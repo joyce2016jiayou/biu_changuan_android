@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="69dp"
+    android:id="@+id/rel_quanju"
+    android:background="@color/transparent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_marginTop="28dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_alignParentLeft="true"
+            android:id="@+id/linear_left"
+            android:layout_width="100dp"
+            android:orientation="vertical"
+            android:background="@color/transparent"
+            android:layout_height="match_parent">
+
+        </LinearLayout>
+        <ImageView
+            android:id="@+id/toolbar_left_button1"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:layout_alignParentLeft="true"
+            android:src="@drawable/back_image"
+            />
+        <TextView
+            android:id="@+id/toolbar_title1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="食物摄影食物设"
+            android:textSize="22dp"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/top_heiziti"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:id="@+id/toolbar_right_button1"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="40px"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3000问题"
+            android:visibility="invisible"
+            android:textSize="12dp"
+            android:layout_centerVertical="true"
+            android:textColor="@color/top_heiziti"
+            android:textStyle="normal"
+            />
+    </RelativeLayout>
+
+</RelativeLayout>

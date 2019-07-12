@@ -8,4 +8,8 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!--用于在布局文件中给toolbar设置title-->
+    <declare-styleable name="ToolbarControl">
+        <attr name="titleText" format="string" />
+    </declare-styleable>
 </resources>
