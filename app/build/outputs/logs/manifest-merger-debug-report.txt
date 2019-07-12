@@ -1,0 +1,161 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/joyce/Desktop/andriod/app/src/main/AndroidManifest.xml:2:1-24:12
+INJECTED from /Users/joyce/Desktop/andriod/app/src/main/AndroidManifest.xml:2:1-24:12
+INJECTED from /Users/joyce/Desktop/andriod/app/src/main/AndroidManifest.xml:2:1-24:12
+INJECTED from /Users/joyce/Desktop/andriod/app/src/main/AndroidManifest.xml:2:1-24:12
+MERGED from [androidx.appcompat:appcompat:1.0.2] /Users/joyce/.gradle/caches/transforms-2/files-2.1/2592b86a694956c9419ae9e7de64d1fa/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.core:core-ktx:1.0.2] /Users/joyce/.gradle/caches/transforms-2/files-2.1/3c4fe2d55191eaa9bea8f8ddc6f5f50e/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] /Users/joyce/.gradle/caches/transforms-2/files-2.1/31d1b095eea86ee26a6927d3ecd965a6/AndroidManifest.xml:2:1-11:12
+MERGED from [androidx.fragment:fragment:1.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/d9e35b6acf6f744a81541d3d9ac6dfa9/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/e01ccfb1670a68c15221f767a75624f1/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/fd59498fc51c70204640330c575da7e7/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/a0c70335dc20655415a41f44378fac54/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.vectordrawable:vectordrawable:1.0.1] /Users/joyce/.gradle/caches/transforms-2/files-2.1/d5d375494d8db630eb88c26c75fa3f56/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.loader:loader:1.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/4422a1962dd7f8176ff39e3731e2eaaa/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/87b60e8cc93904ce6b5c86c74c50eaaf/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/9f36eeed43bb9eac6d1b8ae8b09e885a/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/14bbb6e83c4ce14b6993cc891b110aaa/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/2fcb9cf5614aaa47414c8287b6a9432d/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.customview:customview:1.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/948529bc2c3638a7264c2a2d41c1a568/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/ed1399f3c7ecc13da8fb55287f53b4fc/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/675261eb7fb49233ebfd76f78b87d64f/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.core:core:1.0.2] /Users/joyce/.gradle/caches/transforms-2/files-2.1/411096ba997ea73989cab8c2687ce111/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/b72423fa4689030241ea721a2952e525/AndroidManifest.xml:17:1-25:12
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/0515405c6265772d1a47648bf1be2b3e/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/9bcb368e43bbb910ca66acd9d2116231/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/c884b5b806e663817167cf5a45f45065/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.print:print:1.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/07eb72c354c0ef5a70692669deceb5df/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/7ddf464482452536b94c2ca09077b61d/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/d3267990c7651d1f99f35c36e5186920/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/57481ec7c8484bddcc431e30d600d006/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/d3613c45a8668b3786f62f81c76eb648/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/cf8b4740ef1fe8ce9e0c1e4f75e4b652/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.arch.core:core-runtime:2.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/09063133a3ffca27d8c81de0866e649c/AndroidManifest.xml:17:1-22:12
+INJECTED from /Users/joyce/Desktop/andriod/app/src/main/AndroidManifest.xml:2:1-24:12
+INJECTED from /Users/joyce/Desktop/andriod/app/src/main/AndroidManifest.xml:2:1-24:12
+INJECTED from /Users/joyce/Desktop/andriod/app/src/main/AndroidManifest.xml:2:1-24:12
+	package
+		ADDED from /Users/joyce/Desktop/andriod/app/src/main/AndroidManifest.xml:3:58-87
+		INJECTED from /Users/joyce/Desktop/andriod/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/joyce/Desktop/andriod/app/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /Users/joyce/Desktop/andriod/app/src/main/AndroidManifest.xml
+		ADDED from /Users/joyce/Desktop/andriod/app/src/main/AndroidManifest.xml:2:1-24:12
+		INJECTED from /Users/joyce/Desktop/andriod/app/src/main/AndroidManifest.xml
+	xmlns:tools
+		ADDED from /Users/joyce/Desktop/andriod/app/src/main/AndroidManifest.xml:3:11-57
+	android:versionCode
+		INJECTED from /Users/joyce/Desktop/andriod/app/src/main/AndroidManifest.xml
+		ADDED from /Users/joyce/Desktop/andriod/app/src/main/AndroidManifest.xml:2:1-24:12
+		INJECTED from /Users/joyce/Desktop/andriod/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/joyce/Desktop/andriod/app/src/main/AndroidManifest.xml:2:11-69
+application
+ADDED from /Users/joyce/Desktop/andriod/app/src/main/AndroidManifest.xml:5:5-22:19
+MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] /Users/joyce/.gradle/caches/transforms-2/files-2.1/31d1b095eea86ee26a6927d3ecd965a6/AndroidManifest.xml:9:5-20
+MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] /Users/joyce/.gradle/caches/transforms-2/files-2.1/31d1b095eea86ee26a6927d3ecd965a6/AndroidManifest.xml:9:5-20
+MERGED from [androidx.core:core:1.0.2] /Users/joyce/.gradle/caches/transforms-2/files-2.1/411096ba997ea73989cab8c2687ce111/AndroidManifest.xml:22:5-89
+MERGED from [androidx.core:core:1.0.2] /Users/joyce/.gradle/caches/transforms-2/files-2.1/411096ba997ea73989cab8c2687ce111/AndroidManifest.xml:22:5-89
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/b72423fa4689030241ea721a2952e525/AndroidManifest.xml:22:5-23:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/b72423fa4689030241ea721a2952e525/AndroidManifest.xml:22:5-23:19
+	android:appComponentFactory
+		ADDED from [androidx.core:core:1.0.2] /Users/joyce/.gradle/caches/transforms-2/files-2.1/411096ba997ea73989cab8c2687ce111/AndroidManifest.xml:22:18-86
+	android:supportsRtl
+		ADDED from /Users/joyce/Desktop/andriod/app/src/main/AndroidManifest.xml:10:13-39
+	android:label
+		ADDED from /Users/joyce/Desktop/andriod/app/src/main/AndroidManifest.xml:8:13-45
+	tools:ignore
+		ADDED from /Users/joyce/Desktop/andriod/app/src/main/AndroidManifest.xml:12:13-52
+	android:roundIcon
+		ADDED from /Users/joyce/Desktop/andriod/app/src/main/AndroidManifest.xml:9:13-58
+	android:icon
+		ADDED from /Users/joyce/Desktop/andriod/app/src/main/AndroidManifest.xml:7:13-47
+	android:allowBackup
+		ADDED from /Users/joyce/Desktop/andriod/app/src/main/AndroidManifest.xml:6:13-39
+	android:theme
+		ADDED from /Users/joyce/Desktop/andriod/app/src/main/AndroidManifest.xml:11:13-44
+activity#com.example.keepfit.KeepFitActivity
+ADDED from /Users/joyce/Desktop/andriod/app/src/main/AndroidManifest.xml:14:9-19:20
+	android:name
+		ADDED from /Users/joyce/Desktop/andriod/app/src/main/AndroidManifest.xml:14:19-69
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from /Users/joyce/Desktop/andriod/app/src/main/AndroidManifest.xml:15:13-18:29
+action#android.intent.action.MAIN
+ADDED from /Users/joyce/Desktop/andriod/app/src/main/AndroidManifest.xml:16:17-68
+	android:name
+		ADDED from /Users/joyce/Desktop/andriod/app/src/main/AndroidManifest.xml:16:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /Users/joyce/Desktop/andriod/app/src/main/AndroidManifest.xml:17:17-76
+	android:name
+		ADDED from /Users/joyce/Desktop/andriod/app/src/main/AndroidManifest.xml:17:27-74
+uses-sdk
+INJECTED from /Users/joyce/Desktop/andriod/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/joyce/Desktop/andriod/app/src/main/AndroidManifest.xml
+INJECTED from /Users/joyce/Desktop/andriod/app/src/main/AndroidManifest.xml
+MERGED from [androidx.appcompat:appcompat:1.0.2] /Users/joyce/.gradle/caches/transforms-2/files-2.1/2592b86a694956c9419ae9e7de64d1fa/AndroidManifest.xml:20:5-44
+MERGED from [androidx.appcompat:appcompat:1.0.2] /Users/joyce/.gradle/caches/transforms-2/files-2.1/2592b86a694956c9419ae9e7de64d1fa/AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core-ktx:1.0.2] /Users/joyce/.gradle/caches/transforms-2/files-2.1/3c4fe2d55191eaa9bea8f8ddc6f5f50e/AndroidManifest.xml:5:5-44
+MERGED from [androidx.core:core-ktx:1.0.2] /Users/joyce/.gradle/caches/transforms-2/files-2.1/3c4fe2d55191eaa9bea8f8ddc6f5f50e/AndroidManifest.xml:5:5-44
+MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] /Users/joyce/.gradle/caches/transforms-2/files-2.1/31d1b095eea86ee26a6927d3ecd965a6/AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] /Users/joyce/.gradle/caches/transforms-2/files-2.1/31d1b095eea86ee26a6927d3ecd965a6/AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.fragment:fragment:1.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/d9e35b6acf6f744a81541d3d9ac6dfa9/AndroidManifest.xml:20:5-44
+MERGED from [androidx.fragment:fragment:1.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/d9e35b6acf6f744a81541d3d9ac6dfa9/AndroidManifest.xml:20:5-44
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/e01ccfb1670a68c15221f767a75624f1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/e01ccfb1670a68c15221f767a75624f1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/fd59498fc51c70204640330c575da7e7/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/fd59498fc51c70204640330c575da7e7/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/a0c70335dc20655415a41f44378fac54/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/a0c70335dc20655415a41f44378fac54/AndroidManifest.xml:20:5-44
+MERGED from [androidx.vectordrawable:vectordrawable:1.0.1] /Users/joyce/.gradle/caches/transforms-2/files-2.1/d5d375494d8db630eb88c26c75fa3f56/AndroidManifest.xml:20:5-44
+MERGED from [androidx.vectordrawable:vectordrawable:1.0.1] /Users/joyce/.gradle/caches/transforms-2/files-2.1/d5d375494d8db630eb88c26c75fa3f56/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/4422a1962dd7f8176ff39e3731e2eaaa/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/4422a1962dd7f8176ff39e3731e2eaaa/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/87b60e8cc93904ce6b5c86c74c50eaaf/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/87b60e8cc93904ce6b5c86c74c50eaaf/AndroidManifest.xml:20:5-44
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/9f36eeed43bb9eac6d1b8ae8b09e885a/AndroidManifest.xml:20:5-44
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/9f36eeed43bb9eac6d1b8ae8b09e885a/AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/14bbb6e83c4ce14b6993cc891b110aaa/AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/14bbb6e83c4ce14b6993cc891b110aaa/AndroidManifest.xml:20:5-44
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/2fcb9cf5614aaa47414c8287b6a9432d/AndroidManifest.xml:20:5-44
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/2fcb9cf5614aaa47414c8287b6a9432d/AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/948529bc2c3638a7264c2a2d41c1a568/AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/948529bc2c3638a7264c2a2d41c1a568/AndroidManifest.xml:20:5-44
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/ed1399f3c7ecc13da8fb55287f53b4fc/AndroidManifest.xml:20:5-44
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/ed1399f3c7ecc13da8fb55287f53b4fc/AndroidManifest.xml:20:5-44
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/675261eb7fb49233ebfd76f78b87d64f/AndroidManifest.xml:20:5-44
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/675261eb7fb49233ebfd76f78b87d64f/AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.0.2] /Users/joyce/.gradle/caches/transforms-2/files-2.1/411096ba997ea73989cab8c2687ce111/AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.0.2] /Users/joyce/.gradle/caches/transforms-2/files-2.1/411096ba997ea73989cab8c2687ce111/AndroidManifest.xml:20:5-44
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/b72423fa4689030241ea721a2952e525/AndroidManifest.xml:20:5-44
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/b72423fa4689030241ea721a2952e525/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/0515405c6265772d1a47648bf1be2b3e/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/0515405c6265772d1a47648bf1be2b3e/AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/9bcb368e43bbb910ca66acd9d2116231/AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/9bcb368e43bbb910ca66acd9d2116231/AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/c884b5b806e663817167cf5a45f45065/AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/c884b5b806e663817167cf5a45f45065/AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/07eb72c354c0ef5a70692669deceb5df/AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/07eb72c354c0ef5a70692669deceb5df/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/7ddf464482452536b94c2ca09077b61d/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/7ddf464482452536b94c2ca09077b61d/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/d3267990c7651d1f99f35c36e5186920/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/d3267990c7651d1f99f35c36e5186920/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/57481ec7c8484bddcc431e30d600d006/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/57481ec7c8484bddcc431e30d600d006/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/d3613c45a8668b3786f62f81c76eb648/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/d3613c45a8668b3786f62f81c76eb648/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/cf8b4740ef1fe8ce9e0c1e4f75e4b652/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/cf8b4740ef1fe8ce9e0c1e4f75e4b652/AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/09063133a3ffca27d8c81de0866e649c/AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.0.0] /Users/joyce/.gradle/caches/transforms-2/files-2.1/09063133a3ffca27d8c81de0866e649c/AndroidManifest.xml:20:5-44
+INJECTED from /Users/joyce/Desktop/andriod/app/src/main/AndroidManifest.xml
+INJECTED from /Users/joyce/Desktop/andriod/app/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /Users/joyce/Desktop/andriod/app/src/main/AndroidManifest.xml
+		ADDED from /Users/joyce/Desktop/andriod/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/joyce/Desktop/andriod/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/joyce/Desktop/andriod/app/src/main/AndroidManifest.xml
+		ADDED from /Users/joyce/Desktop/andriod/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/joyce/Desktop/andriod/app/src/main/AndroidManifest.xml
