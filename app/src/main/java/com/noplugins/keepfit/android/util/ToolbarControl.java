@@ -59,7 +59,9 @@ public class ToolbarControl extends Toolbar {
                 attrs, R.styleable.ToolbarControl, 0, 0);
         titleText = a.getString(R.styleable.ToolbarControl_titleText);
 //        Log.d(TAG, titleText);
-        titleTextView.setText(titleText);
+        if(null!=titleText){
+            titleTextView.setText(titleText);
+        }
 
         a.recycle();
     }

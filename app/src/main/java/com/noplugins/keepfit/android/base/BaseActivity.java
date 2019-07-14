@@ -3,6 +3,7 @@ package com.noplugins.keepfit.android.base;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.PowerManager;
@@ -11,92 +12,66 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-
 import androidx.annotation.NonNull;
-
-
+import androidx.appcompat.app.AppCompatActivity;
 import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.util.ToolbarControl;
 import com.noplugins.keepfit.android.util.permission.EasyPermissions;
 import com.noplugins.keepfit.android.util.permission.PermissionActivity;
 import com.noplugins.keepfit.android.util.screen.AndroidWorkaround;
+import com.noplugins.keepfit.android.util.screen.ScreenUtilsHelper;
+import com.noplugins.keepfit.android.util.screen.StatusBarUtil;
+import com.noplugins.keepfit.android.util.ui.NoScrollViewPager;
 import com.orhanobut.logger.Logger;
-
+import java.util.LinkedList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import rx.Subscription;
 
 import static android.webkit.WebView.enableSlowWholeDocumentDraw;
 
-public abstract class BaseActivity  extends SuperActivity implements View.OnClickListener, EasyPermissions.PermissionCallbacks{
-    /**
-     * 当前Activity渲染的视图View
-     **/
-    private View mContextView = null;
-    /**
-     * 是否输出日志信息
-     **/
-    protected final String TAG = this.getClass().getSimpleName();
-    /**
-     * Rxjava
-     */
-    protected Subscription subscription;
+public abstract class BaseActivity  extends AppCompatActivity implements EasyPermissions.PermissionCallbacks{
 
-    /**
-     * 自定义title
-     */
-    ToolbarControl toolbar;
-
-    /**
-     * 封装布局
-     */
-    RelativeLayout ly_content;
-    /***
-     * 判断是否是有刘海
-     */
-    LinearLayout compensate_linear;
-
-    BaseActivity activity;
-
+    private View mContextView = null;//当前Activity渲染的视图View
+    protected final String TAG = this.getClass().getSimpleName();//是否输出日志信息
+    protected Subscription subscription;//Rxjava
+    ToolbarControl toolbar;//自定义title
+    RelativeLayout ly_content;//封装布局
+    private boolean isSetStatusBar = true;//是否沉浸状态栏
+    private final List<BaseActivity> mActivities = new LinkedList<>();//记录所有活动的Activity
     private boolean isShowTitle;
-
-
-    //页面保持常亮
-    private PowerManager powerManager = null;
-    private PowerManager.WakeLock wakeLock = null;
     protected static final int RC_PERM = 123;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        super.onCreate(savedInstanceState);
-        if (Build.VERSION.SDK_INT >= 21) {
-            enableSlowWholeDocumentDraw();
-        }
-        activity = this;
+
+
+        //设置沉浸栏
+        set_status_bar();
+
+
         //初始化Bundle对象
         Bundle bundle = getIntent().getExtras();
-        initParms(bundle);
+        initBundle(bundle);
 
-        powerManager = (PowerManager) this.getSystemService(Service.POWER_SERVICE);
-      //  wakeLock = powerManager.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, "My Lock");
-        //是否需计算锁的数量
-      //  wakeLock.setReferenceCounted(false);
 
         //初始化布局
         mContextView = LayoutInflater.from(this).inflate(R.layout.ll_basetitle, null);
         ly_content = mContextView.findViewById(R.id.layout_base);
-
         setContentView(mContextView);
 
-        /**为了适配华为屏幕软键盘*/
+
+        //为了适配屏幕软键盘
         if (AndroidWorkaround.checkDeviceHasNavigationBar(this)) {
             AndroidWorkaround.assistActivity(findViewById(android.R.id.content));
-            //mContextView.setPadding(0,0,0,50);
+            //mContextView.setPadding(0,0,0, ScreenUtilsHelper.dip2px(this,50));
         }
 
+
         toolbar = mContextView.findViewById(R.id.about_me_toolbar);
-        compensate_linear = mContextView.findViewById(R.id.compensate_linear);
 
         //初始化控件
         initView();
@@ -108,67 +83,59 @@ public abstract class BaseActivity  extends SuperActivity implements View.OnClic
             toolbar.setVisibility(View.GONE);
         }
 
-        //初始化极光推送
-        //JPushInterface.init(getApplicationContext());
-        //registerMessageReceiver();  // used for receive msg
-
         doBusiness(getApplicationContext());
 
     }
 
-    @Override
-    protected void onResume() {
-        initonResume();
-        //请求屏幕常亮，onResume()方法中执行
-      //  wakeLock.acquire();
-//        JPushInterface.onResume(this);
-//        JPushInterface.clearAllNotifications(this);
-        super.onResume();
+    private void set_status_bar() {
+        if (Build.VERSION.SDK_INT >= 21) {
+            enableSlowWholeDocumentDraw();
+        }
+        if (isSetStatusBar) {
+            steepStatusBar();
+        }
+
     }
 
-    @Override
-    protected void onPause() {
-        initonPause();
-        //取消屏幕常亮，onPause()方法中执行
-       // wakeLock.release();
-//        JPushInterface.onPause(this);
-        super.onPause();
+    /**
+     * [沉浸状态栏]
+     */
+    private void steepStatusBar() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+            StatusBarUtil.setStatusBarColor(this, R.color.white);
+        }else{
+            StatusBarUtil.transparencyBar(this);
+        }
     }
 
-    //private MessageReceiver mMessageReceiver;
-    public static final String MESSAGE_RECEIVED_ACTION = "com.example.jpushdemo.MESSAGE_RECEIVED_ACTION";
-    public static final String KEY_TITLE = "title";
-    public static final String KEY_MESSAGE = "message";
-    public static final String KEY_EXTRAS = "extras";
+    /**
+     * 状态栏替代方法
+     * @param isShowTitle
+     */
+/*    private void steepStatusBar() {
+        SharedPreferences shared = getSharedPreferences("is", MODE_PRIVATE);
+        boolean isfer = shared.getBoolean("isfer", true);
+        if (isfer) {
+            //第一次进入跳转
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+                StatusBarUtil.setStatusBarColor(this, R.color.color_70000000);
+            } else {
+                StatusBarUtil.transparencyBar(this);
+            }
+        } else {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+                StatusBarUtil.setStatusBarColor(this, R.color.color_00000000);
+            } else {
+                StatusBarUtil.transparencyBar(this);
+            }
+        }
+    }*/
 
-//    public void registerMessageReceiver() {
-//        mMessageReceiver = new MessageReceiver();
-//        IntentFilter filter = new IntentFilter();
-//        filter.setPriority(IntentFilter.SYSTEM_HIGH_PRIORITY);
-//        filter.addAction(MESSAGE_RECEIVED_ACTION);
-//        LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver, filter);
-//    }
 
-//    public class MessageReceiver extends BroadcastReceiver {
-//
-//        @Override
-//        public void onReceive(Context context, Intent intent) {
-//            try {
-//                if (MESSAGE_RECEIVED_ACTION.equals(intent.getAction())) {
-//                    String messge = intent.getStringExtra(KEY_MESSAGE);
-//                    String extras = intent.getStringExtra(KEY_EXTRAS);
-//                    StringBuilder showMsg = new StringBuilder();
-//                    showMsg.append(KEY_MESSAGE + " : " + messge + "\n");
-//                    if (!ExampleUtil.isEmpty(extras)) {
-//                        showMsg.append(KEY_EXTRAS + " : " + extras + "\n");
-//                    }
-//                    //注册services返回的信息
-//                    Log.e("极光注册services返回的信息", showMsg.toString());
-//                }
-//            } catch (Exception e) {
-//            }
-//        }
-//    }
+
 
     public void isShowTitle(boolean isShowTitle) {
         this.isShowTitle = isShowTitle;
@@ -220,7 +187,6 @@ public abstract class BaseActivity  extends SuperActivity implements View.OnClic
     }
 
 
-    public abstract void RightImgOnclick();
 
 
     @Override
@@ -238,10 +204,9 @@ public abstract class BaseActivity  extends SuperActivity implements View.OnClic
 
     /**
      * [初始化Bundle参数]
-     *
      * @param parms
      */
-    public abstract void initParms(Bundle parms);
+    public abstract void initBundle(Bundle parms);
 
 
     /**
@@ -249,15 +214,6 @@ public abstract class BaseActivity  extends SuperActivity implements View.OnClic
      */
     public abstract void initView();
 
-    /***
-     *
-     */
-    public abstract void initonResume();
-
-    /***
-     *
-     */
-    public abstract void initonPause();
 
     /**
      * [业务操作]
@@ -266,48 +222,7 @@ public abstract class BaseActivity  extends SuperActivity implements View.OnClic
      */
     public abstract void doBusiness(Context mContext);
 
-    /**
-     * View点击
-     **/
-    public abstract void widgetClick(View v);
 
-    @Override
-    public void onClick(View v) {
-        if (fastClick())
-            widgetClick(v);
-    }
-
-    /**
-     * [防止快速点击]
-     *
-     * @return
-     */
-    private boolean fastClick() {
-        long lastClick = 0;
-        if (System.currentTimeMillis() - lastClick <= 1000) {
-            return false;
-        }
-        lastClick = System.currentTimeMillis();
-        return true;
-    }
-
-
-    /**
-     * [含有Bundle通过Class打开编辑界面]
-     *
-     * @param cls
-     * @param bundle
-     * @param requestCode
-     */
-    public void startActivityForResult(Class<?> cls, Bundle bundle,
-                                       int requestCode) {
-        Intent intent = new Intent();
-        intent.setClass(this, cls);
-        if (bundle != null) {
-            intent.putExtras(bundle);
-        }
-        startActivityForResult(intent, requestCode);
-    }
 
     /**
      * 权限回调接口
@@ -334,7 +249,6 @@ public abstract class BaseActivity  extends SuperActivity implements View.OnClic
      * 用户权限处理,
      * 如果全部获取, 则直接过.
      * 如果权限缺失, 则提示Dialog.
-     *
      * @param requestCode  请求码
      * @param permissions  权限
      * @param grantResults 结果

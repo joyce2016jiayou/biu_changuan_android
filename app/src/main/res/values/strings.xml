@@ -6,4 +6,6 @@
     </string>
     <string name="ask_again">请给予应用必要权限，让程序可正常工作。</string>
     <string name="cancel">取消</string>
+    <string name="mine">我的</string>
+
 </resources>

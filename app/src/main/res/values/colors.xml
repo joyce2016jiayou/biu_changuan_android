@@ -2,5 +2,12 @@
 <resources>
     <color name="white">#ffffff</color>
     <color name="transparent">#00000000</color>
+    <color name="color_70000000">#70000000</color>
     <color name="top_heiziti">#292C31</color>
+    <color name="color_00000000">#00000000</color>
+    <color name="bottom_color">#FF433B</color>
+    <color name="color_bbbbbb">#BBBBBB</color>
+    <color name="fengexian">#dadada</color>
+    <color name="color_333333">#333333</color>
+
 </resources>
