@@ -7,5 +7,27 @@
     <string name="ask_again">请给予应用必要权限，让程序可正常工作。</string>
     <string name="cancel">取消</string>
     <string name="mine">我的</string>
+    <string name="register">注册</string>
+    <string name="edit_hint1">请输入手机号</string>
+    <string name="edit_hint2">请输入密码</string>
+    <string name="edit_hint3">记住我</string>
+    <string name="edit_hint4">忘记密码</string>
+    <string name="edit_hint5">请输入验证码</string>
+    <string name="edit_hint6">请输入新密码</string>
+    <string name="edit_hint7">请再次确认密码</string>
+
+    <string name="tv1">登录</string>
+    <string name="tv2">注册即代表您同意哔哟</string>
+    <string name="tv3">《用户隐私政策》</string>
+
+    <string name="title_activity_register">Sign in</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
 
 </resources>

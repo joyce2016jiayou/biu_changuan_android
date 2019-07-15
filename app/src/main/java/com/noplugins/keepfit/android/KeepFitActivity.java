@@ -30,15 +30,12 @@ import com.noplugins.keepfit.android.util.net.entity.Token;
 import com.noplugins.keepfit.android.util.net.progress.GsonSubscriberOnNextListener;
 import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriberNew;
 import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener;
-import com.noplugins.keepfit.android.util.screen.StatusBarUtil;
 import com.noplugins.keepfit.android.util.ui.NoScrollViewPager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import butterknife.BindView;
 import butterknife.BindViews;

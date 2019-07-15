@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.os.Looper;
 
 
+import com.noplugins.keepfit.android.activity.LoginActivity;
 import com.noplugins.keepfit.android.base.BaseActivity;
 import butterknife.ButterKnife;
 
@@ -28,14 +29,13 @@ public class SplashActivity extends BaseActivity {
 
     @Override
     public void doBusiness(Context mContext) {
-
         if(panduan_net()){
             new Handler().postDelayed(new Runnable() {
                 @Override
 
                 public void run() {
                     //超时处理
-                    Intent intent = new Intent(SplashActivity.this, KeepFitActivity.class);
+                    Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
                     startActivity(intent);
                     finish();
                 }

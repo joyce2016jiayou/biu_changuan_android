@@ -4,8 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:clipToPadding="true"
-    android:fitsSystemWindows="true">
+>
 
     <com.noplugins.keepfit.android.util.ui.NoScrollViewPager
         android:id="@+id/viewpager_content"

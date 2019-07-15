@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fillViewport="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true">
+
+        <ImageView
+            android:layout_width="118dp"
+            android:layout_height="81dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="31dp"
+            android:layout_marginTop="88dp"
+            android:src="@drawable/login_icon" />
+
+        <TextView
+            android:id="@+id/register_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="101dp"
+            android:layout_marginRight="31dp"
+            android:text="@string/register"
+            android:textColor="@color/color_9B9B9B"
+            android:textSize="15sp" />
+
+        <LinearLayout
+            android:id="@+id/center"
+            android:layout_width="match_parent"
+            android:layout_height="225dp"
+            android:layout_marginLeft="31dp"
+            android:layout_marginTop="201dp"
+            android:layout_marginRight="31dp"
+            android:background="@drawable/login_kuang"
+
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="17dp"
+                android:layout_marginTop="48dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="21dp"
+                    android:layout_height="21dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/icon_number" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:background="@null"
+                    android:hint="@string/edit_hint1"
+                    android:singleLine="true"
+                    android:textColor="@color/top_heiziti"
+                    android:textColorHint="@color/color_ACACAC"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="17dp"
+                android:layout_marginTop="41dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="23dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/icon_password" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:background="@null"
+                    android:hint="@string/edit_hint2"
+                    android:singleLine="true"
+
+                    android:textColor="@color/top_heiziti"
+                    android:textColorHint="@color/color_ACACAC"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="27dp"
+                android:layout_marginTop="49dp">
+
+                <LinearLayout
+                    android:id="@+id/checkbox_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginLeft="0dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/xieyi_check_btn"
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/selector_btn_checkbox"
+                        android:button="@null"
+                        android:checked="false" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="4dp"
+                        android:text="@string/edit_hint3"
+                        android:textColor="@color/color_898989" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="30dp"
+                    android:text="@string/edit_hint4"
+                    android:textColor="@color/color_898989" />
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="225dp"
+            android:layout_height="63dp"
+            android:layout_below="@+id/center"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="55dp"
+            android:background="@drawable/login_btn"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/tv1"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</ScrollView>

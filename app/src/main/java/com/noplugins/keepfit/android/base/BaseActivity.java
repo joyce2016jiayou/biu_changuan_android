@@ -4,12 +4,14 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import androidx.annotation.NonNull;
@@ -101,40 +103,21 @@ public abstract class BaseActivity  extends AppCompatActivity implements EasyPer
      * [沉浸状态栏]
      */
     private void steepStatusBar() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-            StatusBarUtil.setStatusBarColor(this, R.color.white);
-        }else{
-            StatusBarUtil.transparencyBar(this);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+            getWindow().getDecorView().setSystemUiVisibility(option);
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            getWindow().setStatusBarColor(Color.parseColor("#00000000"));
         }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+//            StatusBarUtil.setStatusBarColor(this, R.color.transparent);
+//        } else {
+//            StatusBarUtil.transparencyBar(this);
+//        }
     }
-
-    /**
-     * 状态栏替代方法
-     * @param isShowTitle
-     */
-/*    private void steepStatusBar() {
-        SharedPreferences shared = getSharedPreferences("is", MODE_PRIVATE);
-        boolean isfer = shared.getBoolean("isfer", true);
-        if (isfer) {
-            //第一次进入跳转
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-                StatusBarUtil.setStatusBarColor(this, R.color.color_70000000);
-            } else {
-                StatusBarUtil.transparencyBar(this);
-            }
-        } else {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-                StatusBarUtil.setStatusBarColor(this, R.color.color_00000000);
-            } else {
-                StatusBarUtil.transparencyBar(this);
-            }
-        }
-    }*/
-
-
 
 
     public void isShowTitle(boolean isShowTitle) {
