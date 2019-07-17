@@ -3,7 +3,6 @@ package com.noplugins.keepfit.android.activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -19,21 +18,20 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.base.BaseActivity;
 import com.noplugins.keepfit.android.util.data.StringsHelper;
-import com.noplugins.keepfit.android.util.screen.ScreenUtilsHelper;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class RegisterActivity extends BaseActivity {
-    @BindView(R.id.login_tv)
-    TextView login_tv;
+public class ForgetPasswordActivity extends BaseActivity {
+
+    @BindView(R.id.back_btn)
+    ImageView back_btn;
     @BindView(R.id.yanzhengma_btn)
     TextView yanzhengma_btn;
     @BindView(R.id.edit_phone_number)
@@ -46,7 +44,6 @@ public class RegisterActivity extends BaseActivity {
     EditText edit_sure_password;
     @BindView(R.id.clear_password_btn)
     ImageView clear_password_btn;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,13 +56,21 @@ public class RegisterActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        setContentLayout(R.layout.activity_register2);
+        setContentLayout(R.layout.activity_forget_password);
         ButterKnife.bind(this);
         isShowTitle(false);
+
+        //区分hint和text字体大小
         StringsHelper.setEditTextHintSize(edit_phone_number,"请输入手机号",15);
         StringsHelper.setEditTextHintSize(edit_yanzhengma,"请输入验证码",15);
         StringsHelper.setEditTextHintSize(edit_new_password,"请输入新密码",15);
         StringsHelper.setEditTextHintSize(edit_sure_password,"请再次确认密码",15);
+
+
+    }
+
+    @Override
+    public void doBusiness(Context mContext) {
         edit_phone_number.addTextChangedListener(phone_number_jiaoyan);
         edit_phone_number.setKeyListener(DigitsKeyListener.getInstance("0123456789"));//设置输入数字
         //设置验证码输入错误
@@ -77,17 +82,10 @@ public class RegisterActivity extends BaseActivity {
             }
         });
         edit_sure_password.addTextChangedListener(password_number_jiaoyan);
-    }
-
-
-
-    @Override
-    public void doBusiness(Context mContext) {
-        login_tv.setOnClickListener(new View.OnClickListener() {
+        back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(RegisterActivity.this,LoginActivity.class);
-                startActivity(intent);
+                finish();
             }
         });
         yanzhengma_btn.setOnClickListener(new View.OnClickListener() {
@@ -108,8 +106,6 @@ public class RegisterActivity extends BaseActivity {
                 }
             }
         });
-
-
     }
 
     TextWatcher phone_number_jiaoyan = new TextWatcher() {
@@ -153,7 +149,6 @@ public class RegisterActivity extends BaseActivity {
             }
         }
     };
-
     CountDownTimer timer = new CountDownTimer(60000, 1000) {
         @Override
         public void onTick(long millisUntilFinished) {
@@ -169,6 +164,4 @@ public class RegisterActivity extends BaseActivity {
             yanzhengma_btn.setEnabled(true);
         }
     };
-
-
 }

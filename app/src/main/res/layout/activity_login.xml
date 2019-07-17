@@ -56,15 +56,20 @@
                     android:src="@drawable/icon_number" />
 
                 <EditText
+                    android:id="@+id/edit_phone_number"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="5dp"
                     android:background="@null"
                     android:hint="@string/edit_hint1"
+                    android:maxLength="11"
+                    android:layout_marginRight="25dp"
+
+                    android:inputType="textNoSuggestions|text|textCapCharacters"
                     android:singleLine="true"
-                    android:textColor="@color/top_heiziti"
+                    android:textColor="@color/color_ACACAC"
                     android:textColorHint="@color/color_ACACAC"
-                    android:textSize="15sp" />
+                    android:textSize="20sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -81,16 +86,19 @@
                     android:src="@drawable/icon_password" />
 
                 <EditText
+                    android:id="@+id/edit_password"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="5dp"
                     android:background="@null"
                     android:hint="@string/edit_hint2"
+                    android:inputType="textPassword"
+                    android:password="true"
+                    android:layout_marginRight="25dp"
                     android:singleLine="true"
-
-                    android:textColor="@color/top_heiziti"
+                    android:textColor="@color/color_ACACAC"
                     android:textColorHint="@color/color_ACACAC"
-                    android:textSize="15sp" />
+                    android:textSize="20sp" />
             </LinearLayout>
 
             <RelativeLayout
@@ -130,6 +138,7 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/forget_password_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
