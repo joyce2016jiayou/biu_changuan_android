@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.noplugins.keepfit.android.util.data.SharedPreferencesHelper;
 import com.noplugins.keepfit.android.util.net.entity.Bean;
+import com.noplugins.keepfit.android.util.net.entity.Token;
 import com.noplugins.keepfit.android.util.net.interceptor.LogInterceptor;
 
 import java.io.IOException;
@@ -26,8 +27,10 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
 import okhttp3.Interceptor;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
@@ -43,41 +46,13 @@ import rx.schedulers.Schedulers;
 public class Network {
     public static final int DEFAULT_TIMEOUT = 7;
     private static Network mInstance;
-    public static String token = "";
     public MyService service;
     //测试服
-    public static String main_url = "https://app.shiyujia.com/";
-    //正式服
-//    public static String main_url = "https://app.shiyujia.com/";
-//    public static String main_url = "https://appuat.shiyujia.com/";
-    //public static String main_url = "https://appprd.shiyujia.com/";//临时测试正式服
-
-    //public static String bucketPath = "appDebug/";//阿里测试服图片库地址
-    public static String bucketPath = "appProduction/";//阿里正式服图片库地址
-
-    //分享测试路径图片
-    public static String ShareImage = "https://s3-011-shinho-syj-uat-bjs.s3.cn-north-1.amazonaws.com.cn/syjapp/2018_07/applogo.png";
-    //分享正式路径图片
-//    public static String ShareImage = "https://s3-014-shinho-syj-prd-bjs.s3.cn-north-1.amazonaws.com.cn/syjapp/2018_07/applogo.png";
-
-    //分享网页测试地址
-    public static String ShareUrl = Network.main_url +"answerPhone2/index.html#/";
-    //    分享网页正式地址
-//    public static String ShareUrl = Network.main_url +"answerPhone/index.html#/";
-    //视频分享
-    public static String VideoUrl = main_url + "answerPhone2/index.html?from=singlemessage#/videos?id=";
-    public static String ImageTextUrl = main_url + "answerPhone2/index.html?from=singlemessage#/images?id=";
+    public static String main_url = "http://172.17.0.155:8888/api/gym-service/";
 
     //获取单例
     public static Network getInstance(String method, Context context) {
         if (context != null) {
-            if ("".equals(SharedPreferencesHelper.get(context, "login_token", "").toString())) {
-                token = "";
-                Log.e("没有添加token", token);
-            } else {
-                token = SharedPreferencesHelper.get(context, "login_token", "").toString();
-                Log.e("添加的头部的token", token);
-            }
             if (mInstance == null) {
                 synchronized (Network.class) {
                     mInstance = new Network(method, context);
@@ -130,7 +105,7 @@ public class Network {
                     public Response intercept(Chain chain) throws IOException {
                         Request original = chain.request();
                         Request request = original.newBuilder()
-                                .header("token", token)
+                                //.header("token", token)
                                 .method(original.method(), original.body())
                                 .build();
                         return chain.proceed(request);
@@ -184,14 +159,99 @@ public class Network {
     }
 
 
+//    /**
+//     * 登录
+//     *
+//     * @param params
+//     * @param subscriber
+//     * @return
+//     */
+//    public Subscription login(Map<String, String> params, Subscriber<Bean<Object>> subscriber) {
+//        return service.fast_login(params)
+//                .subscribeOn(Schedulers.io())
+//                .unsubscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(subscriber);
+//    }
+
     /**
-     * 登录
-     * @param params
+     * 获取验证码
+     *
      * @param subscriber
      * @return
      */
-    public Subscription login(Map<String, String> params, Subscriber<Bean<Object>> subscriber) {
-        return service.fast_login(params)
+    public Subscription get_yanzhengma(Map<String, String> params, Subscriber<Bean<Object>> subscriber) {
+        return service.get_yanzhengma(params)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+
+
+
+    /**
+     * 验证验证码
+     *
+     * @param subscriber
+     * @return
+     */
+    public Subscription check_yanzhengma(Map<String, String> params, Subscriber<Bean<Object>> subscriber) {
+        return service.check_yanzhengma(params)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 注册
+     *
+     * @param subscriber
+     * @return
+     */
+    public Subscription register(Map<String, String> params, Subscriber<Bean<Object>> subscriber) {
+        return service.register(params)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 登录
+     * @param subscriber
+     * @return
+     */
+    public Subscription login(RequestBody params, Subscriber<Bean<Object>> subscriber) {
+        return service.login(params)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 修改密码
+     * @param subscriber
+     * @return
+     */
+    public Subscription submit_password(Map<String, String> params, Subscriber<Bean<Object>> subscriber) {
+        return service.update_password(params)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 选择角色
+     * @param subscriber
+     * @return
+     */
+    public Subscription select_role(Map<String, String> params, Subscriber<Bean<Object>> subscriber) {
+        return service.select_role(params)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

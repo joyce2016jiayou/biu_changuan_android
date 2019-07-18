@@ -6,25 +6,6 @@ package com.noplugins.keepfit.android.util.net.entity;
  */
 
 public class Bean<T> {
-    private String code;
-    private String msg;
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
-
     public T getData() {
         return data;
     }
@@ -34,5 +15,24 @@ public class Bean<T> {
     }
 
     private T data;
+    private Integer code;
+    private String message;
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public Integer getCode() {
+        return code;
+    }
+
+    public void setCode(Integer code) {
+        this.code = code;
+    }
+
 
 }

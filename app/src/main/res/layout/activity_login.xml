@@ -155,6 +155,7 @@
 
 
         <LinearLayout
+            android:id="@+id/login_btn"
             android:layout_width="225dp"
             android:layout_height="63dp"
             android:layout_below="@+id/center"

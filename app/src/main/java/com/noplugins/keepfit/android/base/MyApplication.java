@@ -93,7 +93,7 @@ public class MyApplication extends Application {
         UMConfigure.setLogEnabled(true);
         UMConfigure.init(this, UMConfigure.DEVICE_TYPE_PHONE, "5d2d6979570df3fe04000f97");
         PlatformConfig.setWeixin("wxdc1e388c3822c80b", "3baf1193c85774b3fd9d18447d76cab0");
-        PlatformConfig.setSinaWeibo("3921700954", "04b48b094faeb16683c32669824ebdad","http://sns.whalecloud.com");
+        PlatformConfig.setSinaWeibo("597832238", "1c6785dbf569cc74c60e24c223741593","http://sns.whalecloud.com");//微博
         PlatformConfig.setQQZone("100424468", "c7394704798a158208a74ab60104f0ba");
 
 

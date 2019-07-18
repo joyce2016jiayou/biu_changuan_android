@@ -5,5 +5,5 @@ package com.noplugins.keepfit.android.util.net.progress;
  */
 
 public interface GsonSubscriberOnNextListener<T> {
-     void on_post_entity(T t);
+     void on_post_entity(T t,String message_id);
 }

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+
+    <LinearLayout style="@style/tanchukuang_style">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                style="@style/tanchukuang_style_2"
+                android:layout_width="match_parent"
+                android:layout_height="70dp">
+
+                <TextView
+                    android:id="@+id/title"
+                    style="@style/Dialog_title"
+                    android:text="@string/alert_dialog_tishi1"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/message"
+                    style="@style/Dialog_content_1"
+                    android:text="@string/alert_dialog_tishi2"
+                    android:textColor="@color/color_292c31"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout style="@style/view_fengexiang" />
+
+        <LinearLayout style="@style/tanchukuang_style_3">
+
+            <TextView
+                android:id="@+id/folder_cancel"
+                style="@style/Dialog_sure_style"
+                android:text="放弃"
+                android:textColor="@color/color_777777"
+                android:textSize="16dp" />
+
+            <LinearLayout
+                style="@style/view_fengexiang_2"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="15dp" />
+
+            <TextView
+                android:id="@+id/folder_ok"
+                style="@style/Dialog_sure_style"
+                android:text="保存"
+                android:textColor="@color/color_292c31"
+                android:textSize="16dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

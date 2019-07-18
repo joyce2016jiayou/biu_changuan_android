@@ -47,12 +47,39 @@
         android:theme="@style/Theme.AppCompat.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".activity.ShareSDKDEMOActivity">
+
+        </activity>
+
+        <activity android:name=".activity.UserPermissionSelectActivity">
+
+        </activity>
+
+        <activity
+            android:name=".activity.ForgetPasswordActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".activity.RegisterActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden" >
+
+        </activity>
+        <activity
+            android:name=".activity.LoginActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".SplashActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".KeepFitActivity"
+            android:launchMode="singleTask" />
+
+
         <!-- 友盟分享 -->
         <meta-data
             android:name="UMENG_APPKEY"
@@ -66,6 +93,7 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <!-- 微博 -->
         <activity
             android:name="com.umeng.socialize.media.WBShareCallBackActivity"
             android:configChanges="keyboardHidden|orientation"
@@ -80,8 +108,9 @@
             android:name="com.sina.weibo.sdk.share.WbShareTransActivity"
             android:launchMode="singleTask"
             android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen">
-
         </activity>
+        <!-- 微博 -->
+
         <activity
             android:name="com.tencent.tauth.AuthActivity"
             android:launchMode="singleTask"
@@ -102,25 +131,7 @@
         <!--友盟分享-->
 
 
-        <activity android:name=".activity.UserPermissionSelectActivity">
 
-        </activity>
-        <activity
-            android:name=".activity.ForgetPasswordActivity"
-            android:windowSoftInputMode="adjustPan|stateHidden" />
-        <activity
-            android:name=".activity.RegisterActivity"
-            android:windowSoftInputMode="adjustPan|stateHidden" />
-        <activity
-            android:name=".activity.LoginActivity"
-            android:windowSoftInputMode="adjustPan|stateHidden" />
-        <activity
-            android:name=".SplashActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".KeepFitActivity"
-            android:launchMode="singleTask" />
     </application>
 
 </manifest>

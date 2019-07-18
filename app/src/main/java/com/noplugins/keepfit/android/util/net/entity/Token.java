@@ -5,22 +5,33 @@ package com.noplugins.keepfit.android.util.net.entity;
  */
 
 public class Token {
-    private String token;
-    private String tag;
+    private String data;
 
-    public String getToken() {
-        return token;
+    public String getData() {
+        return data;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    public void setData(String data) {
+        this.data = data;
     }
 
-    public String getTag() {
-        return tag;
+    public Integer getCode() {
+        return code;
     }
 
-    public void setTag(String tag) {
-        this.tag = tag;
+    public void setCode(Integer code) {
+        this.code = code;
+    }
+
+    private Integer code;
+    private String message;
+
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 }

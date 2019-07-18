@@ -36,6 +36,7 @@
         android:background="@drawable/boss"
         android:layout_height="225dp">
         <LinearLayout
+            android:id="@+id/guanzhu_enter"
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
             android:layout_width="114dp"
@@ -60,7 +61,7 @@
                     android:layout_marginLeft="20dp"
                     android:layout_gravity="center_vertical"
                     android:layout_height="16dp"
-                    android:src="@drawable/back_image"
+                    android:src="@drawable/you_jiantou"
                     />
             </LinearLayout>
         </LinearLayout>
@@ -74,6 +75,7 @@
         android:background="@drawable/yuangong"
         android:layout_height="225dp">
         <LinearLayout
+            android:id="@+id/yuangong_btn"
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
             android:layout_width="114dp"
@@ -98,7 +100,7 @@
                     android:layout_marginLeft="20dp"
                     android:layout_gravity="center_vertical"
                     android:layout_height="16dp"
-                    android:src="@drawable/back_image"
+                    android:src="@drawable/black_right_jiantou"
                     />
             </LinearLayout>
         </LinearLayout>

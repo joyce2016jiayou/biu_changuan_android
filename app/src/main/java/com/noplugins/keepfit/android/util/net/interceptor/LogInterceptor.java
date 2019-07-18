@@ -80,7 +80,7 @@ public class LogInterceptor implements Interceptor {
         String bodyString = buffer.clone().readString(charset);
 
         //打印返回的json
-//        Logger.e(Tag+"返回的json",1);
+        Logger.e(Tag+"返回的json",bodyString);
         Logger.json(bodyString);
         return response;
     }

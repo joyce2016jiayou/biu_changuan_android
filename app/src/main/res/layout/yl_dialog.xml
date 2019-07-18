@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical" >
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        style="@style/tanchukuang_style"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                style="@style/tanchukuang_style_2">
+                <TextView
+                    android:id="@+id/title"
+                    style="@style/Dialog_title"
+                    android:text="@string/alert_dialog_tishi1"/>
+                <TextView
+                    android:id="@+id/message"
+                    style="@style/Dialog_content"
+                    android:text="@string/alert_dialog_tishi2"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/view_fengexiang"
+            />
+
+        <LinearLayout
+            style="@style/tanchukuang_style_3">
+            <TextView
+                style="@style/Dialog_sure_style"
+                android:id="@+id/folder_cancel"
+                android:text="@string/alert_dialog_cached_cancel"
+                />
+            <LinearLayout
+                style="@style/view_fengexiang_2"
+                />
+            <TextView
+                style="@style/Dialog_sure_style"
+                android:id="@+id/folder_ok"
+                android:text="@string/alert_dialog_cached_ok"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

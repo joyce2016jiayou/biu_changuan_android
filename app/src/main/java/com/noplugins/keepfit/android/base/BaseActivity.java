@@ -1,18 +1,14 @@
 package com.noplugins.keepfit.android.base;
 
-import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.PowerManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,15 +17,9 @@ import com.noplugins.keepfit.android.util.ToolbarControl;
 import com.noplugins.keepfit.android.util.permission.EasyPermissions;
 import com.noplugins.keepfit.android.util.permission.PermissionActivity;
 import com.noplugins.keepfit.android.util.screen.AndroidWorkaround;
-import com.noplugins.keepfit.android.util.screen.ScreenUtilsHelper;
-import com.noplugins.keepfit.android.util.screen.StatusBarUtil;
-import com.noplugins.keepfit.android.util.ui.NoScrollViewPager;
 import com.orhanobut.logger.Logger;
 import java.util.LinkedList;
 import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import rx.Subscription;
 
 import static android.webkit.WebView.enableSlowWholeDocumentDraw;

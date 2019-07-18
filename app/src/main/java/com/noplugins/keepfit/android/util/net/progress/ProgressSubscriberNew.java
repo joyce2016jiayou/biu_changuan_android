@@ -5,9 +5,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.util.Log;
 
 import com.alibaba.fastjson.JSONObject;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
@@ -16,8 +16,15 @@ import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 import com.noplugins.keepfit.android.util.net.entity.Bean;
 import com.noplugins.keepfit.android.util.net.entity.Contacts;
+import com.noplugins.keepfit.android.util.net.progress.GsonSubscriberOnNextListener;
+import com.noplugins.keepfit.android.util.net.progress.ProgressHUD;
+import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener;
+
 
 import java.lang.reflect.Type;
+import java.net.ConnectException;
+import java.net.SocketTimeoutException;
+import java.util.logging.Logger;
 
 import rx.Subscriber;
 
@@ -126,74 +133,57 @@ public class ProgressSubscriberNew<T> extends Subscriber<Bean<Object>> implement
 
     @Override
     public void onError(Throwable e) {
-       /* if (e instanceof SocketTimeoutException) {
-//            Toast.makeText(MyApplication.getApplication(), "网络中断，请检查您的网络状态", Toast.LENGTH_SHORT).show();
-        } else if (e instanceof ConnectException) {
-//            Toast.makeText(MyApplication.getApplication(), "网络中断，请检查您的网络状态", Toast.LENGTH_SHORT).show();
-        } else {
-//            if (e.getMessage().contains("AppClient has not been setup")) {
-//                Log.e("速度快放假快乐速度快11","速度快放假快乐速度快11");
-//                if (mListener != null) {
-//                    Intent intent = new Intent(mContext, LoginActivity.class);
-//                    mContext.startActivity(intent);
-//                }
-//            } else if (e.getMessage().contains("异地登录")) {
-//                Log.e("速度快放假快乐速度快","速度快放假快乐速度快");
-//                MyApplication.destoryActivity("SplashActivity");
-//                Intent intent = new Intent(mContext, LoginActivity.class);
-//                mContext.startActivity(intent);
-//            } else {
-//                Log.e("速度快放假快乐速度快12","速度快放假快乐速度快12");
-//                mListener.onError(e.getMessage());
-//            }
-        }*/
-
-        //判断是不是用户断网了
-        ConnectivityManager connMgr = (ConnectivityManager) mContext
-                .getSystemService(Context.CONNECTIVITY_SERVICE);
-        assert connMgr != null;
-        NetworkInfo networkInfo = connMgr
-                .getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-        boolean isWifiConn = networkInfo.isConnected();
-        networkInfo = connMgr.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
-        boolean isMobileConn = networkInfo.isConnected();
-        if (isMobileConn || isWifiConn) {
-            if (e.getMessage().contains("Unable to resolve host")) {
-//                RunBeyToast runBeyToast = new RunBeyToast(mContext, 2000, "连接服务器失败，请稍后再试~"
-//                        , R.color.black, 255
-//                );
-//                runBeyToast.show();
-                mListener.onError("断网");
-                //dismissProgressDialog();//关闭loading
-
-            } else {
-//                Log.e("服务器返回异常：", e.getMessage());
-                mListener.onError(e.getMessage());
-//                if ("timeout".endsWith(e.getMessage()) || "SSL handshake timed out".endsWith(e.getMessage())) {
-//                    mListener.onError(e.getMessage());
-//                    dismissProgressDialog();
-//                } else {
-//                    mListener.onError(e.getMessage());
-                dismissProgressDialog();
-//                }
-            }
-        } else {
-//            RunBeyToast runBeyToast = new RunBeyToast(mContext, 2000, "Opps,网络走丢啦~"
-//                    , R.color.black, 255
-//            );
-//            runBeyToast.show();
-            mListener.onError("断网");
-//            dismissProgressDialog();//关闭loading
-        }
+        mListener.onError(e.getMessage());
     }
 
     @Override
     public void onNext(Bean<Object> t) {
         if (t != null) {
+            int code = t.getCode();
+            if (code == 0) {
+                if(null!=t.getData()){
+                    Object obj = t.getData();
+                    Gson gson = new GsonBuilder().
+                            registerTypeAdapter(Double.class, new JsonSerializer<Double>() {
+                                @Override
+                                public JsonElement serialize(Double src, Type typeOfSrc, JsonSerializationContext context) {
+                                    if (src == src.longValue())
+                                        return new JsonPrimitive(src.longValue());
+                                    return new JsonPrimitive(src);
+                                }
+                            }).create();
+                    String myJson = gson.toJson(obj);//将gson转化为json
+                    T jsonObject = gson.fromJson(myJson, entity_class);//把JSON字符串转为对象
+                    gsonSubscriberOnNextListener.on_post_entity(jsonObject, jsonObject.toString());
+                }else{
+                    String string = "success";
+                    gsonSubscriberOnNextListener.on_post_entity((T) string, string);
+                }
+
+            } else {
+                mListener.onError(t.getMessage());
+            }
+
+
+//            Gson gson = new GsonBuilder().
+//                    registerTypeAdapter(Double.class, new JsonSerializer<Double>() {
+//                        @Override
+//                        public JsonElement serialize(Double src, Type typeOfSrc, JsonSerializationContext context) {
+//                            if (src == src.longValue())
+//                                return new JsonPrimitive(src.longValue());
+//                            return new JsonPrimitive(src);
+//                        }
+//                    }).create();
+//            String myJson = gson.toJson(t.getEntity());//将gson转化为json
+//            Log.e("123", "   获取数据JSON---》  " + myJson);
+//            T jsonObject = gson.fromJson(myJson, entity_class);//把JSON字符串转为对象
+//            Log.e("123", "返回的对象json:" + jsonObject);
+//            gsonSubscriberOnNextListener.on_post_entity(jsonObject);
+
 //            Log.e("网络请求成功", "进来了onNext" + "返回code:" + t.getCode()
 //                    + "\n" + "返回message:" + t.getMsg()
 //                    + "\n" + "返回实体类" + t.getData() + "       " + t);
-            if (t.getCode().equals("1")) {//表示成功
+            /*if (t.getCode().equals("1")) {//表示成功
                 if (mListener != null) {
                     if (gsonSubscriberOnNextListener != null) {
                         //如果请求接口正确了，就返回实体类
@@ -233,9 +223,9 @@ public class ProgressSubscriberNew<T> extends Subscriber<Bean<Object>> implement
                     if (mListener != null) {
                         if ("1".equals(Contacts.isPage)) {
                             Contacts.isPage = "2";
-//                            Intent intent = new Intent(mContext, LoginErrorDialog.class);
-//                            intent.putExtra("errorMes", msg);
-                            //mContext.startActivity(intent);
+                            Intent intent = new Intent(mContext, LoginErrorDialog.class);
+                            intent.putExtra("errorMes", msg);
+                            mContext.startActivity(intent);
                         }
                     }
                 } else if (t.getCode().equals("0")) {//接口报错信息
@@ -243,7 +233,9 @@ public class ProgressSubscriberNew<T> extends Subscriber<Bean<Object>> implement
                 } else if (t.getCode().equals("400")) {
                     mListener.onError(t.getMsg());
                 }
-            }
+            }*/
+
+
         }
 
     }

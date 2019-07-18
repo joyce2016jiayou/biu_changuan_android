@@ -100,6 +100,7 @@
                     android:layout_marginLeft="5dp"
                     android:background="@null"
                     android:hint="@string/edit_hint5"
+                    android:maxLength="6"
                     android:singleLine="true"
                     android:textColor="@color/color_ACACAC"
                     android:textColorHint="@color/color_ACACAC"
@@ -176,6 +177,7 @@
 
 
         <LinearLayout
+            android:id="@+id/register_tv"
             android:layout_width="225dp"
             android:layout_height="63dp"
             android:layout_below="@+id/center"
@@ -188,36 +190,57 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="@string/register"
+                android:text="@string/tv4"
                 android:textColor="@color/white"
                 android:textSize="20sp" />
 
         </LinearLayout>
 
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="11dp"
-            android:orientation="horizontal">
-
-            <TextView
+            android:layout_height="wrap_content">
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:text="@string/tv2"
-                android:textColor="@color/color_D8D8D8"
-                android:textSize="12sp" />
+                android:orientation="horizontal">
+                <CheckBox
+                    android:id="@+id/xieyi_check_btn"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/selector_btn_checkbox"
+                    android:button="@null"
+                    android:checked="false" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/tv2"
+                    android:layout_marginLeft="2dp"
+                    android:textColor="@color/color_D8D8D8"
+                    android:textSize="12sp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:text="@string/tv3"
-                android:textColor="@color/color_898989"
-                android:textSize="12sp" />
-        </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/tv3"
+                    android:textColor="@color/color_898989"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/check_layout"
+                android:background="@color/transparent"
+                android:layout_width="20dp"
+                android:orientation="vertical"
+                android:layout_height="12dp">
+
+            </LinearLayout>
+        </RelativeLayout>
     </RelativeLayout>
 </ScrollView>

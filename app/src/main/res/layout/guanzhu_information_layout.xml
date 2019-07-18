@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@drawable/guanzhu_backgroud"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/close_pop"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="@dimen/m106"
+        android:layout_marginRight="@dimen/m50"
+        android:src="@drawable/pop_chacha"/>
+
+    <TextView
+        android:id="@+id/guanzhu_titlt"
+        android:layout_marginTop="@dimen/m96"
+        android:layout_marginLeft="@dimen/m49"
+        android:layout_alignParentLeft="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:text="@string/tv10"
+        />
+    <LinearLayout
+        android:id="@+id/content"
+        android:layout_width="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/m114"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/guanzhu_titlt"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="match_parent"
+            android:text="@string/tv11"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="match_parent"
+            android:text="@string/tv12"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="match_parent"
+            android:text="@string/tv13"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    
+    <LinearLayout
+        android:id="@+id/submit_btn"
+        android:layout_below="@+id/content"
+        android:layout_width="188dp"
+        android:layout_marginTop="@dimen/m118"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:background="@drawable/guanzhu_submit"
+        android:layout_height="50dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:text="@string/tv14"
+            />
+    </LinearLayout>
+
+</RelativeLayout>

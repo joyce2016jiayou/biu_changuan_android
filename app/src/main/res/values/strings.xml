@@ -25,6 +25,20 @@
     <string name="tv7">角色选择</string>
     <string name="tv8">馆主</string>
     <string name="tv9">员工</string>
+    <string name="tv10">馆主资质</string>
+    <string name="tv11">为了更好的获取客户，及验证您的真实身份</string>
+    <string name="tv12">和核实场馆资质，需要您配合提交相关信</string>
+    <string name="tv13">息，我们会在24小时内为您审核</string>
+    <string name="tv14">提交审核资料</string>
+    <string name="tv15">员工资质</string>
+    <string name="tv16">您暂无权限！</string>
+    <string name="tv17">请联系您所在场馆并及时为您开通权限。</string>
+
+
+    <string name="alert_dialog_tishi1">温馨提示</string>
+    <string name="alert_dialog_tishi2">解绑银行卡</string>
+    <string name="alert_dialog_cached_cancel">取消</string>
+    <string name="alert_dialog_cached_ok">确认</string>
 
     <string name="title_activity_register">Sign in</string>
     <string name="prompt_email">Email</string>

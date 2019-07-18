@@ -81,54 +81,9 @@ public class KeepFitActivity extends BaseActivity {
         sp = new SoundPool(10, AudioManager.STREAM_SYSTEM, 5);//第一个参数为同时播放数据流的最大个数，第二数据流类型，第三为声音质量
         music = sp.load(this, R.raw.button, 1); //把你的声音素材放到res/raw里，第2个参数即为资源文件，第3个为音乐的优先级
 
-        //网络请求
-        Network.main_url = "https://app.shiyujia.com/";
-        Network.bucketPath = "appProduction";
-        Network.ShareImage = "https://s3-014-shinho-syj-prd-bjs.s3.cn-north-1.amazonaws.com.cn/syjapp/2018_07/app.png";
-        Network.ShareUrl = Network.main_url + "answerPhone/index.html#/";
-        Network.VideoUrl = Network.main_url + "answerPhone2/index.html?from=singlemessage#/videos?id=";
-        Network.ImageTextUrl = Network.main_url + "answerPhone2/index.html?from=singlemessage#/images?id=";
-        Login();
+
     }
 
-    private void Login() {
-        Map<String, String> params = new HashMap<>();
-        params.put("name", "17621233147");
-        params.put("password", "123456");
-        params.put("app_version", "123");
-        params.put("controller", "2");
-        params.put("phone_version", "123");
-        if (!"".equals(SharedPreferencesHelper.get(getApplicationContext(), "pigeonData", ""))) {
-            String pigeonData = SharedPreferencesHelper.get(getApplicationContext(), "pigeonData", "").toString();
-            params.put("pigeon", pigeonData);
-        }
-        if (null != SharedPreferencesHelper.get(getApplicationContext(), "jiguang_id", "")) {
-            String registrationId = SharedPreferencesHelper.get(getApplicationContext(), "jiguang_id", "").toString();
-            params.put("registration_id", registrationId);
-
-        }
-        Log.e("123", "        登录        " + params);
-        subscription = Network.getInstance("登录", getApplicationContext())
-                .login(params, new ProgressSubscriberNew<>(
-                        Token.class, new GsonSubscriberOnNextListener<Token>() {
-                    @Override
-                    public void on_post_entity(Token token) {
-                        Log.e("123", "  登录成功： " + token.getToken() + "     token.getTag()    " + token.getTag());
-
-                    }
-                }, new SubscriberOnNextListener<Bean<Object>>() {
-                    @Override
-                    public void onNext(Bean<Object> result) {
-
-                    }
-
-                    @Override
-                    public void onError(String error) {
-                        Log.e("123", "     登录失败：" + error);
-                    }
-
-                }, this, false, "登录中..."));
-    }
 
 
 
