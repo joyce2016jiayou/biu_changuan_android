@@ -28,7 +28,6 @@ import android.widget.Toast;
 
 import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.base.BaseActivity;
-import com.noplugins.keepfit.android.entity.Code;
 import com.noplugins.keepfit.android.entity.RegisterEntity;
 import com.noplugins.keepfit.android.util.data.StringsHelper;
 import com.noplugins.keepfit.android.util.net.Network;
@@ -92,8 +91,7 @@ public class RegisterActivity extends BaseActivity {
         StringsHelper.setEditTextHintSize(edit_sure_password, "请再次确认密码", 15);
         edit_phone_number.addTextChangedListener(phone_number_jiaoyan);
         edit_phone_number.setKeyListener(DigitsKeyListener.getInstance("0123456789"));//设置输入数字
-        //设置验证码输入错误
-        //edit_yanzhengma.setError("验证码输入错误");
+
         clear_password_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -186,7 +184,32 @@ public class RegisterActivity extends BaseActivity {
 
         });
 
+        edit_yanzhengma.addTextChangedListener(yanzhengma);
+
+
     }
+
+    TextWatcher yanzhengma = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+            if (editable.length()>0){
+                clear_password_btn.setVisibility(View.VISIBLE);
+            }else{
+                clear_password_btn.setVisibility(View.INVISIBLE);
+            }
+        }
+    };
+
     private void Check_YanZhengMa() {
         Map<String, String> params = new HashMap<>();
         params.put("code", edit_yanzhengma.getText().toString());
@@ -211,6 +234,8 @@ public class RegisterActivity extends BaseActivity {
                             public void onError(String error) {
                                 //Logger.e(TAG, "验证验证码报错：" + error);
                                 Log.e(TAG,"验证验证码报错：" + error);
+                                //设置验证码输入错误
+                                edit_yanzhengma.setError("验证码输入错误");
                                 Toast.makeText(getApplicationContext(), "验证码输入不正确！", Toast.LENGTH_SHORT).show();
                             }
                         }, this, true));
@@ -257,7 +282,7 @@ public class RegisterActivity extends BaseActivity {
                             @Override
                             public void on_post_entity(String code,String get_message_id) {
                                 message_id = get_message_id;
-                                //Logger.e(TAG, "接收验证码成功：" + message_id);
+                                Log.e(TAG, "接收验证码成功get_message_id：" + message_id);
                                 Log.e(TAG, "接收验证码成功：" + message_id);
 
                             }

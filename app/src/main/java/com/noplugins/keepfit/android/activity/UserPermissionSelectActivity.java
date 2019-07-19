@@ -19,8 +19,10 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.noplugins.keepfit.android.KeepFitActivity;
 import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.base.BaseActivity;
+import com.noplugins.keepfit.android.entity.PermmisionSelectEntity;
 import com.noplugins.keepfit.android.util.data.SharedPreferencesHelper;
 import com.noplugins.keepfit.android.util.net.Network;
 import com.noplugins.keepfit.android.util.net.entity.Bean;
@@ -100,22 +102,36 @@ public class UserPermissionSelectActivity extends BaseActivity {
 
 
     private void selete_role(String type) {
-
-        String token = SharedPreferencesHelper.get(getApplicationContext(), "login_token", "").toString();
         String phone_number = SharedPreferencesHelper.get(getApplicationContext(), "phone_number", "").toString();
         Map<String, String> params = new HashMap<>();
-        params.put("token",token);
+        //params.put("token",token);
         params.put("phone", phone_number);
         params.put("type", type);
         Log.e(TAG, "选择参数：" + params.toString());
 
         subscription = Network.getInstance("选择角色", getApplicationContext())
                 .select_role(params,
-                        new ProgressSubscriberNew<>(String.class, new GsonSubscriberOnNextListener<String>() {
+                        new ProgressSubscriberNew<>(PermmisionSelectEntity.class, new GsonSubscriberOnNextListener<PermmisionSelectEntity>() {
                             @Override
-                            public void on_post_entity(String code,String Message_id) {
+                            public void on_post_entity(PermmisionSelectEntity code,String Message_id) {
                                 Log.e(TAG,"选择成功：");
-                                Toast.makeText(getApplicationContext(), "选择成功！", Toast.LENGTH_SHORT).show();
+                                //0是没有权限,1是有权限
+                                if(code.getStatus().equals("0")){//跳转基础资料
+                                    if(type.equals("1")){//馆主
+                                        Intent intent = new Intent(UserPermissionSelectActivity.this,InformationCheckActivity.class);
+                                        startActivity(intent);
+                                        finish();
+
+                                    }else{//员工
+                                        Toast.makeText(getApplicationContext(), "您暂未开通权限！", Toast.LENGTH_SHORT).show();
+                                    }
+
+                                }else{
+                                    Intent intent = new Intent(UserPermissionSelectActivity.this, KeepFitActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                                //Toast.makeText(getApplicationContext(), "选择成功！", Toast.LENGTH_SHORT).show();
 
                             }
                         }, new SubscriberOnNextListener<Bean<Object>>() {

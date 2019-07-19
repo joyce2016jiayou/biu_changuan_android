@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.Editable;
+import android.text.Selection;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.SpannedString;
@@ -92,7 +93,6 @@ public class ForgetPasswordActivity extends BaseActivity {
         edit_phone_number.addTextChangedListener(phone_number_jiaoyan);
         edit_phone_number.setKeyListener(DigitsKeyListener.getInstance("0123456789"));//设置输入数字
         //设置验证码输入错误
-        //edit_yanzhengma.setError("验证码输入错误");
         clear_password_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -152,7 +152,30 @@ public class ForgetPasswordActivity extends BaseActivity {
                 }
             }
         });
+        edit_yanzhengma.addTextChangedListener(yanzhengma);
     }
+
+    TextWatcher yanzhengma = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+            if (editable.length()>0){
+                clear_password_btn.setVisibility(View.VISIBLE);
+            }else{
+                clear_password_btn.setVisibility(View.INVISIBLE);
+            }
+        }
+    };
+
     private void Check_YanZhengMa() {
         Map<String, String> params = new HashMap<>();
         params.put("code", edit_yanzhengma.getText().toString());
@@ -175,6 +198,8 @@ public class ForgetPasswordActivity extends BaseActivity {
                             @Override
                             public void onError(String error) {
                                 Log.e(TAG,"验证验证码报错：" + error);
+                                //设置验证码输入错误
+                                edit_yanzhengma.setError("验证码输入错误");
                                 Toast.makeText(getApplicationContext(), "验证码输入不正确！", Toast.LENGTH_SHORT).show();
                             }
                         }, this, true));
@@ -185,7 +210,6 @@ public class ForgetPasswordActivity extends BaseActivity {
         Map<String, String> params = new HashMap<>();
         params.put("phone", edit_phone_number.getText().toString());
         params.put("password", edit_sure_password.getText().toString());
-
         subscription = Network.getInstance("修改密码", getApplicationContext())
                 .submit_password(params,
                         new ProgressSubscriberNew<>(String.class, new GsonSubscriberOnNextListener<String>() {

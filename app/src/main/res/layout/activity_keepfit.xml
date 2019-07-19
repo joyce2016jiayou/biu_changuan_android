@@ -29,8 +29,8 @@
 
             <ImageView
                 android:id="@+id/home_img"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="30dp"
+                android:layout_height="31dp"
                 android:layout_gravity="center"
                 android:src="@drawable/icon_home_on" />
 
@@ -55,8 +55,8 @@
 
             <ImageView
                 android:id="@+id/shipu_img"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="30dp"
+                android:layout_height="31dp"
                 android:layout_gravity="center"
                 android:src="@drawable/icon_discover_off" />
 
@@ -83,8 +83,8 @@
 
             <ImageView
                 android:id="@+id/movie_img"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="30dp"
+                android:layout_height="31dp"
                 android:layout_gravity="center_horizontal"
                 android:src="@drawable/icon_issue_off" />
 
@@ -111,8 +111,8 @@
 
             <ImageView
                 android:id="@+id/mine_img"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="30dp"
+                android:layout_height="31dp"
                 android:layout_gravity="center"
                 android:src="@drawable/icon_user_off" />
 

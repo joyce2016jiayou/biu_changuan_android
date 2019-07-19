@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.base.BaseActivity;
+import com.noplugins.keepfit.android.entity.LoginEntity;
 import com.noplugins.keepfit.android.entity.RegisterEntity;
 import com.noplugins.keepfit.android.util.data.SharedPreferencesHelper;
 import com.noplugins.keepfit.android.util.data.StringsHelper;
@@ -68,6 +69,7 @@ public class LoginActivity extends BaseActivity {
     @BindView(R.id.login_btn)
     LinearLayout login_btn;
 
+    private boolean is_save_number;
     protected final String TAG = this.getClass().getSimpleName();//是否输出日志信息
 
 
@@ -94,9 +96,9 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean is_check) {
                 if (is_check) {
-                    Log.e("dsdd", "选中了");
+                    is_save_number = true;
                 } else {
-                    Log.e("dsdd", "没选中");
+                    is_save_number = false;
 
                 }
             }
@@ -148,32 +150,43 @@ public class LoginActivity extends BaseActivity {
         params.put("password", edit_password.getText().toString());
         params.put("phone", edit_phone_number.getText().toString());
         Gson gson = new Gson();
-        String json_params=gson.toJson(params);
+        String json_params = gson.toJson(params);
         Log.e(TAG, "登录参数：" + json_params);
-        String json= new Gson().toJson(params);//要传递的json
-        RequestBody requestBody=RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),json);
+        String json = new Gson().toJson(params);//要传递的json
+        RequestBody requestBody = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), json);
 
         subscription = Network.getInstance("登录", getApplicationContext())
-                .login(requestBody, new ProgressSubscriberNew<>(String.class, new GsonSubscriberOnNextListener<String>() {
+                .login(requestBody, new ProgressSubscriberNew<>(LoginEntity.class, new GsonSubscriberOnNextListener<LoginEntity>() {
                     @Override
-                    public void on_post_entity(String o,String s) {
+                    public void on_post_entity(LoginEntity loginEntity, String s) {
                         Log.e(TAG, "登录成功：" + s);
+                        if (is_save_number) {//保存密码
+
+                        }else{
+//                            Intent intent = new Intent(LoginActivity.this, UserPermissionSelectActivity.class);
+//                            startActivity(intent);
+//                            finish();
+                        }
+
+                        //保存密码
                         if ("".equals(SharedPreferencesHelper.get(getApplicationContext(), "login_token", ""))) {
-                            SharedPreferencesHelper.put(getApplicationContext(), "login_token", o);
+                            SharedPreferencesHelper.put(getApplicationContext(), "login_token", loginEntity.getToken());
                             SharedPreferencesHelper.put(getApplicationContext(), "phone_number", edit_phone_number.getText().toString());
                         } else {
                             SharedPreferencesHelper.remove(getApplicationContext(), "login_token");
-                            SharedPreferencesHelper.put(getApplicationContext(), "login_token", o);
+                            SharedPreferencesHelper.put(getApplicationContext(), "login_token", loginEntity.getToken());
                             SharedPreferencesHelper.put(getApplicationContext(), "phone_number", edit_phone_number.getText().toString());
                         }
                         Intent intent = new Intent(LoginActivity.this, UserPermissionSelectActivity.class);
                         startActivity(intent);
                         finish();
+
                     }
                 }, new SubscriberOnNextListener<Bean<Object>>() {
                     @Override
                     public void onNext(Bean<Object> result) {
                     }
+
                     @Override
                     public void onError(String error) {
                         Log.e(TAG, "登录失败：" + error);

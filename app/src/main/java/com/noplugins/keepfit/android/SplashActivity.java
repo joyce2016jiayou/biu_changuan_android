@@ -42,13 +42,15 @@ public class SplashActivity extends BaseActivity {
                         finish();
                     } else {
                         Intent intent = new Intent(SplashActivity.this, UserPermissionSelectActivity.class);
+                        //Intent intent = new Intent(SplashActivity.this, KeepFitActivity.class);
+
                         startActivity(intent);
                         finish();
                     }
 
 
                 }
-            }, 500);
+            }, 2000);
         }else{//等待网络或者弹窗
             if (null == mHandler) {
                 mHandler = new Handler(Looper.getMainLooper());

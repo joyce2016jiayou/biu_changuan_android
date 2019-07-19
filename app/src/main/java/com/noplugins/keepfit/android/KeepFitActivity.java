@@ -82,6 +82,7 @@ public class KeepFitActivity extends BaseActivity {
         music = sp.load(this, R.raw.button, 1); //把你的声音素材放到res/raw里，第2个参数即为资源文件，第3个为音乐的优先级
 
 
+
     }
 
 

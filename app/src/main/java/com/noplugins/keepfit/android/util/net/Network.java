@@ -27,7 +27,6 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
 import okhttp3.Interceptor;
-import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -47,12 +46,20 @@ public class Network {
     public static final int DEFAULT_TIMEOUT = 7;
     private static Network mInstance;
     public MyService service;
+    public static String token = "";
     //测试服
-    public static String main_url = "http://172.17.0.155:8888/api/gym-service/";
+    public static String main_url = "http://172.17.0.168:8888/api/gym-service/";
 
     //获取单例
     public static Network getInstance(String method, Context context) {
         if (context != null) {
+            if ("".equals(SharedPreferencesHelper.get(context, "login_token", "").toString())) {
+                token = "";
+                Log.e("没有添加token", token);
+            } else {
+                token = SharedPreferencesHelper.get(context, "login_token", "").toString();
+                Log.e("添加的头部的token", token);
+            }
             if (mInstance == null) {
                 synchronized (Network.class) {
                     mInstance = new Network(method, context);
@@ -63,7 +70,6 @@ public class Network {
     }
 
     Retrofit retrofit;
-
     private Network(String method, Context context) {
 
         final TrustManager[] trustAllCerts = new TrustManager[]{new X509TrustManager() {
@@ -98,19 +104,19 @@ public class Network {
         }
 
         OkHttpClient client = new OkHttpClient.Builder()
-                .sslSocketFactory(sslContext.getSocketFactory())//去掉okhttp https证书验证
+             //   .sslSocketFactory(sslContext.getSocketFactory())//去掉okhttp https证书验证
                 .addInterceptor(new LogInterceptor(method))//添加日志拦截器
-                .addInterceptor(new Interceptor() {//添加token
-                    @Override
-                    public Response intercept(Chain chain) throws IOException {
-                        Request original = chain.request();
-                        Request request = original.newBuilder()
-                                //.header("token", token)
-                                .method(original.method(), original.body())
-                                .build();
-                        return chain.proceed(request);
-                    }
-                })
+//                .addInterceptor(new Interceptor() {//添加token
+//                    @Override
+//                    public Response intercept(Chain chain) throws IOException {
+//                            Request original = chain.request();
+//                            Request request = original.newBuilder()
+//                                    .header("token", token)
+//                                    .method(original.method(), original.body())
+//                                    .build();
+//                            return chain.proceed(request);
+//                    }
+//                })
                 .writeTimeout(DEFAULT_TIMEOUT, TimeUnit.MINUTES)//设置写的超时时间
                 .connectTimeout(DEFAULT_TIMEOUT, TimeUnit.MINUTES)//超时处理
                 .readTimeout(DEFAULT_TIMEOUT, TimeUnit.MINUTES)
