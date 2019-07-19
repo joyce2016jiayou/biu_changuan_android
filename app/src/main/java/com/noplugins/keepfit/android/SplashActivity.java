@@ -10,7 +10,10 @@ import android.os.Looper;
 
 
 import com.noplugins.keepfit.android.activity.LoginActivity;
+import com.noplugins.keepfit.android.activity.UserPermissionSelectActivity;
 import com.noplugins.keepfit.android.base.BaseActivity;
+import com.noplugins.keepfit.android.util.data.SharedPreferencesHelper;
+
 import butterknife.ButterKnife;
 
 public class SplashActivity extends BaseActivity {
@@ -32,12 +35,18 @@ public class SplashActivity extends BaseActivity {
         if(panduan_net()){
             new Handler().postDelayed(new Runnable() {
                 @Override
-
                 public void run() {
-                    //超时处理
-                    Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
-                    startActivity(intent);
-                    finish();
+                    if ("".equals(SharedPreferencesHelper.get(getApplicationContext(), "login_token", ""))) {
+                        Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        Intent intent = new Intent(SplashActivity.this, UserPermissionSelectActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+
+
                 }
             }, 500);
         }else{//等待网络或者弹窗
