@@ -48,7 +48,7 @@ public class Network {
     public MyService service;
     public static String token = "";
     //测试服
-    public static String main_url = "http://172.17.0.168:8888/api/gym-service/";
+    public static String main_url = "http://172.17.0.132:8888/api/gym-service/";
 
     //获取单例
     public static Network getInstance(String method, Context context) {
@@ -106,17 +106,17 @@ public class Network {
         OkHttpClient client = new OkHttpClient.Builder()
              //   .sslSocketFactory(sslContext.getSocketFactory())//去掉okhttp https证书验证
                 .addInterceptor(new LogInterceptor(method))//添加日志拦截器
-//                .addInterceptor(new Interceptor() {//添加token
-//                    @Override
-//                    public Response intercept(Chain chain) throws IOException {
-//                            Request original = chain.request();
-//                            Request request = original.newBuilder()
-//                                    .header("token", token)
-//                                    .method(original.method(), original.body())
-//                                    .build();
-//                            return chain.proceed(request);
-//                    }
-//                })
+                .addInterceptor(new Interceptor() {//添加token
+                    @Override
+                    public Response intercept(Chain chain) throws IOException {
+                            Request original = chain.request();
+                            Request request = original.newBuilder()
+                                    .header("token", token)
+                                    .method(original.method(), original.body())
+                                    .build();
+                            return chain.proceed(request);
+                    }
+                })
                 .writeTimeout(DEFAULT_TIMEOUT, TimeUnit.MINUTES)//设置写的超时时间
                 .connectTimeout(DEFAULT_TIMEOUT, TimeUnit.MINUTES)//超时处理
                 .readTimeout(DEFAULT_TIMEOUT, TimeUnit.MINUTES)

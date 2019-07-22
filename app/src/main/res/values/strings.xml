@@ -15,6 +15,12 @@
     <string name="edit_hint5">请输入验证码</string>
     <string name="edit_hint6">请输入新密码</string>
     <string name="edit_hint7">请再次确认密码</string>
+    <string name="edit_hint8">请输入场馆名称</string>
+    <string name="edit_hint9">请输入场馆面积</string>
+    <string name="edit_hint10">场馆电话</string>
+    <string name="edit_hint11">场馆邮箱</string>
+    <string name="edit_hint12">09:00</string>
+    <string name="edit_hint13">24:00</string>
 
     <string name="tv1">登录</string>
     <string name="tv2">注册即代表您同意哔哟</string>
@@ -33,7 +39,13 @@
     <string name="tv15">员工资质</string>
     <string name="tv16">您暂无权限！</string>
     <string name="tv17">请联系您所在场馆并及时为您开通权限。</string>
-
+    <string name="tv18">基础资料</string>
+    <string name="tv19">名称</string>
+    <string name="tv20">类型</string>
+    <string name="tv21">面积</string>
+    <string name="tv22">电话</string>
+    <string name="tv23">邮箱</string>
+    <string name="tv24">营业时间</string>
 
     <string name="alert_dialog_tishi1">温馨提示</string>
     <string name="alert_dialog_tishi2">解绑银行卡</string>
@@ -49,5 +61,8 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

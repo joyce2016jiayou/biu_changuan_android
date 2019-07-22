@@ -1,5 +1,6 @@
 package com.noplugins.keepfit.android.util.ui;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -45,5 +46,10 @@ public abstract class ViewPagerFragment extends Fragment {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
     }
 }

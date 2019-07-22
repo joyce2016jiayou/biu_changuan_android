@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../AndroidPicker-master.iml" filepath="$PROJECT_DIR$/../AndroidPicker-master.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../CalendarPicker/CalendarPicker.iml" filepath="$PROJECT_DIR$/../CalendarPicker/CalendarPicker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../ColorPicker/ColorPicker.iml" filepath="$PROJECT_DIR$/../ColorPicker/ColorPicker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../FilePicker/FilePicker.iml" filepath="$PROJECT_DIR$/../FilePicker/FilePicker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../Logger/Logger.iml" filepath="$PROJECT_DIR$/../Logger/Logger.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../Popup/Popup.iml" filepath="$PROJECT_DIR$/../Popup/Popup.iml" />
+      <module fileurl="file://$PROJECT_DIR$/WheelPicker.iml" filepath="$PROJECT_DIR$/WheelPicker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../WheelView/WheelView.iml" filepath="$PROJECT_DIR$/../WheelView/WheelView.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../app/app.iml" filepath="$PROJECT_DIR$/../app/app.iml" />
+    </modules>
+  </component>
+</project>

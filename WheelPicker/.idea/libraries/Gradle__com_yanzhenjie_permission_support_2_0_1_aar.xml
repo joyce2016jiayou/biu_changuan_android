@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.yanzhenjie.permission:support:2.0.1@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5ba19bf23a9ac7b5f081620a8eb2587a/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5ba19bf23a9ac7b5f081620a8eb2587a/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.yanzhenjie.permission/support/2.0.1/8d9f901687f3be21c78c2952465afabfc792a014/support-2.0.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

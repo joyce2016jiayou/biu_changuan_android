@@ -31,6 +31,8 @@ import java.util.concurrent.TimeUnit;
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLSession;
 
+import cn.qqtheme.framework.logger.CqrLog;
+import cn.qqtheme.framework.logger.impl.LoggerImpl;
 import okhttp3.OkHttpClient;
 
 /**
@@ -96,6 +98,9 @@ public class MyApplication extends Application {
         PlatformConfig.setSinaWeibo("597832238", "1c6785dbf569cc74c60e24c223741593","http://sns.whalecloud.com");//微博
         PlatformConfig.setQQZone("100424468", "c7394704798a158208a74ab60104f0ba");
 
+
+        //日志初始化
+        CqrLog.setLogger(new LoggerImpl());
 
     }
 
