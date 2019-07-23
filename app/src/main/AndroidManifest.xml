@@ -54,7 +54,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.ShareSDKDEMOActivity"></activity>
-        <activity android:name=".activity.UserPermissionSelectActivity"></activity>
+        <activity android:name=".activity.UserPermissionSelectActivity">
+
+        </activity>
         <activity
             android:name=".activity.ForgetPasswordActivity"
             android:windowSoftInputMode="adjustPan|stateHidden" />
@@ -68,15 +70,31 @@
             android:name=".SplashActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
+           <!-- <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>-->
         </activity>
         <activity
             android:name=".KeepFitActivity"
-            android:launchMode="singleTask" /> <!-- 友盟分享 -->
+            android:launchMode="singleTask" />
+
+
+
+        <!-- 存储权限 authorities="你的包名+fileprovider" -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.noplugins.keepfit.android.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths_public" />
+        </provider>
+
+
+        <!-- 友盟分享 -->
         <meta-data
             android:name="UMENG_APPKEY"
             android:value="5d2d6979570df3fe04000f97" />

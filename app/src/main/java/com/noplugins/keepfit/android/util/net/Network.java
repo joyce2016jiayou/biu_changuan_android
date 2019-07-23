@@ -48,7 +48,7 @@ public class Network {
     public MyService service;
     public static String token = "";
     //测试服
-    public static String main_url = "http://172.17.0.132:8888/api/gym-service/";
+    public static String main_url = "http://172.17.0.169:8888/api/gym-service/";
 
     //获取单例
     public static Network getInstance(String method, Context context) {

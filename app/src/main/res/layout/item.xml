@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:spinner="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_height="wrap_content">
+        <lib.demo.spinner.MaterialSpinner
+            android:id="@+id/spinner_changsuo_type"
+            android:layout_width="93dp"
+            android:layout_height="33dp"
+            android:background="@drawable/et_login_bg"
+            android:textSize="13sp"
+            android:gravity="center"
+            spinner:ms_background_color="@android:color/white"
+            spinner:ms_popupwindow_height="wrap_content"
+            spinner:ms_popupwindow_maxheight="200dp"
+            spinner:ms_text_color="@color/color_9B9B9B"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="22dp"
+            android:gravity="center_vertical"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/xianzhi_number"
+                android:layout_width="85dp"
+                android:layout_height="36dp"
+                android:background="@null"
+                android:hint="@string/edit_hint14"
+                android:textSize="13sp"
+                android:textColor="@color/top_heiziti"
+                android:textColorHint="@color/color_9B9B9B" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tv25"
+                android:textSize="8sp"
+                android:textColor="@color/color_9B9B9B"
+                />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/Add_btn"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginLeft="11dp"
+            android:src="@drawable/jiahao"
+            />
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

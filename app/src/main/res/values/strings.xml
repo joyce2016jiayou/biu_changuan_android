@@ -21,6 +21,8 @@
     <string name="edit_hint11">场馆邮箱</string>
     <string name="edit_hint12">09:00</string>
     <string name="edit_hint13">24:00</string>
+    <string name="edit_hint14">限制人数</string>
+    <string name="edit_hint15">请输入场馆地址</string>
 
     <string name="tv1">登录</string>
     <string name="tv2">注册即代表您同意哔哟</string>
@@ -46,6 +48,16 @@
     <string name="tv22">电话</string>
     <string name="tv23">邮箱</string>
     <string name="tv24">营业时间</string>
+    <string name="tv25">人</string>
+    <string name="tv26">最多选择三项</string>
+    <string name="tv27">地址</string>
+    <string name="tv28">功能性场所</string>
+    <string name="tv29">LOGO</string>
+    <string name="tv30">更多照片</string>
+    <string name="tv31">0/9</string>
+    <string name="tv32">添加更多精彩照片，让用户更加了解你哦~</string>
+    <string name="tv33">营业设施</string>
+    <string name="tv34">下一步</string>
 
     <string name="alert_dialog_tishi1">温馨提示</string>
     <string name="alert_dialog_tishi2">解绑银行卡</string>

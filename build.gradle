@@ -4,6 +4,10 @@ buildscript {
     repositories {
         google()
         jcenter()
+        maven { url 'https://maven.google.com' }
+        mavenCentral()
+        maven{url "https://jitpack.io"}
+        maven { url "http://maven.aliyun.com/nexus/content/repositories/releases" }
         
     }
     dependencies {
@@ -13,7 +17,21 @@ buildscript {
         // in the individual module build.gradle files
     }
 }
+allprojects {
+    repositories {
+        mavenCentral()
+        maven { url "https://jitpack.io" }
+        google()
+        jcenter()
+        maven {url 'https://dl.bintray.com/jetbrains/anko'}
+        maven { url "http://maven.aliyun.com/nexus/content/repositories/releases" }
+//        flatDir { dirs 'src/main/libs' }
 
+    }
+
+//    apply plugin: 'idea'
+//    buildDir = new File(rootDir, "gradle-build/${path.replaceAll(':', '/')}")
+}
 allprojects {
     repositories {
         google()

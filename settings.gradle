@@ -1,1 +1,1 @@
-include ':app', ':okhttputils', ':LoadManager', ':spinner_lib', ':WheelPicker', ':Logger', ':Popup', ':WheelView'
+include ':app', ':okhttputils', ':LoadManager', ':spinner_lib', ':WheelPicker', ':Logger', ':Popup', ':WheelView', ':easyPhotos'

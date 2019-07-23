@@ -29,6 +29,21 @@ android {
         exclude 'META-INF/rxjava.properties'
 
     }
+    allprojects {
+        repositories {
+            mavenCentral()
+            jcenter()
+            maven { url 'https://maven.google.com' }
+            maven { url 'https://maven.fabric.io/public' }
+            maven { url 'https://jitpack.io' }
+            mavenCentral(url: "https://dl.bintray.com/ycjiang/ycjiang")
+            //  maven { url 'http://oss.jfrog.org/artifactory/oss-snapshot-local/' }
+
+            flatDir {
+                dirs 'libs'
+            }
+        }
+    }
     compileOptions {
         targetCompatibility JavaVersion.VERSION_1_8
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -96,7 +111,12 @@ dependencies {
     implementation project(':spinner_lib')
     //时间选择
     implementation project(':WheelPicker')
-    compile project(path: ':Logger')
+    implementation project(path: ':Logger')
+    //九宫格图片
+    implementation 'com.github.bumptech.glide:glide:3.7.0'
+    implementation project(':easyPhotos')
+
+
 
 
 }
