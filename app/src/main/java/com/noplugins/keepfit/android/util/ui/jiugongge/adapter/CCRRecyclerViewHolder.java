@@ -2,9 +2,7 @@ package com.noplugins.keepfit.android.util.ui.jiugongge.adapter;
 
 import android.content.Context;
 import android.view.View;
-
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.noplugins.keepfit.android.util.ui.jiugongge.listen.CCROnNoDoubleClickListener;
 import com.noplugins.keepfit.android.util.ui.jiugongge.listen.CCROnRVItemClickListener;
 import com.noplugins.keepfit.android.util.ui.jiugongge.listen.CCROnRVItemLongClickListener;

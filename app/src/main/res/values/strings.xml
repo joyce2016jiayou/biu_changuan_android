@@ -23,6 +23,11 @@
     <string name="edit_hint13">24:00</string>
     <string name="edit_hint14">限制人数</string>
     <string name="edit_hint15">请输入场馆地址</string>
+    <string name="edit_hint16">请输入法人姓名</string>
+    <string name="edit_hint17">请输入身份证号</string>
+    <string name="edit_hint18">请输入营业执照上的企业名称</string>
+    <string name="edit_hint19">请输入营业执照上的企业注册号</string>
+    <string name="edit_hint20">以上信息提交后不可更改</string>
 
     <string name="tv1">登录</string>
     <string name="tv2">注册即代表您同意哔哟</string>
@@ -58,6 +63,11 @@
     <string name="tv32">添加更多精彩照片，让用户更加了解你哦~</string>
     <string name="tv33">营业设施</string>
     <string name="tv34">下一步</string>
+    <string name="tv35">法人姓名</string>
+    <string name="tv36">身份证号</string>
+    <string name="tv37">企业名称</string>
+    <string name="tv38">企业注册号</string>
+    <string name="tv39">提交</string>
 
     <string name="alert_dialog_tishi1">温馨提示</string>
     <string name="alert_dialog_tishi2">解绑银行卡</string>

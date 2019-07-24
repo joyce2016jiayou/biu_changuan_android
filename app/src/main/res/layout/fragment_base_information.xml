@@ -227,7 +227,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:background="@drawable/kapian_bg"
             android:orientation="vertical">
 
@@ -299,7 +298,7 @@
 
                 <RelativeLayout
                     android:layout_width="54dp"
-                    android:layout_marginLeft="44dp"
+                    android:layout_marginLeft="50dp"
                     android:layout_gravity="center_vertical"
                     android:layout_height="54dp">
 
@@ -313,8 +312,13 @@
                         android:src="@drawable/jia_image" />
 
                     <ImageView
+                        android:id="@+id/delete_icon_btn"
                         android:layout_width="16dp"
                         android:layout_height="16dp"
+                        android:layout_marginRight="3dp"
+                        android:clickable="true"
+                        android:layout_marginTop="3dp"
+                        android:visibility="invisible"
                         android:layout_alignParentTop="true"
                         android:layout_alignParentRight="true"
                         android:src="@drawable/delete_image" />
@@ -345,6 +349,7 @@
                             android:textColor="@color/top_heiziti"
                             />
                         <TextView
+                            android:id="@+id/select_numbers_tv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/color_9B9B9B"
@@ -367,17 +372,18 @@
                     android:id="@+id/snpl_moment_add_photos"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    app:bga_snpl_deleteDrawable="@mipmap/bga_pp_ic_delete"
+                    app:bga_snpl_deleteDrawable="@drawable/delete_image"
                     app:bga_snpl_deleteDrawableOverlapQuarter="false"
                     app:bga_snpl_editable="true"
                     app:bga_snpl_itemCornerRadius="0dp"
-                    app:bga_snpl_itemSpanCount="5"
-                    app:bga_snpl_itemWhiteSpacing="15dp"
+                    app:bga_snpl_itemSpanCount="4"
+                    app:bga_snpl_itemWhiteSpacing="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
                     app:bga_snpl_itemWidth="0dp"
                     app:bga_snpl_maxItemCount="9"
                     app:bga_snpl_placeholderDrawable="@mipmap/bga_pp_ic_holder_dark"
-                    app:bga_snpl_plusDrawable="@mipmap/bga_pp_ic_plus"
+                    app:bga_snpl_plusDrawable="@drawable/add_image_moren"
                     app:bga_snpl_plusEnable="true"
                     app:bga_snpl_sortable="true" />
             </LinearLayout>
@@ -388,7 +394,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="vertical"
-            android:layout_marginTop="10dp"
             android:background="@drawable/yingye_bg"
             android:layout_height="138dp">
             <TextView
@@ -501,6 +506,7 @@
 
         <!--下一步-->
         <TextView
+            android:id="@+id/next_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/tv34"

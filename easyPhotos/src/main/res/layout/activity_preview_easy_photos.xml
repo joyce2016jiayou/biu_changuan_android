@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/easy_photos_bg_primary">
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_photos"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

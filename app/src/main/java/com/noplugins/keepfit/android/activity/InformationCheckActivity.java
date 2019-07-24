@@ -11,6 +11,7 @@ import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.adapter.ContentPagerAdapterMy;
 import com.noplugins.keepfit.android.base.BaseActivity;
 import com.noplugins.keepfit.android.fragment.BaseInformationFragment;
+import com.noplugins.keepfit.android.fragment.BusinessInformationFragment;
 import com.noplugins.keepfit.android.util.ui.NoScrollViewPager;
 import com.noplugins.keepfit.android.util.ui.StepView;
 
@@ -62,7 +63,7 @@ public class InformationCheckActivity extends BaseActivity {
 
         //设置视图
         tabFragments.add(BaseInformationFragment.homeInstance("第一页"));
-        tabFragments.add(BaseInformationFragment.homeInstance("第二页"));
+        tabFragments.add(BusinessInformationFragment.homeInstance("第二页"));
         tabFragments.add(BaseInformationFragment.homeInstance("第二页"));
         ContentPagerAdapterMy contentAdapter = new ContentPagerAdapterMy(getSupportFragmentManager(), tabFragments);
         viewpager_content.setAdapter(contentAdapter);

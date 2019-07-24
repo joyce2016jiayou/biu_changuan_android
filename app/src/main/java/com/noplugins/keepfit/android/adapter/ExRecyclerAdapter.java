@@ -4,21 +4,24 @@ import android.content.Context;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.entity.ItemBean;
+import com.noplugins.keepfit.android.entity.TypeItemEntity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import lib.demo.spinner.MaterialSpinner;
 
@@ -37,11 +40,15 @@ public class ExRecyclerAdapter extends RecyclerView.Adapter<ExRecyclerAdapter.Vi
     private LayoutInflater mInflater;
     private int mLayoutId;
     private Context mcontext;
-
+    private List<TypeItemEntity> typeItemEntities=new ArrayList<>();
+    private String[] typeArrays;
+    //定义一个HashMap，用来存放EditText的值，Key是position
+    HashMap<Integer, Integer> hashMap = new HashMap<Integer, Integer>();
     public ExRecyclerAdapter(Context context, ArrayList<ItemBean> data, int layoutId) {
         this.datas = data;
         mInflater = LayoutInflater.from(context);
         mcontext = context;
+        typeArrays = mcontext.getResources().getStringArray(R.array.gongneng_types);
         mLayoutId = layoutId;
     }
 
@@ -111,6 +118,8 @@ public class ExRecyclerAdapter extends RecyclerView.Adapter<ExRecyclerAdapter.Vi
                 } else {
                     //监听edit 值
                     datas.get(position).setPlace(s.toString());
+                    //将editText中改变的值设置的HashMap中
+                    //hashMap.put(position, s.toString());
                 }
             }
         };
@@ -139,12 +148,15 @@ public class ExRecyclerAdapter extends RecyclerView.Adapter<ExRecyclerAdapter.Vi
         });
 
         //设置下拉选择框
-        String[] typeArrays = mcontext.getResources().getStringArray(R.array.gongneng_types);
         holder.spinner_changsuo_type.setItems(typeArrays);
         holder.spinner_changsuo_type.setSelectedIndex(0);
+        hashMap.put(position, 0);
         holder.spinner_changsuo_type.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
             @Override
-            public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
+            public void onItemSelected(MaterialSpinner view, int select_position, long id, String item) {
+                //将editText中改变的值设置的HashMap中
+                Log.e("简单快乐就是的",""+select_position);
+                hashMap.put(position, select_position);
             }
         });
         holder.spinner_changsuo_type.setOnNothingSelectedListener(new MaterialSpinner.OnNothingSelectedListener() {
@@ -153,6 +165,12 @@ public class ExRecyclerAdapter extends RecyclerView.Adapter<ExRecyclerAdapter.Vi
                 spinner.getSelectedIndex();
             }
         });
+        //如果hashMap不为空，就设置的editText
+        if(hashMap.get(position) != null){
+            holder.spinner_changsuo_type.setSelectedIndex(hashMap.get(position));
+        }
+
+
 
 
 
@@ -173,6 +191,14 @@ public class ExRecyclerAdapter extends RecyclerView.Adapter<ExRecyclerAdapter.Vi
 //        }
         }
 
+    }
+
+    public ArrayList<ItemBean>  getData(){
+        for(int i=0;i<datas.size();i++){
+            ItemBean itemBean= datas.get(i);
+            itemBean.setType_name(typeArrays[hashMap.get(i)]);
+        }
+        return datas;
     }
 
     //设置状态
@@ -199,9 +225,6 @@ public class ExRecyclerAdapter extends RecyclerView.Adapter<ExRecyclerAdapter.Vi
             xianzhi_number= itemView.findViewById(R.id.xianzhi_number);
             Add_btn = itemView.findViewById(R.id.Add_btn);
             spinner_changsuo_type = itemView.findViewById(R.id.spinner_changsuo_type);
-
         }
-
-
     }
 }

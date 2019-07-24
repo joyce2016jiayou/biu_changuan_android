@@ -11,8 +11,19 @@ package com.noplugins.keepfit.android.entity;
  */
 public class ItemBean {
 
-    private String place;
+    private String place;//限制人数
     private boolean focus;
+    private String type_name;//类型
+
+    public String getType_name() {
+        return type_name;
+    }
+
+    public void setType_name(String type_name) {
+        this.type_name = type_name;
+    }
+
+
 
     public String getPlace() {
         return place;

@@ -419,7 +419,7 @@ public class CCRSortableNinePhotoLayout extends RecyclerView implements CCROnIte
         private int mImageSize;
 
         public PhotoAdapter(RecyclerView recyclerView) {
-            super(recyclerView, R.layout.bga_pp_item_nine_photo);
+            super(recyclerView, R.layout.bga_pp_item_nine_photo_update);
             mImageSize = CCRPhotoPickerUtil.getScreenWidth() / (mItemSpanCount > 3 ? 8 : 6);
         }
 

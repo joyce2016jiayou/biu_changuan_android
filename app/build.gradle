@@ -115,8 +115,8 @@ dependencies {
     //九宫格图片
     implementation 'com.github.bumptech.glide:glide:3.7.0'
     implementation project(':easyPhotos')
-
-
+    //下拉刷新列表
+    implementation project(':XrefreshLibrary')
 
 
 }
