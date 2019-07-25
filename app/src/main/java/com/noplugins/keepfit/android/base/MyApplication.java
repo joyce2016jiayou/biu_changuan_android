@@ -14,6 +14,11 @@ import android.util.Log;
 
 
 import com.noplugins.keepfit.android.util.net.callback.ErrorCallback;
+import com.qiniu.android.common.FixedZone;
+import com.qiniu.android.storage.Configuration;
+import com.qiniu.android.storage.Recorder;
+import com.qiniu.android.storage.UploadManager;
+import com.qiniu.android.storage.persistent.FileRecorder;
 import com.ql0571.loadmanager.core.LoadManager;
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.socialize.PlatformConfig;
@@ -61,6 +66,7 @@ public class MyApplication extends Application {
 
     private static Map<String, Activity> destoryMap = new HashMap<>();
 
+    public static UploadManager uploadManager;
 
     @Override
     public void onCreate() {
@@ -95,12 +101,37 @@ public class MyApplication extends Application {
         UMConfigure.setLogEnabled(true);
         UMConfigure.init(this, UMConfigure.DEVICE_TYPE_PHONE, "5d2d6979570df3fe04000f97");
         PlatformConfig.setWeixin("wxdc1e388c3822c80b", "3baf1193c85774b3fd9d18447d76cab0");
-        PlatformConfig.setSinaWeibo("597832238", "1c6785dbf569cc74c60e24c223741593","http://sns.whalecloud.com");//微博
+        PlatformConfig.setSinaWeibo("597832238", "1c6785dbf569cc74c60e24c223741593", "http://sns.whalecloud.com");//微博
         PlatformConfig.setQQZone("100424468", "c7394704798a158208a74ab60104f0ba");
 
 
         //日志初始化
         CqrLog.setLogger(new LoggerImpl());
+
+        //初始化七牛云
+        Recorder recorder = null;
+        String dirPath = "/storage/emulated/0/Download";
+
+        try {
+            File f = File.createTempFile("qiniu_xxxx", ".tmp");
+            Log.d("qiniu", f.getAbsolutePath().toString());
+            dirPath = f.getParent();
+            recorder = new FileRecorder(dirPath);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Configuration config = new Configuration.Builder()
+                .chunkSize(512 * 1024)        // 分片上传时，每片的大小。 默认256K
+                .putThreshhold(1024 * 1024)   // 启用分片上传阀值。默认512K
+                .connectTimeout(10)           // 链接超时。默认10秒
+                .useHttps(true)               // 是否使用https上传域名
+                .responseTimeout(60)          // 服务器响应超时。默认60秒
+                .recorder(recorder)           // recorder分片上传时，已上传片记录器。默认null
+                //.recorder(recorder, keyGen)   // keyGen 分片上传时，生成标识符，用于片记录器区分是那个文件的上传记录
+                .zone(FixedZone.zone0)        // 设置区域，指定不同区域的上传域名、备用域名、备用IP。
+                .build();
+        // 重用uploadManager。一般地，只需要创建一个uploadManager对象
+        uploadManager = new UploadManager(config);
 
     }
 

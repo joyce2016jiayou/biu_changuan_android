@@ -47,11 +47,11 @@
         android:theme="@style/Theme.AppCompat.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".activity.InformationCheckActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
         </activity>
         <activity android:name=".activity.ShareSDKDEMOActivity"></activity>
         <activity android:name=".activity.UserPermissionSelectActivity">
@@ -70,16 +70,15 @@
             android:name=".SplashActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait">
-           <!-- <intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
+            </intent-filter>
         </activity>
         <activity
             android:name=".KeepFitActivity"
             android:launchMode="singleTask" />
-
 
 
         <!-- 存储权限 authorities="你的包名+fileprovider" -->

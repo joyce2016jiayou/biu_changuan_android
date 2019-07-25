@@ -117,6 +117,10 @@ dependencies {
     implementation project(':easyPhotos')
     //下拉刷新列表
     implementation project(':XrefreshLibrary')
+    //七牛云
+    implementation 'com.qiniu:qiniu-android-sdk:7.3.15'
+
+
 
 
 }

@@ -77,5 +77,21 @@ public interface MyService {
     @POST("choiceRole")
     Observable<Bean<Object>> select_role(@FieldMap Map<String, String> map);
 
+    /**
+     * 获取七牛token
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("getPicToken")
+    Observable<Bean<Object>> get_qiniu_token(@FieldMap Map<String, String> map);
+    /**
+     * 获取七牛token
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("getPicUrl")
+    Observable<Bean<Object>> get_qiniu_url(@FieldMap Map<String, String> map);
+
+
 
 }

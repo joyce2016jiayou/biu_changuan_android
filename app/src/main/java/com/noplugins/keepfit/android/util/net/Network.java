@@ -104,7 +104,7 @@ public class Network {
         }
 
         OkHttpClient client = new OkHttpClient.Builder()
-             //   .sslSocketFactory(sslContext.getSocketFactory())//去掉okhttp https证书验证
+                .sslSocketFactory(sslContext.getSocketFactory())//去掉okhttp https证书验证
                 .addInterceptor(new LogInterceptor(method))//添加日志拦截器
                 .addInterceptor(new Interceptor() {//添加token
                     @Override
@@ -258,6 +258,31 @@ public class Network {
      */
     public Subscription select_role(Map<String, String> params, Subscriber<Bean<Object>> subscriber) {
         return service.select_role(params)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+    /**
+     * 获取七牛token
+     * @param subscriber
+     * @return
+     */
+    public Subscription get_qiniu_token(Map<String, String> params,Subscriber<Bean<Object>> subscriber) {
+        return service.get_qiniu_token(params)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 测试获取七牛token
+     * @param subscriber
+     * @return
+     */
+    public Subscription get_qiniu_url(Map<String, String> params,Subscriber<Bean<Object>> subscriber) {
+        return service.get_qiniu_url(params)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

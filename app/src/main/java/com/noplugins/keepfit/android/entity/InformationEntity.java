@@ -1,0 +1,213 @@
+package com.noplugins.keepfit.android.entity;
+
+import java.util.List;
+
+public class InformationEntity {
+
+    /**
+     * area_name : 场馆名称
+     * type : 2
+     * area : 900
+     * address : 上海
+     * business_start : 12:23:00
+     * business_end : 20:23:00
+     * phone : 123
+     * email : 场馆联系邮箱
+     * facility : 1,2,3
+     * legal_person : 法人姓名
+     * card_num : 232323232
+     * company_name : 企业名称
+     * company_code : xxx223232
+     * gymPlaces : [{"max_num":20,"place_name":"test01"},{"max_num":30,"place_name":"test02"}]
+     * gym_pic : [{"order_num":1,"url":"www.logo99.com"},{"order_num":"2","url":"www.url2.com"},{"order_num":"3","url":"www.url6.com"}]
+     */
+
+    private String area_name;
+    private int type;
+    private int area;
+    private String address;
+    private String business_start;
+    private String business_end;
+    private int phone;
+    private String email;
+    private String facility;
+    private String legal_person;
+    private int card_num;
+    private String company_name;
+    private String company_code;
+    private List<GymPlacesBean> gymPlaces;
+    private List<GymPicBean> gym_pic;
+
+    public String getArea_name() {
+        return area_name;
+    }
+
+    public void setArea_name(String area_name) {
+        this.area_name = area_name;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public int getArea() {
+        return area;
+    }
+
+    public void setArea(int area) {
+        this.area = area;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getBusiness_start() {
+        return business_start;
+    }
+
+    public void setBusiness_start(String business_start) {
+        this.business_start = business_start;
+    }
+
+    public String getBusiness_end() {
+        return business_end;
+    }
+
+    public void setBusiness_end(String business_end) {
+        this.business_end = business_end;
+    }
+
+    public int getPhone() {
+        return phone;
+    }
+
+    public void setPhone(int phone) {
+        this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getFacility() {
+        return facility;
+    }
+
+    public void setFacility(String facility) {
+        this.facility = facility;
+    }
+
+    public String getLegal_person() {
+        return legal_person;
+    }
+
+    public void setLegal_person(String legal_person) {
+        this.legal_person = legal_person;
+    }
+
+    public int getCard_num() {
+        return card_num;
+    }
+
+    public void setCard_num(int card_num) {
+        this.card_num = card_num;
+    }
+
+    public String getCompany_name() {
+        return company_name;
+    }
+
+    public void setCompany_name(String company_name) {
+        this.company_name = company_name;
+    }
+
+    public String getCompany_code() {
+        return company_code;
+    }
+
+    public void setCompany_code(String company_code) {
+        this.company_code = company_code;
+    }
+
+    public List<GymPlacesBean> getGymPlaces() {
+        return gymPlaces;
+    }
+
+    public void setGymPlaces(List<GymPlacesBean> gymPlaces) {
+        this.gymPlaces = gymPlaces;
+    }
+
+    public List<GymPicBean> getGym_pic() {
+        return gym_pic;
+    }
+
+    public void setGym_pic(List<GymPicBean> gym_pic) {
+        this.gym_pic = gym_pic;
+    }
+
+    public static class GymPlacesBean {
+        /**
+         * max_num : 20
+         * place_name : test01
+         */
+
+        private int max_num;
+        private String place_name;
+
+        public int getMax_num() {
+            return max_num;
+        }
+
+        public void setMax_num(int max_num) {
+            this.max_num = max_num;
+        }
+
+        public String getPlace_name() {
+            return place_name;
+        }
+
+        public void setPlace_name(String place_name) {
+            this.place_name = place_name;
+        }
+    }
+
+    public static class GymPicBean {
+        /**
+         * order_num : 1
+         * url : www.logo99.com
+         */
+
+        private int order_num;
+        private String url;
+
+        public int getOrder_num() {
+            return order_num;
+        }
+
+        public void setOrder_num(int order_num) {
+            this.order_num = order_num;
+        }
+
+        public String getUrl() {
+            return url;
+        }
+
+        public void setUrl(String url) {
+            this.url = url;
+        }
+    }
+
+}
