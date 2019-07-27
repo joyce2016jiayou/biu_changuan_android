@@ -17,22 +17,28 @@ dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     implementation 'com.github.chrisbanes:PhotoView:2.1.3'
     implementation 'com.android.support:support-v4:27.1.1'
-    implementation 'com.android.support:support-v4:27.1.1'
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support:design:27.1.1'
     implementation 'com.android.support:recyclerview-v7:27.1.1'
 }
-
-//// 指定编码
-//tasks.withType(JavaCompile) {
-//    options.encoding = "UTF-8"
-//}
 
 // 打包源码
 task sourcesJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs
     classifier = 'sources'
 }
+artifacts {
+    archives sourcesJar
+//    archives javadocJar
+}
+
+
+
+//// 指定编码
+//tasks.withType(JavaCompile) {
+//    options.encoding = "UTF-8"
+//}
+
 
 //制作文档
 //task javadoc(type: Javadoc) {
@@ -48,7 +54,3 @@ task sourcesJar(type: Jar) {
 //    from javadoc.destinationDir
 //}
 
-artifacts {
-    archives sourcesJar
-//    archives javadocJar
-}

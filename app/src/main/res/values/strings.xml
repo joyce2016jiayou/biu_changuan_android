@@ -70,6 +70,8 @@
     <string name="tv39">提交</string>
     <string name="tv40">提交成功</string>
     <string name="tv41">我们会在24小时内为您审核，请您耐心等待</string>
+    <string name="tv42">月</string>
+    <string name="tv43">7/15</string>
 
     <string name="alert_dialog_tishi1">温馨提示</string>
     <string name="alert_dialog_tishi2">解绑银行卡</string>
@@ -89,17 +91,8 @@
     <string name="alert_dialog_tishi14">企业名字不能为空！</string>
     <string name="alert_dialog_tishi15">企业注册号不能为空！</string>
 
-    <string name="title_activity_register">Sign in</string>
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="welcome">"Welcome !"</string>
-    <string name="invalid_username">Not a valid username</string>
-    <string name="invalid_password">Password must be >5 characters</string>
-    <string name="login_failed">"Login failed"</string>
-
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
 
 </resources>

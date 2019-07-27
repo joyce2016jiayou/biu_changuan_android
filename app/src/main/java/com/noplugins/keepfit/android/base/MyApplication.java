@@ -13,6 +13,9 @@ import android.os.Handler;
 import android.util.Log;
 
 
+import androidx.multidex.MultiDex;
+import androidx.multidex.MultiDexApplication;
+
 import com.noplugins.keepfit.android.util.net.callback.ErrorCallback;
 import com.qiniu.android.common.FixedZone;
 import com.qiniu.android.storage.Configuration;
@@ -22,7 +25,6 @@ import com.qiniu.android.storage.persistent.FileRecorder;
 import com.ql0571.loadmanager.core.LoadManager;
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.socialize.PlatformConfig;
-import com.uuzuche.lib_zxing.activity.ZXingLibrary;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.https.HttpsUtils;
 
@@ -45,7 +47,7 @@ import okhttp3.OkHttpClient;
  * Created by shiyujia02 on 2017/8/3.
  */
 
-public class MyApplication extends Application {
+public class MyApplication extends MultiDexApplication {
     private static final String TAG = MyApplication.class.getSimpleName();
     public static List<Integer> list = new ArrayList<>();
 
@@ -134,9 +136,8 @@ public class MyApplication extends Application {
         // 重用uploadManager。一般地，只需要创建一个uploadManager对象
         uploadManager = new UploadManager(config);
 
-        //初始化二维码扫描
-        ZXingLibrary.initDisplayOpinion(this);
 
+        MultiDex.install(this);
 
     }
 
