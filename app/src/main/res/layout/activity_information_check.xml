@@ -36,7 +36,7 @@
         android:id="@+id/sv"
         android:paddingTop="6dp"
         android:layout_width="match_parent"
-        android:layout_height="40dp"/>
+        android:layout_height="@dimen/m40"/>
     <com.noplugins.keepfit.android.util.ui.NoScrollViewPager
         android:id="@+id/viewpager_content"
         android:layout_width="match_parent"

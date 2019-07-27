@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:background="@color/color_f0f2f5"
     android:layout_height="match_parent">
-
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="第一个页面"
-        android:textColor="@color/bottom_color"
-        />
+        android:background="@color/white"
+        android:layout_height="@dimen/m98">
+        <ImageView
+            android:id="@+id/saoma_btn"
+            android:layout_width="28dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="9dp"
+            android:layout_height="28dp"
+            android:src="@drawable/saoma_icon"
+            />
+    </RelativeLayout>
 
 </RelativeLayout>

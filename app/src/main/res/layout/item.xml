@@ -35,6 +35,9 @@
                 android:layout_height="36dp"
                 android:background="@null"
                 android:hint="@string/edit_hint14"
+                android:inputType="number"
+                android:maxLength="10"
+                android:singleLine="true"
                 android:textSize="13sp"
                 android:textColor="@color/top_heiziti"
                 android:textColorHint="@color/color_9B9B9B" />

@@ -120,7 +120,7 @@ public class UserPermissionSelectActivity extends BaseActivity {
                                     if(type.equals("1")){//馆主
                                         Intent intent = new Intent(UserPermissionSelectActivity.this,InformationCheckActivity.class);
                                         startActivity(intent);
-                                        finish();
+                                        //finish();
 
                                     }else{//员工
                                         Toast.makeText(getApplicationContext(), "您暂未开通权限！", Toast.LENGTH_SHORT).show();

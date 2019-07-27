@@ -136,6 +136,7 @@ public class LoginActivity extends BaseActivity {
             public void onClick(View view) {
                 if (TextUtils.isEmpty(edit_phone_number.getText())) {
                     Toast.makeText(getApplicationContext(), "电话号码不能为空！", Toast.LENGTH_SHORT).show();
+                    return;
                 } else {
                     Login();
                 }
@@ -179,7 +180,7 @@ public class LoginActivity extends BaseActivity {
                         }
                         Intent intent = new Intent(LoginActivity.this, UserPermissionSelectActivity.class);
                         startActivity(intent);
-                        finish();
+                        //finish();
 
                     }
                 }, new SubscriberOnNextListener<Bean<Object>>() {

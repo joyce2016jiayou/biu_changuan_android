@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.nfc.Tag;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,6 +54,7 @@ import com.noplugins.keepfit.android.util.net.progress.ProgressHUD;
 import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriberNew;
 import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener;
 import com.noplugins.keepfit.android.util.ui.NoScrollViewPager;
+import com.noplugins.keepfit.android.util.ui.ProgressUtil;
 import com.noplugins.keepfit.android.util.ui.StepView;
 import com.noplugins.keepfit.android.util.ui.ViewPagerFragment;
 import com.noplugins.keepfit.android.util.ui.jiugongge.CCRSortableNinePhotoLayout;
@@ -157,13 +159,14 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
     private String changguan_type = "";
     private Subscription subscription;//Rxjava
     private String icon_net_path = "";
-    List<BiaoqianEntity> biaoqianEntities = new ArrayList<>();
-    List<String> jiugongge_iamges = new ArrayList<>();
-
+    private List<BiaoqianEntity> biaoqianEntities = new ArrayList<>();
+    private List<String> jiugongge_iamges = new ArrayList<>();
+    private ProgressUtil progress_upload;
+    private InformationCheckActivity mainActivity;
     /**
      * 七牛云
      **/
-    //指定upToken, 强烈建议从服务端提供get请求获取, 这里为了掩饰直接指定key
+    //指定upToken, 强烈建议从服务端提供get请求获取
     private String uptoken = "xxxxxxxxx:xxxxxxx:xxxxxxxxxx";
     private SimpleDateFormat sdf;
     private String qiniu_key;
@@ -193,8 +196,8 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
             sdf = new SimpleDateFormat("yyyyMMddHHmmss");
             qiniu_key = "icon_" + sdf.format(new Date());
             initView();
-            select_biaoqian();
-
+            select_biaoqian();//设置标签监听
+            getToken();//获取七牛云token
 
         }
         return view;
@@ -209,52 +212,180 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
     }
 
     private void initView() {
-        String[] typeArrays = getResources().getStringArray(R.array.identify_types);
-        spinner_type.setItems(typeArrays);
-        spinner_type.setSelectedIndex(0);
-        spinner_type.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
-
-            @Override
-            public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
-                changguan_type = item;
-            }
-        });
-        spinner_type.setOnNothingSelectedListener(new MaterialSpinner.OnNothingSelectedListener() {
-
-            @Override
-            public void onNothingSelected(MaterialSpinner spinner) {
-                spinner.getSelectedIndex();
-            }
-        });
-
-        time1_edit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
 
-                time_check(time1_edit);
-            }
-        });
+        //设置下拉选择框
+        set_xiala_select();
 
-        time2_edit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                time_check(time2_edit);
-            }
-        });
+        //设置时间选择器
+        set_time_select();
 
-        //设置视图添加
-        linearLayoutManager = new LinearLayoutManager(getActivity());
-        rc_view.setLayoutManager(linearLayoutManager);
-        rc_view.setNestedScrollingEnabled(false);//禁止滑动
-        datas = new ArrayList<>();
-        exRecyclerAdapter = new ExRecyclerAdapter(getActivity(), datas, R.layout.item);
-        exRecyclerAdapter.addData(new ItemBean());
-        rc_view.setAdapter(exRecyclerAdapter);
         //设置九宫格控件
-        //设置拖拽排序控件的代理
-        mPhotosSnpl.setDelegate(this);
+        set_jiugongge_view();
+
         //添加场馆icon
+        set_icon_image();
+
+
+        //点击下一步
+        next_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (check_value()) {
+                    /**七牛云**/
+                    progress_upload = new ProgressUtil();
+                    progress_upload.showProgressDialog(getActivity(), "载入中...");
+                    //上传icon
+                    uploadManager.put(icon_image_path, qiniu_key, uptoken,
+                            new UpCompletionHandler() {
+                                @Override
+                                public void complete(String key, ResponseInfo info, JSONObject response) {
+                                    //res包含hash、key等信息，具体字段取决于上传策略的设置
+                                    if (info.isOK()) {
+                                        Log.e("qiniu", "Upload Success");
+                                        icon_net_path = key;
+                                        Log.e("打印key：", icon_net_path);
+                                        //测试资料上传的
+                                        //getUrlTest(icon_net_path);
+                                        String headpicPath = "http://upload.qiniup.com/" + key;
+                                        Log.e("返回的地址", headpicPath);
+                                    } else {
+                                        Log.e("qiniu", "Upload Fail");
+                                        //如果失败，这里可以把info信息上报自己的服务器，便于后面分析上传错误原因
+                                    }
+                                    //Log.e("qiniu", key + ",\r\n " + info.path + ",\r\n " + response);
+                                }
+                            }, new UploadOptions(null, "test-type", true, null, null));
+                    //上传九宫格
+                    for (int i = 0; i < strings.size(); i++) {
+                        String expectKey = UUID.randomUUID().toString();
+                        uploadManager.put(strings.get(i), expectKey, uptoken, new UpCompletionHandler() {
+                            public void complete(String k, ResponseInfo rinfo, JSONObject response) {
+                                if (rinfo.isOK()) {
+                                    Log.e("qiniu", "Upload Success");
+//                                String key = getKey(k, response);
+                                    // String s = k + ", "+ rinfo + ", " + response;
+                                    Log.e("获取到的key", "获取到的key:" + k);
+                                    jiugongge_iamges.add(k);
+                                    if (jiugongge_iamges.size() == strings.size()) {
+                                        progress_upload.dismissProgressDialog();
+
+                                        mainActivity.informationEntity = getDates();
+
+                                        //跳转下一个页面
+                                        viewpager_content.setCurrentItem(1);
+                                        int step = stepView.getCurrentStep();//设置进度条
+                                        stepView.setCurrentStep((step + 1) % stepView.getStepNum());
+                                    }
+                                } else {
+                                    Log.e("qiniu", "Upload Fail");
+                                    //如果失败，这里可以把info信息上报自己的服务器，便于后面分析上传错误原因
+                                }
+                            }
+                        }, new UploadOptions(null, "test-type", true, null, null));
+                    }
+                    /**七牛云*/
+                }else{
+                    return;
+                }
+
+
+
+               /* mainActivity.informationEntity = getDates();
+                viewpager_content.setCurrentItem(1);
+                int step = stepView.getCurrentStep();//设置进度条
+                stepView.setCurrentStep((step + 1) % stepView.getStepNum());*/
+            }
+        });
+    }
+
+
+    public InformationEntity getDates() {
+        InformationEntity informationEntity = new InformationEntity();
+        informationEntity.setArea_name(changguan_name.getText().toString());//场馆名称
+        if (changguan_type.equals("综合会所")) {//场馆类型
+            informationEntity.setType(1);
+        } else {//工作室
+            informationEntity.setType(2);
+        }
+        informationEntity.setArea(Integer.valueOf(edittext_area.getText().toString()));//场馆面积
+        informationEntity.setPhone(tell_edit.getText().toString());//电话号码
+        informationEntity.setEmail(edit_email.getText().toString());//邮箱
+        informationEntity.setBusiness_start(time1_edit.getText().toString());//营业开始时间
+        informationEntity.setBusiness_end(time2_edit.getText().toString());//营业结束时间
+        informationEntity.setAddress(edit_address.getText().toString());//地址
+        //获取选择的功能性场所类型
+        ArrayList<ItemBean> itemBeans = exRecyclerAdapter.getData();
+        List<InformationEntity.GymPlacesBean> gymPlacesBeans = new ArrayList<>();
+        for (int i = 0; i < itemBeans.size(); i++) {
+            InformationEntity.GymPlacesBean gymPlacesBean = new InformationEntity.GymPlacesBean();
+            if(null==itemBeans.get(i).getPlace()){
+                gymPlacesBean.setMax_num(0);
+            }else{
+                gymPlacesBean.setMax_num(Integer.valueOf(itemBeans.get(i).getPlace()));
+            }
+            gymPlacesBean.setPlace_name(itemBeans.get(i).getType_name());
+            gymPlacesBeans.add(gymPlacesBean);
+//            Log.e("获取到的人数", "获取到的人数: " + itemBeans.get(i).getPlace());
+//            Log.e("获取到的type", "获取到的type: " + itemBeans.get(i).getType_name());
+
+        }
+        informationEntity.setGymPlaces(gymPlacesBeans);//功能性场所
+        informationEntity.setFacility(get_selete_biaoqian());//标签
+        //设置icon和九宫格图片
+        List<InformationEntity.GymPicBean> gym_pic = new ArrayList<>();
+        InformationEntity.GymPicBean icon_pic = new InformationEntity.GymPicBean();
+        icon_pic.setOrder_num(1);
+        //icon_pic.setUrl(icon_net_path);
+        icon_pic.setQiniu_key(icon_net_path);
+        gym_pic.add(icon_pic);
+        for (int i = 0; i < jiugongge_iamges.size(); i++) {
+            InformationEntity.GymPicBean jiugongge_icon = new InformationEntity.GymPicBean();
+            jiugongge_icon.setOrder_num((i + 1));
+            //jiugongge_icon.setUrl(jiugongge_iamges.get(i));
+            jiugongge_icon.setQiniu_key(jiugongge_iamges.get(i));
+            gym_pic.add(jiugongge_icon);
+        }
+        informationEntity.setGym_pic(gym_pic);//设置九宫格图片
+        return informationEntity;
+    }
+
+
+    private boolean check_value() {
+        if (TextUtils.isEmpty(changguan_name.getText())) {
+            Toast.makeText(getActivity(), R.string.alert_dialog_tishi3, Toast.LENGTH_SHORT).show();
+            return false;
+        }else if(TextUtils.isEmpty(edittext_area.getText())){
+            Toast.makeText(getActivity(), R.string.alert_dialog_tishi4, Toast.LENGTH_SHORT).show();
+            return false;
+        }else if(TextUtils.isEmpty(tell_edit.getText())){
+            Toast.makeText(getActivity(), R.string.alert_dialog_tishi5, Toast.LENGTH_SHORT).show();
+            return false;
+        }else if(TextUtils.isEmpty(edit_email.getText())){
+            Toast.makeText(getActivity(), R.string.alert_dialog_tishi6, Toast.LENGTH_SHORT).show();
+            return false;
+        }else if(TextUtils.isEmpty(edit_address.getText())){
+            Toast.makeText(getActivity(), R.string.alert_dialog_tishi7, Toast.LENGTH_SHORT).show();
+            return false;
+        }else if(icon_image_path.length()==0){//icon地址
+            Toast.makeText(getActivity(), R.string.alert_dialog_tishi8, Toast.LENGTH_SHORT).show();
+            return false;
+        }else if(strings.size()==0){//场馆照片
+            Toast.makeText(getActivity(), R.string.alert_dialog_tishi9, Toast.LENGTH_SHORT).show();
+            return false;
+        }else if(biaoqianEntities.size()==0){//标签
+            Toast.makeText(getActivity(), R.string.alert_dialog_tishi10, Toast.LENGTH_SHORT).show();
+            return false;
+        }else if(exRecyclerAdapter.getData().size()==0){//功能性场所
+            Toast.makeText(getActivity(), R.string.alert_dialog_tishi11, Toast.LENGTH_SHORT).show();
+            return false;
+        }else{
+            return true;
+        }
+
+    }
+
+    private void set_icon_image() {
         logo_image.setOnClickListener(new View.OnClickListener() {//添加图片
             @Override
             public void onClick(View view) {
@@ -274,95 +405,57 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
                 Glide.with(getActivity()).load(R.drawable.jia_image).into(logo_image);
             }
         });
+    }
 
-        //点击下一步
-        next_btn.setOnClickListener(new View.OnClickListener() {
+    private void set_jiugongge_view() {
+        //设置视图添加
+        linearLayoutManager = new LinearLayoutManager(getActivity());
+        rc_view.setLayoutManager(linearLayoutManager);
+        rc_view.setNestedScrollingEnabled(false);//禁止滑动
+        datas = new ArrayList<>();
+        exRecyclerAdapter = new ExRecyclerAdapter(getActivity(), datas, R.layout.item);
+        exRecyclerAdapter.addData(new ItemBean());
+        rc_view.setAdapter(exRecyclerAdapter);
+        //设置拖拽排序控件的代理
+        mPhotosSnpl.setDelegate(this);
+    }
+
+    private void set_time_select() {
+        time1_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
 
-//                //跳转下一个页面
-//                viewpager_content.setCurrentItem(1);
-//                //设置进度条
-//                int step = stepView.getCurrentStep();
-//                stepView.setCurrentStep((step + 1) % stepView.getStepNum());
-
-
-                /**七牛云**/
-                Log.e("qiniutest", "starting......");
-
-                for (int i = 0; i < strings.size(); i++) {
-                    String expectKey = UUID.randomUUID().toString();
-                    uploadManager.put(strings.get(i), expectKey, uptoken, new UpCompletionHandler() {
-                        public void complete(String k, ResponseInfo rinfo, JSONObject response) {
-                            if (rinfo.isOK()) {
-                                Log.e("qiniu", "Upload Success");
-//                                String key = getKey(k, response);
-                                // String s = k + ", "+ rinfo + ", " + response;
-                                Log.e("获取到的key", "获取到的key:" + k);
-                                jiugongge_iamges.add(k);
-                                if (jiugongge_iamges.size() == strings.size()) {
-
-                                }
-                            } else {
-                                Log.e("qiniu", "Upload Fail");
-                                //如果失败，这里可以把info信息上报自己的服务器，便于后面分析上传错误原因
-                            }
-                        }
-                    }, new UploadOptions(null, "test-type", true, null, null));
-                }
-                /**七牛云**/
-
-                //上传icon
-//                uploadManager.put(icon_image_path, qiniu_key, uptoken,
-//                        new UpCompletionHandler() {
-//                            @Override
-//                            public void complete(String key, ResponseInfo info, JSONObject response) {
-//                                //res包含hash、key等信息，具体字段取决于上传策略的设置
-//                                if(info.isOK()) {
-//                                    Log.e("qiniu", "Upload Success");
-//                                    icon_net_path = key;
-//                                    Log.e("打印key：",icon_net_path);
-//                                    //测试资料上传的
-//                                    //getUrlTest(icon_net_path);
-//                                    String headpicPath = "http://upload.qiniup.com/" + key;
-//                                    Log.e("返回的地址", headpicPath);
-//                                } else {
-//                                    Log.e("qiniu", "Upload Fail");
-//                                    //如果失败，这里可以把info信息上报自己的服务器，便于后面分析上传错误原因
-//                                }
-//                                //Log.e("qiniu", key + ",\r\n " + info.path + ",\r\n " + response);
-//                            }
-//                        }, new UploadOptions(null, "test-type", true, null, null));
-
-
-                //上传进度
-                /*uploadManager.put(icon_image_path, "img", uptoken,handler,
-                        new UploadOptions(null, null, false,
-                                new UpProgressHandler(){
-                                    public void progress(String key, double percent){
-                                        Log.i("qiniu", key + ": " + percent);
-                                    }
-                                }, null));
-                //取消上传
-                private volatile boolean isCancelled = false;
-                uploadManager.put(icon_image_path, "img", uptoken,handler,
-                        new UploadOptions(null, null, false, progressHandler,
-                                new UpCancellationSignal(){
-                                    public boolean isCancelled(){
-                                        return isCancelled;
-                                    }
-                                }));
-                // 点击取消按钮，让UpCancellationSignal##isCancelled()方法返回true，以停止上传
-                private void cancell() {
-                    isCancelled = true;
-                }*/
-
-
+                time_check(time1_edit);
             }
         });
 
-        getToken();
+        time2_edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                time_check(time2_edit);
+            }
+        });
+    }
+
+    private void set_xiala_select() {
+        String[] typeArrays = getResources().getStringArray(R.array.identify_types);
+        spinner_type.setItems(typeArrays);
+        spinner_type.setSelectedIndex(0);
+        spinner_type.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
+
+            @Override
+            public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
+                changguan_type = item;
+            }
+        });
+        spinner_type.setOnNothingSelectedListener(new MaterialSpinner.OnNothingSelectedListener() {
+
+            @Override
+            public void onNothingSelected(MaterialSpinner spinner) {
+                spinner.getSelectedIndex();
+            }
+        });
     }
 
     private String get_selete_biaoqian() {
@@ -527,6 +620,11 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
 
     }
 
+    /**
+     * 测试key能不能获取URL
+     *
+     * @param key_value
+     */
     private void getUrlTest(String key_value) {
         Map<String, String> params = new HashMap<>();
         params.put("key", key_value);
@@ -551,37 +649,6 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
     }
 
 
-    public InformationEntity getDates() {
-        InformationEntity informationEntity = new InformationEntity();
-        informationEntity.setArea_name(changguan_name.getText().toString());//场馆名称
-        if (changguan_type.equals("综合会所")) {//场馆类型
-            informationEntity.setType(1);
-        } else {//工作室
-            informationEntity.setType(2);
-        }
-        informationEntity.setArea(Integer.valueOf(edittext_area.getText().toString()));//场馆面积
-        informationEntity.setPhone(Integer.valueOf(tell_edit.getText().toString()));//电话号码
-        informationEntity.setEmail(edit_email.getText().toString());//邮箱
-        informationEntity.setBusiness_start(time1_edit.getText().toString());//营业开始时间
-        informationEntity.setBusiness_end(time2_edit.getText().toString());//营业结束时间
-        informationEntity.setAddress(edit_address.getText().toString());//地址
-        //获取选择的功能性场所类型
-        List<InformationEntity.GymPlacesBean> gymPlacesBeans = new ArrayList<>();
-        ArrayList<ItemBean> itemBeans = exRecyclerAdapter.getData();
-        for (int i = 0; i < itemBeans.size(); i++) {
-            InformationEntity.GymPlacesBean gymPlacesBean = new InformationEntity.GymPlacesBean();
-            gymPlacesBean.setMax_num(Integer.valueOf(itemBeans.get(i).getPlace()));
-            gymPlacesBean.setPlace_name(itemBeans.get(i).getType_name());
-            gymPlacesBeans.add(gymPlacesBean);
-//            Log.e("获取到的人数", "获取到的人数: " + itemBeans.get(i).getPlace());
-//            Log.e("获取到的type", "获取到的type: " + itemBeans.get(i).getType_name());
-
-        }
-        informationEntity.setGymPlaces(gymPlacesBeans);//功能性场所
-        informationEntity.setFacility(get_selete_biaoqian());//标签
-
-        return informationEntity;
-    }
 
 
     private void time_check(TextView textView) {
@@ -609,7 +676,7 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
         // TODO Auto-generated method stub
         super.onAttach(activity);
         if (activity instanceof InformationCheckActivity) {
-            InformationCheckActivity mainActivity = (InformationCheckActivity) activity;
+            mainActivity = (InformationCheckActivity) activity;
             stepView = (StepView) mainActivity.findViewById(R.id.sv);
             viewpager_content = mainActivity.findViewById(R.id.viewpager_content);
         }

@@ -64,7 +64,6 @@
                     android:hint="@string/edit_hint1"
                     android:maxLength="11"
                     android:layout_marginRight="25dp"
-
                     android:inputType="textNoSuggestions|text|textCapCharacters"
                     android:singleLine="true"
                     android:textColor="@color/color_ACACAC"

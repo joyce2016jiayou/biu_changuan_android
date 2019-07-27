@@ -28,11 +28,11 @@ public class InformationEntity {
     private String address;
     private String business_start;
     private String business_end;
-    private int phone;
+    private String phone;
     private String email;
     private String facility;
     private String legal_person;
-    private int card_num;
+    private String card_num;
     private String company_name;
     private String company_code;
     private List<GymPlacesBean> gymPlaces;
@@ -86,11 +86,11 @@ public class InformationEntity {
         this.business_end = business_end;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
@@ -118,11 +118,11 @@ public class InformationEntity {
         this.legal_person = legal_person;
     }
 
-    public int getCard_num() {
+    public String getCard_num() {
         return card_num;
     }
 
-    public void setCard_num(int card_num) {
+    public void setCard_num(String card_num) {
         this.card_num = card_num;
     }
 
@@ -192,6 +192,15 @@ public class InformationEntity {
 
         private int order_num;
         private String url;
+        private String qiniu_key;
+
+        public String getQiniu_key() {
+            return qiniu_key;
+        }
+
+        public void setQiniu_key(String qiniu_key) {
+            this.qiniu_key = qiniu_key;
+        }
 
         public int getOrder_num() {
             return order_num;

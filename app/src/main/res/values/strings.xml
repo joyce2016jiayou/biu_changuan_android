@@ -68,11 +68,26 @@
     <string name="tv37">企业名称</string>
     <string name="tv38">企业注册号</string>
     <string name="tv39">提交</string>
+    <string name="tv40">提交成功</string>
+    <string name="tv41">我们会在24小时内为您审核，请您耐心等待</string>
 
     <string name="alert_dialog_tishi1">温馨提示</string>
     <string name="alert_dialog_tishi2">解绑银行卡</string>
     <string name="alert_dialog_cached_cancel">取消</string>
     <string name="alert_dialog_cached_ok">确认</string>
+    <string name="alert_dialog_tishi3">场馆名称不能为空！</string>
+    <string name="alert_dialog_tishi4">面积不能为空！</string>
+    <string name="alert_dialog_tishi5">电话不能为空！</string>
+    <string name="alert_dialog_tishi6">邮箱不能为空！</string>
+    <string name="alert_dialog_tishi7">地址不能为空！</string>
+    <string name="alert_dialog_tishi8">LOGO不能为空！</string>
+    <string name="alert_dialog_tishi9">照片不能为空！</string>
+    <string name="alert_dialog_tishi10">标签不能为空！</string>
+    <string name="alert_dialog_tishi11">功能性场所不能为空！</string>
+    <string name="alert_dialog_tishi12">法人信息不能为空！</string>
+    <string name="alert_dialog_tishi13">身份证不能为空！</string>
+    <string name="alert_dialog_tishi14">企业名字不能为空！</string>
+    <string name="alert_dialog_tishi15">企业注册号不能为空！</string>
 
     <string name="title_activity_register">Sign in</string>
     <string name="prompt_email">Email</string>

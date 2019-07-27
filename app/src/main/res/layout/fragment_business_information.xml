@@ -28,11 +28,13 @@
                 android:textSize="16sp" />
 
             <EditText
+                android:id="@+id/faren_name"
                 android:layout_width="264dp"
                 android:layout_height="36dp"
                 android:layout_marginLeft="4dp"
                 android:background="@null"
                 android:hint="@string/edit_hint16"
+                android:singleLine="true"
                 android:textColor="@color/top_heiziti"
                 android:textColorHint="@color/color_9B9B9B"
                 android:textSize="13sp" />
@@ -53,11 +55,13 @@
                 android:textSize="16sp" />
 
             <EditText
+                android:id="@+id/icon_id_card"
                 android:layout_width="264dp"
                 android:layout_height="36dp"
                 android:layout_marginLeft="4dp"
                 android:background="@null"
                 android:hint="@string/edit_hint17"
+                android:singleLine="true"
                 android:textColor="@color/top_heiziti"
                 android:textColorHint="@color/color_9B9B9B"
                 android:textSize="13sp" />
@@ -78,9 +82,11 @@
                 android:textSize="16sp" />
 
             <EditText
+                android:id="@+id/qiye_name"
                 android:layout_width="264dp"
                 android:layout_height="36dp"
                 android:layout_marginLeft="4dp"
+                android:singleLine="true"
                 android:background="@null"
                 android:hint="@string/edit_hint18"
                 android:textColor="@color/top_heiziti"
@@ -103,10 +109,12 @@
                 android:textSize="16sp" />
 
             <EditText
+                android:id="@+id/qiye_zhucehao"
                 android:layout_width="264dp"
                 android:layout_height="36dp"
                 android:layout_marginLeft="4dp"
                 android:background="@null"
+                android:singleLine="true"
                 android:hint="@string/edit_hint18"
                 android:textColor="@color/top_heiziti"
                 android:textColorHint="@color/color_9B9B9B"

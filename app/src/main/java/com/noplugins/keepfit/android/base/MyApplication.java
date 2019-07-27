@@ -22,6 +22,7 @@ import com.qiniu.android.storage.persistent.FileRecorder;
 import com.ql0571.loadmanager.core.LoadManager;
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.socialize.PlatformConfig;
+import com.uuzuche.lib_zxing.activity.ZXingLibrary;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.https.HttpsUtils;
 
@@ -132,6 +133,10 @@ public class MyApplication extends Application {
                 .build();
         // 重用uploadManager。一般地，只需要创建一个uploadManager对象
         uploadManager = new UploadManager(config);
+
+        //初始化二维码扫描
+        ZXingLibrary.initDisplayOpinion(this);
+
 
     }
 

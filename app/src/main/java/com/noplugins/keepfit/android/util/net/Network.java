@@ -289,6 +289,18 @@ public class Network {
                 .subscribe(subscriber);
     }
 
+    /**
+     * 提交审核资料
+     * @param subscriber
+     * @return
+     */
+    public Subscription submit_information(RequestBody params,Subscriber<Bean<Object>> subscriber) {
+        return service.submit_information(params)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
 
 
 }

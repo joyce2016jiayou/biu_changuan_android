@@ -92,6 +92,14 @@ public interface MyService {
     @POST("getPicUrl")
     Observable<Bean<Object>> get_qiniu_url(@FieldMap Map<String, String> map);
 
+    /**
+     * 提交审核资料
+     * @return
+     */
+    @Headers({"Content-Type: application/json","Accept: application/json"})//需要添加头
+    @POST("submitAudit")
+    Observable<Bean<Object>> submit_information(@Body RequestBody json);
+
 
 
 }
