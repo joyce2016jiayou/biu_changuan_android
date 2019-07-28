@@ -15,8 +15,10 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.CAMERA" />
+
     <uses-feature android:name="android.hardware.camera" />
-    <uses-feature android:name="android.hardware.autofocus"/>
+    <uses-feature android:name="android.hardware.autofocus" />
+
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
@@ -46,29 +48,30 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
         android:theme="@style/Theme.AppCompat.NoActionBar"
+        android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".activity.MyErWeiMaActivity"></activity>
         <activity android:name=".activity.InformationCheckActivity">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
-        </activity>
-        <activity android:name=".activity.ShareSDKDEMOActivity"></activity>
-        <activity android:name=".activity.UserPermissionSelectActivity">
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
 
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
+        <activity android:name=".activity.ShareSDKDEMOActivity" />
+        <activity android:name=".activity.UserPermissionSelectActivity"></activity>
         <activity
             android:name=".activity.ForgetPasswordActivity"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
             android:name=".activity.RegisterActivity"
-            android:windowSoftInputMode="adjustPan|stateHidden"></activity>
+            android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
             android:name=".activity.LoginActivity"
-            android:windowSoftInputMode="adjustPan|stateHidden"></activity>
+            android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
             android:name=".SplashActivity"
             android:launchMode="singleTask"
@@ -81,10 +84,7 @@
         </activity>
         <activity
             android:name=".KeepFitActivity"
-            android:launchMode="singleTask" />
-
-
-        <!-- 存储权限 authorities="你的包名+fileprovider" -->
+            android:launchMode="singleTask" /> <!-- 存储权限 authorities="你的包名+fileprovider" -->
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.noplugins.keepfit.android.fileprovider"
@@ -95,8 +95,12 @@
                 android:resource="@xml/file_paths_public" />
         </provider>
 
-
-        <!-- 友盟分享 -->
+        <activity
+            android:name=".util.ui.erweima.android.CaptureActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:windowSoftInputMode="adjustPan|stateHidden" /> <!-- 友盟分享 -->
         <meta-data
             android:name="UMENG_APPKEY"
             android:value="5d2d6979570df3fe04000f97" />
@@ -122,7 +126,7 @@
         <activity
             android:name="com.sina.weibo.sdk.share.WbShareTransActivity"
             android:launchMode="singleTask"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"></activity> <!-- 微博 -->
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" /> <!-- 微博 -->
         <activity
             android:name="com.tencent.tauth.AuthActivity"
             android:launchMode="singleTask"

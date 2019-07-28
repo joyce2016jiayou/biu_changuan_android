@@ -48,13 +48,14 @@
         </RelativeLayout>
 
 
+
+
         <!-- 扫描取景框 -->
         <com.yzq.zxinglibrary.view.ViewfinderView
             android:id="@+id/viewfinder_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1" />
-
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/bottomLayout"
@@ -118,4 +119,19 @@
         </androidx.appcompat.widget.LinearLayoutCompat>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <TextView
+        android:id="@+id/my_erweima"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="我的二维码"
+        android:textSize="20sp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="200dp"
+        android:textStyle="bold"
+        android:textColor="#FFBA02"
+        />
+
 </RelativeLayout>

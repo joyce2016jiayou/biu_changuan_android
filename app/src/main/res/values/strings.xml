@@ -72,6 +72,13 @@
     <string name="tv41">我们会在24小时内为您审核，请您耐心等待</string>
     <string name="tv42">月</string>
     <string name="tv43">7/15</string>
+    <string name="tv44">用户端二维码</string>
+    <string name="tv45">将二维码放入框内，即可自动扫描</string>
+    <string name="tv46">有氧操房</string>
+    <string name="tv47">瑜伽</string>
+    <string name="tv48">单车房</string>
+    <string name="tv49">9:00</string>
+
 
     <string name="alert_dialog_tishi1">温馨提示</string>
     <string name="alert_dialog_tishi2">解绑银行卡</string>
@@ -93,6 +100,13 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-
+    <!--zxing-->
+    <string name="msg_camera_framework_bug">The camera is occupied or has no camera permission, please check</string>
+    <string name="button_ok">Exit</string>
+    <string name="scan_code">扫描二维码</string>
+    <string name="open_flash">打开闪关灯</string>
+    <string name="close_flash">关闭闪光灯</string>
+    <string name="gallery">相册</string>
+    <string name="scan_failed_tip">Scan image failed, please retry.</string>
 
 </resources>

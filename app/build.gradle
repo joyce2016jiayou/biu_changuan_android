@@ -124,10 +124,16 @@ dependencies {
     implementation 'com.qiniu:qiniu-android-sdk:7.3.15'
     //二维码扫描
     implementation 'com.yanzhenjie:permission:2.0.0-rc4'
-    implementation project(':zxinglibrary')
-
+    implementation files('libs/core-3.3.3.jar')
     //时间轴
     implementation 'com.vivian.widgets:TimeLineItemDecoration:1.5'
+    //viewpage指示器
+    implementation project(':viewpagerindicator')
+    //时间轴
+    implementation project(':timelinelibrary')
+
+
+
 
 
 }

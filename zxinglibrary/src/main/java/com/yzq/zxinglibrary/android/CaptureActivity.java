@@ -59,7 +59,7 @@ public class CaptureActivity extends AppCompatActivity implements SurfaceHolder.
     private CameraManager cameraManager;
     private CaptureActivityHandler handler;
     private SurfaceHolder surfaceHolder;
-
+    private TextView my_erweima;
 
     public ViewfinderView getViewfinderView() {
         return viewfinderView;
@@ -142,6 +142,8 @@ public class CaptureActivity extends AppCompatActivity implements SurfaceHolder.
         albumLayout.setOnClickListener(this);
         bottomLayout = findViewById(R.id.bottomLayout);
 
+        my_erweima=findViewById(R.id.my_erweima);
+        my_erweima.setOnClickListener(this);
 
         switchVisibility(bottomLayout, config.isShowbottomLayout());
         switchVisibility(flashLightLayout, config.isShowFlashLight());
@@ -334,6 +336,8 @@ public class CaptureActivity extends AppCompatActivity implements SurfaceHolder.
             startActivityForResult(intent, Constant.REQUEST_IMAGE);
         } else if (id == R.id.backIv) {
             finish();
+        }else if(id==R.id.my_erweima){//我的二维码功能
+
         }
 
 

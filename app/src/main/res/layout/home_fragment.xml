@@ -2,10 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:orientation="vertical"
+    android:background="@color/color_F8F8F8"
     android:layout_height="match_parent">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:background="@color/white"
+        android:background="@drawable/daohanglan"
         android:layout_height="@dimen/m98">
         <ImageView
             android:id="@+id/saoma_btn"
@@ -13,7 +14,7 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_marginRight="20dp"
-            android:layout_marginBottom="9dp"
+            android:layout_marginBottom="20dp"
             android:layout_height="28dp"
             android:src="@drawable/saoma_icon"
             />
@@ -24,7 +25,7 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_marginRight="77dp"
-            android:layout_marginBottom="9dp"
+            android:layout_marginBottom="20dp"
             android:layout_height="28dp"
             android:src="@drawable/fenxiang_icon"
             />
@@ -37,7 +38,7 @@
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="20dp"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="20dp"
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="@color/color_9B9B9B"
@@ -45,7 +46,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_toRightOf="@+id/shijiao_qiehuan_btn"
-            android:layout_marginBottom="6dp"
+            android:layout_marginBottom="18dp"
             android:layout_alignParentBottom="true"
             android:layout_marginLeft="40dp"
             android:layout_height="wrap_content">
@@ -80,6 +81,8 @@
 
     <com.noplugins.keepfit.android.util.ui.NoScrollViewPager
         android:id="@+id/viewpager_content"
+        android:layout_marginTop="-8dp"
+        android:background="@color/color_F8F8F8"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
          />

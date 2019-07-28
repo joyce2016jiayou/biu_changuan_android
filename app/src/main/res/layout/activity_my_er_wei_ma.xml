@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/color_F8F8F8"
+    tools:context=".activity.MyErWeiMaActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="@drawable/daohanglan"
+        android:layout_height="100dp">
+        <ImageView
+            android:id="@+id/back_btn"
+            android:layout_width="28dp"
+            android:layout_height="18dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="30dp"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/icon_back" />
+        <TextView
+            android:id="@+id/title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv44"
+            android:textStyle="bold"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="19dp"
+            android:textSize="25sp"
+            android:textColor="@color/top_heiziti"
+            />
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:background="@color/color_F8F8F8"
+        android:orientation="vertical"
+        android:layout_marginTop="-8dp"
+        android:layout_height="0dp">
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/weweima_viewpage"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="0dp" />
+        <com.lwj.widget.viewpagerindicator.ViewPagerIndicator
+            android:id="@+id/indicator_spring"
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:background="@color/transparent"
+            app:vpi_default_color="@color/color_ACACAC"
+            app:vpi_distance="15dp"
+            app:vpi_distanceType="BY_DISTANCE"
+            app:vpi_indicatorType="SPRING"
+            app:vpi_radius="5dp"
+            android:layout_marginBottom="19dp"
+            app:vpi_selected_color="@color/color_FFBA02"
+            />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+
+        android:background="@color/color_F8F8F8"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="@drawable/fenxiang_bg"
+            android:layout_height="97dp">
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/umeng_socialize_wxcircle"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="@drawable/fenxiang_bg"
+            android:layout_height="97dp">
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/umeng_socialize_wxcircle"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="@drawable/fenxiang_bg"
+            android:layout_height="97dp">
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/umeng_socialize_wxcircle"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="@drawable/fenxiang_bg"
+            android:layout_height="97dp">
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/umeng_socialize_wxcircle"
+                />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

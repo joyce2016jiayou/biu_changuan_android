@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:background="@color/color_F8F8F8"
+    tools:context=".fragment.ErWeiMaFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+
+    <ImageView
+        android:id="@+id/contentIvWithLogo"
+        android:layout_width="@dimen/m198"
+        android:layout_height="@dimen/m198"
+        android:layout_gravity="center"
+        />
+    <TextView
+        android:id="@+id/erweima_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/color_FFBA02"
+        android:layout_marginTop="39dp"
+        android:textSize="13sp"
+        android:text="@string/tv45" />
+</LinearLayout>

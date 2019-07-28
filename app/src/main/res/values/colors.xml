@@ -19,5 +19,18 @@
     <color name="color_4A4A4A">#4A4A4A</color>
     <color name="bga_pp_photo_selected_mask">#4D000000</color>
     <color name="color_f0f2f5">#f0f2f5</color>
-
+    <color name="color_F8F8F8">#F8F8F8</color>
+    <!--zxing-->
+    <color name="contents_text">#000000</color>
+    <color name="encode_view">#ffffff</color>
+    <color name="possible_result_points">#ffbd21</color>
+    <color name="result_minor_text">#c0c0c0</color>
+    <color name="result_points">#99cc00</color>
+    <color name="result_text">#ffffff</color>
+    <color name="result_view">#000000</color>
+    <color name="status_text">#ffffff</color>
+    <color name="viewfinder_mask">#50000000</color>
+    <color name="react">#ffffff</color>
+    <color name="scanLineColor">#ffffff</color>
+    <color name="defaultColor">#ffffff</color>
 </resources>

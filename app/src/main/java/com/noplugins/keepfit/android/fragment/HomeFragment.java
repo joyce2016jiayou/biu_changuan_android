@@ -35,6 +35,9 @@ import com.noplugins.keepfit.android.activity.ShareSDKDEMOActivity;
 import com.noplugins.keepfit.android.adapter.ContentPagerAdapterMy;
 import com.noplugins.keepfit.android.util.ui.NoScrollViewPager;
 import com.noplugins.keepfit.android.util.ui.ViewPagerFragment;
+import com.noplugins.keepfit.android.util.ui.erweima.android.CaptureActivity;
+import com.noplugins.keepfit.android.util.ui.erweima.bean.ZxingConfig;
+import com.noplugins.keepfit.android.util.ui.erweima.common.Constant;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.UMShareListener;
@@ -42,9 +45,6 @@ import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.yanzhenjie.permission.Action;
 import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.Permission;
-import com.yzq.zxinglibrary.android.CaptureActivity;
-import com.yzq.zxinglibrary.bean.ZxingConfig;
-import com.yzq.zxinglibrary.common.Constant;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -246,7 +246,6 @@ public class HomeFragment extends ViewPagerFragment {
         // 扫描二维码/条码回传
         if (requestCode == REQUEST_CODE_SCAN && resultCode == RESULT_OK) {
             if (data != null) {
-
                 String content = data.getStringExtra(Constant.CODED_CONTENT);
                 Toast.makeText(getActivity(),content,Toast.LENGTH_SHORT).show();
             }
