@@ -77,7 +77,6 @@ public class InformationCheckActivity extends BaseActivity {
         stepView.setCurrentStep((step + 1) % stepView.getStepNum());*/
 
 
-
         //设置视图
         tabFragments.add(BaseInformationFragment.homeInstance("第一页"));
         tabFragments.add(BusinessInformationFragment.homeInstance("第二页"));
@@ -94,7 +93,7 @@ public class InformationCheckActivity extends BaseActivity {
     }
 
 
-    private void show_advice_pop(){
+    private void show_advice_pop() {
         PopWindowHelper.public_tishi_pop(InformationCheckActivity.this, "温馨提示", "是否退出资料提交？", "取消", "确定", new DialogCallBack() {
             @Override
             public void save() {

@@ -100,6 +100,14 @@ public interface MyService {
     @POST("submitAudit")
     Observable<Bean<Object>> submit_information(@Body RequestBody json);
 
+    /**
+     * 获取审核状态
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("getAuditResult")
+    Observable<Bean<Object>> get_check_status(@FieldMap Map<String, String> map);
+
 
 
 }

@@ -14,21 +14,24 @@
         android:layout_height="match_parent">
         <TextView
             android:id="@+id/time_tv"
-            android:layout_marginLeft="15dp"
+            android:layout_marginLeft="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="top"
             android:text="@string/tv49"
             android:textColor="@color/top_heiziti"
             android:textSize="16sp"
             />
         <com.bt.mylibrary.TimeLineMarkerView
             android:id="@+id/lin_view"
-            android:layout_width="29dp"
+            android:layout_marginLeft="5dp"
+            android:layout_width="15dp"
+            android:layout_gravity="top"
             android:layout_height="match_parent"
-            app:beginLine="@color/color_FFBA02"
-            app:endLine="@color/color_FFBA02"
+            app:beginLine="@color/result_points"
+            app:endLine="@color/result_points"
             app:marker="@drawable/jiedian"
-            app:oritation="false" />
+            app:oritation="false"/>
 
     </LinearLayout>
 

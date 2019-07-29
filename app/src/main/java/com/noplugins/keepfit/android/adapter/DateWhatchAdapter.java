@@ -1,10 +1,18 @@
 package com.noplugins.keepfit.android.adapter;
 
+import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -16,17 +24,19 @@ import com.bt.mylibrary.TimeLineMarkerView;
 import com.bumptech.glide.Glide;
 import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.entity.DayWhatch;
+import com.noplugins.keepfit.android.util.screen.ScreenUtilsHelper;
 
 import java.util.List;
+import java.util.Properties;
 
 public class DateWhatchAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder> {
     private List<DayWhatch> list;
-    private Context context;
+    private Activity context;
     private static final int EMPTY_VIEW = 2;
     private static final int TYPE_YOUTANG = 1;
 
 
-    public DateWhatchAdapter(List<DayWhatch> mlist, Context mcontext) {
+    public DateWhatchAdapter(List<DayWhatch> mlist, Activity mcontext) {
         list = mlist;
         context = mcontext;
     }
@@ -65,16 +75,18 @@ public class DateWhatchAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHold
         DayWhatch dayWhatch = list.get(position);
         if (view_holder instanceof YouYangViewHolder) {
             YouYangViewHolder holder = (YouYangViewHolder) view_holder;
+            //holder.lin_view.setMarkerSize(ScreenUtilsHelper.dip2px(context,15));
 
-            //holder.lin_view.setBeginLine(null);//不绘制上
 
             if (dayWhatch.getKecheng_type().equals("1")) {//表示有氧
                 holder.yujia_bg.setVisibility(View.INVISIBLE);
                 holder.dance_bg.setVisibility(View.INVISIBLE);
                 if (dayWhatch.isIs_out_date()) {
                     holder.youyang_bg.setBackgroundResource(R.drawable.kapian_hui);
+                    set_red(holder);
                 } else {
                     holder.youyang_bg.setBackgroundResource(R.drawable.kapian_bai);
+                    set_green(holder);
                 }
             } else if (dayWhatch.getKecheng_type().equals("2")) {//表示瑜伽
                 holder.youyang_bg.setVisibility(View.INVISIBLE);
@@ -94,14 +106,40 @@ public class DateWhatchAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHold
                 }
             }
 
+            holder.youyang_bg.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    select_more_popwindow();
+                }
+            });
+            holder.yujia_bg.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    select_more_popwindow();
 
+                }
+            });
+            holder.dance_bg.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    select_more_popwindow();
 
-
-
-
-
+                }
+            });
 
         }
+    }
+
+    private void set_red(YouYangViewHolder holder) {
+        int mycolor = context.getResources().getColor(R.color.bottom_color);
+        ColorDrawable colorDrawable = new ColorDrawable(mycolor);
+        holder.lin_view.setEndLine(colorDrawable);
+    }
+
+    private void set_green(YouYangViewHolder holder) {
+        int mycolor = context.getResources().getColor(R.color.result_points);
+        ColorDrawable colorDrawable = new ColorDrawable(mycolor);
+        holder.lin_view.setEndLine(colorDrawable);
     }
 
     @Override
@@ -112,6 +150,39 @@ public class DateWhatchAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHold
             return TYPE_YOUTANG;
         }
     }
+
+
+    public static Dialog m_dialog;
+    private void select_more_popwindow() {
+        LayoutInflater factory = LayoutInflater.from(context);
+        View view = factory.inflate(R.layout.daywhatch_item_detial, null);
+        m_dialog = new Dialog(context, R.style.transparentFrameWindowStyle2);
+        m_dialog.setContentView(view, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        Window window = m_dialog.getWindow();
+        // 设置显示动画
+        window.setWindowAnimations(R.style.main_menu_animstyle);
+        WindowManager.LayoutParams wl = window.getAttributes();
+        wl.x = 0;
+        wl.y = 0;
+        // 以下这两句是为了保证按钮可以水平满屏
+        wl.width = ViewGroup.LayoutParams.MATCH_PARENT;
+        wl.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+        // 设置显示位置
+        m_dialog.onWindowAttributesChanged(wl);
+        // 设置点击外围解散
+        m_dialog.setCanceledOnTouchOutside(true);
+        m_dialog.show();
+        /**操作*/
+        ImageView close_btn = view.findViewById(R.id.close_btn);
+        close_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                m_dialog.dismiss();
+            }
+        });
+
+    }
+
 
     @Override
     public int getAdapterItemCount() {

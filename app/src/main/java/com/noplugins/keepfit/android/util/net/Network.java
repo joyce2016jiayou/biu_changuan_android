@@ -302,5 +302,19 @@ public class Network {
                 .subscribe(subscriber);
     }
 
+    /**
+     * 获取验证码
+     *
+     * @param subscriber
+     * @return
+     */
+    public Subscription get_check_status(Map<String, String> params, Subscriber<Bean<Object>> subscriber) {
+        return service.get_check_status(params)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
 
 }

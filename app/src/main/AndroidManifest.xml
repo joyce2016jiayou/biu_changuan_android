@@ -51,7 +51,8 @@
         android:theme="@style/Theme.AppCompat.NoActionBar"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.MyErWeiMaActivity"></activity>
+        <activity android:name=".activity.CheckStatusFailActivity"></activity>
+        <activity android:name=".activity.MyErWeiMaActivity" />
         <activity android:name=".activity.InformationCheckActivity">
 
             <!-- <intent-filter> -->
@@ -62,7 +63,7 @@
             <!-- </intent-filter> -->
         </activity>
         <activity android:name=".activity.ShareSDKDEMOActivity" />
-        <activity android:name=".activity.UserPermissionSelectActivity"></activity>
+        <activity android:name=".activity.UserPermissionSelectActivity" />
         <activity
             android:name=".activity.ForgetPasswordActivity"
             android:windowSoftInputMode="adjustPan|stateHidden" />

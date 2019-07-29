@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,6 +9,7 @@
     tools:context=".fragment.DayWhatchFragment">
 
     <LinearLayout
+        android:id="@+id/rel_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -78,6 +79,8 @@
         android:id="@+id/xrefreshview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/rel_top"
+
         android:layout_marginTop="20dp"
         android:background="@color/color_F8F8F8">
 
@@ -89,5 +92,13 @@
 
     </com.andview.refreshview.XRefreshView>
 
+    <ImageView
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_width="@dimen/m69"
+        android:layout_marginRight="@dimen/m18"
+        android:layout_marginBottom="@dimen/m18"
+        android:layout_height="@dimen/m69"
+        android:src="@drawable/add_kecheng_icon" />
 
-</LinearLayout>
+</RelativeLayout>

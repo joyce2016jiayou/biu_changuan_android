@@ -78,7 +78,18 @@
     <string name="tv47">瑜伽</string>
     <string name="tv48">单车房</string>
     <string name="tv49">9:00</string>
-
+    <string name="tv50">提交审核</string>
+    <string name="tv51">审核失败!</string>
+    <string name="tv52">很抱歉，您提供的信息未能通过审核，请重新提交。</string>
+    <string name="tv53">重新提交</string>
+    <string name="tv54">课程名称:</string>
+    <string name="tv55">团操老师:</string>
+    <string name="tv56">课程房间:</string>
+    <string name="tv57">课程价格:</string>
+    <string name="tv58">人数限制:</string>
+    <string name="tv59">课程时间:</string>
+    <string name="tv60">课程介绍:</string>
+    <string name="tv61">注意事项:</string>
 
     <string name="alert_dialog_tishi1">温馨提示</string>
     <string name="alert_dialog_tishi2">解绑银行卡</string>

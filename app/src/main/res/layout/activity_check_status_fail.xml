@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_F8F8F8"
+    android:orientation="vertical"
+    tools:context=".activity.CheckStatusFailActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/daohanglan">
+
+        <ImageView
+            android:id="@+id/back_btn"
+            android:layout_width="28dp"
+            android:layout_height="18dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="30dp"
+            android:src="@drawable/icon_back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="19dp"
+            android:text="@string/tv50"
+            android:textColor="@color/top_heiziti"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tv51"
+        android:layout_marginTop="@dimen/m166"
+        android:textColor="@color/color_000000"
+        android:layout_gravity="center_horizontal"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tv52"
+        android:layout_marginLeft="42dp"
+        android:layout_marginRight="26dp"
+        android:layout_marginTop="@dimen/m13"
+        android:textColor="@color/color_000000"
+        android:layout_gravity="center_horizontal"
+        android:textSize="20sp"/>
+
+    <LinearLayout
+        android:id="@+id/again_submit_btn"
+        android:layout_width="225dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="@dimen/m127"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/login_btn"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/tv53"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="25sp" />
+
+    </LinearLayout>
+
+
+</LinearLayout>
