@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,20 +24,23 @@ import com.andview.refreshview.recyclerview.BaseRecyclerAdapter;
 import com.bt.mylibrary.TimeLineMarkerView;
 import com.bumptech.glide.Glide;
 import com.noplugins.keepfit.android.R;
+import com.noplugins.keepfit.android.entity.DateViewEntity;
 import com.noplugins.keepfit.android.entity.DayWhatch;
+import com.noplugins.keepfit.android.util.data.DateHelper;
 import com.noplugins.keepfit.android.util.screen.ScreenUtilsHelper;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
 public class DateWhatchAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder> {
-    private List<DayWhatch> list;
+    private List<DateViewEntity.DateBean> list;
     private Activity context;
     private static final int EMPTY_VIEW = 2;
     private static final int TYPE_YOUTANG = 1;
 
 
-    public DateWhatchAdapter(List<DayWhatch> mlist, Activity mcontext) {
+    public DateWhatchAdapter(List<DateViewEntity.DateBean> mlist, Activity mcontext) {
         list = mlist;
         context = mcontext;
     }
@@ -61,7 +65,6 @@ public class DateWhatchAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHold
         View item_view = null;
         if (viewType == EMPTY_VIEW) {
             item_view = LayoutInflater.from(context).inflate(R.layout.daywhatch_empty_view, parent, false);
-            ;
             holder = new EmptyViewHolder(item_view, true);
         } else if (viewType == TYPE_YOUTANG) {
             item_view = LayoutInflater.from(context).inflate(R.layout.daywhatch_youyang_view, parent, false);
@@ -72,38 +75,56 @@ public class DateWhatchAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHold
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder view_holder, int position, boolean isItem) {
-        DayWhatch dayWhatch = list.get(position);
+        DateViewEntity.DateBean dayWhatch = list.get(position);
         if (view_holder instanceof YouYangViewHolder) {
             YouYangViewHolder holder = (YouYangViewHolder) view_holder;
             //holder.lin_view.setMarkerSize(ScreenUtilsHelper.dip2px(context,15));
 
+            Date date = DateHelper.transForDate(dayWhatch.getStart_time());
+            String hour;
+            String minute;
+            if(date.getHours()<=9){
+                hour="0"+date.getHours();
+            }else{
+                hour = date.getHours()+"";
+            }
+            if(date.getMinutes()<=9){
+                minute = "0"+date.getMinutes();
+            }else{
+                minute = date.getMinutes()+"";
+            }
+            holder.time_tv.setText(hour+":"+minute);
 
-            if (dayWhatch.getKecheng_type().equals("1")) {//表示有氧
+            Log.e("接口连接可怜的萨达",dayWhatch.getStart_time()+"");
+            if (dayWhatch.getType().equals("1")) {//表示有氧
                 holder.yujia_bg.setVisibility(View.INVISIBLE);
                 holder.dance_bg.setVisibility(View.INVISIBLE);
-                if (dayWhatch.isIs_out_date()) {
+
+                /*if (dayWhatch.isIs_out_date()) {
                     holder.youyang_bg.setBackgroundResource(R.drawable.kapian_hui);
                     set_red(holder);
                 } else {
                     holder.youyang_bg.setBackgroundResource(R.drawable.kapian_bai);
                     set_green(holder);
-                }
-            } else if (dayWhatch.getKecheng_type().equals("2")) {//表示瑜伽
+                }*/
+            } else if (dayWhatch.getType().equals("2")) {//表示瑜伽
                 holder.youyang_bg.setVisibility(View.INVISIBLE);
                 holder.dance_bg.setVisibility(View.INVISIBLE);
-                if (dayWhatch.isIs_out_date()) {
+
+                /*if (dayWhatch.isIs_out_date()) {
                     holder.yujia_bg.setBackgroundResource(R.drawable.kapian_hui);
                 } else {
                     holder.yujia_bg.setBackgroundResource(R.drawable.kapian_bai);
-                }
+                }*/
             } else {//表示单车
                 holder.youyang_bg.setVisibility(View.INVISIBLE);
                 holder.yujia_bg.setVisibility(View.INVISIBLE);
-                if (dayWhatch.isIs_out_date()) {
+
+                /*if (dayWhatch.isIs_out_date()) {
                     holder.dance_bg.setBackgroundResource(R.drawable.kapian_hui);
                 } else {
                     holder.dance_bg.setBackgroundResource(R.drawable.kapian_bai);
-                }
+                }*/
             }
 
             holder.youyang_bg.setOnClickListener(new View.OnClickListener() {
@@ -200,7 +221,7 @@ public class DateWhatchAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHold
 //        this.mOnItemClickListener = mOnItemClickListener;
 //    }
 
-    public void setData(List<DayWhatch> list) {
+    public void setData(List<DateViewEntity.DateBean> list) {
         this.list = list;
         notifyDataSetChanged();
     }

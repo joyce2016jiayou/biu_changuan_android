@@ -13,7 +13,7 @@ public class DateHelper {
         if (ms == null) {
             ms = (long) 0;
         }
-        long msl = (long) ms * 1000;
+        long msl = (long) ms ;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date temp = null;
         if (ms != null) {

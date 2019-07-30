@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.noplugins.keepfit.android.KeepFitActivity;
 import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.base.BaseActivity;
 import com.noplugins.keepfit.android.entity.LoginEntity;
@@ -173,12 +174,17 @@ public class LoginActivity extends BaseActivity {
                         if ("".equals(SharedPreferencesHelper.get(getApplicationContext(), "login_token", ""))) {
                             SharedPreferencesHelper.put(getApplicationContext(), "login_token", loginEntity.getToken());
                             SharedPreferencesHelper.put(getApplicationContext(), "phone_number", edit_phone_number.getText().toString());
+                            SharedPreferencesHelper.put(getApplicationContext(), "changguan_number", loginEntity.getGymAreaNum());
+
                         } else {
                             SharedPreferencesHelper.remove(getApplicationContext(), "login_token");
                             SharedPreferencesHelper.put(getApplicationContext(), "login_token", loginEntity.getToken());
                             SharedPreferencesHelper.put(getApplicationContext(), "phone_number", edit_phone_number.getText().toString());
+                            SharedPreferencesHelper.put(getApplicationContext(), "changguan_number", loginEntity.getGymAreaNum());
+
                         }
-                        Intent intent = new Intent(LoginActivity.this, UserPermissionSelectActivity.class);
+                        //todo 首先得判断权限
+                        Intent intent = new Intent(LoginActivity.this, KeepFitActivity.class);
                         startActivity(intent);
                         //finish();
 

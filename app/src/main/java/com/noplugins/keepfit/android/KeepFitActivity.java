@@ -106,26 +106,23 @@ public class KeepFitActivity extends BaseActivity {
         params.put("token", token);
         subscription = Network.getInstance("获取审核状态", getApplicationContext())
                 .get_check_status(params,
-                        new ProgressSubscriberNew<>(String.class, new GsonSubscriberOnNextListener<String>() {
+                        new ProgressSubscriberNew<>(List.class, new GsonSubscriberOnNextListener<List>() {
                             @Override
-                            public void on_post_entity(String code,String get_message_id) {
+                            public void on_post_entity(List mlocation,String get_message_id) {
                                 Log.e(TAG, "获取审核状态成功：" );
-                                Intent intent = new Intent(KeepFitActivity.this, CheckStatusFailActivity.class);
-                                startActivity(intent);
                             }
                         }, new SubscriberOnNextListener<Bean<Object>>() {
                             @Override
                             public void onNext(Bean<Object> result) {
 
                             }
-
                             @Override
                             public void onError(String error) {
-                                Intent intent = new Intent(KeepFitActivity.this, CheckStatusFailActivity.class);
-                                startActivity(intent);
+//                                Intent intent = new Intent(KeepFitActivity.this, CheckStatusFailActivity.class);
+//                                startActivity(intent);
 
                                 Logger.e(TAG, "获取审核状态报错：" + error);
-                                Toast.makeText(getApplicationContext(), "获取审核状态失败！", Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(getApplicationContext(), "获取审核状态失败！", Toast.LENGTH_SHORT).show();
                             }
                         }, this, true));
 

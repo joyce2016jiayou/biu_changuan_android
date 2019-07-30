@@ -131,6 +131,9 @@ dependencies {
     implementation project(':viewpagerindicator')
     //时间轴
     implementation project(':timelinelibrary')
+    //日历选择
+    implementation project(':calendarview')
+
 
 
 }

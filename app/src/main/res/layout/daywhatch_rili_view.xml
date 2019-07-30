@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:calendarview="http://schemas.android.com/apk/res-auto"
+    xmlns:weekview="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_multi_choose"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_79000000"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:background="#79000000">
+
+        <LinearLayout
+            android:id="@+id/last_btn"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="25dp"
+            android:background="@android:color/transparent"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="9dp"
+                android:layout_height="14dp"
+                android:background="@mipmap/last" />
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="当前日期"
+            android:textColor="@android:color/white"
+            android:textSize="22sp"
+            />
+
+        <LinearLayout
+            android:id="@+id/next_btn"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="25dp"
+            android:background="@android:color/transparent"
+            android:gravity="center"
+            android:onClick="nextMonth">
+
+            <ImageView
+                android:layout_width="9dp"
+                android:layout_height="14dp"
+                android:layout_centerVertical="true"
+                android:background="@mipmap/next" />
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <com.othershe.calendarview.weiget.WeekView
+        android:layout_width="match_parent"
+        android:layout_height="35dp" />
+
+    <com.othershe.calendarview.weiget.CalendarView
+        android:id="@+id/calendar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        calendarview:choose_type="single"
+        calendarview:solar_size="20"
+        calendarview:solar_color="@android:color/white"
+        calendarview:show_holiday="false"
+        calendarview:show_lunar="false"
+        calendarview:show_term="false" />
+
+
+
+</LinearLayout>

@@ -44,6 +44,7 @@
             android:textColor="@color/color_9B9B9B"
             />
         <LinearLayout
+            android:id="@+id/rili_xiala"
             android:layout_width="wrap_content"
             android:layout_toRightOf="@+id/shijiao_qiehuan_btn"
             android:layout_marginBottom="18dp"

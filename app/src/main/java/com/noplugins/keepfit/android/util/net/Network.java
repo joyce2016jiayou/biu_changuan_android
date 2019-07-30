@@ -316,5 +316,19 @@ public class Network {
                 .subscribe(subscriber);
     }
 
+    /**
+     * 获取课程
+     *
+     * @param subscriber
+     * @return
+     */
+    public Subscription get_class_resource(Map<String, String> params, Subscriber<Bean<Object>> subscriber) {
+        return service.get_class_resource(params)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
 
 }

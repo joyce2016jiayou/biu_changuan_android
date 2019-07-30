@@ -9,21 +9,35 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.andview.refreshview.XRefreshView;
 import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.adapter.DateWhatchAdapter;
+import com.noplugins.keepfit.android.entity.DateViewEntity;
 import com.noplugins.keepfit.android.entity.DayWhatch;
+import com.noplugins.keepfit.android.util.data.SharedPreferencesHelper;
+import com.noplugins.keepfit.android.util.net.Network;
+import com.noplugins.keepfit.android.util.net.entity.Bean;
+import com.noplugins.keepfit.android.util.net.progress.GsonSubscriberOnNextListener;
+import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriberNew;
+import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener;
 import com.noplugins.keepfit.android.util.ui.ViewPagerFragment;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import rx.Subscription;
+
+import static com.umeng.socialize.net.dplus.CommonNetImpl.TAG;
 
 
 public class DayWhatchFragment extends ViewPagerFragment {
@@ -36,6 +50,7 @@ public class DayWhatchFragment extends ViewPagerFragment {
     private View view;
     private LinearLayoutManager layoutManager;
     DateWhatchAdapter dateWhatchAdapter;
+    List<DateViewEntity.DateBean> dateBeans = new ArrayList<>();
 
     public static DayWhatchFragment newInstance(String title) {
         DayWhatchFragment fragment = new DayWhatchFragment();
@@ -82,11 +97,51 @@ public class DayWhatchFragment extends ViewPagerFragment {
 
             strings.add(dayWhatch);
         }
-        set_list_resource(strings);
+
+
+        //获取日视角课程接口
+        get_date_class_resource();
+
+
 
     }
 
-    private void set_list_resource(final List<DayWhatch> dates) {
+    private void get_date_class_resource() {
+        Map<String, String> params = new HashMap<>();
+        params.put("date", "2019-07-01");
+        String gymAreaNum;
+        if ("".equals(SharedPreferencesHelper.get(getActivity(), "changguan_number", "").toString())) {
+            gymAreaNum = "";
+        } else {
+            gymAreaNum = SharedPreferencesHelper.get(getActivity(), "changguan_number", "").toString();
+        }
+        params.put("gymAreaNum", "GYM19072138381319");//场馆编号
+        Subscription subscription = Network.getInstance("获取课程", getActivity())
+                .get_class_resource(params,
+                        new ProgressSubscriberNew<>(DateViewEntity.class , new GsonSubscriberOnNextListener<DateViewEntity>() {
+                            @Override
+                            public void on_post_entity(DateViewEntity dateViewEntity, String get_message_id) {
+                                Log.e(TAG, "获取课程成功：");
+                                dateBeans = dateViewEntity.getDayView();
+                                set_list_resource(dateBeans);
+
+                            }
+                        }, new SubscriberOnNextListener<Bean<Object>>() {
+                            @Override
+                            public void onNext(Bean<Object> result) {
+
+                            }
+                            @Override
+                            public void onError(String error) {
+                                Log.e(TAG, "获取课程报错：" + error);
+                                Toast.makeText(getActivity(), "获取课程失败！", Toast.LENGTH_SHORT).show();
+                            }
+                        }, getActivity(), true));
+
+    }
+
+
+    private void set_list_resource(final List<DateViewEntity.DateBean> dates) {
         //设置上拉刷新下拉加载
         recycler_view.setHasFixedSize(true);
         recycler_view.setItemAnimator(null);

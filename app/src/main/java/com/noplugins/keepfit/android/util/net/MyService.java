@@ -108,6 +108,14 @@ public interface MyService {
     @POST("getAuditResult")
     Observable<Bean<Object>> get_check_status(@FieldMap Map<String, String> map);
 
+    /**
+     * 获取审核状态
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("dayView")
+    Observable<Bean<Object>> get_class_resource(@FieldMap Map<String, String> map);
+
 
 
 }
