@@ -195,7 +195,7 @@ public class MonthView2 extends ViewGroup {
                 @Override
                 public void onClick(View v) {
                     int day = date.getSolar()[2];
-                    CalendarView calendarView = (CalendarView) getParent();
+                    MonthCalenDarView calendarView = (MonthCalenDarView) getParent();
                     OnSingleChooseListener clickListener = calendarView.getSingleChooseListener();
                     OnMultiChooseListener chooseListener = calendarView.getMultiChooseListener();
                     if (date.getType() == 1) {//点击当月
