@@ -16,13 +16,13 @@ android {
     buildTypes {
         release {
             minifyEnabled false
-            signingConfig signingConfigs.debug
+            //signingConfig signingConfigs.debug
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
 
         debug {
             minifyEnabled false
-            signingConfig signingConfigs.debug
+            //signingConfig signingConfigs.debug
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -49,15 +49,15 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
         sourceCompatibility JavaVersion.VERSION_1_8
     }
-    signingConfigs {
-        debug {
-            keyAlias 'key0'
-            keyPassword '123456'
-            storeFile file('/Users/joyce/Desktop/andriod/app/app_key.jks')
-            storePassword '123456'
-        }
-
-    }
+//    signingConfigs {
+//        debug {
+//            keyAlias 'key0'
+//            keyPassword '123456'
+//            storeFile file('/Users/joyce/Desktop/andriod/app/app_key.jks')
+//            storePassword '123456'
+//        }
+//
+//    }
 
 
 }

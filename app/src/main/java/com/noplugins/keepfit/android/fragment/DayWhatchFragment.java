@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.andview.refreshview.XRefreshView;
@@ -50,7 +51,8 @@ public class DayWhatchFragment extends ViewPagerFragment {
     XRefreshView xrefreshview;
     @BindView(R.id.recycler_view)
     RecyclerView recycler_view;
-
+    @BindView(R.id.add_class_btn)
+    ImageView add_class_btn;
 
     private View view;
     private LinearLayoutManager layoutManager;
@@ -69,7 +71,6 @@ public class DayWhatchFragment extends ViewPagerFragment {
 
     //注册广播接收器
     LocalBroadcastManager broadcastManager;
-
     private void registerReceiver() {
         broadcastManager = LocalBroadcastManager.getInstance(getActivity());
         IntentFilter intentFilter = new IntentFilter();
@@ -122,6 +123,12 @@ public class DayWhatchFragment extends ViewPagerFragment {
 
     private void initView() {
 
+        add_class_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
 
     }
 

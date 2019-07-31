@@ -10,21 +10,10 @@ import android.os.Bundle;
 import android.provider.Contacts;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
-
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
-
-import com.google.gson.Gson;
-import com.noplugins.keepfit.android.activity.CheckStatusFailActivity;
-import com.noplugins.keepfit.android.activity.LoginActivity;
-import com.noplugins.keepfit.android.activity.UserPermissionSelectActivity;
 import com.noplugins.keepfit.android.adapter.ContentPagerAdapterMy;
 import com.noplugins.keepfit.android.base.BaseActivity;
-import com.noplugins.keepfit.android.entity.LoginEntity;
 import com.noplugins.keepfit.android.fragment.DiscoverFragment;
 import com.noplugins.keepfit.android.fragment.HomeFragment;
 import com.noplugins.keepfit.android.fragment.MyFragment;
@@ -32,23 +21,19 @@ import com.noplugins.keepfit.android.fragment.QuestionsAndAnswersFragment;
 import com.noplugins.keepfit.android.util.data.SharedPreferencesHelper;
 import com.noplugins.keepfit.android.util.net.Network;
 import com.noplugins.keepfit.android.util.net.entity.Bean;
-import com.noplugins.keepfit.android.util.net.entity.Token;
 import com.noplugins.keepfit.android.util.net.progress.GsonSubscriberOnNextListener;
 import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriberNew;
 import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener;
 import com.noplugins.keepfit.android.util.ui.NoScrollViewPager;
 import com.orhanobut.logger.Logger;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import okhttp3.RequestBody;
 
 public class KeepFitActivity extends BaseActivity {
     @BindView(R.id.viewpager_content)

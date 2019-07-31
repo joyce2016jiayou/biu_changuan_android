@@ -93,6 +93,7 @@
     </com.andview.refreshview.XRefreshView>
 
     <ImageView
+        android:id="@+id/add_class_btn"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_width="@dimen/m69"
