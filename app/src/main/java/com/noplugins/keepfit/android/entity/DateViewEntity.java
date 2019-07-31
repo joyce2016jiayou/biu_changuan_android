@@ -68,6 +68,26 @@ public class DateViewEntity {
         private int max_num;
         private int status;
 
+        public int getPast() {
+            return past;
+        }
+
+        public void setPast(int past) {
+            this.past = past;
+        }
+
+        private int past;
+
+        public String getTeacher_name() {
+            return teacher_name;
+        }
+
+        public void setTeacher_name(String teacher_name) {
+            this.teacher_name = teacher_name;
+        }
+
+        private String teacher_name;
+
         public String getCourse_name() {
             return course_name;
         }

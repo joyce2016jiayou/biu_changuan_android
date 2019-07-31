@@ -68,15 +68,15 @@ public class DateWhatchAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHold
             holder = new EmptyViewHolder(item_view, true);
         } else if (viewType == TYPE_YOUTANG) {
             item_view = LayoutInflater.from(context).inflate(R.layout.daywhatch_youyang_view, parent, false);
+            holder = new YouYangViewHolder(item_view, true);
         }
-        holder = new YouYangViewHolder(item_view, true);
         return holder;
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder view_holder, int position, boolean isItem) {
-        DateViewEntity.DateBean dayWhatch = list.get(position);
         if (view_holder instanceof YouYangViewHolder) {
+            DateViewEntity.DateBean dayWhatch = list.get(position);
             YouYangViewHolder holder = (YouYangViewHolder) view_holder;
             //holder.lin_view.setMarkerSize(ScreenUtilsHelper.dip2px(context,15));
 
@@ -94,37 +94,54 @@ public class DateWhatchAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHold
                 minute = date.getMinutes()+"";
             }
             holder.time_tv.setText(hour+":"+minute);
+            Date create_date = DateHelper.transForDate(dayWhatch.getCreate_date());
 
             Log.e("接口连接可怜的萨达",dayWhatch.getStart_time()+"");
             if (dayWhatch.getType().equals("1")) {//表示有氧
                 holder.yujia_bg.setVisibility(View.INVISIBLE);
                 holder.dance_bg.setVisibility(View.INVISIBLE);
 
-                /*if (dayWhatch.isIs_out_date()) {
+                holder.youyang_title_tv.setText(dayWhatch.getCourse_name());
+                holder.youyang_date_tv.setText("("+create_date.getMonth()+"/"+create_date.getDate()+")");
+                holder.youyang_user_tv.setText(dayWhatch.getTeacher_name());
+                holder.money_tv.setText("￥"+dayWhatch.getPrice()+"/人");
+                /**设置有没有过期*/
+                if (dayWhatch.getPast()==1) {//表示过期
                     holder.youyang_bg.setBackgroundResource(R.drawable.kapian_hui);
-                    set_red(holder);
+                    //set_red(holder);
                 } else {
                     holder.youyang_bg.setBackgroundResource(R.drawable.kapian_bai);
-                    set_green(holder);
-                }*/
+                    //set_green(holder);
+                }
             } else if (dayWhatch.getType().equals("2")) {//表示瑜伽
                 holder.youyang_bg.setVisibility(View.INVISIBLE);
                 holder.dance_bg.setVisibility(View.INVISIBLE);
 
-                /*if (dayWhatch.isIs_out_date()) {
+                holder.yujia_title_tv.setText(dayWhatch.getCourse_name());
+                holder.yujia_date_tv.setText("("+create_date.getMonth()+"/"+create_date.getDate()+")");
+                holder.yujia_user_tv.setText(dayWhatch.getTeacher_name());
+                holder.yujia_money_tv.setText("￥"+dayWhatch.getPrice()+"/人");
+                /**设置有没有过期*/
+                if (dayWhatch.getPast()==1) {
                     holder.yujia_bg.setBackgroundResource(R.drawable.kapian_hui);
                 } else {
                     holder.yujia_bg.setBackgroundResource(R.drawable.kapian_bai);
-                }*/
+                }
+
             } else {//表示单车
                 holder.youyang_bg.setVisibility(View.INVISIBLE);
                 holder.yujia_bg.setVisibility(View.INVISIBLE);
 
-                /*if (dayWhatch.isIs_out_date()) {
+                holder.dance_title_tv.setText(dayWhatch.getCourse_name());
+                holder.dance_date_tv.setText("("+create_date.getMonth()+"/"+create_date.getDate()+")");
+                holder.dance_user_tv.setText(dayWhatch.getTeacher_name());
+                holder.dance_money_tv.setText("￥"+dayWhatch.getPrice()+"/人");
+                /**设置有没有过期*/
+                if (dayWhatch.getPast()==1) {
                     holder.dance_bg.setBackgroundResource(R.drawable.kapian_hui);
                 } else {
                     holder.dance_bg.setBackgroundResource(R.drawable.kapian_bai);
-                }*/
+                }
             }
 
             holder.youyang_bg.setOnClickListener(new View.OnClickListener() {
@@ -242,7 +259,10 @@ public class DateWhatchAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHold
     public class YouYangViewHolder extends RecyclerView.ViewHolder {
         public View view;
         public LinearLayout youyang_bg, yujia_bg, dance_bg;
-        public TextView time_tv;
+        public TextView time_tv,youyang_title_tv,youyang_date_tv
+                ,youyang_user_tv,money_tv,yujia_title_tv,yujia_date_tv
+                , yujia_user_tv,yujia_money_tv,dance_title_tv,dance_date_tv
+                ,dance_user_tv,dance_money_tv;
         public TimeLineMarkerView lin_view;
 
         public YouYangViewHolder(View itemView, boolean isItem) {
@@ -254,6 +274,18 @@ public class DateWhatchAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHold
                 dance_bg = view.findViewById(R.id.dance_bg);
                 time_tv = view.findViewById(R.id.time_tv);
                 lin_view = view.findViewById(R.id.lin_view);
+                youyang_title_tv = view.findViewById(R.id.youyang_title_tv);
+                youyang_date_tv = view.findViewById(R.id.youyang_date_tv);
+                youyang_user_tv = view.findViewById(R.id.youyang_user_tv);
+                money_tv = view.findViewById(R.id.money_tv);
+                yujia_title_tv = view.findViewById(R.id.yujia_title_tv);
+                yujia_date_tv = view.findViewById(R.id.yujia_date_tv);
+                yujia_user_tv = view.findViewById(R.id.yujia_user_tv);
+                yujia_money_tv = view.findViewById(R.id.yujia_money_tv);
+                dance_title_tv = view.findViewById(R.id.dance_title_tv);
+                dance_date_tv = view.findViewById(R.id.dance_date_tv);
+                dance_user_tv = view.findViewById(R.id.dance_user_tv);
+                dance_money_tv = view.findViewById(R.id.dance_money_tv);
             }
         }
     }

@@ -22,8 +22,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class MonthView extends ViewGroup {
-
+public class MonthView2 extends ViewGroup {
     private static final int ROW = 6;
     private static final int COLUMN = 7;
 
@@ -42,11 +41,11 @@ public class MonthView extends ViewGroup {
     private Set<Integer> chooseDays = new HashSet<>();//记录多选时当前页选中的日期
     private AttrsBean mAttrsBean;
 
-    public MonthView(Context context,String color) {
-        this(context, null,color);
+    public MonthView2(Context context, String color) {
+        this(context, null, color);
     }
 
-    public MonthView(Context context, AttributeSet attrs,String color){
+    public MonthView2(Context context, AttributeSet attrs, String color) {
         super(context, attrs, 0);
 
         mContext = context;
@@ -91,28 +90,23 @@ public class MonthView extends ViewGroup {
             View view;
             TextView solarDay;//阳历TextView
             TextView lunarDay;//阴历TextView(节假日、节气同样使用阴历TextView来显示)
-            ImageView circle_status=null;//小圆点// TODO: 2019-07-30
+            //TODO: 2019-07-30
             if (item_layout != 0 && calendarViewAdapter != null) {
                 view = LayoutInflater.from(mContext).inflate(item_layout, null);
                 TextView[] views = calendarViewAdapter.convertView(view, date);
                 solarDay = views[0];
                 lunarDay = views[1];
             } else {
-                view = LayoutInflater.from(mContext).inflate(R.layout.item_month_layout, null);
+                view = LayoutInflater.from(mContext).inflate(R.layout.item_month_layout2, null);
                 solarDay = (TextView) view.findViewById(R.id.solar_day);
                 lunarDay = (TextView) view.findViewById(R.id.lunar_day);
-                circle_status = (ImageView) view.findViewById(R.id.circle_status);
             }
             //设置小圆点
             solarDay.setTextColor(mAttrsBean.getColorSolar());
             solarDay.setTextSize(mAttrsBean.getSizeSolar());
             lunarDay.setTextColor(mAttrsBean.getColorLunar());
             lunarDay.setTextSize(mAttrsBean.getSizeLunar());
-            if(date.isIs_future_class()){
-                circle_status.setImageResource(R.drawable.circle_bg);
-            }else{
-                circle_status.setImageResource(R.drawable.circle_bg_hui);
-            }
+
             //设置上个月和下个月的阳历颜色
             if (date.getType() == 0 || date.getType() == 2) {
                 solarDay.setTextColor(mAttrsBean.getColorLunar());
@@ -197,7 +191,7 @@ public class MonthView extends ViewGroup {
                 }
             }
 
-            view.setOnClickListener(new OnClickListener() {
+            view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int day = date.getSolar()[2];
@@ -287,8 +281,8 @@ public class MonthView extends ViewGroup {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
-        int widthSpecSize = MeasureSpec.getSize(widthMeasureSpec);
-        int heightSpecSize = MeasureSpec.getSize(heightMeasureSpec);
+        int widthSpecSize = View.MeasureSpec.getSize(widthMeasureSpec);
+        int heightSpecSize = View.MeasureSpec.getSize(heightMeasureSpec);
 
         int itemWidth = widthSpecSize / COLUMN;
 
@@ -304,8 +298,8 @@ public class MonthView extends ViewGroup {
         int itemSize = Math.min(itemWidth, itemHeight);
         for (int i = 0; i < getChildCount(); i++) {
             View childView = getChildAt(i);
-            childView.measure(MeasureSpec.makeMeasureSpec(itemSize, MeasureSpec.EXACTLY),
-                    MeasureSpec.makeMeasureSpec(itemSize, MeasureSpec.EXACTLY));
+            childView.measure(View.MeasureSpec.makeMeasureSpec(itemSize, View.MeasureSpec.EXACTLY),
+                    View.MeasureSpec.makeMeasureSpec(itemSize, View.MeasureSpec.EXACTLY));
         }
     }
 

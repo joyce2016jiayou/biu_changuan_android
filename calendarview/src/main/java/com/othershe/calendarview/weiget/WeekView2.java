@@ -12,28 +12,27 @@ import android.view.View;
 import com.othershe.calendarview.R;
 import com.othershe.calendarview.utils.CalendarUtil;
 
-public class WeekView extends View {
-
+public class WeekView2 extends View{
     //private String[] weekArray = {"日", "一", "二", "三", "四", "五", "六"};
     private String[] weekArray = {"S", "M", "T", "W", "T", "F", "S"};// TODO: 2019-07-30
 
     private int weekSize=18;//文字尺寸
-    private int weekColor = Color.WHITE;//文字颜色
+    private int weekColor = Color.BLACK;//文字颜色
 
     private Paint mPaint;
     private Context context;
 
 
 
-    public WeekView(Context context) {
+    public WeekView2(Context context) {
         this(context, null);
     }
 
-    public WeekView(Context context, AttributeSet attrs) {
+    public WeekView2(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public WeekView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public WeekView2(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         this.context = context;
 
@@ -80,14 +79,14 @@ public class WeekView extends View {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
-        int widthSize = MeasureSpec.getSize(widthMeasureSpec);
-        int widthMode = MeasureSpec.getMode(widthMeasureSpec);
-        int heightSize = MeasureSpec.getSize(heightMeasureSpec);
-        int heightMode = MeasureSpec.getMode(heightMeasureSpec);
-        if (heightMode == MeasureSpec.AT_MOST) {
+        int widthSize = View.MeasureSpec.getSize(widthMeasureSpec);
+        int widthMode = View.MeasureSpec.getMode(widthMeasureSpec);
+        int heightSize = View.MeasureSpec.getSize(heightMeasureSpec);
+        int heightMode = View.MeasureSpec.getMode(heightMeasureSpec);
+        if (heightMode == View.MeasureSpec.AT_MOST) {
             heightSize = CalendarUtil.getPxSize(context, 35);
         }
-        if (widthMode == MeasureSpec.AT_MOST) {
+        if (widthMode == View.MeasureSpec.AT_MOST) {
             widthSize = CalendarUtil.getPxSize(context, 300);
         }
         setMeasuredDimension(widthSize, heightSize);

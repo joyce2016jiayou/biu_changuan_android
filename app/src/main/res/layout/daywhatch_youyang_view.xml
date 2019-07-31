@@ -59,6 +59,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/youyang_title_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -69,6 +70,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/youyang_date_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -78,6 +80,7 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/youyang_user_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -87,6 +90,7 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/money_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -122,6 +126,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/yujia_title_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -132,6 +137,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/yujia_date_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -141,6 +147,7 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/yujia_user_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -150,6 +157,7 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/yujia_money_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -186,6 +194,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/dance_title_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -196,6 +205,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/dance_date_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -205,6 +215,7 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/dance_user_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -214,6 +225,7 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/dance_money_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"

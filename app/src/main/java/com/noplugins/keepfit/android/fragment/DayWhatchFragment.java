@@ -1,10 +1,14 @@
 package com.noplugins.keepfit.android.fragment;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,6 +24,7 @@ import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.adapter.DateWhatchAdapter;
 import com.noplugins.keepfit.android.entity.DateViewEntity;
 import com.noplugins.keepfit.android.entity.DayWhatch;
+import com.noplugins.keepfit.android.util.data.DateHelper;
 import com.noplugins.keepfit.android.util.data.SharedPreferencesHelper;
 import com.noplugins.keepfit.android.util.net.Network;
 import com.noplugins.keepfit.android.util.net.entity.Bean;
@@ -49,8 +54,10 @@ public class DayWhatchFragment extends ViewPagerFragment {
 
     private View view;
     private LinearLayoutManager layoutManager;
-    DateWhatchAdapter dateWhatchAdapter;
-    List<DateViewEntity.DateBean> dateBeans = new ArrayList<>();
+    private DateWhatchAdapter dateWhatchAdapter;
+    private List<DateViewEntity.DateBean> dateBeans = new ArrayList<>();
+//    private int PAGE = 1;
+//    private boolean is_not_more;
 
     public static DayWhatchFragment newInstance(String title) {
         DayWhatchFragment fragment = new DayWhatchFragment();
@@ -60,10 +67,45 @@ public class DayWhatchFragment extends ViewPagerFragment {
         return fragment;
     }
 
+    //注册广播接收器
+    LocalBroadcastManager broadcastManager;
+
+    private void registerReceiver() {
+        broadcastManager = LocalBroadcastManager.getInstance(getActivity());
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("zachary");
+        broadcastManager.registerReceiver(mRefreshReceiver, intentFilter);
+    }
+
+    private BroadcastReceiver mRefreshReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String refresh = intent.getStringExtra("refreshInfo");
+            String select_date = intent.getStringExtra("select_date");
+            if ("yes".equals(refresh)) {
+                // 在主线程中刷新UI，用Handler来实现
+                new Handler().post(new Runnable() {
+                    public void run() {
+                        Log.e("打开就结束啦", "接口数量的");
+                        //在这里来写你需要刷新的地方
+                        get_date_class_resource(select_date);
+                    }
+                });
+            }
+        }
+    };
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        broadcastManager.unregisterReceiver(mRefreshReceiver);
+
+    }
 
     @Override
     public void fetchData() {
-
+        //获取日视角课程接口
+        get_date_class_resource("");
     }
 
     @Override
@@ -73,56 +115,44 @@ public class DayWhatchFragment extends ViewPagerFragment {
             view = inflater.inflate(R.layout.fragment_day_whatch, container, false);
             ButterKnife.bind(this, view);//绑定黄牛刀
             initView();
+            registerReceiver();
         }
         return view;
     }
 
     private void initView() {
-        List<DayWhatch> strings = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            DayWhatch dayWhatch = new DayWhatch();
-            if(i==1||i==6||i==3){
-                dayWhatch.setIs_out_date(true);
-            }else{
-                dayWhatch.setIs_out_date(false);
-            }
-            if(i==1||i==6||i==3){
-                dayWhatch.setKecheng_type("1");//有氧
-            }else if(i==2||i==5||i==8){
-                dayWhatch.setKecheng_type("3");//单车
-            }else{
-                dayWhatch.setKecheng_type("2");//瑜伽
-
-            }
-
-            strings.add(dayWhatch);
-        }
-
-
-        //获取日视角课程接口
-        get_date_class_resource();
-
 
 
     }
 
-    private void get_date_class_resource() {
+    public void get_date_class_resource(String selectdate) {
         Map<String, String> params = new HashMap<>();
-        params.put("date", "2019-07-01");
+        //获取当前的时间
+        String crrent_date = DateHelper.get_current_date();//获取当前的时间
+        //params.put("date", crrent_date);
+        //Log.e("获取当前的时间",DateHelper.get_current_date());
+        if (selectdate.length() > 0) {
+            params.put("date", selectdate);
+        } else {
+            params.put("date", "2019-08-01");
+        }
         String gymAreaNum;
         if ("".equals(SharedPreferencesHelper.get(getActivity(), "changguan_number", "").toString())) {
             gymAreaNum = "";
         } else {
             gymAreaNum = SharedPreferencesHelper.get(getActivity(), "changguan_number", "").toString();
         }
+        //params.put("gymAreaNum", gymAreaNum);//场馆编号
+
         params.put("gymAreaNum", "GYM19072138381319");//场馆编号
         Subscription subscription = Network.getInstance("获取课程", getActivity())
                 .get_class_resource(params,
-                        new ProgressSubscriberNew<>(DateViewEntity.class , new GsonSubscriberOnNextListener<DateViewEntity>() {
+                        new ProgressSubscriberNew<>(DateViewEntity.class, new GsonSubscriberOnNextListener<DateViewEntity>() {
                             @Override
                             public void on_post_entity(DateViewEntity dateViewEntity, String get_message_id) {
-                                Log.e(TAG, "获取课程成功：");
                                 dateBeans = dateViewEntity.getDayView();
+
+                                Log.e(TAG, "获取课程成功：" + dateBeans.size());
                                 set_list_resource(dateBeans);
 
                             }
@@ -131,6 +161,7 @@ public class DayWhatchFragment extends ViewPagerFragment {
                             public void onNext(Bean<Object> result) {
 
                             }
+
                             @Override
                             public void onError(String error) {
                                 Log.e(TAG, "获取课程报错：" + error);
@@ -156,7 +187,7 @@ public class DayWhatchFragment extends ViewPagerFragment {
         xrefreshview.setPinnedTime(1000);
         xrefreshview.setMoveForHorizontal(true);
         xrefreshview.setPullRefreshEnable(true);
-        xrefreshview.setPullLoadEnable(true);
+        xrefreshview.setPullLoadEnable(false);//关闭加载更多
         xrefreshview.setAutoLoadMore(false);
         xrefreshview.enableRecyclerViewPullUp(true);
         xrefreshview.enablePullUpWhenLoadCompleted(true);
@@ -165,14 +196,8 @@ public class DayWhatchFragment extends ViewPagerFragment {
         xrefreshview.enableRecyclerViewPullUp(true);
         xrefreshview.enablePullUpWhenLoadCompleted(true);
         xrefreshview.setPreLoadCount(10);
-        if (dates.size() > 9) {
-            xrefreshview.enableReleaseToLoadMore(true);
-//            guanZhuWoRenAdapter.setCustomLoadMoreView(new XRefreshViewFooter(this));//加载更多
-            xrefreshview.setLoadComplete(false);//显示底部
-        } else {
-            xrefreshview.enableReleaseToLoadMore(false);
-            xrefreshview.setLoadComplete(true);//隐藏底部
-        }
+        xrefreshview.enableReleaseToLoadMore(false);
+        xrefreshview.setLoadComplete(true);//隐藏底部
         //设置静默加载时提前加载的item个数
 //        xefreshView1.setPreLoadCount(4);
 
@@ -193,9 +218,9 @@ public class DayWhatchFragment extends ViewPagerFragment {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-//                        PAGE = 1;
-//                        //填写刷新数据的网络请求，一般page=1，List集合清空操作
-//                        init_net_source(false);
+                        //PAGE = 1;
+                        //填写刷新数据的网络请求，一般page=1，List集合清空操作
+                        get_date_class_resource("");
                         xrefreshview.stopRefresh();//刷新停止
 
 
@@ -209,14 +234,14 @@ public class DayWhatchFragment extends ViewPagerFragment {
                     public void run() {
 //                        PAGE = PAGE + 1;
 //                        //填写加载更多的网络请求，一般page++
-//                        init_net_source(false);
+//                        get_date_class_resource();
 //
 //                        //没有更多数据时候
 //                        if (is_not_more) {
 //                            xrefreshview.setLoadComplete(true);
 //                        } else {
 //                            //刷新完成必须调用此方法停止加载
-                        xrefreshview.stopLoadMore(true);
+//                            xrefreshview.stopLoadMore(true);
 //                        }
 
 

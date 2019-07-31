@@ -15,6 +15,8 @@ import android.os.Parcelable;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,12 +25,14 @@ import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
 import androidx.fragment.app.Fragment;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.noplugins.keepfit.android.KeepFitActivity;
 import com.noplugins.keepfit.android.R;
@@ -36,12 +40,14 @@ import com.noplugins.keepfit.android.activity.CheckStatusFailActivity;
 import com.noplugins.keepfit.android.activity.ShareSDKDEMOActivity;
 import com.noplugins.keepfit.android.adapter.ContentPagerAdapterMy;
 import com.noplugins.keepfit.android.entity.DateViewEntity;
+import com.noplugins.keepfit.android.util.data.DateHelper;
 import com.noplugins.keepfit.android.util.data.SharedPreferencesHelper;
 import com.noplugins.keepfit.android.util.net.Network;
 import com.noplugins.keepfit.android.util.net.entity.Bean;
 import com.noplugins.keepfit.android.util.net.progress.GsonSubscriberOnNextListener;
 import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriberNew;
 import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener;
+import com.noplugins.keepfit.android.util.screen.ScreenUtilsHelper;
 import com.noplugins.keepfit.android.util.ui.NoScrollViewPager;
 import com.noplugins.keepfit.android.util.ui.ViewPagerFragment;
 import com.noplugins.keepfit.android.util.ui.erweima.android.CaptureActivity;
@@ -52,6 +58,7 @@ import com.othershe.calendarview.bean.DateBean;
 import com.othershe.calendarview.listener.OnMultiChooseListener;
 import com.othershe.calendarview.listener.OnPagerChangeListener;
 import com.othershe.calendarview.listener.OnSingleChooseListener;
+import com.othershe.calendarview.utils.CalendarUtil;
 import com.othershe.calendarview.weiget.CalendarView;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareAPI;
@@ -101,7 +108,9 @@ public class HomeFragment extends ViewPagerFragment {
     private int REQUEST_CODE = 110;
     private int REQUEST_CODE_SCAN = 111;
     private List<Fragment> tabFragments = new ArrayList<>();
-
+    private PopupWindow popupWindow;
+    //获取当前的日期
+    private int[] cDate = CalendarUtil.getCurrentDate();
 
     public static HomeFragment homeInstance(String title) {
         HomeFragment fragment = new HomeFragment();
@@ -126,7 +135,7 @@ public class HomeFragment extends ViewPagerFragment {
     private void initView() {
         //初始化viewpager
         tabFragments.add(DayWhatchFragment.newInstance("日视角"));
-        tabFragments.add(MonthWhatchFragment.newInstance("月视角"));
+        tabFragments.add(MonWhatchFragment.newInstance("月视角"));
         ContentPagerAdapterMy contentAdapter = new ContentPagerAdapterMy(getChildFragmentManager(), tabFragments);
         viewpager_content.setAdapter(contentAdapter);
         viewpager_content.setCurrentItem(0);
@@ -144,13 +153,17 @@ public class HomeFragment extends ViewPagerFragment {
                     shijiao_qiehuan_btn.setText("日");
                     viewpager_content.setCurrentItem(1);
                     xiala_icon.setVisibility(View.INVISIBLE);
-                    date_tv.setText("07月");//显示当前月份
+                    if(cDate[1]<=9){
+                        date_tv.setText("0"+cDate[1]+"月");//显示当前月份
+                    }else{
+                        date_tv.setText(cDate[1]+"月");//显示当前月份
+                    }
 
 
                 }
             }
         });
-
+        date_tv.setText(DateHelper.get_date2(cDate[1],cDate[2]));
         //扫码按钮
         saoma_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -210,43 +223,125 @@ public class HomeFragment extends ViewPagerFragment {
 
             }
         });
-
+        //日期下拉按钮
         rili_xiala.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                select_data_popwindow();
+                //select_data_popwindow();
+                select_data_popwindow_view();
             }
         });
 
     }
 
-
     /**
      * 日历弹窗
      */
-    public static Dialog m_dialog;
+    private void select_data_popwindow_view() {
+        LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.daywhatch_rili_view, null);
+        popupWindow = new PopupWindow(view, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        //popupWindow
+        popupWindow.setFocusable(true);
+        popupWindow.setOutsideTouchable(false);
+        popupWindow.setBackgroundDrawable(null);
 
+        popupWindow.getContentView().setFocusable(true); // 这个很重要
+        popupWindow.getContentView().setFocusableInTouchMode(true);
+        popupWindow.getContentView().setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_BACK) {
+                    popupWindow.dismiss();
+                    return true;
+                }
+                return false;
+            }
+        });
+        popupWindow.showAsDropDown(rili_xiala, 0, 10);
+
+        //设置逻辑
+        CalendarView calendarView = view.findViewById(R.id.calendar);
+        TextView title_tv = (TextView) view.findViewById(R.id.title);
+
+        calendarView
+                .setStartEndDate("2019.01", "2025.12")
+                .setDisableStartEndDate("2019.01.01", "2025.12.30")
+                .setInitDate(cDate[0] + "." + cDate[1])
+                .setSingleDate(cDate[0] + "." + cDate[1] + "." + cDate[2])
+                .init();
+
+        //设置title
+        title_tv.setText(cDate[0] + "年" + cDate[1] + "月");
+        LinearLayout last_btn = view.findViewById(R.id.last_btn);
+        last_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                calendarView.lastMonth();
+            }
+        });
+        LinearLayout next_btn = view.findViewById(R.id.next_btn);
+        next_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                calendarView.nextMonth();
+            }
+        });
+        calendarView.setOnSingleChooseListener(new OnSingleChooseListener() {
+            @Override
+            public void onSingleChoose(View view, DateBean date) {
+                date_tv.setText(DateHelper.get_date2(date.getSolar()[1],date.getSolar()[2]));
+                popupWindow.dismiss();
+                //日视角刷新数据
+                String select_date = DateHelper.get_date(date.getSolar()[0], date.getSolar()[1], date.getSolar()[2]);
+                Log.e("选择的日期", select_date);
+
+                Intent intent = new Intent("zachary");
+                intent.putExtra("refreshInfo", "yes");
+                intent.putExtra("select_date", select_date);
+
+                LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(intent);
+
+
+            }
+        });
+
+
+        calendarView.setOnPagerChangeListener(new OnPagerChangeListener() {
+            @Override
+            public void onPagerChanged(int[] date) {
+                title_tv.setText(date[0] + "年" + date[1] + "月");
+            }
+        });
+    }
+
+
+
+    /*public static Dialog m_dialog;
     private void select_data_popwindow() {
         LayoutInflater factory = LayoutInflater.from(getActivity());
         View view = factory.inflate(R.layout.daywhatch_rili_view, null);
         m_dialog = new Dialog(getActivity(), R.style.transparentFrameWindowStyle2);
-        m_dialog.setContentView(view, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        m_dialog.setContentView(view, params);
         Window window = m_dialog.getWindow();
         // 设置显示动画
         window.setWindowAnimations(R.style.main_menu_animstyle);
-        WindowManager.LayoutParams wl = window.getAttributes();
-        wl.x = 0;
-        //wl.y = (getActivity().getWindowManager().getDefaultDisplay().getHeight()/2);
-        wl.y = 0;
-        // 以下这两句是为了保证按钮可以水平满屏
-        wl.width = ViewGroup.LayoutParams.MATCH_PARENT;
-        wl.height = ViewGroup.LayoutParams.MATCH_PARENT;
-        // 设置显示位置
-        m_dialog.onWindowAttributesChanged(wl);
+        WindowManager.LayoutParams params1 = window.getAttributes();
+        params1.x = 0;
+        params1.y = -((ScreenUtilsHelper.getScreenHeight(getActivity())/4));
+//        params1.width = ScreenUtilsHelper.getScreenWidth(getActivity());
+//        params1.height = ScreenUtilsHelper.getScreenHeight(getActivity());
+        window.setAttributes(params1);
+
+
         // 设置点击外围解散
         m_dialog.setCanceledOnTouchOutside(true);
         m_dialog.show();
-        /**操作*/
+        */
+    /**
+     * 操作
+     *//*
         CalendarView calendarView = view.findViewById(R.id.calendar);
         TextView title = (TextView) view.findViewById(R.id.title);
         StringBuilder sb = new StringBuilder();
@@ -308,7 +403,7 @@ public class HomeFragment extends ViewPagerFragment {
             }
         });
 
-    }
+    }*/
 
 
     private UMShareListener shareListener = new UMShareListener() {

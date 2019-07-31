@@ -11,13 +11,6 @@
         android:text="111"
         android:layout_height="wrap_content" />
 
-    <ImageView
-        android:id="@+id/circle_status"
-        android:layout_marginLeft="2dp"
-        android:layout_width="10dp"
-        android:layout_height="10dp"
-        android:src="@drawable/circle_bg"
-        />
     <TextView
         android:id="@+id/lunar_day"
         android:text="222"

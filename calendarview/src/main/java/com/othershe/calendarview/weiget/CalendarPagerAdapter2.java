@@ -15,11 +15,10 @@ import com.othershe.calendarview.utils.SolarUtil;
 import java.util.LinkedList;
 import java.util.List;
 
-public class CalendarPagerAdapter extends PagerAdapter {
-
+public class CalendarPagerAdapter2 extends PagerAdapter {
     //缓存上一次回收的MonthView
-    private LinkedList<MonthView> cache = new LinkedList<>();
-    private SparseArray<MonthView> mViews = new SparseArray<>();
+    private LinkedList<MonthView2> cache = new LinkedList<>();
+    private SparseArray<MonthView2> mViews = new SparseArray<>();
 
     private int count;
 
@@ -28,7 +27,7 @@ public class CalendarPagerAdapter extends PagerAdapter {
 
     private AttrsBean mAttrsBean;
 
-    public CalendarPagerAdapter(int count) {
+    public CalendarPagerAdapter2(int count) {
         this.count = count;
     }
 
@@ -44,11 +43,11 @@ public class CalendarPagerAdapter extends PagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-        MonthView view;
+        MonthView2 view;
         if (!cache.isEmpty()) {
             view = cache.removeFirst();
         } else {
-            view = new MonthView(container.getContext(),"#e0000000");
+            view = new MonthView2(container.getContext(),"#ffffff");
         }
         //根据position计算对应年、月
         int[] date = CalendarUtil.positionToDate(position, mAttrsBean.getStartDate()[0], mAttrsBean.getStartDate()[1]);
@@ -66,8 +65,8 @@ public class CalendarPagerAdapter extends PagerAdapter {
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
-        container.removeView((MonthView) object);
-        cache.addLast((MonthView) object);
+        container.removeView((MonthView2) object);
+        cache.addLast((MonthView2) object);
         mViews.remove(position);
     }
 
@@ -76,7 +75,7 @@ public class CalendarPagerAdapter extends PagerAdapter {
      *
      * @return
      */
-    public SparseArray<MonthView> getViews() {
+    public SparseArray<MonthView2> getViews() {
         return mViews;
     }
 
