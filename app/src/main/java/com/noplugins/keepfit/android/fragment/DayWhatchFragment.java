@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.andview.refreshview.XRefreshView;
 import com.noplugins.keepfit.android.R;
+import com.noplugins.keepfit.android.activity.AddClassActivity;
 import com.noplugins.keepfit.android.adapter.DateWhatchAdapter;
 import com.noplugins.keepfit.android.entity.DateViewEntity;
 import com.noplugins.keepfit.android.entity.DayWhatch;
@@ -126,7 +127,8 @@ public class DayWhatchFragment extends ViewPagerFragment {
         add_class_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(getActivity(), AddClassActivity.class);
+                startActivity(intent);
             }
         });
 

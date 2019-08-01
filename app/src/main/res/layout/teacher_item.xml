@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="124dp"
+    android:background="@drawable/bg5"
+    android:orientation="horizontal">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/touxiang_image"
+        android:layout_width="76dp"
+        android:layout_height="76dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="20dp"
+        android:src="@drawable/touxiang"
+        app:civ_border_color="#ffffff"
+        app:civ_border_width="0dp" />
+
+    <LinearLayout
+        android:layout_width="209dp"
+        android:layout_height="34dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="68dp"
+        android:background="@drawable/bg_huang"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="已邀请"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+
+</LinearLayout>

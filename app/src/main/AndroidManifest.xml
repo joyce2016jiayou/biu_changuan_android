@@ -51,9 +51,15 @@
         android:theme="@style/Theme.AppCompat.NoActionBar"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.CheckStatusFailActivity"></activity>
+        <activity android:name=".activity.YaoQingZhongDetailActivity"></activity>
+        <activity android:name=".activity.TeacherDetailActivity" />
+        <activity android:name=".activity.YaoQingTeacherActivity" />
+        <activity android:name=".activity.AddClassItemActivity" />
+        <activity android:name=".activity.AddClassDetailActivity" />
+        <activity android:name=".activity.AddClassActivity" />
+        <activity android:name=".activity.CheckStatusFailActivity" />
         <activity android:name=".activity.MyErWeiMaActivity" />
-        <activity android:name=".activity.InformationCheckActivity"></activity>
+        <activity android:name=".activity.InformationCheckActivity" />
         <activity android:name=".activity.ShareSDKDEMOActivity" />
         <activity android:name=".activity.UserPermissionSelectActivity" />
         <activity
@@ -69,11 +75,14 @@
             android:name=".SplashActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait">
-            <!--<intent-filter>-->
-            <!--<action android:name="android.intent.action.MAIN" />-->
 
-            <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+            <!--
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            -->
         </activity>
         <activity
             android:name=".KeepFitActivity"
@@ -83,9 +92,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
-        </activity>
-        <!-- 存储权限 authorities="你的包名+fileprovider" -->
+        </activity> <!-- 存储权限 authorities="你的包名+fileprovider" -->
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.noplugins.keepfit.android.fileprovider"

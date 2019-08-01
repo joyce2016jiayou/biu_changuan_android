@@ -28,6 +28,11 @@
     <string name="edit_hint18">请输入营业执照上的企业名称</string>
     <string name="edit_hint19">请输入营业执照上的企业注册号</string>
     <string name="edit_hint20">以上信息提交后不可更改</string>
+    <string name="edit_hint21">请输入课程名称</string>
+    <string name="edit_hint22">请输入限制人数</string>
+    <string name="edit_hint23">请输入课程详情</string>
+    <string name="edit_hint24">请输入适合人群</string>
+    <string name="edit_hint25">请输入注意事项</string>
 
     <string name="tv1">登录</string>
     <string name="tv2">注册即代表您同意哔哟</string>
@@ -90,6 +95,25 @@
     <string name="tv59">课程时间:</string>
     <string name="tv60">课程介绍:</string>
     <string name="tv61">注意事项:</string>
+    <string name="tv62">添加课程</string>
+    <string name="tv63">新增课程</string>
+    <string name="tv64">课程详情</string>
+    <string name="tv65">新增团课邀请</string>
+    <string name="tv66">团课名称</string>
+    <string name="tv67">团课类型</string>
+    <string name="tv68">训练目标</string>
+    <string name="tv69">训练难度</string>
+    <string name="tv70">团课房间</string>
+    <string name="tv71">团课人数</string>
+    <string name="tv72">课程时间</string>
+    <string name="tv73">课程循环</string>
+    <string name="tv74">课程介绍</string>
+    <string name="tv75">适合人群</string>
+    <string name="tv76">注意事项</string>
+    <string name="tv77">邀请团课老师</string>
+    <string name="tv78">团课老师详情</string>
+    <string name="tv79">已贴标签</string>
+    <string name="tv80">邀请</string>
 
     <string name="alert_dialog_tishi1">温馨提示</string>
     <string name="alert_dialog_tishi2">解绑银行卡</string>

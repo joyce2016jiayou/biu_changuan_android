@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/color_F8F8F8"
+    tools:context=".activity.AddClassActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_F8F8F8"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@drawable/daohanglan">
+
+            <ImageView
+                android:id="@+id/back_btn"
+                android:layout_width="28dp"
+                android:layout_height="18dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="30dp"
+                android:src="@drawable/icon_back" />
+
+            <TextView
+                android:id="@+id/title_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="19dp"
+                android:text="@string/tv62"
+                android:textColor="@color/top_heiziti"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+
+        <com.andview.refreshview.XRefreshView
+            android:id="@+id/xrefreshview"
+            android:layout_width="match_parent"
+            android:background="@color/color_F8F8F8"
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:background="@color/color_F8F8F8"
+                android:layout_height="match_parent"
+                android:scrollbars="vertical" />
+
+        </com.andview.refreshview.XRefreshView>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/add_class_btn"
+        android:layout_width="225dp"
+        android:layout_height="70dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="22dp"
+        android:background="@drawable/login_btn"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/tv63"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+</RelativeLayout>

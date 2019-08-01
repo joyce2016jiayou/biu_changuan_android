@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:id="@+id/compensate_linear"
@@ -23,6 +22,6 @@
         android:id="@+id/layout_base"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:background="@color/white"/>
+        android:background="@color/color_F8F8F8"
+        android:layout_alignParentTop="true" />
 </RelativeLayout>
