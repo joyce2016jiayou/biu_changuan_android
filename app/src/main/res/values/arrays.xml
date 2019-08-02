@@ -9,4 +9,30 @@
         <item>动态单车</item>
         <item>瑜伽房</item>
     </string-array>
+    <string-array name="tuanke_types">
+        <item>单车</item>
+        <item>瑜伽</item>
+        <item>普拉提</item>
+        <item>拳击/搏击</item>
+        <item>舞蹈</item>
+        <item>功能性课程</item>
+        <item>儿童体适能</item>
+    </string-array>
+    <string-array name="target_types">
+        <item>燃脂</item>
+        <item>塑形</item>
+        <item>减压舒缓</item>
+        <item>体态改善</item>
+    </string-array>
+    <string-array name="nandu_types">
+        <item>容易</item>
+        <item>中等</item>
+        <item>困难</item>
+    </string-array>
+    <string-array name="xunhuan_types">
+        <item>一周</item>
+        <item>二周</item>
+        <item>三周</item>
+        <item>四周</item>
+    </string-array>
 </resources>

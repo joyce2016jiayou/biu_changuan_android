@@ -89,7 +89,7 @@ public class BusinessInformationFragment extends ViewPagerFragment {
         submit_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(check_value()){
+                if (check_value()) {
                     informationEntity = mainActivity.informationEntity;//获取基础资料信息
                     informationEntity.setLegal_person(faren_name.getText().toString());
                     informationEntity.setCard_num(icon_id_card.getText().toString());
@@ -98,8 +98,8 @@ public class BusinessInformationFragment extends ViewPagerFragment {
 
                     //提交审核资料
                     submit_information();
-                }else{
-                   return;
+                } else {
+                    return;
                 }
 
             }
@@ -110,22 +110,22 @@ public class BusinessInformationFragment extends ViewPagerFragment {
         if (TextUtils.isEmpty(faren_name.getText())) {
             Toast.makeText(getActivity(), R.string.alert_dialog_tishi12, Toast.LENGTH_SHORT).show();
             return false;
-        }else if(TextUtils.isEmpty(icon_id_card.getText())){
+        } else if (TextUtils.isEmpty(icon_id_card.getText())) {
             Toast.makeText(getActivity(), R.string.alert_dialog_tishi13, Toast.LENGTH_SHORT).show();
             return false;
-        }else if(TextUtils.isEmpty(qiye_name.getText())){
+        } else if (TextUtils.isEmpty(qiye_name.getText())) {
             Toast.makeText(getActivity(), R.string.alert_dialog_tishi14, Toast.LENGTH_SHORT).show();
             return false;
-        }else if(TextUtils.isEmpty(qiye_zhucehao.getText())){
+        } else if (TextUtils.isEmpty(qiye_zhucehao.getText())) {
             Toast.makeText(getActivity(), R.string.alert_dialog_tishi15, Toast.LENGTH_SHORT).show();
             return false;
-        }else{
+        } else {
             return true;
         }
     }
 
 
-        private void submit_information() {
+    private void submit_information() {
         Map<String, Object> params = new HashMap<>();
         params.put("area_name", informationEntity.getArea_name());
         params.put("type", informationEntity.getType());
@@ -152,7 +152,7 @@ public class BusinessInformationFragment extends ViewPagerFragment {
                 .submit_information(requestBody, new ProgressSubscriberNew<>(String.class, new GsonSubscriberOnNextListener<String>() {
                     @Override
                     public void on_post_entity(String entity, String s) {
-                        Log.e("提交审核资料成功", entity+"提交审核资料成功" + s);
+                        Log.e("提交审核资料成功", entity + "提交审核资料成功" + s);
                         viewpager_content.setCurrentItem(2);
                         int step = stepView.getCurrentStep();//设置进度条
                         stepView.setCurrentStep((step + 1) % stepView.getStepNum());
@@ -166,13 +166,14 @@ public class BusinessInformationFragment extends ViewPagerFragment {
 
                     @Override
                     public void onError(String error) {
-                        Log.e("提交审核资料失败", "提交审核资料失败:"+error);
+                        Log.e("提交审核资料失败", "提交审核资料失败:" + error);
 
                     }
                 }, getActivity(), true));
     }
 
     ImageView back_btn;
+
     @Override
     public void onAttach(Context activity) {
         // TODO Auto-generated method stub

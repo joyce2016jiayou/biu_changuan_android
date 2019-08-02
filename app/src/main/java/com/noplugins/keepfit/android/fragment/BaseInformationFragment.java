@@ -324,7 +324,14 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
             }else{
                 gymPlacesBean.setMax_num(Integer.valueOf(itemBeans.get(i).getPlace()));
             }
-            gymPlacesBean.setPlace_name(itemBeans.get(i).getType_name());
+            if (itemBeans.get(i).getType_name().equals("有氧操房")) {
+                gymPlacesBean.setPlace_type("1");
+            }else if(itemBeans.get(i).getType_name().equals("动态单车")){
+                gymPlacesBean.setPlace_type("2");
+            }else{
+                gymPlacesBean.setPlace_type("3");
+
+            }
             gymPlacesBeans.add(gymPlacesBean);
 //            Log.e("获取到的人数", "获取到的人数: " + itemBeans.get(i).getPlace());
 //            Log.e("获取到的type", "获取到的type: " + itemBeans.get(i).getType_name());

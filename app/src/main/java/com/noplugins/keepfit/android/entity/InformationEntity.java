@@ -165,7 +165,16 @@ public class InformationEntity {
          */
 
         private int max_num;
-        private String place_name;
+
+        public String getPlace_type() {
+            return place_type;
+        }
+
+        public void setPlace_type(String place_type) {
+            this.place_type = place_type;
+        }
+
+        private String place_type;
 
         public int getMax_num() {
             return max_num;
@@ -175,13 +184,8 @@ public class InformationEntity {
             this.max_num = max_num;
         }
 
-        public String getPlace_name() {
-            return place_name;
-        }
 
-        public void setPlace_name(String place_name) {
-            this.place_name = place_name;
-        }
+
     }
 
     public static class GymPicBean {

@@ -330,5 +330,47 @@ public class Network {
                 .subscribe(subscriber);
     }
 
+    /**
+     * 添加课程
+     *
+     * @param subscriber
+     * @return
+     */
+    public Subscription add_class(RequestBody params, Subscriber<Bean<Object>> subscriber) {
+        return service.add_class(params)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+    /**
+     * 课程列表
+     *
+     * @param subscriber
+     * @return
+     */
+    public Subscription class_list(Map<String, Object> params, Subscriber<Bean<Object>> subscriber) {
+        return service.class_list(params)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+
+    /**
+     * 添加课程
+     *
+     * @param subscriber
+     * @return
+     */
+    public Subscription get_max_num(RequestBody params, Subscriber<Bean<Object>> subscriber) {
+        return service.get_max_num(params)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
 
 }
