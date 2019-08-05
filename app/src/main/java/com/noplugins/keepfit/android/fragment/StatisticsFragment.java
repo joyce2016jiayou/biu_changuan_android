@@ -1,4 +1,5 @@
 package com.noplugins.keepfit.android.fragment;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,15 +10,15 @@ import com.noplugins.keepfit.android.util.ui.ViewPagerFragment;
 
 import butterknife.ButterKnife;
 
-public class MyFragment extends ViewPagerFragment {
-
-
+/**
+ * 发现页
+ */
+public class StatisticsFragment extends ViewPagerFragment {
     private View view;
 
 
-
-    public static MyFragment myInstance(String title) {
-        MyFragment fragment = new MyFragment();
+    public static StatisticsFragment newInstance(String title) {
+        StatisticsFragment fragment = new StatisticsFragment();
         Bundle args = new Bundle();
         args.putString("home_fragment_title", title);
         fragment.setArguments(args);
@@ -25,19 +26,16 @@ public class MyFragment extends ViewPagerFragment {
     }
 
     @Override
-    public View onCreateView( LayoutInflater inflater,  ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater,  ViewGroup container, Bundle savedInstanceState) {
         if (view == null) {
-            view = inflater.inflate(R.layout.my_page_fragment, container, false);
+            view = inflater.inflate(R.layout.discovers_fragment, container, false);
             ButterKnife.bind(this, view);//绑定黄牛刀
             initView();
         }
         return view;
     }
 
-
-
     private void initView() {
-
 
     }
 

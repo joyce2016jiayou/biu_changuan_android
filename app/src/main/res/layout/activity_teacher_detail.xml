@@ -4,13 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/color_F8F8F8"
+    android:orientation="vertical"
     tools:context=".activity.TeacherDetailActivity">
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
         <RelativeLayout
             android:id="@+id/title"
             android:layout_width="match_parent"
@@ -42,91 +44,145 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:background="@drawable/bg6"
-            android:layout_height="174dp">
+            android:layout_height="190dp"
+            android:layout_marginTop="-20dp"
+            android:background="@drawable/user_bg"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
+            <de.hdodenhof.circleimageview.CircleImageView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/touxiang_image"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/touxiang"
+                app:civ_border_color="@android:color/transparent"
+                app:civ_border_width="0dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Jane erry"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="我是一名私人教练，哈哈来打我呀"
+                android:textColor="@color/white"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:gravity="left|top"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tv83"
+                android:textColor="@color/color_6D7278"
+                android:textSize="13sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="222小时"
+                android:textColor="@color/color_6D7278"
+                android:textSize="13sp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:background="@drawable/bg6"
-            android:orientation="vertical"
-            android:layout_height="156dp">
-            <TextView
-                android:layout_marginTop="23dp"
-                android:layout_marginLeft="30dp"
-                android:text="@string/tv79"
-                android:textSize="16sp"
-                android:textColor="@color/top_heiziti"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <LinearLayout
+            android:layout_height="@dimen/m123"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="11dp"
+            android:layout_marginRight="11dp"
+            android:gravity="center_vertical"
+            android:background="@drawable/biaoqian_bg1"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="53dp"
+                android:layout_height="53dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="25dp"
+                android:src="@drawable/biaoqian_view" />
+
+            <com.noplugins.keepfit.android.util.ui.FlowLayout
+                android:id="@+id/biaoqian_view"
                 android:layout_width="match_parent"
-                android:orientation="horizontal"
-                android:layout_height="wrap_content">
-                <LinearLayout
-                    android:layout_width="90dp"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginTop="14dp"
-                    android:background="@drawable/biaoqian_bg"
-                    android:gravity="center"
-                    android:layout_height="30dp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:textColor="@color/color_6D7278"
-                        android:layout_height="wrap_content"
-                        android:textSize="13sp"
-                        android:text="不错的教练" />
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="15dp"
+                app:backgroundResource="@drawable/bg_frame"
+                app:horizontalSpacing="15dp"
+                app:itemColor="@color/colorAccent"
+                app:itemSize="12sp"
+                app:textPaddingH="15dp"
+                app:textPaddingV="8dp"
+                app:verticalSpacing="15dp" />
+        </LinearLayout>
 
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="90dp"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginTop="14dp"
-                    android:background="@drawable/biaoqian_bg"
-                    android:gravity="center"
-                    android:layout_height="30dp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:textColor="@color/color_6D7278"
-                        android:layout_height="wrap_content"
-                        android:textSize="13sp"
-                        android:text="不错的教练" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="@string/tv84"
+            android:textColor="@color/color_6D7278"
+            android:textSize="13sp" />
 
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="90dp"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginTop="14dp"
-                    android:background="@drawable/biaoqian_bg"
-                    android:gravity="center"
-                    android:layout_height="30dp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:textColor="@color/color_6D7278"
-                        android:layout_height="wrap_content"
-                        android:textSize="13sp"
-                        android:text="不错的教练" />
-
-                </LinearLayout>
-            </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/m123"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="11dp"
+            android:layout_marginRight="11dp"
+            android:gravity="center_vertical"
+            android:background="@drawable/biaoqian_bg1"
+            android:orientation="vertical">
 
 
-            <LinearLayout
-                android:layout_width="90dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="14dp"
-                android:background="@drawable/biaoqian_bg"
-                android:gravity="center"
-                android:layout_height="30dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:textColor="@color/color_6D7278"
-                    android:layout_height="wrap_content"
-                    android:textSize="13sp"
-                    android:text="不错的教练" />
+                <!--<LinearLayout-->
+                    <!--android:layout_width="90dp"-->
+                    <!--android:layout_height="30dp"-->
+                    <!--android:layout_marginLeft="20dp"-->
+                    <!--android:layout_marginTop="14dp"-->
+                    <!--android:background="@drawable/biaoqian_bg"-->
+                    <!--android:gravity="center">-->
 
-            </LinearLayout>
+                    <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:text="不错的教练"-->
+                        <!--android:textColor="@color/color_6D7278"-->
+                        <!--android:textSize="13sp" />-->
+
+                <!--</LinearLayout>-->
+            <com.noplugins.keepfit.android.util.ui.FlowLayout
+                android:id="@+id/yitie_biaoqian_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                app:backgroundResource="@drawable/bg_frame"
+                app:horizontalSpacing="15dp"
+                app:itemColor="@color/colorAccent"
+                app:itemSize="12sp"
+                app:textPaddingH="15dp"
+                app:textPaddingV="8dp"
+                app:verticalSpacing="15dp" />
+
+
+
         </LinearLayout>
 
     </LinearLayout>
@@ -137,8 +193,8 @@
         android:layout_width="225dp"
         android:layout_height="70dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="11dp"
         android:layout_centerHorizontal="true"
+        android:layout_marginBottom="11dp"
         android:background="@drawable/login_btn"
         android:gravity="center">
 

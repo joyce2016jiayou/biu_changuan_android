@@ -23,6 +23,7 @@
     <color name="color_000000">#000000</color>
     <color name="color_79000000">#79000000</color>
     <color name="color_6D7278">#6D7278</color>
+    <color name="color_E5E5E5">#E5E5E5</color>
 
     <!--zxing-->
     <color name="contents_text">#000000</color>

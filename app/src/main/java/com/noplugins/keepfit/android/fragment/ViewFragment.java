@@ -1,32 +1,22 @@
 package com.noplugins.keepfit.android.fragment;
 
-import android.app.Dialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Configuration;
-import android.graphics.Rect;
+import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.os.Parcelable;
 
+import android.os.Handler;
 import android.provider.Settings;
-import android.text.TextUtils;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,28 +24,15 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
-import com.noplugins.keepfit.android.KeepFitActivity;
 import com.noplugins.keepfit.android.R;
-import com.noplugins.keepfit.android.activity.CheckStatusFailActivity;
-import com.noplugins.keepfit.android.activity.ShareSDKDEMOActivity;
 import com.noplugins.keepfit.android.adapter.ContentPagerAdapterMy;
-import com.noplugins.keepfit.android.entity.DateViewEntity;
 import com.noplugins.keepfit.android.util.data.DateHelper;
-import com.noplugins.keepfit.android.util.data.SharedPreferencesHelper;
-import com.noplugins.keepfit.android.util.net.Network;
-import com.noplugins.keepfit.android.util.net.entity.Bean;
-import com.noplugins.keepfit.android.util.net.progress.GsonSubscriberOnNextListener;
-import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriberNew;
-import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener;
-import com.noplugins.keepfit.android.util.screen.ScreenUtilsHelper;
 import com.noplugins.keepfit.android.util.ui.NoScrollViewPager;
 import com.noplugins.keepfit.android.util.ui.ViewPagerFragment;
 import com.noplugins.keepfit.android.util.ui.erweima.android.CaptureActivity;
 import com.noplugins.keepfit.android.util.ui.erweima.bean.ZxingConfig;
 import com.noplugins.keepfit.android.util.ui.erweima.common.Constant;
-import com.orhanobut.logger.Logger;
 import com.othershe.calendarview.bean.DateBean;
-import com.othershe.calendarview.listener.OnMultiChooseListener;
 import com.othershe.calendarview.listener.OnPagerChangeListener;
 import com.othershe.calendarview.listener.OnSingleChooseListener;
 import com.othershe.calendarview.utils.CalendarUtil;
@@ -69,25 +46,18 @@ import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.Permission;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Properties;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import rx.Subscription;
-
 import static android.app.Activity.RESULT_OK;
-import static com.umeng.socialize.net.dplus.CommonNetImpl.TAG;
 import static com.umeng.socialize.utils.ContextUtil.getPackageName;
 
 /**
  * 首页
  */
-public class HomeFragment extends ViewPagerFragment {
+public class ViewFragment extends ViewPagerFragment {
 
     @BindView(R.id.saoma_btn)
     ImageView saoma_btn;
@@ -112,8 +82,8 @@ public class HomeFragment extends ViewPagerFragment {
     //获取当前的日期
     private int[] cDate = CalendarUtil.getCurrentDate();
 
-    public static HomeFragment homeInstance(String title) {
-        HomeFragment fragment = new HomeFragment();
+    public static ViewFragment homeInstance(String title) {
+        ViewFragment fragment = new ViewFragment();
         Bundle args = new Bundle();
         args.putString("home_fragment_title", title);
         fragment.setArguments(args);
@@ -126,6 +96,9 @@ public class HomeFragment extends ViewPagerFragment {
             view = inflater.inflate(R.layout.home_fragment, container, false);
             ButterKnife.bind(this, view);//绑定黄牛刀
             initView();
+
+            //注册广播接收器
+            registerReceiver();
 
         }
         return view;
@@ -234,6 +207,15 @@ public class HomeFragment extends ViewPagerFragment {
 
     }
 
+    @Override
+    public void onResume() {
+        int id = getActivity().getIntent().getIntExtra("id", 0);
+        if(id==2){
+            viewpager_content.setCurrentItem(0);
+        }
+        super.onResume();
+    }
+
     /**
      * 日历弹窗
      */
@@ -313,6 +295,62 @@ public class HomeFragment extends ViewPagerFragment {
                 title_tv.setText(date[0] + "年" + date[1] + "月");
             }
         });
+
+
+    }
+
+    //注册广播接收器
+    LocalBroadcastManager broadcastManager;
+    private void registerReceiver() {
+        broadcastManager = LocalBroadcastManager.getInstance(getActivity());
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("update_refresh");
+        broadcastManager.registerReceiver(mRefreshReceiver, intentFilter);
+    }
+
+    private BroadcastReceiver mRefreshReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String refresh = intent.getStringExtra("enter_of_month_view");
+            if ("yes".equals(refresh)) {//表示从月视角进来的
+                String select_year = intent.getStringExtra("select_year");
+                String select_month = intent.getStringExtra("select_month");
+                String select_date = intent.getStringExtra("select_date");
+                String month_select_date = intent.getStringExtra("mselect_date");
+                Log.e("月视角选择的日期",month_select_date);
+                // 在主线程中刷新UI，用Handler来实现
+                new Handler().post(new Runnable() {
+                    public void run() {
+                        Log.e("表示从月视角进来的", "选择日期"+month_select_date);
+                        //切换日视角需要更新的view
+                        viewpager_content.setCurrentItem(0);
+                        shijiao_qiehuan_btn.setText("月");
+                        xiala_icon.setVisibility(View.VISIBLE);
+                        String select_data_tv= DateHelper.get_date2(Integer.valueOf(select_month),Integer.valueOf(select_date));
+                        date_tv.setText(select_data_tv);
+                        //更新日视角数据
+                        Intent intent = new Intent("zachary");
+                        intent.putExtra("refreshInfo", "yes");
+                        intent.putExtra("select_date", month_select_date);
+                        LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(intent);
+
+                    }
+                });
+            }else if("upadte_month".equals(refresh)) {//切换月份
+                String change_month = intent.getStringExtra("change_month");
+                if(Integer.valueOf(change_month)<=9){
+                    date_tv.setText("0"+change_month+"月");
+                }else{
+                    date_tv.setText(change_month+"月");
+                }
+            }
+        }
+    };
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        broadcastManager.unregisterReceiver(mRefreshReceiver);
+
     }
 
 

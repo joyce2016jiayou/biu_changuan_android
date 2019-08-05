@@ -129,10 +129,15 @@ public class DayWhatchFragment extends ViewPagerFragment {
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), AddClassActivity.class);
                 startActivity(intent);
+
             }
         });
 
     }
+
+
+
+
 
     public void get_date_class_resource(String selectdate) {
         Map<String, String> params = new HashMap<>();
@@ -154,6 +159,7 @@ public class DayWhatchFragment extends ViewPagerFragment {
         //params.put("gymAreaNum", gymAreaNum);//场馆编号
 
         params.put("gymAreaNum", "GYM19072138381319");//场馆编号
+
         Subscription subscription = Network.getInstance("获取课程", getActivity())
                 .get_class_resource(params,
                         new ProgressSubscriberNew<>(DateViewEntity.class, new GsonSubscriberOnNextListener<DateViewEntity>() {

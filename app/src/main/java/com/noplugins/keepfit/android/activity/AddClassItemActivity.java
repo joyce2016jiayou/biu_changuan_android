@@ -130,9 +130,11 @@ public class AddClassItemActivity extends BaseActivity {
         add_class_teacher_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (check_value()) {//如果所有参数不为空，请求网络接口
-                    add_class();
-                }
+//                if (check_value()) {//如果所有参数不为空，请求网络接口
+//                    add_class();
+//                }else{
+//                    return;
+//                }
 
                 Intent intent = new Intent(AddClassItemActivity.this, YaoQingTeacherActivity.class);
                 startActivity(intent);

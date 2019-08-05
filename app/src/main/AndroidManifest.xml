@@ -52,8 +52,12 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".activity.YaoQingZhongDetailActivity"></activity>
-        <activity android:name=".activity.TeacherDetailActivity" />
-        <activity android:name=".activity.YaoQingTeacherActivity" />
+        <activity android:name=".activity.TeacherDetailActivity">
+
+        </activity>
+        <activity android:name=".activity.YaoQingTeacherActivity">
+
+        </activity>
         <activity android:name=".activity.AddClassItemActivity" />
         <activity android:name=".activity.AddClassDetailActivity" />
         <activity android:name=".activity.AddClassActivity" />
@@ -75,21 +79,21 @@
             android:name=".SplashActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait">
+            <!--   <intent-filter>
+                   <action android:name="android.intent.action.MAIN" />
 
+                   <category android:name="android.intent.category.LAUNCHER" />
+               </intent-filter>-->
+
+        </activity>
+        <activity
+            android:name=".KeepFitActivity"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".KeepFitActivity"
-            android:launchMode="singleTask">
-            <!--<intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
         </activity> <!-- 存储权限 authorities="你的包名+fileprovider" -->
         <provider
             android:name="androidx.core.content.FileProvider"

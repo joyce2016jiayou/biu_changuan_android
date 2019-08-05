@@ -38,12 +38,13 @@
     </RelativeLayout>
 
     <TextView
+        android:id="@+id/yaoqing_number_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
         android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
-        android:text="(1/5)"
+        android:text="(0/5)"
         android:textColor="@color/color_6D7278"
         android:textSize="13sp" />
     <com.andview.refreshview.XRefreshView

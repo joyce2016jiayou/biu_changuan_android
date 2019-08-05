@@ -4,7 +4,6 @@ package com.noplugins.keepfit.android.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.fragment.app.Fragment;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import android.util.Log;
@@ -14,15 +13,17 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.noplugins.keepfit.android.KeepFitActivity;
 import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.util.data.DateHelper;
 import com.noplugins.keepfit.android.util.ui.ViewPagerFragment;
+import com.othershe.calendarview.weiget.MonthCalenDarView1;
 import com.othershe.calendarview.bean.DateBean;
 import com.othershe.calendarview.listener.OnPagerChangeListener;
 import com.othershe.calendarview.listener.OnSingleChooseListener;
 import com.othershe.calendarview.utils.CalendarUtil;
-import com.othershe.calendarview.weiget.CalendarView;
-import com.othershe.calendarview.weiget.MonthCalenDarView;
+
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,7 +33,7 @@ public class MonWhatchFragment extends ViewPagerFragment {
 
     private View view;
     @BindView(R.id.calendar)
-    MonthCalenDarView calendarView;
+    MonthCalenDarView1 calendarView;
     @BindView(R.id.title)
     TextView title_tv;
     @BindView(R.id.next_btn)
@@ -42,6 +43,8 @@ public class MonWhatchFragment extends ViewPagerFragment {
 
     private int[] cDate = CalendarUtil.getCurrentDate();
 
+    private String change_month;
+
     public static MonWhatchFragment newInstance(String title) {
         MonWhatchFragment fragment = new MonWhatchFragment();
         Bundle args = new Bundle();
@@ -49,6 +52,7 @@ public class MonWhatchFragment extends ViewPagerFragment {
         fragment.setArguments(args);
         return fragment;
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -59,6 +63,7 @@ public class MonWhatchFragment extends ViewPagerFragment {
         }
         return view;
     }
+
     private void initView() {
         calendarView
                 .setStartEndDate("2019.01", "2025.12")
@@ -73,6 +78,12 @@ public class MonWhatchFragment extends ViewPagerFragment {
             @Override
             public void onClick(View view) {
                 calendarView.lastMonth();
+
+                //通知主fragement更新选择的月份
+               /* Intent intent = new Intent("update_refresh");
+                intent.putExtra("enter_of_month_view", "upadte_month");
+                intent.putExtra("change_month",change_month);
+                LocalBroadcastManager.getInstance(Objects.requireNonNull(getActivity())).sendBroadcast(intent);*/
             }
         });
         LinearLayout next_btn = view.findViewById(R.id.next_btn);
@@ -80,6 +91,11 @@ public class MonWhatchFragment extends ViewPagerFragment {
             @Override
             public void onClick(View view) {
                 calendarView.nextMonth();
+                //通知主fragement更新选择的月份
+            /*    Intent intent = new Intent("update_refresh");
+                intent.putExtra("enter_of_month_view", "upadte_month");
+                intent.putExtra("change_month",change_month);
+                LocalBroadcastManager.getInstance(Objects.requireNonNull(getActivity())).sendBroadcast(intent);*/
             }
         });
         calendarView.setOnSingleChooseListener(new OnSingleChooseListener() {
@@ -88,12 +104,14 @@ public class MonWhatchFragment extends ViewPagerFragment {
                 //日视角刷新数据
                 String select_date = DateHelper.get_date(date.getSolar()[0], date.getSolar()[1], date.getSolar()[2]);
                 Log.e("选择的日期", select_date);
+                Intent intent = new Intent("update_refresh");
+                intent.putExtra("enter_of_month_view", "yes");
+                intent.putExtra("mselect_date", select_date);
+                intent.putExtra("select_year", date.getSolar()[0] + "");
+                intent.putExtra("select_month", date.getSolar()[1] + "");
+                intent.putExtra("select_date", date.getSolar()[2] + "");
 
-                Intent intent = new Intent("zachary");
-                intent.putExtra("refreshInfo", "yes");
-                intent.putExtra("select_date", select_date);
-
-                LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(intent);
+                LocalBroadcastManager.getInstance(Objects.requireNonNull(getActivity())).sendBroadcast(intent);
 
 
             }
@@ -104,6 +122,7 @@ public class MonWhatchFragment extends ViewPagerFragment {
             @Override
             public void onPagerChanged(int[] date) {
                 title_tv.setText(date[0] + "年" + date[1] + "月");
+                change_month = date[1] + "";
             }
         });
 

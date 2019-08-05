@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:gravity="center"
+    android:id="@+id/content_toast"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="271dp"
+        android:background="@drawable/toast_bg"
+        android:gravity="center"
+        android:layout_height="166dp">
+        <ImageView
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:src="@drawable/duigou"
+            />
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:textSize="25sp"
+            android:text="@string/tv94"
+            android:textColor="@color/top_heiziti"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+
+</LinearLayout>

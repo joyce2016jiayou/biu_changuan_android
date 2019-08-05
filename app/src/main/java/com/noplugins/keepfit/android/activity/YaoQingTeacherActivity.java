@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,6 +30,9 @@ public class YaoQingTeacherActivity extends BaseActivity {
     XRefreshView xrefreshview;
     @BindView(R.id.recycler_view)
     RecyclerView recycler_view;
+    @BindView(R.id.yaoqing_number_tv)
+    TextView yaoqing_number_tv;
+
     private LinearLayoutManager layoutManager;
     private YaoQiTeacherAdapter yaoQiTeacherAdapter;
     @Override
@@ -80,7 +84,7 @@ public class YaoQingTeacherActivity extends BaseActivity {
         recycler_view.setItemAnimator(null);
         layoutManager = new LinearLayoutManager(this);
         recycler_view.setLayoutManager(layoutManager);
-        yaoQiTeacherAdapter = new YaoQiTeacherAdapter(dates, this);
+        yaoQiTeacherAdapter = new YaoQiTeacherAdapter(dates, this,yaoqing_number_tv);
         yaoQiTeacherAdapter.setOnItemClickListener(new YaoQiTeacherAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {

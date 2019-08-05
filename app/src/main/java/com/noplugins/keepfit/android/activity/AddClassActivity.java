@@ -48,6 +48,7 @@ public class AddClassActivity extends BaseActivity {
     private AddClassAdapter addClassAdapter;
     private int page = 1;
     private List<ClassEntity.DataBean> dataBeans = new ArrayList<>();
+
     @Override
     public void initBundle(Bundle parms) {
 
@@ -92,7 +93,7 @@ public class AddClassActivity extends BaseActivity {
     private void init_class_date() {
         Map<String, Object> params = new HashMap<>();
         params.put("gymAreaNum", "GYM19072138381319");//场馆编号
-        params.put("page",page);
+        params.put("page", page);
         subscription = Network.getInstance("课程列表", this)
                 .class_list(params, new ProgressSubscriberNew<>(ClassEntity.class, new GsonSubscriberOnNextListener<ClassEntity>() {
                     @Override
@@ -124,13 +125,14 @@ public class AddClassActivity extends BaseActivity {
         addClassAdapter.setOnItemClickListener(new AddClassAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                if(position==0){
+                if (dataBeans.get(position).getStatus() == 1) {
                     Intent intent = new Intent(AddClassActivity.this, YaoQingZhongDetailActivity.class);
                     startActivity(intent);
-                }else{
+                } else {
                     Intent intent = new Intent(AddClassActivity.this, AddClassDetailActivity.class);
                     startActivity(intent);
                 }
+
 
             }
         });

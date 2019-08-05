@@ -7,7 +7,9 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.othershe.calendarview.R;
@@ -265,11 +267,13 @@ public class MonthView extends ViewGroup {
     private void setDayColor(View v, int type) {
         TextView solarDay = (TextView) v.findViewById(R.id.solar_day);
         TextView lunarDay = (TextView) v.findViewById(R.id.lunar_day);
+        LinearLayout lin_tv_bg = (LinearLayout) v.findViewById(R.id.lin_tv_bg);
+
         solarDay.setTextSize(mAttrsBean.getSizeSolar());
         lunarDay.setTextSize(mAttrsBean.getSizeLunar());
 
         if (type == 0) {
-            v.setBackgroundResource(0);
+            lin_tv_bg.setBackgroundResource(0);
             solarDay.setTextColor(mAttrsBean.getColorSolar());
             if ("holiday".equals(lunarDay.getTag())) {
                 lunarDay.setTextColor(mAttrsBean.getColorHoliday());
@@ -277,7 +281,7 @@ public class MonthView extends ViewGroup {
                 lunarDay.setTextColor(mAttrsBean.getColorLunar());
             }
         } else if (type == 1) {
-            v.setBackgroundResource(mAttrsBean.getDayBg());
+            lin_tv_bg.setBackgroundResource(mAttrsBean.getDayBg());
             solarDay.setTextColor(mAttrsBean.getColorChoose());
             lunarDay.setTextColor(mAttrsBean.getColorChoose());
         }
@@ -287,26 +291,40 @@ public class MonthView extends ViewGroup {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
-        int widthSpecSize = MeasureSpec.getSize(widthMeasureSpec);
-        int heightSpecSize = MeasureSpec.getSize(heightMeasureSpec);
+        WindowManager wm = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
+        int width = wm.getDefaultDisplay().getWidth();
+        int widthSpecSize = width;
+//        int widthSpecSize = View.MeasureSpec.getSize(widthMeasureSpec);
+        int heightSpecSize = dip2px(mContext,470);
+
+        //int heightSpecSize = View.MeasureSpec.getSize(heightMeasureSpec);
 
         int itemWidth = widthSpecSize / COLUMN;
 
         //计算日历的最大高度
-        if (heightSpecSize > itemWidth * ROW) {
-            heightSpecSize = itemWidth * ROW;
-        }
+//        if (heightSpecSize > itemWidth * ROW) {
+//            heightSpecSize = itemWidth * ROW;
+//        }
 
-        setMeasuredDimension(widthSpecSize, heightSpecSize);
+        //setMeasuredDimension(widthSpecSize, heightSpecSize);
 
         int itemHeight = heightSpecSize / ROW;
 
-        int itemSize = Math.min(itemWidth, itemHeight);
+        int itemSize = Math.min(itemWidth, itemHeight+100);
         for (int i = 0; i < getChildCount(); i++) {
             View childView = getChildAt(i);
-            childView.measure(MeasureSpec.makeMeasureSpec(itemSize, MeasureSpec.EXACTLY),
-                    MeasureSpec.makeMeasureSpec(itemSize, MeasureSpec.EXACTLY));
+//            int m_width = View.MeasureSpec.makeMeasureSpec(itemSize, View.MeasureSpec.EXACTLY);
+//            int m_height = View.MeasureSpec.makeMeasureSpec(itemSize, View.MeasureSpec.EXACTLY);
+            childView.measure(itemWidth, itemHeight);
         }
+    }
+
+    /**
+     * 根据手机的分辨率从 dip 的单位 转成为 px(像素)
+     */
+    public  int dip2px(Context context, float dpValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (dpValue * scale + 0.5f);
     }
 
     @Override

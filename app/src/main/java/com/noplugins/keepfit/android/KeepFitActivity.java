@@ -2,22 +2,26 @@ package com.noplugins.keepfit.android;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.media.SoundPool;
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.Contacts;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.viewpager.widget.ViewPager;
+
+import com.huantansheng.easyphotos.utils.bitmap.BitmapUtils;
 import com.noplugins.keepfit.android.adapter.ContentPagerAdapterMy;
 import com.noplugins.keepfit.android.base.BaseActivity;
-import com.noplugins.keepfit.android.fragment.DiscoverFragment;
-import com.noplugins.keepfit.android.fragment.HomeFragment;
-import com.noplugins.keepfit.android.fragment.MyFragment;
-import com.noplugins.keepfit.android.fragment.QuestionsAndAnswersFragment;
+import com.noplugins.keepfit.android.fragment.DayWhatchFragment;
+import com.noplugins.keepfit.android.fragment.StatisticsFragment;
+import com.noplugins.keepfit.android.fragment.ViewFragment;
+import com.noplugins.keepfit.android.fragment.MineFragment;
+import com.noplugins.keepfit.android.fragment.MessageFragment;
 import com.noplugins.keepfit.android.util.data.SharedPreferencesHelper;
 import com.noplugins.keepfit.android.util.net.Network;
 import com.noplugins.keepfit.android.util.net.entity.Bean;
@@ -25,11 +29,14 @@ import com.noplugins.keepfit.android.util.net.progress.GsonSubscriberOnNextListe
 import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriberNew;
 import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener;
 import com.noplugins.keepfit.android.util.ui.NoScrollViewPager;
+import com.noplugins.keepfit.android.util.ui.message_icon.DragBubbleView;
 import com.orhanobut.logger.Logger;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.ButterKnife;
@@ -40,7 +47,6 @@ public class KeepFitActivity extends BaseActivity {
     NoScrollViewPager viewpager_content;
     @BindViews({R.id.home_img, R.id.shipu_img, R.id.movie_img, R.id.mine_img})
     List<ImageView> bottom_iamge_views;
-
     private SoundPool sp;//声明一个SoundPool
     private int music;//定义一个整型用load（）；来设置suondID
     private List<Fragment> tabFragments = new ArrayList<>();
@@ -61,10 +67,10 @@ public class KeepFitActivity extends BaseActivity {
     @Override
     public void doBusiness(Context mContext) {
         //初始化页面
-        tabFragments.add(HomeFragment.homeInstance("第一页"));
-        tabFragments.add(DiscoverFragment.newInstance("第二页"));
-        tabFragments.add(QuestionsAndAnswersFragment.newInstance("第三页"));
-        tabFragments.add(MyFragment.myInstance("第四页"));
+        tabFragments.add(ViewFragment.homeInstance("第一页"));
+        tabFragments.add(StatisticsFragment.newInstance("第二页"));
+        tabFragments.add(MessageFragment.newInstance("第三页"));
+        tabFragments.add(MineFragment.myInstance("第四页"));
         //初始化viewpager
         ContentPagerAdapterMy contentAdapter = new ContentPagerAdapterMy(getSupportFragmentManager(), tabFragments);
         viewpager_content.setAdapter(contentAdapter);
@@ -78,7 +84,10 @@ public class KeepFitActivity extends BaseActivity {
         //获取审核状态
         get_check_status();
 
+
     }
+
+
 
     private void get_check_status() {
         String token;
@@ -93,14 +102,15 @@ public class KeepFitActivity extends BaseActivity {
                 .get_check_status(params,
                         new ProgressSubscriberNew<>(List.class, new GsonSubscriberOnNextListener<List>() {
                             @Override
-                            public void on_post_entity(List mlocation,String get_message_id) {
-                                Log.e(TAG, "获取审核状态成功：" );
+                            public void on_post_entity(List mlocation, String get_message_id) {
+                                Log.e(TAG, "获取审核状态成功：");
                             }
                         }, new SubscriberOnNextListener<Bean<Object>>() {
                             @Override
                             public void onNext(Bean<Object> result) {
 
                             }
+
                             @Override
                             public void onError(String error) {
 //                                Intent intent = new Intent(KeepFitActivity.this, CheckStatusFailActivity.class);
@@ -113,7 +123,6 @@ public class KeepFitActivity extends BaseActivity {
 
 
     }
-
 
 
     @OnClick({R.id.btn_home, R.id.btn_shipu, R.id.btn_movie, R.id.btn_mine})

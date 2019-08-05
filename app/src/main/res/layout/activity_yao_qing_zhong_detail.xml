@@ -53,7 +53,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right|top"
-                android:layout_marginTop="34dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginRight="15dp"
                 android:text="邀请已接受"
                 android:textColor="@color/color_4A4A4A"
@@ -425,48 +425,24 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/yaoqing_number_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="8dp"
             android:layout_marginLeft="20dp"
             android:text="已邀请(1/5)"
             android:textColor="@color/color_6D7278"
             android:textSize="13sp" />
 
-        <LinearLayout
+        <!--邀请列表-->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="124dp"
-            android:background="@drawable/bg5"
-            android:orientation="horizontal">
-
-            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/touxiang_image"
-                android:layout_width="76dp"
-                android:layout_height="76dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="20dp"
-                android:src="@drawable/touxiang"
-                app:civ_border_color="#ffffff"
-                app:civ_border_width="0dp" />
-
-            <LinearLayout
-                android:layout_width="209dp"
-                android:layout_height="34dp"
-                android:layout_marginLeft="50dp"
-                android:layout_marginTop="68dp"
-                android:background="@drawable/bg_huang"
-                android:gravity="center">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="已邀请"
-                    android:textColor="@color/white"
-                    android:textSize="16sp" />
-            </LinearLayout>
-        </LinearLayout>
-
+            android:background="@color/color_F8F8F8"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:scrollbars="vertical" />
 
         <LinearLayout
             android:id="@+id/add_class_btn"
