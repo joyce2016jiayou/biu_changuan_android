@@ -10,6 +10,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.othershe.calendarview.R;
 import com.othershe.calendarview.bean.AttrsBean;
 import com.othershe.calendarview.bean.DateBean;
+import com.othershe.calendarview.bean.MothEntity;
 import com.othershe.calendarview.listener.CalendarViewAdapter;
 import com.othershe.calendarview.listener.OnMultiChooseListener;
 import com.othershe.calendarview.listener.OnSingleChooseListener;
@@ -97,10 +98,10 @@ public class CalendarView extends ViewPager {
         mAttrsBean.setEndDate(endDate);
     }
 
-    public void init() {
+    public void init(List<MothEntity.DataBean> mothEntities) {
         //根据设定的日期范围计算日历的页数
         count = (endDate[0] - startDate[0]) * 12 + endDate[1] - startDate[1] + 1;
-        calendarPagerAdapter = new CalendarPagerAdapter(count);
+        calendarPagerAdapter = new CalendarPagerAdapter(count,mothEntities);
         calendarPagerAdapter.setAttrsBean(mAttrsBean);
         calendarPagerAdapter.setOnCalendarViewAdapter(item_layout, calendarViewAdapter);
         setAdapter(calendarPagerAdapter);

@@ -5,12 +5,14 @@ import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.util.SparseArray;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import androidx.viewpager.widget.ViewPager;
 
 import com.othershe.calendarview.R;
 import com.othershe.calendarview.bean.AttrsBean;
 import com.othershe.calendarview.bean.DateBean;
+import com.othershe.calendarview.bean.MothEntity;
 import com.othershe.calendarview.listener.CalendarViewAdapter;
 import com.othershe.calendarview.listener.OnMultiChooseListener;
 import com.othershe.calendarview.listener.OnPagerChangeListener;
@@ -24,7 +26,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class MonthCalenDarView1 extends ViewPager{
+public class CalenDarView2 extends ViewPager{
     //记录当前PagerAdapter的position
     private int currentPosition;
 
@@ -47,11 +49,11 @@ public class MonthCalenDarView1 extends ViewPager{
 
     private AttrsBean mAttrsBean;
 
-    public MonthCalenDarView1(Context context) {
+    public CalenDarView2(Context context) {
         this(context, null);
     }
 
-    public MonthCalenDarView1(Context context, AttributeSet attrs) {
+    public CalenDarView2(Context context, AttributeSet attrs) {
         super(context, attrs);
         mAttrsBean = new AttrsBean();
         initAttr(context, attrs);
@@ -98,13 +100,26 @@ public class MonthCalenDarView1 extends ViewPager{
         mAttrsBean.setEndDate(endDate);
     }
 
-    public void init() {
-        //根据设定的日期范围计算日历的页数
-        count = (endDate[0] - startDate[0]) * 12 + endDate[1] - startDate[1] + 1;
+    /*public void setAdapter(CalendarPagerAdapter2 mcalendarPagerAdapter){
+        calendarPagerAdapter = mcalendarPagerAdapter;
         calendarPagerAdapter = new CalendarPagerAdapter2(count);
         calendarPagerAdapter.setAttrsBean(mAttrsBean);
         calendarPagerAdapter.setOnCalendarViewAdapter(item_layout, calendarViewAdapter);
         setAdapter(calendarPagerAdapter);
+
+    }*/
+
+    public void init(List<MothEntity.DataBean> mothEntities) {
+        //根据设定的日期范围计算日历的页数
+        count = (endDate[0] - startDate[0]) * 12 + endDate[1] - startDate[1] + 1;
+
+
+        calendarPagerAdapter = new CalendarPagerAdapter2(count,mothEntities);
+        calendarPagerAdapter.setAttrsBean(mAttrsBean);
+        calendarPagerAdapter.setOnCalendarViewAdapter(item_layout, calendarViewAdapter);
+        setAdapter(calendarPagerAdapter);
+
+
 
         currentPosition = CalendarUtil.dateToPosition(initDate[0], initDate[1], startDate[0], startDate[1]);
 
@@ -301,7 +316,7 @@ public class MonthCalenDarView1 extends ViewPager{
      * @param item_layout         自定义的日期item布局
      * @param calendarViewAdapter 解析item的接口
      */
-    public MonthCalenDarView1 setOnCalendarViewAdapter(int item_layout, CalendarViewAdapter calendarViewAdapter) {
+    public CalenDarView2 setOnCalendarViewAdapter(int item_layout, CalendarViewAdapter calendarViewAdapter) {
         this.item_layout = item_layout;
         this.calendarViewAdapter = calendarViewAdapter;
         return this;
@@ -402,7 +417,7 @@ public class MonthCalenDarView1 extends ViewPager{
     /**
      * 将指定日期的农历替换成对应文字
      */
-    public MonthCalenDarView1 setSpecifyMap(HashMap<String, String> map) {
+    public CalenDarView2 setSpecifyMap(HashMap<String, String> map) {
         mAttrsBean.setSpecifyMap(map);
         return this;
     }
@@ -413,7 +428,7 @@ public class MonthCalenDarView1 extends ViewPager{
      * @param date
      * @return
      */
-    public MonthCalenDarView1 setInitDate(String date) {
+    public CalenDarView2 setInitDate(String date) {
         initDate = CalendarUtil.strToArray(date);
         return this;
     }
@@ -425,7 +440,7 @@ public class MonthCalenDarView1 extends ViewPager{
      * @param endDate
      * @return
      */
-    public MonthCalenDarView1 setStartEndDate(String startDate, String endDate) {
+    public CalenDarView2 setStartEndDate(String startDate, String endDate) {
         this.startDate = CalendarUtil.strToArray(startDate);
         if (startDate == null) {
             this.startDate = new int[]{1900, 1};
@@ -445,7 +460,7 @@ public class MonthCalenDarView1 extends ViewPager{
      * @param dates
      * @return
      */
-    public MonthCalenDarView1 setMultiDate(List<String> dates) {
+    public CalenDarView2 setMultiDate(List<String> dates) {
         List<int[]> multiDates = new ArrayList<>();
         for (String date : dates) {
             int[] d = CalendarUtil.strToArray(date);
@@ -464,7 +479,7 @@ public class MonthCalenDarView1 extends ViewPager{
      * @param date
      * @return
      */
-    public MonthCalenDarView1 setSingleDate(String date) {
+    public CalenDarView2 setSingleDate(String date) {
         int[] singleDate = CalendarUtil.strToArray(date);
         if (!isIllegal(singleDate)) {
             singleDate = null;
@@ -480,7 +495,7 @@ public class MonthCalenDarView1 extends ViewPager{
      * @param endDate   禁用endDate之后的日期
      * @return
      */
-    public MonthCalenDarView1 setDisableStartEndDate(String startDate, String endDate) {
+    public CalenDarView2 setDisableStartEndDate(String startDate, String endDate) {
         mAttrsBean.setDisableStartDate(CalendarUtil.strToArray(startDate));
         mAttrsBean.setDisableEndDate(CalendarUtil.strToArray(endDate));
         return this;

@@ -29,7 +29,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="2dp"
             android:src="@drawable/circle_bg"
-            android:visibility="visible" />
+            android:visibility="gone" />
     </LinearLayout>
 
 

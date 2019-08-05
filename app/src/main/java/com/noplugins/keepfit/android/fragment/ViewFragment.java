@@ -24,15 +24,22 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
+import com.google.gson.Gson;
 import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.adapter.ContentPagerAdapterMy;
 import com.noplugins.keepfit.android.util.data.DateHelper;
+import com.noplugins.keepfit.android.util.net.Network;
+import com.noplugins.keepfit.android.util.net.entity.Bean;
+import com.noplugins.keepfit.android.util.net.progress.GsonSubscriberOnNextListener;
+import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriberNew;
+import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener;
 import com.noplugins.keepfit.android.util.ui.NoScrollViewPager;
 import com.noplugins.keepfit.android.util.ui.ViewPagerFragment;
 import com.noplugins.keepfit.android.util.ui.erweima.android.CaptureActivity;
 import com.noplugins.keepfit.android.util.ui.erweima.bean.ZxingConfig;
 import com.noplugins.keepfit.android.util.ui.erweima.common.Constant;
 import com.othershe.calendarview.bean.DateBean;
+import com.othershe.calendarview.bean.MothEntity;
 import com.othershe.calendarview.listener.OnPagerChangeListener;
 import com.othershe.calendarview.listener.OnSingleChooseListener;
 import com.othershe.calendarview.utils.CalendarUtil;
@@ -46,12 +53,17 @@ import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.Permission;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.RequestBody;
+import rx.Subscription;
 
 import static android.app.Activity.RESULT_OK;
+import static com.umeng.socialize.net.dplus.CommonNetImpl.TAG;
 import static com.umeng.socialize.utils.ContextUtil.getPackageName;
 
 /**
@@ -81,6 +93,7 @@ public class ViewFragment extends ViewPagerFragment {
     private PopupWindow popupWindow;
     //获取当前的日期
     private int[] cDate = CalendarUtil.getCurrentDate();
+    List<MothEntity.DataBean> dataBeans = new ArrayList<>();
 
     public static ViewFragment homeInstance(String title) {
         ViewFragment fragment = new ViewFragment();
@@ -99,9 +112,51 @@ public class ViewFragment extends ViewPagerFragment {
 
             //注册广播接收器
             registerReceiver();
+            //获取视角数据
+            getDates();
 
         }
         return view;
+    }
+
+    private void getDates() {
+        Map<String, Object> params = new HashMap<>();
+        //当前的月份
+        if(cDate[1]<=9){
+            params.put("month",cDate[0]+"0"+cDate[1]);
+        }else{
+            params.put("month",""+cDate[0]+cDate[1]);
+        }
+        Gson gson = new Gson();
+        String json_params = gson.toJson(params);
+        String json = new Gson().toJson(params);//要传递的json
+        RequestBody requestBody = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), json);
+        Log.e(TAG, "获取月视角参数：" + json_params);
+
+        Subscription subscription = Network.getInstance("获取月视角", getActivity())
+                .get_month_view(requestBody, new ProgressSubscriberNew<>(MothEntity.class, new GsonSubscriberOnNextListener<MothEntity>() {
+                    @Override
+                    public void on_post_entity(MothEntity entity, String s) {
+                        dataBeans = entity.getData();
+                        Log.e("获取月视角成功", entity.getData().size() + "获取月视角成功" + s);
+                        for(int i=0;i<entity.getData().size();i++){
+                            Log.e("DayEntity数据Days",entity.getData().get(i).getDays()+"");
+                            Log.e("DayEntity数据Count",entity.getData().get(i).getCount()+"");
+                            Log.e("DayEntity数据Num",entity.getData().get(i).getNum()+"");
+                        }
+
+                    }
+                }, new SubscriberOnNextListener<Bean<Object>>() {
+                    @Override
+                    public void onNext(Bean<Object> result) {
+
+                    }
+
+                    @Override
+                    public void onError(String error) {
+                        Log.e("获取月视角失败", "获取月视角失败:" + error);
+                    }
+                }, getActivity(), true));
     }
 
 
@@ -245,13 +300,12 @@ public class ViewFragment extends ViewPagerFragment {
         //设置逻辑
         CalendarView calendarView = view.findViewById(R.id.calendar);
         TextView title_tv = (TextView) view.findViewById(R.id.title);
-
         calendarView
                 .setStartEndDate("2019.01", "2025.12")
                 .setDisableStartEndDate("2019.01.01", "2025.12.30")
                 .setInitDate(cDate[0] + "." + cDate[1])
                 .setSingleDate(cDate[0] + "." + cDate[1] + "." + cDate[2])
-                .init();
+                .init(dataBeans);
 
         //设置title
         title_tv.setText(cDate[0] + "年" + cDate[1] + "月");

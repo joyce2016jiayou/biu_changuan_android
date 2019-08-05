@@ -4,11 +4,11 @@ import android.content.Context;
 import android.graphics.Color;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -92,18 +92,43 @@ public class MonthView2 extends ViewGroup {
             View view;
             TextView solarDay;//阳历TextView
             TextView lunarDay;//阴历TextView(节假日、节气同样使用阴历TextView来显示)
+            TextView class_number = null;
+            TextView class_people = null;
+            LinearLayout class_number_layout = null;
+            LinearLayout people__number_layout = null;
+
             //TODO: 2019-07-30
             if (item_layout != 0 && calendarViewAdapter != null) {
+                Log.e("积分开始减肥了","积分开始减肥了");
                 view = LayoutInflater.from(mContext).inflate(item_layout, null);
                 TextView[] views = calendarViewAdapter.convertView(view, date);
                 solarDay = views[0];
                 lunarDay = views[1];
+
             } else {
+                // TODO: 2019-08-05
                 view = LayoutInflater.from(mContext).inflate(R.layout.item_month_layout2, null);
                 solarDay = (TextView) view.findViewById(R.id.solar_day);
                 lunarDay = (TextView) view.findViewById(R.id.lunar_day);
+                class_number = (TextView) view.findViewById(R.id.class_number);
+                class_people = (TextView) view.findViewById(R.id.class_people);
+                class_number_layout = (LinearLayout) view.findViewById(R.id.class_number_layout);
+                people__number_layout = (LinearLayout) view.findViewById(R.id.people__number_layout);
             }
-            //设置小圆点
+            // TODO: 2019-08-05  设置显示的数据和逻辑
+            if (date.isIs_have_class()) {//如果没有课
+                class_number_layout.setVisibility(VISIBLE);
+                people__number_layout.setVisibility(VISIBLE);
+                class_number.setText(date.getClass_number());//课程数量
+                class_people.setText(date.getClass_people_number());//课程人数
+            }else{
+                class_number_layout.setVisibility(INVISIBLE);
+                people__number_layout.setVisibility(INVISIBLE);
+
+
+            }
+
+            //设置样式
             solarDay.setTextColor(mAttrsBean.getColorSolar());
             solarDay.setTextSize(mAttrsBean.getSizeSolar());
             lunarDay.setTextColor(mAttrsBean.getColorLunar());
@@ -111,10 +136,10 @@ public class MonthView2 extends ViewGroup {
 
             //设置上个月和下个月的阳历颜色
             if (date.getType() == 0 || date.getType() == 2) {
-                solarDay.setTextColor(mAttrsBean.getColorLunar());
+                //solarDay.setTextColor(mAttrsBean.getColorSolar());
+                solarDay.setTextColor(Color.parseColor("#989898"));//设置灰色
             }
             solarDay.setText(String.valueOf(date.getSolar()[2]));
-            //todo
 
             //设置农历（节假日显示）
             if (mAttrsBean.isShowLunar()) {
@@ -197,7 +222,7 @@ public class MonthView2 extends ViewGroup {
                 @Override
                 public void onClick(View v) {
                     int day = date.getSolar()[2];
-                    MonthCalenDarView1 calendarView = (MonthCalenDarView1) getParent();
+                    CalenDarView2 calendarView = (CalenDarView2) getParent();
                     OnSingleChooseListener clickListener = calendarView.getSingleChooseListener();
                     OnMultiChooseListener chooseListener = calendarView.getMultiChooseListener();
                     if (date.getType() == 1) {//点击当月
@@ -287,7 +312,7 @@ public class MonthView2 extends ViewGroup {
         int width = wm.getDefaultDisplay().getWidth();
         int widthSpecSize = width;
 //        int widthSpecSize = View.MeasureSpec.getSize(widthMeasureSpec);
-        int heightSpecSize = dip2px(mContext,448);
+        int heightSpecSize = dip2px(mContext, 448);
 
         //int heightSpecSize = View.MeasureSpec.getSize(heightMeasureSpec);
 
@@ -302,7 +327,7 @@ public class MonthView2 extends ViewGroup {
 
         int itemHeight = heightSpecSize / ROW;
 
-        int itemSize = Math.min(itemWidth, itemHeight+100);
+        int itemSize = Math.min(itemWidth, itemHeight + 100);
         for (int i = 0; i < getChildCount(); i++) {
             View childView = getChildAt(i);
 //            int m_width = View.MeasureSpec.makeMeasureSpec(itemSize, View.MeasureSpec.EXACTLY);
@@ -314,12 +339,10 @@ public class MonthView2 extends ViewGroup {
     /**
      * 根据手机的分辨率从 dip 的单位 转成为 px(像素)
      */
-    public  int dip2px(Context context, float dpValue) {
+    public int dip2px(Context context, float dpValue) {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (dpValue * scale + 0.5f);
     }
-
-
 
 
     @Override

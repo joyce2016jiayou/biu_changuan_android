@@ -44,11 +44,11 @@ public class MonthView extends ViewGroup {
     private Set<Integer> chooseDays = new HashSet<>();//记录多选时当前页选中的日期
     private AttrsBean mAttrsBean;
 
-    public MonthView(Context context,String color) {
-        this(context, null,color);
+    public MonthView(Context context, String color) {
+        this(context, null, color);
     }
 
-    public MonthView(Context context, AttributeSet attrs,String color){
+    public MonthView(Context context, AttributeSet attrs, String color) {
         super(context, attrs, 0);
 
         mContext = context;
@@ -93,7 +93,7 @@ public class MonthView extends ViewGroup {
             View view;
             TextView solarDay;//阳历TextView
             TextView lunarDay;//阴历TextView(节假日、节气同样使用阴历TextView来显示)
-            ImageView circle_status=null;//小圆点// TODO: 2019-07-30
+            ImageView circle_status = null;//小圆点// TODO: 2019-07-30
             if (item_layout != 0 && calendarViewAdapter != null) {
                 view = LayoutInflater.from(mContext).inflate(item_layout, null);
                 TextView[] views = calendarViewAdapter.convertView(view, date);
@@ -110,18 +110,27 @@ public class MonthView extends ViewGroup {
             solarDay.setTextSize(mAttrsBean.getSizeSolar());
             lunarDay.setTextColor(mAttrsBean.getColorLunar());
             lunarDay.setTextSize(mAttrsBean.getSizeLunar());
-            if(date.isIs_future_class()){
-                circle_status.setImageResource(R.drawable.circle_bg);
-            }else{
-                circle_status.setImageResource(R.drawable.circle_bg_hui);
+
+            if (date.isIs_show_circle()) {//是否显示圆点
+                circle_status.setVisibility(VISIBLE);//如果日期一致就显示圆点，默认是不显示
+                if (date.isIs_out_class()) {//过期
+                    circle_status.setImageResource(R.drawable.circle_bg_hui);
+                } else {
+                    circle_status.setImageResource(R.drawable.circle_bg);
+                }
+            } else {
+                circle_status.setVisibility(GONE);
             }
+
+
             //设置上个月和下个月的阳历颜色
             if (date.getType() == 0 || date.getType() == 2) {
-                solarDay.setTextColor(mAttrsBean.getColorLunar());
+                //solarDay.setTextColor(mAttrsBean.getColorLunar());
+                solarDay.setTextColor(Color.parseColor("#989898"));//设置灰色
+
             }
             solarDay.setText(String.valueOf(date.getSolar()[2]));
             //todo
-
             //设置农历（节假日显示）
             if (mAttrsBean.isShowLunar()) {
                 if ("初一".equals(date.getLunar()[1])) {
@@ -295,7 +304,7 @@ public class MonthView extends ViewGroup {
         int width = wm.getDefaultDisplay().getWidth();
         int widthSpecSize = width;
 //        int widthSpecSize = View.MeasureSpec.getSize(widthMeasureSpec);
-        int heightSpecSize = dip2px(mContext,470);
+        int heightSpecSize = dip2px(mContext, 470);
 
         //int heightSpecSize = View.MeasureSpec.getSize(heightMeasureSpec);
 
@@ -310,7 +319,7 @@ public class MonthView extends ViewGroup {
 
         int itemHeight = heightSpecSize / ROW;
 
-        int itemSize = Math.min(itemWidth, itemHeight+100);
+        int itemSize = Math.min(itemWidth, itemHeight + 100);
         for (int i = 0; i < getChildCount(); i++) {
             View childView = getChildAt(i);
 //            int m_width = View.MeasureSpec.makeMeasureSpec(itemSize, View.MeasureSpec.EXACTLY);
@@ -322,7 +331,7 @@ public class MonthView extends ViewGroup {
     /**
      * 根据手机的分辨率从 dip 的单位 转成为 px(像素)
      */
-    public  int dip2px(Context context, float dpValue) {
+    public int dip2px(Context context, float dpValue) {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (dpValue * scale + 0.5f);
     }

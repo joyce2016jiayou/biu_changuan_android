@@ -371,6 +371,19 @@ public class Network {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
     }
+    /**
+     * 获取月视角
+     *
+     * @param subscriber
+     * @return
+     */
+    public Subscription get_month_view(RequestBody params, Subscriber<Bean<Object>> subscriber) {
+        return service.get_month_view(params)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
 
 
 }

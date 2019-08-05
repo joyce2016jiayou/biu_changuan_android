@@ -155,6 +155,13 @@ public interface MyService {
     @POST("getMaxPerson")
     Observable<Bean<Object>> get_max_num(@Body RequestBody json);
 
+    /**
+     * 获取审核状态
+     * @return
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("dayViewList")
+    Observable<Bean<Object>> get_month_view(@Body RequestBody json);
 
 
 }

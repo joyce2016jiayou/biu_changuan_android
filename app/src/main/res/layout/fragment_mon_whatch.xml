@@ -68,7 +68,7 @@
         android:layout_marginTop="14dp"
         android:background="@drawable/rili_top" />
 
-    <com.othershe.calendarview.weiget.MonthCalenDarView1
+    <com.othershe.calendarview.weiget.CalenDarView2
         android:id="@+id/calendar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -81,6 +81,8 @@
         calendarview:solar_color="@android:color/black"
         calendarview:solar_size="20"
         calendarview:switch_choose="false" />
+
+
 
 
 </LinearLayout>

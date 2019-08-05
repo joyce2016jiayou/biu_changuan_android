@@ -79,21 +79,21 @@
             android:name=".SplashActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait">
-            <!--   <intent-filter>
-                   <action android:name="android.intent.action.MAIN" />
-
-                   <category android:name="android.intent.category.LAUNCHER" />
-               </intent-filter>-->
-
-        </activity>
-        <activity
-            android:name=".KeepFitActivity"
-            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+        </activity>
+        <activity
+            android:name=".KeepFitActivity"
+            android:launchMode="singleTask">
+            <!--<intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>-->
         </activity> <!-- 存储权限 authorities="你的包名+fileprovider" -->
         <provider
             android:name="androidx.core.content.FileProvider"
