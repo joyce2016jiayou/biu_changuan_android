@@ -163,5 +163,35 @@ public interface MyService {
     @POST("dayViewList")
     Observable<Bean<Object>> get_month_view(@Body RequestBody json);
 
+    /**
+     * 获取审核状态
+     * @return
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("searchMessage")
+    Observable<Bean<Object>> zhanghu_message_list(@Body RequestBody json);
+    /**
+     * 获取审核状态
+     * @return
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("agreeApply")
+    Observable<Bean<Object>> agreeApply(@Body RequestBody json);
+
+    /**
+     * 获取申请详情
+     * @return
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("classDetail")
+    Observable<Bean<Object>> get_shenqing_detail(@Body RequestBody json);
+    /**
+     * 获取申请详情
+     * @return
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("alreadyRead")
+    Observable<Bean<Object>> change_status(@Body RequestBody json);
+
 
 }

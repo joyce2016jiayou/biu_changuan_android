@@ -1,18 +1,27 @@
 package com.noplugins.keepfit.android.fragment;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.viewpager.widget.ViewPager;
 
 import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.adapter.TabItemAdapter;
+import com.noplugins.keepfit.android.util.data.DateHelper;
 import com.noplugins.keepfit.android.util.ui.ViewPagerFragment;
 
 import java.util.ArrayList;
@@ -49,6 +58,14 @@ public class MessageFragment extends ViewPagerFragment {
     TextView tv3;
     @BindView(R.id.tv4)
     TextView tv4;
+    @BindView(R.id.circle1)
+    ImageView circle1;
+    @BindView(R.id.circle2)
+    ImageView circle2;
+    @BindView(R.id.circle3)
+    ImageView circle3;
+    @BindView(R.id.circle4)
+    ImageView circle4;
 
     private ArrayList<Fragment> mFragments;
 
@@ -66,9 +83,55 @@ public class MessageFragment extends ViewPagerFragment {
             view = inflater.inflate(R.layout.questions_and_answers_fragment, container, false);
             ButterKnife.bind(this, view);//绑定黄牛刀
             initView();
+            registerReceiver();
         }
         return view;
     }
+
+    //注册广播接收器
+    LocalBroadcastManager broadcastManager;
+    private void registerReceiver() {
+        broadcastManager = LocalBroadcastManager.getInstance(getActivity());
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("update_message_read_status");
+        broadcastManager.registerReceiver(mRefreshReceiver, intentFilter);
+    }
+
+    private BroadcastReceiver mRefreshReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String is_read = intent.getStringExtra("is_read");
+            String type_number = intent.getStringExtra("type_number");
+            if(type_number.equals("1")){
+                if(is_read.equals("true")){//已读,第一个提现不显示
+                    circle1.setVisibility(View.GONE);
+                }else{//未读
+                    circle1.setVisibility(View.GONE);
+                }
+            }else if(type_number.equals("2")){
+                if(is_read.equals("true")){//已读
+                    circle2.setVisibility(View.GONE);
+                }else{//未读
+                    circle2.setVisibility(View.VISIBLE);
+                }
+            }else if(type_number.equals("3")){
+                if(is_read.equals("true")){//已读
+                    circle3.setVisibility(View.GONE);
+                }else{//未读
+                    circle3.setVisibility(View.VISIBLE);
+                }
+            }else if(type_number.equals("4")){
+                if(is_read.equals("true")){//已读
+                    circle4.setVisibility(View.GONE);
+                }else{//未读
+                    circle4.setVisibility(View.VISIBLE);
+                }
+            }
+
+
+
+        }
+    };
 
     private void initView() {
         mFragments = new ArrayList<>();
@@ -85,26 +148,27 @@ public class MessageFragment extends ViewPagerFragment {
 
         TabItemAdapter myAdapter = new TabItemAdapter(getActivity().getSupportFragmentManager(), mFragments);// 初始化adapter
         view_pager.setAdapter(myAdapter); // 设置adapter
+        setTabTextColorAndImageView(0);// 更改text的颜色还有图片
 
         view_pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPs) {
-                setTabTextColorAndImageView(position, positionOffset);// 更改text的颜色还有图片
-            }
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPs) {}
 
             @Override
             public void onPageSelected(int position) {
+                setTabTextColorAndImageView(position);// 更改text的颜色还有图片
             }
 
             @Override
             public void onPageScrollStateChanged(int state) {
+
             }
         });
 
 
     }
 
-    private void setTabTextColorAndImageView(int position, float positionOffset) {
+    private void setTabTextColorAndImageView(int position) {
         switch (position) {
             case 0:
                 tv1.setTextSize(20);

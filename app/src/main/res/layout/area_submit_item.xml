@@ -46,7 +46,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/title_tv"
+                        android:id="@+id/area_type_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="操房申请"
@@ -89,7 +89,7 @@
                 </LinearLayout>
 
                 <TextView
-                    android:id="@+id/money_tv"
+                    android:id="@+id/content_tv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -171,6 +171,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <EditText
+            android:id="@+id/edit_reason_tv"
             android:layout_marginTop="5dp"
             android:gravity="left|top"
             android:paddingTop="5dp"

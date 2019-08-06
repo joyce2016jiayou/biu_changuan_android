@@ -357,6 +357,20 @@ public class Network {
                 .subscribe(subscriber);
     }
 
+    /**
+     * 消息列表
+     *
+     * @param subscriber
+     * @return
+     */
+    public Subscription zhanghu_message_list(RequestBody params, Subscriber<Bean<Object>> subscriber) {
+        return service.zhanghu_message_list(params)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
 
     /**
      * 添加课程
@@ -379,6 +393,47 @@ public class Network {
      */
     public Subscription get_month_view(RequestBody params, Subscriber<Bean<Object>> subscriber) {
         return service.get_month_view(params)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 获取月视角
+     *
+     * @param subscriber
+     * @return
+     */
+    public Subscription agreeApply(RequestBody params, Subscriber<Bean<Object>> subscriber) {
+        return service.agreeApply(params)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+    /**
+     * 获取申请详情
+     *
+     * @param subscriber
+     * @return
+     */
+    public Subscription get_shenqing_detail(RequestBody params, Subscriber<Bean<Object>> subscriber) {
+        return service.get_shenqing_detail(params)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 改变状态
+     *
+     * @param subscriber
+     * @return
+     */
+    public Subscription change_status(RequestBody params, Subscriber<Bean<Object>> subscriber) {
+        return service.change_status(params)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

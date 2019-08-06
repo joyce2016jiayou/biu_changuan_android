@@ -14,20 +14,23 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.andview.refreshview.recyclerview.BaseRecyclerAdapter;
 import com.bumptech.glide.Glide;
 import com.noplugins.keepfit.android.R;
+import com.noplugins.keepfit.android.entity.MessageEntity;
+import com.noplugins.keepfit.android.util.data.DateHelper;
 
+import java.util.Date;
 import java.util.List;
 
 public class ZhanghuMessageAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder> {
 
-    private List<String> list;
+    private List<MessageEntity.MessageBean> list;
     private Activity context;
     private static final int EMPTY_VIEW = 2;
     private static final int TYPE_YOUTANG = 1;
     private TextView yaoqing_number_tv;
     private int select_num;
-    private int max_selectnum=5;
+    private int max_selectnum = 5;
 
-    public ZhanghuMessageAdapter(List<String> mlist, Activity mcontext) {
+    public ZhanghuMessageAdapter(List<MessageEntity.MessageBean> mlist, Activity mcontext) {
         list = mlist;
         context = mcontext;
     }
@@ -64,6 +67,7 @@ public class ZhanghuMessageAdapter extends BaseRecyclerAdapter<RecyclerView.View
     public void onBindViewHolder(RecyclerView.ViewHolder view_holder, int position, boolean isItem) {
         if (view_holder instanceof YouYangViewHolder) {
             YouYangViewHolder holder = (YouYangViewHolder) view_holder;
+            MessageEntity.MessageBean messageBean = list.get(position);
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -72,26 +76,34 @@ public class ZhanghuMessageAdapter extends BaseRecyclerAdapter<RecyclerView.View
                     }
                 }
             });
-            if(position==2||position==4){
+
+            if (messageBean.getType() == 1) {//微信
+                Glide.with(context).load(R.drawable.wx_icon).into(holder.left_icon);
+                holder.title_tv.setText("微信提现");
+                holder.shouzhi_money_tv.setTextColor(context.getResources().getColor(R.color.result_points));
+
+            } else if (messageBean.getType() == 2) {//支付宝
                 Glide.with(context).load(R.drawable.ali_icon).into(holder.left_icon);
-                holder.title_tv.setText("支付宝进账");
+                holder.title_tv.setText("支付宝提现");
                 holder.shouzhi_money_tv.setTextColor(context.getResources().getColor(R.color.result_points));
-                holder.shouzhi_money_tv.setText("+500");
-            }
-            if(position==3||position==6){
+
+            } else if (messageBean.getType() == 3) {
                 Glide.with(context).load(R.drawable.band_icon).into(holder.left_icon);
-                holder.title_tv.setText("银行卡进账");
+                holder.title_tv.setText("银行卡提现");
                 holder.shouzhi_money_tv.setTextColor(context.getResources().getColor(R.color.result_points));
-                holder.shouzhi_money_tv.setText("+400");
 
             }
 
-
-
+            holder.shouzhi_money_tv.setText("+" + messageBean.getWithdrawMoney());//提现金额
+            long time = messageBean.getWithdrawTime();
+            Date date = DateHelper.transForDate(time);
+            holder.tv_date_time.setText((date.getYear() + 1900) + "." + (date.getMonth() + 1) + "." + date.getDate() + " " + date.getHours() + ":" + date.getMinutes());
+            holder.money_tv.setText("余额" + messageBean.getWithdrawBalance());
 
 
         }
     }
+
     private OnItemClickListener onItemClickListener;
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
@@ -112,15 +124,13 @@ public class ZhanghuMessageAdapter extends BaseRecyclerAdapter<RecyclerView.View
     }
 
 
-
-
     @Override
     public int getAdapterItemCount() {
         return list.size() > 0 ? list.size() : 1;
     }
 
 
-    public void setData(List<String> list) {
+    public void setData(List<MessageEntity.MessageBean> list) {
         this.list = list;
         notifyDataSetChanged();
     }
@@ -141,7 +151,7 @@ public class ZhanghuMessageAdapter extends BaseRecyclerAdapter<RecyclerView.View
     public class YouYangViewHolder extends RecyclerView.ViewHolder {
         public View view;
         public ImageView left_icon;
-        public TextView title_tv,money_tv,tv_date_time,shouzhi_money_tv;
+        public TextView title_tv, money_tv, tv_date_time, shouzhi_money_tv;
 
         public YouYangViewHolder(View itemView, boolean isItem) {
             super(itemView);

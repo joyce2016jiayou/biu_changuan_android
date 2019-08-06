@@ -1,15 +1,20 @@
 package com.noplugins.keepfit.android.fragment;
 
 import android.app.Dialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,15 +23,31 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.andview.refreshview.XRefreshView;
+import com.andview.refreshview.XRefreshViewFooter;
+import com.google.gson.Gson;
 import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.adapter.AreaSubmitAdapter;
 import com.noplugins.keepfit.android.adapter.SystemMessageAdapter;
+import com.noplugins.keepfit.android.entity.MessageEntity;
+import com.noplugins.keepfit.android.util.data.DateHelper;
+import com.noplugins.keepfit.android.util.net.Network;
+import com.noplugins.keepfit.android.util.net.entity.Bean;
+import com.noplugins.keepfit.android.util.net.progress.GsonSubscriberOnNextListener;
+import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriberNew;
+import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.RequestBody;
+import rx.Subscription;
+
+import static com.zhy.http.okhttp.log.LoggerInterceptor.TAG;
 
 public class AreaSubmitFragment extends Fragment {
     @BindView(R.id.xrefreshview)
@@ -36,6 +57,12 @@ public class AreaSubmitFragment extends Fragment {
     private View view;
     private LinearLayoutManager layoutManager;
     private AreaSubmitAdapter areaSubmitAdapter;
+    private int page = 1;
+    private int maxPage;
+    private boolean is_not_more;
+
+    private List<MessageEntity.MessageBean> messageBeans = new ArrayList<>();
+
     public static AreaSubmitFragment newInstance(String title) {
         AreaSubmitFragment fragment = new AreaSubmitFragment();
         Bundle args = new Bundle();
@@ -57,25 +84,66 @@ public class AreaSubmitFragment extends Fragment {
     }
 
     private void initView() {
-        List<String> strings = new ArrayList<>();
-        strings.add("1");
-        strings.add("1");
-        strings.add("1");
-        strings.add("1");
-        strings.add("1");
-        strings.add("1");
-        strings.add("1");
-        strings.add("1");
-        strings.add("1");
-        strings.add("1");
-        strings.add("1");
-        set_list_resource(strings);
+        initMessageDate();//获取消息列表
+    }
+
+    private void initMessageDate() {
+        Map<String, Object> params = new HashMap<>();
+        params.put("gymAreaNum", "GYM19072138381319");//场馆编号
+        params.put("page", page);//场馆编号
+        params.put("type", "4");
+        Gson gson = new Gson();
+        String json_params = gson.toJson(params);
+        String json = new Gson().toJson(params);//要传递的json
+        RequestBody requestBody = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), json);
+        Log.e(TAG, "系统消息参数：" + json_params);
+        Subscription subscription = Network.getInstance("系统消息列表", getActivity())
+                .zhanghu_message_list(requestBody, new ProgressSubscriberNew<>(MessageEntity.class, new GsonSubscriberOnNextListener<MessageEntity>() {
+                    @Override
+                    public void on_post_entity(MessageEntity entity, String s) {
+                        Log.e("场地消息列表成功", entity + "系统消息列表成功" + entity.getMessage().size());
+                        maxPage = entity.getMaxPage();
+                        if (page == 1) {//表示刷新
+                            messageBeans.addAll(entity.getMessage());
+                            set_list_resource(messageBeans);
+                        } else {
+                            if (page <= maxPage) {//表示加载还有数据
+                                is_not_more = false;
+                                messageBeans.addAll(entity.getMessage());
+                                areaSubmitAdapter.notifyDataSetChanged();
+
+                            } else {//表示没有更多数据了
+                                is_not_more = true;
+                                messageBeans.addAll(entity.getMessage());
+                                areaSubmitAdapter.notifyDataSetChanged();
+                            }
+                        }
+
+
+                        boolean is_read = entity.isRead();//有已读消息，false是未读消息，通知MessageFragment更新红点信息
+                        Intent intent = new Intent("update_message_read_status");
+                        intent.putExtra("is_read", "" + is_read);
+                        intent.putExtra("type_number", "4");
+                        LocalBroadcastManager.getInstance(Objects.requireNonNull(getActivity())).sendBroadcast(intent);
+
+
+                    }
+                }, new SubscriberOnNextListener<Bean<Object>>() {
+                    @Override
+                    public void onNext(Bean<Object> result) {
+                    }
+
+                    @Override
+                    public void onError(String error) {
+                        Log.e("场地消息列表失败", "消息列表失败:" + error);
+                    }
+                }, getActivity(), true));
     }
 
 
-    private void set_list_resource(final List<String> dates) {
+    private void set_list_resource(final List<MessageEntity.MessageBean> dates) {
         //设置上拉刷新下拉加载
-        recycler_view.setHasFixedSize(true);
+        recycler_view.setHasFixedSize(false);
         recycler_view.setItemAnimator(null);
         layoutManager = new LinearLayoutManager(getActivity());
         recycler_view.setLayoutManager(layoutManager);
@@ -83,22 +151,24 @@ public class AreaSubmitFragment extends Fragment {
         recycler_view.setAdapter(areaSubmitAdapter);
         // 静默加载模式不能设置footerview
         // 设置静默加载模式
-        xrefreshview.setSilenceLoadMore(true);
+        //xrefreshview.setSilenceLoadMore(true);
         //设置刷新完成以后，headerview固定的时间
         xrefreshview.setPinnedTime(1000);
         xrefreshview.setMoveForHorizontal(true);
-        xrefreshview.setPullRefreshEnable(true);
-        xrefreshview.setPullLoadEnable(false);//关闭加载更多
+        //xrefreshview.setPullRefreshEnable(true);
+        xrefreshview.setPullLoadEnable(true);//关闭加载更多
         xrefreshview.setAutoLoadMore(false);
         xrefreshview.enableRecyclerViewPullUp(true);
         xrefreshview.enablePullUpWhenLoadCompleted(true);
         //给recycler_view设置底部加载布局
-        xrefreshview.enableReleaseToLoadMore(true);
-        xrefreshview.enableRecyclerViewPullUp(true);
-        xrefreshview.enablePullUpWhenLoadCompleted(true);
-        xrefreshview.setPreLoadCount(10);
-        xrefreshview.enableReleaseToLoadMore(false);
-        xrefreshview.setLoadComplete(true);//隐藏底部
+        if (dates.size() > 9) {
+            xrefreshview.enableReleaseToLoadMore(true);
+            areaSubmitAdapter.setCustomLoadMoreView(new XRefreshViewFooter(getActivity()));//加载更多
+            xrefreshview.setLoadComplete(false);//显示底部
+        } else {
+            xrefreshview.enableReleaseToLoadMore(false);
+            xrefreshview.setLoadComplete(true);//隐藏底部
+        }
         //设置静默加载时提前加载的item个数
 //        xefreshView1.setPreLoadCount(4);
 
@@ -119,9 +189,10 @@ public class AreaSubmitFragment extends Fragment {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        //PAGE = 1;
+                        page = 1;
                         //填写刷新数据的网络请求，一般page=1，List集合清空操作
-                        //get_date_class_resource("");
+                        dates.clear();
+                        initMessageDate();
                         xrefreshview.stopRefresh();//刷新停止
 
 
@@ -133,19 +204,16 @@ public class AreaSubmitFragment extends Fragment {
             public void onLoadMore(boolean isSilence) {
                 new Handler().postDelayed(new Runnable() {
                     public void run() {
-//                        PAGE = PAGE + 1;
-//                        //填写加载更多的网络请求，一般page++
-//                        get_date_class_resource();
-//
+                        page = page + 1;
+                        initMessageDate();
+                        //填写加载更多的网络请求，一般page++
 //                        //没有更多数据时候
-//                        if (is_not_more) {
-//                            xrefreshview.setLoadComplete(true);
-//                        } else {
-//                            //刷新完成必须调用此方法停止加载
-//                            xrefreshview.stopLoadMore(true);
-//                        }
-
-
+                        if (is_not_more) {
+                            xrefreshview.setLoadComplete(true);
+                        } else {
+                            //刷新完成必须调用此方法停止加载
+                            xrefreshview.stopLoadMore(true);
+                        }
                     }
                 }, 1000);//1000是加载的延时，使得有个动画效果
 

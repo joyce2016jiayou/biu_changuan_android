@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="455dp"
         android:layout_marginTop="-10dp"
+        android:layout_marginBottom="-10dp"
         android:background="@drawable/jujue_bg1"
         android:orientation="vertical">
 
@@ -22,18 +23,47 @@
             android:layout_marginRight="15dp"
             android:src="@drawable/close_btn_ico" />
 
-        <TextView
-            android:id="@+id/title"
+        <LinearLayout
+            android:id="@+id/lin_rel"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:layout_marginLeft="20dp"
+            android:layout_alignParentTop="true"
+            android:gravity="center_vertical"
             android:layout_marginTop="29dp"
-            android:text="@string/tv96"
-            android:textColor="@color/top_heiziti"
-            android:textSize="25sp" />
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tv96"
+                android:textColor="@color/top_heiziti"
+                android:textSize="25sp" />
+
+            <LinearLayout
+                android:id="@+id/agree_icon"
+                android:layout_width="54dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="5dp"
+                android:visibility="visible"
+                android:background="@drawable/agree_bg"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/type_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tv92"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    android:textStyle="normal" />
+            </LinearLayout>
+        </LinearLayout>
+
 
         <LinearLayout
-            android:layout_below="@+id/title"
+            android:layout_below="@+id/lin_rel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
@@ -54,7 +84,7 @@
                     android:textSize="15sp" />
 
                 <TextView
-                    android:id="@+id/edit_class_name"
+                    android:id="@+id/class_name"
                     android:layout_width="265dp"
                     android:layout_height="33dp"
                     android:layout_marginLeft="4dp"
@@ -81,6 +111,7 @@
                     android:textSize="15sp" />
 
                 <TextView
+                    android:id="@+id/teacher_name"
                     android:layout_width="265dp"
                     android:layout_height="33dp"
                     android:layout_marginLeft="4dp"
@@ -107,6 +138,7 @@
                     android:textSize="15sp" />
 
                 <TextView
+                    android:id="@+id/class_room"
                     android:layout_width="265dp"
                     android:layout_height="33dp"
                     android:layout_marginLeft="4dp"
@@ -134,6 +166,7 @@
                     android:textSize="15sp" />
 
                 <TextView
+                    android:id="@+id/price_tv"
                     android:layout_width="265dp"
                     android:layout_height="33dp"
                     android:layout_marginLeft="4dp"
@@ -160,6 +193,7 @@
                     android:textSize="15sp" />
 
                 <TextView
+                    android:id="@+id/people_number_xianzhi"
                     android:layout_width="265dp"
                     android:layout_height="33dp"
                     android:layout_marginLeft="4dp"
@@ -186,6 +220,7 @@
                     android:textSize="15sp" />
 
                 <TextView
+                    android:id="@+id/class_jieshao_content"
                     android:layout_width="wrap_content"
                     android:layout_height="33dp"
                     android:layout_marginLeft="10dp"
@@ -211,6 +246,7 @@
                     android:textSize="15sp" />
 
                 <TextView
+                    android:id="@+id/zhuyi_shixiang_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="33dp"
                     android:layout_marginLeft="10dp"
@@ -241,6 +277,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <EditText
+            android:id="@+id/edit_reason_tv"
             android:layout_marginTop="5dp"
             android:gravity="left|top"
             android:paddingTop="5dp"
