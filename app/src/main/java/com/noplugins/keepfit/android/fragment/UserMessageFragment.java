@@ -23,11 +23,14 @@ import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.adapter.SystemMessageAdapter;
 import com.noplugins.keepfit.android.adapter.UserMessageAdapter;
 import com.noplugins.keepfit.android.entity.MessageEntity;
+import com.noplugins.keepfit.android.util.MessageEvent;
 import com.noplugins.keepfit.android.util.net.Network;
 import com.noplugins.keepfit.android.util.net.entity.Bean;
 import com.noplugins.keepfit.android.util.net.progress.GsonSubscriberOnNextListener;
 import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriberNew;
 import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -132,6 +135,44 @@ public class UserMessageFragment extends Fragment {
                 }, getActivity(), true));
     }
 
+
+
+    /**
+     * 改变消息类型
+     * @param messageBean
+     */
+    private void change_message_status(MessageEntity.MessageBean messageBean) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("messageNum", messageBean.getMessageNum());//场馆编号
+        Gson gson = new Gson();
+        String json_params = gson.toJson(params);
+        String json = new Gson().toJson(params);//要传递的json
+        RequestBody requestBody = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), json);
+        Log.e(TAG, "改变消息已读：" + json_params);
+        Subscription subscription = Network.getInstance("改变消息已读", getActivity())
+                .change_status(requestBody, new ProgressSubscriberNew<>(String.class, new GsonSubscriberOnNextListener<String>() {
+                    @Override
+                    public void on_post_entity(String entity, String s) {
+                        Log.e(TAG, "改变消息成功：" + json_params);
+                        //通知KeepFitActivity
+                        MessageEvent messageEvent = new MessageEvent("update_message_num");
+                        EventBus.getDefault().post(messageEvent);
+
+
+
+                    }
+                }, new SubscriberOnNextListener<Bean<Object>>() {
+                    @Override
+                    public void onNext(Bean<Object> result) {
+
+                    }
+
+                    @Override
+                    public void onError(String error) {
+                        Log.e(TAG, "改变消息失败：" + error);
+                    }
+                }, getActivity(), true));
+    }
     private void set_list_resource(final List<MessageEntity.MessageBean> dates) {
         //设置上拉刷新下拉加载
         recycler_view.setHasFixedSize(false);
@@ -140,6 +181,15 @@ public class UserMessageFragment extends Fragment {
         recycler_view.setLayoutManager(layoutManager);
         userMessageAdapter = new UserMessageAdapter(dates, getActivity());
         recycler_view.setAdapter(userMessageAdapter);
+        userMessageAdapter.setOnItemClickListener(new SystemMessageAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Log.e(TAG, "进来了吗：");
+                //通知主Activity更新总消息数量
+                // TODO: 2019-08-06
+                change_message_status(dates.get(position));
+            }
+        });
         // 静默加载模式不能设置footerview
         // 设置静默加载模式
         //xrefreshview.setSilenceLoadMore(true);

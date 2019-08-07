@@ -67,6 +67,16 @@ public class DateViewEntity {
         private String course_num;
         private int max_num;
         private int status;
+        private int placeType;
+
+        public int getPlaceType() {
+            return placeType;
+        }
+
+        public void setPlaceType(int placeType) {
+            this.placeType = placeType;
+        }
+
 
         public int getPast() {
             return past;

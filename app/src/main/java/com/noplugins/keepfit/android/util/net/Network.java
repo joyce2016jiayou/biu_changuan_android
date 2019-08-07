@@ -439,6 +439,19 @@ public class Network {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
     }
+    /**
+     * 获取消息总数
+     *
+     * @param subscriber
+     * @return
+     */
+    public Subscription get_message_all(RequestBody params, Subscriber<Bean<Object>> subscriber) {
+        return service.get_message_all(params)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
 
 
 }

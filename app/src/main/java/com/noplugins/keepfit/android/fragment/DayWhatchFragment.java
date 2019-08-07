@@ -148,7 +148,7 @@ public class DayWhatchFragment extends ViewPagerFragment {
         if (selectdate.length() > 0) {
             params.put("date", selectdate);
         } else {
-            params.put("date", "2019-08-01");
+            params.put("date", crrent_date);
         }
         String gymAreaNum;
         if ("".equals(SharedPreferencesHelper.get(getActivity(), "changguan_number", "").toString())) {
