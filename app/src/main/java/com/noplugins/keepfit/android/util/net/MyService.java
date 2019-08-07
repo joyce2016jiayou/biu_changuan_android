@@ -200,5 +200,13 @@ public interface MyService {
     @POST("initializeMessage")
     Observable<Bean<Object>> get_message_all(@Body RequestBody json);
 
+    /**
+     * 获取申请详情
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("getFreeTeacher")
+    Observable<Bean<Object>> get_teacher_list(@FieldMap Map<String, Object> map);
+
 
 }

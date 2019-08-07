@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.base.BaseActivity;
+import com.noplugins.keepfit.android.callback.DialogCallBack;
 import com.noplugins.keepfit.android.entity.AddClassEntity;
 import com.noplugins.keepfit.android.entity.ClassEntity;
 import com.noplugins.keepfit.android.entity.MaxPeopleEntity;
@@ -26,6 +27,7 @@ import com.noplugins.keepfit.android.util.net.entity.Bean;
 import com.noplugins.keepfit.android.util.net.progress.GsonSubscriberOnNextListener;
 import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriberNew;
 import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener;
+import com.noplugins.keepfit.android.util.ui.PopWindowHelper;
 import com.othershe.calendarview.utils.CalendarUtil;
 
 import java.util.ArrayList;
@@ -90,9 +92,9 @@ public class AddClassItemActivity extends BaseActivity {
     EditText edit_price_number;
 
     private String select_changguan_type;
-    private String select_target_type="燃脂";
+    private String select_target_type = "燃脂";
     private String select_nandu_type = "容易";
-    private String select_room_type ="有氧操房";
+    private String select_room_type = "有氧操房";
     private String select_xunhuan_type = "一周";
     private TimePicker picker;
     private DatePicker datePicker;
@@ -124,20 +126,21 @@ public class AddClassItemActivity extends BaseActivity {
         back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                //弹出是否退出创建的提示
+                back_pop();
+
             }
         });
         add_class_teacher_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                if (check_value()) {//如果所有参数不为空，请求网络接口
-//                    add_class();
-//                }else{
-//                    return;
-//                }
+                if (check_value()) {//如果所有参数不为空，请求网络接口
+                    add_class();
+                } else {
+                    return;
+                }
 
-                Intent intent = new Intent(AddClassItemActivity.this, YaoQingTeacherActivity.class);
-                startActivity(intent);
+
             }
         });
 
@@ -154,6 +157,25 @@ public class AddClassItemActivity extends BaseActivity {
         select_time();
 
         search_room_people(true);//获取最大人数
+    }
+
+    @Override
+    public void onBackPressed() {
+        back_pop();
+    }
+
+    private void back_pop() {
+        PopWindowHelper.public_tishi_pop(AddClassItemActivity.this, "提示", "是否退出团课创建？", "取消", "确定", new DialogCallBack() {
+            @Override
+            public void save() {
+                finish();
+            }
+
+            @Override
+            public void cancel() {
+
+            }
+        });
     }
 
     private void add_class() {
@@ -190,7 +212,6 @@ public class AddClassItemActivity extends BaseActivity {
         } else {
             params.put("type", "3");
         }
-
         if (select_target_type.equals("单车")) {
             params.put("class_type", "1");
         } else if (select_target_type.equals("瑜伽")) {
@@ -206,26 +227,22 @@ public class AddClassItemActivity extends BaseActivity {
         } else {//儿童体适能
             params.put("class_type", "7");
         }
-
-        params.put("class_type", "1");//团课类型：1单车2瑜伽3普拉提4拳击5舞蹈6功能性7儿童
-
         params.put("class_type", "1");//团课类型：1单车2瑜伽3普拉提4拳击5舞蹈6功能性7儿童
         params.put("course_type", "1");//1团课，2私教，3健身
         params.put("max_num", edit_tuanke_renshu_number.getText().toString());//人数限制
-
         params.put("start_time",
-                year_tv.getText().toString()+"-"+month_tv.getText().toString()+"-"+date_tv.getText().toString()+" "
-                        +time1_edit.getText().toString());//开始时间
-        params.put("end_time", year_tv.getText().toString()+"-"+month_tv.getText().toString()+"-"+date_tv.getText().toString()+" "
-                +time2_edit.getText().toString());//结束时间
+                year_tv.getText().toString() + "-" + month_tv.getText().toString() + "-" + date_tv.getText().toString() + " "
+                        + time1_edit.getText().toString());//开始时间
+        params.put("end_time", year_tv.getText().toString() + "-" + month_tv.getText().toString() + "-" + date_tv.getText().toString() + " "
+                + time2_edit.getText().toString());//结束时间
 
-        if(select_xunhuan_type.equals("一周")){
+        if (select_xunhuan_type.equals("一周")) {
             params.put("loop_cycle", "1");//循环周数
-        }else if(select_xunhuan_type.equals("二周")){
+        } else if (select_xunhuan_type.equals("二周")) {
             params.put("loop_cycle", "2");//循环周数
-        }else if(select_xunhuan_type.equals("三周")){
+        } else if (select_xunhuan_type.equals("三周")) {
             params.put("loop_cycle", "3");//循环周数
-        }else{
+        } else {
             params.put("loop_cycle", "4");//循环周数
         }
         params.put("course_des", edit_class_jieshao.getText().toString());//课程介绍
@@ -241,8 +258,12 @@ public class AddClassItemActivity extends BaseActivity {
                 add_class(requestBody, new ProgressSubscriberNew<>(AddClassEntity.class, new GsonSubscriberOnNextListener<AddClassEntity>() {
                     @Override
                     public void on_post_entity(AddClassEntity entity, String s) {
-                        Log.e("添加课程成功", entity + "添加课程成功" + s);
-
+                        Log.e("添加课程成功", "添加课程成功" + entity.getStartTime());
+                        Intent intent = new Intent(AddClassItemActivity.this, YaoQingTeacherActivity.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putString("create_time", entity.getStartTime());
+                        intent.putExtras(bundle);
+                        startActivity(intent);
                     }
                 }, new SubscriberOnNextListener<Bean<Object>>() {
                     @Override
@@ -252,8 +273,8 @@ public class AddClassItemActivity extends BaseActivity {
 
                     @Override
                     public void onError(String error) {
+                        Toast.makeText(AddClassItemActivity.this, error, Toast.LENGTH_SHORT).show();
                         Log.e("添加课程失败", "添加课程失败:" + error);
-
                     }
                 }, this, true));
     }
@@ -274,10 +295,10 @@ public class AddClassItemActivity extends BaseActivity {
         } else if (TextUtils.isEmpty(edit_zhuyi_shixiang.getText())) {
             Toast.makeText(this, R.string.alert_dialog_tishi20, Toast.LENGTH_SHORT).show();
             return false;
-        } else if(Integer.valueOf(edit_tuanke_renshu_number.getText().toString())>enable_max_people){
+        } else if (Integer.valueOf(edit_tuanke_renshu_number.getText().toString()) > enable_max_people) {
             Toast.makeText(this, R.string.alert_dialog_tishi21, Toast.LENGTH_SHORT).show();
             return false;
-        }else {
+        } else {
             return true;
         }
 
@@ -432,6 +453,7 @@ public class AddClassItemActivity extends BaseActivity {
                     @Override
                     public void onNext(Bean<Object> result) {
                     }
+
                     @Override
                     public void onError(String error) {
                         Log.e("获取最大人数失败", "获取最大人数失败:" + error);
@@ -498,4 +520,6 @@ public class AddClassItemActivity extends BaseActivity {
             }
         });
     }
+
+
 }

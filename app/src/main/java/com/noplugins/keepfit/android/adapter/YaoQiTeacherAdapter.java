@@ -12,12 +12,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.andview.refreshview.recyclerview.BaseRecyclerAdapter;
 import com.noplugins.keepfit.android.R;
+import com.noplugins.keepfit.android.entity.TeacherEntity;
 
 import java.util.List;
 
 public class YaoQiTeacherAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder> {
 
-    private List<String> list;
+    private List<TeacherEntity.TeacherBean> list;
     private Activity context;
     private static final int EMPTY_VIEW = 2;
     private static final int TYPE_YOUTANG = 1;
@@ -25,7 +26,7 @@ public class YaoQiTeacherAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHo
     private int select_num;
     private int max_selectnum=5;
 
-    public YaoQiTeacherAdapter(List<String> mlist, Activity mcontext, TextView myaoqing_number_tv) {
+    public YaoQiTeacherAdapter(List<TeacherEntity.TeacherBean> mlist, Activity mcontext, TextView myaoqing_number_tv) {
         list = mlist;
         yaoqing_number_tv = myaoqing_number_tv;
         context = mcontext;
@@ -63,6 +64,10 @@ public class YaoQiTeacherAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHo
     public void onBindViewHolder(RecyclerView.ViewHolder view_holder, int position, boolean isItem) {
         if (view_holder instanceof YouYangViewHolder) {
             YouYangViewHolder holder = (YouYangViewHolder) view_holder;
+            TeacherEntity.TeacherBean teacherBean = list.get(position);
+            holder.teacher_name.setText(teacherBean.getTeacherName());
+            holder.tag_tv.setText(teacherBean.getSkill());
+
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -71,6 +76,7 @@ public class YaoQiTeacherAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHo
                     }
                 }
             });
+
 
             holder.yaoqing_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -123,7 +129,7 @@ public class YaoQiTeacherAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHo
     }
 
 
-    public void setData(List<String> list) {
+    public void setData(List<TeacherEntity.TeacherBean> list) {
         this.list = list;
         notifyDataSetChanged();
     }
@@ -144,7 +150,7 @@ public class YaoQiTeacherAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHo
     public class YouYangViewHolder extends RecyclerView.ViewHolder {
         public View view;
         public LinearLayout yaoqing_btn;
-        public TextView yaoqing_tv;
+        public TextView yaoqing_tv,teacher_name,tag_tv;
 
         public YouYangViewHolder(View itemView, boolean isItem) {
             super(itemView);
@@ -152,7 +158,8 @@ public class YaoQiTeacherAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHo
                 this.view = itemView;
                 yaoqing_btn = view.findViewById(R.id.yaoqing_btn);
                 yaoqing_tv = view.findViewById(R.id.yaoqing_tv);
-
+                teacher_name = view.findViewById(R.id.teacher_name);
+                tag_tv = view.findViewById(R.id.tag_tv);
             }
         }
     }

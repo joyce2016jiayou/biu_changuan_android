@@ -452,6 +452,18 @@ public class Network {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
     }
-
+    /**
+     * 获取教练列表
+     *
+     * @param subscriber
+     * @return
+     */
+    public Subscription get_teacher_list(Map<String, Object> params, Subscriber<Bean<Object>> subscriber) {
+        return service.get_teacher_list(params)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
 
 }
