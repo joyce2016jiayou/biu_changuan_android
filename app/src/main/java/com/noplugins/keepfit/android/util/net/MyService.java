@@ -192,6 +192,13 @@ public interface MyService {
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
     @POST("alreadyRead")
     Observable<Bean<Object>> change_status(@Body RequestBody json);
+    /**
+     * 获取申请详情
+     * @return
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("initializeMessage")
+    Observable<Bean<Object>> get_message_all(@Body RequestBody json);
 
 
 }

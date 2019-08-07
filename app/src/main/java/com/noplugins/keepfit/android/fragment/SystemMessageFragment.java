@@ -24,11 +24,14 @@ import com.noplugins.keepfit.android.adapter.AreaSubmitAdapter;
 import com.noplugins.keepfit.android.adapter.SystemMessageAdapter;
 import com.noplugins.keepfit.android.adapter.ZhanghuMessageAdapter;
 import com.noplugins.keepfit.android.entity.MessageEntity;
+import com.noplugins.keepfit.android.util.MessageEvent;
 import com.noplugins.keepfit.android.util.net.Network;
 import com.noplugins.keepfit.android.util.net.entity.Bean;
 import com.noplugins.keepfit.android.util.net.progress.GsonSubscriberOnNextListener;
 import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriberNew;
 import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -73,9 +76,17 @@ public class SystemMessageFragment extends Fragment {
         if (view == null) {
             view = inflater.inflate(R.layout.fragment_system_message, container, false);
             ButterKnife.bind(this, view);//绑定黄牛刀
+            EventBus.getDefault().register(getActivity());
+
             initView();
         }
         return view;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(getActivity());
     }
 
     private void initView() {
@@ -242,12 +253,10 @@ public class SystemMessageFragment extends Fragment {
                     @Override
                     public void on_post_entity(String entity, String s) {
                         Log.e(TAG, "改变消息成功：" + json_params);
+                        //通知KeepFitActivity
+                        MessageEvent messageEvent = new MessageEvent("update_message_num");
+                        EventBus.getDefault().post(messageEvent);
 
-//                        boolean is_read = entity.isRead();//有已读消息，false是未读消息，通知MessageFragment更新红点信息
-//                        Intent intent = new Intent("update_message_read_status");
-//                        intent.putExtra("is_read", "" + is_read);
-//                        intent.putExtra("type_number", "2");
-//                        LocalBroadcastManager.getInstance(Objects.requireNonNull(getActivity())).sendBroadcast(intent);
 
 
                     }

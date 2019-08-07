@@ -2,12 +2,7 @@ package com.noplugins.keepfit.android.adapter;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,16 +17,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.andview.refreshview.recyclerview.BaseRecyclerAdapter;
 import com.bt.mylibrary.TimeLineMarkerView;
-import com.bumptech.glide.Glide;
 import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.entity.DateViewEntity;
-import com.noplugins.keepfit.android.entity.DayWhatch;
 import com.noplugins.keepfit.android.util.data.DateHelper;
-import com.noplugins.keepfit.android.util.screen.ScreenUtilsHelper;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Properties;
 
 public class DateWhatchAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder> {
     private List<DateViewEntity.DateBean> list;
@@ -83,30 +74,30 @@ public class DateWhatchAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHold
             Date date = DateHelper.transForDate(dayWhatch.getStart_time());
             String hour;
             String minute;
-            if(date.getHours()<=9){
-                hour="0"+date.getHours();
-            }else{
-                hour = date.getHours()+"";
+            if (date.getHours() <= 9) {
+                hour = "0" + date.getHours();
+            } else {
+                hour = date.getHours() + "";
             }
-            if(date.getMinutes()<=9){
-                minute = "0"+date.getMinutes();
-            }else{
-                minute = date.getMinutes()+"";
+            if (date.getMinutes() <= 9) {
+                minute = "0" + date.getMinutes();
+            } else {
+                minute = date.getMinutes() + "";
             }
-            holder.time_tv.setText(hour+":"+minute);
+            holder.time_tv.setText(hour + ":" + minute);
             Date create_date = DateHelper.transForDate(dayWhatch.getCreate_date());
 
-            Log.e("接口连接可怜的萨达",dayWhatch.getStart_time()+"");
+            Log.e("接口连接可怜的萨达", dayWhatch.getStart_time() + "");
             if (dayWhatch.getType().equals("1")) {//表示有氧
                 holder.yujia_bg.setVisibility(View.INVISIBLE);
                 holder.dance_bg.setVisibility(View.INVISIBLE);
 
                 holder.youyang_title_tv.setText(dayWhatch.getCourse_name());
-                holder.youyang_date_tv.setText("("+create_date.getMonth()+"/"+create_date.getDate()+")");
+                holder.youyang_date_tv.setText("(" + create_date.getMonth() + "/" + create_date.getDate() + ")");
                 holder.youyang_user_tv.setText(dayWhatch.getTeacher_name());
-                holder.money_tv.setText("￥"+dayWhatch.getPrice()+"/人");
+                holder.money_tv.setText("￥" + dayWhatch.getPrice() + "/人");
                 /**设置有没有过期*/
-                if (dayWhatch.getPast()==1) {//表示过期
+                if (dayWhatch.getPast() == 1) {//表示过期
                     holder.youyang_bg.setBackgroundResource(R.drawable.kapian_hui);
                     //set_red(holder);
                 } else {
@@ -118,11 +109,11 @@ public class DateWhatchAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHold
                 holder.dance_bg.setVisibility(View.INVISIBLE);
 
                 holder.yujia_title_tv.setText(dayWhatch.getCourse_name());
-                holder.yujia_date_tv.setText("("+create_date.getMonth()+"/"+create_date.getDate()+")");
+                holder.yujia_date_tv.setText("(" + create_date.getMonth() + "/" + create_date.getDate() + ")");
                 holder.yujia_user_tv.setText(dayWhatch.getTeacher_name());
-                holder.yujia_money_tv.setText("￥"+dayWhatch.getPrice()+"/人");
+                holder.yujia_money_tv.setText("￥" + dayWhatch.getPrice() + "/人");
                 /**设置有没有过期*/
-                if (dayWhatch.getPast()==1) {
+                if (dayWhatch.getPast() == 1) {
                     holder.yujia_bg.setBackgroundResource(R.drawable.kapian_hui);
                 } else {
                     holder.yujia_bg.setBackgroundResource(R.drawable.kapian_bai);
@@ -133,11 +124,11 @@ public class DateWhatchAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHold
                 holder.yujia_bg.setVisibility(View.INVISIBLE);
 
                 holder.dance_title_tv.setText(dayWhatch.getCourse_name());
-                holder.dance_date_tv.setText("("+create_date.getMonth()+"/"+create_date.getDate()+")");
+                holder.dance_date_tv.setText("(" + create_date.getMonth() + "/" + create_date.getDate() + ")");
                 holder.dance_user_tv.setText(dayWhatch.getTeacher_name());
-                holder.dance_money_tv.setText("￥"+dayWhatch.getPrice()+"/人");
+                holder.dance_money_tv.setText("￥" + dayWhatch.getPrice() + "/人");
                 /**设置有没有过期*/
-                if (dayWhatch.getPast()==1) {
+                if (dayWhatch.getPast() == 1) {
                     holder.dance_bg.setBackgroundResource(R.drawable.kapian_hui);
                 } else {
                     holder.dance_bg.setBackgroundResource(R.drawable.kapian_bai);
@@ -147,20 +138,20 @@ public class DateWhatchAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHold
             holder.youyang_bg.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    select_more_popwindow();
+                    select_more_popwindow(dayWhatch);
                 }
             });
             holder.yujia_bg.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    select_more_popwindow();
+                    select_more_popwindow(dayWhatch);
 
                 }
             });
             holder.dance_bg.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    select_more_popwindow();
+                    select_more_popwindow(dayWhatch);
 
                 }
             });
@@ -191,7 +182,8 @@ public class DateWhatchAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHold
 
 
     public static Dialog m_dialog;
-    private void select_more_popwindow() {
+
+    private void select_more_popwindow(DateViewEntity.DateBean dayWhatch) {
         LayoutInflater factory = LayoutInflater.from(context);
         View view = factory.inflate(R.layout.daywhatch_item_detial, null);
         m_dialog = new Dialog(context, R.style.transparentFrameWindowStyle2);
@@ -218,7 +210,70 @@ public class DateWhatchAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHold
                 m_dialog.dismiss();
             }
         });
+        TextView class_title_tv = view.findViewById(R.id.class_title_tv);
+        TextView people_number_tv = view.findViewById(R.id.people_number_tv);
+        TextView teacher_name = view.findViewById(R.id.teacher_name);
+        TextView price_tv = view.findViewById(R.id.price_tv);
+        TextView class_name = view.findViewById(R.id.class_name);
+        TextView teacher_name_tv = view.findViewById(R.id.teacher_name_tv);
+        TextView class_room = view.findViewById(R.id.class_room);
+        TextView price = view.findViewById(R.id.price);
+        TextView people_xianzhi = view.findViewById(R.id.people_xianzhi);
+        TextView class_time = view.findViewById(R.id.class_time);
+        TextView class_jieshao = view.findViewById(R.id.class_jieshao);
+        TextView tips_tv = view.findViewById(R.id.tips_tv);
 
+        class_title_tv.setText(dayWhatch.getCourse_name());
+        people_number_tv.setText(dayWhatch.getCome_num() + "/" + dayWhatch.getMax_num());
+        teacher_name.setText(dayWhatch.getTeacher_name());
+        price_tv.setText(dayWhatch.getPrice() + "元/人");
+        price.setText(dayWhatch.getPrice() + "元/人");
+        class_name.setText(dayWhatch.getCourse_name());
+        teacher_name_tv.setText(dayWhatch.getTeacher_name());
+        if (dayWhatch.getPlaceType() == 1) {
+            class_room.setText("有氧操房");
+        } else if (dayWhatch.getPlaceType() == 2) {
+            class_room.setText("动感单车");
+        } else if (dayWhatch.getPlaceType() == 3) {
+            class_room.setText("瑜伽房");
+        }
+        people_xianzhi.setText(dayWhatch.getMax_num() + "人");
+        long start_time = dayWhatch.getStart_time();
+        long end_time = dayWhatch.getEnd_time();
+        Date start_date = DateHelper.transForDate(start_time);
+        Date end_date = DateHelper.transForDate(end_time);
+
+        String start_hour = "";
+        if (start_date.getHours() <= 9) {
+            start_hour = "0" + start_date.getHours();
+        } else {
+            start_hour = "" + start_date.getHours();
+        }
+        String end_hour = "";
+        if (start_date.getHours() <= 9) {
+            end_hour = "0" + end_date.getHours();
+        } else {
+            end_hour = "" + end_date.getHours();
+        }
+        String start_minute = "";
+        if (end_date.getMinutes() <= 9) {
+            start_minute = "0" + end_date.getMinutes();
+        } else {
+            start_minute = "" + end_date.getMinutes();
+        }
+        String end_minute = "";
+        if (end_date.getMinutes() <= 9) {
+            end_minute = "0" + end_date.getMinutes();
+        } else {
+            end_minute = "" + end_date.getMinutes();
+        }
+
+        class_time.setText((start_date.getYear() + 1900) + "." + (start_date.getMonth() + 1) + "." + start_date.getDate()
+                + " " + start_hour + ":" + start_minute
+                + "-" + end_hour + ":" + end_minute);
+
+        class_jieshao.setText(dayWhatch.getCourse_des());
+        tips_tv.setText(dayWhatch.getTips());
     }
 
 
@@ -259,10 +314,7 @@ public class DateWhatchAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHold
     public class YouYangViewHolder extends RecyclerView.ViewHolder {
         public View view;
         public LinearLayout youyang_bg, yujia_bg, dance_bg;
-        public TextView time_tv,youyang_title_tv,youyang_date_tv
-                ,youyang_user_tv,money_tv,yujia_title_tv,yujia_date_tv
-                , yujia_user_tv,yujia_money_tv,dance_title_tv,dance_date_tv
-                ,dance_user_tv,dance_money_tv;
+        public TextView time_tv, youyang_title_tv, youyang_date_tv, youyang_user_tv, money_tv, yujia_title_tv, yujia_date_tv, yujia_user_tv, yujia_money_tv, dance_title_tv, dance_date_tv, dance_user_tv, dance_money_tv;
         public TimeLineMarkerView lin_view;
 
         public YouYangViewHolder(View itemView, boolean isItem) {

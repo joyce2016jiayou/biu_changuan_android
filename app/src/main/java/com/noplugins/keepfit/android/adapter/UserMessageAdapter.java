@@ -27,7 +27,7 @@ public class UserMessageAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHol
     private static final int TYPE_YOUTANG = 1;
     private TextView yaoqing_number_tv;
     private int select_num;
-    private int max_selectnum=5;
+    private int max_selectnum = 5;
 
     public UserMessageAdapter(List<MessageEntity.MessageBean> mlist, Activity mcontext) {
         list = mlist;
@@ -76,23 +76,23 @@ public class UserMessageAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHol
                 }
             });
             //5超时提醒6进场提醒7课程购买8场馆预约9场馆取消10订单取消11教练进馆12用户进馆13用户离馆14教练离馆
-            if(messageBean.getType()==5){
+            if (messageBean.getType() == 5) {
                 holder.user_type.setText("超时提醒");
-            }else if(messageBean.getType()==6){
+            } else if (messageBean.getType() == 6) {
                 holder.user_type.setText("进场提醒");
-            }else if(messageBean.getType()==7){
+            } else if (messageBean.getType() == 7) {
                 holder.user_type.setText("课程购买");
-            }else if(messageBean.getType()==8){
+            } else if (messageBean.getType() == 8) {
                 holder.user_type.setText("场馆预约");
-            }else if(messageBean.getType()==9){
+            } else if (messageBean.getType() == 9) {
                 holder.user_type.setText("场馆取消");
-            }else if(messageBean.getType()==10){
+            } else if (messageBean.getType() == 10) {
                 holder.user_type.setText("订单取消");
-            }else if(messageBean.getType()==11){
+            } else if (messageBean.getType() == 11) {
                 holder.user_type.setText("教练进馆");
-            }else if(messageBean.getType()==12){
+            } else if (messageBean.getType() == 12) {
                 holder.user_type.setText("用户进馆");
-            }else if(messageBean.getType()==13){
+            } else if (messageBean.getType() == 13) {
                 holder.user_type.setText("教练离馆");
             }
             //设置日期
@@ -107,9 +107,7 @@ public class UserMessageAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHol
         }
     }
 
-
-
-    DragBubbleView.OnBubbleStateListener  onBubbleStateListener = new DragBubbleView.OnBubbleStateListener() {
+    DragBubbleView.OnBubbleStateListener onBubbleStateListener = new DragBubbleView.OnBubbleStateListener() {
         @Override
         public void onDrag() {//拖拽气泡
 
@@ -150,8 +148,6 @@ public class UserMessageAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHol
     }
 
 
-
-
     @Override
     public int getAdapterItemCount() {
         return list.size() > 0 ? list.size() : 1;
@@ -179,13 +175,14 @@ public class UserMessageAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHol
     public class YouYangViewHolder extends RecyclerView.ViewHolder {
         public View view;
         public CircleImageView touxiang_image;
-        public TextView title_tv,user_type,content_tv,tv_date_time,tv_count;
+        public TextView title_tv, user_type, content_tv, tv_date_time, tv_count;
+
         public YouYangViewHolder(View itemView, boolean isItem) {
             super(itemView);
             if (isItem) {
                 this.view = itemView;
                 touxiang_image = view.findViewById(R.id.touxiang_image);
-                user_type =  view.findViewById(R.id.user_type);
+                user_type = view.findViewById(R.id.user_type);
                 content_tv = view.findViewById(R.id.content_tv);
                 tv_date_time = view.findViewById(R.id.tv_date_time);
                 tv_count = view.findViewById(R.id.tv_count);

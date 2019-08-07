@@ -1,27 +1,26 @@
 package com.noplugins.keepfit.android;
 
 import android.content.Context;
-import android.content.Intent;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.viewpager.widget.ViewPager;
 
-import com.huantansheng.easyphotos.utils.bitmap.BitmapUtils;
+import com.google.gson.Gson;
 import com.noplugins.keepfit.android.adapter.ContentPagerAdapterMy;
 import com.noplugins.keepfit.android.base.BaseActivity;
-import com.noplugins.keepfit.android.fragment.DayWhatchFragment;
+import com.noplugins.keepfit.android.entity.MaxMessageEntity;
 import com.noplugins.keepfit.android.fragment.StatisticsFragment;
 import com.noplugins.keepfit.android.fragment.ViewFragment;
 import com.noplugins.keepfit.android.fragment.MineFragment;
 import com.noplugins.keepfit.android.fragment.MessageFragment;
+import com.noplugins.keepfit.android.util.MessageEvent;
 import com.noplugins.keepfit.android.util.data.SharedPreferencesHelper;
 import com.noplugins.keepfit.android.util.net.Network;
 import com.noplugins.keepfit.android.util.net.entity.Bean;
@@ -29,8 +28,10 @@ import com.noplugins.keepfit.android.util.net.progress.GsonSubscriberOnNextListe
 import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriberNew;
 import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener;
 import com.noplugins.keepfit.android.util.ui.NoScrollViewPager;
-import com.noplugins.keepfit.android.util.ui.message_icon.DragBubbleView;
 import com.orhanobut.logger.Logger;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -41,10 +42,16 @@ import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.RequestBody;
 
 public class KeepFitActivity extends BaseActivity {
     @BindView(R.id.viewpager_content)
     NoScrollViewPager viewpager_content;
+    @BindView(R.id.message_view)
+    LinearLayout message_view;
+    @BindView(R.id.message_num_tv)
+    TextView message_num_tv;
+
     @BindViews({R.id.home_img, R.id.shipu_img, R.id.movie_img, R.id.mine_img})
     List<ImageView> bottom_iamge_views;
     private SoundPool sp;//声明一个SoundPool
@@ -84,9 +91,63 @@ public class KeepFitActivity extends BaseActivity {
         //获取审核状态
         get_check_status();
 
+        //获取消息总数，设置消息总数
+        get_message_all();
+
 
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void upadate(MessageEvent messageEvent) {
+        if (messageEvent.getMessage().equals("update_message_num")) {//获取消息总数，设置消息总数
+            get_message_all();
+        }
+    }
+
+
+    private void get_message_all() {
+        Map<String, String> params = new HashMap<>();
+        params.put("gymAreaNum", "GYM19072138381319");
+        Gson gson = new Gson();
+        String json_params = gson.toJson(params);
+        String json = new Gson().toJson(params);//要传递的json
+        RequestBody requestBody = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), json);
+        Log.e(TAG, "获取场馆消息总数参数：" + json_params);
+        subscription = Network.getInstance("获取场馆消息总数", getApplicationContext())
+                .get_message_all(requestBody,
+                        new ProgressSubscriberNew<>(MaxMessageEntity.class, new GsonSubscriberOnNextListener<MaxMessageEntity>() {
+                            @Override
+                            public void on_post_entity(MaxMessageEntity maxMessageEntity, String get_message_id) {
+                                Log.e(TAG, "获取场馆消息总数成功：" + maxMessageEntity.getMessageCount());
+                                //设置消息总数
+                                if (maxMessageEntity.getMessageCount() > 0) {
+                                    message_view.setVisibility(View.VISIBLE);
+                                    if (maxMessageEntity.getMessageCount() > 99) {
+                                        message_num_tv.setText("99+");
+                                    } else {
+                                        message_num_tv.setText(maxMessageEntity.getMessageCount() + "");
+                                    }
+                                } else {
+                                    message_view.setVisibility(View.GONE);
+                                }
+
+                            }
+                        }, new SubscriberOnNextListener<Bean<Object>>() {
+                            @Override
+                            public void onNext(Bean<Object> result) {
+
+                            }
+
+                            @Override
+                            public void onError(String error) {
+//                                Intent intent = new Intent(KeepFitActivity.this, CheckStatusFailActivity.class);
+//                                startActivity(intent);
+
+                                Logger.e(TAG, "获取获取场馆消息总数报错：" + error);
+                                //Toast.makeText(getApplicationContext(), "获取审核状态失败！", Toast.LENGTH_SHORT).show();
+                            }
+                        }, this, true));
+    }
 
 
     private void get_check_status() {
@@ -120,8 +181,6 @@ public class KeepFitActivity extends BaseActivity {
                                 //Toast.makeText(getApplicationContext(), "获取审核状态失败！", Toast.LENGTH_SHORT).show();
                             }
                         }, this, true));
-
-
     }
 
 
