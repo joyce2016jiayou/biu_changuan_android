@@ -12,6 +12,8 @@ import android.widget.LinearLayout;
 import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.base.BaseActivity;
 import com.noplugins.keepfit.android.callback.DialogCallBack;
+import com.noplugins.keepfit.android.util.ActivityCollectorUtil;
+import com.noplugins.keepfit.android.util.data.SharedPreferencesHelper;
 import com.noplugins.keepfit.android.util.ui.PopWindowHelper;
 
 import butterknife.BindView;
@@ -68,12 +70,22 @@ public class ZhangHaoSafeActivity extends BaseActivity {
 
                     @Override
                     public void cancel() {
-
+                        toLogin();
                     }
                 });
             }
         });
 
+
+    }
+
+    private void toLogin(){
+        Intent intent = new Intent(ZhangHaoSafeActivity.this, LoginActivity.class);
+        SharedPreferencesHelper.put(getApplicationContext(), "login_token", "");
+        SharedPreferencesHelper.put(getApplicationContext(), "phone_number", "");
+        SharedPreferencesHelper.put(getApplicationContext(), "changguan_number", "");
+        startActivity(intent);
+        ActivityCollectorUtil.finishAllActivity();
 
     }
 }

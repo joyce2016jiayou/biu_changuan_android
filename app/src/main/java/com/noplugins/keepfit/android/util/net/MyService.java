@@ -223,4 +223,20 @@ public interface MyService {
     @POST("statistics")
     Observable<Bean<Object>> get_statistics(@Body RequestBody json);
 
+    /**
+     * 修改密码
+     * @return 是否修改成功
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("modificationPassword")
+    Observable<Bean<Object>> update_my_password(@Body RequestBody json);
+
+    /**
+     * 设置高低峰时段
+     * @return 是否设置成功
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("setHighAndLowTime")
+    Observable<Bean<Object>> setHighAndLowTime(@Body RequestBody json);
+
 }
