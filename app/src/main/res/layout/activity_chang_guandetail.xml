@@ -1,0 +1,723 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:spinner="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.ChangGuandetailActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        tools:context=".fragment.BaseInformationFragment">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@drawable/daohanglan">
+
+                <ImageView
+                    android:id="@+id/back_btn"
+                    android:layout_width="28dp"
+                    android:layout_height="18dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginBottom="30dp"
+                    android:src="@drawable/icon_back" />
+
+                <TextView
+                    android:id="@+id/title_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="19dp"
+                    android:text="@string/tv105"
+                    android:textColor="@color/top_heiziti"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="19dp"
+                    android:layout_marginRight="20dp"
+                    android:text="@string/tv123"
+                    android:textColor="@color/top_heiziti"
+                    android:textSize="17sp" />
+            </RelativeLayout>
+            <!--第一块-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="280dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/kapian_bg"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/top_heiziti"
+                    android:textSize="25sp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="28dp"
+                    android:textStyle="bold"
+                    android:text="@string/tv121"
+                    />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="28dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tv119"
+                        android:textColor="@color/top_heiziti"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/changguan_name"
+                        android:layout_width="264dp"
+                        android:layout_height="36dp"
+                        android:layout_marginLeft="4dp"
+                        android:background="@null"
+                        android:hint="@string/edit_hint8"
+                        android:singleLine="true"
+                        android:textColor="@color/top_heiziti"
+                        android:textColorHint="@color/color_9B9B9B"
+                        android:textSize="13sp" />
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="28dp"
+                    android:layout_marginTop="22dp"
+                    android:layout_marginRight="44dp">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/tv120"
+                            android:textColor="@color/top_heiziti"
+                            android:textSize="16sp" />
+
+                        <lib.demo.spinner.MaterialSpinner
+                            android:id="@+id/spinner_type"
+                            spinner:ms_background_color="@android:color/white"
+                            spinner:ms_popupwindow_height="wrap_content"
+                            spinner:ms_popupwindow_maxheight="200dp"
+                            spinner:ms_text_color="@color/color_9B9B9B"
+                            android:layout_width="93dp"
+                            android:layout_height="36dp"
+                            android:layout_marginLeft="4dp"
+                            android:background="@drawable/et_login_bg"
+                            android:gravity="center"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/tv21"
+                            android:textColor="@color/top_heiziti"
+                            android:textSize="16sp" />
+
+                        <EditText
+                            android:id="@+id/edittext_area"
+                            android:layout_width="98dp"
+                            android:layout_height="36dp"
+                            android:layout_marginLeft="4dp"
+                            android:background="@null"
+                            android:hint="@string/edit_hint9"
+                            android:inputType="number"
+                            android:maxLength="11"
+                            android:singleLine="true"
+                            android:textColor="@color/top_heiziti"
+                            android:textColorHint="@color/color_9B9B9B"
+                            android:textSize="13sp" />
+
+                        <ImageView
+                            android:layout_width="9dp"
+                            android:layout_height="12dp"
+                            android:src="@drawable/pingfang" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="28dp"
+                    android:layout_marginTop="23dp"
+                    android:layout_marginRight="58dp">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/tv22"
+                            android:textColor="@color/top_heiziti"
+                            android:textSize="16sp" />
+
+                        <EditText
+                            android:id="@+id/tell_edit"
+                            android:layout_width="93dp"
+                            android:layout_height="36dp"
+                            android:background="@null"
+                            android:gravity="center"
+                            android:hint="@string/edit_hint10"
+                            android:inputType="number"
+                            android:maxLength="11"
+                            android:singleLine="true"
+                            android:textColor="@color/top_heiziti"
+                            android:textColorHint="@color/color_9B9B9B"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="28dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/tv23"
+                            android:textColor="@color/top_heiziti"
+                            android:textSize="16sp" />
+
+                        <EditText
+                            android:id="@+id/edit_email"
+                            android:layout_width="93dp"
+                            android:layout_height="36dp"
+                            android:layout_marginStart="4dp"
+                            android:layout_marginLeft="4dp"
+                            android:background="@null"
+                            android:hint="@string/edit_hint11"
+                            android:singleLine="true"
+                            android:textColor="@color/top_heiziti"
+                            android:textColorHint="@color/color_9B9B9B"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="28dp"
+                    android:layout_marginTop="22dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tv24"
+                        android:textColor="@color/top_heiziti"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/time1_edit"
+                        android:layout_width="63dp"
+                        android:layout_height="36dp"
+                        android:layout_marginLeft="3dp"
+                        android:background="@null"
+                        android:gravity="center"
+                        android:hint="@string/edit_hint12"
+                        android:text="@string/edit_hint12"
+                        android:textColor="@color/top_heiziti"
+                        android:textColorHint="@color/color_9B9B9B"
+                        android:textSize="13sp" />
+
+                    <LinearLayout
+                        android:layout_width="42dp"
+                        android:layout_height="8dp"
+                        android:layout_marginLeft="11dp"
+                        android:background="@drawable/hengang"
+                        android:orientation="horizontal" />
+
+                    <TextView
+                        android:id="@+id/time2_edit"
+                        android:layout_width="63dp"
+                        android:layout_height="36dp"
+                        android:layout_marginLeft="10dp"
+                        android:background="@null"
+                        android:gravity="center"
+                        android:hint="@string/edit_hint13"
+                        android:text="@string/edit_hint13"
+                        android:textColor="@color/top_heiziti"
+                        android:textColorHint="@color/color_9B9B9B"
+                        android:textSize="13sp" />
+                </LinearLayout>
+            </LinearLayout>
+            <!--第二块-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/kapian_bg"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="28dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tv27"
+                        android:textColor="@color/top_heiziti"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/edit_address"
+                        android:layout_width="264dp"
+                        android:layout_height="36dp"
+                        android:layout_marginLeft="4dp"
+                        android:background="@null"
+                        android:hint="@string/edit_hint15"
+                        android:singleLine="true"
+                        android:textColor="@color/top_heiziti"
+                        android:textColorHint="@color/color_9B9B9B"
+                        android:textSize="13sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="28dp"
+                    android:layout_marginTop="6dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tv28"
+                        android:textColor="@color/top_heiziti"
+                        android:textSize="16sp" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rc_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    </androidx.recyclerview.widget.RecyclerView>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="28dp"
+                    android:layout_marginTop="3dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginTop="3dp"
+                        android:text="@string/tv29"
+                        android:textColor="@color/top_heiziti"
+                        android:textSize="16sp" />
+
+                    <RelativeLayout
+                        android:layout_width="54dp"
+                        android:layout_height="54dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="50dp">
+
+                        <ImageView
+                            android:id="@+id/logo_image"
+                            android:layout_width="44dp"
+                            android:layout_height="44dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentBottom="true"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/jia_image" />
+
+                        <ImageView
+                            android:id="@+id/delete_icon_btn"
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginRight="3dp"
+                            android:clickable="true"
+                            android:src="@drawable/delete_image"
+                            android:visibility="invisible" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <!--九宫格图片-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="28dp"
+                    android:layout_marginTop="11dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="bottom"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/tv30"
+                                android:textColor="@color/top_heiziti"
+                                android:textSize="15sp" />
+
+                            <TextView
+                                android:id="@+id/select_numbers_tv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:text="@string/tv31"
+                                android:textColor="@color/color_9B9B9B"
+                                android:textSize="8sp" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="77dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="3dp"
+                            android:text="@string/tv32"
+                            android:visibility="gone"
+                            android:textColor="@color/color_9B9B9B"
+                            android:textSize="11sp" />
+                    </LinearLayout>
+
+                    <com.noplugins.keepfit.android.util.ui.jiugongge.CCRSortableNinePhotoLayout
+                        android:id="@+id/snpl_moment_add_photos"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        app:bga_snpl_deleteDrawable="@drawable/delete_image"
+                        app:bga_snpl_deleteDrawableOverlapQuarter="false"
+                        app:bga_snpl_editable="true"
+                        app:bga_snpl_itemCornerRadius="0dp"
+                        app:bga_snpl_itemSpanCount="4"
+                        app:bga_snpl_itemWhiteSpacing="5dp"
+                        app:bga_snpl_itemWidth="0dp"
+                        app:bga_snpl_maxItemCount="9"
+                        app:bga_snpl_placeholderDrawable="@mipmap/bga_pp_ic_holder_dark"
+                        app:bga_snpl_plusDrawable="@drawable/add_image_moren"
+                        app:bga_snpl_plusEnable="true"
+                        app:bga_snpl_sortable="true" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!--第三块-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="138dp"
+                android:background="@drawable/yingye_bg"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/top_heiziti"
+                    android:textSize="25sp"
+                    android:layout_marginTop="19dp"
+                    android:layout_marginLeft="28dp"
+                    android:textStyle="bold"
+                    android:text="@string/tv122"
+                    />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="11dp"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/checkbox_youyang"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/selector_btn_youyang"
+                        android:button="@null"
+                        android:checked="false" />
+
+                    <CheckBox
+                        android:id="@+id/checkbox_wuyang"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="23dp"
+                        android:background="@drawable/selector_btn_wuyang"
+                        android:button="@null"
+                        android:checked="false" />
+
+                    <CheckBox
+                        android:id="@+id/checkbox_tuancao"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="23dp"
+                        android:background="@drawable/selector_btn_tuancao"
+                        android:button="@null"
+                        android:checked="false" />
+
+                    <CheckBox
+                        android:id="@+id/checkbox_danche"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="23dp"
+                        android:background="@drawable/selector_btn_danche"
+                        android:button="@null"
+                        android:checked="false" />
+
+                    <CheckBox
+                        android:id="@+id/checkbox_youyong"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="23dp"
+                        android:background="@drawable/selector_btn_youyong"
+                        android:button="@null"
+                        android:checked="false" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/checkbox_wifi"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/selector_btn_wifi"
+                        android:button="@null"
+                        android:checked="false" />
+
+                    <CheckBox
+                        android:id="@+id/checkbox_genyi"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="23dp"
+                        android:background="@drawable/selector_btn_genyi"
+                        android:button="@null"
+                        android:checked="false" />
+
+                    <CheckBox
+                        android:id="@+id/checkbox_linyu"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="23dp"
+                        android:background="@drawable/selector_btn_linyu"
+                        android:button="@null"
+                        android:checked="false" />
+
+                    <CheckBox
+                        android:id="@+id/checkbox_cesuo"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="23dp"
+                        android:background="@drawable/selector_btn_cesuo"
+                        android:button="@null"
+                        android:checked="false" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="320dp"
+                android:background="@drawable/yingye_bg"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/top_heiziti"
+                    android:textSize="25sp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="25dp"
+                    android:textStyle="bold"
+                    android:text="@string/tv121"
+                    />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tv35"
+                        android:textColor="@color/top_heiziti"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/faren_name"
+                        android:layout_width="264dp"
+                        android:layout_height="36dp"
+                        android:layout_marginLeft="4dp"
+                        android:background="@null"
+                        android:hint="@string/edit_hint16"
+                        android:singleLine="true"
+                        android:textColor="@color/top_heiziti"
+                        android:textColorHint="@color/color_9B9B9B"
+                        android:textSize="13sp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tv36"
+                        android:textColor="@color/top_heiziti"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/icon_id_card"
+                        android:layout_width="264dp"
+                        android:layout_height="36dp"
+                        android:layout_marginLeft="4dp"
+                        android:background="@null"
+                        android:hint="@string/edit_hint17"
+                        android:singleLine="true"
+                        android:textColor="@color/top_heiziti"
+                        android:textColorHint="@color/color_9B9B9B"
+                        android:textSize="13sp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tv37"
+                        android:textColor="@color/top_heiziti"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/qiye_name"
+                        android:layout_width="264dp"
+                        android:layout_height="36dp"
+                        android:layout_marginLeft="4dp"
+                        android:singleLine="true"
+                        android:background="@null"
+                        android:hint="@string/edit_hint18"
+                        android:textColor="@color/top_heiziti"
+                        android:textColorHint="@color/color_9B9B9B"
+                        android:textSize="13sp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tv38"
+                        android:textColor="@color/top_heiziti"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/qiye_zhucehao"
+                        android:layout_width="264dp"
+                        android:layout_height="36dp"
+                        android:layout_marginLeft="4dp"
+                        android:background="@null"
+                        android:singleLine="true"
+                        android:hint="@string/edit_hint18"
+                        android:textColor="@color/top_heiziti"
+                        android:textColorHint="@color/color_9B9B9B"
+                        android:textSize="13sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+
+
+
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>

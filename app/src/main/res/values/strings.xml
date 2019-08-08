@@ -38,6 +38,9 @@
     <string name="edit_hint28">手机号</string>
     <string name="edit_hint29">职位</string>
     <string name="edit_hint30">对现有功能不满意？有新的想法？快点告诉我们吧</string>
+    <string name="edit_hint31">请输入旧密码</string>
+    <string name="edit_hint32">请输入新密码</string>
+    <string name="edit_hint33">请再次确认密码</string>
 
     <string name="tv1">登录</string>
     <string name="tv2">注册即代表您同意哔哟</string>
@@ -152,6 +155,19 @@
     <string name="tv111">故障反馈 (功能不可用)</string>
     <string name="tv112">其他问题</string>
     <string name="tv113">请输入问题描述 (比填，10个字以上)</string>
+    <string name="tv114">账号安全</string>
+    <string name="tv115">手机号</string>
+    <string name="tv116">修改密码</string>
+    <string name="tv117">退出登录</string>
+    <string name="tv118">修改密码</string>
+    <string name="tv119">场馆名称</string>
+    <string name="tv120">场馆类型</string>
+    <string name="tv121">基础信息</string>
+    <string name="tv122">营业设施</string>
+    <string name="tv123">完成</string>
+    <string name="tv124">高低时峰</string>
+    <string name="tv125">低峰时间段</string>
+    <string name="tv126">高峰时间段</string>
 
     <string name="alert_dialog_tishi1">温馨提示</string>
     <string name="alert_dialog_tishi2">解绑银行卡</string>

@@ -10,8 +10,12 @@ import android.widget.RelativeLayout;
 
 import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.activity.AboutActivity;
+import com.noplugins.keepfit.android.activity.ChangGuandetailActivity;
+import com.noplugins.keepfit.android.activity.HightLowTImeActivity;
 import com.noplugins.keepfit.android.activity.PermissionActivity;
 import com.noplugins.keepfit.android.activity.ProductAdviceActivity;
+import com.noplugins.keepfit.android.activity.UpdatePasswordActivity;
+import com.noplugins.keepfit.android.activity.ZhangHaoSafeActivity;
 import com.noplugins.keepfit.android.util.ui.ViewPagerFragment;
 
 import butterknife.BindView;
@@ -33,6 +37,8 @@ public class MineFragment extends ViewPagerFragment implements View.OnClickListe
     RelativeLayout product_fankui_layout;
     @BindView(R.id.about_layout)
     RelativeLayout about_layout;
+    @BindView(R.id.zhanghao_layout)
+    RelativeLayout zhanghao_layout;
 
     public static MineFragment myInstance(String title) {
         MineFragment fragment = new MineFragment();
@@ -58,6 +64,7 @@ public class MineFragment extends ViewPagerFragment implements View.OnClickListe
         zhangdan_layout.setOnClickListener(this);
         quanxian_layout.setOnClickListener(this);
         gaodi_layout.setOnClickListener(this);
+        zhanghao_layout.setOnClickListener(this);
         product_fankui_layout.setOnClickListener(this);
         about_layout.setOnClickListener(this);
     }
@@ -72,9 +79,12 @@ public class MineFragment extends ViewPagerFragment implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.user_item://场馆详情
+                Intent intent5 = new Intent(getActivity(), ChangGuandetailActivity.class);
+                startActivity(intent5);
 
                 break;
             case R.id.zhangdan_layout://账单余额
+
 
                 break;
             case R.id.quanxian_layout://权限管理
@@ -83,18 +93,24 @@ public class MineFragment extends ViewPagerFragment implements View.OnClickListe
                 break;
 
             case R.id.gaodi_layout://高低时峰
+                Intent intent4 = new Intent(getActivity(), HightLowTImeActivity.class);
+                startActivity(intent4);
 
                 break;
             case R.id.zhanghao_layout://账号安全
+                Intent intent3 = new Intent(getActivity(), ZhangHaoSafeActivity.class);
+                startActivity(intent3);
 
                 break;
             case R.id.product_fankui_layout://产品反馈
                 Intent intent2 = new Intent(getActivity(), ProductAdviceActivity.class);
                 startActivity(intent2);
+
                 break;
             case R.id.about_layout://关于
                 Intent intent1 = new Intent(getActivity(), AboutActivity.class);
                 startActivity(intent1);
+
                 break;
         }
 

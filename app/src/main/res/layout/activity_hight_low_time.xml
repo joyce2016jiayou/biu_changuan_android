@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/color_F8F8F8"
+    tools:context=".activity.HightLowTImeActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/daohanglan">
+
+        <ImageView
+            android:id="@+id/back_btn"
+            android:layout_width="28dp"
+            android:layout_height="18dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="30dp"
+            android:src="@drawable/icon_back" />
+
+        <TextView
+            android:id="@+id/title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="19dp"
+            android:text="@string/tv124"
+            android:textColor="@color/top_heiziti"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="19dp"
+            android:layout_marginRight="20dp"
+            android:text="@string/tv123"
+            android:textColor="@color/top_heiziti"
+            android:textSize="17sp" />
+    </RelativeLayout>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:background="@color/white"
+        android:layout_height="183dp">
+        <LinearLayout
+            android:layout_width="5dp"
+            android:orientation="horizontal"
+            android:background="@color/bottom_color"
+            android:layout_height="match_parent"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:layout_marginLeft="25dp"
+                android:layout_width="match_parent"
+                android:layout_marginTop="30dp"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tv125"
+                    android:textStyle="bold"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:textSize="20sp"
+                    android:textColor="@color/top_heiziti"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="价格： ￥28/小时"
+                    android:layout_marginRight="25dp"
+                    android:layout_centerVertical="true"
+                    android:textSize="15sp"
+                    android:layout_alignParentRight="true"
+                    android:textColor="@color/top_heiziti"
+                    />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="28dp"
+                android:layout_marginTop="28dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_centerVertical="true"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/time1_edit"
+                        android:layout_width="63dp"
+                        android:layout_height="36dp"
+                        android:layout_marginLeft="3dp"
+                        android:background="@drawable/time_item"
+                        android:gravity="center"
+                        android:hint="@string/edit_hint12"
+                        android:text="@string/edit_hint12"
+                        android:textColor="@color/top_heiziti"
+                        android:textColorHint="@color/color_9B9B9B"
+                        android:textSize="13sp" />
+
+                    <LinearLayout
+                        android:layout_width="42dp"
+                        android:layout_height="8dp"
+                        android:layout_marginLeft="11dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/hengang"
+                        android:orientation="horizontal" />
+
+                    <TextView
+                        android:id="@+id/time2_edit"
+                        android:layout_width="63dp"
+                        android:layout_height="36dp"
+                        android:layout_marginLeft="10dp"
+                        android:background="@drawable/time_item"
+                        android:gravity="center"
+                        android:hint="@string/edit_hint13"
+                        android:text="@string/edit_hint13"
+                        android:textColor="@color/top_heiziti"
+                        android:textColorHint="@color/color_9B9B9B"
+                        android:textSize="13sp" />
+                </LinearLayout>
+
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginRight="31dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/role_add_icon" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="28dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_centerVertical="true"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="63dp"
+                        android:layout_height="36dp"
+                        android:layout_marginLeft="3dp"
+                        android:background="@drawable/time_item"
+                        android:gravity="center"
+                        android:hint="@string/edit_hint12"
+                        android:text="@string/edit_hint12"
+                        android:textColor="@color/top_heiziti"
+                        android:textColorHint="@color/color_9B9B9B"
+                        android:textSize="13sp" />
+
+                    <LinearLayout
+                        android:layout_width="42dp"
+                        android:layout_height="8dp"
+                        android:layout_marginLeft="11dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/hengang"
+                        android:orientation="horizontal" />
+
+                    <TextView
+                        android:layout_width="63dp"
+                        android:layout_height="36dp"
+                        android:layout_marginLeft="10dp"
+                        android:background="@drawable/time_item"
+                        android:gravity="center"
+                        android:hint="@string/edit_hint13"
+                        android:text="@string/edit_hint13"
+                        android:textColor="@color/top_heiziti"
+                        android:textColorHint="@color/color_9B9B9B"
+                        android:textSize="13sp" />
+                </LinearLayout>
+
+
+                <ImageView
+                    android:id="@+id/Add_btn"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginRight="31dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/role_jian_btn" />
+
+            </RelativeLayout>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:background="@color/white"
+        android:layout_height="183dp">
+        <LinearLayout
+            android:layout_width="5dp"
+            android:orientation="horizontal"
+            android:background="@color/result_points"
+            android:layout_height="match_parent"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:layout_marginLeft="25dp"
+                android:layout_width="match_parent"
+                android:layout_marginTop="30dp"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tv126"
+                    android:textStyle="bold"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:textSize="20sp"
+                    android:textColor="@color/top_heiziti"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="价格： ￥28/小时"
+                    android:layout_marginRight="25dp"
+                    android:layout_centerVertical="true"
+                    android:textSize="15sp"
+                    android:layout_alignParentRight="true"
+                    android:textColor="@color/top_heiziti"
+                    />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="28dp"
+                android:layout_marginTop="28dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_centerVertical="true"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/time1_edit"
+                        android:layout_width="63dp"
+                        android:layout_height="36dp"
+                        android:layout_marginLeft="3dp"
+                        android:background="@drawable/time_item"
+                        android:gravity="center"
+                        android:hint="@string/edit_hint12"
+                        android:text="@string/edit_hint12"
+                        android:textColor="@color/top_heiziti"
+                        android:textColorHint="@color/color_9B9B9B"
+                        android:textSize="13sp" />
+
+                    <LinearLayout
+                        android:layout_width="42dp"
+                        android:layout_height="8dp"
+                        android:layout_marginLeft="11dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/hengang"
+                        android:orientation="horizontal" />
+
+                    <TextView
+                        android:id="@+id/time2_edit"
+                        android:layout_width="63dp"
+                        android:layout_height="36dp"
+                        android:layout_marginLeft="10dp"
+                        android:background="@drawable/time_item"
+                        android:gravity="center"
+                        android:hint="@string/edit_hint13"
+                        android:text="@string/edit_hint13"
+                        android:textColor="@color/top_heiziti"
+                        android:textColorHint="@color/color_9B9B9B"
+                        android:textSize="13sp" />
+                </LinearLayout>
+
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginRight="31dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/role_add_icon" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="28dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_centerVertical="true"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="63dp"
+                        android:layout_height="36dp"
+                        android:layout_marginLeft="3dp"
+                        android:background="@drawable/time_item"
+                        android:gravity="center"
+                        android:hint="@string/edit_hint12"
+                        android:text="@string/edit_hint12"
+                        android:textColor="@color/top_heiziti"
+                        android:textColorHint="@color/color_9B9B9B"
+                        android:textSize="13sp" />
+
+                    <LinearLayout
+                        android:layout_width="42dp"
+                        android:layout_height="8dp"
+                        android:layout_marginLeft="11dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/hengang"
+                        android:orientation="horizontal" />
+
+                    <TextView
+                        android:layout_width="63dp"
+                        android:layout_height="36dp"
+                        android:layout_marginLeft="10dp"
+                        android:background="@drawable/time_item"
+                        android:gravity="center"
+                        android:hint="@string/edit_hint13"
+                        android:text="@string/edit_hint13"
+                        android:textColor="@color/top_heiziti"
+                        android:textColorHint="@color/color_9B9B9B"
+                        android:textSize="13sp" />
+                </LinearLayout>
+
+
+                <ImageView
+                    android:id="@+id/Add_btn"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginRight="31dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/role_jian_btn" />
+
+            </RelativeLayout>
+        </LinearLayout>
+
+
+    </LinearLayout>
+    
+</LinearLayout>

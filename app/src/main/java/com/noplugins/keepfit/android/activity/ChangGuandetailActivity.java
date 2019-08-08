@@ -1,17 +1,25 @@
 package com.noplugins.keepfit.android.activity;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+
 import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.base.BaseActivity;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ProductAdviceActivity extends BaseActivity {
+public class ChangGuandetailActivity extends BaseActivity {
     @BindView(R.id.back_btn)
     ImageView back_btn;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 
     @Override
     public void initBundle(Bundle parms) {
@@ -20,7 +28,7 @@ public class ProductAdviceActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        setContentLayout(R.layout.activity_product_advice);
+        setContentLayout(R.layout.activity_chang_guandetail);
         ButterKnife.bind(this);
         isShowTitle(false);
     }

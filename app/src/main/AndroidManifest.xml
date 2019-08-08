@@ -51,7 +51,11 @@
         android:theme="@style/Theme.AppCompat.NoActionBar"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.ProductAdviceActivity"></activity>
+        <activity android:name=".activity.HightLowTImeActivity"></activity>
+        <activity android:name=".activity.ChangGuandetailActivity" />
+        <activity android:name=".activity.UpdatePasswordActivity" />
+        <activity android:name=".activity.ZhangHaoSafeActivity" />
+        <activity android:name=".activity.ProductAdviceActivity" />
         <activity android:name=".activity.AboutActivity" />
         <activity android:name=".activity.TeacherActivity" />
         <activity android:name=".activity.RoleActivity" />
