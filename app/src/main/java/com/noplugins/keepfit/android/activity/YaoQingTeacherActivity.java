@@ -50,6 +50,7 @@ public class YaoQingTeacherActivity extends BaseActivity {
     private LinearLayoutManager layoutManager;
     private YaoQiTeacherAdapter yaoQiTeacherAdapter;
     private String create_time;
+    private String gym_course_num;
     private List<TeacherEntity.TeacherBean> dataBeans = new ArrayList<>();
     private int page = 1;
 
@@ -62,6 +63,7 @@ public class YaoQingTeacherActivity extends BaseActivity {
     @Override
     public void initBundle(Bundle parms) {
         create_time = parms.getString("create_time");
+        gym_course_num = parms.getString("gym_course_num");
         Log.e("创建的时间",create_time);
     }
 
@@ -87,6 +89,7 @@ public class YaoQingTeacherActivity extends BaseActivity {
     private void init_teacher_resource() {
         Map<String, Object> params = new HashMap<>();
         params.put("startTime", create_time);//场馆编号
+        params.put("gymCourse", gym_course_num);
         params.put("page", page);
         Log.e(TAG, "教练列表参数：" + params);
         subscription = Network.getInstance("教练列表", this)
@@ -129,7 +132,7 @@ public class YaoQingTeacherActivity extends BaseActivity {
         recycler_view.setItemAnimator(null);
         layoutManager = new LinearLayoutManager(this);
         recycler_view.setLayoutManager(layoutManager);
-        yaoQiTeacherAdapter = new YaoQiTeacherAdapter(dates, this,yaoqing_number_tv);
+        yaoQiTeacherAdapter = new YaoQiTeacherAdapter(dates, this,yaoqing_number_tv,gym_course_num);
         yaoQiTeacherAdapter.setOnItemClickListener(new YaoQiTeacherAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {

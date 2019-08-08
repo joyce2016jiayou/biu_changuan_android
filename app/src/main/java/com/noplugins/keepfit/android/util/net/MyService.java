@@ -207,6 +207,13 @@ public interface MyService {
     @FormUrlEncoded
     @POST("getFreeTeacher")
     Observable<Bean<Object>> get_teacher_list(@FieldMap Map<String, Object> map);
+    /**
+     * 邀请
+     * @return
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("initializeMessage")
+    Observable<Bean<Object>> invite(@Body RequestBody json);
 
 
 }

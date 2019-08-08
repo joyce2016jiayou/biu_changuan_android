@@ -466,4 +466,18 @@ public class Network {
                 .subscribe(subscriber);
     }
 
+    /**
+     * 获取教练列表
+     *
+     * @param subscriber
+     * @return
+     */
+    public Subscription invite(RequestBody params, Subscriber<Bean<Object>> subscriber) {
+        return service.invite(params)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
 }

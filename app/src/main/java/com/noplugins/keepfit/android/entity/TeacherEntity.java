@@ -40,6 +40,16 @@ public class TeacherEntity {
         private String teacherName;
         private long createDate;
 
+        public int getInviteType() {
+            return inviteType;
+        }
+
+        public void setInviteType(int inviteType) {
+            this.inviteType = inviteType;
+        }
+
+        private int inviteType;
+
         public String getSkill() {
             return skill;
         }

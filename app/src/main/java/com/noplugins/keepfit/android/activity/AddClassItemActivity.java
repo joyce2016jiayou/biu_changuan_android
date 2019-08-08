@@ -262,6 +262,8 @@ public class AddClassItemActivity extends BaseActivity {
                         Intent intent = new Intent(AddClassItemActivity.this, YaoQingTeacherActivity.class);
                         Bundle bundle = new Bundle();
                         bundle.putString("create_time", entity.getStartTime());
+                        bundle.putString("gym_course_num", entity.getGym_course_num());
+
                         intent.putExtras(bundle);
                         startActivity(intent);
                     }
