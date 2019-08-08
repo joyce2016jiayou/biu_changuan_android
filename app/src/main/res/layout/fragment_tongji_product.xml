@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/color_79000000"
-        android:text="过去30天的平效：30元/m2"/>
+        android:text="过去30天的平效：0元/m2"/>
     <TextView
         android:layout_marginLeft="@dimen/m20"
         android:layout_marginRight="@dimen/m20"
@@ -21,7 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/color_79000000"
-        android:text="过去30天的客单价：30元/人"/>
+        android:text="过去30天的客单价：0元/人"/>
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="@dimen/m180"

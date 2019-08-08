@@ -15,6 +15,7 @@ import com.noplugins.keepfit.android.activity.HightLowTImeActivity;
 import com.noplugins.keepfit.android.activity.PermissionActivity;
 import com.noplugins.keepfit.android.activity.ProductAdviceActivity;
 import com.noplugins.keepfit.android.activity.UpdatePasswordActivity;
+import com.noplugins.keepfit.android.activity.WalletActivity;
 import com.noplugins.keepfit.android.activity.ZhangHaoSafeActivity;
 import com.noplugins.keepfit.android.util.ui.ViewPagerFragment;
 
@@ -84,8 +85,8 @@ public class MineFragment extends ViewPagerFragment implements View.OnClickListe
 
                 break;
             case R.id.zhangdan_layout://账单余额
-
-
+                Intent intentWallet = new Intent(getActivity(), WalletActivity.class);
+                startActivity(intentWallet);
                 break;
             case R.id.quanxian_layout://权限管理
                 Intent intent = new Intent(getActivity(), PermissionActivity.class);
