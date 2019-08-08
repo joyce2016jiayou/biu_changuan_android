@@ -34,7 +34,7 @@
                 android:gravity="right"
                 android:text="进馆总人数：1000"/>
             <!--树状图-->
-            <com.openxu.cview.chart.barchart.BarVerticalChart
+            <com.noplugins.keepfit.android.util.ui.BarVerticalChart
                 android:layout_below="@+id/tv_user_sum"
                 android:id="@+id/chart_user_time"
                 android:layout_width="match_parent"
@@ -110,7 +110,7 @@
                 android:gravity="right"
                 android:text="进馆总人数：1000"/>
             <!--树状图-->
-            <com.openxu.cview.chart.barchart.BarVerticalChart
+            <com.noplugins.keepfit.android.util.ui.BarVerticalChart
                 android:layout_below="@+id/tv_user_age"
                 android:id="@+id/chart_user_age"
                 android:layout_width="match_parent"

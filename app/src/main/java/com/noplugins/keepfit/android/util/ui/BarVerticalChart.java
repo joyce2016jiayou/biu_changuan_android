@@ -9,17 +9,16 @@ import android.graphics.PointF;
 import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 
 import com.noplugins.keepfit.android.entity.CoordinateBean;
-import com.openxu.utils.DensityUtil;
-import com.openxu.utils.FontUtil;
-import com.openxu.utils.LogUtil;
+import com.openxu.cview.R;
 import com.openxu.cview.chart.BaseChart;
 import com.openxu.cview.chart.anim.AngleEvaluator;
 import com.openxu.cview.chart.bean.BarBean;
-import com.openxu.cview.R;
+import com.openxu.utils.DensityUtil;
+import com.openxu.utils.FontUtil;
+import com.openxu.utils.LogUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +32,7 @@ import static com.openxu.cview.chart.BaseChart.TOUCH_EVENT_TYPE.EVENT_X;
  * version : 1.0
  * description : 竖向(柱子竖直) 柱状图，支持多柱
  */
-public class BarVerticalAndPolylineChart extends BaseChart {
+public class BarVerticalChart extends BaseChart {
 
     private List<List<BarBean>> dataList;
     private List<String> strList;
@@ -93,17 +92,16 @@ public class BarVerticalAndPolylineChart extends BaseChart {
     private int heightLable;
     private int leadLable;
     private float animPro;       //动画计算的占比数量
-    private List<CoordinateBean> floats;  //绘制线
 
-    public BarVerticalAndPolylineChart(Context context) {
+    public BarVerticalChart(Context context) {
         this(context, null);
     }
 
-    public BarVerticalAndPolylineChart(Context context, AttributeSet attrs) {
+    public BarVerticalChart(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public BarVerticalAndPolylineChart(Context context, AttributeSet attrs, int defStyle) {
+    public BarVerticalChart(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
 
@@ -112,7 +110,6 @@ public class BarVerticalAndPolylineChart extends BaseChart {
         touchEventType = EVENT_X;
         dataList = new ArrayList<>();
         strList = new ArrayList<>();
-        floats = new ArrayList<>();
     }
 
     public void setShowEnd(boolean showEnd) {
@@ -123,10 +120,10 @@ public class BarVerticalAndPolylineChart extends BaseChart {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        int widthMode = View.MeasureSpec.getMode(widthMeasureSpec);
-        int widthSize = View.MeasureSpec.getSize(widthMeasureSpec);
-        int heightMode = View.MeasureSpec.getMode(heightMeasureSpec);
-        int heightSize = View.MeasureSpec.getSize(heightMeasureSpec);
+        int widthMode = MeasureSpec.getMode(widthMeasureSpec);
+        int widthSize = MeasureSpec.getSize(widthMeasureSpec);
+        int heightMode = MeasureSpec.getMode(heightMeasureSpec);
+        int heightSize = MeasureSpec.getSize(heightMeasureSpec);
         setMeasuredDimension(widthSize, heightSize);
         evaluatorByData();
         invalidate();
@@ -342,7 +339,6 @@ public class BarVerticalAndPolylineChart extends BaseChart {
      */
     @Override
     public void drawChart(Canvas canvas) {
-        floats.clear();
         int leftStart = leftStartPointX + mMoveLen;
 
 //        LogUtil.i(TAG, "leftStart："+leftStart+"   zezeroPoint"+zeroPoint+"   barItemSpace="+barItemSpace+"   barWidth="+barWidth +"   oneBarW="+oneBarW);
@@ -377,20 +373,7 @@ public class BarVerticalAndPolylineChart extends BaseChart {
 //                LogUtil.d(TAG, "绘制bar："+(br)+"    "+getMeasuredWidth()+"*"+getMeasuredHeight());
                 leftX += (barWidth + barSpace);
 
-                floats.add(new CoordinateBean(leftX-(barWidth/2),top));
-
             }
-        }
-
-        if (floats.size() > 0){
-            Log.d("DrawLine","点的个数："+floats.size());
-            for (int i = 0; i < floats.size()-1; i++) {
-                paint.setColor(Color.RED);
-                paint.setStrokeWidth(5);
-                canvas.drawLine(floats.get(i).getX(),floats.get(i).getY(),
-                        floats.get(i+1).getX(),floats.get(i+1).getY(), paint);
-            }
-
         }
 
 

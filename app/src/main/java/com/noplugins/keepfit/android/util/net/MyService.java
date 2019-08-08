@@ -215,5 +215,12 @@ public interface MyService {
     @POST("initializeMessage")
     Observable<Bean<Object>> invite(@Body RequestBody json);
 
+    /**
+     * 获取用户/产品 统计
+     * @return
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("statistics")
+    Observable<Bean<Object>> get_statistics(@Body RequestBody json);
 
 }
