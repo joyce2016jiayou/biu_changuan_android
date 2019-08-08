@@ -115,6 +115,7 @@ public class UserPermissionSelectActivity extends BaseActivity {
                             @Override
                             public void on_post_entity(PermmisionSelectEntity code,String Message_id) {
                                 Log.e(TAG,"选择成功：");
+                                SharedPreferencesHelper.put(getApplicationContext(),"identity",code.getStatus());
                                 //0是没有权限,1是有权限
                                 if(code.getStatus().equals("0")){//跳转基础资料
                                     if(type.equals("1")){//馆主

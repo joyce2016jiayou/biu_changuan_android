@@ -146,7 +146,7 @@ public class MessageFragment extends ViewPagerFragment {
         area_message_layout.setOnClickListener(onClickListener);
 
 
-        TabItemAdapter myAdapter = new TabItemAdapter(getActivity().getSupportFragmentManager(), mFragments);// 初始化adapter
+        TabItemAdapter myAdapter = new TabItemAdapter(getChildFragmentManager(), mFragments);// 初始化adapter
         view_pager.setAdapter(myAdapter); // 设置adapter
         setTabTextColorAndImageView(0);// 更改text的颜色还有图片
 

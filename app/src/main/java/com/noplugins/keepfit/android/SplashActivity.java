@@ -41,8 +41,13 @@ public class SplashActivity extends BaseActivity {
                         startActivity(intent);
                         finish();
                     } else {
-                        //Intent intent = new Intent(SplashActivity.this, UserPermissionSelectActivity.class);
-                        Intent intent = new Intent(SplashActivity.this, KeepFitActivity.class);
+                        Intent intent;
+                        if (SharedPreferencesHelper.get(getApplicationContext(),"identity","-1").toString().equals("-1")){
+                            intent = new Intent(SplashActivity.this, UserPermissionSelectActivity.class);
+                        } else {
+                            intent = new Intent(SplashActivity.this, KeepFitActivity.class);
+                        }
+//
 
                         startActivity(intent);
                         finish();

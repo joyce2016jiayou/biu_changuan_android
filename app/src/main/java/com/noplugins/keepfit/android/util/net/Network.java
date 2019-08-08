@@ -466,4 +466,17 @@ public class Network {
                 .subscribe(subscriber);
     }
 
+    /**
+     * 获取统计信息
+     *
+     * @param subscriber
+     * @return
+     */
+    public Subscription get_statistics(RequestBody params, Subscriber<Bean<Object>> subscriber) {
+        return service.get_statistics(params)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
 }

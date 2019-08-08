@@ -208,5 +208,12 @@ public interface MyService {
     @POST("getFreeTeacher")
     Observable<Bean<Object>> get_teacher_list(@FieldMap Map<String, Object> map);
 
+    /**
+     * 获取用户/产品 统计
+     * @return
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("statistics")
+    Observable<Bean<Object>> get_statistics(@Body RequestBody json);
 
 }
