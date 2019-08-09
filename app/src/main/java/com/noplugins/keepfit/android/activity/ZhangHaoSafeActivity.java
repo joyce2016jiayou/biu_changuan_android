@@ -65,12 +65,12 @@ public class ZhangHaoSafeActivity extends BaseActivity {
                 PopWindowHelper.public_tishi_pop(ZhangHaoSafeActivity.this, "提示", "是否退出登录？", "取消", "确定", new DialogCallBack() {
                     @Override
                     public void save() {
-
+                        toLogin();
                     }
 
                     @Override
                     public void cancel() {
-                        toLogin();
+
                     }
                 });
             }

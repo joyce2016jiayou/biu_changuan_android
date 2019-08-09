@@ -216,5 +216,6 @@
     <string name="tv_tixian_ok">确认提现</string>
     <string name="tv_all_tixian">全部提现</string>
     <string name="tv_now_tixian">立即提现</string>
+    <string name="tv_bill">账单</string>
 
 </resources>

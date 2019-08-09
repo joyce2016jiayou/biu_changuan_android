@@ -168,6 +168,7 @@
         <activity
             android:name=".activity.WalletActivity"
             android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity android:name=".activity.BillActivity" />
     </application>
 
 </manifest>

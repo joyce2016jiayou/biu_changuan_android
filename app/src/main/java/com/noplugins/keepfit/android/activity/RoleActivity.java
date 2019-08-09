@@ -7,20 +7,35 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.media.MediaMetadata;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.adapter.ExRecyclerAdapter;
 import com.noplugins.keepfit.android.adapter.RoleAdapter;
 import com.noplugins.keepfit.android.base.BaseActivity;
 import com.noplugins.keepfit.android.entity.ItemBean;
+import com.noplugins.keepfit.android.entity.RoleBean;
+import com.noplugins.keepfit.android.util.data.SharedPreferencesHelper;
+import com.noplugins.keepfit.android.util.net.Network;
+import com.noplugins.keepfit.android.util.net.entity.Bean;
+import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriberNew;
+import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener;
+import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.RequestBody;
 
 public class RoleActivity extends BaseActivity {
     @BindView(R.id.rc_view)
@@ -34,7 +49,7 @@ public class RoleActivity extends BaseActivity {
     private LinearLayoutManager linearLayoutManager;
     private ArrayList<ItemBean> datas;
     private RoleAdapter roleAdapter;
-
+    private List<RoleBean> completeDatas;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +65,7 @@ public class RoleActivity extends BaseActivity {
         setContentLayout(R.layout.activity_role);
         ButterKnife.bind(this);
         isShowTitle(false);
+        completeDatas = new ArrayList<>();
 
     }
 
@@ -65,7 +81,7 @@ public class RoleActivity extends BaseActivity {
         tv_complete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                toComplete();
             }
         });
     }
@@ -79,6 +95,66 @@ public class RoleActivity extends BaseActivity {
         roleAdapter = new RoleAdapter(this, datas, R.layout.role_item);
         roleAdapter.addData(new ItemBean());
         rc_view.setAdapter(roleAdapter);
+
+    }
+
+    /**
+     * 点击完成
+     */
+    private void toComplete(){
+        completeDatas.clear();
+        for (int i = 0; i < rc_view.getChildCount(); i++) {
+            LinearLayout layout = (LinearLayout) rc_view.getChildAt(i);
+            EditText et_name = layout.findViewById(R.id.edit_name);
+            EditText edit_phone = layout.findViewById(R.id.edit_phone);
+            EditText edit_role = layout.findViewById(R.id.edit_role);
+
+            if (TextUtils.isEmpty(et_name.getText().toString())){
+                Toast.makeText(getApplicationContext(), "姓名不能为空！", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if (TextUtils.isEmpty(edit_phone.getText().toString())){
+                Toast.makeText(getApplicationContext(), "手机号不能为空！", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if (TextUtils.isEmpty(edit_role.getText().toString())){
+                Toast.makeText(getApplicationContext(), "职位不能为空！", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            RoleBean roleBean = new RoleBean();
+            roleBean.setUserName(et_name.getText().toString());
+            roleBean.setPhone(edit_phone.getText().toString());
+            roleBean.setUserType(2);
+//            roleBean.setGymAreaNum((String) SharedPreferencesHelper.get(getApplicationContext(),
+//                    "changguan_number", "GYM19072138381319"));
+            roleBean.setGymAreaNum("GYM19072138381319");
+            completeDatas.add(roleBean);
+        }
+
+
+        Gson gson = new Gson();
+        String objJson = gson.toJson(completeDatas);
+        Logger.d(objJson);
+
+        RequestBody requestBody = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), objJson);
+
+        subscription = Network.getInstance("绑定用户", getApplicationContext())
+                .binding_role(requestBody,new ProgressSubscriberNew<>(Object.class, (o, message_id) -> {
+                    if (message_id.equals("success")){
+                        //绑定成功！
+                        Toast.makeText(getApplicationContext(), "绑定成功", Toast.LENGTH_SHORT).show();
+                    }
+                }, new SubscriberOnNextListener<Bean<Object>>() {
+                    @Override
+                    public void onNext(Bean<Object> result) {
+                    }
+
+                    @Override
+                    public void onError(String error) {
+                        Log.e(TAG, "修改失败：" + error);
+                        Toast.makeText(getApplicationContext(), error, Toast.LENGTH_SHORT).show();
+                    }
+                }, this, true));
 
     }
 }

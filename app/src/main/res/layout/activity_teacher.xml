@@ -33,15 +33,18 @@
             android:textSize="25sp"
             android:textStyle="bold" />
 
-        <ImageView
-            android:id="@+id/question_btn"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_alignParentRight="true"
+        <TextView
+            android:id="@+id/tv_complete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="19dp"
             android:layout_marginRight="20dp"
-            android:layout_marginBottom="15dp"
-            android:src="@drawable/quesition_icon" />
+            android:text="@string/tv123"
+            android:textColor="@color/top_heiziti"
+            android:textSize="17sp" />
     </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
