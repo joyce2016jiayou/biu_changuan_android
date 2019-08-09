@@ -168,6 +168,10 @@
     <string name="tv124">高低时峰</string>
     <string name="tv125">低峰时间段</string>
     <string name="tv126">高峰时间段</string>
+    <string name="tv_qianbao">钱包</string>
+    <string name="tv_money_details">收支明细</string>
+    <string name="tv_tixian">提现</string>
+    <string name="tv_tixian_money">提现金额</string>
 
     <string name="alert_dialog_tishi1">温馨提示</string>
     <string name="alert_dialog_tishi2">解绑银行卡</string>
@@ -203,5 +207,8 @@
     <string name="close_flash">关闭闪光灯</string>
     <string name="gallery">相册</string>
     <string name="scan_failed_tip">Scan image failed, please retry.</string>
+    <string name="tv_tixian_ok">确认提现</string>
+    <string name="tv_all_tixian">全部提现</string>
+    <string name="tv_now_tixian">立即提现</string>
 
 </resources>
