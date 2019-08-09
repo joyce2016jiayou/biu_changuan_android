@@ -71,21 +71,27 @@ public class UpdatePasswordActivity extends BaseActivity {
             return;
         }
         Map<String, String> params = new HashMap<>();
+        params.put("gymAreaNum",Network.place_number);
         params.put("oldPassWord", edit_old_password.getText().toString());
-        params.put("phone", "18380583083");
+        params.put("phone", (String)SharedPreferencesHelper.get(getApplicationContext(), "phone_number", ""));
         params.put("newPass1", edit_new_password1.getText().toString());
         params.put("newPass2", edit_password2.getText().toString());
         Gson gson = new Gson();
         String json_params = gson.toJson(params);
         Log.e(TAG, "修改密码的参数：" + json_params);
         String json = new Gson().toJson(params);//要传递的json
-        RequestBody requestBody = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), json);
+        RequestBody requestBody = RequestBody.create(null, json);
 
         subscription = Network.getInstance("修改密码", getApplicationContext())
-                .update_my_password(requestBody,new ProgressSubscriberNew<>(Object.class, (o, message_id) -> {
-                    if (message_id.equals("success")){
-                        //修改成功！
+
+                .update_my_password(requestBody,new ProgressSubscriberNew<>(Object.class, new GsonSubscriberOnNextListener<Object>() {
+                    @Override
+                    public void on_post_entity(Object o, String message_id) {
+                        Toast.makeText(getApplicationContext(), message_id, Toast.LENGTH_SHORT).show();
+                        if (message_id.equals("success")){
+                            //修改成功！
                         toLogin();
+                        }
                     }
                 }, new SubscriberOnNextListener<Bean<Object>>() {
                     @Override

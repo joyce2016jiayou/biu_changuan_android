@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.base.BaseActivity;
@@ -26,6 +27,8 @@ public class ZhangHaoSafeActivity extends BaseActivity {
     LinearLayout exit_btn;
     @BindView(R.id.jujue_btn)
     LinearLayout jujue_btn;
+    @BindView(R.id.phone_number_tv)
+    TextView phone_number_tv;
 
     @Override
     public void initBundle(Bundle parms) {
@@ -37,6 +40,7 @@ public class ZhangHaoSafeActivity extends BaseActivity {
         setContentLayout(R.layout.activity_zhang_hao_safe);
         ButterKnife.bind(this);
         isShowTitle(false);
+        phone_number_tv.setText((String)SharedPreferencesHelper.get(getApplicationContext(), "phone_number", ""));
     }
 
     @Override
