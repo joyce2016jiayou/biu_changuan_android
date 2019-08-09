@@ -506,7 +506,30 @@ public class Network {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
     }
-
+    /**
+     * 修改密码
+     * @param subscriber
+     * @return
+     */
+    public Subscription update_my_password(RequestBody params, Subscriber<Bean<Object>> subscriber) {
+        return service.update_my_password(params)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+    /**
+     * 设置高低峰时段
+     * @param subscriber
+     * @return
+     */
+    public Subscription setHighAndLowTime(RequestBody params, Subscriber<Bean<Object>> subscriber) {
+        return service.setHighAndLowTime(params)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
     /**
      * 获取课程详情
      *

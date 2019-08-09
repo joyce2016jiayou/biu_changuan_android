@@ -9,6 +9,7 @@ import android.media.MediaMetadata;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.adapter.ExRecyclerAdapter;
@@ -26,6 +27,9 @@ public class RoleActivity extends BaseActivity {
     RecyclerView rc_view;
     @BindView(R.id.back_btn)
     ImageView back_btn;
+
+    @BindView(R.id.tv_complete)
+    TextView tv_complete;
 
     private LinearLayoutManager linearLayoutManager;
     private ArrayList<ItemBean> datas;
@@ -56,6 +60,12 @@ public class RoleActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 finish();
+            }
+        });
+        tv_complete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
             }
         });
     }
