@@ -1,6 +1,7 @@
 package com.noplugins.keepfit.android;
 
 import android.content.Context;
+import android.content.Intent;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.google.gson.Gson;
+import com.noplugins.keepfit.android.activity.BuyActivity;
 import com.noplugins.keepfit.android.adapter.ContentPagerAdapterMy;
 import com.noplugins.keepfit.android.base.BaseActivity;
 import com.noplugins.keepfit.android.entity.MaxMessageEntity;
@@ -165,6 +167,9 @@ public class KeepFitActivity extends BaseActivity {
                             @Override
                             public void on_post_entity(List mlocation, String get_message_id) {
                                 Log.e(TAG, "获取审核状态成功：");
+                                Intent intent = new Intent(KeepFitActivity.this, BuyActivity.class);
+                                startActivity(intent);
+
                             }
                         }, new SubscriberOnNextListener<Bean<Object>>() {
                             @Override
@@ -176,6 +181,8 @@ public class KeepFitActivity extends BaseActivity {
                             public void onError(String error) {
 //                                Intent intent = new Intent(KeepFitActivity.this, CheckStatusFailActivity.class);
 //                                startActivity(intent);
+                                Intent intent = new Intent(KeepFitActivity.this, BuyActivity.class);
+                                startActivity(intent);
 
                                 Logger.e(TAG, "获取审核状态报错：" + error);
                                 //Toast.makeText(getApplicationContext(), "获取审核状态失败！", Toast.LENGTH_SHORT).show();

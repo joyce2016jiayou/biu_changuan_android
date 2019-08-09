@@ -62,6 +62,7 @@
                     android:textColor="@color/color_bbbbbb"
                     android:textSize="12sp" />
                 <LinearLayout
+                    android:id="@+id/message_layout"
                     android:layout_width="20dp"
                     android:background="@drawable/circle_bg"
                     android:layout_marginTop="10dp"

@@ -340,6 +340,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
                     android:text="-----"
+                    android:visibility="gone"
                     android:textColor="@color/color_4A4A4A"
                     android:textSize="14sp" />
 
@@ -350,6 +351,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
                     android:text="2019.7.11"
+                    android:visibility="gone"
                     android:textColor="@color/color_4A4A4A"
                     android:textSize="14sp" />
 
@@ -400,6 +402,7 @@
                     android:textSize="15sp" />
 
                 <TextView
+                    android:id="@+id/shihe_people"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
@@ -426,6 +429,7 @@
                     android:textSize="15sp" />
 
                 <TextView
+                    android:id="@+id/tips_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"

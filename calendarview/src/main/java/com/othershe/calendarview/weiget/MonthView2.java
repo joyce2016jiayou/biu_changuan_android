@@ -99,7 +99,7 @@ public class MonthView2 extends ViewGroup {
 
             //TODO: 2019-07-30
             if (item_layout != 0 && calendarViewAdapter != null) {
-                Log.e("积分开始减肥了","积分开始减肥了");
+                //Log.e("积分开始减肥了","积分开始减肥了");
                 view = LayoutInflater.from(mContext).inflate(item_layout, null);
                 TextView[] views = calendarViewAdapter.convertView(view, date);
                 solarDay = views[0];

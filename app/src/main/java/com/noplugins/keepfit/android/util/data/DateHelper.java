@@ -508,4 +508,44 @@ public class DateHelper {
         }
         return temp;
     }
+
+    /**
+     * 获取类似以  2019.09.09 12：00 - 15：00
+     * @param create_date_l
+     * @param end_date_l
+     * @return
+     */
+    public static String get_Date_str(long create_date_l,long end_date_l){
+        Date create_date = DateHelper.transForDate(create_date_l);
+        Date end_date = DateHelper.transForDate(end_date_l);
+        String start_hour = "";
+        if (create_date.getHours() <= 9) {
+            start_hour = "0" + create_date.getHours();
+        } else {
+            start_hour = "" + create_date.getHours();
+        }
+        String start_minute = "";
+        if (create_date.getMinutes() <= 9) {
+            start_minute = "0" + create_date.getMinutes();
+        } else {
+            start_minute = "" + create_date.getMinutes();
+        }
+
+        String end_hour = "";
+        if (create_date.getHours() <= 9) {
+            end_hour = "0" + end_date.getHours();
+        } else {
+            end_hour = "" + end_date.getHours();
+        }
+        String end_minute = "";
+        if (end_date.getMinutes() <= 9) {
+            end_minute = "0" + end_date.getMinutes();
+        } else {
+            end_minute = "" + end_date.getMinutes();
+        }
+
+        return (create_date.getYear() + 1900) + "." + (create_date.getMonth() + 1) + "." + create_date.getDate()
+                + " " + start_hour + ":" + start_minute
+                + "-" + end_hour + ":" + end_minute;
+    }
 }

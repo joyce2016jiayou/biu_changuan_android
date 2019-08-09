@@ -222,7 +222,6 @@ public class DateWhatchAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHold
         TextView class_time = view.findViewById(R.id.class_time);
         TextView class_jieshao = view.findViewById(R.id.class_jieshao);
         TextView tips_tv = view.findViewById(R.id.tips_tv);
-
         class_title_tv.setText(dayWhatch.getCourse_name());
         people_number_tv.setText(dayWhatch.getCome_num() + "/" + dayWhatch.getMax_num());
         teacher_name.setText(dayWhatch.getTeacher_name());
@@ -238,41 +237,11 @@ public class DateWhatchAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHold
             class_room.setText("瑜伽房");
         }
         people_xianzhi.setText(dayWhatch.getMax_num() + "人");
-        long start_time = dayWhatch.getStart_time();
-        long end_time = dayWhatch.getEnd_time();
-        Date start_date = DateHelper.transForDate(start_time);
-        Date end_date = DateHelper.transForDate(end_time);
 
-        String start_hour = "";
-        if (start_date.getHours() <= 9) {
-            start_hour = "0" + start_date.getHours();
-        } else {
-            start_hour = "" + start_date.getHours();
-        }
-        String end_hour = "";
-        if (start_date.getHours() <= 9) {
-            end_hour = "0" + end_date.getHours();
-        } else {
-            end_hour = "" + end_date.getHours();
-        }
-        String start_minute = "";
-        if (end_date.getMinutes() <= 9) {
-            start_minute = "0" + end_date.getMinutes();
-        } else {
-            start_minute = "" + end_date.getMinutes();
-        }
-        String end_minute = "";
-        if (end_date.getMinutes() <= 9) {
-            end_minute = "0" + end_date.getMinutes();
-        } else {
-            end_minute = "" + end_date.getMinutes();
-        }
-
-        class_time.setText((start_date.getYear() + 1900) + "." + (start_date.getMonth() + 1) + "." + start_date.getDate()
-                + " " + start_hour + ":" + start_minute
-                + "-" + end_hour + ":" + end_minute);
+        class_time.setText(DateHelper.get_Date_str(dayWhatch.getStart_time(),dayWhatch.getEnd_time()));
 
         class_jieshao.setText(dayWhatch.getCourse_des());
+
         tips_tv.setText(dayWhatch.getTips());
     }
 

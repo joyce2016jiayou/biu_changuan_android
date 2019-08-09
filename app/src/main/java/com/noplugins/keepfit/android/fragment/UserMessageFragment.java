@@ -102,7 +102,7 @@ public class UserMessageFragment extends Fragment {
                         maxPage = entity.getMaxPage();
                         if (page == 1) {//表示刷新
                             messageBeans.addAll(entity.getMessage());
-                            set_list_resource(messageBeans);
+                            set_list_resource(messageBeans,entity.getNoRead());
                         } else {
                             if (page <= maxPage) {//表示加载还有数据
                                 is_not_more = false;
@@ -143,7 +143,7 @@ public class UserMessageFragment extends Fragment {
      */
     private void change_message_status(MessageEntity.MessageBean messageBean) {
         Map<String, Object> params = new HashMap<>();
-        params.put("messageNum", messageBean.getMessageNum());//场馆编号
+        params.put("messageNum", messageBean.getMessageNum());
         Gson gson = new Gson();
         String json_params = gson.toJson(params);
         String json = new Gson().toJson(params);//要传递的json
@@ -173,13 +173,13 @@ public class UserMessageFragment extends Fragment {
                     }
                 }, getActivity(), true));
     }
-    private void set_list_resource(final List<MessageEntity.MessageBean> dates) {
+    private void set_list_resource(final List<MessageEntity.MessageBean> dates,final List<MessageEntity.NoReadBean> noReadBeans) {
         //设置上拉刷新下拉加载
         recycler_view.setHasFixedSize(false);
         recycler_view.setItemAnimator(null);
         layoutManager = new LinearLayoutManager(getActivity());
         recycler_view.setLayoutManager(layoutManager);
-        userMessageAdapter = new UserMessageAdapter(dates, getActivity());
+        userMessageAdapter = new UserMessageAdapter(dates,noReadBeans ,getActivity());
         recycler_view.setAdapter(userMessageAdapter);
         userMessageAdapter.setOnItemClickListener(new SystemMessageAdapter.OnItemClickListener() {
             @Override

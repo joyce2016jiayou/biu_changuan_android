@@ -87,11 +87,11 @@ public class YaoQiTeacherAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHo
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder view_holder, int position, boolean isItem) {
         if (view_holder instanceof YouYangViewHolder) {
+
             YouYangViewHolder holder = (YouYangViewHolder) view_holder;
             TeacherEntity.TeacherBean teacherBean = list.get(position);
             holder.teacher_name.setText(teacherBean.getTeacherName());
             holder.tag_tv.setText(teacherBean.getSkill());
-
             if (teacherBean.getInviteStatus() == 0) {//获取是否邀请
                 holder.yaoqing_tv.setText("取消邀请");
             } else if (teacherBean.getInviteStatus() == 1) {
@@ -103,8 +103,6 @@ public class YaoQiTeacherAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHo
             } else {
                 holder.yaoqing_tv.setText("邀请");
             }
-
-
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -201,7 +199,7 @@ public class YaoQiTeacherAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHo
         } else {
             gymAreaNum = SharedPreferencesHelper.get(context, "changguan_number", "").toString();
         }
-        params.put("gym_area_num", "GYM19072138381319");//场馆编号
+        params.put("gym_area_num", Network.place_number);//场馆编号
         params.put("gen_teacher_num", teacherBean.getTeacherNum());//场馆编号
         params.put("gym_course_num", gym_course_num);
         Gson gson = new Gson();

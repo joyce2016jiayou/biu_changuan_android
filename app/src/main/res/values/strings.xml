@@ -168,6 +168,12 @@
     <string name="tv124">高低时峰</string>
     <string name="tv125">低峰时间段</string>
     <string name="tv126">高峰时间段</string>
+    <string name="tv127">开启会员</string>
+    <string name="tv128">尊敬的 一二三场馆</string>
+    <string name="tv129">购买会员，您将享受哔哟为您提供的以下服务：</string>
+    <string name="tv130">试用7天</string>
+    <string name="tv131">购买会员</string>
+
     <string name="tv_qianbao">钱包</string>
     <string name="tv_money_details">收支明细</string>
     <string name="tv_tixian">提现</string>

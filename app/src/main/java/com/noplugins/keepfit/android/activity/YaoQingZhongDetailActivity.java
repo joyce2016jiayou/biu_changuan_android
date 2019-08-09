@@ -1,10 +1,12 @@
 package com.noplugins.keepfit.android.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,6 +19,7 @@ import com.noplugins.keepfit.android.adapter.YaoQingZhongDetailAdapter;
 import com.noplugins.keepfit.android.base.BaseActivity;
 import com.noplugins.keepfit.android.entity.ClassDetailEntity;
 import com.noplugins.keepfit.android.entity.ClassEntity;
+import com.noplugins.keepfit.android.util.data.DateHelper;
 import com.noplugins.keepfit.android.util.net.Network;
 import com.noplugins.keepfit.android.util.net.entity.Bean;
 import com.noplugins.keepfit.android.util.net.progress.GsonSubscriberOnNextListener;
@@ -24,6 +27,7 @@ import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriberNew;
 import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -65,7 +69,14 @@ public class YaoQingZhongDetailActivity extends BaseActivity {
     TextView end_time;
     @BindView(R.id.jieshao_tv)
     TextView jieshao_tv;
-
+    @BindView(R.id.class_status)
+    TextView class_status;
+    @BindView(R.id.shihe_people)
+    TextView shihe_people;
+    @BindView(R.id.tips_tv)
+    TextView tips_tv;
+    @BindView(R.id.add_class_btn)
+    LinearLayout add_class_btn;
 
     private LinearLayoutManager layoutManager;
     private YaoQingZhongDetailAdapter yaoQingZhongDetailAdapter;
@@ -91,10 +102,12 @@ public class YaoQingZhongDetailActivity extends BaseActivity {
                 finish();
             }
         });
+    }
 
-
+    @Override
+    protected void onResume() {
+        super.onResume();
         init_class_detail();
-
     }
 
     private void init_class_detail() {
@@ -113,11 +126,9 @@ public class YaoQingZhongDetailActivity extends BaseActivity {
                         List<ClassDetailEntity.TeacherListBean> teacherListBeans = entity.getTeacherList();
                         if(teacherListBeans.size()>0){
                             recycler_view.setVisibility(View.VISIBLE);
-                            yaoqing_number_tv.setVisibility(View.VISIBLE);
                             init_recycle(teacherListBeans);
                         }else{
                             recycler_view.setVisibility(View.GONE);
-                            yaoqing_number_tv.setVisibility(View.GONE);
                             //设置信息
                             set_information(entity);
                         }
@@ -154,9 +165,44 @@ public class YaoQingZhongDetailActivity extends BaseActivity {
 
         price.setText("￥"+entity.getCourse().getPrice()+"/人");
         people_xianzhi.setText(entity.getCourse().getMaxNum()+"人");
-        //class_xunhuan.setText(entity.getCourse().get);
-        create_time.setText(entity.getCourse().getCreateDate()+"");
-        end_time.setText(entity.getCourse().getEndTime()+"");
+        if(entity.getCourse().isLoop()){//有循环
+            class_xunhuan.setVisibility(View.VISIBLE);
+            if(entity.getCourse().getLoopCycle()==1){
+                class_xunhuan.setText("一周");
+            }else if(entity.getCourse().getLoopCycle()==2){
+                class_xunhuan.setText("二周");
+            }else if(entity.getCourse().getLoopCycle()==3){
+                class_xunhuan.setText("三周");
+            }else if(entity.getCourse().getLoopCycle()==4){
+                class_xunhuan.setText("四周");
+            }
+
+        }else{//没有循环
+            class_xunhuan.setVisibility(View.GONE);
+        }
+        if(entity.getTeacherList().size()>0){
+            class_status.setText("已邀请");
+            yaoqing_number_tv.setText(entity.getTeacherList().size()+"/5");
+        }else{
+            class_status.setText("未邀请");
+            yaoqing_number_tv.setVisibility(View.GONE);
+        }
+
+        create_time.setText(DateHelper.get_Date_str(entity.getCourse().getStartTime(),entity.getCourse().getEndTime()));
+        jieshao_tv.setText(entity.getCourse().getCourseDes());
+        shihe_people.setText(entity.getCourse().getSuitPerson());
+        tips_tv.setText(entity.getCourse().getTips());
+        add_class_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(YaoQingZhongDetailActivity.this,YaoQingTeacherActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("create_time",entity.getCourse().getCreateDate());
+                bundle.putString("gym_course_num",entity.getCourse().getCourseNum());
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
 
     }
 
@@ -166,7 +212,7 @@ public class YaoQingZhongDetailActivity extends BaseActivity {
         recycler_view.setItemAnimator(null);
         layoutManager = new LinearLayoutManager(this);
         recycler_view.setLayoutManager(layoutManager);
-        yaoQingZhongDetailAdapter = new YaoQingZhongDetailAdapter(dates, this, yaoqing_number_tv);
+        yaoQingZhongDetailAdapter = new YaoQingZhongDetailAdapter(dates, this, yaoqing_number_tv,gymCourseNum);
         recycler_view.setAdapter(yaoQingZhongDetailAdapter);
     }
 

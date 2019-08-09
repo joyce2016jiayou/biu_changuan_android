@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,10 +29,13 @@ public class UserMessageAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHol
     private TextView yaoqing_number_tv;
     private int select_num;
     private int max_selectnum = 5;
+    private List<MessageEntity.NoReadBean> readBeans;
 
-    public UserMessageAdapter(List<MessageEntity.MessageBean> mlist, Activity mcontext) {
+    public UserMessageAdapter(List<MessageEntity.MessageBean> mlist, List<MessageEntity.NoReadBean> mreadBeans, Activity mcontext) {
         list = mlist;
         context = mcontext;
+        readBeans = mreadBeans;
+
     }
 
     @Override
@@ -102,8 +106,21 @@ public class UserMessageAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHol
             //设置内容
             holder.content_tv.setText(messageBean.getMessageCon());
             //设置消息数目
-            holder.tv_count.setText("99+");
-
+            if (readBeans.size() > 0) {//显示消息气泡
+                for (int i = 0; i < readBeans.size(); i++) {
+                    if (readBeans.get(i).getType() == messageBean.getType()) {
+                        if (readBeans.get(i).getNum() > 99) {
+                            holder.tv_count.setText("99+");
+                            holder.message_layout.setVisibility(View.VISIBLE);
+                        } else {
+                            holder.message_layout.setVisibility(View.VISIBLE);
+                            holder.tv_count.setText(readBeans.get(i).getNum()+"");
+                        }
+                    }
+                }
+            } else {
+                holder.message_layout.setVisibility(View.INVISIBLE);
+            }
         }
     }
 
@@ -176,6 +193,7 @@ public class UserMessageAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHol
         public View view;
         public CircleImageView touxiang_image;
         public TextView title_tv, user_type, content_tv, tv_date_time, tv_count;
+        public LinearLayout message_layout;
 
         public YouYangViewHolder(View itemView, boolean isItem) {
             super(itemView);
@@ -186,6 +204,7 @@ public class UserMessageAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHol
                 content_tv = view.findViewById(R.id.content_tv);
                 tv_date_time = view.findViewById(R.id.tv_date_time);
                 tv_count = view.findViewById(R.id.tv_count);
+                message_layout = view.findViewById(R.id.message_layout);
             }
         }
     }

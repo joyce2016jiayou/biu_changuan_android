@@ -213,7 +213,7 @@ public class AreaSubmitAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHold
      */
     private void post_jujue(MessageEntity.MessageBean messageBean, int select_type, String reason, YouYangViewHolder holder) {
         Map<String, Object> params = new HashMap<>();
-        params.put("gymAreaNum", "GYM19072138381319");//场馆编号
+        params.put("gymAreaNum", Network.place_number);//场馆编号
         params.put("gymCourseCheckNum", messageBean.getGymCourseCheckNum());//numner
         params.put("gymMessageNum", messageBean.getMessageNum());//消息numner
         params.put("agreeType", select_type);//0是拒绝，1是同意

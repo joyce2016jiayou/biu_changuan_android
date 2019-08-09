@@ -111,7 +111,7 @@ public class SystemMessageFragment extends Fragment {
                         maxPage = entity.getMaxPage();
                         if (page == 1) {//表示刷新
                             messageBeans.addAll(entity.getMessage());
-                            set_list_resource(messageBeans);
+                            set_list_resource(entity.getMessage(),entity.getNoRead());
                         } else {
                             if (page <= maxPage) {//表示加载还有数据
                                 is_not_more = false;
@@ -145,14 +145,13 @@ public class SystemMessageFragment extends Fragment {
     }
 
 
-
-    private void set_list_resource(final List<MessageEntity.MessageBean> dates) {
+    private void set_list_resource(final List<MessageEntity.MessageBean> dates, final List<MessageEntity.NoReadBean> reads) {
         //设置上拉刷新下拉加载
         recycler_view.setHasFixedSize(false);
         recycler_view.setItemAnimator(null);
         layoutManager = new LinearLayoutManager(getActivity());
         recycler_view.setLayoutManager(layoutManager);
-        systemMessageAdapter = new SystemMessageAdapter(dates, getActivity());
+        systemMessageAdapter = new SystemMessageAdapter(dates, reads, getActivity());
         systemMessageAdapter.setOnItemClickListener(new SystemMessageAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
@@ -238,6 +237,7 @@ public class SystemMessageFragment extends Fragment {
 
     /**
      * 改变消息类型
+     *
      * @param messageBean
      */
     private void change_message_status(MessageEntity.MessageBean messageBean) {
@@ -256,7 +256,6 @@ public class SystemMessageFragment extends Fragment {
                         //通知KeepFitActivity
                         MessageEvent messageEvent = new MessageEvent("update_message_num");
                         EventBus.getDefault().post(messageEvent);
-
 
 
                     }

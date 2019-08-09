@@ -252,5 +252,13 @@ public interface MyService {
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
     @POST("setHighAndLowTime")
     Observable<Bean<Object>> setHighAndLowTime(@Body RequestBody json);
+    /**
+     * 设置高低峰时段
+     * @return 是否设置成功
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("teacherDetail")
+    Observable<Bean<Object>> teacherDetail(@Body RequestBody json);
+
 
 }

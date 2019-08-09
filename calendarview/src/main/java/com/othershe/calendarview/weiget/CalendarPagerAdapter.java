@@ -77,11 +77,10 @@ public class CalendarPagerAdapter extends PagerAdapter {
                 String date_item1=year+"."+month+"."+date_str;
                 int[] solars = dateBeans.get(i).getSolar();
                 String date_item2 = solars[0]+"."+solars[1]+"."+solars[2];
-                Log.e("比较的日期","date_item1:"+date_item1+"date_item2---->"+date_item2);
-                Log.e("日历自带的日期","date_item2---->"+date_item2+"是否过期"+mothEntities.get(k).isPast());
+                //Log.e("比较的日期","date_item1:"+date_item1+"date_item2---->"+date_item2);
+                //Log.e("日历自带的日期","date_item2---->"+date_item2+"是否过期"+mothEntities.get(k).isPast());
 
                 if(date_item1.equals(date_item2)){
-                    Log.e("技术开发经理","技术开发经理");
                     dateBeans.get(i).setIs_show_circle(true);//是否显示灰点
                     if(mothEntities.get(k).isPast()){//已过期
                         dateBeans.get(i).setIs_out_class(true);

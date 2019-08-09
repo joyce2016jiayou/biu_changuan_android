@@ -90,7 +90,7 @@ public class AddClassActivity extends BaseActivity {
 
     private void init_class_date() {
         Map<String, Object> params = new HashMap<>();
-        params.put("gymAreaNum", "GYM19072138381319");//场馆编号
+        params.put("gymAreaNum", Network.place_number);//场馆编号
         params.put("page", page);
         subscription = Network.getInstance("课程列表", this)
                 .class_list(params, new ProgressSubscriberNew<>(ClassEntity.class, new GsonSubscriberOnNextListener<ClassEntity>() {

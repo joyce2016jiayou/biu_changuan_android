@@ -137,6 +137,10 @@ public class YaoQingTeacherActivity extends BaseActivity {
             @Override
             public void onItemClick(View view, int position) {
                 Intent intent = new Intent(YaoQingTeacherActivity.this, TeacherDetailActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("genTeacherNum",dates.get(position).getTeacherNum());
+                //bundle.putString("gymCourseNum",dates.get(position).ge);
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });
@@ -204,8 +208,6 @@ public class YaoQingTeacherActivity extends BaseActivity {
                             //刷新完成必须调用此方法停止加载
                             xrefreshview.stopLoadMore(true);
                         }
-
-
                     }
                 }, 1000);//1000是加载的延时，使得有个动画效果
 

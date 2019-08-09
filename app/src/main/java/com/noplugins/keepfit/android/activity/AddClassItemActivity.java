@@ -187,7 +187,7 @@ public class AddClassItemActivity extends BaseActivity {
             gymAreaNum = SharedPreferencesHelper.get(this, "changguan_number", "").toString();
         }
         //params.put("gymAreaNum", gymAreaNum);//场馆编号
-        params.put("gym_area_num", "GYM19072138381319");//场馆编号
+        params.put("gym_area_num", Network.place_number);//场馆编号
         params.put("course_name", edit_class_name.getText().toString());//团课名称
         if (select_target_type.equals("燃脂")) {//训练目标  1燃脂2塑形3体态改善
             params.put("target", "1");
@@ -263,7 +263,6 @@ public class AddClassItemActivity extends BaseActivity {
                         Bundle bundle = new Bundle();
                         bundle.putString("create_time", entity.getStartTime());
                         bundle.putString("gym_course_num", entity.getGym_course_num());
-
                         intent.putExtras(bundle);
                         startActivity(intent);
                         finish();
@@ -428,7 +427,7 @@ public class AddClassItemActivity extends BaseActivity {
 
     private void search_room_people(boolean is_first) {
         Map<String, Object> params = new HashMap<>();
-        params.put("gymAreaNum", "GYM19072138381319");//场馆编号
+        params.put("gymAreaNum", Network.place_number);//场馆编号
         if (is_first) {
             params.put("PlaceType", 1);
         } else {

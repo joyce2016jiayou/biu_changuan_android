@@ -25,9 +25,7 @@ public class CalendarPagerAdapter2 extends PagerAdapter {
     //缓存上一次回收的MonthView
     private LinkedList<MonthView2> cache = new LinkedList<>();
     private SparseArray<MonthView2> mViews = new SparseArray<>();
-
     private int count;
-
     private int item_layout;
     private CalendarViewAdapter calendarViewAdapter;
 
@@ -99,8 +97,8 @@ public class CalendarPagerAdapter2 extends PagerAdapter {
                 String date_item1=year+"."+month+"."+date_str;
                 int[] solars = dateBeans.get(i).getSolar();
                 String date_item2 = solars[0]+"."+solars[1]+"."+solars[2];
-                Log.e("比较的日期","date_item1:"+date_item1+"date_item2---->"+date_item2);
-                Log.e("日历自带的日期","date_item2---->"+date_item2);
+                //Log.e("比较的日期","date_item1:"+date_item1+"date_item2---->"+date_item2);
+                //Log.e("日历自带的日期","date_item2---->"+date_item2);
 
                 if(date_item1.equals(date_item2)){
                     dateBeans.get(i).setIs_have_class(true);
