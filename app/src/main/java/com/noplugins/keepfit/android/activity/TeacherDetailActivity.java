@@ -74,7 +74,6 @@ public class TeacherDetailActivity extends BaseActivity {
         });
         init_teacher_detail();
 
-        setFlowlayout2();
     }
 
     private void init_teacher_detail() {
@@ -115,18 +114,14 @@ public class TeacherDetailActivity extends BaseActivity {
         } else {
             teacher_time.setText(entity.getServiceDur() + "小时");
         }
+
         setFlowlayout1(entity.getSkillList());
+        setFlowlayout2(entity.getLabelList());
 
     }
 
-    private void setFlowlayout2() {
-        // 关键字集合
-        List<String> list = new ArrayList<>();
-        list.add("关键词");
-        list.add("关键词");
-        list.add("关键词");
-        list.add("关键词");
-        list.add("关键词");
+    private void setFlowlayout2(List<String> list) {
+
         // 设置文字大小
         yitie_biaoqian_view.setTextSize(13);
         // 设置文字颜色
@@ -151,12 +146,12 @@ public class TeacherDetailActivity extends BaseActivity {
         });
 
         // 增加关键字
-        yitie_biaoqian_view.addView("关键字六", new FlowLayout.OnItemClickListener() {
-            @Override
-            public void onItemClick(String content) {
-                Toast.makeText(TeacherDetailActivity.this, content, Toast.LENGTH_SHORT).show();
-            }
-        });
+//        yitie_biaoqian_view.addView("关键字六", new FlowLayout.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(String content) {
+//                Toast.makeText(TeacherDetailActivity.this, content, Toast.LENGTH_SHORT).show();
+//            }
+//        });
     }
 
     private void setFlowlayout1(List<String> skills) {

@@ -34,6 +34,15 @@ public class TeacherDetailEntity {
     private int deleted;
     private String inviteType;
 
+    public List<String> getLabelList() {
+        return labelList;
+    }
+
+    public void setLabelList(List<String> labelList) {
+        this.labelList = labelList;
+    }
+
+    private List<String> labelList;
     public List<String> getSkillList() {
         return skillList;
     }
