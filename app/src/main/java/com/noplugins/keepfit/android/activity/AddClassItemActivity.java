@@ -266,6 +266,7 @@ public class AddClassItemActivity extends BaseActivity {
 
                         intent.putExtras(bundle);
                         startActivity(intent);
+                        finish();
                     }
                 }, new SubscriberOnNextListener<Bean<Object>>() {
                     @Override

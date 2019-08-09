@@ -62,17 +62,15 @@ public class AddClassActivity extends BaseActivity {
     }
 
     @Override
-    public void doBusiness(Context mContext) {
+    protected void onResume() {
+        super.onResume();
         init_class_date();
-//
-//        List<String> strings = new ArrayList<>();
-//        strings.add("1");
-//        strings.add("1");
-//        strings.add("1");
-//        strings.add("1");
-//        strings.add("1");
 
-        set_list_resource(dataBeans);
+    }
+
+    @Override
+    public void doBusiness(Context mContext) {
+
 
         add_class_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,14 +123,19 @@ public class AddClassActivity extends BaseActivity {
         addClassAdapter.setOnItemClickListener(new AddClassAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                if (dataBeans.get(position).getStatus() == 1) {
-                    Intent intent = new Intent(AddClassActivity.this, YaoQingZhongDetailActivity.class);
-                    startActivity(intent);
-                } else {
-                    Intent intent = new Intent(AddClassActivity.this, AddClassDetailActivity.class);
-                    startActivity(intent);
-                }
-
+//                if (dataBeans.get(position).getStatus() == 1) {
+//                    Intent intent = new Intent(AddClassActivity.this, YaoQingZhongDetailActivity.class);
+//                    startActivity(intent);
+//                } else {
+//                    Intent intent = new Intent(AddClassActivity.this, AddClassDetailActivity.class);
+//                    startActivity(intent);
+//                }
+                Intent intent = new Intent(AddClassActivity.this, YaoQingZhongDetailActivity.class);
+                Bundle bundle = new Bundle();
+                Log.e("健康是福",dates.get(position).getCourse_num());
+                bundle.putString("gymCourseNum",dates.get(position).getCourse_num());
+                intent.putExtras(bundle);
+                startActivity(intent);
 
             }
         });

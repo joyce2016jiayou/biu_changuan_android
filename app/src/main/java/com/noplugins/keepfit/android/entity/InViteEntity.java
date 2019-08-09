@@ -15,4 +15,5 @@ public class InViteEntity {
     public void setData(String data) {
         this.data = data;
     }
+
 }

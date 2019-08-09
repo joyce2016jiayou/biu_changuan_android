@@ -39,16 +39,17 @@ public class TeacherEntity {
         private String teacherNum;
         private String teacherName;
         private long createDate;
+        private int inviteStatus;
 
-        public int getInviteType() {
-            return inviteType;
+
+        public int getInviteStatus() {
+            return inviteStatus;
         }
 
-        public void setInviteType(int inviteType) {
-            this.inviteType = inviteType;
+        public void setInviteStatus(int inviteStatus) {
+            this.inviteStatus = inviteStatus;
         }
 
-        private int inviteType;
 
         public String getSkill() {
             return skill;

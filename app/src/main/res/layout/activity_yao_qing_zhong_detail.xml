@@ -68,7 +68,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/class_changdi"
+                    android:id="@+id/class_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
@@ -79,6 +79,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/xianzhi_number_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
@@ -100,6 +101,7 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/teacher_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
@@ -121,6 +123,7 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/price_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
@@ -148,6 +151,7 @@
                     android:textSize="15sp" />
 
                 <TextView
+                    android:id="@+id/class_name1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
@@ -176,6 +180,7 @@
                     android:textSize="15sp" />
 
                 <TextView
+                    android:id="@+id/teacher_name_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
@@ -204,6 +209,7 @@
                     android:textSize="15sp" />
 
                 <TextView
+                    android:id="@+id/class_room"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
@@ -232,6 +238,7 @@
                     android:textSize="15sp" />
 
                 <TextView
+                    android:id="@+id/price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
@@ -260,6 +267,7 @@
                     android:textSize="15sp" />
 
                 <TextView
+                    android:id="@+id/people_xianzhi"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
@@ -288,6 +296,7 @@
                     android:textSize="15sp" />
 
                 <TextView
+                    android:id="@+id/class_xunhuan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
@@ -316,6 +325,7 @@
                     android:textSize="15sp" />
 
                 <TextView
+                    android:id="@+id/create_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
@@ -334,6 +344,7 @@
                     android:textSize="14sp" />
 
                 <TextView
+                    android:id="@+id/end_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
@@ -362,6 +373,7 @@
                     android:textSize="15sp" />
 
                 <TextView
+                    android:id="@+id/jieshao_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"

@@ -12,11 +12,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.andview.refreshview.recyclerview.BaseRecyclerAdapter;
 import com.noplugins.keepfit.android.R;
+import com.noplugins.keepfit.android.entity.ClassDetailEntity;
 
 import java.util.List;
 
 public class YaoQingZhongDetailAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder> {
-    private List<String> list;
+    private List<ClassDetailEntity.TeacherListBean> list;
     private Activity context;
     private static final int EMPTY_VIEW = 2;
     private static final int TYPE_YOUTANG = 1;
@@ -24,7 +25,7 @@ public class YaoQingZhongDetailAdapter extends BaseRecyclerAdapter<RecyclerView.
     private int select_num;
     private int max_selectnum=5;
 
-    public YaoQingZhongDetailAdapter(List<String> mlist, Activity mcontext, TextView myaoqing_number_tv) {
+    public YaoQingZhongDetailAdapter(List<ClassDetailEntity.TeacherListBean> mlist, Activity mcontext, TextView myaoqing_number_tv) {
         list = mlist;
         yaoqing_number_tv = myaoqing_number_tv;
         context = mcontext;
@@ -32,7 +33,6 @@ public class YaoQingZhongDetailAdapter extends BaseRecyclerAdapter<RecyclerView.
 
     @Override
     public RecyclerView.ViewHolder getViewHolder(View view) {
-
         YouYangViewHolder youYangViewHolder = new YouYangViewHolder(view, false);
         return youYangViewHolder;
     }
@@ -70,6 +70,8 @@ public class YaoQingZhongDetailAdapter extends BaseRecyclerAdapter<RecyclerView.
                     }
                 }
             });
+
+
 
             holder.yaoqing_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -122,7 +124,7 @@ public class YaoQingZhongDetailAdapter extends BaseRecyclerAdapter<RecyclerView.
     }
 
 
-    public void setData(List<String> list) {
+    public void setData(List<ClassDetailEntity.TeacherListBean> list) {
         this.list = list;
         notifyDataSetChanged();
     }

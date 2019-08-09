@@ -2,6 +2,7 @@ package com.noplugins.keepfit.android.activity;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -9,16 +10,27 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
 import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.adapter.YaoQiTeacherAdapter;
 import com.noplugins.keepfit.android.adapter.YaoQingZhongDetailAdapter;
 import com.noplugins.keepfit.android.base.BaseActivity;
+import com.noplugins.keepfit.android.entity.ClassDetailEntity;
+import com.noplugins.keepfit.android.entity.ClassEntity;
+import com.noplugins.keepfit.android.util.net.Network;
+import com.noplugins.keepfit.android.util.net.entity.Bean;
+import com.noplugins.keepfit.android.util.net.progress.GsonSubscriberOnNextListener;
+import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriberNew;
+import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.RequestBody;
 
 public class YaoQingZhongDetailActivity extends BaseActivity {
     @BindView(R.id.back_btn)
@@ -27,19 +39,41 @@ public class YaoQingZhongDetailActivity extends BaseActivity {
     RecyclerView recycler_view;
     @BindView(R.id.yaoqing_number_tv)
     TextView yaoqing_number_tv;
+    @BindView(R.id.xianzhi_number_tv)
+    TextView xianzhi_number_tv;
+    @BindView(R.id.class_name)
+    TextView class_name;
+    @BindView(R.id.teacher_name)
+    TextView teacher_name;
+    @BindView(R.id.price_tv)
+    TextView price_tv;
+    @BindView(R.id.class_name1)
+    TextView class_name1;
+    @BindView(R.id.teacher_name_tv)
+    TextView teacher_name_tv;
+    @BindView(R.id.class_room)
+    TextView class_room;
+    @BindView(R.id.price)
+    TextView price;
+    @BindView(R.id.people_xianzhi)
+    TextView people_xianzhi;
+    @BindView(R.id.class_xunhuan)
+    TextView class_xunhuan;
+    @BindView(R.id.create_time)
+    TextView create_time;
+    @BindView(R.id.end_time)
+    TextView end_time;
+    @BindView(R.id.jieshao_tv)
+    TextView jieshao_tv;
+
 
     private LinearLayoutManager layoutManager;
     private YaoQingZhongDetailAdapter yaoQingZhongDetailAdapter;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-    }
+    private String gymCourseNum;
 
     @Override
     public void initBundle(Bundle parms) {
-
+        gymCourseNum = parms.getString("gymCourseNum");
     }
 
     @Override
@@ -57,25 +91,82 @@ public class YaoQingZhongDetailActivity extends BaseActivity {
                 finish();
             }
         });
-        List<String> strings = new ArrayList<>();
-        strings.add("1");
-        strings.add("1");
-        strings.add("1");
-        strings.add("1");
-        strings.add("1");
 
-        init_recycle(strings);
 
+        init_class_detail();
 
     }
 
-    private void init_recycle(final List<String> dates) {
+    private void init_class_detail() {
+        Map<String, Object> params = new HashMap<>();
+        params.put("gymCourseNum", gymCourseNum);//场馆编号
+        Gson gson = new Gson();
+        String json_params = gson.toJson(params);
+        String json = new Gson().toJson(params);//要传递的json
+        RequestBody requestBody = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), json);
+        Log.e("课程详情",json_params);
+        subscription = Network.getInstance("课程详情", this)
+                .class_detail(requestBody, new ProgressSubscriberNew<>(ClassDetailEntity.class, new GsonSubscriberOnNextListener<ClassDetailEntity>() {
+                    @Override
+                    public void on_post_entity(ClassDetailEntity entity, String s) {
+                        Log.e("课程详情","课程详情");
+                        List<ClassDetailEntity.TeacherListBean> teacherListBeans = entity.getTeacherList();
+                        if(teacherListBeans.size()>0){
+                            recycler_view.setVisibility(View.VISIBLE);
+                            yaoqing_number_tv.setVisibility(View.VISIBLE);
+                            init_recycle(teacherListBeans);
+                        }else{
+                            recycler_view.setVisibility(View.GONE);
+                            yaoqing_number_tv.setVisibility(View.GONE);
+                            //设置信息
+                            set_information(entity);
+                        }
+
+                    }
+                }, new SubscriberOnNextListener<Bean<Object>>() {
+                    @Override
+                    public void onNext(Bean<Object> result) {
+
+                    }
+
+                    @Override
+                    public void onError(String error) {
+                        Log.e("课程详情失败", "课程详情失败:" + error);
+                    }
+                }, this, true));
+
+    }
+
+    private void set_information(ClassDetailEntity entity) {
+        xianzhi_number_tv.setText("("+entity.getCourse().getComeNum() + "/" + entity.getCourse().getMaxNum()+")");
+        class_name.setText(entity.getCourse().getCourseName());
+        teacher_name.setText(entity.getCourse().getGenTeacherNum());
+        price_tv.setText("￥"+entity.getCourse().getPrice()+"/人");
+        class_name1.setText(entity.getCourse().getCourseName());
+        teacher_name_tv.setText(entity.getCourse().getGenTeacherNum());
+        if(entity.getCourse().getPlaceType()==1){
+            class_room.setText("有氧操房");
+        }else if(entity.getCourse().getPlaceType()==2){
+            class_room.setText("动感单车");
+        }else if(entity.getCourse().getPlaceType()==3){
+            class_room.setText("瑜伽房");
+        }
+
+        price.setText("￥"+entity.getCourse().getPrice()+"/人");
+        people_xianzhi.setText(entity.getCourse().getMaxNum()+"人");
+        //class_xunhuan.setText(entity.getCourse().get);
+        create_time.setText(entity.getCourse().getCreateDate()+"");
+        end_time.setText(entity.getCourse().getEndTime()+"");
+
+    }
+
+    private void init_recycle(final List<ClassDetailEntity.TeacherListBean> dates) {
         recycler_view.setNestedScrollingEnabled(false);//禁止滑动
         recycler_view.setHasFixedSize(true);
         recycler_view.setItemAnimator(null);
         layoutManager = new LinearLayoutManager(this);
         recycler_view.setLayoutManager(layoutManager);
-        yaoQingZhongDetailAdapter = new YaoQingZhongDetailAdapter(dates, this,yaoqing_number_tv);
+        yaoQingZhongDetailAdapter = new YaoQingZhongDetailAdapter(dates, this, yaoqing_number_tv);
         recycler_view.setAdapter(yaoQingZhongDetailAdapter);
     }
 

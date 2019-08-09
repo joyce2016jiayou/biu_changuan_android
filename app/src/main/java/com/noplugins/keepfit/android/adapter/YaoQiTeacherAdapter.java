@@ -47,7 +47,9 @@ public class YaoQiTeacherAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHo
     private int select_num;
     private int max_selectnum = 5;
     private String gym_course_num;
-    public YaoQiTeacherAdapter(List<TeacherEntity.TeacherBean> mlist, Activity mcontext, TextView myaoqing_number_tv,String m_gym_course_num) {
+    private String gymInviteNum;
+
+    public YaoQiTeacherAdapter(List<TeacherEntity.TeacherBean> mlist, Activity mcontext, TextView myaoqing_number_tv, String m_gym_course_num) {
         list = mlist;
         yaoqing_number_tv = myaoqing_number_tv;
         gym_course_num = m_gym_course_num;
@@ -90,22 +92,17 @@ public class YaoQiTeacherAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHo
             holder.teacher_name.setText(teacherBean.getTeacherName());
             holder.tag_tv.setText(teacherBean.getSkill());
 
-            if (teacherBean.getInviteType()==0) {//获取是否邀请
+            if (teacherBean.getInviteStatus() == 0) {//获取是否邀请
                 holder.yaoqing_tv.setText("取消邀请");
-            }else if(teacherBean.getInviteType()==1){
+            } else if (teacherBean.getInviteStatus() == 1) {
                 holder.yaoqing_tv.setText("已邀请");
-            }else if(teacherBean.getInviteType()==2){
+            } else if (teacherBean.getInviteStatus() == 2) {
                 holder.yaoqing_tv.setText("接受邀请");
-            }else if(teacherBean.getInviteType()==3){
+            } else if (teacherBean.getInviteStatus() == 3) {
                 holder.yaoqing_tv.setText("拒绝邀请");
-            }else{
+            } else {
                 holder.yaoqing_tv.setText("邀请");
             }
-
-
-
-
-
 
 
             holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -125,17 +122,25 @@ public class YaoQiTeacherAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHo
 
 
                     if (select_num < max_selectnum) {
-                        select_num++;
-                        yaoqing_number_tv.setText("(" + select_num + "/5)");
                         //判断是邀请还是取消邀请
-//                        if (holder.yaoqing_tv.getText().equals("已邀请")) {
-//                            holder.yaoqing_tv.setText("取消邀请");
-//                        } else {
-//                            holder.yaoqing_tv.setText("已邀请");
-//                        }
-                        if(teacherBean.getInviteType()==0){
+                        if (holder.yaoqing_tv.getText().equals("邀请")) {
+                            holder.yaoqing_tv.setText("取消邀请");
+                            Log.e("邀请", "邀请");
+                            select_num++;
+
                             //邀请
                             invite(teacherBean);
+                        } else {
+                            holder.yaoqing_tv.setText("邀请");
+                            select_num--;
+
+                            Log.e("取消邀请", "取消邀请");
+                            //取消邀请
+                            cancel_invite();
+                        }
+                        yaoqing_number_tv.setText("(" + select_num + "/5)");
+
+                        /*if(teacherBean.getInviteType()==0){
 
                         }else if(teacherBean.getInviteType()==1){
 
@@ -144,8 +149,9 @@ public class YaoQiTeacherAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHo
                         }else if(teacherBean.getInviteType()==3){
 
                         }else{
-                            //取消邀请
-                        }
+
+
+                        }*/
 
                     } else {
                         Toast.makeText(context, R.string.tv82, Toast.LENGTH_SHORT).show();
@@ -155,6 +161,36 @@ public class YaoQiTeacherAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHo
 
 
         }
+    }
+
+    private void cancel_invite() {
+        Map<String, Object> params = new HashMap<>();
+        params.put("gymInviteNum", gymInviteNum);//老师编号
+        Gson gson = new Gson();
+        String json_params = gson.toJson(params);
+        String json = new Gson().toJson(params);//要传递的json
+        RequestBody requestBody = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), json);
+        Log.e(TAG, "取消邀请参数：" + json_params);
+        Subscription subscription = Network.getInstance("取消邀请", context).
+                cancel_invite(requestBody, new ProgressSubscriberNew<>(String.class, new GsonSubscriberOnNextListener<String>() {
+                    @Override
+                    public void on_post_entity(String entity, String s) {
+                        Log.e("取消邀请成功", "取消邀请成功");
+
+
+                    }
+                }, new SubscriberOnNextListener<Bean<Object>>() {
+                    @Override
+                    public void onNext(Bean<Object> result) {
+
+                    }
+
+                    @Override
+                    public void onError(String error) {
+                        Toast.makeText(context, error, Toast.LENGTH_SHORT).show();
+                        Log.e("取消邀请失败", "取消邀请失败:" + error);
+                    }
+                }, context, true));
     }
 
     private void invite(TeacherEntity.TeacherBean teacherBean) {
@@ -167,7 +203,7 @@ public class YaoQiTeacherAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHo
         }
         params.put("gym_area_num", "GYM19072138381319");//场馆编号
         params.put("gen_teacher_num", teacherBean.getTeacherNum());//场馆编号
-        params.put("gym_course_num",gym_course_num);
+        params.put("gym_course_num", gym_course_num);
         Gson gson = new Gson();
         String json_params = gson.toJson(params);
         String json = new Gson().toJson(params);//要传递的json
@@ -178,6 +214,7 @@ public class YaoQiTeacherAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHo
                     @Override
                     public void on_post_entity(InViteEntity entity, String s) {
                         Log.e("邀请成功", "邀请成功" + entity.getData());
+                        gymInviteNum = entity.getData();
                     }
                 }, new SubscriberOnNextListener<Bean<Object>>() {
                     @Override

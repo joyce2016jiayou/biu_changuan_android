@@ -212,8 +212,15 @@ public interface MyService {
      * @return
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
-    @POST("initializeMessage")
+    @POST("inviteTeacher")
     Observable<Bean<Object>> invite(@Body RequestBody json);
+    /**
+     * 取消邀请
+     * @return
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("cancelInvite")
+    Observable<Bean<Object>> cancel_invite(@Body RequestBody json);
 
     /**
      * 获取用户/产品 统计
@@ -222,5 +229,12 @@ public interface MyService {
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
     @POST("statistics")
     Observable<Bean<Object>> get_statistics(@Body RequestBody json);
+    /**
+     * 取消邀请
+     * @return
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("leagueClass")
+    Observable<Bean<Object>> class_detail(@Body RequestBody json);
 
 }

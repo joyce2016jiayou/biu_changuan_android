@@ -64,7 +64,7 @@ public class YaoQingTeacherActivity extends BaseActivity {
     public void initBundle(Bundle parms) {
         create_time = parms.getString("create_time");
         gym_course_num = parms.getString("gym_course_num");
-        Log.e("创建的时间",create_time);
+        Log.e("创建的时间", create_time);
     }
 
     @Override
@@ -132,7 +132,7 @@ public class YaoQingTeacherActivity extends BaseActivity {
         recycler_view.setItemAnimator(null);
         layoutManager = new LinearLayoutManager(this);
         recycler_view.setLayoutManager(layoutManager);
-        yaoQiTeacherAdapter = new YaoQiTeacherAdapter(dates, this,yaoqing_number_tv,gym_course_num);
+        yaoQiTeacherAdapter = new YaoQiTeacherAdapter(dates, this, yaoqing_number_tv, gym_course_num);
         yaoQiTeacherAdapter.setOnItemClickListener(new YaoQiTeacherAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {

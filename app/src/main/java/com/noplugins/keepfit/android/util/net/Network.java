@@ -479,6 +479,19 @@ public class Network {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
     }
+    /**
+     * 获取教练列表
+     *
+     * @param subscriber
+     * @return
+     */
+    public Subscription cancel_invite(RequestBody params, Subscriber<Bean<Object>> subscriber) {
+        return service.cancel_invite(params)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
 
     /**
      * 获取统计信息
@@ -488,6 +501,20 @@ public class Network {
      */
     public Subscription get_statistics(RequestBody params, Subscriber<Bean<Object>> subscriber) {
         return service.get_statistics(params)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 获取课程详情
+     *
+     * @param subscriber
+     * @return
+     */
+    public Subscription class_detail(RequestBody params, Subscriber<Bean<Object>> subscriber) {
+        return service.class_detail(params)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
