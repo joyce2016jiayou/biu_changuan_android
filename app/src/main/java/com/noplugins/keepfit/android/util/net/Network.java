@@ -48,7 +48,9 @@ public class Network {
     public MyService service;
     public static String token = "";
     //测试服
-    public static String main_url = "http://192.168.1.205:8888/api/gym-service/";
+    //public static String main_url = "http://192.168.1.205:8888/api/gym-service/";
+
+    public static String main_url = "http://kft.ahcomg.com/api/gym-service/";
 
     public static String place_number = "GYM19072138381319";
 
@@ -72,6 +74,7 @@ public class Network {
     }
 
     Retrofit retrofit;
+
     private Network(String method, Context context) {
 
         final TrustManager[] trustAllCerts = new TrustManager[]{new X509TrustManager() {
@@ -111,12 +114,12 @@ public class Network {
                 .addInterceptor(new Interceptor() {//添加token
                     @Override
                     public Response intercept(Chain chain) throws IOException {
-                            Request original = chain.request();
-                            Request request = original.newBuilder()
-                                    .header("token", token)
-                                    .method(original.method(), original.body())
-                                    .build();
-                            return chain.proceed(request);
+                        Request original = chain.request();
+                        Request request = original.newBuilder()
+                                .header("token", token)
+                                .method(original.method(), original.body())
+                                .build();
+                        return chain.proceed(request);
                     }
                 })
                 .writeTimeout(DEFAULT_TIMEOUT, TimeUnit.MINUTES)//设置写的超时时间
@@ -197,8 +200,6 @@ public class Network {
     }
 
 
-
-
     /**
      * 验证验证码
      *
@@ -229,6 +230,7 @@ public class Network {
 
     /**
      * 登录
+     *
      * @param subscriber
      * @return
      */
@@ -242,6 +244,7 @@ public class Network {
 
     /**
      * 修改密码
+     *
      * @param subscriber
      * @return
      */
@@ -255,6 +258,7 @@ public class Network {
 
     /**
      * 选择角色
+     *
      * @param subscriber
      * @return
      */
@@ -265,12 +269,14 @@ public class Network {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
     }
+
     /**
      * 获取七牛token
+     *
      * @param subscriber
      * @return
      */
-    public Subscription get_qiniu_token(Map<String, String> params,Subscriber<Bean<Object>> subscriber) {
+    public Subscription get_qiniu_token(Map<String, String> params, Subscriber<Bean<Object>> subscriber) {
         return service.get_qiniu_token(params)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
@@ -280,10 +286,11 @@ public class Network {
 
     /**
      * 测试获取七牛token
+     *
      * @param subscriber
      * @return
      */
-    public Subscription get_qiniu_url(Map<String, String> params,Subscriber<Bean<Object>> subscriber) {
+    public Subscription get_qiniu_url(Map<String, String> params, Subscriber<Bean<Object>> subscriber) {
         return service.get_qiniu_url(params)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
@@ -293,10 +300,11 @@ public class Network {
 
     /**
      * 提交审核资料
+     *
      * @param subscriber
      * @return
      */
-    public Subscription submit_information(RequestBody params,Subscriber<Bean<Object>> subscriber) {
+    public Subscription submit_information(RequestBody params, Subscriber<Bean<Object>> subscriber) {
         return service.submit_information(params)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
@@ -345,6 +353,7 @@ public class Network {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
     }
+
     /**
      * 课程列表
      *
@@ -387,6 +396,7 @@ public class Network {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
     }
+
     /**
      * 获取月视角
      *
@@ -414,6 +424,7 @@ public class Network {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
     }
+
     /**
      * 获取申请详情
      *
@@ -441,6 +452,7 @@ public class Network {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
     }
+
     /**
      * 获取消息总数
      *
@@ -454,6 +466,7 @@ public class Network {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
     }
+
     /**
      * 获取教练列表
      *
@@ -481,6 +494,7 @@ public class Network {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
     }
+
     /**
      * 获取教练列表
      *
@@ -508,8 +522,10 @@ public class Network {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
     }
+
     /**
      * 修改密码
+     *
      * @param subscriber
      * @return
      */
@@ -520,8 +536,10 @@ public class Network {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
     }
+
     /**
      * 设置高低峰时段
+     *
      * @param subscriber
      * @return
      */
@@ -532,6 +550,7 @@ public class Network {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
     }
+
     /**
      * 获取课程详情
      *
@@ -559,6 +578,7 @@ public class Network {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
     }
+
     /**
      * 批量绑定角色
      *
