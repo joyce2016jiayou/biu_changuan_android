@@ -3,11 +3,12 @@ package com.noplugins.keepfit.android.activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,12 +16,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.gson.Gson;
 import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.adapter.HightLowTimeAdapter;
-import com.noplugins.keepfit.android.adapter.RoleAdapter;
 import com.noplugins.keepfit.android.base.BaseActivity;
 import com.noplugins.keepfit.android.entity.HightLowTimeEntity;
-import com.noplugins.keepfit.android.entity.ItemBean;
-import com.noplugins.keepfit.android.entity.RoleBean;
-import com.noplugins.keepfit.android.entity.TimeEntity;
+import com.noplugins.keepfit.android.entity.TimeSelectEntity;
 import com.noplugins.keepfit.android.util.TimePickerUtils;
 import com.orhanobut.logger.Logger;
 
@@ -42,12 +40,13 @@ public class HightLowTImeActivity extends BaseActivity {
     TextView tv_complete;
 
     private LinearLayoutManager linearLayoutManager;
-    private ArrayList<ItemBean> datas;
     private HightLowTimeAdapter hightLowTimeAdapter;
-    private List<HightLowTimeEntity> completeDatas;
-    private List<TimeEntity> timeEntities;
+    private ArrayList<HightLowTimeEntity> completeDatas;
+    private List<TimeSelectEntity> timeEntities;
     //日期选择
     private TimePicker picker;
+
+    private String arr[];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,16 +72,34 @@ public class HightLowTImeActivity extends BaseActivity {
         linearLayoutManager = new LinearLayoutManager(this);
         rc_view.setLayoutManager(linearLayoutManager);
         rc_view.setNestedScrollingEnabled(false);//禁止滑动
-        datas = new ArrayList<>();
-        hightLowTimeAdapter = new HightLowTimeAdapter(this, datas, R.layout.item_hight_low_time);
-        hightLowTimeAdapter.addData(new ItemBean());
+        hightLowTimeAdapter = new HightLowTimeAdapter(this, completeDatas, R.layout.item_hight_low_time);
+        hightLowTimeAdapter.addData(new HightLowTimeEntity());
         rc_view.setAdapter(hightLowTimeAdapter);
         hightLowTimeAdapter.setOnItemClickListener(new HightLowTimeAdapter.onItemClick() {
             @Override
-            public void onItemClick(int tag, View view, int position) {
-                TimePickerUtils.time_check(HightLowTImeActivity.this,picker,(TextView) view);
+            public void onItemClick(int tag, View view, TextView endView,int position) {
+
+                getTimeData();
+
+                TimePickerUtils.time_check(HightLowTImeActivity.this,picker,
+                        (TextView) view,endView,timeEntities);
 
             }
+
+            @Override
+            public void onItemClick(int tag, TextView startView, View view, int position) {
+                if ("请选择".equals(startView.getText().toString())){
+                    Toast.makeText(HightLowTImeActivity.this,"请先选择开始时间！",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                Log.d("tag_onItemClick",startView.getText().toString());
+                arr = startView.getText().toString().split(":");
+                getTimeData();
+
+                TimePickerUtils.time_check(HightLowTImeActivity.this,picker,(TextView) view,
+                        arr[0],arr[1],timeEntities);
+            }
+
         });
 
     }
@@ -103,6 +120,32 @@ public class HightLowTImeActivity extends BaseActivity {
         });
     }
 
+    /**
+     * 获取当前时间段列表
+     */
+    private void getTimeData(){
+        timeEntities.clear();
+
+        for (int i = 0; i < rc_view.getChildCount(); i++) {
+            RelativeLayout layout = (RelativeLayout) rc_view.getChildAt(i);
+            TextView tvStartTime = layout.findViewById(R.id.tvStartTime);
+            TextView tvEndTime = layout.findViewById(R.id.tvEndTime);
+
+            if ("请选择".equals(tvStartTime.getText().toString())){
+                return;
+            }
+            if ("请选择".equals(tvEndTime.getText().toString())){
+                return;
+            }
+            TimeSelectEntity timeSelectEntity = new TimeSelectEntity();
+            timeSelectEntity.setStartTimeHour(Integer.parseInt(tvStartTime.getText().toString().split(":")[0]));
+            timeSelectEntity.setStartTimeMinute(Integer.parseInt(tvStartTime.getText().toString().split(":")[1]));
+            timeSelectEntity.setEndTimeHour(Integer.parseInt(tvEndTime.getText().toString().split(":")[0]));
+            timeSelectEntity.setEndTimeMinute(Integer.parseInt(tvEndTime.getText().toString().split(":")[1]));
+
+            timeEntities.add(timeSelectEntity);
+        }
+    }
     /**
      * 点击完成
      */

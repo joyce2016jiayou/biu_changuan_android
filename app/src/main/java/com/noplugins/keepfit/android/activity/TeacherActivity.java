@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
 import com.noplugins.keepfit.android.R;
-import com.noplugins.keepfit.android.adapter.RoleAdapter;
+import com.noplugins.keepfit.android.adapter.TeacherRoleAdapter;
 import com.noplugins.keepfit.android.base.BaseActivity;
 import com.noplugins.keepfit.android.entity.ItemBean;
 import com.noplugins.keepfit.android.entity.RoleBean;
@@ -47,7 +47,7 @@ public class TeacherActivity extends BaseActivity {
 
     private LinearLayoutManager linearLayoutManager;
     private ArrayList<ItemBean> datas;
-    private RoleAdapter roleAdapter;
+    private TeacherRoleAdapter roleAdapter;
     private List<TeacherBean> completeDatas;
 
     @Override
@@ -93,7 +93,7 @@ public class TeacherActivity extends BaseActivity {
         rc_view.setLayoutManager(linearLayoutManager);
         rc_view.setNestedScrollingEnabled(false);//禁止滑动
         datas = new ArrayList<>();
-        roleAdapter = new RoleAdapter(this, datas, R.layout.teacher_role_item);
+        roleAdapter = new TeacherRoleAdapter(this, datas, R.layout.teacher_role_item);
         roleAdapter.addData(new ItemBean());
         rc_view.setAdapter(roleAdapter);
 

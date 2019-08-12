@@ -48,5 +48,12 @@ public class WalletActivity extends BaseActivity {
             Intent intentWallet = new Intent(WalletActivity.this, WithdrawActivity.class);
             startActivity(intentWallet);
         });
+        rl_money_details.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentWallet = new Intent(WalletActivity.this, BillActivity.class);
+                startActivity(intentWallet);
+            }
+        });
     }
 }

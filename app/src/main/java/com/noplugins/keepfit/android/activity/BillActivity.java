@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -20,13 +22,20 @@ import com.noplugins.keepfit.android.util.TimePickerUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.qqtheme.framework.wheelpicker.DatePicker;
 import cn.qqtheme.framework.wheelpicker.TimePicker;
 
+/**
+ * 账单界面
+ */
 public class BillActivity extends BaseActivity {
+
+    @BindView(R.id.back_btn)
+    ImageView back_btn;
     @BindView(R.id.xrefreshview)
     XRefreshView xrefreshview;
     @BindView(R.id.recycler_view)
@@ -36,16 +45,42 @@ public class BillActivity extends BaseActivity {
     @BindView(R.id.tv_filter)
     TextView tv_filter;
 
+    @BindView(R.id.ll_filter)
+    LinearLayout ll_filter;
+    @BindView(R.id.tv_all)
+    TextView tv_all;
+    @BindView(R.id.tv_fitness)
+    TextView tv_fitness;
+    @BindView(R.id.tv_private_instructor)
+    TextView tv_private_instructor;
+    @BindView(R.id.tv_team_class)
+    TextView tv_team_class;
+    @BindView(R.id.tv_withdraw_service)
+    TextView tv_withdraw_service;
+
+
+    @BindView(R.id.tv_withdraw)
+    TextView tv_withdraw;
+    @BindView(R.id.tv_income)
+    TextView tv_income;
+
     DatePicker datePicker;
 
     private View view;
     private LinearLayoutManager layoutManager;
     private BillAdapter billAdapter;
     private int page = 1;
-    private List<BillEntity.BillItemBean> billItemBeans = new ArrayList<>();
+    private List<BillEntity.BillItemBean> billItemBeans;
     private int maxPage;
     private boolean is_not_more;
     private String date;
+    //当前选择的交易类型  默认全部
+    private int nowSelectType = 0;
+    //当前选择的时间年份  默认当前年份
+    private int nowSelectYear;
+    //当前选择的时间月份  默认当前月份
+    private int nowSelectMonth;
+
     @Override
     public void initBundle(Bundle parms) {
 
@@ -56,14 +91,33 @@ public class BillActivity extends BaseActivity {
         setContentLayout(R.layout.activity_bill);
         ButterKnife.bind(this);
         isShowTitle(false);
+
+        billItemBeans =new ArrayList<>();
+        for (int i = 0; i < 9; i++) {
+            BillEntity.BillItemBean billItemBean = new BillEntity.BillItemBean();
+            billItemBean.setMoney("1000");
+            billItemBean.setProjectName("测试项目名字");
+            billItemBean.setProjectContent("测试项目内容");
+            billItemBean.setTime("2019-10-01");
+            billItemBean.setType(new Random().nextInt(5));
+            billItemBeans.add(billItemBean);
+        }
+
+        set_list_resource(billItemBeans);
     }
 
     @Override
     public void doBusiness(Context mContext) {
+        back_btn.setOnClickListener(view -> finish());
         tv_filter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //筛选
+                if (ll_filter.getVisibility() == View.GONE){
+                    ll_filter.setVisibility(View.VISIBLE);
+                } else {
+                    ll_filter.setVisibility(View.GONE);
+                }
             }
         });
         tv_select_time.setOnClickListener(new View.OnClickListener() {
@@ -76,6 +130,37 @@ public class BillActivity extends BaseActivity {
                     //调用接口
                 }
             }
+        });
+
+        tv_all.setOnClickListener(view -> {
+            nowSelectType = 0;
+            tv_filter.setText(tv_all.getText().toString());
+            ll_filter.setVisibility(View.GONE);
+            //调用接口
+        });
+        tv_fitness.setOnClickListener(view -> {
+            nowSelectType = 1;
+            tv_filter.setText(tv_fitness.getText().toString());
+            ll_filter.setVisibility(View.GONE);
+            //调用接口
+        });
+        tv_private_instructor.setOnClickListener(view -> {
+            nowSelectType = 2;
+            tv_filter.setText(tv_private_instructor.getText().toString());
+            ll_filter.setVisibility(View.GONE);
+            //调用接口
+        });
+        tv_team_class.setOnClickListener(view -> {
+            nowSelectType = 3;
+            tv_filter.setText(tv_team_class.getText().toString());
+            ll_filter.setVisibility(View.GONE);
+            //调用接口
+        });
+        tv_withdraw_service.setOnClickListener(view -> {
+            nowSelectType = 4;
+            tv_filter.setText(tv_withdraw_service.getText().toString());
+            ll_filter.setVisibility(View.GONE);
+            //调用接口
         });
     }
 
@@ -140,7 +225,7 @@ public class BillActivity extends BaseActivity {
                     public void run() {
                         page = 1;
                         //填写刷新数据的网络请求，一般page=1，List集合清空操作
-                        billItemBeans.clear();
+//                        billItemBeans.clear();
 //                        initMessageDate();
                         xrefreshview.stopRefresh();//刷新停止
 

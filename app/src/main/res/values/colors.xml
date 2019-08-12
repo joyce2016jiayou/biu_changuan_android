@@ -28,6 +28,7 @@
     <color name="color_E5E5E5">#E5E5E5</color>
     <color name="color_7E7E7E">#7E7E7E</color>
     <color name="color_bk_black">#b7b7b7</color>
+    <color name="color_bg_black">#333333</color>
 
     <!--zxing-->
     <color name="contents_text">#000000</color>

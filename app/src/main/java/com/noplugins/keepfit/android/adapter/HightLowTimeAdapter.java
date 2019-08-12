@@ -4,6 +4,7 @@ import android.content.Context;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -16,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.noplugins.keepfit.android.R;
+import com.noplugins.keepfit.android.entity.HightLowTimeEntity;
 import com.noplugins.keepfit.android.entity.ItemBean;
 import com.noplugins.keepfit.android.entity.TypeItemEntity;
 
@@ -27,19 +29,18 @@ import cn.qqtheme.framework.wheelpicker.DatePicker;
 import cn.qqtheme.framework.wheelpicker.TimePicker;
 
 public class HightLowTimeAdapter extends RecyclerView.Adapter<HightLowTimeAdapter.ViewHolder> {
-    private ArrayList<ItemBean> datas;
     private LayoutInflater mInflater;
     private int mLayoutId;
     private Context mcontext;
-    private List<TypeItemEntity> typeItemEntities = new ArrayList<>();
+    private List<HightLowTimeEntity> completeDatas;
     private String[] typeArrays;
     //定义一个HashMap，用来存放EditText的值，Key是position
     HashMap<Integer, Integer> hashMap = new HashMap<Integer, Integer>();
 
 
 
-    public HightLowTimeAdapter(Context context, ArrayList<ItemBean> data, int layoutId) {
-        this.datas = data;
+    public HightLowTimeAdapter(Context context, ArrayList<HightLowTimeEntity> data, int layoutId) {
+        this.completeDatas = data;
         mInflater = LayoutInflater.from(context);
         mcontext = context;
         typeArrays = mcontext.getResources().getStringArray(R.array.gongneng_types);
@@ -56,7 +57,8 @@ public class HightLowTimeAdapter extends RecyclerView.Adapter<HightLowTimeAdapte
      */
     public static interface onItemClick {
 
-        void onItemClick(int tag, View view, int position);
+        void onItemClick(int tag, View view,TextView endView, int position);
+        void onItemClick(int tag, TextView startView,View view, int position);
     }
 
     /**
@@ -76,14 +78,14 @@ public class HightLowTimeAdapter extends RecyclerView.Adapter<HightLowTimeAdapte
         holder.tvStartTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onItemClick.onItemClick(-55, view, (Integer) view.getTag());
+                onItemClick.onItemClick(-55, view,holder.tvEndTime, (Integer) view.getTag());
             }
         });
 
         holder.tvEndTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onItemClick.onItemClick(-66, view, (Integer) view.getTag());
+                onItemClick.onItemClick(-66, holder.tvStartTime,view, (Integer) view.getTag());
             }
         });
         return holder;
@@ -107,17 +109,22 @@ public class HightLowTimeAdapter extends RecyclerView.Adapter<HightLowTimeAdapte
             @Override
             public void onClick(View view) {
                 if (position == 0) {//表示添加
-                    addData(new ItemBean());
+                    addData(new HightLowTimeEntity());
                 } else {//表示删除
-                    if (position != 0) {
-                        datas.remove(position);
-                        notifyItemRemoved(position);
-                        if (position != datas.size()) {
-                            notifyItemRangeChanged(position, getItemCount());
-                        }
-//                    datas.remove(position);
-//                    notifyDataSetChanged();
+                    // TODO: 2019-08-11 删除有bug
+                    Log.d("Hight_Adapter","del:"+position);
+                    completeDatas.remove(position);
+                    notifyItemRemoved(position);
+                    if (position != completeDatas.size()) {
+                        notifyItemRangeChanged(position, completeDatas.size() - position);
                     }
+//                    completeDatas.remove(position);
+//                    notifyItemRemoved(position);
+//                    if (position != completeDatas.size()) {
+//                        notifyItemRangeChanged(position, getItemCount());
+//                    }
+////                    datas.remove(position);
+//                    notifyItemChanged(position);
                 }
             }
         });
@@ -125,43 +132,24 @@ public class HightLowTimeAdapter extends RecyclerView.Adapter<HightLowTimeAdapte
         //设置下拉选择框
         hashMap.put(position, 0);
 
-
     }
 
     //  添加数据
-    public void addData(ItemBean itemBean) {
+    public void addData(HightLowTimeEntity itemBean) {
 
-        itemBean.setFocus(true);
 //      在list中添加数据，并通知条目加入一条
-        datas.add(datas.size(), itemBean);
+        completeDatas.add(completeDatas.size(), itemBean);
         //添加动画
-        notifyItemInserted(datas.size());
-//        if (position != mData.size()) {
-//            otifyItemRangeChanged(position, mData.size() - position);
-//        }
+        notifyItemInserted(completeDatas.size());
+
 
 
     }
 
-    public ArrayList<ItemBean> getData() {
-        for (int i = 0; i < datas.size(); i++) {
-            ItemBean itemBean = datas.get(i);
-            itemBean.setType_name(typeArrays[hashMap.get(i)]);
-        }
-        return datas;
-    }
-
-    //设置状态
-    private void check(int position) {
-        for (ItemBean l : datas) {
-            l.setFocus(false);
-        }
-        datas.get(position).setFocus(true);
-    }
 
     @Override
     public int getItemCount() {
-        return datas.size();
+        return completeDatas.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

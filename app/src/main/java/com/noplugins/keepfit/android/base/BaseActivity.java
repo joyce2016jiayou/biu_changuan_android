@@ -2,6 +2,8 @@ package com.noplugins.keepfit.android.base;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -37,7 +39,18 @@ public abstract class BaseActivity  extends AppCompatActivity implements EasyPer
     private boolean isShowTitle;
     protected static final int RC_PERM = 123;
 
+    /**
+     * 设置 app 不随着系统字体的调整而变化
+     */
     @Override
+    public Resources getResources() {
+        Resources res = super.getResources();
+        Configuration config = new Configuration();
+        config.setToDefaults();
+        res.updateConfiguration(config, res.getDisplayMetrics());
+        return res;
+    }
+        @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActivityCollectorUtil.addActivity(this);

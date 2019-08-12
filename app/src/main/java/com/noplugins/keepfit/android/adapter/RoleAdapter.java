@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.entity.ItemBean;
+import com.noplugins.keepfit.android.entity.RoleBean;
 import com.noplugins.keepfit.android.entity.TypeItemEntity;
 
 import java.util.ArrayList;
@@ -26,21 +27,23 @@ import java.util.List;
 import lib.demo.spinner.MaterialSpinner;
 
 public class RoleAdapter extends RecyclerView.Adapter<RoleAdapter.ViewHolder> {
-    private ArrayList<ItemBean> datas;
+    private ArrayList<RoleBean> datas;
     private LayoutInflater mInflater;
     private int mLayoutId;
     private Context mcontext;
+    private List<Object> posts;
     private List<TypeItemEntity> typeItemEntities = new ArrayList<>();
     private String[] typeArrays;
     //定义一个HashMap，用来存放EditText的值，Key是position
     HashMap<Integer, Integer> hashMap = new HashMap<Integer, Integer>();
 
-    public RoleAdapter(Context context, ArrayList<ItemBean> data, int layoutId) {
+    public RoleAdapter(Context context, ArrayList<RoleBean> data,List<Object> posts, int layoutId) {
         this.datas = data;
         mInflater = LayoutInflater.from(context);
         mcontext = context;
         typeArrays = mcontext.getResources().getStringArray(R.array.gongneng_types);
         mLayoutId = layoutId;
+        this.posts = posts;
     }
 
     @Override
@@ -56,6 +59,10 @@ public class RoleAdapter extends RecyclerView.Adapter<RoleAdapter.ViewHolder> {
         //第0 不能有删除功能
         if (position == 0) {
             holder.Add_btn.setImageResource(R.drawable.role_add_icon);
+            //且不能点击和修改
+            holder.edit_name.setEnabled(false);
+            holder.edit_phone.setEnabled(false);
+            holder.edit_role.setEnabled(false);
         } else {
             holder.Add_btn.setImageResource(R.drawable.role_jian_btn);
         }
@@ -64,17 +71,18 @@ public class RoleAdapter extends RecyclerView.Adapter<RoleAdapter.ViewHolder> {
             holder.edit_name.removeTextChangedListener(((TextWatcher) holder.edit_name.getTag(R.id.edit_name)));
         }
         //移除了TextWatcher事件后设置item对应的文本
-        holder.edit_name.setText(datas.get(position).getPlace());
-
+        if (position!=0){
+            holder.edit_name.setText(datas.get(position).getUserName());
+        }
         //设置焦点
-        if (datas.get(position).isFocus()) {
+        if (datas.get(position).isFocus() && position != 0) {
             if (!holder.edit_name.isFocused()) {
                 holder.edit_name.requestFocus();
             }
-            CharSequence text = datas.get(position).getPlace();
+            CharSequence text = datas.get(position).getUserName();
             holder.edit_name.setSelection(TextUtils.isEmpty(text) ? 0 : text.length());
         } else {
-            if (holder.edit_name.isFocused()) {
+            if (holder.edit_name.isFocused() && position != 0) {
                 holder.edit_name.clearFocus();
             }
         }
@@ -105,10 +113,10 @@ public class RoleAdapter extends RecyclerView.Adapter<RoleAdapter.ViewHolder> {
             @Override
             public void afterTextChanged(Editable s) {
                 if (TextUtils.isEmpty(s)) {
-                    datas.get(position).setPlace(null);
+                    datas.get(position).setUserName(null);
                 } else {
                     //监听edit 值
-                    datas.get(position).setPlace(s.toString());
+                    datas.get(position).setUserName(s.toString());
                     //将editText中改变的值设置的HashMap中
                     //hashMap.put(position, s.toString());
                 }
@@ -120,7 +128,7 @@ public class RoleAdapter extends RecyclerView.Adapter<RoleAdapter.ViewHolder> {
             @Override
             public void onClick(View view) {
                 if (position == 0) {//表示添加
-                    addData(new ItemBean());
+                    addData(new RoleBean());
                 } else {//表示删除
                     if (position != 0) {
                         datas.remove(position);
@@ -135,14 +143,38 @@ public class RoleAdapter extends RecyclerView.Adapter<RoleAdapter.ViewHolder> {
             }
         });
 
+
         //设置下拉选择框
         hashMap.put(position, 0);
 
+        String[] typeArrays = mcontext.getResources().getStringArray(R.array.tuanke_types);
+        holder.edit_role.setItems(typeArrays);
+
+//        holder.edit_role.setItems(posts);
+//        holder.edit_role.setSelectedIndex(0);
+        holder.edit_role.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
+
+            @Override
+            public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
+                holder.edit_role.setText(item);
+            }
+        });
+        holder.edit_role.setOnNothingSelectedListener(new MaterialSpinner.OnNothingSelectedListener() {
+
+            @Override
+            public void onNothingSelected(MaterialSpinner spinner) {
+                spinner.getSelectedIndex();
+            }
+        });
+
+        holder.edit_name.setText(datas.get(position).getUserName());
+        holder.edit_phone.setText(datas.get(position).getPhone());
+        holder.edit_role.setText(datas.get(position).getType()+"");
 
     }
 
     //  添加数据
-    public void addData(ItemBean itemBean) {
+    public void addData(RoleBean itemBean) {
 
         itemBean.setFocus(true);
 //      在list中添加数据，并通知条目加入一条
@@ -156,17 +188,17 @@ public class RoleAdapter extends RecyclerView.Adapter<RoleAdapter.ViewHolder> {
 
     }
 
-    public ArrayList<ItemBean> getData() {
-        for (int i = 0; i < datas.size(); i++) {
-            ItemBean itemBean = datas.get(i);
-            itemBean.setType_name(typeArrays[hashMap.get(i)]);
-        }
-        return datas;
-    }
-
+//    public ArrayList<ItemBean> getData() {
+//        for (int i = 0; i < datas.size(); i++) {
+//            ItemBean itemBean = datas.get(i);
+//            itemBean.setType_name(typeArrays[hashMap.get(i)]);
+//        }
+//        return datas;
+//    }
+//
     //设置状态
     private void check(int position) {
-        for (ItemBean l : datas) {
+        for (RoleBean l : datas) {
             l.setFocus(false);
         }
         datas.get(position).setFocus(true);
@@ -181,11 +213,15 @@ public class RoleAdapter extends RecyclerView.Adapter<RoleAdapter.ViewHolder> {
 
         private ImageView Add_btn;
         private EditText edit_name;
+        private EditText edit_phone;
+        private MaterialSpinner edit_role;
 
         public ViewHolder(View itemView) {
             super(itemView);
             Add_btn = itemView.findViewById(R.id.Add_btn);
             edit_name = itemView.findViewById(R.id.edit_name);
+            edit_phone = itemView.findViewById(R.id.edit_phone);
+            edit_role = itemView.findViewById(R.id.post_type_spinner);
         }
     }
 }

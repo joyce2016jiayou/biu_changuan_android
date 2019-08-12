@@ -33,19 +33,103 @@
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/m15"
+        android:layout_marginRight="@dimen/m15">
         <TextView
             android:id="@+id/tv_filter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:textColor="@color/top_heiziti"
-            android:text="筛选"/>
+            android:text="筛选"
+            android:textSize="20sp"/>
+        <LinearLayout
+            android:layout_below="@+id/tv_filter"
+            android:id="@+id/ll_filter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/tv_bg_333333"
+            android:visibility="gone">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/m10"
+                android:layout_marginTop="@dimen/m5"
+                android:text="选择相应的交易类型"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/m40"
+                android:orientation="horizontal"
+                android:gravity="center">
+                <TextView
+                    android:id="@+id/tv_all"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="全部"/>
+                <View
+                    android:layout_width="@dimen/m2"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:layout_marginTop="@dimen/m15"
+                    android:layout_marginBottom="@dimen/m15"
+                    android:layout_marginLeft="@dimen/m4"
+                    android:layout_marginRight="@dimen/m4"/>
+
+                <TextView
+                    android:id="@+id/tv_fitness"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="健身服务"/>
+                <View
+                    android:layout_width="@dimen/m2"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:layout_marginTop="@dimen/m15"
+                    android:layout_marginBottom="@dimen/m15"
+                    android:layout_marginLeft="@dimen/m4"
+                    android:layout_marginRight="@dimen/m4"/>
+                <TextView
+                    android:id="@+id/tv_private_instructor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="私教服务"/>
+                <View
+                    android:layout_width="@dimen/m2"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:layout_marginTop="@dimen/m15"
+                    android:layout_marginBottom="@dimen/m15"
+                    android:layout_marginLeft="@dimen/m4"
+                    android:layout_marginRight="@dimen/m4"/>
+                <TextView
+                    android:id="@+id/tv_team_class"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="团课服务"/>
+                <View
+                    android:layout_width="@dimen/m2"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:layout_marginTop="@dimen/m15"
+                    android:layout_marginBottom="@dimen/m15"
+                    android:layout_marginLeft="@dimen/m4"
+                    android:layout_marginRight="@dimen/m4"/>
+                <TextView
+                    android:id="@+id/tv_withdraw_service"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="提现"/>
+
+            </LinearLayout>
+        </LinearLayout>
         <TextView
             android:id="@+id/tv_select_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="2019年7月"
+            android:textSize="20sp"
             android:textColor="@color/top_heiziti"
             android:layout_alignParentRight="true"/>
         <TextView
@@ -54,6 +138,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="提现：¥22222.22"
+            android:layout_marginTop="@dimen/m10"
             android:textColor="@color/top_heiziti"
             android:layout_alignParentRight="true" />
         <TextView
@@ -62,6 +147,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="收入：¥22222.22"
+            android:layout_marginTop="@dimen/m10"
             android:textColor="@color/top_heiziti"
             android:layout_alignParentRight="true" />
     </RelativeLayout>

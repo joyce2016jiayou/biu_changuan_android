@@ -29,7 +29,7 @@
             android:layout_marginRight="31dp"
             android:text="@string/register"
             android:textColor="@color/color_9B9B9B"
-            android:textSize="15sp" />
+            android:textSize="18dp" />
 
         <LinearLayout
             android:id="@+id/center"
@@ -68,7 +68,7 @@
                     android:singleLine="true"
                     android:textColor="@color/color_ACACAC"
                     android:textColorHint="@color/color_ACACAC"
-                    android:textSize="20sp" />
+                    android:textSize="18dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -97,7 +97,7 @@
                     android:singleLine="true"
                     android:textColor="@color/color_ACACAC"
                     android:textColorHint="@color/color_ACACAC"
-                    android:textSize="20sp" />
+                    android:textSize="18dp" />
             </LinearLayout>
 
             <RelativeLayout
@@ -169,7 +169,7 @@
                 android:gravity="center"
                 android:text="@string/tv1"
                 android:textColor="@color/white"
-                android:textSize="20sp" />
+                android:textSize="18dp" />
 
         </LinearLayout>
 

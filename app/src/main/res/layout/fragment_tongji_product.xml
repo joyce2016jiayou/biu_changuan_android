@@ -38,6 +38,14 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/contents_text"
                 android:text="产品消费占比（过去30天）"/>
+            <TextView
+                android:id="@+id/tv_consume_null"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="暂无数据"
+                android:layout_centerInParent="true"
+                android:textColor="@color/contents_text"
+                android:gravity="center"/>
             <!--饼状图1-->
             <com.openxu.cview.chart.piechart.PieChartLayout
                 android:id="@+id/chart_consume"
@@ -46,6 +54,7 @@
                 android:layout_centerVertical="true"
                 android:paddingRight="10dp"
                 android:background="#ffffff"
+                android:visibility="gone"
                 android:orientation="horizontal">
                 <com.openxu.cview.chart.piechart.PieChart
                     android:layout_width="match_parent"
@@ -76,10 +85,19 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/contents_text"
                 android:text="2019年销售金额环比月销售额"/>
+            <TextView
+                android:id="@+id/tv_age_null"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="暂无数据"
+                android:layout_centerInParent="true"
+                android:textColor="@color/contents_text"
+                android:gravity="center"/>
             <!--树状图-->
             <com.noplugins.keepfit.android.util.ui.BarVerticalAndPolylineChart
                 android:layout_below="@+id/tv_user_time"
                 android:id="@+id/chart_user_age"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="250dip"
                 android:background="#ffffff"

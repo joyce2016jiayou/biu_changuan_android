@@ -32,12 +32,21 @@ public class BillEntity {
         this.billItemBeans = billItemBeans;
     }
 
-    public class BillItemBean{
+    public static class BillItemBean{
+        private int type;
         private String time;
         private String projectName;
         private String imgUrl;
         private String projectContent;
         private String money;
+
+        public int getType() {
+            return type;
+        }
+
+        public void setType(int type) {
+            this.type = type;
+        }
 
         public String getTime() {
             return time;

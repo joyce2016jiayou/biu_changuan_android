@@ -18,6 +18,15 @@ public class HightLowTimeEntity {
     private String high_time_price;
     private String normal_price;
 
+    public HightLowTimeEntity() {
+
+    }
+
+    public HightLowTimeEntity(String high_time_start, String high_time_end) {
+        this.high_time_start = high_time_start;
+        this.high_time_end = high_time_end;
+    }
+
     public String getGym_area_num() {
         return gym_area_num;
     }
