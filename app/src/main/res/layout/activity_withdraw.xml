@@ -136,7 +136,7 @@
             android:layout_toLeftOf="@+id/tv_all"
             android:layout_alignParentLeft="true"
             android:gravity="left"
-            android:text="当前可提现余额 10000.00"/>
+            android:text="当前可提现余额 0.00"/>
         <TextView
             android:id="@+id/tv_all"
             android:layout_below="@+id/et_withdraw_money"
@@ -156,7 +156,6 @@
             android:layout_below="@+id/tv_now_money"
             android:layout_marginTop="@dimen/m5"
             android:layout_marginLeft="@dimen/m60"
-            android:text="@string/tv_qianbao"
             />
 
         <TextView

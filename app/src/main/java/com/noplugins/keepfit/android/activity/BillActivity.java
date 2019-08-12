@@ -8,26 +8,38 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.andview.refreshview.XRefreshView;
 import com.andview.refreshview.XRefreshViewFooter;
+import com.google.gson.Gson;
 import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.adapter.BillAdapter;
 import com.noplugins.keepfit.android.base.BaseActivity;
 import com.noplugins.keepfit.android.entity.BillEntity;
+import com.noplugins.keepfit.android.entity.WalletDetailEntity;
 import com.noplugins.keepfit.android.util.TimePickerUtils;
+import com.noplugins.keepfit.android.util.data.SharedPreferencesHelper;
+import com.noplugins.keepfit.android.util.net.Network;
+import com.noplugins.keepfit.android.util.net.entity.Bean;
+import com.noplugins.keepfit.android.util.net.progress.GsonSubscriberOnNextListener;
+import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriberNew;
+import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.qqtheme.framework.wheelpicker.DatePicker;
 import cn.qqtheme.framework.wheelpicker.TimePicker;
+import okhttp3.RequestBody;
 
 /**
  * 账单界面
@@ -93,17 +105,7 @@ public class BillActivity extends BaseActivity {
         isShowTitle(false);
 
         billItemBeans =new ArrayList<>();
-        for (int i = 0; i < 9; i++) {
-            BillEntity.BillItemBean billItemBean = new BillEntity.BillItemBean();
-            billItemBean.setMoney("1000");
-            billItemBean.setProjectName("测试项目名字");
-            billItemBean.setProjectContent("测试项目内容");
-            billItemBean.setTime("2019-10-01");
-            billItemBean.setType(new Random().nextInt(5));
-            billItemBeans.add(billItemBean);
-        }
-
-        set_list_resource(billItemBeans);
+        initBill(null,1);
     }
 
     @Override
@@ -169,8 +171,31 @@ public class BillActivity extends BaseActivity {
      */
     private void initBill(String data,int type){
         //默认获取当月的数据
+        Map<String, Object> params = new HashMap<>();
+        params.put("gymWalletNum", ""+999);
+        params.put("start", 1);
 
+        String json = new Gson().toJson(params);//要传递的json
+        RequestBody requestBody = RequestBody.create(null, json);
 
+        subscription = Network.getInstance("产品反馈", getApplicationContext())
+
+                .searchWalletDetail(requestBody,new ProgressSubscriberNew<>(BillEntity.class, new GsonSubscriberOnNextListener<BillEntity>() {
+                    @Override
+                    public void on_post_entity(BillEntity s, String message_id) {
+                        set_list_resource(s.getBillItemBeans());
+                    }
+                }, new SubscriberOnNextListener<Bean<Object>>() {
+                    @Override
+                    public void onNext(Bean<Object> objectBean) {
+
+                    }
+
+                    @Override
+                    public void onError(String error) {
+
+                    }
+                }, this, true));
     }
 
 
@@ -225,8 +250,8 @@ public class BillActivity extends BaseActivity {
                     public void run() {
                         page = 1;
                         //填写刷新数据的网络请求，一般page=1，List集合清空操作
-//                        billItemBeans.clear();
-//                        initMessageDate();
+                        billItemBeans.clear();
+                        initBill(null,1);
                         xrefreshview.stopRefresh();//刷新停止
 
 
@@ -239,7 +264,7 @@ public class BillActivity extends BaseActivity {
                 new Handler().postDelayed(new Runnable() {
                     public void run() {
                         page = page + 1;
-//                        initMessageDate();
+                       initBill(null,1);
                         //填写加载更多的网络请求，一般page++
 //                        //没有更多数据时候
                         if (is_not_more) {

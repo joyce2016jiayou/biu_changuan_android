@@ -20,14 +20,23 @@ import com.noplugins.keepfit.android.base.BaseActivity;
 import com.noplugins.keepfit.android.entity.HightLowTimeEntity;
 import com.noplugins.keepfit.android.entity.TimeSelectEntity;
 import com.noplugins.keepfit.android.util.TimePickerUtils;
+import com.noplugins.keepfit.android.util.data.SharedPreferencesHelper;
+import com.noplugins.keepfit.android.util.net.Network;
+import com.noplugins.keepfit.android.util.net.entity.Bean;
+import com.noplugins.keepfit.android.util.net.progress.GsonSubscriberOnNextListener;
+import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriberNew;
+import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener;
 import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.qqtheme.framework.wheelpicker.TimePicker;
+import okhttp3.RequestBody;
 
 public class HightLowTImeActivity extends BaseActivity {
 
@@ -156,15 +165,19 @@ public class HightLowTImeActivity extends BaseActivity {
             TextView tvStartTime = layout.findViewById(R.id.tvStartTime);
             TextView tvEndTime = layout.findViewById(R.id.tvEndTime);
 
-            if (TextUtils.isEmpty(tvStartTime.getText().toString())){
+            if ("请选择".equals(tvStartTime.getText().toString())){
+                Toast.makeText(getApplicationContext(), "时间不能为空！", Toast.LENGTH_SHORT).show();
                 return;
             }
-            if (TextUtils.isEmpty(tvEndTime.getText().toString())){
+            if ("请选择".equals(tvEndTime.getText().toString())){
+                Toast.makeText(getApplicationContext(), "时间不能为空！", Toast.LENGTH_SHORT).show();
                 return;
             }
             HightLowTimeEntity hightLowTimeEntity = new HightLowTimeEntity();
+            hightLowTimeEntity.setGym_area_num(Network.place_number);
             hightLowTimeEntity.setHigh_time_start(tvStartTime.getText().toString());
             hightLowTimeEntity.setHigh_time_end(tvEndTime.getText().toString());
+            hightLowTimeEntity.setNormal_price("38");
             completeDatas.add(hightLowTimeEntity);
         }
 
@@ -172,5 +185,38 @@ public class HightLowTImeActivity extends BaseActivity {
         Gson gson = new Gson();
         String objJson = gson.toJson(completeDatas);
         Logger.d(objJson);
+
+        upload();
+    }
+
+    private void upload(){
+        Map<String, String> params = new HashMap<>();
+        params.put("list", Network.place_number);
+        Gson gson = new Gson();
+        String json_params = gson.toJson(params);
+        Log.e(TAG, "修改密码的参数：" + json_params);
+        String json = new Gson().toJson(params);//要传递的json
+        RequestBody requestBody = RequestBody.create(null, json);
+
+        subscription = Network.getInstance("高低时峰", getApplicationContext())
+
+                .setHighAndLowTime(requestBody,new ProgressSubscriberNew<>(String.class, new GsonSubscriberOnNextListener<String>() {
+                    @Override
+                    public void on_post_entity(String s, String message_id) {
+                        Toast.makeText(getApplicationContext(), message_id, Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                }, new SubscriberOnNextListener<Bean<Object>>() {
+                    @Override
+                    public void onNext(Bean<Object> objectBean) {
+
+                    }
+
+                    @Override
+                    public void onError(String error) {
+                        Log.e(TAG, "登录失败：" + error);
+                        Toast.makeText(getApplicationContext(), error, Toast.LENGTH_SHORT).show();
+                    }
+                }, this, true));
     }
 }

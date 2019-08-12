@@ -5,6 +5,7 @@ import com.alibaba.fastjson.annotation.JSONField;
 import com.noplugins.keepfit.android.util.net.entity.Bean;
 import com.noplugins.keepfit.android.util.net.entity.Token;
 
+import java.util.List;
 import java.util.Map;
 
 import okhttp3.MultipartBody;
@@ -276,5 +277,29 @@ public interface MyService {
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
     @POST("gymBinding")
     Observable<Bean<Object>> bindingTeacher(@Body RequestBody json);
+
+    /**
+     * 产品反馈
+     * @return 是否设置成功
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("feeaBackData")
+    Observable<Bean<Object>> feedback(@Body RequestBody json);
+
+    /**
+     * 获取我的账户
+     * @return 账户信息
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("searchWallet")
+    Observable<Bean<Object>> searchWallet(@Body RequestBody json);
+
+    /**
+     * 获取我的账单列表
+     * @return 账户信息
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("searchWalletDetail")
+    Observable<Bean<Object>> searchWalletDetail(@Body RequestBody json);
 
 }

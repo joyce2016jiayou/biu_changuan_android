@@ -64,10 +64,10 @@ public class BillAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder> {
 
                 }
             });
-            holder.user_type.setText(billItemBean.getProjectName());
-            holder.tv_date_time.setText(billItemBean.getTime());
+            holder.user_type.setText(billItemBean.getPkname());
+            holder.tv_date_time.setText(billItemBean.getCreateDate());
             //设置内容
-            holder.content_tv.setText(billItemBean.getProjectContent());
+            holder.content_tv.setText(billItemBean.getRemark());
 
             //提现账单
             if (billItemBean.getType() == 4){
@@ -76,7 +76,7 @@ public class BillAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder> {
                 holder.tv_count.setTextColor(Color.GREEN);
             }
             //设置消息数目
-            holder.tv_count.setText(billItemBean.getMoney());
+            holder.tv_count.setText(""+billItemBean.getMoney());
 
         }
     }

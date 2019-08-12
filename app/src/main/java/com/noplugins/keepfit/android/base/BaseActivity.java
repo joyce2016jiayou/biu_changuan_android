@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.util.ActivityCollectorUtil;
+import com.noplugins.keepfit.android.util.SoftHideKeyBoardUtil;
 import com.noplugins.keepfit.android.util.ToolbarControl;
 import com.noplugins.keepfit.android.util.permission.EasyPermissions;
 import com.noplugins.keepfit.android.util.permission.PermissionActivity;
@@ -54,7 +55,6 @@ public abstract class BaseActivity  extends AppCompatActivity implements EasyPer
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActivityCollectorUtil.addActivity(this);
-
         //设置沉浸栏
         set_status_bar();
 
