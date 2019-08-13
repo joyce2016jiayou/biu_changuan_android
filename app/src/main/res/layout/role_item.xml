@@ -41,19 +41,25 @@
             android:textColor="@color/top_heiziti"
             android:textColorHint="@color/color_9B9B9B"
             android:textSize="13sp" />
-        <EditText
-            android:id="@+id/edit_role"
-            android:layout_width="114dp"
-            android:layout_marginLeft="6dp"
-            android:layout_height="36dp"
+        <LinearLayout
+            android:layout_width="@dimen/m100"
+            android:layout_height="33dp"
+            android:layout_marginLeft="4dp"
             android:background="@drawable/kapian_shurukuang"
-            android:hint="@string/edit_hint29"
-            android:maxLength="10"
-            android:gravity="center"
-            android:singleLine="true"
-            android:textColor="@color/top_heiziti"
-            android:textColorHint="@color/color_9B9B9B"
-            android:textSize="13sp" />
+            android:padding="2dp">
+
+            <lib.demo.spinner.MaterialSpinner
+                android:id="@+id/post_type_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textSize="13sp"
+                android:text="@string/tv_select"
+                spinner:ms_background_color="@android:color/white"
+                spinner:ms_popupwindow_height="wrap_content"
+                spinner:ms_popupwindow_maxheight="200dp"
+                spinner:ms_text_color="@color/color_9B9B9B" />
+        </LinearLayout>
 
         <ImageView
             android:id="@+id/Add_btn"

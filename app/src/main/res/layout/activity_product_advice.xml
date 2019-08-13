@@ -83,6 +83,7 @@
 
 
             <CheckBox
+                android:id="@+id/cb_product_suggest"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_centerVertical="true"
@@ -108,6 +109,7 @@
                 android:textSize="15sp" />
 
             <CheckBox
+                android:id="@+id/cb_fault_feedback"
                 android:layout_width="25dp"
                 android:layout_alignParentRight="true"
                 android:layout_height="25dp"
@@ -133,6 +135,7 @@
                 android:textSize="15sp" />
 
             <CheckBox
+                android:id="@+id/cb_other"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_centerVertical="true"
@@ -153,6 +156,7 @@
             android:textSize="13sp" />
 
         <EditText
+            android:id="@+id/edit_content"
             android:layout_width="match_parent"
             android:layout_height="106dp"
             android:layout_marginLeft="20dp"

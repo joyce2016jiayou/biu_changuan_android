@@ -1,6 +1,6 @@
 package com.noplugins.keepfit.android.entity;
 
-public class TimeEntity {
+public class TimeSelectEntity {
     private int position;
     private int startTimeHour;
     private int startTimeMinute;

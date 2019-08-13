@@ -84,23 +84,21 @@ public class UpdatePasswordActivity extends BaseActivity {
 
         subscription = Network.getInstance("修改密码", getApplicationContext())
 
-                .update_my_password(requestBody,new ProgressSubscriberNew<>(Object.class, new GsonSubscriberOnNextListener<Object>() {
+                .update_my_password(requestBody,new ProgressSubscriberNew<>(String.class, new GsonSubscriberOnNextListener<String>() {
                     @Override
-                    public void on_post_entity(Object o, String message_id) {
+                    public void on_post_entity(String s, String message_id) {
                         Toast.makeText(getApplicationContext(), message_id, Toast.LENGTH_SHORT).show();
-                        if (message_id.equals("success")){
-                            //修改成功！
                         toLogin();
-                        }
                     }
                 }, new SubscriberOnNextListener<Bean<Object>>() {
                     @Override
-                    public void onNext(Bean<Object> result) {
+                    public void onNext(Bean<Object> objectBean) {
+
                     }
 
                     @Override
                     public void onError(String error) {
-                        Log.e(TAG, "修改失败：" + error);
+                        Log.e(TAG, "登录失败：" + error);
                         Toast.makeText(getApplicationContext(), error, Toast.LENGTH_SHORT).show();
                     }
                 }, this, true));

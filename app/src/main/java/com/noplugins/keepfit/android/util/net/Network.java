@@ -48,9 +48,9 @@ public class Network {
     public MyService service;
     public static String token = "";
     //测试服
-    //public static String main_url = "http://192.168.1.205:8888/api/gym-service/";
+    public static String main_url = "http://192.168.1.205:8888/api/gym-service/";
 
-    public static String main_url = "http://kft.ahcomg.com/api/gym-service/";
+//    public static String main_url = "http://kft.ahcomg.com/api/gym-service/";
 
     public static String place_number = "GYM19072138381319";
 
@@ -601,6 +601,47 @@ public class Network {
      */
     public Subscription binding_teacher(RequestBody params, Subscriber<Bean<Object>> subscriber) {
         return service.bindingTeacher(params)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 产品反馈
+     *
+     * @param subscriber
+     * @return
+     */
+    public Subscription feedback(RequestBody params, Subscriber<Bean<Object>> subscriber) {
+        return service.feedback(params)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 获取我的账户
+     *
+     * @param subscriber
+     * @return
+     */
+    public Subscription searchWallet(RequestBody params, Subscriber<Bean<Object>> subscriber) {
+        return service.searchWallet(params)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+    /**
+     * 获取我的账单列表
+     *
+     * @param subscriber
+     * @return
+     */
+    public Subscription searchWalletDetail(RequestBody params, Subscriber<Bean<Object>> subscriber) {
+        return service.searchWalletDetail(params)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

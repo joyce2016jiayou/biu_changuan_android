@@ -1,6 +1,7 @@
 package com.noplugins.keepfit.android.adapter;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,7 +45,7 @@ public class BillAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder> {
         View item_view = null;
         if (viewType == EMPTY_VIEW) {
             item_view = LayoutInflater.from(context).inflate(R.layout.daywhatch_empty_view, parent, false);
-
+            holder = new EmptyViewHolder(item_view, false);
         } else if (viewType == TYPE_YOUTANG) {
             item_view = LayoutInflater.from(context).inflate(R.layout.item_bill, parent, false);
             holder = new BillViewHolder(item_view, true);
@@ -63,12 +64,19 @@ public class BillAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder> {
 
                 }
             });
-            holder.user_type.setText(billItemBean.getProjectName());
-            holder.tv_date_time.setText(billItemBean.getTime());
+            holder.user_type.setText(billItemBean.getPkname());
+            holder.tv_date_time.setText(billItemBean.getCreateDate());
             //设置内容
-            holder.content_tv.setText(billItemBean.getProjectContent());
+            holder.content_tv.setText(billItemBean.getRemark());
+
+            //提现账单
+            if (billItemBean.getType() == 4){
+                holder.tv_count.setTextColor(Color.RED);
+            } else {
+                holder.tv_count.setTextColor(Color.GREEN);
+            }
             //设置消息数目
-            holder.tv_count.setText(billItemBean.getMoney());
+            holder.tv_count.setText(""+billItemBean.getMoney());
 
         }
     }
@@ -92,6 +100,17 @@ public class BillAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder> {
     public void setData(List<BillEntity.BillItemBean> list) {
         this.list = list;
         notifyDataSetChanged();
+    }
+
+    public class EmptyViewHolder extends RecyclerView.ViewHolder {
+        public View view;
+
+        public EmptyViewHolder(View item_view, boolean isItem) {
+            super(item_view);
+            if (isItem) {
+                this.view = item_view;
+            }
+        }
     }
 
 

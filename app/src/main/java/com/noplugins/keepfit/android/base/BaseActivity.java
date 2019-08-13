@@ -2,6 +2,8 @@ package com.noplugins.keepfit.android.base;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.jpush.TagAliasOperatorHelper;
 import com.noplugins.keepfit.android.util.ActivityCollectorUtil;
+import com.noplugins.keepfit.android.util.SoftHideKeyBoardUtil;
 import com.noplugins.keepfit.android.util.ToolbarControl;
 import com.noplugins.keepfit.android.util.permission.EasyPermissions;
 import com.noplugins.keepfit.android.util.permission.PermissionActivity;
@@ -41,11 +44,21 @@ public abstract class BaseActivity  extends AppCompatActivity implements EasyPer
     private boolean isShowTitle;
     protected static final int RC_PERM = 123;
 
+    /**
+     * 设置 app 不随着系统字体的调整而变化
+     */
     @Override
+    public Resources getResources() {
+        Resources res = super.getResources();
+        Configuration config = new Configuration();
+        config.setToDefaults();
+        res.updateConfiguration(config, res.getDisplayMetrics());
+        return res;
+    }
+        @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActivityCollectorUtil.addActivity(this);
-
         //设置沉浸栏
         set_status_bar();
 

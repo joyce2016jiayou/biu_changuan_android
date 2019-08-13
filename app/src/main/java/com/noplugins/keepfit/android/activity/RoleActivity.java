@@ -47,9 +47,10 @@ public class RoleActivity extends BaseActivity {
     TextView tv_complete;
 
     private LinearLayoutManager linearLayoutManager;
-    private ArrayList<ItemBean> datas;
+    private ArrayList<RoleBean> datas;
     private RoleAdapter roleAdapter;
     private List<RoleBean> completeDatas;
+    private List<Object> posts;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +67,7 @@ public class RoleActivity extends BaseActivity {
         ButterKnife.bind(this);
         isShowTitle(false);
         completeDatas = new ArrayList<>();
+        posts = new ArrayList<>();
 
     }
 
@@ -92,8 +94,12 @@ public class RoleActivity extends BaseActivity {
         rc_view.setLayoutManager(linearLayoutManager);
         rc_view.setNestedScrollingEnabled(false);//禁止滑动
         datas = new ArrayList<>();
-        roleAdapter = new RoleAdapter(this, datas, R.layout.role_item);
-        roleAdapter.addData(new ItemBean());
+        roleAdapter = new RoleAdapter(this, datas,posts, R.layout.role_item);
+        RoleBean roleBean = new RoleBean();
+        roleBean.setUserName("我的名字");
+        roleBean.setPhone("电话");
+        roleBean.setUserType(1);
+        roleAdapter.addData(roleBean);
         rc_view.setAdapter(roleAdapter);
 
     }
@@ -107,7 +113,7 @@ public class RoleActivity extends BaseActivity {
             LinearLayout layout = (LinearLayout) rc_view.getChildAt(i);
             EditText et_name = layout.findViewById(R.id.edit_name);
             EditText edit_phone = layout.findViewById(R.id.edit_phone);
-            EditText edit_role = layout.findViewById(R.id.edit_role);
+//            EditText edit_role = layout.findViewById(R.id.edit_role);
 
             if (TextUtils.isEmpty(et_name.getText().toString())){
                 Toast.makeText(getApplicationContext(), "姓名不能为空！", Toast.LENGTH_SHORT).show();
@@ -117,10 +123,10 @@ public class RoleActivity extends BaseActivity {
                 Toast.makeText(getApplicationContext(), "手机号不能为空！", Toast.LENGTH_SHORT).show();
                 return;
             }
-            if (TextUtils.isEmpty(edit_role.getText().toString())){
-                Toast.makeText(getApplicationContext(), "职位不能为空！", Toast.LENGTH_SHORT).show();
-                return;
-            }
+//            if (TextUtils.isEmpty(edit_role.getText().toString())){
+//                Toast.makeText(getApplicationContext(), "职位不能为空！", Toast.LENGTH_SHORT).show();
+//                return;
+//            }
             RoleBean roleBean = new RoleBean();
             roleBean.setUserName(et_name.getText().toString());
             roleBean.setPhone(edit_phone.getText().toString());

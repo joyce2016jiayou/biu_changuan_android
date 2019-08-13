@@ -316,7 +316,7 @@ public class AddClassItemActivity extends BaseActivity {
         if (cDate[2] <= 9) {
             month_tv.setText("0" + cDate[2]);//显示当前月份
         } else {
-            month_tv.setText(cDate[2]);//显示当前月份
+            month_tv.setText(""+cDate[2]);//显示当前月份
         }
 
         select_date.setOnClickListener(new View.OnClickListener() {

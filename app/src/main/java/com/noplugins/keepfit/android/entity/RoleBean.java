@@ -6,6 +6,7 @@ public class RoleBean {
     private String phone;
     private int type = 1;
     private int userType;
+    private boolean focus;
 
     public String getGymAreaNum() {
         return gymAreaNum;
@@ -45,6 +46,14 @@ public class RoleBean {
 
     public void setUserType(int userType) {
         this.userType = userType;
+    }
+
+    public boolean isFocus() {
+        return focus;
+    }
+
+    public void setFocus(boolean focus) {
+        this.focus = focus;
     }
 
 }
