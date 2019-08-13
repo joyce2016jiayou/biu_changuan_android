@@ -16,7 +16,7 @@
 
         <EditText
             android:id="@+id/edit_name"
-            android:layout_width="85dp"
+            android:layout_width="80dp"
             android:layout_marginLeft="12dp"
             android:layout_height="36dp"
             android:background="@drawable/riqi_bg"
@@ -35,14 +35,14 @@
             android:layout_height="36dp"
             android:background="@drawable/kapian_shurukuang"
             android:hint="@string/edit_hint28"
-            android:maxLength="10"
+            android:maxLength="11"
             android:gravity="center"
             android:singleLine="true"
             android:textColor="@color/top_heiziti"
             android:textColorHint="@color/color_9B9B9B"
             android:textSize="13sp" />
         <LinearLayout
-            android:layout_width="@dimen/m100"
+            android:layout_width="@dimen/m80"
             android:layout_height="33dp"
             android:layout_marginLeft="4dp"
             android:background="@drawable/kapian_shurukuang"

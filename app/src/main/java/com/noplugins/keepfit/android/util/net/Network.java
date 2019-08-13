@@ -594,6 +594,20 @@ public class Network {
     }
 
     /**
+     * 获取角色列表
+     *
+     * @param subscriber
+     * @return
+     */
+    public Subscription findBindingRoles(RequestBody params, Subscriber<Bean<Object>> subscriber) {
+        return service.findBindingRoles(params)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    /**
      * 批量绑定教练
      *
      * @param subscriber
@@ -601,6 +615,20 @@ public class Network {
      */
     public Subscription binding_teacher(RequestBody params, Subscriber<Bean<Object>> subscriber) {
         return service.bindingTeacher(params)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 获取教练列表
+     *
+     * @param subscriber
+     * @return
+     */
+    public Subscription findBindingTeachers(RequestBody params, Subscriber<Bean<Object>> subscriber) {
+        return service.findBindingTeachers(params)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

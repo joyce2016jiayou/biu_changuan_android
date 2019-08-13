@@ -6,7 +6,7 @@ public class BillEntity {
 
     private String withdraw;
     private String income;
-    private List<BillItemBean> billItemBeans;
+    private List<BillItemBean> walletList;
 
     public String getWithdraw() {
         return withdraw;
@@ -25,11 +25,11 @@ public class BillEntity {
     }
 
     public List<BillItemBean> getBillItemBeans() {
-        return billItemBeans;
+        return walletList;
     }
 
     public void setBillItemBeans(List<BillItemBean> billItemBeans) {
-        this.billItemBeans = billItemBeans;
+        this.walletList = billItemBeans;
     }
 
     public class BillItemBean{

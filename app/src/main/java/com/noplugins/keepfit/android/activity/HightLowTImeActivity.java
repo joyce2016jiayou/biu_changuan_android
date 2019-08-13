@@ -49,6 +49,7 @@ public class HightLowTImeActivity extends BaseActivity {
     TextView tv_complete;
 
     private LinearLayoutManager linearLayoutManager;
+    private LinearLayoutManager linearLayoutManager1;
     private HightLowTimeAdapter hightLowTimeAdapter;
     private ArrayList<HightLowTimeEntity> completeDatas;
     private List<TimeSelectEntity> timeEntities;
@@ -134,7 +135,9 @@ public class HightLowTImeActivity extends BaseActivity {
      */
     private void getTimeData(){
         timeEntities.clear();
-
+        if (rc_view.getChildCount() <=1){
+            return;
+        }
         for (int i = 0; i < rc_view.getChildCount(); i++) {
             RelativeLayout layout = (RelativeLayout) rc_view.getChildAt(i);
             TextView tvStartTime = layout.findViewById(R.id.tvStartTime);
@@ -182,19 +185,18 @@ public class HightLowTImeActivity extends BaseActivity {
         }
 
 
-        Gson gson = new Gson();
-        String objJson = gson.toJson(completeDatas);
-        Logger.d(objJson);
+//        Gson gson = new Gson();
+//        String objJson = gson.toJson(completeDatas);
+//        Logger.d(objJson);
 
         upload();
     }
 
     private void upload(){
-        Map<String, String> params = new HashMap<>();
-        params.put("list", Network.place_number);
+        Map<String, Object> params = new HashMap<>();
+        params.put("list", completeDatas);
         Gson gson = new Gson();
         String json_params = gson.toJson(params);
-        Log.e(TAG, "修改密码的参数：" + json_params);
         String json = new Gson().toJson(params);//要传递的json
         RequestBody requestBody = RequestBody.create(null, json);
 

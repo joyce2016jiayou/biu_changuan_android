@@ -37,7 +37,7 @@
             android:layout_height="36dp"
             android:background="@drawable/kapian_shurukuang"
             android:hint="@string/edit_hint28"
-            android:maxLength="10"
+            android:maxLength="11"
             android:gravity="center"
             android:singleLine="true"
             android:textColor="@color/top_heiziti"
@@ -56,6 +56,6 @@
         android:layout_marginRight="20dp"
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
-        android:src="@drawable/role_add_icon" />
+        android:src="@drawable/role_jian_btn" />
 
 </RelativeLayout>

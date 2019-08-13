@@ -354,7 +354,7 @@ public class BarVerticalChart extends BaseChart {
             paintLabel.setTextSize(textSizeCoordinate);
             paintLabel.setColor(textColorCoordinate);
             float tw = FontUtil.getFontlength(paintLabel, str);
-            canvas.drawText(str, leftX + oneBarW / 2 - tw / 2, zeroPoint.y + textSpace + leadCoordinate, paintLabel);
+            canvas.drawText(str, leftX - tw / 2, zeroPoint.y + textSpace + leadCoordinate, paintLabel);
 //            LogUtil.i(TAG, "绘制X刻度：leftX="+leftX   +"    "+(leftX + oneBarW/2-tw/2)+"*"+(zeroPoint.y+textSpace + leadCoordinate));
 //            LogUtil.i(TAG, "leftStartPointX="+leftStartPointX+"  leftStart="+leftStart+ "   oneBarW="+oneBarW   +"    barWidth="+barWidth+"   barSpace="+barSpace);
             paintLabel.setTextSize(textSizeTag);

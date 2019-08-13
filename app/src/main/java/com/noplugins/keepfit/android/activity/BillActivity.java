@@ -39,6 +39,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.qqtheme.framework.wheelpicker.DatePicker;
 import cn.qqtheme.framework.wheelpicker.TimePicker;
+import cn.qqtheme.framework.wheelview.entity.DateEntity;
 import okhttp3.RequestBody;
 
 /**
@@ -103,9 +104,10 @@ public class BillActivity extends BaseActivity {
         setContentLayout(R.layout.activity_bill);
         ButterKnife.bind(this);
         isShowTitle(false);
-
+        DateEntity today = DateEntity.today();
+        tv_select_time.setText(today.getYear()+"-"+today.getMonth());
         billItemBeans =new ArrayList<>();
-        initBill(null,1);
+        initBill(1);
     }
 
     @Override
@@ -127,9 +129,10 @@ public class BillActivity extends BaseActivity {
             public void onClick(View view) {
                 //日期选择
                 date = tv_select_time.getText().toString();
-                TimePickerUtils.select_date(BillActivity.this,datePicker,tv_select_time);
+                TimePickerUtils.select_month(BillActivity.this,datePicker,tv_select_time);
                 if (!date.equals(tv_select_time.getText().toString())){
                     //调用接口
+                    initBill(1);
                 }
             }
         });
@@ -139,41 +142,51 @@ public class BillActivity extends BaseActivity {
             tv_filter.setText(tv_all.getText().toString());
             ll_filter.setVisibility(View.GONE);
             //调用接口
+            initBill(1);
         });
         tv_fitness.setOnClickListener(view -> {
-            nowSelectType = 1;
+            nowSelectType = 2;
             tv_filter.setText(tv_fitness.getText().toString());
             ll_filter.setVisibility(View.GONE);
             //调用接口
+            initBill(1);
         });
         tv_private_instructor.setOnClickListener(view -> {
-            nowSelectType = 2;
+            nowSelectType = 3;
             tv_filter.setText(tv_private_instructor.getText().toString());
             ll_filter.setVisibility(View.GONE);
             //调用接口
+            initBill(1);
         });
         tv_team_class.setOnClickListener(view -> {
-            nowSelectType = 3;
+            nowSelectType = 4;
             tv_filter.setText(tv_team_class.getText().toString());
             ll_filter.setVisibility(View.GONE);
             //调用接口
+            initBill(1);
         });
         tv_withdraw_service.setOnClickListener(view -> {
-            nowSelectType = 4;
+            nowSelectType = 1;
             tv_filter.setText(tv_withdraw_service.getText().toString());
             ll_filter.setVisibility(View.GONE);
             //调用接口
+            initBill(1);
         });
     }
 
     /**
      * 获取账单列表
      */
-    private void initBill(String data,int type){
+    private void initBill(int page){
         //默认获取当月的数据
         Map<String, Object> params = new HashMap<>();
         params.put("gymWalletNum", ""+999);
         params.put("start", 1);
+        params.put("nowMonth", tv_select_time.getText().toString()+"-01");
+        if (nowSelectType != 0){
+            params.put("type",nowSelectType );
+        }
+
 
         String json = new Gson().toJson(params);//要传递的json
         RequestBody requestBody = RequestBody.create(null, json);
@@ -183,6 +196,9 @@ public class BillActivity extends BaseActivity {
                 .searchWalletDetail(requestBody,new ProgressSubscriberNew<>(BillEntity.class, new GsonSubscriberOnNextListener<BillEntity>() {
                     @Override
                     public void on_post_entity(BillEntity s, String message_id) {
+
+                        tv_income.setText("提现：¥"+s.getIncome());
+                        tv_withdraw.setText("收入：¥"+s.getWithdraw());
                         set_list_resource(s.getBillItemBeans());
                     }
                 }, new SubscriberOnNextListener<Bean<Object>>() {
@@ -251,7 +267,7 @@ public class BillActivity extends BaseActivity {
                         page = 1;
                         //填写刷新数据的网络请求，一般page=1，List集合清空操作
                         billItemBeans.clear();
-                        initBill(null,1);
+                        initBill(1);
                         xrefreshview.stopRefresh();//刷新停止
 
 
@@ -264,7 +280,7 @@ public class BillActivity extends BaseActivity {
                 new Handler().postDelayed(new Runnable() {
                     public void run() {
                         page = page + 1;
-                       initBill(null,1);
+                       initBill(page);
                         //填写加载更多的网络请求，一般page++
 //                        //没有更多数据时候
                         if (is_not_more) {

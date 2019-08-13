@@ -72,7 +72,7 @@ public class TimePickerUtils {
         picker.setOnTimeSelectedListener(new OnTimeSelectedListener() {
             @Override
             public void onItemSelected(int hour, int minute, int second) {
-                if (TimeCheckUtil.isCoincide(timeEntities,hour + ":" + minute)){
+                if ( TimeCheckUtil.isCoincide(timeEntities,hour + ":" + minute)){
                     Toast.makeText(activity,"时间不能重复！",Toast.LENGTH_SHORT).show();
                 } else {
                     if (minute <= 9) {
@@ -138,6 +138,26 @@ public class TimePickerUtils {
                     textView.setText(year+"年0" + month+"月");
                 } else {
                     textView.setText(year+"年" + month+"月");
+                }
+            }
+        });
+
+    }
+
+    public static void select_month(FragmentActivity activity, DatePicker datePicker, TextView textView){
+        DateEntity today = DateEntity.today();
+        Calendar calendar = Calendar.getInstance();
+        datePicker = new DatePicker(activity, DateMode.YEAR_MONTH);
+        datePicker.setRange(today, new DateEntity(calendar.get(Calendar.YEAR)+3, 12, 31));
+        datePicker.setDefaultValue(today);
+        datePicker.showAtBottom();
+        datePicker.setOnDateSelectedListener(new OnDateSelectedListener() {
+            @Override
+            public void onItemSelected(int year, int month, int day) {
+                if (month <= 9) {
+                    textView.setText(year+"-0" + month);
+                } else {
+                    textView.setText(year+"-" + month);
                 }
             }
         });

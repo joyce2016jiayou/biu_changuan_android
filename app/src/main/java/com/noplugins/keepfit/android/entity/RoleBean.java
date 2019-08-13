@@ -1,59 +1,93 @@
 package com.noplugins.keepfit.android.entity;
 
+import java.util.List;
+
 public class RoleBean {
-    private String gymAreaNum;
-    private String userName;
-    private String phone;
-    private int type = 1;
-    private int userType;
-    private boolean focus;
 
-    public String getGymAreaNum() {
-        return gymAreaNum;
+    private List<RoleEntity> userList;
+
+    public List<RoleEntity> getUserList() {
+        return userList;
     }
 
-    public void setGymAreaNum(String gymAreaNum) {
-        this.gymAreaNum = gymAreaNum;
+    public void setUserList(List<RoleEntity> userList) {
+        this.userList = userList;
     }
 
-    public String getUserName() {
-        return userName;
-    }
+    public static class RoleEntity{
+        private String gymAreaNum;
+        private String userNum;
+        private String name;
+        private String phone;
+        private int type = 0;
+        private int userType;
+        private boolean focus;
+        private int deleted = -1;
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
+        public int getDeleted() {
+            return deleted;
+        }
 
-    public String getPhone() {
-        return phone;
-    }
+        public void setDeleted(int deleted) {
+            this.deleted = deleted;
+        }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
+        public String getGymAreaNum() {
+            return gymAreaNum;
+        }
 
-    public int getType() {
-        return type;
-    }
+        public void setGymAreaNum(String gymAreaNum) {
+            this.gymAreaNum = gymAreaNum;
+        }
 
-    public void setType(int type) {
-        this.type = type;
-    }
+        public String getUserNum() {
+            return userNum;
+        }
 
-    public int getUserType() {
-        return userType;
-    }
+        public void setUserNum(String userNum) {
+            this.userNum = userNum;
+        }
 
-    public void setUserType(int userType) {
-        this.userType = userType;
-    }
+        public String getName() {
+            return name;
+        }
 
-    public boolean isFocus() {
-        return focus;
-    }
+        public void setName(String name) {
+            this.name = name;
+        }
 
-    public void setFocus(boolean focus) {
-        this.focus = focus;
+        public String getPhone() {
+            return phone;
+        }
+
+        public void setPhone(String phone) {
+            this.phone = phone;
+        }
+
+        public int getType() {
+            return type;
+        }
+
+        public void setType(int type) {
+            this.type = type;
+        }
+
+        public int getUserType() {
+            return userType;
+        }
+
+        public void setUserType(int userType) {
+            this.userType = userType;
+        }
+
+        public boolean isFocus() {
+            return focus;
+        }
+
+        public void setFocus(boolean focus) {
+            this.focus = focus;
+        }
+
     }
 
 }

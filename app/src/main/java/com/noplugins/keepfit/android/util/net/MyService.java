@@ -271,12 +271,28 @@ public interface MyService {
     Observable<Bean<Object>> bindingRole(@Body RequestBody json);
 
     /**
+     * 获取已绑定列表
+     * @return 是否设置成功
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("findBindingRoles")
+    Observable<Bean<Object>> findBindingRoles(@Body RequestBody json);
+
+    /**
      * 批量绑定教练
      * @return 是否设置成功
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
     @POST("gymBinding")
     Observable<Bean<Object>> bindingTeacher(@Body RequestBody json);
+
+    /**
+     * 获取已绑定列表
+     * @return 是否设置成功
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("findBindingTeachers")
+    Observable<Bean<Object>> findBindingTeachers(@Body RequestBody json);
 
     /**
      * 产品反馈

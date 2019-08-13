@@ -128,7 +128,7 @@
             android:id="@+id/tv_select_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2019年7月"
+            android:text="2019-08"
             android:textSize="20sp"
             android:textColor="@color/top_heiziti"
             android:layout_alignParentRight="true"/>

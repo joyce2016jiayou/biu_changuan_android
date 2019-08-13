@@ -184,7 +184,7 @@ public class StatisticsUserFragment extends Fragment {
                 List<BarBean> list = new ArrayList<>();
                 list.add(new BarBean(statisticsUserEntity.getFitness().get(i).getResult(), ""));
                 dataList.add(list);
-                strXList.add(statisticsUserEntity.getFitness().get(i).getTime());
+                strXList.add(statisticsUserEntity.getFitness().get(i).getTime()+"点");
             }
             chart_user_time.setLoading(false);
             chart_user_time.setData(dataList, strXList);
@@ -193,7 +193,7 @@ public class StatisticsUserFragment extends Fragment {
         if (statisticsUserEntity.getAge()!=null){
             //年龄柱形图
             chart_user_age.setBarWidth(60);
-            chart_user_age.setBarItemSpace(20);  //柱间距
+            chart_user_age.setBarItemSpace(30);  //柱间距
             chart_user_age.setDebug(false);
             chart_user_age.setBarColor(new int[]{Color.parseColor("#5F93E7")});
             //X轴

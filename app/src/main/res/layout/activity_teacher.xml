@@ -46,11 +46,23 @@
             android:textColor="@color/top_heiziti"
             android:textSize="17sp" />
     </RelativeLayout>
-
+    <Button
+        android:id="@+id/btn_add"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/m60"
+        android:text="添加教练"/>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rc_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
     </androidx.recyclerview.widget.RecyclerView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rc_view_add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
 </LinearLayout>
