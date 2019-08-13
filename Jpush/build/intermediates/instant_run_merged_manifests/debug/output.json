@@ -1,0 +1,1 @@
+[{"outputType":{"type":"INSTANT_RUN_MERGED_MANIFESTS"},"apkData":{"type":"MAIN","splits":[],"versionCode":334,"versionName":"3.3.4","enabled":true,"outputFile":"Jpush-debug.apk","fullName":"debug","baseName":"debug"},"path":"AndroidManifest.xml","properties":{"packageId":"com.noplugins.keepfit.android","split":"","minSdkVersion":"9"}}]

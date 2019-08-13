@@ -21,6 +21,8 @@ import com.noplugins.keepfit.android.util.screen.AndroidWorkaround;
 import com.orhanobut.logger.Logger;
 import java.util.LinkedList;
 import java.util.List;
+
+import cn.jpush.android.api.JPushInterface;
 import rx.Subscription;
 
 import static android.webkit.WebView.enableSlowWholeDocumentDraw;
@@ -75,6 +77,10 @@ public abstract class BaseActivity  extends AppCompatActivity implements EasyPer
         } else {
             toolbar.setVisibility(View.GONE);
         }
+
+        //极光
+        JPushInterface.init(getApplicationContext());
+
 
         doBusiness(getApplicationContext());
 

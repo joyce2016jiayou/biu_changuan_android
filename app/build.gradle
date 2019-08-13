@@ -11,8 +11,13 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
+        manifestPlaceholders = [
+                JPUSH_APPKEY : "3d4375015f70ff991612b924",//值来自开发者平台取得的AppKey
+                JPUSH_CHANNEL: "default_developer",
+        ]
 
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -29,7 +34,6 @@ android {
     packagingOptions {
         exclude('META-INF/LICENSE')
         exclude 'META-INF/rxjava.properties'
-
     }
     allprojects {
         repositories {
@@ -87,19 +91,25 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
     implementation 'io.reactivex.rxjava2:rxjava:2.0.7'
     implementation 'io.reactivex:rxandroid:1.2.0'
+
     //黄牛刀
     implementation 'com.jakewharton:butterknife:10.1.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
+
     //日志
     implementation 'com.orhanobut:logger:2.1.1'
+
     //权限
     implementation 'pub.devrel:easypermissions:1.0.1'
     implementation 'androidx.appcompat:appcompat:1.0.2'
+
     //json
     implementation files('libs/fastjson-1.2.7.jar')
+
     //网络请求
     implementation project(':okhttputils')
     implementation project(':LoadManager')
+
     //友盟
     implementation files('libs/umeng-shareboard-widget-6.9.6.jar')
     implementation files('libs/utdid4all-1.1.5.3_proguard.jar')
@@ -110,35 +120,51 @@ dependencies {
     implementation files('libs/umeng-share-QQ-simplify-6.9.6.jar')
     implementation files('libs/umeng-share-wechat-simplify-6.9.6.jar')
     implementation files('libs/umeng-share-sina-simplify-6.9.6.jar')
+
     //下拉框
     implementation project(':spinner_lib')
+
     //时间选择
     implementation project(':WheelPicker')
     implementation project(path: ':Logger')
+
     //九宫格图片
     implementation 'com.github.bumptech.glide:glide:3.7.0'
     implementation project(':easyPhotos')
+
     //下拉刷新列表
     implementation project(':XrefreshLibrary')
+
     //七牛云
     implementation 'com.qiniu:qiniu-android-sdk:7.3.15'
+
     //二维码扫描
     implementation 'com.yanzhenjie:permission:2.0.0-rc4'
     implementation files('libs/core-3.3.3.jar')
+
     //时间轴
     implementation 'com.vivian.widgets:TimeLineItemDecoration:1.5'
+
     //viewpage指示器
     implementation project(':viewpagerindicator')
+
     //时间轴
     implementation project(':timelinelibrary')
+
     //日历选择
     implementation project(':calendarview')
+
     //圆形控件
     implementation 'de.hdodenhof:circleimageview:2.1.0'
+
     //eventbus
     implementation 'org.greenrobot:eventbus:3.1.1'
+
     //图表控件
     implementation 'com.openxu.viewlib:OXViewLib:1.0.2'
 
+    //极光集成
+    implementation files('libs/jcore-android-2.1.2.jar')
+    implementation files('libs/jpush-android-3.3.4.jar')
 
 }

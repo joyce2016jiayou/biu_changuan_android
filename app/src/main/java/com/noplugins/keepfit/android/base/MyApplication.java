@@ -11,6 +11,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Environment;
 import android.os.Handler;
 import android.util.Log;
+import android.widget.Toast;
 
 
 import androidx.multidex.MultiDex;
@@ -39,6 +40,7 @@ import java.util.concurrent.TimeUnit;
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLSession;
 
+import cn.jpush.android.api.JPushInterface;
 import cn.qqtheme.framework.logger.CqrLog;
 import cn.qqtheme.framework.logger.impl.LoggerImpl;
 import okhttp3.OkHttpClient;
@@ -136,6 +138,16 @@ public class MyApplication extends MultiDexApplication {
         // 重用uploadManager。一般地，只需要创建一个uploadManager对象
         uploadManager = new UploadManager(config);
 
+        //极光
+        JPushInterface.setDebugMode(true);    // 设置开启日志,发布时请关闭日志
+        JPushInterface.init(this);            // 初始化 JPush
+        String rid = JPushInterface.getRegistrationID(getApplicationContext());
+        if (!rid.isEmpty()) {
+            registrationId = rid;
+            Log.e("极光registrationId",registrationId);
+        } else {
+            Toast.makeText(this, "Get registration fail, JPush init failed!", Toast.LENGTH_SHORT).show();
+        }
 
         MultiDex.install(this);
 
