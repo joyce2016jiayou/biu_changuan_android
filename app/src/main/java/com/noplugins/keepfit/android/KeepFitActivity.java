@@ -63,7 +63,21 @@ public class KeepFitActivity extends BaseActivity {
 
     @Override
     public void initBundle(Bundle parms) {
+        if (null != parms) {
+            if (parms.getString("jpush_enter1").equals("jpush_enter1")) {
+                Log.e("进来了", "jpush_enter1");
 
+            } else if (parms.getString("jpush_enter2").equals("jpush_enter2")) {
+                Log.e("进来了", "jpush_enter2");
+
+            } else if (parms.getString("jpush_enter3").equals("jpush_enter3")) {
+                Log.e("进来了", "jpush_enter3");
+
+            } else if (parms.getString("jpush_enter4").equals("jpush_enter4")) {
+                Log.e("进来了", "jpush_enter4");
+
+            }
+        }
     }
 
     @Override

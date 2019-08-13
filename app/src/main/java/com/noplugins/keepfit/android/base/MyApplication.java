@@ -17,6 +17,9 @@ import android.widget.Toast;
 import androidx.multidex.MultiDex;
 import androidx.multidex.MultiDexApplication;
 
+import com.noplugins.keepfit.android.jpush.ExampleUtil;
+import com.noplugins.keepfit.android.jpush.TagAliasOperatorHelper;
+import com.noplugins.keepfit.android.jpush.TagAliasOperatorHelper.TagAliasBean;
 import com.noplugins.keepfit.android.util.net.callback.ErrorCallback;
 import com.qiniu.android.common.FixedZone;
 import com.qiniu.android.storage.Configuration;
@@ -41,10 +44,11 @@ import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLSession;
 
 import cn.jpush.android.api.JPushInterface;
+import cn.jpush.android.api.TagAliasCallback;
 import cn.qqtheme.framework.logger.CqrLog;
 import cn.qqtheme.framework.logger.impl.LoggerImpl;
 import okhttp3.OkHttpClient;
-
+import static com.noplugins.keepfit.android.jpush.TagAliasOperatorHelper.sequence;
 /**
  * Created by shiyujia02 on 2017/8/3.
  */
@@ -109,14 +113,12 @@ public class MyApplication extends MultiDexApplication {
         PlatformConfig.setSinaWeibo("597832238", "1c6785dbf569cc74c60e24c223741593", "http://sns.whalecloud.com");//微博
         PlatformConfig.setQQZone("100424468", "c7394704798a158208a74ab60104f0ba");
 
-
         //日志初始化
         CqrLog.setLogger(new LoggerImpl());
 
         //初始化七牛云
         Recorder recorder = null;
         String dirPath = "/storage/emulated/0/Download";
-
         try {
             File f = File.createTempFile("qiniu_xxxx", ".tmp");
             Log.d("qiniu", f.getAbsolutePath().toString());
@@ -135,23 +137,32 @@ public class MyApplication extends MultiDexApplication {
                 //.recorder(recorder, keyGen)   // keyGen 分片上传时，生成标识符，用于片记录器区分是那个文件的上传记录
                 .zone(FixedZone.zone0)        // 设置区域，指定不同区域的上传域名、备用域名、备用IP。
                 .build();
-        // 重用uploadManager。一般地，只需要创建一个uploadManager对象
-        uploadManager = new UploadManager(config);
+        uploadManager = new UploadManager(config);// 重用uploadManager。一般地，只需要创建一个uploadManager对象
 
-        //极光
+        /**极光*/
         JPushInterface.setDebugMode(true);    // 设置开启日志,发布时请关闭日志
         JPushInterface.init(this);            // 初始化 JPush
         String rid = JPushInterface.getRegistrationID(getApplicationContext());
         if (!rid.isEmpty()) {
             registrationId = rid;
-            Log.e("极光registrationId",registrationId);
+            Log.e("极光registrationId", registrationId);
+            //设置别名
+            TagAliasOperatorHelper.TagAliasBean tagAliasBean = new TagAliasOperatorHelper.TagAliasBean();
+            sequence++;
+            tagAliasBean.alias = "android_alias_key_value" + sequence;
+            tagAliasBean.isAliasAction = true;
+            tagAliasBean.action = TagAliasOperatorHelper.ACTION_SET;
+            TagAliasOperatorHelper.getInstance().handleAction(getApplicationContext(), sequence, tagAliasBean);
+
         } else {
             Toast.makeText(this, "Get registration fail, JPush init failed!", Toast.LENGTH_SHORT).show();
         }
 
+        /**方法负载过多解决*/
         MultiDex.install(this);
 
     }
+
 
 
     /**

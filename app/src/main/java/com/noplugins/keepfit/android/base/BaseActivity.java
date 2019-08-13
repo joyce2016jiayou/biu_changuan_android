@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.noplugins.keepfit.android.R;
+import com.noplugins.keepfit.android.jpush.TagAliasOperatorHelper;
 import com.noplugins.keepfit.android.util.ActivityCollectorUtil;
 import com.noplugins.keepfit.android.util.ToolbarControl;
 import com.noplugins.keepfit.android.util.permission.EasyPermissions;
@@ -26,6 +27,7 @@ import cn.jpush.android.api.JPushInterface;
 import rx.Subscription;
 
 import static android.webkit.WebView.enableSlowWholeDocumentDraw;
+import static com.noplugins.keepfit.android.jpush.TagAliasOperatorHelper.sequence;
 
 public abstract class BaseActivity  extends AppCompatActivity implements EasyPermissions.PermissionCallbacks{
 
@@ -80,7 +82,6 @@ public abstract class BaseActivity  extends AppCompatActivity implements EasyPer
 
         //极光
         JPushInterface.init(getApplicationContext());
-
 
         doBusiness(getApplicationContext());
 
