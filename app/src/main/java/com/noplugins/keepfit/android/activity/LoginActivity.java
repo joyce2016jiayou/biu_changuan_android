@@ -141,6 +141,9 @@ public class LoginActivity extends BaseActivity {
                 if (TextUtils.isEmpty(edit_phone_number.getText())) {
                     Toast.makeText(getApplicationContext(), "电话号码不能为空！", Toast.LENGTH_SHORT).show();
                     return;
+                } else if (!StringsHelper.isMobileOne(edit_phone_number.getText().toString())) {
+                    Toast.makeText(getApplicationContext(), "电话号码格式不正确！", Toast.LENGTH_SHORT).show();
+                    return;
                 } else {
                     Login();
                 }
@@ -167,7 +170,7 @@ public class LoginActivity extends BaseActivity {
                         Log.e(TAG, "登录成功：" + s);
                         if (is_save_number) {//保存密码
 
-                        }else{
+                        } else {
 //                            Intent intent = new Intent(LoginActivity.this, UserPermissionSelectActivity.class);
 //                            startActivity(intent);
 //                            finish();
@@ -189,7 +192,7 @@ public class LoginActivity extends BaseActivity {
                         //todo 首先得判断权限
                         Intent intent = new Intent(LoginActivity.this, KeepFitActivity.class);
                         startActivity(intent);
-                        //finish();
+                        finish();
 
                     }
                 }, new SubscriberOnNextListener<Bean<Object>>() {
@@ -220,7 +223,7 @@ public class LoginActivity extends BaseActivity {
         @Override
         public void afterTextChanged(Editable editable) {
             if (editable.length() == 11) {
-                if (!StringsHelper.isMobileNO(edit_phone_number.getText().toString())) {//校验手机格式
+                if (!StringsHelper.isMobileOne(edit_phone_number.getText().toString())) {//校验手机格式
                     edit_phone_number.setError("手机号码格式不正确！");
                 }
             }

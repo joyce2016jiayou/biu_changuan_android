@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.noplugins.keepfit.android.KeepFitActivity;
+import com.noplugins.keepfit.android.activity.LoginActivity;
+import com.noplugins.keepfit.android.base.MyApplication;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,6 +37,7 @@ public class PushMessageReceiver extends JPushMessageReceiver {
     public void onMessage(Context context, CustomMessage customMessage) {
         Log.e(TAG, "[onMessage] " + customMessage);
         processCustomMessage(context, customMessage);
+
     }
 
     /**
@@ -50,59 +53,57 @@ public class PushMessageReceiver extends JPushMessageReceiver {
      */
     @Override
     public void onNotifyMessageOpened(Context context, NotificationMessage message) {
-        Bundle bundle = new Bundle();
-
         Log.e(TAG, "[onNotifyMessageOpened] " + message.notificationExtras);
-        // String extra = bundle.getString(message.notificationExtras);
-        //Log.e("极光返回的json", extra);
-
-
+        Log.e("极光返回的json", message.notificationExtras);
         JSONObject jsonObject = null;
         String type_id = "";
         try {
             jsonObject = new JSONObject(message.notificationExtras);
             type_id = jsonObject.getString("type");
+        } catch (Throwable throwable) {
 
-        } catch (JSONException e) {
-            e.printStackTrace();
         }
-        Log.e("极光返回的页面跳转的ID", type_id);
-        Intent itent = new Intent(context, KeepFitActivity.class);
-        Bundle message_bunder = new Bundle();
+        //Log.e("极光返回的页面跳转的ID", type_id);
+        MyApplication.destoryActivity("KeepFitActivity");//首先得销毁
+        Intent i = new Intent(context, KeepFitActivity.class);
+        Bundle bundle = new Bundle();
         switch (type_id) {
             case "1"://跳转到消息第一项
-                message_bunder.putString("jpush_enter1", "jpush_enter1");
+                Log.e("进来了接口见风使舵", "进来了");
+                bundle.putString("jpush_enter", "jpush_enter1");
                 break;
             case "2": {
-                message_bunder.putString("jpush_enter2", "jpush_enter2");
+                bundle.putString("jpush_enter", "jpush_enter2");
                 break;
             }
             case "3": {
-                message_bunder.putString("jpush_enter3", "jpush_enter3");
+                bundle.putString("jpush_enter", "jpush_enter3");
                 break;
             }
             case "4": {
-                message_bunder.putString("jpush_enter4", "jpush_enter4");
+                bundle.putString("jpush_enter", "jpush_enter4");
                 break;
             }
         }
-        itent.putExtras(message_bunder);
-        itent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        context.startActivity(itent);
+        bundle.putString("jpush_enter", "jpush_enter2");
+        i.putExtras(bundle);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        context.startActivity(i);
 
-//        try {
-//            //打开自定义的Activity
-//            Intent i = new Intent(context, KeepFitActivity.class);
-//            Bundle bundle = new Bundle();
-//            bundle.putString(JPushInterface.EXTRA_NOTIFICATION_TITLE, message.notificationTitle);
-//            bundle.putString(JPushInterface.EXTRA_ALERT, message.notificationContent);
-//            i.putExtras(bundle);
-//            //i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//            context.startActivity(i);
-//        } catch (Throwable throwable) {
-//
-//        }
+        /*try {
+            MyApplication.destoryActivity("KeepFitActivity");
+            //打开自定义的Activity
+            Intent i = new Intent(context, KeepFitActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putString("jpush_enter", "jpush_enter2");
+            i.putExtras(bundle);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            context.startActivity(i);
+        } catch (Throwable throwable) {
+
+        }*/
 
     }
 

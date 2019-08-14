@@ -1,8 +1,6 @@
 package com.noplugins.keepfit.android.fragment;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -20,11 +18,9 @@ import com.andview.refreshview.XRefreshView;
 import com.andview.refreshview.XRefreshViewFooter;
 import com.google.gson.Gson;
 import com.noplugins.keepfit.android.R;
-import com.noplugins.keepfit.android.adapter.AreaSubmitAdapter;
 import com.noplugins.keepfit.android.adapter.SystemMessageAdapter;
-import com.noplugins.keepfit.android.adapter.ZhanghuMessageAdapter;
 import com.noplugins.keepfit.android.entity.MessageEntity;
-import com.noplugins.keepfit.android.util.MessageEvent;
+import com.noplugins.keepfit.android.util.eventbus.MessageEvent;
 import com.noplugins.keepfit.android.util.net.Network;
 import com.noplugins.keepfit.android.util.net.entity.Bean;
 import com.noplugins.keepfit.android.util.net.progress.GsonSubscriberOnNextListener;
@@ -76,7 +72,6 @@ public class SystemMessageFragment extends Fragment {
         if (view == null) {
             view = inflater.inflate(R.layout.fragment_system_message, container, false);
             ButterKnife.bind(this, view);//绑定黄牛刀
-            EventBus.getDefault().register(getActivity());
 
             initView();
         }
@@ -84,9 +79,10 @@ public class SystemMessageFragment extends Fragment {
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-        EventBus.getDefault().unregister(getActivity());
+    public void onDestroyView() {
+        super.onDestroyView();
+
+
     }
 
     private void initView() {
@@ -111,7 +107,7 @@ public class SystemMessageFragment extends Fragment {
                         maxPage = entity.getMaxPage();
                         if (page == 1) {//表示刷新
                             messageBeans.addAll(entity.getMessage());
-                            set_list_resource(entity.getMessage(),entity.getNoRead());
+                            set_list_resource(entity.getMessage(), entity.getNoRead());
                         } else {
                             if (page <= maxPage) {//表示加载还有数据
                                 is_not_more = false;

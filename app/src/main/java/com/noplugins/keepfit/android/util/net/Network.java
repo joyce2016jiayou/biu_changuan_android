@@ -48,9 +48,9 @@ public class Network {
     public MyService service;
     public static String token = "";
     //测试服
-    public static String main_url = "http://192.168.1.205:8888/api/gym-service/";
+    //public static String main_url = "http://192.168.1.205:8888/api/gym-service/";
 
-//    public static String main_url = "http://kft.ahcomg.com/api/gym-service/";
+    public static String main_url = "http://kft.ahcomg.com/api/gym-service/";
 
     public static String place_number = "GYM19072138381319";
 

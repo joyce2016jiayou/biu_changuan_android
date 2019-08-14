@@ -114,7 +114,6 @@
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
             android:name=".SplashActivity"
-            android:launchMode="singleTask"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -123,8 +122,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".KeepFitActivity"
-            android:launchMode="singleTask">
+            android:name=".KeepFitActivity">
 
             <!--
             <intent-filter>

@@ -1,8 +1,6 @@
 package com.noplugins.keepfit.android.fragment;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -23,7 +21,7 @@ import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.adapter.SystemMessageAdapter;
 import com.noplugins.keepfit.android.adapter.UserMessageAdapter;
 import com.noplugins.keepfit.android.entity.MessageEntity;
-import com.noplugins.keepfit.android.util.MessageEvent;
+import com.noplugins.keepfit.android.util.eventbus.MessageEvent;
 import com.noplugins.keepfit.android.util.net.Network;
 import com.noplugins.keepfit.android.util.net.entity.Bean;
 import com.noplugins.keepfit.android.util.net.progress.GsonSubscriberOnNextListener;
@@ -75,8 +73,15 @@ public class UserMessageFragment extends Fragment {
             view = inflater.inflate(R.layout.fragment_user_message, container, false);
             ButterKnife.bind(this, view);//绑定黄牛刀
             initView();
+
         }
         return view;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
     }
 
     private void initView() {
@@ -102,7 +107,7 @@ public class UserMessageFragment extends Fragment {
                         maxPage = entity.getMaxPage();
                         if (page == 1) {//表示刷新
                             messageBeans.addAll(entity.getMessage());
-                            set_list_resource(messageBeans,entity.getNoRead());
+                            set_list_resource(messageBeans, entity.getNoRead());
                         } else {
                             if (page <= maxPage) {//表示加载还有数据
                                 is_not_more = false;
@@ -136,9 +141,9 @@ public class UserMessageFragment extends Fragment {
     }
 
 
-
     /**
      * 改变消息类型
+     *
      * @param messageBean
      */
     private void change_message_status(MessageEntity.MessageBean messageBean) {
@@ -159,7 +164,6 @@ public class UserMessageFragment extends Fragment {
                         EventBus.getDefault().post(messageEvent);
 
 
-
                     }
                 }, new SubscriberOnNextListener<Bean<Object>>() {
                     @Override
@@ -173,13 +177,14 @@ public class UserMessageFragment extends Fragment {
                     }
                 }, getActivity(), true));
     }
-    private void set_list_resource(final List<MessageEntity.MessageBean> dates,final List<MessageEntity.NoReadBean> noReadBeans) {
+
+    private void set_list_resource(final List<MessageEntity.MessageBean> dates, final List<MessageEntity.NoReadBean> noReadBeans) {
         //设置上拉刷新下拉加载
         recycler_view.setHasFixedSize(false);
         recycler_view.setItemAnimator(null);
         layoutManager = new LinearLayoutManager(getActivity());
         recycler_view.setLayoutManager(layoutManager);
-        userMessageAdapter = new UserMessageAdapter(dates,noReadBeans ,getActivity());
+        userMessageAdapter = new UserMessageAdapter(dates, noReadBeans, getActivity());
         recycler_view.setAdapter(userMessageAdapter);
         userMessageAdapter.setOnItemClickListener(new SystemMessageAdapter.OnItemClickListener() {
             @Override

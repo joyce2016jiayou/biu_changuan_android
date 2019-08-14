@@ -280,6 +280,20 @@ public class StringsHelper {
     }
 
     /**
+     * 校验第一位数是不是1
+     * @param mobileNums
+     * @return
+     */
+    public static boolean isMobileOne(String mobileNums) {
+        String s = mobileNums.substring(0,1);
+        if(s.equals("1")){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    /**
      * ========================================================
      *         设置EditText的hint字体的大小
      * ========================================================

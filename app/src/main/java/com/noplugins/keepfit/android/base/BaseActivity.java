@@ -12,8 +12,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.jpush.TagAliasOperatorHelper;
 import com.noplugins.keepfit.android.util.ActivityCollectorUtil;
@@ -23,6 +25,9 @@ import com.noplugins.keepfit.android.util.permission.EasyPermissions;
 import com.noplugins.keepfit.android.util.permission.PermissionActivity;
 import com.noplugins.keepfit.android.util.screen.AndroidWorkaround;
 import com.orhanobut.logger.Logger;
+
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -32,7 +37,7 @@ import rx.Subscription;
 import static android.webkit.WebView.enableSlowWholeDocumentDraw;
 import static com.noplugins.keepfit.android.jpush.TagAliasOperatorHelper.sequence;
 
-public abstract class BaseActivity  extends AppCompatActivity implements EasyPermissions.PermissionCallbacks{
+public abstract class BaseActivity extends AppCompatActivity implements EasyPermissions.PermissionCallbacks {
 
     private View mContextView = null;//当前Activity渲染的视图View
     protected final String TAG = this.getClass().getSimpleName();//是否输出日志信息
@@ -55,7 +60,8 @@ public abstract class BaseActivity  extends AppCompatActivity implements EasyPer
         res.updateConfiguration(config, res.getDisplayMetrics());
         return res;
     }
-        @Override
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActivityCollectorUtil.addActivity(this);
@@ -96,9 +102,14 @@ public abstract class BaseActivity  extends AppCompatActivity implements EasyPer
         //极光
         JPushInterface.init(getApplicationContext());
 
+
+
         doBusiness(getApplicationContext());
 
+
     }
+
+
 
     private void set_status_bar() {
         if (Build.VERSION.SDK_INT >= 21) {
@@ -181,13 +192,12 @@ public abstract class BaseActivity  extends AppCompatActivity implements EasyPer
     }
 
 
-
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
         unsubscribe();//取消订阅
         ActivityCollectorUtil.removeActivity(this);
+
     }
 
     protected void unsubscribe() {
@@ -199,6 +209,7 @@ public abstract class BaseActivity  extends AppCompatActivity implements EasyPer
 
     /**
      * [初始化Bundle参数]
+     *
      * @param parms
      */
     public abstract void initBundle(Bundle parms);
@@ -216,7 +227,6 @@ public abstract class BaseActivity  extends AppCompatActivity implements EasyPer
      * @param mContext
      */
     public abstract void doBusiness(Context mContext);
-
 
 
     /**
@@ -244,6 +254,7 @@ public abstract class BaseActivity  extends AppCompatActivity implements EasyPer
      * 用户权限处理,
      * 如果全部获取, 则直接过.
      * 如果权限缺失, 则提示Dialog.
+     *
      * @param requestCode  请求码
      * @param permissions  权限
      * @param grantResults 结果

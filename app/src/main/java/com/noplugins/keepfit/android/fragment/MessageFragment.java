@@ -22,7 +22,12 @@ import androidx.viewpager.widget.ViewPager;
 import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.adapter.TabItemAdapter;
 import com.noplugins.keepfit.android.util.data.DateHelper;
+import com.noplugins.keepfit.android.util.eventbus.MessageEvent;
 import com.noplugins.keepfit.android.util.ui.ViewPagerFragment;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 
@@ -84,9 +89,41 @@ public class MessageFragment extends ViewPagerFragment {
             ButterKnife.bind(this, view);//绑定黄牛刀
             initView();
             registerReceiver();
+            EventBus.getDefault().register(this);
+
         }
         return view;
     }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        EventBus.getDefault().unregister(this);
+
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN,sticky = true)
+    public void upadate(MessageEvent messageEvent) {
+        Log.e("富士康积分考虑到","是否大是大非");
+        if (messageEvent.getMessage().equals("jpush_main_enter1")) {//获取消息总数，设置消息总数
+            view_pager.setCurrentItem(0);
+            setTabTextColorAndImageView(0);
+        }else if(messageEvent.getMessage().equals("jpush_main_enter2")){
+            view_pager.setCurrentItem(1);
+            setTabTextColorAndImageView(1);
+        }else if(messageEvent.getMessage().equals("jpush_main_enter3")){
+            view_pager.setCurrentItem(2);
+            setTabTextColorAndImageView(2);
+        }else if(messageEvent.getMessage().equals("jpush_main_enter4")){
+            view_pager.setCurrentItem(3);
+            setTabTextColorAndImageView(3);
+        }
+    }
+
+
+
+
+
 
     //注册广播接收器
     LocalBroadcastManager broadcastManager;

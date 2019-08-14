@@ -20,6 +20,7 @@ import androidx.multidex.MultiDexApplication;
 import com.noplugins.keepfit.android.jpush.ExampleUtil;
 import com.noplugins.keepfit.android.jpush.TagAliasOperatorHelper;
 import com.noplugins.keepfit.android.jpush.TagAliasOperatorHelper.TagAliasBean;
+import com.noplugins.keepfit.android.util.data.SharedPreferencesHelper;
 import com.noplugins.keepfit.android.util.net.callback.ErrorCallback;
 import com.qiniu.android.common.FixedZone;
 import com.qiniu.android.storage.Configuration;
@@ -48,7 +49,9 @@ import cn.jpush.android.api.TagAliasCallback;
 import cn.qqtheme.framework.logger.CqrLog;
 import cn.qqtheme.framework.logger.impl.LoggerImpl;
 import okhttp3.OkHttpClient;
+
 import static com.noplugins.keepfit.android.jpush.TagAliasOperatorHelper.sequence;
+
 /**
  * Created by shiyujia02 on 2017/8/3.
  */
@@ -146,14 +149,19 @@ public class MyApplication extends MultiDexApplication {
         if (!rid.isEmpty()) {
             registrationId = rid;
             Log.e("极光registrationId", registrationId);
-            //设置别名
-            TagAliasOperatorHelper.TagAliasBean tagAliasBean = new TagAliasOperatorHelper.TagAliasBean();
-            sequence++;
-            tagAliasBean.alias = "android_alias_key_value" + sequence;
-            tagAliasBean.isAliasAction = true;
-            tagAliasBean.action = TagAliasOperatorHelper.ACTION_SET;
-            TagAliasOperatorHelper.getInstance().handleAction(getApplicationContext(), sequence, tagAliasBean);
+            //如果没有缓存的别名，重新获取
+            if ("".equals(SharedPreferencesHelper.get(this, "is_set_alias", ""))) {
+                //设置别名
+                TagAliasOperatorHelper.TagAliasBean tagAliasBean = new TagAliasOperatorHelper.TagAliasBean();
+                sequence++;
+                tagAliasBean.alias = "android_alias_key_value" + sequence;
+                tagAliasBean.isAliasAction = true;
+                tagAliasBean.action = TagAliasOperatorHelper.ACTION_SET;
+                TagAliasOperatorHelper.getInstance().handleAction(getApplicationContext(), sequence, tagAliasBean);
+            }else{
+                Log.e("已缓存alias", "已缓存alias");
 
+            }
         } else {
             Toast.makeText(this, "Get registration fail, JPush init failed!", Toast.LENGTH_SHORT).show();
         }
@@ -162,7 +170,6 @@ public class MyApplication extends MultiDexApplication {
         MultiDex.install(this);
 
     }
-
 
 
     /**

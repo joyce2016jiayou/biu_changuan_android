@@ -1,8 +1,8 @@
-package com.noplugins.keepfit.android.util;
+package com.noplugins.keepfit.android.util.eventbus;
 
 public class MessageEvent {
     private String message;
-    public  MessageEvent(String message){
+    public MessageEvent(String message){
         this.message=message;
     }
     public String getMessage() {

@@ -6,6 +6,8 @@ import android.os.Message;
 import android.util.Log;
 import android.util.SparseArray;
 
+import com.noplugins.keepfit.android.util.data.SharedPreferencesHelper;
+
 import java.util.Locale;
 import java.util.Set;
 
@@ -212,7 +214,12 @@ public class TagAliasOperatorHelper {
                     logs = "Set tag and alias success";
                     Log.e(TAG, "设置别名" + logs);
                     // 建议这里往 SharePreference 里写一个成功设置的状态。成功设置一次后，以后不必再次设置了。
-
+                    if ("".equals(SharedPreferencesHelper.get(context, "is_set_alias", ""))) {
+                        SharedPreferencesHelper.put(context, "is_set_alias", "true");
+                    } else {
+                        SharedPreferencesHelper.remove(context, "is_set_alias");
+                        SharedPreferencesHelper.put(context, "is_set_alias", "true");
+                    }
                     break;
                 case 6002:
                     logs = "Failed to set alias and tags due to timeout. Try again after 60s.";

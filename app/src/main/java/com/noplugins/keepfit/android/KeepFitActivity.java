@@ -15,15 +15,18 @@ import androidx.fragment.app.Fragment;
 
 import com.google.gson.Gson;
 import com.noplugins.keepfit.android.activity.BuyActivity;
+import com.noplugins.keepfit.android.activity.CheckStatusFailActivity;
 import com.noplugins.keepfit.android.adapter.ContentPagerAdapterMy;
 import com.noplugins.keepfit.android.base.BaseActivity;
+import com.noplugins.keepfit.android.base.MyApplication;
+import com.noplugins.keepfit.android.entity.CheckEntity;
 import com.noplugins.keepfit.android.entity.MaxMessageEntity;
 import com.noplugins.keepfit.android.fragment.StatisticsFragment;
 import com.noplugins.keepfit.android.fragment.ViewFragment;
 import com.noplugins.keepfit.android.fragment.MineFragment;
 import com.noplugins.keepfit.android.fragment.MessageFragment;
-import com.noplugins.keepfit.android.util.MessageEvent;
 import com.noplugins.keepfit.android.util.data.SharedPreferencesHelper;
+import com.noplugins.keepfit.android.util.eventbus.MessageEvent;
 import com.noplugins.keepfit.android.util.net.Network;
 import com.noplugins.keepfit.android.util.net.entity.Bean;
 import com.noplugins.keepfit.android.util.net.progress.GsonSubscriberOnNextListener;
@@ -32,6 +35,7 @@ import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener;
 import com.noplugins.keepfit.android.util.ui.NoScrollViewPager;
 import com.orhanobut.logger.Logger;
 
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
@@ -60,31 +64,76 @@ public class KeepFitActivity extends BaseActivity {
     private int music;//定义一个整型用load（）；来设置suondID
     private List<Fragment> tabFragments = new ArrayList<>();
 
-
     @Override
-    public void initBundle(Bundle parms) {
-        if (null != parms) {
-            if (parms.getString("jpush_enter1").equals("jpush_enter1")) {
-                Log.e("进来了", "jpush_enter1");
-
-            } else if (parms.getString("jpush_enter2").equals("jpush_enter2")) {
-                Log.e("进来了", "jpush_enter2");
-
-            } else if (parms.getString("jpush_enter3").equals("jpush_enter3")) {
-                Log.e("进来了", "jpush_enter3");
-
-            } else if (parms.getString("jpush_enter4").equals("jpush_enter4")) {
-                Log.e("进来了", "jpush_enter4");
-
-            }
-        }
+    public void initBundle(Bundle bundle) {
     }
+
 
     @Override
     public void initView() {
         setContentLayout(R.layout.activity_keepfit);
         ButterKnife.bind(this);
         isShowTitle(false);
+        MyApplication.addDestoryActivity(this, "KeepFitActivity");
+        //注册eventbus
+        //EventBus.getDefault().register(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //EventBus.getDefault().unregister(this);
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.e("接口设计弗兰克的说法", "独守空房懒得");
+        if (null != getIntent().getExtras()) {
+            Bundle parms = getIntent().getExtras();
+            if (parms.getString("jpush_enter").equals("jpush_enter1")) {
+                Log.e("进来了", "jpush_enter1");
+
+                viewpager_content.setCurrentItem(2);
+                xianshi_three();
+                //设置跳转到消息tab1
+                MessageEvent messageEvent = new MessageEvent("jpush_main_enter1");
+                EventBus.getDefault().postSticky(messageEvent);
+
+            } else if (parms.getString("jpush_enter").equals("jpush_enter2")) {
+                Log.e("进来了", "jpush_enter2");
+
+                viewpager_content.setCurrentItem(2);
+                xianshi_three();
+                //设置跳转到消息tab2
+                MessageEvent messageEvent = new MessageEvent("jpush_main_enter2");
+                EventBus.getDefault().postSticky(messageEvent);
+
+            } else if (parms.getString("jpush_enter").equals("jpush_enter3")) {
+                Log.e("进来了", "jpush_enter3");
+
+                viewpager_content.setCurrentItem(2);
+                xianshi_three();
+
+                //设置跳转到消息tab3
+                MessageEvent messageEvent = new MessageEvent("jpush_main_enter3");
+                EventBus.getDefault().postSticky(messageEvent);
+
+            } else if (parms.getString("jpush_enter").equals("jpush_enter4")) {
+                Log.e("进来了", "jpush_enter4");
+
+                viewpager_content.setCurrentItem(2);
+                xianshi_three();
+                //设置跳转到消息tab4
+                MessageEvent messageEvent = new MessageEvent("jpush_main_enter4");
+                EventBus.getDefault().postSticky(messageEvent);
+            }
+        } else {
+            //初始化首页
+            viewpager_content.setCurrentItem(0);
+
+        }
     }
 
     @Override
@@ -97,7 +146,7 @@ public class KeepFitActivity extends BaseActivity {
         //初始化viewpager
         ContentPagerAdapterMy contentAdapter = new ContentPagerAdapterMy(getSupportFragmentManager(), tabFragments);
         viewpager_content.setAdapter(contentAdapter);
-        viewpager_content.setCurrentItem(0);
+
 
         //初始化音效
         sp = new SoundPool(10, AudioManager.STREAM_SYSTEM, 5);//第一个参数为同时播放数据流的最大个数，第二数据流类型，第三为声音质量
@@ -175,15 +224,20 @@ public class KeepFitActivity extends BaseActivity {
             token = SharedPreferencesHelper.get(getApplicationContext(), "login_token", "").toString();
         }
         params.put("token", token);
-        subscription = Network.getInstance("获取审核状态", getApplicationContext())
+        subscription = Network.getInstance("获取审核状态", getApplicationContext())//todo 需要返回的model
                 .get_check_status(params,
-                        new ProgressSubscriberNew<>(List.class, new GsonSubscriberOnNextListener<List>() {
+                        new ProgressSubscriberNew<>(CheckEntity.class, new GsonSubscriberOnNextListener<CheckEntity>() {
                             @Override
-                            public void on_post_entity(List mlocation, String get_message_id) {
+                            public void on_post_entity(CheckEntity mlocation, String get_message_id) {
                                 Log.e(TAG, "获取审核状态成功：");
-                                Intent intent = new Intent(KeepFitActivity.this, BuyActivity.class);
-                                startActivity(intent);
+                                //缓存审核状态，下次进来不再请求审核接口
+                                if ("".equals(SharedPreferencesHelper.get(getApplicationContext(), "get_examine_result", ""))) {
+                                    SharedPreferencesHelper.put(getApplicationContext(), "get_examine_result", "true");
+                                    Intent intent = new Intent(KeepFitActivity.this, BuyActivity.class);
+                                    startActivity(intent);
+                                } else {
 
+                                }
                             }
                         }, new SubscriberOnNextListener<Bean<Object>>() {
                             @Override
@@ -193,15 +247,11 @@ public class KeepFitActivity extends BaseActivity {
 
                             @Override
                             public void onError(String error) {
-//                                Intent intent = new Intent(KeepFitActivity.this, CheckStatusFailActivity.class);
-//                                startActivity(intent);
-                                Intent intent = new Intent(KeepFitActivity.this, BuyActivity.class);
+                                Intent intent = new Intent(KeepFitActivity.this, CheckStatusFailActivity.class);
                                 startActivity(intent);
-
-                                Logger.e(TAG, "获取审核状态报错：" + error);
-                                //Toast.makeText(getApplicationContext(), "获取审核状态失败！", Toast.LENGTH_SHORT).show();
+                                Log.e(TAG, "获取审核状态报错：" + error);
                             }
-                        }, this, true));
+                        }, this, false));
     }
 
 
