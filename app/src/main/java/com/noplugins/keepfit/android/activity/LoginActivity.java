@@ -124,6 +124,7 @@ public class LoginActivity extends BaseActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
         //忘记密码
@@ -177,22 +178,31 @@ public class LoginActivity extends BaseActivity {
                         }
 
                         //保存密码
-                        if ("".equals(SharedPreferencesHelper.get(getApplicationContext(), "login_token", ""))) {
-                            SharedPreferencesHelper.put(getApplicationContext(), "login_token", loginEntity.getToken());
-                            SharedPreferencesHelper.put(getApplicationContext(), "phone_number", edit_phone_number.getText().toString());
-                            SharedPreferencesHelper.put(getApplicationContext(), "changguan_number", loginEntity.getGymAreaNum());
+                        if ("".equals(SharedPreferencesHelper.get(getApplicationContext(), Network.login_token, ""))) {
+                            SharedPreferencesHelper.put(getApplicationContext(),  Network.login_token, loginEntity.getToken());
+                            SharedPreferencesHelper.put(getApplicationContext(), Network.phone_number, edit_phone_number.getText().toString());
+                            SharedPreferencesHelper.put(getApplicationContext(), Network.changguan_number, loginEntity.getGymAreaNum());
 
                         } else {
-                            SharedPreferencesHelper.remove(getApplicationContext(), "login_token");
-                            SharedPreferencesHelper.put(getApplicationContext(), "login_token", loginEntity.getToken());
-                            SharedPreferencesHelper.put(getApplicationContext(), "phone_number", edit_phone_number.getText().toString());
-                            SharedPreferencesHelper.put(getApplicationContext(), "changguan_number", loginEntity.getGymAreaNum());
-
+                            SharedPreferencesHelper.remove(getApplicationContext(),  Network.login_token);
+                            SharedPreferencesHelper.put(getApplicationContext(),  Network.login_token, loginEntity.getToken());
+                            SharedPreferencesHelper.put(getApplicationContext(), Network.phone_number, edit_phone_number.getText().toString());
+                            SharedPreferencesHelper.put(getApplicationContext(), Network.changguan_number, loginEntity.getGymAreaNum());
                         }
-                        //todo 首先得判断权限
-                        Intent intent = new Intent(LoginActivity.this, KeepFitActivity.class);
-                        startActivity(intent);
-                        finish();
+
+                        //type 0  type 1场馆主 2经理  3前台
+                        if (loginEntity.getType() == 0) {//没有提交过审核资料
+                            SharedPreferencesHelper.put(getApplicationContext(), Network.no_submit_information, "true");
+
+                            Intent intent = new Intent(LoginActivity.this, UserPermissionSelectActivity.class);
+                            startActivity(intent);
+                            finish();
+                        } else {//已经提交过资料
+                            Intent intent = new Intent(LoginActivity.this, KeepFitActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
+
 
                     }
                 }, new SubscriberOnNextListener<Bean<Object>>() {

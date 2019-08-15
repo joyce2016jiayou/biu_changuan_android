@@ -71,9 +71,15 @@ public class UpdatePasswordActivity extends BaseActivity {
             return;
         }
         Map<String, String> params = new HashMap<>();
-        params.put("gymAreaNum",Network.place_number);
+        String gymAreaNum;
+        if ("".equals(SharedPreferencesHelper.get(this, Network.changguan_number, "").toString())) {
+            gymAreaNum = "";
+        } else {
+            gymAreaNum = SharedPreferencesHelper.get(this, Network.changguan_number, "").toString();
+        }
+        params.put("gymAreaNum",gymAreaNum);
         params.put("oldPassWord", edit_old_password.getText().toString());
-        params.put("phone", (String)SharedPreferencesHelper.get(getApplicationContext(), "phone_number", ""));
+        params.put("phone", (String)SharedPreferencesHelper.get(getApplicationContext(), Network.phone_number, ""));
         params.put("newPass1", edit_new_password1.getText().toString());
         params.put("newPass2", edit_password2.getText().toString());
         Gson gson = new Gson();
@@ -121,9 +127,9 @@ public class UpdatePasswordActivity extends BaseActivity {
 
     private void toLogin(){
         Intent intent = new Intent(UpdatePasswordActivity.this, LoginActivity.class);
-        SharedPreferencesHelper.put(getApplicationContext(), "login_token", "");
-        SharedPreferencesHelper.put(getApplicationContext(), "phone_number", "");
-        SharedPreferencesHelper.put(getApplicationContext(), "changguan_number", "");
+        SharedPreferencesHelper.put(getApplicationContext(), Network.login_token, "");
+        SharedPreferencesHelper.put(getApplicationContext(), Network.phone_number, "");
+        SharedPreferencesHelper.put(getApplicationContext(), Network.changguan_number, "");
         startActivity(intent);
         ActivityCollectorUtil.finishAllActivity();
 

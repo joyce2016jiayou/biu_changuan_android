@@ -61,7 +61,7 @@ public class ProductAdviceActivity extends BaseActivity {
         cb_product_suggest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (cb_product_suggest.isChecked()){
+                if (cb_product_suggest.isChecked()) {
                     type = 1;
                     cb_fault_feedback.setChecked(false);
                     cb_other.setChecked(false);
@@ -73,11 +73,11 @@ public class ProductAdviceActivity extends BaseActivity {
         cb_fault_feedback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (cb_fault_feedback.isChecked()){
+                if (cb_fault_feedback.isChecked()) {
                     type = 2;
                     cb_product_suggest.setChecked(false);
                     cb_other.setChecked(false);
-                }else {
+                } else {
                     type = 0;
                 }
             }
@@ -85,11 +85,11 @@ public class ProductAdviceActivity extends BaseActivity {
         cb_other.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (cb_other.isChecked()){
+                if (cb_other.isChecked()) {
                     type = 3;
                     cb_fault_feedback.setChecked(false);
                     cb_product_suggest.setChecked(false);
-                }else {
+                } else {
                     type = 0;
                 }
             }
@@ -107,7 +107,7 @@ public class ProductAdviceActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 //
-                if (type == 0){
+                if (type == 0) {
                     Toast.makeText(getApplicationContext(), "请选择反馈类型", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -116,12 +116,18 @@ public class ProductAdviceActivity extends BaseActivity {
         });
     }
 
-    private void submit(){
+    private void submit() {
         //
         Map<String, String> params = new HashMap<>();
-        params.put("gymAreaNum", Network.place_number);
-        params.put("gymUserNum", (String)SharedPreferencesHelper.get(getApplicationContext(), "phone_number", ""));
-        params.put("feedbackType", ""+type);
+        String gymAreaNum;
+        if ("".equals(SharedPreferencesHelper.get(this, Network.changguan_number, "").toString())) {
+            gymAreaNum = "";
+        } else {
+            gymAreaNum = SharedPreferencesHelper.get(this, Network.changguan_number, "").toString();
+        }
+        params.put("gymAreaNum", gymAreaNum);
+        params.put("gymUserNum", (String) SharedPreferencesHelper.get(getApplicationContext(), "phone_number", ""));
+        params.put("feedbackType", "" + type);
         params.put("feedbackDes", edit_content.getText().toString());
         Gson gson = new Gson();
         String json_params = gson.toJson(params);
@@ -131,7 +137,7 @@ public class ProductAdviceActivity extends BaseActivity {
 
         subscription = Network.getInstance("产品反馈", getApplicationContext())
 
-                .feedback(requestBody,new ProgressSubscriberNew<>(String.class, new GsonSubscriberOnNextListener<String>() {
+                .feedback(requestBody, new ProgressSubscriberNew<>(String.class, new GsonSubscriberOnNextListener<String>() {
                     @Override
                     public void on_post_entity(String s, String message_id) {
                         Toast.makeText(getApplicationContext(), message_id, Toast.LENGTH_SHORT).show();

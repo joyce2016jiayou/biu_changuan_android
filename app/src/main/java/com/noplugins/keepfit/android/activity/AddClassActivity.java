@@ -20,6 +20,7 @@ import com.noplugins.keepfit.android.adapter.DateWhatchAdapter;
 import com.noplugins.keepfit.android.base.BaseActivity;
 import com.noplugins.keepfit.android.entity.ClassEntity;
 import com.noplugins.keepfit.android.entity.DateViewEntity;
+import com.noplugins.keepfit.android.util.data.SharedPreferencesHelper;
 import com.noplugins.keepfit.android.util.net.Network;
 import com.noplugins.keepfit.android.util.net.entity.Bean;
 import com.noplugins.keepfit.android.util.net.progress.GsonSubscriberOnNextListener;
@@ -90,7 +91,13 @@ public class AddClassActivity extends BaseActivity {
 
     private void init_class_date() {
         Map<String, Object> params = new HashMap<>();
-        params.put("gymAreaNum", Network.place_number);//场馆编号
+        String gymAreaNum;
+        if ("".equals(SharedPreferencesHelper.get(this, Network.changguan_number, "").toString())) {
+            gymAreaNum = "";
+        } else {
+            gymAreaNum = SharedPreferencesHelper.get(this, Network.changguan_number, "").toString();
+        }
+        params.put("gymAreaNum", gymAreaNum);//场馆编号
         params.put("page", page);
         subscription = Network.getInstance("课程列表", this)
                 .class_list(params, new ProgressSubscriberNew<>(ClassEntity.class, new GsonSubscriberOnNextListener<ClassEntity>() {

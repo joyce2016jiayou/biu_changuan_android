@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import com.google.gson.Gson;
 import com.noplugins.keepfit.android.activity.BuyActivity;
 import com.noplugins.keepfit.android.activity.CheckStatusFailActivity;
+import com.noplugins.keepfit.android.activity.UserPermissionSelectActivity;
 import com.noplugins.keepfit.android.adapter.ContentPagerAdapterMy;
 import com.noplugins.keepfit.android.base.BaseActivity;
 import com.noplugins.keepfit.android.base.MyApplication;
@@ -205,9 +206,6 @@ public class KeepFitActivity extends BaseActivity {
 
                             @Override
                             public void onError(String error) {
-//                                Intent intent = new Intent(KeepFitActivity.this, CheckStatusFailActivity.class);
-//                                startActivity(intent);
-
                                 Logger.e(TAG, "获取获取场馆消息总数报错：" + error);
                                 //Toast.makeText(getApplicationContext(), "获取审核状态失败！", Toast.LENGTH_SHORT).show();
                             }
@@ -218,25 +216,32 @@ public class KeepFitActivity extends BaseActivity {
     private void get_check_status() {
         String token;
         Map<String, String> params = new HashMap<>();
-        if ("".equals(SharedPreferencesHelper.get(getApplicationContext(), "login_token", "").toString())) {
+        if ("".equals(SharedPreferencesHelper.get(getApplicationContext(), Network.login_token, "").toString())) {
             token = "";
         } else {
-            token = SharedPreferencesHelper.get(getApplicationContext(), "login_token", "").toString();
+            token = SharedPreferencesHelper.get(getApplicationContext(), Network.login_token, "").toString();
         }
         params.put("token", token);
-        subscription = Network.getInstance("获取审核状态", getApplicationContext())//todo 需要返回的model
+        subscription = Network.getInstance("获取审核状态", getApplicationContext())
                 .get_check_status(params,
                         new ProgressSubscriberNew<>(CheckEntity.class, new GsonSubscriberOnNextListener<CheckEntity>() {
                             @Override
-                            public void on_post_entity(CheckEntity mlocation, String get_message_id) {
-                                Log.e(TAG, "获取审核状态成功：");
-                                //缓存审核状态，下次进来不再请求审核接口
-                                if ("".equals(SharedPreferencesHelper.get(getApplicationContext(), "get_examine_result", ""))) {
-                                    SharedPreferencesHelper.put(getApplicationContext(), "get_examine_result", "true");
-                                    Intent intent = new Intent(KeepFitActivity.this, BuyActivity.class);
+                            public void on_post_entity(CheckEntity checkEntity, String get_message_id) {
+                                Log.e(TAG, "获取审核状态成功：" + checkEntity.getStatus());
+                                //成功1，失败0，没有提交过资料-2
+                                if (checkEntity.getStatus() == 1) {
+                                    if ("".equals(SharedPreferencesHelper.get(getApplicationContext(), Network.get_examine_result, ""))) {
+                                        SharedPreferencesHelper.put(getApplicationContext(), Network.get_examine_result, "true");
+                                        Intent intent = new Intent(KeepFitActivity.this, BuyActivity.class);
+                                        startActivity(intent);
+                                    }
+                                } else if (checkEntity.getStatus() == 0) {
+                                    Intent intent = new Intent(KeepFitActivity.this, CheckStatusFailActivity.class);
                                     startActivity(intent);
-                                } else {
-
+                                } else if (checkEntity.getStatus() == -2) {
+                                    Intent intent = new Intent(KeepFitActivity.this, UserPermissionSelectActivity.class);
+                                    startActivity(intent);
+                                    finish();
                                 }
                             }
                         }, new SubscriberOnNextListener<Bean<Object>>() {
@@ -247,8 +252,6 @@ public class KeepFitActivity extends BaseActivity {
 
                             @Override
                             public void onError(String error) {
-                                Intent intent = new Intent(KeepFitActivity.this, CheckStatusFailActivity.class);
-                                startActivity(intent);
                                 Log.e(TAG, "获取审核状态报错：" + error);
                             }
                         }, this, false));

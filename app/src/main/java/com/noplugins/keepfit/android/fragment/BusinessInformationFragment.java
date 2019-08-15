@@ -17,6 +17,7 @@ import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.activity.InformationCheckActivity;
 import com.noplugins.keepfit.android.entity.InformationEntity;
 import com.noplugins.keepfit.android.entity.UrlEntity;
+import com.noplugins.keepfit.android.util.data.SharedPreferencesHelper;
 import com.noplugins.keepfit.android.util.net.Network;
 import com.noplugins.keepfit.android.util.net.entity.Bean;
 import com.noplugins.keepfit.android.util.net.progress.GsonSubscriberOnNextListener;
@@ -156,6 +157,9 @@ public class BusinessInformationFragment extends ViewPagerFragment {
                         viewpager_content.setCurrentItem(2);
                         int step = stepView.getCurrentStep();//设置进度条
                         stepView.setCurrentStep((step + 1) % stepView.getStepNum());
+
+                        //删除缓存的状态,目的是下次进启动页的时候不会跳转"角色选择页面"
+                        SharedPreferencesHelper.remove(getActivity(), Network.no_submit_information);
 
                     }
                 }, new SubscriberOnNextListener<Bean<Object>>() {

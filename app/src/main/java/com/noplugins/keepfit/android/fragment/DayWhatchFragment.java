@@ -151,14 +151,13 @@ public class DayWhatchFragment extends ViewPagerFragment {
             params.put("date", crrent_date);
         }
         String gymAreaNum;
-        if ("".equals(SharedPreferencesHelper.get(getActivity(), "changguan_number", "").toString())) {
+        if ("".equals(SharedPreferencesHelper.get(getActivity(), Network.changguan_number, "").toString())) {
             gymAreaNum = "";
         } else {
-            gymAreaNum = SharedPreferencesHelper.get(getActivity(), "changguan_number", "").toString();
+            gymAreaNum = SharedPreferencesHelper.get(getActivity(), Network.changguan_number, "").toString();
         }
-        //params.put("gymAreaNum", gymAreaNum);//场馆编号
 
-        params.put("gymAreaNum", "GYM19072138381319");//场馆编号
+        params.put("gymAreaNum", gymAreaNum);//场馆编号
 
         Subscription subscription = Network.getInstance("获取课程", getActivity())
                 .get_class_resource(params,

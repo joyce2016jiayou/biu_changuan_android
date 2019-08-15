@@ -1,16 +1,24 @@
 package com.noplugins.keepfit.android.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.noplugins.keepfit.android.KeepFitActivity;
 import com.noplugins.keepfit.android.R;
+import com.noplugins.keepfit.android.SplashActivity;
+import com.noplugins.keepfit.android.activity.LoginActivity;
+import com.noplugins.keepfit.android.activity.UserPermissionSelectActivity;
+import com.noplugins.keepfit.android.util.data.SharedPreferencesHelper;
+import com.noplugins.keepfit.android.util.net.Network;
 import com.noplugins.keepfit.android.util.ui.ViewPagerFragment;
 
 import butterknife.ButterKnife;
@@ -18,8 +26,6 @@ import butterknife.ButterKnife;
 public class InformationResultFragement extends ViewPagerFragment {
 
     private View view;
-
-
 
 
     public static InformationResultFragement homeInstance(String title) {
@@ -38,13 +44,21 @@ public class InformationResultFragement extends ViewPagerFragment {
             ButterKnife.bind(this, view);//绑定黄牛刀
             initView();
 
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent intent = new Intent(getActivity(), KeepFitActivity.class);
+                    startActivity(intent);
+                    getActivity().finish();
+                }
+            }, 2000);
         }
         return view;
     }
+
     private void initView() {
 
     }
-
 
 
     @Override

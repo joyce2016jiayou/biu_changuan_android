@@ -87,32 +87,33 @@ public class HightLowTImeActivity extends BaseActivity {
         rc_view.setAdapter(hightLowTimeAdapter);
         hightLowTimeAdapter.setOnItemClickListener(new HightLowTimeAdapter.onItemClick() {
             @Override
-            public void onItemClick(int tag, View view, TextView endView,int position) {
+            public void onItemClick(int tag, View view, TextView endView, int position) {
 
                 getTimeData();
 
-                TimePickerUtils.time_check(HightLowTImeActivity.this,picker,
-                        (TextView) view,endView,timeEntities);
+                TimePickerUtils.time_check(HightLowTImeActivity.this, picker,
+                        (TextView) view, endView, timeEntities);
 
             }
 
             @Override
             public void onItemClick(int tag, TextView startView, View view, int position) {
-                if ("请选择".equals(startView.getText().toString())){
-                    Toast.makeText(HightLowTImeActivity.this,"请先选择开始时间！",Toast.LENGTH_SHORT).show();
+                if ("请选择".equals(startView.getText().toString())) {
+                    Toast.makeText(HightLowTImeActivity.this, "请先选择开始时间！", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                Log.d("tag_onItemClick",startView.getText().toString());
+                Log.d("tag_onItemClick", startView.getText().toString());
                 arr = startView.getText().toString().split(":");
                 getTimeData();
 
-                TimePickerUtils.time_check(HightLowTImeActivity.this,picker,(TextView) view,
-                        arr[0],arr[1],timeEntities);
+                TimePickerUtils.time_check(HightLowTImeActivity.this, picker, (TextView) view,
+                        arr[0], arr[1], timeEntities);
             }
 
         });
 
     }
+
     @Override
     public void doBusiness(Context mContext) {
         setAdapter();
@@ -133,9 +134,9 @@ public class HightLowTImeActivity extends BaseActivity {
     /**
      * 获取当前时间段列表
      */
-    private void getTimeData(){
+    private void getTimeData() {
         timeEntities.clear();
-        if (rc_view.getChildCount() <=1){
+        if (rc_view.getChildCount() <= 1) {
             return;
         }
         for (int i = 0; i < rc_view.getChildCount(); i++) {
@@ -143,10 +144,10 @@ public class HightLowTImeActivity extends BaseActivity {
             TextView tvStartTime = layout.findViewById(R.id.tvStartTime);
             TextView tvEndTime = layout.findViewById(R.id.tvEndTime);
 
-            if ("请选择".equals(tvStartTime.getText().toString())){
+            if ("请选择".equals(tvStartTime.getText().toString())) {
                 return;
             }
-            if ("请选择".equals(tvEndTime.getText().toString())){
+            if ("请选择".equals(tvEndTime.getText().toString())) {
                 return;
             }
             TimeSelectEntity timeSelectEntity = new TimeSelectEntity();
@@ -158,26 +159,33 @@ public class HightLowTImeActivity extends BaseActivity {
             timeEntities.add(timeSelectEntity);
         }
     }
+
     /**
      * 点击完成
      */
-    private void toComplete(){
+    private void toComplete() {
         completeDatas.clear();
         for (int i = 0; i < rc_view.getChildCount(); i++) {
             RelativeLayout layout = (RelativeLayout) rc_view.getChildAt(i);
             TextView tvStartTime = layout.findViewById(R.id.tvStartTime);
             TextView tvEndTime = layout.findViewById(R.id.tvEndTime);
 
-            if ("请选择".equals(tvStartTime.getText().toString())){
+            if ("请选择".equals(tvStartTime.getText().toString())) {
                 Toast.makeText(getApplicationContext(), "时间不能为空！", Toast.LENGTH_SHORT).show();
                 return;
             }
-            if ("请选择".equals(tvEndTime.getText().toString())){
+            if ("请选择".equals(tvEndTime.getText().toString())) {
                 Toast.makeText(getApplicationContext(), "时间不能为空！", Toast.LENGTH_SHORT).show();
                 return;
             }
             HightLowTimeEntity hightLowTimeEntity = new HightLowTimeEntity();
-            hightLowTimeEntity.setGym_area_num(Network.place_number);
+            String gymAreaNum;
+            if ("".equals(SharedPreferencesHelper.get(this, Network.changguan_number, "").toString())) {
+                gymAreaNum = "";
+            } else {
+                gymAreaNum = SharedPreferencesHelper.get(this, Network.changguan_number, "").toString();
+            }
+            hightLowTimeEntity.setGym_area_num(gymAreaNum);
             hightLowTimeEntity.setHigh_time_start(tvStartTime.getText().toString());
             hightLowTimeEntity.setHigh_time_end(tvEndTime.getText().toString());
             hightLowTimeEntity.setNormal_price("38");
@@ -192,7 +200,7 @@ public class HightLowTImeActivity extends BaseActivity {
         upload();
     }
 
-    private void upload(){
+    private void upload() {
         Map<String, Object> params = new HashMap<>();
         params.put("list", completeDatas);
         Gson gson = new Gson();
@@ -202,7 +210,7 @@ public class HightLowTImeActivity extends BaseActivity {
 
         subscription = Network.getInstance("高低时峰", getApplicationContext())
 
-                .setHighAndLowTime(requestBody,new ProgressSubscriberNew<>(String.class, new GsonSubscriberOnNextListener<String>() {
+                .setHighAndLowTime(requestBody, new ProgressSubscriberNew<>(String.class, new GsonSubscriberOnNextListener<String>() {
                     @Override
                     public void on_post_entity(String s, String message_id) {
                         Toast.makeText(getApplicationContext(), message_id, Toast.LENGTH_SHORT).show();

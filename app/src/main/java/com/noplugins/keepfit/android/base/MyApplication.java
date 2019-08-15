@@ -21,6 +21,7 @@ import com.noplugins.keepfit.android.jpush.ExampleUtil;
 import com.noplugins.keepfit.android.jpush.TagAliasOperatorHelper;
 import com.noplugins.keepfit.android.jpush.TagAliasOperatorHelper.TagAliasBean;
 import com.noplugins.keepfit.android.util.data.SharedPreferencesHelper;
+import com.noplugins.keepfit.android.util.net.Network;
 import com.noplugins.keepfit.android.util.net.callback.ErrorCallback;
 import com.qiniu.android.common.FixedZone;
 import com.qiniu.android.storage.Configuration;
@@ -150,7 +151,7 @@ public class MyApplication extends MultiDexApplication {
             registrationId = rid;
             Log.e("极光registrationId", registrationId);
             //如果没有缓存的别名，重新获取
-            if ("".equals(SharedPreferencesHelper.get(this, "is_set_alias", ""))) {
+            if ("".equals(SharedPreferencesHelper.get(this, Network.is_set_alias, ""))) {
                 //设置别名
                 TagAliasOperatorHelper.TagAliasBean tagAliasBean = new TagAliasOperatorHelper.TagAliasBean();
                 sequence++;

@@ -102,9 +102,8 @@ public class UserPermissionSelectActivity extends BaseActivity {
 
 
     private void selete_role(String type) {
-        String phone_number = SharedPreferencesHelper.get(getApplicationContext(), "phone_number", "").toString();
+        String phone_number = SharedPreferencesHelper.get(getApplicationContext(), Network.phone_number, "").toString();
         Map<String, String> params = new HashMap<>();
-        //params.put("token",token);
         params.put("phone", phone_number);
         params.put("type", type);
         Log.e(TAG, "选择参数：" + params.toString());

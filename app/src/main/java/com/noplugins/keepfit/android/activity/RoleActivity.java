@@ -80,8 +80,8 @@ public class RoleActivity extends BaseActivity {
         ButterKnife.bind(this);
         isShowTitle(false);
         posts = new ArrayList<>();
-        tv_user_name.setText((String)SharedPreferencesHelper.get(getApplicationContext(),"username",""));
-        tv_user_phone.setText((String)SharedPreferencesHelper.get(getApplicationContext(),"phone",""));
+        tv_user_name.setText((String)SharedPreferencesHelper.get(getApplicationContext(),Network.username,""));
+        tv_user_phone.setText((String)SharedPreferencesHelper.get(getApplicationContext(),Network.phone,""));
         tv_zhiwei_name.setText("场馆主");
         set_jiugongge_view();
 

@@ -118,6 +118,7 @@ public class RegisterActivity extends BaseActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
         yanzhengma_btn.setOnClickListener(new View.OnClickListener() {

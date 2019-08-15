@@ -7,17 +7,29 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
 
+import com.noplugins.keepfit.android.activity.BuyActivity;
+import com.noplugins.keepfit.android.activity.CheckStatusFailActivity;
 import com.noplugins.keepfit.android.activity.LoginActivity;
 import com.noplugins.keepfit.android.activity.UserPermissionSelectActivity;
 import com.noplugins.keepfit.android.base.BaseActivity;
+import com.noplugins.keepfit.android.entity.CheckEntity;
 import com.noplugins.keepfit.android.util.data.SharedPreferencesHelper;
 import com.noplugins.keepfit.android.util.eventbus.MessageEvent;
+import com.noplugins.keepfit.android.util.net.Network;
+import com.noplugins.keepfit.android.util.net.entity.Bean;
+import com.noplugins.keepfit.android.util.net.progress.GsonSubscriberOnNextListener;
+import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriberNew;
+import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener;
 
 import org.greenrobot.eventbus.EventBus;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,6 +45,16 @@ public class SplashActivity extends BaseActivity {
 
     @Override
     public void initView() {
+        // http://code.google.com/p/android/issues/detail?id=2373
+        if (!isTaskRoot()) {
+            final Intent intent = getIntent();
+            final String intentAction = intent.getAction();
+            if (intent.hasCategory(Intent.CATEGORY_LAUNCHER) && intentAction != null && intentAction.equals(Intent
+                    .ACTION_MAIN)) {
+                finish();
+                return;
+            }
+        }
         setContentLayout(R.layout.activity_splash);
         ButterKnife.bind(this);
         isShowTitle(false);
@@ -55,17 +77,22 @@ public class SplashActivity extends BaseActivity {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    if ("".equals(SharedPreferencesHelper.get(getApplicationContext(), "login_token", ""))) {
+                    if ("".equals(SharedPreferencesHelper.get(getApplicationContext(), Network.login_token, ""))) {
                         Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
                         startActivity(intent);
                         finish();
                     } else {
-                        Intent intent = new Intent(SplashActivity.this, KeepFitActivity.class);
-                        startActivity(intent);
-                        finish();
+                        //防止在第一次，选择角色的时候退出了，导致，第二次进来直接进主页
+                        if ("".equals(SharedPreferencesHelper.get(getApplicationContext(), Network.no_submit_information, ""))) {
+                            Intent intent = new Intent(SplashActivity.this, KeepFitActivity.class);
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            Intent intent = new Intent(SplashActivity.this, UserPermissionSelectActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
                     }
-
-
                 }
             }, 2000);
         } else {//等待网络或者弹窗

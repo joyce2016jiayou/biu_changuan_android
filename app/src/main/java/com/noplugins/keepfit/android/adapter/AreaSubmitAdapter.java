@@ -25,6 +25,7 @@ import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.entity.MessageDetailEntity;
 import com.noplugins.keepfit.android.entity.MessageEntity;
 import com.noplugins.keepfit.android.util.data.DateHelper;
+import com.noplugins.keepfit.android.util.data.SharedPreferencesHelper;
 import com.noplugins.keepfit.android.util.net.Network;
 import com.noplugins.keepfit.android.util.net.entity.Bean;
 import com.noplugins.keepfit.android.util.net.progress.GsonSubscriberOnNextListener;
@@ -96,7 +97,7 @@ public class AreaSubmitAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHold
 //                    if (onItemClickListener != null) {
 //                        onItemClickListener.onItemClick(v, position);
 //                    }
-                    get_detail_resouce(holder,messageBean,messageBean.getType());
+                    get_detail_resouce(holder, messageBean, messageBean.getType());
 
                 }
             });
@@ -172,7 +173,7 @@ public class AreaSubmitAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHold
     /**
      * 获取课程详情
      */
-    private void get_detail_resouce(YouYangViewHolder holder,MessageEntity.MessageBean m_messageBean,int type) {
+    private void get_detail_resouce(YouYangViewHolder holder, MessageEntity.MessageBean m_messageBean, int type) {
         Map<String, Object> params = new HashMap<>();
         params.put("gymCourseCheckNum", m_messageBean.getGymCourseCheckNum());//场馆编号
 
@@ -188,8 +189,7 @@ public class AreaSubmitAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHold
                         Log.e("申请详情成功", "申请详情成功:" + entity.getData().getCourseDes());
                         MessageDetailEntity.DataBean dataBean = entity.getData();
                         //设置详情页数据
-                        submit_jujue_popwindow(holder,m_messageBean, dataBean,type);
-
+                        submit_jujue_popwindow(holder, m_messageBean, dataBean, type);
 
 
                     }
@@ -206,14 +206,18 @@ public class AreaSubmitAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHold
     }
 
 
-
-
     /**
      * 拒绝提交
      */
     private void post_jujue(MessageEntity.MessageBean messageBean, int select_type, String reason, YouYangViewHolder holder) {
         Map<String, Object> params = new HashMap<>();
-        params.put("gymAreaNum", Network.place_number);//场馆编号
+        String gymAreaNum;
+        if ("".equals(SharedPreferencesHelper.get(context, Network.changguan_number, "").toString())) {
+            gymAreaNum = "";
+        } else {
+            gymAreaNum = SharedPreferencesHelper.get(context, Network.changguan_number, "").toString();
+        }
+        params.put("gymAreaNum", gymAreaNum);//场馆编号
         params.put("gymCourseCheckNum", messageBean.getGymCourseCheckNum());//numner
         params.put("gymMessageNum", messageBean.getMessageNum());//消息numner
         params.put("agreeType", select_type);//0是拒绝，1是同意
@@ -274,7 +278,7 @@ public class AreaSubmitAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHold
 
     public static Dialog jujue_dialog;
 
-    private void submit_jujue_popwindow(YouYangViewHolder holder,MessageEntity.MessageBean m_messageBean ,MessageDetailEntity.DataBean messageBean,int type) {
+    private void submit_jujue_popwindow(YouYangViewHolder holder, MessageEntity.MessageBean m_messageBean, MessageDetailEntity.DataBean messageBean, int type) {
         LayoutInflater factory = LayoutInflater.from(context);
         View view = factory.inflate(R.layout.jujue_pop_detial, null);
         jujue_dialog = new Dialog(context, R.style.transparentFrameWindowStyle2);
@@ -301,7 +305,6 @@ public class AreaSubmitAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHold
         LinearLayout submit_btn = view.findViewById(R.id.submit_btn);
         ImageView close_btn = view.findViewById(R.id.close_btn);
         TextView type_tv = view.findViewById(R.id.type_tv);
-
 
 
         close_btn.setOnClickListener(new View.OnClickListener() {
@@ -378,15 +381,15 @@ public class AreaSubmitAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHold
         }
         class_name.setText(messageBean.getCourseName());
         teacher_name.setText(messageBean.getTeacherName());
-        if(messageBean.getPlaceType()==1){
+        if (messageBean.getPlaceType() == 1) {
             class_room.setText("有氧操房");
-        }else if(messageBean.getPlaceType()==2){
+        } else if (messageBean.getPlaceType() == 2) {
             class_room.setText("动感单车");
-        }else{
+        } else {
             class_room.setText("瑜伽房");
         }
-        price_tv.setText(messageBean.getPrice()+"/人");
-        people_number_xianzhi.setText(messageBean.getMaxPerson()+"人");
+        price_tv.setText(messageBean.getPrice() + "/人");
+        people_number_xianzhi.setText(messageBean.getMaxPerson() + "人");
         class_jieshao_content.setText(messageBean.getCourseDes());
         zhuyi_shixiang_tv.setText(messageBean.getTips());
 

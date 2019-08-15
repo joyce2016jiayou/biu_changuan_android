@@ -46,22 +46,29 @@ public class Network {
     public static final int DEFAULT_TIMEOUT = 7;
     private static Network mInstance;
     public MyService service;
-    public static String token = "";
     //测试服
-    //public static String main_url = "http://192.168.1.205:8888/api/gym-service/";
+    public static String main_url = "http://192.168.1.205:8888/api/gym-service/";
+    //public static String main_url = "http://kft.ahcomg.com/api/gym-service/";
 
-    public static String main_url = "http://kft.ahcomg.com/api/gym-service/";
 
-    public static String place_number = "GYM19072138381319";
+    public static String token = "";
+    public static String login_token="login_token";
+    public static String phone_number="phone_number";
+    public static String no_submit_information="no_submit_information";
+    public static String changguan_number="changguan_number";
+    public static String get_examine_result="get_examine_result";
+    public static String username="username" ;
+    public static String phone="phone";
+    public static String is_set_alias="is_set_alias";
 
     //获取单例
     public static Network getInstance(String method, Context context) {
         if (context != null) {
-            if ("".equals(SharedPreferencesHelper.get(context, "login_token", "").toString())) {
+            if ("".equals(SharedPreferencesHelper.get(context, Network.login_token, "").toString())) {
                 token = "";
                 Log.e("没有添加token", token);
             } else {
-                token = SharedPreferencesHelper.get(context, "login_token", "").toString();
+                token = SharedPreferencesHelper.get(context, Network.login_token, "").toString();
                 Log.e("添加的头部的token", token);
             }
             if (mInstance == null) {
@@ -662,6 +669,7 @@ public class Network {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
     }
+
     /**
      * 获取我的账单列表
      *

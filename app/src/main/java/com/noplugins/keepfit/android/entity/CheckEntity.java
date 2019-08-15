@@ -10,4 +10,14 @@ public class CheckEntity {
     }
 
     private String gymAreaNum;
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    private int status;
 }

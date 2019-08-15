@@ -191,7 +191,7 @@ public class YaoQingZhongDetailAdapter extends BaseRecyclerAdapter<RecyclerView.
         } else {
             gymAreaNum = SharedPreferencesHelper.get(context, "changguan_number", "").toString();
         }
-        params.put("gym_area_num", Network.place_number);//场馆编号
+        params.put("gym_area_num", gymAreaNum);//场馆编号
         params.put("gen_teacher_num", teacherBean.getTeacherNum());//场馆编号
         params.put("gym_course_num", gym_course_num);
         Gson gson = new Gson();

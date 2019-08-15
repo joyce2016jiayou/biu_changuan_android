@@ -1,7 +1,7 @@
 package com.noplugins.keepfit.android.entity;
 
 public class LoginEntity {
-    private String type;
+    private int type;
 
     public String getGymAreaNum() {
         return gymAreaNum;
@@ -14,11 +14,11 @@ public class LoginEntity {
     private String gymAreaNum;
 
 
-    public String getType() {
+    public  int getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(int type) {
         this.type = type;
     }
 
