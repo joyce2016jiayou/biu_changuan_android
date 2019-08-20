@@ -153,7 +153,7 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
     private ExRecyclerAdapter exRecyclerAdapter;
     private ArrayList<ItemBean> datas;
     private int max_num = 0;
-    private String icon_image_path;
+    private String icon_image_path="";
     private List<String> strings = new ArrayList<>();
     private NoScrollViewPager viewpager_content;
     private String changguan_type = "";

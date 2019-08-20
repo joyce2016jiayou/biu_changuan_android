@@ -69,7 +69,6 @@
         android:orientation="horizontal"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-
         android:background="@color/color_F8F8F8"
         android:layout_height="wrap_content">
 

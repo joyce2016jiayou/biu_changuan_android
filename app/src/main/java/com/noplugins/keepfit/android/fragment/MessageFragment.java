@@ -104,7 +104,6 @@ public class MessageFragment extends ViewPagerFragment {
 
     @Subscribe(threadMode = ThreadMode.MAIN,sticky = true)
     public void upadate(MessageEvent messageEvent) {
-        Log.e("富士康积分考虑到","是否大是大非");
         if (messageEvent.getMessage().equals("jpush_main_enter1")) {//获取消息总数，设置消息总数
             view_pager.setCurrentItem(0);
             setTabTextColorAndImageView(0);
