@@ -90,11 +90,9 @@ public class KeepFitActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Log.e("接口设计弗兰克的说法", "独守空房懒得");
         if (null != getIntent().getExtras()) {
             Bundle parms = getIntent().getExtras();
             if (parms.getString("jpush_enter").equals("jpush_enter1")) {
-                Log.e("进来了", "jpush_enter1");
 
                 viewpager_content.setCurrentItem(2);
                 xianshi_three();
@@ -103,16 +101,14 @@ public class KeepFitActivity extends BaseActivity {
                 EventBus.getDefault().postSticky(messageEvent);
 
             } else if (parms.getString("jpush_enter").equals("jpush_enter2")) {
-                Log.e("进来了", "jpush_enter2");
-
                 viewpager_content.setCurrentItem(2);
+
                 xianshi_three();
                 //设置跳转到消息tab2
                 MessageEvent messageEvent = new MessageEvent("jpush_main_enter2");
                 EventBus.getDefault().postSticky(messageEvent);
 
             } else if (parms.getString("jpush_enter").equals("jpush_enter3")) {
-                Log.e("进来了", "jpush_enter3");
 
                 viewpager_content.setCurrentItem(2);
                 xianshi_three();
@@ -122,7 +118,6 @@ public class KeepFitActivity extends BaseActivity {
                 EventBus.getDefault().postSticky(messageEvent);
 
             } else if (parms.getString("jpush_enter").equals("jpush_enter4")) {
-                Log.e("进来了", "jpush_enter4");
 
                 viewpager_content.setCurrentItem(2);
                 xianshi_three();

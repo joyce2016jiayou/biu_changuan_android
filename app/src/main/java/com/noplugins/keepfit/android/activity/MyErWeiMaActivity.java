@@ -89,7 +89,6 @@ public class MyErWeiMaActivity extends BaseActivity {
 
         @Override
         public void onPageSelected(int position) {
-            Log.e("JJ分开了第三代",""+position);
             if(position==50000){
                 title_tv.setText("用户端二维码");
             }else{

@@ -22,9 +22,20 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.LinearLayoutCompat;
 
+import com.google.gson.Gson;
 import com.google.zxing.Result;
 import com.noplugins.keepfit.android.R;
+import com.noplugins.keepfit.android.activity.AddClassItemActivity;
 import com.noplugins.keepfit.android.activity.MyErWeiMaActivity;
+import com.noplugins.keepfit.android.activity.YaoQingTeacherActivity;
+import com.noplugins.keepfit.android.entity.AddClassEntity;
+import com.noplugins.keepfit.android.entity.TeacherBean;
+import com.noplugins.keepfit.android.util.data.SharedPreferencesHelper;
+import com.noplugins.keepfit.android.util.net.Network;
+import com.noplugins.keepfit.android.util.net.entity.Bean;
+import com.noplugins.keepfit.android.util.net.progress.GsonSubscriberOnNextListener;
+import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriberNew;
+import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener;
 import com.noplugins.keepfit.android.util.ui.erweima.ViewfinderView;
 import com.noplugins.keepfit.android.util.ui.erweima.bean.ZxingConfig;
 import com.noplugins.keepfit.android.util.ui.erweima.camera.CameraManager;
@@ -34,6 +45,11 @@ import com.noplugins.keepfit.android.util.ui.erweima.decode.DecodeImgThread;
 import com.noplugins.keepfit.android.util.ui.erweima.decode.ImageUtil;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+import okhttp3.RequestBody;
+import rx.Subscription;
 
 
 /**
@@ -198,15 +214,47 @@ public class CaptureActivity extends AppCompatActivity implements SurfaceHolder.
      * @param rawResult 返回的扫描结果
      */
     public void handleDecode(Result rawResult) {
-
         inactivityTimer.onActivity();
 
         beepManager.playBeepSoundAndVibrate();
 
-        Intent intent = getIntent();
-        intent.putExtra(Constant.CODED_CONTENT, rawResult.getText());
-        setResult(RESULT_OK, intent);
-        this.finish();
+        //请求服务器传订单编号
+        send_order_number(rawResult);
+
+
+    }
+
+    private void send_order_number(Result rawResult) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("ordNum", rawResult.getText());//场馆编号
+        Gson gson = new Gson();
+        String json_params = gson.toJson(params);
+        String json = new Gson().toJson(params);//要传递的json
+        RequestBody requestBody = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), json);
+        Log.e(TAG, "发送订单：" + json_params);
+        Subscription subscription = Network.getInstance("发送订单", this).
+                sen_order(requestBody, new ProgressSubscriberNew<>(String.class, new GsonSubscriberOnNextListener<String>() {
+                    @Override
+                    public void on_post_entity(String entity, String s) {
+                        Log.e("发送订单成功", "发送订单成功");
+
+                        Intent intent = getIntent();
+                        intent.putExtra(Constant.CODED_CONTENT, rawResult.getText());
+                        setResult(RESULT_OK, intent);
+                        CaptureActivity.this.finish();
+                    }
+                }, new SubscriberOnNextListener<Bean<Object>>() {
+                    @Override
+                    public void onNext(Bean<Object> result) {
+
+                    }
+
+                    @Override
+                    public void onError(String error) {
+                        Log.e("发送订单失败", "发送订单失败" + error);
+
+                    }
+                }, this, true));
 
 
     }
@@ -278,8 +326,6 @@ public class CaptureActivity extends AppCompatActivity implements SurfaceHolder.
 
     @Override
     protected void onPause() {
-
-        Log.i("CaptureActivity", "onPause");
         if (handler != null) {
             handler.quitSynchronously();
             handler = null;

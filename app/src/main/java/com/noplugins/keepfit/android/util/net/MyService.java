@@ -140,8 +140,10 @@ public interface MyService {
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
     @POST("addClass")
     Observable<Bean<Object>> add_class(@Body RequestBody map);
+
     /**
      * 获取审核状态
+     *
      * @return
      */
     @FormUrlEncoded
@@ -150,6 +152,7 @@ public interface MyService {
 
     /**
      * 获取审核状态
+     *
      * @return
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
@@ -158,6 +161,7 @@ public interface MyService {
 
     /**
      * 获取审核状态
+     *
      * @return
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
@@ -166,13 +170,16 @@ public interface MyService {
 
     /**
      * 获取审核状态
+     *
      * @return
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
     @POST("searchMessage")
     Observable<Bean<Object>> zhanghu_message_list(@Body RequestBody json);
+
     /**
      * 获取审核状态
+     *
      * @return
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
@@ -181,20 +188,25 @@ public interface MyService {
 
     /**
      * 获取申请详情
+     *
      * @return
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
     @POST("classDetail")
     Observable<Bean<Object>> get_shenqing_detail(@Body RequestBody json);
+
     /**
      * 获取申请详情
+     *
      * @return
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
     @POST("alreadyRead")
     Observable<Bean<Object>> change_status(@Body RequestBody json);
+
     /**
      * 获取申请详情
+     *
      * @return
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
@@ -203,20 +215,25 @@ public interface MyService {
 
     /**
      * 获取申请详情
+     *
      * @return
      */
     @FormUrlEncoded
     @POST("getFreeTeacher")
     Observable<Bean<Object>> get_teacher_list(@FieldMap Map<String, Object> map);
+
     /**
      * 邀请
+     *
      * @return
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
     @POST("inviteTeacher")
     Observable<Bean<Object>> invite(@Body RequestBody json);
+
     /**
      * 取消邀请
+     *
      * @return
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
@@ -225,13 +242,16 @@ public interface MyService {
 
     /**
      * 获取用户/产品 统计
+     *
      * @return
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
     @POST("statistics")
     Observable<Bean<Object>> get_statistics(@Body RequestBody json);
+
     /**
      * 取消邀请
+     *
      * @return
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
@@ -240,6 +260,7 @@ public interface MyService {
 
     /**
      * 修改密码
+     *
      * @return 是否修改成功
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
@@ -248,13 +269,16 @@ public interface MyService {
 
     /**
      * 设置高低峰时段
+     *
      * @return 是否设置成功
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
     @POST("setHighAndLowTime")
     Observable<Bean<Object>> setHighAndLowTime(@Body RequestBody json);
+
     /**
      * 设置高低峰时段
+     *
      * @return 是否设置成功
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
@@ -264,6 +288,7 @@ public interface MyService {
 
     /**
      * 批量绑定用户
+     *
      * @return 是否设置成功
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
@@ -272,6 +297,7 @@ public interface MyService {
 
     /**
      * 获取已绑定列表
+     *
      * @return 是否设置成功
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
@@ -280,6 +306,7 @@ public interface MyService {
 
     /**
      * 批量绑定教练
+     *
      * @return 是否设置成功
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
@@ -288,6 +315,7 @@ public interface MyService {
 
     /**
      * 获取已绑定列表
+     *
      * @return 是否设置成功
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
@@ -296,6 +324,7 @@ public interface MyService {
 
     /**
      * 产品反馈
+     *
      * @return 是否设置成功
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
@@ -304,6 +333,7 @@ public interface MyService {
 
     /**
      * 获取我的账户
+     *
      * @return 账户信息
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
@@ -312,10 +342,20 @@ public interface MyService {
 
     /**
      * 获取我的账单列表
+     *
      * @return 账户信息
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
     @POST("searchWalletDetail")
     Observable<Bean<Object>> searchWalletDetail(@Body RequestBody json);
+
+    /**
+     * 发送账号
+     *
+     * @return 账户信息
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("userCheckIn")
+    Observable<Bean<Object>> sen_order(@Body RequestBody json);
 
 }

@@ -47,19 +47,19 @@ public class Network {
     private static Network mInstance;
     public MyService service;
     //测试服
-    //public static String main_url = "http://192.168.1.205:8888/api/gym-service/";
-    public static String main_url = "http://kft.ahcomg.com/api/gym-service/";
+    public static String main_url = "http://192.168.1.205:8888/api/gym-service/";
+    //public static String main_url = "http://kft.ahcomg.com/api/gym-service/";
 
 
     public static String token = "";
-    public static String login_token="login_token";
-    public static String phone_number="phone_number";
-    public static String no_submit_information="no_submit_information";
-    public static String changguan_number="changguan_number";
-    public static String get_examine_result="get_examine_result";
-    public static String username="username" ;
-    public static String phone="phone";
-    public static String is_set_alias="is_set_alias";
+    public static String login_token = "login_token";
+    public static String phone_number = "phone_number";
+    public static String no_submit_information = "no_submit_information";
+    public static String changguan_number = "changguan_number";
+    public static String get_examine_result = "get_examine_result";
+    public static String username = "username";
+    public static String phone = "phone";
+    public static String is_set_alias = "is_set_alias";
 
     //获取单例
     public static Network getInstance(String method, Context context) {
@@ -684,4 +684,17 @@ public class Network {
                 .subscribe(subscriber);
     }
 
+    /**
+     * 发送订单
+     *
+     * @param subscriber
+     * @return
+     */
+    public Subscription sen_order(RequestBody params, Subscriber<Bean<Object>> subscriber) {
+        return service.sen_order(params)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
 }

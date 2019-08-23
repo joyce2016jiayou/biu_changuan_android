@@ -338,7 +338,7 @@
             android:value="default_developer" />
         <meta-data
             android:name="JPUSH_APPKEY"
-            android:value="3d4375015f70ff991612b924" /> <!--  </>值来自开发者平台取得的AppKey-->
+            android:value="6b46fbc676a45e4935ad5430" /> <!--  </>值来自开发者平台取得的AppKey-->
         <!--极光-->
 
     </application>

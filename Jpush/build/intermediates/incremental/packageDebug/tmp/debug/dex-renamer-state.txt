@@ -1,0 +1,4 @@
+#Thu Aug 22 13:12:54 CST 2019
+base.0=/Users/joyce/Desktop/andriod/Jpush/build/intermediates/dex/debug/mergeDexDebug/out
+path.0=classes.dex
+renamed.0=classes.dex

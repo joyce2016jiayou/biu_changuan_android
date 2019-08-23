@@ -1,0 +1,62 @@
+{
+    "logs": [
+        {
+            "outputFile": "/Users/joyce/Desktop/andriod/Jpush/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-zh/values-zh.xml",
+            "map": [
+                {
+                    "source": "/Users/joyce/Desktop/andriod/Jpush/src/main/res/values-zh/jpush_string.xml",
+                    "from": {
+                        "startLines": "4,5,3,2",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "163,220,109,55",
+                        "endColumns": "56,53,53,53",
+                        "endOffsets": "215,269,158,104"
+                    },
+                    "to": {
+                        "startLines": "10,11,12,13",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "497,554,608,662",
+                        "endColumns": "56,53,53,53",
+                        "endOffsets": "549,603,657,711"
+                    }
+                },
+                {
+                    "source": "/Users/joyce/Desktop/andriod/Jpush/src/main/res/values-zh/strings.xml",
+                    "from": {
+                        "startLines": "5,3,9,13,8,10,11,2,14,12,6,15,7,4",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "228,109,466,696,410,522,574,55,758,626,286,811,362,161",
+                        "endColumns": "57,51,55,61,55,51,51,53,52,69,75,43,47,66",
+                        "endOffsets": "281,156,517,753,461,569,621,104,806,691,357,850,405,223"
+                    },
+                    "to": {
+                        "startLines": "2,3,4,5,6,7,8,9,14,15,16,17,18,19",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,113,165,221,283,339,391,443,716,769,839,915,959,1007",
+                        "endColumns": "57,51,55,61,55,51,51,53,52,69,75,43,47,66",
+                        "endOffsets": "108,160,216,278,334,386,438,492,764,834,910,954,1002,1069"
+                    }
+                },
+                {
+                    "source": "/Users/joyce/Desktop/andriod/Jpush/src/main/res/values-zh/style.xml",
+                    "from": {
+                        "startLines": "7,2,11",
+                        "startColumns": "1,3,1",
+                        "startOffsets": "295,113,430",
+                        "endLines": "10,6,14",
+                        "endColumns": "9,9,9",
+                        "endOffsets": "428,293,559"
+                    },
+                    "to": {
+                        "startLines": "20,24,29",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "1074,1212,1397",
+                        "endLines": "23,28,32",
+                        "endColumns": "9,9,9",
+                        "endOffsets": "1207,1392,1526"
+                    }
+                }
+            ]
+        }
+    ]
+}
