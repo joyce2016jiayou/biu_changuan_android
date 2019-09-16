@@ -83,6 +83,7 @@ import java.util.logging.Level;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cn.qqtheme.framework.wheelpicker.PhoneCodePicker;
 import cn.qqtheme.framework.wheelpicker.TimePicker;
 import cn.qqtheme.framework.wheelview.annotation.TimeMode;
 import cn.qqtheme.framework.wheelview.contract.OnTimeSelectedListener;
@@ -153,7 +154,7 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
     private ExRecyclerAdapter exRecyclerAdapter;
     private ArrayList<ItemBean> datas;
     private int max_num = 0;
-    private String icon_image_path="";
+    private String icon_image_path = "";
     private List<String> strings = new ArrayList<>();
     private NoScrollViewPager viewpager_content;
     private String changguan_type = "";
@@ -285,7 +286,7 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
                         }, new UploadOptions(null, "test-type", true, null, null));
                     }
                     /**七牛云*/
-                }else{
+                } else {
                     return;
                 }
 
@@ -319,16 +320,16 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
         List<InformationEntity.GymPlacesBean> gymPlacesBeans = new ArrayList<>();
         for (int i = 0; i < itemBeans.size(); i++) {
             InformationEntity.GymPlacesBean gymPlacesBean = new InformationEntity.GymPlacesBean();
-            if(null==itemBeans.get(i).getPlace()){
+            if (null == itemBeans.get(i).getPlace()) {
                 gymPlacesBean.setMax_num(0);
-            }else{
+            } else {
                 gymPlacesBean.setMax_num(Integer.valueOf(itemBeans.get(i).getPlace()));
             }
             if (itemBeans.get(i).getType_name().equals("有氧操房")) {
                 gymPlacesBean.setPlace_type("1");
-            }else if(itemBeans.get(i).getType_name().equals("动态单车")){
+            } else if (itemBeans.get(i).getType_name().equals("动态单车")) {
                 gymPlacesBean.setPlace_type("2");
-            }else{
+            } else {
                 gymPlacesBean.setPlace_type("3");
 
             }
@@ -362,31 +363,31 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
         if (TextUtils.isEmpty(changguan_name.getText())) {
             Toast.makeText(getActivity(), R.string.alert_dialog_tishi3, Toast.LENGTH_SHORT).show();
             return false;
-        }else if(TextUtils.isEmpty(edittext_area.getText())){
+        } else if (TextUtils.isEmpty(edittext_area.getText())) {
             Toast.makeText(getActivity(), R.string.alert_dialog_tishi4, Toast.LENGTH_SHORT).show();
             return false;
-        }else if(TextUtils.isEmpty(tell_edit.getText())){
+        } else if (TextUtils.isEmpty(tell_edit.getText())) {
             Toast.makeText(getActivity(), R.string.alert_dialog_tishi5, Toast.LENGTH_SHORT).show();
             return false;
-        }else if(TextUtils.isEmpty(edit_email.getText())){
+        } else if (TextUtils.isEmpty(edit_email.getText())) {
             Toast.makeText(getActivity(), R.string.alert_dialog_tishi6, Toast.LENGTH_SHORT).show();
             return false;
-        }else if(TextUtils.isEmpty(edit_address.getText())){
+        } else if (TextUtils.isEmpty(edit_address.getText())) {
             Toast.makeText(getActivity(), R.string.alert_dialog_tishi7, Toast.LENGTH_SHORT).show();
             return false;
-        }else if(icon_image_path.length()==0){//icon地址
+        } else if (icon_image_path.length() == 0) {//icon地址
             Toast.makeText(getActivity(), R.string.alert_dialog_tishi8, Toast.LENGTH_SHORT).show();
             return false;
-        }else if(strings.size()==0){//场馆照片
+        } else if (strings.size() == 0) {//场馆照片
             Toast.makeText(getActivity(), R.string.alert_dialog_tishi9, Toast.LENGTH_SHORT).show();
             return false;
-        }else if(biaoqianEntities.size()==0){//标签
+        } else if (biaoqianEntities.size() == 0) {//标签
             Toast.makeText(getActivity(), R.string.alert_dialog_tishi10, Toast.LENGTH_SHORT).show();
             return false;
-        }else if(exRecyclerAdapter.getData().size()==0){//功能性场所
+        } else if (exRecyclerAdapter.getData().size() == 0) {//功能性场所
             Toast.makeText(getActivity(), R.string.alert_dialog_tishi11, Toast.LENGTH_SHORT).show();
             return false;
-        }else{
+        } else {
             return true;
         }
 
@@ -402,6 +403,7 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
                         .setCount(1)
                         .setOriginalMenu(false, true, null)
                         .start(102);
+
             }
         });
         delete_icon_btn.setOnClickListener(new View.OnClickListener() {//删除图片
@@ -413,6 +415,7 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
             }
         });
     }
+
 
     private void set_jiugongge_view() {
         //设置视图添加
@@ -656,8 +659,6 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
     }
 
 
-
-
     private void time_check(TextView textView) {
         picker = new TimePicker(getActivity(), TimeMode.HOUR_24);
         Calendar calendar = Calendar.getInstance();
@@ -751,6 +752,7 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
                 mPhotosSnpl.setData(strings);//设置九宫格
                 ValueResources.select_iamges_size = strings.size();
                 select_numbers_tv.setText(ValueResources.select_iamges_size + "/9");
+
                 return;
             } else {//添加icon,上传icon
                 ArrayList<String> resultPaths = data.getStringArrayListExtra(EasyPhotos.RESULT_PATHS);
@@ -760,11 +762,11 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
                     Glide.with(getActivity()).load(icon_iamge_file).into(logo_image);
                     delete_icon_btn.setVisibility(View.VISIBLE);
                 }
+
             }
 
 
         } else if (RESULT_CANCELED == resultCode) {
-            Log.e("关闭了相册", "关闭了相册");
             //Toast.makeText(this, "cancel", Toast.LENGTH_SHORT).show();
         }
     }

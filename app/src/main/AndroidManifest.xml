@@ -98,7 +98,9 @@
         <activity android:name=".activity.MyErWeiMaActivity"
             android:windowSoftInputMode="adjustPan|stateHidden"/>
         <activity android:name=".activity.InformationCheckActivity"
-            android:windowSoftInputMode="adjustPan|stateHidden"/>
+            android:windowSoftInputMode="adjustPan|stateHidden">
+
+        </activity>
         <activity android:name=".activity.ShareSDKDEMOActivity"
             android:windowSoftInputMode="adjustPan|stateHidden"/>
         <activity android:name=".activity.UserPermissionSelectActivity"
@@ -123,14 +125,6 @@
         </activity>
         <activity
             android:name=".KeepFitActivity">
-
-            <!--
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-            -->
         </activity> <!-- 存储权限 authorities="你的包名+fileprovider" -->
         <provider
             android:name="androidx.core.content.FileProvider"
