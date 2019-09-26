@@ -285,6 +285,7 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
                             }
                         }, new UploadOptions(null, "test-type", true, null, null));
                     }
+
                     /**七牛云*/
                 } else {
                     return;
