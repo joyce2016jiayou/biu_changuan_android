@@ -215,6 +215,7 @@ public class RegisterActivity extends BaseActivity {
         Map<String, String> params = new HashMap<>();
         params.put("code", edit_yanzhengma.getText().toString());
         params.put("messageid", message_id);
+        params.put("phone",edit_phone_number.getText().toString());
         subscription = Network.getInstance("验证验证码", getApplicationContext())
                 .check_yanzhengma(params,
                         new ProgressSubscriberNew<>(Boolean.class, new GsonSubscriberOnNextListener<Boolean>() {

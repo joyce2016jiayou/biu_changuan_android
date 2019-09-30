@@ -18,18 +18,36 @@ android {
 
     }
 
-    buildTypes {
+    signingConfigs {
+        Properties properties = new Properties()
+        properties.load(project.rootProject.file('local.properties').newDataInputStream())
         release {
-            minifyEnabled false
-            //signingConfig signingConfigs.debug
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            keyAlias properties.getProperty("keystroe_keyAlias")
+            storeFile file(properties.getProperty("keystroe_storeFile"))
+            storePassword properties.getProperty("keystroe_storePassword")
+            keyPassword properties.getProperty("keystroe_keyPassword")
+
         }
 
+    }
+
+    buildTypes {
         debug {
-            minifyEnabled false
-            //signingConfig signingConfigs.debug
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+            debuggable true
+            jniDebuggable true
+
         }
+        release {
+            signingConfig signingConfigs.release
+            debuggable true
+            jniDebuggable true
+//            minifyEnabled true /*发布版一定要混淆，下面是混淆文件*/
+            //proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+
+        }
+
     }
     packagingOptions {
         exclude('META-INF/LICENSE')
@@ -62,10 +80,23 @@ android {
 //        }
 //
 //    }
-
-
+    applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            def outputFile = output.outputFile
+            if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                def buildType = variant.buildType.name
+                def fileName = "哔呦_场馆端_${defaultConfig.versionName}_${buildType}_${getCurrentTime()}.apk"
+                outputFileName = fileName
+            }
+        }
+    }
 }
 
+
+//获取当前时间
+def getCurrentTime() {
+    return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))
+}
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'androidx.appcompat:appcompat:1.0.2'
