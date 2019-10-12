@@ -149,9 +149,6 @@ public class KeepFitActivity extends BaseActivity {
         music = sp.load(this, R.raw.button, 1); //把你的声音素材放到res/raw里，第2个参数即为资源文件，第3个为音乐的优先级
 
 
-        //获取审核状态
-        get_check_status();
-
         //获取消息总数，设置消息总数
         get_message_all();
 
@@ -208,49 +205,7 @@ public class KeepFitActivity extends BaseActivity {
     }
 
 
-    private void get_check_status() {
-        String token;
-        Map<String, String> params = new HashMap<>();
-        if ("".equals(SharedPreferencesHelper.get(getApplicationContext(), Network.login_token, "").toString())) {
-            token = "";
-        } else {
-            token = SharedPreferencesHelper.get(getApplicationContext(), Network.login_token, "").toString();
-        }
-        params.put("token", token);
-        subscription = Network.getInstance("获取审核状态", getApplicationContext())
-                .get_check_status(params,
-                        new ProgressSubscriberNew<>(CheckEntity.class, new GsonSubscriberOnNextListener<CheckEntity>() {
-                            @Override
-                            public void on_post_entity(CheckEntity checkEntity, String get_message_id) {
-                                Log.e(TAG, "获取审核状态成功：" + checkEntity.getStatus());
-                                //成功1，失败0，没有提交过资料-2
-                                if (checkEntity.getStatus() == 1) {
-                                    if ("".equals(SharedPreferencesHelper.get(getApplicationContext(), Network.get_examine_result, ""))) {
-                                        SharedPreferencesHelper.put(getApplicationContext(), Network.get_examine_result, "true");
-                                        Intent intent = new Intent(KeepFitActivity.this, BuyActivity.class);
-                                        startActivity(intent);
-                                    }
-                                } else if (checkEntity.getStatus() == 0) {
-                                    Intent intent = new Intent(KeepFitActivity.this, CheckStatusFailActivity.class);
-                                    startActivity(intent);
-                                } else if (checkEntity.getStatus() == -2) {
-                                    Intent intent = new Intent(KeepFitActivity.this, UserPermissionSelectActivity.class);
-                                    startActivity(intent);
-                                    finish();
-                                }
-                            }
-                        }, new SubscriberOnNextListener<Bean<Object>>() {
-                            @Override
-                            public void onNext(Bean<Object> result) {
 
-                            }
-
-                            @Override
-                            public void onError(String error) {
-                                Log.e(TAG, "获取审核状态报错：" + error);
-                            }
-                        }, this, false));
-    }
 
 
     @OnClick({R.id.btn_home, R.id.btn_shipu, R.id.btn_movie, R.id.btn_mine})

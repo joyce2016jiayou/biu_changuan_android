@@ -31,6 +31,7 @@ import com.noplugins.keepfit.android.util.data.StringsHelper;
 import com.noplugins.keepfit.android.util.net.Network;
 import com.noplugins.keepfit.android.util.net.entity.Bean;
 import com.noplugins.keepfit.android.util.net.progress.GsonSubscriberOnNextListener;
+import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriber;
 import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriberNew;
 import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener;
 import com.orhanobut.logger.Logger;
@@ -177,7 +178,7 @@ public class ForgetPasswordActivity extends BaseActivity {
     };
 
     private void Check_YanZhengMa() {
-        Map<String, String> params = new HashMap<>();
+        /*Map<String, String> params = new HashMap<>();
         params.put("code", edit_yanzhengma.getText().toString());
         params.put("messageid", message_id);
         subscription = Network.getInstance("验证验证码", getApplicationContext())
@@ -202,7 +203,31 @@ public class ForgetPasswordActivity extends BaseActivity {
                                 edit_yanzhengma.setError("验证码输入错误");
                                 Toast.makeText(getApplicationContext(), "验证码输入不正确！", Toast.LENGTH_SHORT).show();
                             }
-                        }, this, true));
+                        }, this, true));*/
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("code", edit_yanzhengma.getText().toString());
+        params.put("messageid", message_id);
+        params.put("phone",edit_phone_number.getText().toString());
+        subscription = Network.getInstance("验证验证码", this)
+                .check_yanzhengma(params,
+                        new ProgressSubscriber<>("验证验证码", new SubscriberOnNextListener<Bean<String>>() {
+                            @Override
+                            public void onNext(Bean<String> result) {
+                                sure_submit();
+
+                            }
+
+                            @Override
+                            public void onError(String error) {
+                                Toast.makeText(getApplicationContext(), "验证码输入错误！", Toast.LENGTH_SHORT).show();
+                                edit_yanzhengma.setError("验证码输入错误");
+
+                            }
+                        }, this, false));
+
+
+
 
     }
 

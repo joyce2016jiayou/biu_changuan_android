@@ -1,7 +1,5 @@
 package com.noplugins.keepfit.android.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,11 +18,13 @@ import com.noplugins.keepfit.android.base.BaseActivity;
 import com.noplugins.keepfit.android.callback.DialogCallBack;
 import com.noplugins.keepfit.android.entity.AddClassEntity;
 import com.noplugins.keepfit.android.entity.ClassEntity;
+import com.noplugins.keepfit.android.entity.ClassTypeEntity;
 import com.noplugins.keepfit.android.entity.MaxPeopleEntity;
 import com.noplugins.keepfit.android.util.data.SharedPreferencesHelper;
 import com.noplugins.keepfit.android.util.net.Network;
 import com.noplugins.keepfit.android.util.net.entity.Bean;
 import com.noplugins.keepfit.android.util.net.progress.GsonSubscriberOnNextListener;
+import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriber;
 import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriberNew;
 import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener;
 import com.noplugins.keepfit.android.util.ui.PopWindowHelper;
@@ -48,8 +48,6 @@ import cn.qqtheme.framework.wheelview.entity.DateEntity;
 import cn.qqtheme.framework.wheelview.entity.TimeEntity;
 import lib.demo.spinner.MaterialSpinner;
 import okhttp3.RequestBody;
-
-import static com.zhy.http.okhttp.log.LoggerInterceptor.TAG;
 
 public class AddClassItemActivity extends BaseActivity {
     @BindView(R.id.back_btn)
@@ -99,10 +97,11 @@ public class AddClassItemActivity extends BaseActivity {
     private TimePicker picker;
     private DatePicker datePicker;
     //获取当前的日期
-    private int[] cDate = CalendarUtil.getCurrentDate();
+    private int[] cDate;
     private int page = 1;
     private List<ClassEntity.DataBean> dataBeans = new ArrayList<>();
     private int enable_max_people;
+    private List<ClassTypeEntity> classTypeEntities = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,6 +122,8 @@ public class AddClassItemActivity extends BaseActivity {
 
     @Override
     public void doBusiness(Context mContext) {
+
+        cDate = CalendarUtil.getCurrentDate();
         back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -150,13 +151,62 @@ public class AddClassItemActivity extends BaseActivity {
 
         select_nandu_type();
 
-        select_room_type();
+        //select_room_type();
 
         select_xunhuan_type();
 
         select_time();
+        //获取房间类型
+        get_class_type();
 
-        search_room_people(true);//获取最大人数
+    }
+
+    private void get_class_type() {
+        Map<String, Object> params = new HashMap<>();
+        String gymAreaNum;
+        if ("".equals(SharedPreferencesHelper.get(this, Network.changguan_number, "").toString())) {
+            gymAreaNum = "";
+        } else {
+            gymAreaNum = SharedPreferencesHelper.get(this, Network.changguan_number, "").toString();
+        }
+        params.put("areaNum", gymAreaNum);//场馆编号
+        subscription = Network.getInstance("获取房间类型", this)
+                .get_class_type(params,
+                        new ProgressSubscriber<>("获取房间类型", new SubscriberOnNextListener<Bean<List<ClassTypeEntity>>>() {
+                            @Override
+                            public void onNext(Bean<List<ClassTypeEntity>> result){
+                                classTypeEntities.addAll(result.getData());
+                                List<String> typeArrays = new ArrayList<>();
+                                for (int i = 0; i < classTypeEntities.size(); i++) {
+                                    typeArrays.add(classTypeEntities.get(i).getValue());
+                                }
+                                room_type_spinner.setItems(typeArrays);
+                                room_type_spinner.setSelectedIndex(0);
+                                //获取最大人数
+                                search_room_people(0);
+                                room_type_spinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
+
+                                    @Override
+                                    public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
+                                        select_room_type = item;
+                                        //查询每个房间最大能容纳的人数
+                                        search_room_people(position);
+                                    }
+                                });
+                                room_type_spinner.setOnNothingSelectedListener(new MaterialSpinner.OnNothingSelectedListener() {
+
+                                    @Override
+                                    public void onNothingSelected(MaterialSpinner spinner) {
+                                        spinner.getSelectedIndex();
+                                    }
+                                });
+                            }
+
+                            @Override
+                            public void onError(String error) {
+
+                            }
+                        }, this, false));
     }
 
     @Override
@@ -248,36 +298,26 @@ public class AddClassItemActivity extends BaseActivity {
         params.put("tips", edit_zhuyi_shixiang.getText().toString());//注意事项
         params.put("price", edit_price_number.getText().toString());//注意事项
         params.put("suit_person", edit_shihe_renqun.getText().toString());//适合人群
-        Gson gson = new Gson();
-        String json_params = gson.toJson(params);
-        String json = new Gson().toJson(params);//要传递的json
-        RequestBody requestBody = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), json);
-        Log.e(TAG, "添加课程：" + json_params);
-        subscription = Network.getInstance("添加课程", this).
-                add_class(requestBody, new ProgressSubscriberNew<>(AddClassEntity.class, new GsonSubscriberOnNextListener<AddClassEntity>() {
-                    @Override
-                    public void on_post_entity(AddClassEntity entity, String s) {
-                        Log.e("添加课程成功", "添加课程成功" + entity.getStartTime());
-                        Intent intent = new Intent(AddClassItemActivity.this, YaoQingTeacherActivity.class);
-                        Bundle bundle = new Bundle();
-                        bundle.putString("create_time", entity.getStartTime());
-                        bundle.putString("gym_course_num", entity.getGym_course_num());
-                        intent.putExtras(bundle);
-                        startActivity(intent);
-                        finish();
-                    }
-                }, new SubscriberOnNextListener<Bean<Object>>() {
-                    @Override
-                    public void onNext(Bean<Object> result) {
+        subscription = Network.getInstance("添加课程", this)
+                .add_class(params,
+                        new ProgressSubscriber<>("添加课程", new SubscriberOnNextListener<Bean<AddClassEntity>>() {
+                            @Override
+                            public void onNext(Bean<AddClassEntity> result) {
+                                Intent intent = new Intent(AddClassItemActivity.this, YaoQingTeacherActivity.class);
+                                Bundle bundle = new Bundle();
+                                bundle.putString("create_time", result.getData().getStartTime());
+                                bundle.putString("gym_course_num", result.getData().getGym_course_num());
+                                intent.putExtras(bundle);
+                                startActivity(intent);
+                                finish();
+                            }
 
-                    }
+                            @Override
+                            public void onError(String error) {
+                                Toast.makeText(AddClassItemActivity.this, error, Toast.LENGTH_SHORT).show();
 
-                    @Override
-                    public void onError(String error) {
-                        Toast.makeText(AddClassItemActivity.this, error, Toast.LENGTH_SHORT).show();
-                        Log.e("添加课程失败", "添加课程失败:" + error);
-                    }
-                }, this, true));
+                            }
+                        }, this, true));
     }
 
     private boolean check_value() {
@@ -297,6 +337,7 @@ public class AddClassItemActivity extends BaseActivity {
             Toast.makeText(this, R.string.alert_dialog_tishi20, Toast.LENGTH_SHORT).show();
             return false;
         } else if (Integer.valueOf(edit_tuanke_renshu_number.getText().toString()) > enable_max_people) {
+            Log.e("最大人数", enable_max_people + "");
             Toast.makeText(this, R.string.alert_dialog_tishi21, Toast.LENGTH_SHORT).show();
             return false;
         } else {
@@ -310,7 +351,7 @@ public class AddClassItemActivity extends BaseActivity {
         if (cDate[1] <= 9) {
             month_tv.setText("0" + cDate[1]);//显示当前月份
         } else {
-            month_tv.setText(cDate[1]);//显示当前月份
+            month_tv.setText("" + cDate[1]);//显示当前月份
         }
         if (cDate[2] <= 9) {
             month_tv.setText("0" + cDate[2]);//显示当前月份
@@ -402,29 +443,8 @@ public class AddClassItemActivity extends BaseActivity {
         });
     }
 
-    private void select_room_type() {
-        String[] typeArrays = getResources().getStringArray(R.array.gongneng_types);
-        room_type_spinner.setItems(typeArrays);
-        room_type_spinner.setSelectedIndex(0);
-        room_type_spinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
 
-            @Override
-            public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
-                select_room_type = item;
-                //查询每个房间最大能容纳的人数
-                search_room_people(false);
-            }
-        });
-        room_type_spinner.setOnNothingSelectedListener(new MaterialSpinner.OnNothingSelectedListener() {
-
-            @Override
-            public void onNothingSelected(MaterialSpinner spinner) {
-                spinner.getSelectedIndex();
-            }
-        });
-    }
-
-    private void search_room_people(boolean is_first) {
+    private void search_room_people(int position) {
         Map<String, Object> params = new HashMap<>();
         String gymAreaNum;
         if ("".equals(SharedPreferencesHelper.get(this, Network.changguan_number, "").toString())) {
@@ -433,16 +453,8 @@ public class AddClassItemActivity extends BaseActivity {
             gymAreaNum = SharedPreferencesHelper.get(this, Network.changguan_number, "").toString();
         }
         params.put("gymAreaNum", gymAreaNum);//场馆编号
-        if (is_first) {
-            params.put("PlaceType", 1);
-        } else {
-            if (select_room_type.equals("有氧操房")) {
-                params.put("PlaceType", 1);
-            } else if (select_room_type.equals("动态单车")) {
-                params.put("PlaceType", 2);
-            } else {
-                params.put("PlaceType", 3);
-            }
+        if (classTypeEntities.size() > 0) {
+            params.put("PlaceType", classTypeEntities.get(position).getKey());
         }
         Gson gson = new Gson();
         String json_params = gson.toJson(params);

@@ -75,7 +75,6 @@ public class BusinessInformationFragment extends ViewPagerFragment {
             view = inflater.inflate(R.layout.fragment_business_information, container, false);
             ButterKnife.bind(this, view);//绑定黄牛刀
             initView();
-
         }
         return view;
     }

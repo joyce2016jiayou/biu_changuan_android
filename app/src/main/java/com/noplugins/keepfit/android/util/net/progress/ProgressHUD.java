@@ -20,27 +20,27 @@ public class ProgressHUD extends Dialog {
 	}
 
 	public void onWindowFocusChanged(boolean hasFocus) {
-		/*ProgressBar mProgressBar = (ProgressBar) findViewById(R.id.spinnerImageView);
-
-
-		ObjectAnimator oa = ObjectAnimator.ofFloat(mProgressBar, "rotationY", 0, 360f).setDuration(2000);
-		oa.setRepeatCount(100);
-		oa.setInterpolator(new LinearInterpolator());
-		oa.start();
-
-		ObjectAnimator oa2 = ObjectAnimator.ofFloat(mProgressBar, "scaleX", 1, 0.6f, 1).setDuration(2000);
-		oa2.setRepeatCount(100);
-		oa2.setInterpolator(new LinearInterpolator());
-		oa2.start();
-
-		ObjectAnimator oa3 = ObjectAnimator.ofFloat(mProgressBar, "scaleY", 1, 0.6f, 1).setDuration(2000);
-		oa3.setRepeatCount(100);
-		oa3.setInterpolator(new LinearInterpolator());
-		oa3.start();*/
-
-		// AnimationDrawable spinner = (AnimationDrawable)
-		// imageView.getBackground();
-		// spinner.start();
+//		ProgressBar mProgressBar = (ProgressBar) findViewById(R.id.spinnerImageView);
+//
+//
+//		ObjectAnimator oa = ObjectAnimator.ofFloat(mProgressBar, "rotationY", 0, 360f).setDuration(2000);
+//		oa.setRepeatCount(100);
+//		oa.setInterpolator(new LinearInterpolator());
+//		oa.start();
+//
+//		ObjectAnimator oa2 = ObjectAnimator.ofFloat(mProgressBar, "scaleX", 1, 0.6f, 1).setDuration(2000);
+//		oa2.setRepeatCount(100);
+//		oa2.setInterpolator(new LinearInterpolator());
+//		oa2.start();
+//
+//		ObjectAnimator oa3 = ObjectAnimator.ofFloat(mProgressBar, "scaleY", 1, 0.6f, 1).setDuration(2000);
+//		oa3.setRepeatCount(100);
+//		oa3.setInterpolator(new LinearInterpolator());
+//		oa3.start();
+//
+//		 AnimationDrawable spinner = (AnimationDrawable)
+//		 imageView.getBackground();
+//		 spinner.start();
 	}
 
 	public void setMessage(CharSequence message) {
@@ -67,8 +67,8 @@ public class ProgressHUD extends Dialog {
 		dialog.getWindow().getAttributes().gravity = Gravity.CENTER;
 		WindowManager.LayoutParams lp = dialog.getWindow().getAttributes();
 		//去掉了透明度
-		//lp.dimAmount = 0.2f;
-		lp.dimAmount = 0.0f;
+		lp.dimAmount = 0.2f;
+		//lp.dimAmount = 0.0f;
 		dialog.getWindow().setAttributes(lp);
 		if (context == null)
 			return null;

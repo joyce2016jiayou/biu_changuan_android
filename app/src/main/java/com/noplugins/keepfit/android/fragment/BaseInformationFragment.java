@@ -233,7 +233,7 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
             @Override
             public void onClick(View view) {
                 if (check_value()) {
-                    /**七牛云**/
+                    /**七牛云*/
                     progress_upload = new ProgressUtil();
                     progress_upload.showProgressDialog(getActivity(), "载入中...");
                     //上传icon
@@ -285,18 +285,11 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
                             }
                         }, new UploadOptions(null, "test-type", true, null, null));
                     }
-
-                    /**七牛云*/
                 } else {
                     return;
                 }
 
 
-
-               /* mainActivity.informationEntity = getDates();
-                viewpager_content.setCurrentItem(1);
-                int step = stepView.getCurrentStep();//设置进度条
-                stepView.setCurrentStep((step + 1) % stepView.getStepNum());*/
             }
         });
     }

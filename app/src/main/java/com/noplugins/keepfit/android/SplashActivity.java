@@ -18,6 +18,8 @@ import com.noplugins.keepfit.android.activity.LoginActivity;
 import com.noplugins.keepfit.android.activity.UserPermissionSelectActivity;
 import com.noplugins.keepfit.android.base.BaseActivity;
 import com.noplugins.keepfit.android.entity.CheckEntity;
+import com.noplugins.keepfit.android.global.AppConstants;
+import com.noplugins.keepfit.android.util.SpUtils;
 import com.noplugins.keepfit.android.util.data.SharedPreferencesHelper;
 import com.noplugins.keepfit.android.util.eventbus.MessageEvent;
 import com.noplugins.keepfit.android.util.net.Network;
@@ -25,6 +27,7 @@ import com.noplugins.keepfit.android.util.net.entity.Bean;
 import com.noplugins.keepfit.android.util.net.progress.GsonSubscriberOnNextListener;
 import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriberNew;
 import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener;
+import com.tencent.bugly.crashreport.CrashReport;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -33,6 +36,7 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cn.jpush.android.cache.Sp;
 
 public class SplashActivity extends BaseActivity {
     @BindView(R.id.splash_image)
@@ -74,27 +78,39 @@ public class SplashActivity extends BaseActivity {
     @Override
     public void doBusiness(Context mContext) {
         if (panduan_net()) {
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    if ("".equals(SharedPreferencesHelper.get(getApplicationContext(), Network.login_token, ""))) {
-                        Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
-                        startActivity(intent);
-                        finish();
-                    } else {
-                        //防止在第一次，选择角色的时候退出了，导致，第二次进来直接进主页
-                        if ("".equals(SharedPreferencesHelper.get(getApplicationContext(), Network.no_submit_information, ""))) {
-                            Intent intent = new Intent(SplashActivity.this, KeepFitActivity.class);
-                            startActivity(intent);
-                            finish();
-                        } else {
-                            Intent intent = new Intent(SplashActivity.this, UserPermissionSelectActivity.class);
-                            startActivity(intent);
-                            finish();
-                        }
-                    }
-                }
-            }, 2000);
+            if ("".equals(SharedPreferencesHelper.get(getApplicationContext(), Network.login_token, ""))) {
+                Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+            } else {
+                //防止在第一次，选择角色的时候退出了，导致，第二次进来直接进主页
+                //获取审核状态
+                get_check_status();
+            }
+
+
+//            new Handler().postDelayed(new Runnable() {
+//                @Override
+//                public void run() {
+//                    if ("".equals(SharedPreferencesHelper.get(getApplicationContext(), Network.login_token, ""))) {
+//                        Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+//                        startActivity(intent);
+//                        finish();
+//                    } else {
+//                        //防止在第一次，选择角色的时候退出了，导致，第二次进来直接进主页
+//                        if ("".equals(SharedPreferencesHelper.get(getApplicationContext(), Network.no_submit_information, ""))) {
+//                            Intent intent = new Intent(SplashActivity.this, KeepFitActivity.class);
+//                            startActivity(intent);
+//                            finish();
+//                        } else {
+//                            Intent intent = new Intent(SplashActivity.this, UserPermissionSelectActivity.class);
+//                            startActivity(intent);
+//                            finish();
+//                        }
+//                    }
+//                }
+//            }, 2000);
+
         } else {//等待网络或者弹窗
             if (null == mHandler) {
                 mHandler = new Handler(Looper.getMainLooper());
@@ -114,6 +130,45 @@ public class SplashActivity extends BaseActivity {
 //
 //            }
 //        });
+
+        //CrashReport.testJavaCrash();
+
+    }
+
+    private void get_check_status() {
+        Map<String, String> params = new HashMap<>();
+        params.put("token", SpUtils.getString(getApplicationContext(), AppConstants.TOKEN));
+        Log.e("获取审核状态参数", params.toString());
+        subscription = Network.getInstance("获取审核状态", getApplicationContext())
+                .get_check_status(params,
+                        new ProgressSubscriberNew<>(CheckEntity.class, new GsonSubscriberOnNextListener<CheckEntity>() {
+                            @Override
+                            public void on_post_entity(CheckEntity checkEntity, String get_message_id) {
+                                Log.e(TAG, "获取审核状态成功：" + checkEntity.getStatus());
+                                //成功1，失败0，没有提交过资料-2
+                                if (checkEntity.getStatus() == 1) {
+                                    Intent intent = new Intent(SplashActivity.this, KeepFitActivity.class);
+                                    startActivity(intent);
+                                } else if (checkEntity.getStatus() == 0) {
+                                    Intent intent = new Intent(SplashActivity.this, CheckStatusFailActivity.class);
+                                    startActivity(intent);
+                                } else if (checkEntity.getStatus() == -2) {
+                                    Intent intent = new Intent(SplashActivity.this, UserPermissionSelectActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                            }
+                        }, new SubscriberOnNextListener<Bean<Object>>() {
+                            @Override
+                            public void onNext(Bean<Object> result) {
+                            }
+
+                            @Override
+                            public void onError(String error) {
+                                Log.e(TAG, "获取审核状态报错：" + error);
+                            }
+                        }, this, false));
+
 
     }
 

@@ -29,11 +29,13 @@ import android.widget.Toast;
 import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.base.BaseActivity;
 import com.noplugins.keepfit.android.entity.RegisterEntity;
+import com.noplugins.keepfit.android.entity.TeacherEntity;
 import com.noplugins.keepfit.android.util.data.StringsHelper;
 import com.noplugins.keepfit.android.util.net.Network;
 import com.noplugins.keepfit.android.util.net.entity.Bean;
 import com.noplugins.keepfit.android.util.net.entity.Token;
 import com.noplugins.keepfit.android.util.net.progress.GsonSubscriberOnNextListener;
+import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriber;
 import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriberNew;
 import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener;
 import com.noplugins.keepfit.android.util.screen.ScreenUtilsHelper;
@@ -69,7 +71,8 @@ public class RegisterActivity extends BaseActivity {
     CheckBox xieyi_check_btn;
 
     private boolean is_enable_register = false;
-    private String message_id="";
+    private String message_id = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -172,7 +175,7 @@ public class RegisterActivity extends BaseActivity {
                 } else if (TextUtils.isEmpty(edit_sure_password.getText().toString())) {
                     Toast.makeText(getApplicationContext(), "确认密码不能为空！", Toast.LENGTH_SHORT).show();
                     return;
-                }else if(!edit_new_password.getText().toString().equals(edit_sure_password.getText().toString())){
+                } else if (!edit_new_password.getText().toString().equals(edit_sure_password.getText().toString())) {
                     edit_sure_password.setError("两次输入不一致");
                     return;
                 } else {
@@ -203,44 +206,34 @@ public class RegisterActivity extends BaseActivity {
 
         @Override
         public void afterTextChanged(Editable editable) {
-            if (editable.length()>0){
+            if (editable.length() > 0) {
                 clear_password_btn.setVisibility(View.VISIBLE);
-            }else{
+            } else {
                 clear_password_btn.setVisibility(View.INVISIBLE);
             }
         }
     };
 
     private void Check_YanZhengMa() {
-        Map<String, String> params = new HashMap<>();
+        Map<String, Object> params = new HashMap<>();
         params.put("code", edit_yanzhengma.getText().toString());
         params.put("messageid", message_id);
-        subscription = Network.getInstance("验证验证码", getApplicationContext())
+        params.put("phone",edit_phone_number.getText().toString());
+        subscription = Network.getInstance("验证验证码", this)
                 .check_yanzhengma(params,
-                        new ProgressSubscriberNew<>(Boolean.class, new GsonSubscriberOnNextListener<Boolean>() {
+                        new ProgressSubscriber<>("验证验证码", new SubscriberOnNextListener<Bean<String>>() {
                             @Override
-                            public void on_post_entity(Boolean code,String Message_id) {
-                                //Logger.e(TAG, "验证验证码成功：" + Message_id);
-                                Log.e(TAG,"验证验证码成功：" + Message_id);
-
+                            public void onNext(Bean<String> result) {
                                 register();
-                            }
-                        }, new SubscriberOnNextListener<Bean<Object>>() {
-                            @Override
-                            public void onNext(Bean<Object> result) {
 
                             }
 
                             @Override
                             public void onError(String error) {
-                                //Logger.e(TAG, "验证验证码报错：" + error);
-                                Log.e(TAG,"验证验证码报错：" + error);
-                                //设置验证码输入错误
-                                edit_yanzhengma.setError("验证码输入错误");
                                 Toast.makeText(getApplicationContext(), "验证码输入不正确！", Toast.LENGTH_SHORT).show();
-                            }
-                        }, this, true));
 
+                            }
+                        }, this, false));
     }
 
     private void register() {
@@ -251,9 +244,9 @@ public class RegisterActivity extends BaseActivity {
                 .register(params,
                         new ProgressSubscriberNew<>(String.class, new GsonSubscriberOnNextListener<String>() {
                             @Override
-                            public void on_post_entity(String code,String Message_id) {
-                                Log.e(TAG,"注册成功：");
-                                Intent intent = new Intent(RegisterActivity.this,LoginActivity.class);
+                            public void on_post_entity(String code, String Message_id) {
+                                Log.e(TAG, "注册成功：");
+                                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                                 startActivity(intent);
                                 finish();
                             }
@@ -266,7 +259,7 @@ public class RegisterActivity extends BaseActivity {
                             @Override
                             public void onError(String error) {
                                 //Logger.e(TAG, "注册报错：" + error);
-                                Log.e(TAG,"注册报错：" + error);
+                                Log.e(TAG, "注册报错：" + error);
                                 Toast.makeText(getApplicationContext(), error, Toast.LENGTH_SHORT).show();
                             }
                         }, this, true));
@@ -281,7 +274,7 @@ public class RegisterActivity extends BaseActivity {
                 .get_yanzhengma(params,
                         new ProgressSubscriberNew<>(String.class, new GsonSubscriberOnNextListener<String>() {
                             @Override
-                            public void on_post_entity(String code,String get_message_id) {
+                            public void on_post_entity(String code, String get_message_id) {
                                 message_id = get_message_id;
                                 Log.e(TAG, "接收验证码成功get_message_id：" + message_id);
                                 Log.e(TAG, "接收验证码成功：" + message_id);
@@ -323,7 +316,6 @@ public class RegisterActivity extends BaseActivity {
             }
         }
     };
-
 
 
     CountDownTimer timer = new CountDownTimer(60000, 1000) {

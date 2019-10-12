@@ -38,7 +38,6 @@ public class ProgressSubscriberNew<T> extends Subscriber<Bean<Object>> implement
     private ProgressHUD mProgressHUD;
     private String message;
     private boolean mIsProgress;
-
     Class<T> entity_class;
     GsonSubscriberOnNextListener<T> gsonSubscriberOnNextListener;
 
@@ -49,7 +48,8 @@ public class ProgressSubscriberNew<T> extends Subscriber<Bean<Object>> implement
      * @param listener   请求成功 逻辑处理
      * @param context    上下文
      */
-    public ProgressSubscriberNew(Class<T> tokenClass, GsonSubscriberOnNextListener<T> mgsonSubscriberOnNextListener, SubscriberOnNextListener<Bean<Object>> listener, Context context) {
+    public ProgressSubscriberNew(Class<T> tokenClass, GsonSubscriberOnNextListener<T> mgsonSubscriberOnNextListener,
+                                 SubscriberOnNextListener<Bean<Object>> listener, Context context) {
         this.gsonSubscriberOnNextListener = mgsonSubscriberOnNextListener;
         this.mListener = listener;
         this.entity_class = tokenClass;
@@ -64,7 +64,9 @@ public class ProgressSubscriberNew<T> extends Subscriber<Bean<Object>> implement
      * @param context    上下文
      * @param isProgress 是否显示进度条
      */
-    public ProgressSubscriberNew(Class<T> tClass, GsonSubscriberOnNextListener<T> mgsonSubscriberOnNextListener, SubscriberOnNextListener<Bean<Object>> listener, Context context, boolean isProgress) {
+    public ProgressSubscriberNew(Class<T> tClass, GsonSubscriberOnNextListener<T> mgsonSubscriberOnNextListener,
+                                 SubscriberOnNextListener<Bean<Object>> listener, Context context, boolean isProgress) {
+        // TODO: 2019-09-05
         this.gsonSubscriberOnNextListener = mgsonSubscriberOnNextListener;
         this.entity_class = tClass;
         this.mListener = listener;
@@ -91,15 +93,19 @@ public class ProgressSubscriberNew<T> extends Subscriber<Bean<Object>> implement
     }
 
     private void showProgressDialog() {
-        if (mProgressHUD != null) {
-            mProgressHUD = ProgressHUD.show(mContext, "加载中", false, this);
+        if (mProgressHUD == null) {
+            mProgressHUD = new ProgressHUD(mContext);
         }
+        mProgressHUD = ProgressHUD.show(mContext, "加载中", false, this);
+
     }
 
     private void showProgressDialog(String message) {
-        if (mProgressHUD != null) {
-            mProgressHUD = ProgressHUD.show(mContext, message, false, this);
+        if (mProgressHUD == null) {
+            mProgressHUD = new ProgressHUD(mContext);
         }
+        mProgressHUD = ProgressHUD.show(mContext, message, false, this);
+
     }
 
     private void dismissProgressDialog() {
@@ -122,6 +128,7 @@ public class ProgressSubscriberNew<T> extends Subscriber<Bean<Object>> implement
                 showProgressDialog(message);
                 return;
             }
+
             showProgressDialog();
         }
     }
@@ -132,16 +139,13 @@ public class ProgressSubscriberNew<T> extends Subscriber<Bean<Object>> implement
     }
 
     @Override
-    public void onError(Throwable e) {
-        mListener.onError(e.getMessage());
-    }
-
-    @Override
     public void onNext(Bean<Object> t) {
         if (t != null) {
             int code = t.getCode();
             if (code == 0) {
-                if(null!=t.getData()){
+                Log.d("http_network", "code:" + code);
+                if (null != t.getData()) {
+                    Log.d("http_network", "data:object");
                     Object obj = t.getData();
                     Gson gson = new GsonBuilder().
                             registerTypeAdapter(Double.class, new JsonSerializer<Double>() {
@@ -155,88 +159,22 @@ public class ProgressSubscriberNew<T> extends Subscriber<Bean<Object>> implement
                     String myJson = gson.toJson(obj);//将gson转化为json
                     T jsonObject = gson.fromJson(myJson, entity_class);//把JSON字符串转为对象
                     gsonSubscriberOnNextListener.on_post_entity(jsonObject, jsonObject.toString());
-                }else{
+                } else {
+                    Log.d("http_network", "data:null");
                     String string = "success";
                     gsonSubscriberOnNextListener.on_post_entity((T) string, string);
                 }
-
             } else {
+                Log.d("http_network", "code:" + code);
                 mListener.onError(t.getMessage());
             }
-
-
-//            Gson gson = new GsonBuilder().
-//                    registerTypeAdapter(Double.class, new JsonSerializer<Double>() {
-//                        @Override
-//                        public JsonElement serialize(Double src, Type typeOfSrc, JsonSerializationContext context) {
-//                            if (src == src.longValue())
-//                                return new JsonPrimitive(src.longValue());
-//                            return new JsonPrimitive(src);
-//                        }
-//                    }).create();
-//            String myJson = gson.toJson(t.getEntity());//将gson转化为json
-//            Log.e("123", "   获取数据JSON---》  " + myJson);
-//            T jsonObject = gson.fromJson(myJson, entity_class);//把JSON字符串转为对象
-//            Log.e("123", "返回的对象json:" + jsonObject);
-//            gsonSubscriberOnNextListener.on_post_entity(jsonObject);
-
-//            Log.e("网络请求成功", "进来了onNext" + "返回code:" + t.getCode()
-//                    + "\n" + "返回message:" + t.getMsg()
-//                    + "\n" + "返回实体类" + t.getData() + "       " + t);
-            /*if (t.getCode().equals("1")) {//表示成功
-                if (mListener != null) {
-                    if (gsonSubscriberOnNextListener != null) {
-                        //如果请求接口正确了，就返回实体类
-//                        Gson gson = new Gson();
-                        //解决gson将Integer默认转换成Double的问题
-
-                        Gson gson = new GsonBuilder().
-                                registerTypeAdapter(Double.class, new JsonSerializer<Double>() {
-                                    @Override
-                                    public JsonElement serialize(Double src, Type typeOfSrc, JsonSerializationContext context) {
-                                        if (src == src.longValue())
-                                            return new JsonPrimitive(src.longValue());
-                                        return new JsonPrimitive(src);
-                                    }
-                                }).create();
-                        String myJson = gson.toJson(t.getData());//将gson转化为json
-//                        Log.e("123", "   获取数据JSON---》  " + myJson);
-                        T jsonObject = gson.fromJson(myJson, entity_class);//把JSON字符串转为对象
-//                        Log.e("123", "返回的对象json:" + jsonObject);
-                        gsonSubscriberOnNextListener.on_post_entity(jsonObject);
-                    }
-                }
-            } else {
-                if (t.getCode().equals("3")) {//异步登录
-                    Gson gson = new GsonBuilder().
-                            registerTypeAdapter(Double.class, new JsonSerializer<Double>() {
-                                @Override
-                                public JsonElement serialize(Double src, Type typeOfSrc, JsonSerializationContext context) {
-                                    if (src == src.longValue())
-                                        return new JsonPrimitive(src.longValue());
-                                    return new JsonPrimitive(src);
-                                }
-                            }).create();
-                    String myJson = gson.toJson(t.getData());//将gson转化为json
-                    JSONObject obj = JSONObject.parseObject(myJson);
-                    String msg = obj.getString("msg");
-                    if (mListener != null) {
-                        if ("1".equals(Contacts.isPage)) {
-                            Contacts.isPage = "2";
-                            Intent intent = new Intent(mContext, LoginErrorDialog.class);
-                            intent.putExtra("errorMes", msg);
-                            mContext.startActivity(intent);
-                        }
-                    }
-                } else if (t.getCode().equals("0")) {//接口报错信息
-                    mListener.onError(t.getMsg());
-                } else if (t.getCode().equals("400")) {
-                    mListener.onError(t.getMsg());
-                }
-            }*/
-
-
         }
+    }
+
+    @Override
+    public void onError(Throwable e) {
+        mListener.onError(e.getMessage());
+        dismissProgressDialog();
 
     }
 

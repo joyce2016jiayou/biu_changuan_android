@@ -14,6 +14,7 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.andview.refreshview.recyclerview.BaseRecyclerAdapter;
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.activity.AddClassItemActivity;
@@ -32,6 +33,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.RequestBody;
 import rx.Subscription;
 
@@ -91,6 +93,7 @@ public class YaoQiTeacherAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHo
             YouYangViewHolder holder = (YouYangViewHolder) view_holder;
             TeacherEntity.TeacherBean teacherBean = list.get(position);
             holder.teacher_name.setText(teacherBean.getTeacherName());
+            Glide.with(context).load(teacherBean.getLogoUrl()).into(holder.touxiang_image);
             holder.tag_tv.setText(teacherBean.getSkill());
             if (teacherBean.getInviteStatus() == 0) {//获取是否邀请
                 holder.yaoqing_tv.setText("取消邀请");
@@ -277,6 +280,7 @@ public class YaoQiTeacherAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHo
         public View view;
         public LinearLayout yaoqing_btn;
         public TextView yaoqing_tv, teacher_name, tag_tv;
+        public CircleImageView touxiang_image;
 
         public YouYangViewHolder(View itemView, boolean isItem) {
             super(itemView);
@@ -286,6 +290,7 @@ public class YaoQiTeacherAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHo
                 yaoqing_tv = view.findViewById(R.id.yaoqing_tv);
                 teacher_name = view.findViewById(R.id.teacher_name);
                 tag_tv = view.findViewById(R.id.tag_tv);
+                touxiang_image = view.findViewById(R.id.touxiang_image);
             }
         }
     }

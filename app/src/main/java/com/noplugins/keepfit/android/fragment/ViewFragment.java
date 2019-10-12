@@ -112,6 +112,7 @@ public class ViewFragment extends ViewPagerFragment {
 
             //注册广播接收器
             registerReceiver();
+
             //获取视角数据
             getDates();
 

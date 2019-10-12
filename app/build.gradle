@@ -17,6 +17,12 @@ android {
         ]
 
     }
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
 
     buildTypes {
         release {
@@ -166,5 +172,9 @@ dependencies {
     //极光集成
     implementation files('libs/jcore-android-2.1.2.jar')
     implementation files('libs/jpush-android-3.3.4.jar')
+
+    //bugly
+    implementation 'com.tencent.bugly:crashreport:3.1.0'
+
 
 }

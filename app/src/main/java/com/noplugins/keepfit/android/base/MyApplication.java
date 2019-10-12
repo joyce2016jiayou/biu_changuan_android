@@ -10,6 +10,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Environment;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -29,12 +30,16 @@ import com.qiniu.android.storage.Recorder;
 import com.qiniu.android.storage.UploadManager;
 import com.qiniu.android.storage.persistent.FileRecorder;
 import com.ql0571.loadmanager.core.LoadManager;
+import com.tencent.bugly.crashreport.CrashReport;
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.socialize.PlatformConfig;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.https.HttpsUtils;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -159,7 +164,7 @@ public class MyApplication extends MultiDexApplication {
                 tagAliasBean.isAliasAction = true;
                 tagAliasBean.action = TagAliasOperatorHelper.ACTION_SET;
                 TagAliasOperatorHelper.getInstance().handleAction(getApplicationContext(), sequence, tagAliasBean);
-            }else{
+            } else {
                 Log.e("已缓存alias", "已缓存alias");
 
             }
@@ -169,9 +174,47 @@ public class MyApplication extends MultiDexApplication {
 
         /**方法负载过多解决*/
         MultiDex.install(this);
+        //bugly
+        // 获取当前包名
+        Context context = getApplicationContext();
+        String packageName = context.getPackageName();
+        // 获取当前进程名
+        String processName = getProcessName(android.os.Process.myPid());
+        // 设置是否为上报进程
+        CrashReport.UserStrategy strategy = new CrashReport.UserStrategy(context);
+        strategy.setUploadProcess(processName == null || processName.equals(packageName));
+        CrashReport.initCrashReport(getApplicationContext(), "1c9cc2ab89", true);
 
     }
 
+    /**
+     * 获取进程号对应的进程名
+     *
+     * @param pid 进程号
+     * @return 进程名
+     */
+    private static String getProcessName(int pid) {
+        BufferedReader reader = null;
+        try {
+            reader = new BufferedReader(new FileReader("/proc/" + pid + "/cmdline"));
+            String processName = reader.readLine();
+            if (!TextUtils.isEmpty(processName)) {
+                processName = processName.trim();
+            }
+            return processName;
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        } finally {
+            try {
+                if (reader != null) {
+                    reader.close();
+                }
+            } catch (IOException exception) {
+                exception.printStackTrace();
+            }
+        }
+        return null;
+    }
 
     /**
      * 添加到销毁队列

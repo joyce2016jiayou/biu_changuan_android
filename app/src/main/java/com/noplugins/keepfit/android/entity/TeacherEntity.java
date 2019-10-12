@@ -38,9 +38,18 @@ public class TeacherEntity {
 
         private String teacherNum;
         private String teacherName;
-        private long createDate;
+        private String createDate;
         private int inviteStatus;
 
+        public String getLogoUrl() {
+            return logoUrl;
+        }
+
+        public void setLogoUrl(String logoUrl) {
+            this.logoUrl = logoUrl;
+        }
+
+        private String logoUrl;
 
         public int getInviteStatus() {
             return inviteStatus;
@@ -77,11 +86,11 @@ public class TeacherEntity {
             this.teacherName = teacherName;
         }
 
-        public long getCreateDate() {
+        public String getCreateDate() {
             return createDate;
         }
 
-        public void setCreateDate(long createDate) {
+        public void setCreateDate(String createDate) {
             this.createDate = createDate;
         }
     }

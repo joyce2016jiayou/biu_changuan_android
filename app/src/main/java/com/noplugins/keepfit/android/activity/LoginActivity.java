@@ -25,9 +25,13 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.noplugins.keepfit.android.KeepFitActivity;
 import com.noplugins.keepfit.android.R;
+import com.noplugins.keepfit.android.SplashActivity;
 import com.noplugins.keepfit.android.base.BaseActivity;
+import com.noplugins.keepfit.android.entity.CheckEntity;
 import com.noplugins.keepfit.android.entity.LoginEntity;
 import com.noplugins.keepfit.android.entity.RegisterEntity;
+import com.noplugins.keepfit.android.global.AppConstants;
+import com.noplugins.keepfit.android.util.SpUtils;
 import com.noplugins.keepfit.android.util.data.SharedPreferencesHelper;
 import com.noplugins.keepfit.android.util.data.StringsHelper;
 import com.noplugins.keepfit.android.util.net.Network;
@@ -176,33 +180,25 @@ public class LoginActivity extends BaseActivity {
 //                            startActivity(intent);
 //                            finish();
                         }
-
                         //保存密码
-                        if ("".equals(SharedPreferencesHelper.get(getApplicationContext(), Network.login_token, ""))) {
-                            SharedPreferencesHelper.put(getApplicationContext(),  Network.login_token, loginEntity.getToken());
-                            SharedPreferencesHelper.put(getApplicationContext(), Network.phone_number, edit_phone_number.getText().toString());
-                            SharedPreferencesHelper.put(getApplicationContext(), Network.changguan_number, loginEntity.getGymAreaNum());
+                        SpUtils.putString(getApplicationContext(), AppConstants.TOKEN, loginEntity.getToken());
+                        SharedPreferencesHelper.put(getApplicationContext(), Network.phone_number, edit_phone_number.getText().toString());
+                        SharedPreferencesHelper.put(getApplicationContext(), Network.changguan_number, loginEntity.getGymAreaNum());
 
-                        } else {
-                            SharedPreferencesHelper.remove(getApplicationContext(),  Network.login_token);
-                            SharedPreferencesHelper.put(getApplicationContext(),  Network.login_token, loginEntity.getToken());
-                            SharedPreferencesHelper.put(getApplicationContext(), Network.phone_number, edit_phone_number.getText().toString());
-                            SharedPreferencesHelper.put(getApplicationContext(), Network.changguan_number, loginEntity.getGymAreaNum());
-                        }
 
                         //type 0  type 1场馆主 2经理  3前台
-                        if (loginEntity.getType() == 0) {//没有提交过审核资料
-                            SharedPreferencesHelper.put(getApplicationContext(), Network.no_submit_information, "true");
-
-                            Intent intent = new Intent(LoginActivity.this, UserPermissionSelectActivity.class);
-                            startActivity(intent);
-                            finish();
-                        } else {//已经提交过资料
-                            Intent intent = new Intent(LoginActivity.this, KeepFitActivity.class);
-                            startActivity(intent);
-                            finish();
-                        }
-
+//                        if (loginEntity.getType() == 0) {//没有提交过审核资料
+//                            SharedPreferencesHelper.put(getApplicationContext(), Network.no_submit_information, "true");
+//
+//                            Intent intent = new Intent(LoginActivity.this, UserPermissionSelectActivity.class);
+//                            startActivity(intent);
+//                            finish();
+//                        } else {//已经提交过资料
+//                            Intent intent = new Intent(LoginActivity.this, KeepFitActivity.class);
+//                            startActivity(intent);
+//                            finish();
+//                        }
+                        get_check_status();
 
                     }
                 }, new SubscriberOnNextListener<Bean<Object>>() {
@@ -216,6 +212,43 @@ public class LoginActivity extends BaseActivity {
                         Toast.makeText(getApplicationContext(), error, Toast.LENGTH_SHORT).show();
                     }
                 }, this, true));
+
+    }
+
+    private void get_check_status() {
+        Map<String, String> params = new HashMap<>();
+        params.put("token", SpUtils.getString(getApplicationContext(), AppConstants.TOKEN));
+        Log.e("获取审核状态参数", params.toString());
+        subscription = Network.getInstance("获取审核状态", getApplicationContext())
+                .get_check_status(params,
+                        new ProgressSubscriberNew<>(CheckEntity.class, new GsonSubscriberOnNextListener<CheckEntity>() {
+                            @Override
+                            public void on_post_entity(CheckEntity checkEntity, String get_message_id) {
+                                Log.e(TAG, "获取审核状态成功：" + checkEntity.getStatus());
+                                //成功1，失败0，没有提交过资料-2
+                                if (checkEntity.getStatus() == 1) {
+                                    Intent intent = new Intent(LoginActivity.this, KeepFitActivity.class);
+                                    startActivity(intent);
+                                } else if (checkEntity.getStatus() == 0) {
+                                    Intent intent = new Intent(LoginActivity.this, CheckStatusFailActivity.class);
+                                    startActivity(intent);
+                                } else if (checkEntity.getStatus() == -2) {
+                                    Intent intent = new Intent(LoginActivity.this, UserPermissionSelectActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                            }
+                        }, new SubscriberOnNextListener<Bean<Object>>() {
+                            @Override
+                            public void onNext(Bean<Object> result) {
+                            }
+
+                            @Override
+                            public void onError(String error) {
+                                Log.e(TAG, "获取审核状态报错：" + error);
+                            }
+                        }, this, false));
+
 
     }
 

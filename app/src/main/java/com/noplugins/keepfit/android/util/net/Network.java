@@ -7,10 +7,16 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.noplugins.keepfit.android.entity.AddClassEntity;
+import com.noplugins.keepfit.android.entity.ClassTypeEntity;
+import com.noplugins.keepfit.android.entity.TeacherEntity;
+import com.noplugins.keepfit.android.global.AppConstants;
+import com.noplugins.keepfit.android.util.SpUtils;
 import com.noplugins.keepfit.android.util.data.SharedPreferencesHelper;
 import com.noplugins.keepfit.android.util.net.entity.Bean;
 import com.noplugins.keepfit.android.util.net.entity.Token;
 import com.noplugins.keepfit.android.util.net.interceptor.LogInterceptor;
+import com.orhanobut.logger.Logger;
 
 import java.io.IOException;
 import java.security.KeyManagementException;
@@ -47,10 +53,8 @@ public class Network {
     private static Network mInstance;
     public MyService service;
     //测试服
-    //public static String main_url = "http://192.168.1.45:8888/api/gym-service/";
-    public static String main_url = "http://kft.ahcomg.com/api/gym-service/";
-
-
+    public static String test_main_url = "http://192.168.1.45:8888/api";
+    public static String main_url = "http://kft.ahcomg.com/api";
     public static String token = "";
     public static String login_token = "login_token";
     public static String phone_number = "phone_number";
@@ -60,16 +64,27 @@ public class Network {
     public static String username = "username";
     public static String phone = "phone";
     public static String is_set_alias = "is_set_alias";
+    private static String MRTHOD_NAME = "";
+    Retrofit retrofit;
+
+    public String get_main_url(String str) {
+        if (str.equals("test")) {
+            return test_main_url + "/gym-service/";
+        } else {
+            return main_url + "/gym-service/";
+        }
+    }
 
     //获取单例
     public static Network getInstance(String method, Context context) {
+        MRTHOD_NAME = method;
         if (context != null) {
-            if ("".equals(SharedPreferencesHelper.get(context, Network.login_token, "").toString())) {
+            if ("".equals(SpUtils.getString(context, AppConstants.TOKEN))) {
                 token = "";
-                Log.e("没有添加token", token);
+                Logger.e(method + "没有添加token");
             } else {
-                token = SharedPreferencesHelper.get(context, Network.login_token, "").toString();
-                Log.e("添加的头部的token", token);
+                token = SpUtils.getString(context, AppConstants.TOKEN);
+                Logger.e(method + "添加的token:" + token);
             }
             if (mInstance == null) {
                 synchronized (Network.class) {
@@ -80,10 +95,8 @@ public class Network {
         return mInstance;
     }
 
-    Retrofit retrofit;
 
     private Network(String method, Context context) {
-
         final TrustManager[] trustAllCerts = new TrustManager[]{new X509TrustManager() {
             @Override
             public void checkClientTrusted(
@@ -138,59 +151,41 @@ public class Network {
                 .setLenient()
                 .create();
 
+
         retrofit = new Retrofit.Builder()
                 .client(client)
-                .baseUrl(Network.main_url)//设置请求网址根部
+                .baseUrl(get_main_url("test"))//设置请求网址根部
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
 
+
         service = retrofit.create(MyService.class);
 
+
     }
 
-    public static void trustAllHttpsCertificates()
-            throws NoSuchAlgorithmException, KeyManagementException {
-        TrustManager[] trustAllCerts = new TrustManager[1];
-        trustAllCerts[0] = new TrustAllManager();
-        SSLContext sc = SSLContext.getInstance("SSL");
-        sc.init(null, trustAllCerts, null);
-        HttpsURLConnection.setDefaultSSLSocketFactory(
-                sc.getSocketFactory());
-    }
-
-    private static class TrustAllManager
-            implements X509TrustManager {
-        public X509Certificate[] getAcceptedIssuers() {
-            return null;
-        }
-
-        public void checkServerTrusted(X509Certificate[] certs,
-                                       String authType)
-                throws CertificateException {
-        }
-
-        public void checkClientTrusted(X509Certificate[] certs,
-                                       String authType)
-                throws CertificateException {
-        }
+    private RequestBody retuen_json_params(Map<String, Object> params) {
+        Gson gson = new Gson();
+        String json_params = gson.toJson(params);
+        String json = new Gson().toJson(params);//要传递的json
+        Logger.e(MRTHOD_NAME + "->请求参数打印：->" + json_params);
+        RequestBody requestBody = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), json);
+        return requestBody;
     }
 
 
-//    /**
-//     * 登录
-//     *
-//     * @param params
-//     * @param subscriber
-//     * @return
-//     */
-//    public Subscription login(Map<String, String> params, Subscriber<Bean<Object>> subscriber) {
-//        return service.fast_login(params)
-//                .subscribeOn(Schedulers.io())
-//                .unsubscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(subscriber);
-//    }
+
+    private RequestBody retuen_json_object(Object params) {
+        Gson gson = new Gson();
+        String json_params = gson.toJson(params);
+        String json = new Gson().toJson(params);//要传递的json
+        Logger.e(MRTHOD_NAME + "->请求参数打印：->" + json_params);
+        RequestBody requestBody = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), json);
+        return requestBody;
+    }
+
+
 
     /**
      * 获取验证码
@@ -207,19 +202,7 @@ public class Network {
     }
 
 
-    /**
-     * 验证验证码
-     *
-     * @param subscriber
-     * @return
-     */
-    public Subscription check_yanzhengma(Map<String, String> params, Subscriber<Bean<Object>> subscriber) {
-        return service.check_yanzhengma(params)
-                .subscribeOn(Schedulers.io())
-                .unsubscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(subscriber);
-    }
+
 
     /**
      * 注册
@@ -347,19 +330,7 @@ public class Network {
                 .subscribe(subscriber);
     }
 
-    /**
-     * 添加课程
-     *
-     * @param subscriber
-     * @return
-     */
-    public Subscription add_class(RequestBody params, Subscriber<Bean<Object>> subscriber) {
-        return service.add_class(params)
-                .subscribeOn(Schedulers.io())
-                .unsubscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(subscriber);
-    }
+
 
     /**
      * 课程列表
@@ -474,19 +445,7 @@ public class Network {
                 .subscribe(subscriber);
     }
 
-    /**
-     * 获取教练列表
-     *
-     * @param subscriber
-     * @return
-     */
-    public Subscription get_teacher_list(Map<String, Object> params, Subscriber<Bean<Object>> subscriber) {
-        return service.get_teacher_list(params)
-                .subscribeOn(Schedulers.io())
-                .unsubscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(subscriber);
-    }
+
 
     /**
      * 获取教练列表
@@ -692,6 +651,39 @@ public class Network {
      */
     public Subscription sen_order(RequestBody params, Subscriber<Bean<Object>> subscriber) {
         return service.sen_order(params)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    public Subscription get_class_type(Map<String, Object> params, Subscriber<Bean<List<ClassTypeEntity>>> subscriber) {
+        return service.get_class_type(retuen_json_params(params))
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    public Subscription add_class(Map<String, Object> params, Subscriber<Bean<AddClassEntity>> subscriber) {
+        return service.add_class(retuen_json_params(params))
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+
+    public Subscription get_teacher_list(Map<String, Object> params, Subscriber<Bean<TeacherEntity>> subscriber) {
+        return service.get_teacher_list(retuen_json_params(params))
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    public Subscription check_yanzhengma(Map<String, Object> params, Subscriber<Bean<String>> subscriber) {
+        return service.check_yanzhengma(params)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

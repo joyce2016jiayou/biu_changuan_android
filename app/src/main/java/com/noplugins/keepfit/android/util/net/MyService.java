@@ -2,6 +2,9 @@ package com.noplugins.keepfit.android.util.net;
 
 
 import com.alibaba.fastjson.annotation.JSONField;
+import com.noplugins.keepfit.android.entity.AddClassEntity;
+import com.noplugins.keepfit.android.entity.ClassTypeEntity;
+import com.noplugins.keepfit.android.entity.TeacherEntity;
 import com.noplugins.keepfit.android.util.net.entity.Bean;
 import com.noplugins.keepfit.android.util.net.entity.Token;
 
@@ -49,7 +52,7 @@ public interface MyService {
      */
     @FormUrlEncoded
     @POST("verifyCode")
-    Observable<Bean<Object>> check_yanzhengma(@FieldMap Map<String, String> map);
+    Observable<Bean<String>> check_yanzhengma(@FieldMap Map<String, Object> map);
 
     /**
      * 注册
@@ -139,7 +142,7 @@ public interface MyService {
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
     @POST("addClass")
-    Observable<Bean<Object>> add_class(@Body RequestBody map);
+    Observable<Bean<AddClassEntity>> add_class(@Body RequestBody map);
 
     /**
      * 获取审核状态
@@ -218,9 +221,9 @@ public interface MyService {
      *
      * @return
      */
-    @FormUrlEncoded
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
     @POST("getFreeTeacher")
-    Observable<Bean<Object>> get_teacher_list(@FieldMap Map<String, Object> map);
+    Observable<Bean<TeacherEntity>> get_teacher_list(@Body RequestBody json);
 
     /**
      * 邀请
@@ -357,5 +360,14 @@ public interface MyService {
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
     @POST("userCheckIn")
     Observable<Bean<Object>> sen_order(@Body RequestBody json);
+
+    /**
+     * 获取房间类型
+     *
+     * @return
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("findAreaPlace")
+    Observable<Bean<List<ClassTypeEntity>>> get_class_type(@Body RequestBody json);
 
 }
