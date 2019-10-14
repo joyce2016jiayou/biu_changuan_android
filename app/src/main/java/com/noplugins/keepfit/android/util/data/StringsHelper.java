@@ -40,7 +40,19 @@ public class StringsHelper {
         sign = getMd5(sign + "iqpgy2awprL-");
         return sign;
     }
-
+    /**
+     * 校验第一位数是不是1
+     * @param mobileNums
+     * @return
+     */
+    public static boolean isMobileOne(String mobileNums) {
+        String s = mobileNums.substring(0,1);
+        if(s.equals("1")){
+            return true;
+        }else{
+            return false;
+        }
+    }
     public static String getMd5(String plainText) {
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
@@ -280,20 +292,6 @@ public class StringsHelper {
     }
 
     /**
-     * 校验第一位数是不是1
-     * @param mobileNums
-     * @return
-     */
-    public static boolean isMobileOne(String mobileNums) {
-        String s = mobileNums.substring(0,1);
-        if(s.equals("1")){
-            return true;
-        }else{
-            return false;
-        }
-    }
-
-    /**
      * ========================================================
      *         设置EditText的hint字体的大小
      * ========================================================
@@ -303,6 +301,16 @@ public class StringsHelper {
         AbsoluteSizeSpan ass = new AbsoluteSizeSpan(size,true);//设置字体大小 true表示单位是sp
         ss.setSpan(ass, 0, ss.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         editText.setHint(new SpannedString(ss));
+    }
+
+    /**
+     * 设置光标显示的位置在最后
+     */
+    public static void setSelecttion(EditText editText){
+        editText.setFocusable(true);
+        editText.setFocusableInTouchMode(true);
+        editText.requestFocus();//获取焦点 光标出现
+        editText.setSelection(editText.getText().length());//设置光标位置
     }
 
 }

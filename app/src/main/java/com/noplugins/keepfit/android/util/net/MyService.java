@@ -43,7 +43,7 @@ public interface MyService {
      */
     @FormUrlEncoded
     @POST("getVerifyCode")
-    Observable<Bean<Object>> get_yanzhengma(@FieldMap Map<String, String> map);
+    Observable<Bean<String>> get_yanzhengma(@FieldMap Map<String, String> map);
 
     /**
      * 验证验证码
@@ -79,7 +79,7 @@ public interface MyService {
      */
     @FormUrlEncoded
     @POST("resetPassword")
-    Observable<Bean<Object>> update_password(@FieldMap Map<String, String> map);
+    Observable<Bean<String>> update_password(@FieldMap Map<String, String> map);
 
     /**
      * 修改密码

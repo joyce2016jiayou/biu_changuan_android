@@ -31,7 +31,7 @@
     <color name="color_bg_black">#333333</color>
 
     <!--zxing-->
-    <color name="contents_text">#000000</color>
+    <color name="contents_text">#181818</color>
     <color name="encode_view">#ffffff</color>
     <color name="possible_result_points">#ffbd21</color>
     <color name="result_minor_text">#c0c0c0</color>
@@ -43,4 +43,13 @@
     <color name="react">#ffffff</color>
     <color name="scanLineColor">#ffffff</color>
     <color name="defaultColor">#ffffff</color>
+    <color name="color_B7B7B7">#b7b7b7</color>
+    <color name="btn_text_gray">#cfcfcf</color>
+    <color name="color_925711">#925711</color>
+    <color name="color_22243D">#22243D</color>
+    <color name="color_929292">#929292</color>
+    <color name="edit_bg_color">#F4F4F4</color>
+    <color name="color_705C00">#705C00</color>
+    <color name="color_ead7c5">#ead7c5</color>
+    <color name="color_fbf0bd">#fbf0bd</color>
 </resources>

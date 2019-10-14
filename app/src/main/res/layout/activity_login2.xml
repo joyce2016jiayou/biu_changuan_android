@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true">
+
+        <TextView
+            android:id="@+id/yanzhengma_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/m70"
+            android:layout_marginRight="@dimen/m20"
+            android:text="密码登陆"
+            android:textColor="@color/color_6D7278"
+            android:textSize="15sp"/>
+
+        <LinearLayout
+            android:id="@+id/center"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/m217"
+            android:layout_marginLeft="@dimen/m11"
+            android:layout_marginRight="@dimen/m11"
+            android:background="@drawable/login_kuang"
+            android:layout_marginTop="@dimen/m168"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="17dp"
+                android:layout_marginTop="@dimen/m64"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="21dp"
+                    android:layout_height="21dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/m20"
+                    android:src="@drawable/icon_number"/>
+
+                <EditText
+                    android:id="@+id/edit_phone_number"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:background="@null"
+                    android:hint="@string/edit_hint1"
+                    android:maxLength="11"
+                    android:digits="0123456789"
+                    android:layout_marginRight="25dp"
+                    android:inputType="phone"
+                    android:singleLine="true"
+                    android:textSize="15sp"/>
+
+                <ImageView
+                    android:id="@+id/iv_delete_edit"
+                    android:layout_width="@dimen/m16"
+                    android:layout_height="@dimen/m16"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:visibility="gone"
+                    android:layout_marginRight="@dimen/m20"
+                    android:src="@drawable/deleted_edit"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="17dp"
+                android:layout_marginTop="@dimen/m60"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/img_password"
+                    android:layout_width="20dp"
+                    android:layout_height="23dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/m20"
+                    android:src="@drawable/yanzhengma_icon"/>
+
+                <EditText
+                    android:id="@+id/edit_password"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:background="@null"
+                    android:maxLength="6"
+                    android:inputType="number"
+                    android:hint="@string/edit_hint5"
+                    android:layout_marginRight="5dp"
+                    android:singleLine="true"
+                    android:textSize="15sp"/>
+
+                <TextView
+                    android:id="@+id/tv_send"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tv6"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="24dp"
+                    android:textColor="@color/top_heiziti"
+                    android:textSize="15sp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_below="@+id/center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginRight="@dimen/m10"
+            android:layout_marginLeft="@dimen/m10"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/xieyi_check_btn"
+                android:layout_width="@dimen/m16"
+                android:layout_height="@dimen/m16"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/selector_btn_checkbox"
+                android:button="@null"
+                android:checked="false"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:textSize="12sp"
+                android:textColor="@color/color_B7B7B7"
+                android:text="登录注册即代表您已同意哔呦"
+                android:layout_marginLeft="4dp"/>
+
+            <TextView
+                android:id="@+id/tv_user_protocol"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:textSize="12sp"
+                android:textColor="@color/color_6D7278"
+                android:text="《用户协议和隐私政策》"
+                android:layout_marginLeft="4dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/m71"
+            android:layout_below="@+id/center"
+            android:layout_marginLeft="@dimen/m53"
+            android:layout_marginRight="@dimen/m53"
+            android:layout_height="wrap_content">
+
+            <com.noplugins.keepfit.android.util.ui.LoadingButton
+                android:id="@+id/login_btn"
+                android:layout_width="match_parent"
+                android:layout_centerHorizontal="true"
+                app:btnText="@string/tv1"
+                app:quickClickLimit="2000"
+                android:layout_height="@dimen/m50"/>
+
+            <TextView
+                android:id="@+id/forget_password_btn"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="@dimen/m30"
+                android:textColor="@color/white"
+                android:text="@string/tv4"
+                android:visibility="gone"
+                android:layout_gravity="center_horizontal"
+                android:textSize="15sp"
+                android:layout_centerHorizontal="true"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="@dimen/m118"
+        android:layout_height="@dimen/m81"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/m145"
+        android:src="@drawable/login_icon"/>
+
+
+</FrameLayout>

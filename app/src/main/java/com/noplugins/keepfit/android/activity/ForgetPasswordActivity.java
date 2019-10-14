@@ -169,9 +169,9 @@ public class ForgetPasswordActivity extends BaseActivity {
 
         @Override
         public void afterTextChanged(Editable editable) {
-            if (editable.length()>0){
+            if (editable.length() > 0) {
                 clear_password_btn.setVisibility(View.VISIBLE);
-            }else{
+            } else {
                 clear_password_btn.setVisibility(View.INVISIBLE);
             }
         }
@@ -208,7 +208,7 @@ public class ForgetPasswordActivity extends BaseActivity {
         Map<String, Object> params = new HashMap<>();
         params.put("code", edit_yanzhengma.getText().toString());
         params.put("messageid", message_id);
-        params.put("phone",edit_phone_number.getText().toString());
+        params.put("phone", edit_phone_number.getText().toString());
         subscription = Network.getInstance("验证验证码", this)
                 .check_yanzhengma(params,
                         new ProgressSubscriber<>("验证验证码", new SubscriberOnNextListener<Bean<String>>() {
@@ -227,8 +227,6 @@ public class ForgetPasswordActivity extends BaseActivity {
                         }, this, false));
 
 
-
-
     }
 
     private void sure_submit() {
@@ -237,20 +235,15 @@ public class ForgetPasswordActivity extends BaseActivity {
         params.put("password", edit_sure_password.getText().toString());
         subscription = Network.getInstance("修改密码", getApplicationContext())
                 .submit_password(params,
-                        new ProgressSubscriberNew<>(String.class, new GsonSubscriberOnNextListener<String>() {
+                        new ProgressSubscriber<>("修改密码", new SubscriberOnNextListener<Bean<String>>() {
                             @Override
-                            public void on_post_entity(String code, String get_message_id) {
-                                message_id = get_message_id;
+                            public void onNext(Bean<String> result) {
+                                message_id = result.getData();
                                 //Logger.e(TAG, "接收验证码成功：" + message_id);
                                 Log.e(TAG, "修改密码成功：" + message_id);
                                 Toast.makeText(getApplicationContext(), "修改密码成功！", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(ForgetPasswordActivity.this,LoginActivity.class);
+                                Intent intent = new Intent(ForgetPasswordActivity.this, LoginActivity.class);
                                 startActivity(intent);
-
-                            }
-                        }, new SubscriberOnNextListener<Bean<Object>>() {
-                            @Override
-                            public void onNext(Bean<Object> result) {
 
                             }
 
@@ -258,8 +251,9 @@ public class ForgetPasswordActivity extends BaseActivity {
                             public void onError(String error) {
                                 Logger.e(TAG, "修改密码报错：" + error);
                                 Toast.makeText(getApplicationContext(), "修改密码失败！", Toast.LENGTH_SHORT).show();
+
                             }
-                        }, this, true));
+                        }, this, false));
 
     }
 
@@ -268,26 +262,20 @@ public class ForgetPasswordActivity extends BaseActivity {
         params.put("phone", edit_phone_number.getText().toString());
         subscription = Network.getInstance("接收验证码", getApplicationContext())
                 .get_yanzhengma(params,
-                        new ProgressSubscriberNew<>(String.class, new GsonSubscriberOnNextListener<String>() {
+                        new ProgressSubscriber<>("接收验证码", new SubscriberOnNextListener<Bean<String>>() {
                             @Override
-                            public void on_post_entity(String code, String get_message_id) {
-                                message_id = get_message_id;
-                                //Logger.e(TAG, "接收验证码成功：" + message_id);
-                                Log.e(TAG, "接收验证码成功：" + message_id);
-
-                            }
-                        }, new SubscriberOnNextListener<Bean<Object>>() {
-                            @Override
-                            public void onNext(Bean<Object> result) {
+                            public void onNext(Bean<String> result) {
+                                message_id = result.getData();
 
                             }
 
                             @Override
                             public void onError(String error) {
-                                Logger.e(TAG, "接收验证码报错：" + error);
                                 Toast.makeText(getApplicationContext(), "接收验证码失败！", Toast.LENGTH_SHORT).show();
+                                edit_yanzhengma.setError("验证码输入错误");
+
                             }
-                        }, this, true));
+                        }, this, false));
 
     }
 

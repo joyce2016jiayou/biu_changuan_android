@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <FrameLayout
+        android:id="@+id/loading_btn_wrapper"
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="@dimen/m50"
+        android:background="@drawable/shape_btn_bg_40"
+        >
+        <TextView
+            android:id="@+id/loading_btn_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="提交"
+            android:textColor="@color/contents_text"
+            android:textSize="18sp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:visibility="visible"
+            android:enabled="true"
+            android:clickable="true"
+
+            />
+        <TextView
+            android:id="@+id/loading_btn_loading_view"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            android:background="@mipmap/btn_loading"
+            />
+    </FrameLayout>
+    <TextView
+        android:id="@+id/loading_btn_notice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:visibility="visible"
+        android:textColor="#ff6767"/>
+</LinearLayout>

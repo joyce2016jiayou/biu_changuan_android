@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/m70">
+
+        <ImageView
+            android:id="@+id/back_btn"
+            android:layout_width="@dimen/m22"
+            android:layout_height="@dimen/m19"
+            android:layout_gravity="left|center_vertical"
+            android:layout_marginLeft="@dimen/m20"
+            android:src="@drawable/icon_back"
+            android:layout_marginTop="@dimen/m20"/>
+
+        <TextView
+            android:id="@+id/title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="订单确认"
+            android:textColor="@color/contents_text"
+            android:textSize="20sp"
+            android:layout_marginTop="@dimen/m20"
+            android:textStyle="bold"/>
+    </FrameLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/m110"
+        android:background="@drawable/bg_h110"
+        android:gravity="center">
+        <ImageView
+            android:id="@+id/iv_logo"
+            android:layout_width="@dimen/m60"
+            android:layout_height="@dimen/m60"
+            android:layout_marginLeft="@dimen/m30"
+            android:src="@mipmap/ic_launcher"/>
+
+        <TextView
+            android:id="@+id/tv_cg_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="哔哔哔旗舰店"
+            android:layout_toRightOf="@+id/iv_logo"
+            android:layout_marginLeft="@dimen/m10"
+            android:layout_marginTop="@dimen/m9"
+            android:textSize="15sp"
+            android:textColor="@color/contents_text"/>
+
+        <TextView
+            android:id="@+id/tv_vip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="终身平台会员服务"
+            android:layout_marginTop="@dimen/m9"
+            android:layout_below="@+id/tv_cg_name"
+            android:layout_toRightOf="@+id/iv_logo"
+            android:layout_marginLeft="@dimen/m10"
+            android:textSize="13sp"
+            android:textColor="@color/color_4A4A4A"/>
+
+        <TextView
+            android:id="@+id/tv_vip_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="¥ 1000"
+            android:layout_marginTop="@dimen/m9"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/m30"
+            android:textSize="15sp"
+            android:textColor="@color/color_4A4A4A"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:orientation="vertical"
+        android:background="@drawable/bg_h110">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/m20"
+            android:visibility="visible"
+            android:layout_marginTop="@dimen/m19">
+            <ImageView
+                android:id="@+id/iv_quanyi"
+                android:layout_width="@dimen/m36"
+                android:layout_height="@dimen/m36"
+                android:src="@drawable/yunshanfu"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="云闪付"
+                android:layout_marginLeft="@dimen/m22"
+                android:layout_toRightOf="@+id/iv_quanyi"
+                android:textColor="@color/contents_text"
+                android:textSize="18sp" />
+
+
+            <CheckBox
+                android:id="@+id/cb_product_suggest"
+                android:layout_width="@dimen/m22"
+                android:layout_height="@dimen/m22"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/m30"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/btn_checkbox"
+                android:button="@null"
+                android:checked="false" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/m20"
+            android:layout_marginTop="@dimen/m20">
+            <ImageView
+                android:id="@+id/iv_weixin"
+                android:layout_width="@dimen/m36"
+                android:layout_height="@dimen/m36"
+                android:src="@drawable/zhifubao"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="支付宝"
+                android:layout_marginLeft="@dimen/m22"
+                android:layout_toRightOf="@+id/iv_weixin"
+                android:textColor="@color/contents_text"
+                android:textSize="18sp" />
+
+            <CheckBox
+                android:id="@+id/cb_fault_feedback"
+                android:layout_width="@dimen/m22"
+                android:layout_alignParentRight="true"
+                android:layout_height="@dimen/m22"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/m30"
+                android:background="@drawable/btn_checkbox"
+                android:button="@null"
+                android:checked="false" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/m20"
+            android:layout_marginTop="@dimen/m20"
+            android:layout_marginBottom="@dimen/m19">
+            <ImageView
+                android:id="@+id/iv_zhifubao"
+                android:layout_width="@dimen/m36"
+                android:layout_height="@dimen/m36"
+                android:src="@drawable/weixin"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="微信支付"
+                android:layout_marginLeft="@dimen/m22"
+                android:layout_toRightOf="@+id/iv_zhifubao"
+                android:textColor="@color/contents_text"
+                android:textSize="18sp" />
+
+            <CheckBox
+                android:id="@+id/cb_other"
+                android:layout_width="@dimen/m22"
+                android:layout_height="@dimen/m22"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/m30"
+                android:background="@drawable/btn_checkbox"
+                android:button="@null"
+                android:checked="false" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_pay"
+        android:layout_width="@dimen/m209"
+        android:layout_height="@dimen/m50"
+        android:background="@drawable/shape_btn_bg_40"
+        android:layout_gravity="bottom|center_horizontal"
+        android:text="支 付"
+        android:textSize="20sp"
+        android:layout_marginTop="@dimen/m50"
+        android:textColor="@color/contents_text"
+        android:gravity="center"/>
+</LinearLayout>

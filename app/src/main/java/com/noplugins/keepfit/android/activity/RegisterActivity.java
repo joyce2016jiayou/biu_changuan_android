@@ -270,28 +270,28 @@ public class RegisterActivity extends BaseActivity {
     private void Get_YanZhengMa() {
         Map<String, String> params = new HashMap<>();
         params.put("phone", edit_phone_number.getText().toString());
-        subscription = Network.getInstance("接收验证码", getApplicationContext())
-                .get_yanzhengma(params,
-                        new ProgressSubscriberNew<>(String.class, new GsonSubscriberOnNextListener<String>() {
-                            @Override
-                            public void on_post_entity(String code, String get_message_id) {
-                                message_id = get_message_id;
-                                Log.e(TAG, "接收验证码成功get_message_id：" + message_id);
-                                Log.e(TAG, "接收验证码成功：" + message_id);
-
-                            }
-                        }, new SubscriberOnNextListener<Bean<Object>>() {
-                            @Override
-                            public void onNext(Bean<Object> result) {
-
-                            }
-
-                            @Override
-                            public void onError(String error) {
-                                Logger.e(TAG, "接收验证码报错：" + error);
-                                Toast.makeText(getApplicationContext(), "接收验证码失败！", Toast.LENGTH_SHORT).show();
-                            }
-                        }, this, true));
+//        subscription = Network.getInstance("接收验证码", getApplicationContext())
+//                .get_yanzhengma(params,
+//                        new ProgressSubscriberNew<>(String.class, new GsonSubscriberOnNextListener<String>() {
+//                            @Override
+//                            public void on_post_entity(String code, String get_message_id) {
+//                                message_id = get_message_id;
+//                                Log.e(TAG, "接收验证码成功get_message_id：" + message_id);
+//                                Log.e(TAG, "接收验证码成功：" + message_id);
+//
+//                            }
+//                        }, new SubscriberOnNextListener<Bean<Object>>() {
+//                            @Override
+//                            public void onNext(Bean<Object> result) {
+//
+//                            }
+//
+//                            @Override
+//                            public void onError(String error) {
+//                                Logger.e(TAG, "接收验证码报错：" + error);
+//                                Toast.makeText(getApplicationContext(), "接收验证码失败！", Toast.LENGTH_SHORT).show();
+//                            }
+//                        }, this, true));
 
     }
 

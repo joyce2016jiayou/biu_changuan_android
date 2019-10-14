@@ -193,7 +193,7 @@ public class Network {
      * @param subscriber
      * @return
      */
-    public Subscription get_yanzhengma(Map<String, String> params, Subscriber<Bean<Object>> subscriber) {
+    public Subscription get_yanzhengma(Map<String, String> params, Subscriber<Bean<String>> subscriber) {
         return service.get_yanzhengma(params)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
@@ -238,7 +238,7 @@ public class Network {
      * @param subscriber
      * @return
      */
-    public Subscription submit_password(Map<String, String> params, Subscriber<Bean<Object>> subscriber) {
+    public Subscription submit_password(Map<String, String> params, Subscriber<Bean<String>> subscriber) {
         return service.update_password(params)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
