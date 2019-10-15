@@ -13,11 +13,18 @@ import android.widget.CompoundButton
 import android.widget.TextView
 import android.widget.Toast
 import butterknife.ButterKnife
+import com.noplugins.keepfit.android.KeepFitActivity
 import com.noplugins.keepfit.android.R
+import com.noplugins.keepfit.android.activity.CheckStatusFailActivity
+import com.noplugins.keepfit.android.activity.UserPermissionSelectActivity
 import com.noplugins.keepfit.android.activity.mine.CgPriceActivity
 import com.noplugins.keepfit.android.base.BaseActivity
+import com.noplugins.keepfit.android.bean.LoginBean
+import com.noplugins.keepfit.android.entity.CheckEntity
+import com.noplugins.keepfit.android.entity.LoginEntity
 import com.noplugins.keepfit.android.global.AppConstants
 import com.noplugins.keepfit.android.util.SpUtils
+import com.noplugins.keepfit.android.util.data.SharedPreferencesHelper
 import com.noplugins.keepfit.android.util.data.StringsHelper
 import com.noplugins.keepfit.android.util.net.Network
 import com.noplugins.keepfit.android.util.net.entity.Bean
@@ -26,7 +33,7 @@ import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener
 import com.noplugins.keepfit.android.util.ui.pop.CommonPopupWindow
 import com.noplugins.keepfit.android.wxapi.WXPayEntryActivity
 import kotlinx.android.synthetic.main.activity_login2.*
-import java.util.HashMap
+import java.util.*
 
 class Login2Activity : BaseActivity() {
 
@@ -47,21 +54,6 @@ class Login2Activity : BaseActivity() {
     override fun doBusiness(mContext: Context) {
         yanzhengma_tv.setOnClickListener(View.OnClickListener {
             if (yanzhengma_tv.text.toString() == "密码登录") {
-                Log.e("登录方式", "密码登录")
-                is_yanzhengma_logon = false
-                yanzhengma_tv.text = "验证码登录"
-                edit_password.inputType = InputType.TYPE_CLASS_TEXT
-                edit_password.filters = arrayOf<InputFilter>(InputFilter.LengthFilter(18)) //最大输入长度
-
-                val s = SpannableString("请输入密码")//这里输入自己想要的提示文字
-                edit_password.hint = s
-                img_password.setImageResource(R.drawable.password_icon)
-                tv_send.visibility = View.GONE
-
-                forget_password_btn.visibility = View.VISIBLE
-
-
-            } else {
                 Log.e("登录方式", "验证码登录")
 
                 is_yanzhengma_logon = true
@@ -75,8 +67,20 @@ class Login2Activity : BaseActivity() {
                 tv_send.visibility = View.VISIBLE
 
                 forget_password_btn.visibility = View.GONE
+            } else {
+                Log.e("登录方式", "密码登录")
 
+                is_yanzhengma_logon = false
+                yanzhengma_tv.text = "验证码登录"
+                edit_password.inputType = InputType.TYPE_CLASS_TEXT
+                edit_password.filters = arrayOf<InputFilter>(InputFilter.LengthFilter(18)) //最大输入长度
 
+                val s = SpannableString("请输入密码")//这里输入自己想要的提示文字
+                edit_password.hint = s
+                img_password.setImageResource(R.drawable.password_icon)
+                tv_send.visibility = View.GONE
+
+                forget_password_btn.visibility = View.VISIBLE
             }
         })
         //发送验证码
@@ -136,34 +140,33 @@ class Login2Activity : BaseActivity() {
         })
     }
 
+    /**
+     * 验证码登陆
+     */
     private fun yanzheng_yanzhengma() {
         val params = HashMap<String, Any>()
         params["messageId"] = message_id
         params["code"] = edit_password.text.toString()
         params["phone"] = edit_phone_number.text.toString()
-//        subscription = Network.getInstance("验证验证码和登录", this)
-//                .yanzheng_yanzhengma(params,
-//                        ProgressSubscriber("验证验证码和登录", object : SubscriberOnNextListener<Bean<YanZhengMaBean>>() {
-//                            override fun onNext(result: Bean<YanZhengMaBean>) {
-//                                login_btn.loadingComplete()
-//                                if (result.getData().getHavePassword() === 0) {//没有设置过密码
-//                                    val intent = Intent(this@Login2Activity, SetPasswordActivity::class.java)
-//                                    startActivity(intent)
-//                                } else {//设置过密码
-//                                    val intent = Intent(this@Login2Activity, SelectRoleActivity::class.java)
-//                                    startActivity(intent)
-//                                }
-//                                save_resource(result.getData().getToken(),
-//                                        result.getData().getUserNum(),
-//                                        result.getData().getTeacherType(),
-//                                        result.getData().getUserNum())
-//                            }
-//
-//                            override fun onError(error: String) {
-//                                login_btn.loadingComplete()
-//
-//                            }
-//                        }, this, false))
+        subscription = Network.getInstance("验证验证码和登录", this)
+                .verifyCodeLogin(params,
+                        ProgressSubscriber("验证验证码和登录", object : SubscriberOnNextListener<Bean<LoginBean>>{
+                            override fun onNext(result: Bean<LoginBean>) {
+                                login_btn.loadingComplete()
+                                if (result.data.havePassword == 0) {//没有设置过密码
+                                    val intent = Intent(this@Login2Activity, SetPasswordActivity::class.java)
+                                    startActivity(intent)
+                                } else {//设置过密码
+                                    get_check_status()
+                                }
+                                save_resource(result.data)
+                            }
+
+                            override fun onError(error: String) {
+                                login_btn.loadingComplete()
+
+                            }
+                        }, this, false))
         val intent = Intent(this@Login2Activity, SetPasswordActivity::class.java)
         startActivity(intent)
     }
@@ -173,32 +176,22 @@ class Login2Activity : BaseActivity() {
         params["phone"] = edit_phone_number.text.toString()
         params["password"] = edit_password.text.toString()
 
-//        subscription = Network.getInstance("密码登录", this)
-//                .password_login(params,
-//                        ProgressSubscriber("密码登录", object : SubscriberOnNextListener<Bean<LoginBean>>() {
-//                            override fun onNext(result: Bean<LoginBean>) {
-//                                login_btn.loadingComplete()
-//
-//                                save_resource(result.getData().getToken(),
-//                                        result.getData().getUserNum(),
-//                                        result.getData().getTeacherType(),
-//                                        result.getData().getUserNum())
-//                                if (null != SpUtils.getString(applicationContext, AppConstants.TEACHER_TYPE)) {
-//                                    if (SpUtils.getString(applicationContext, AppConstants.TEACHER_TYPE).length > 0) {//已经审核过了
-//                                        val intent = Intent(this@Login2Activity, KeepFitActivity::class.java)
-//                                        startActivity(intent)
-//                                    } else {//未审核
-//                                        val intent = Intent(this@Login2Activity, SelectRoleActivity::class.java)
-//                                        startActivity(intent)
-//                                    }
-//                                }
-//                            }
-//
-//                            override fun onError(error: String) {
-//                                login_btn.loadingComplete()
-//
-//                            }
-//                        }, this, false))
+        val subscription = Network.getInstance("获取验证码", this)
+                .login(params,
+                        ProgressSubscriber("获取验证码", object : SubscriberOnNextListener<Bean<LoginEntity>> {
+                            override fun onNext(result: Bean<LoginEntity>) {
+                                SpUtils.putString(applicationContext, AppConstants.TOKEN, result.data.token)
+                                SpUtils.putString(applicationContext, AppConstants.PHONE, edit_phone_number.text.toString())
+                                SpUtils.putString(applicationContext, AppConstants.CHANGGUAN_NUM, result.data.gymAreaNum)
+
+                                get_check_status()
+                            }
+
+                            override fun onError(error: String) {
+                                Log.e(TAG, "登录失败：$error")
+                                Toast.makeText(applicationContext, error, Toast.LENGTH_SHORT).show()
+                            }
+                        }, this, false))
     }
 
     private fun Get_YanZhengMa() {
@@ -239,12 +232,41 @@ class Login2Activity : BaseActivity() {
         no_agree_btn.setOnClickListener(View.OnClickListener { popupWindow.dismiss() })
     }
 
-    private fun save_resource(token: String, user_number: String, teacher_type: String, teacher_number: String) {
-        SpUtils.putString(applicationContext, AppConstants.TOKEN, token)
-        SpUtils.putString(applicationContext, AppConstants.USER_NAME, user_number)
-        SpUtils.putString(applicationContext, AppConstants.PHONE, edit_phone_number.getText().toString())
-        SpUtils.putString(applicationContext, AppConstants.TEACHER_TYPE, teacher_type)
-        SpUtils.putString(applicationContext, AppConstants.SELECT_TEACHER_NUMBER, teacher_number)
+    private fun save_resource(login:LoginBean) {
+        SpUtils.putString(applicationContext, AppConstants.TOKEN, login.token)
+        SpUtils.putString(applicationContext, AppConstants.USER_NAME, login.gymUserNum)
+        SpUtils.putInt(applicationContext, AppConstants.USER_TYPE, login.type)
+        SpUtils.putString(applicationContext, AppConstants.PHONE, edit_phone_number.text.toString())
+    }
+
+    private fun get_check_status(){
+        val params = HashMap<String, Any>()
+        params["token"] = SpUtils.getString(applicationContext,AppConstants.TOKEN)
+        val subscription = Network.getInstance("获取审核状态", this)
+                .get_check_status(params,
+                        ProgressSubscriber("获取审核状态", object : SubscriberOnNextListener<Bean<CheckEntity>> {
+                            override fun onNext(result: Bean<CheckEntity>) {
+                                when {
+                                    result.data.status == 1 -> {
+                                        val intent = Intent(this@Login2Activity, KeepFitActivity::class.java)
+                                        startActivity(intent)
+                                    }
+                                    result.data.status == 0 -> {
+                                        val intent = Intent(this@Login2Activity, CheckStatusFailActivity::class.java)
+                                        startActivity(intent)
+                                    }
+                                    result.data.status == -2 -> {
+                                        val intent = Intent(this@Login2Activity, UserPermissionSelectActivity::class.java)
+                                        startActivity(intent)
+                                        finish()
+                                    }
+                                }
+                            }
+
+                            override fun onError(error: String) {
+
+                            }
+                        }, this, false))
     }
 
     internal var textWatcher: TextWatcher = object : TextWatcher {

@@ -23,6 +23,10 @@ import com.noplugins.keepfit.android.activity.mine.CgPriceActivity
 import com.noplugins.keepfit.android.base.BaseActivity
 import com.noplugins.keepfit.android.bean.WxPayBean
 import com.noplugins.keepfit.android.pay.PayResult
+import com.noplugins.keepfit.android.util.net.Network
+import com.noplugins.keepfit.android.util.net.entity.Bean
+import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriber
+import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener
 import com.orhanobut.logger.Logger
 import com.tencent.mm.opensdk.constants.ConstantsAPI
 import com.tencent.mm.opensdk.modelbase.BaseReq
@@ -87,16 +91,15 @@ class WXPayEntryActivity : BaseActivity(), IWXAPIEventHandler {
         }
 
         tv_pay.setOnClickListener {
-//            if (type == 2) {
-//                requestAliPayInfo(1)
-//
-//            }
-//            if (type == 3) {
-////                requestAliPayInfo(2)
-//                testWxRequest()
-//            }
-            val intent = Intent(this@WXPayEntryActivity, CgPriceActivity::class.java)
-            startActivity(intent)
+            if (type == 2) {
+                requestAliPayInfo()
+
+            }
+            if (type == 3) {
+                testWxRequest()
+            }
+//            val intent = Intent(this@WXPayEntryActivity, CgPriceActivity::class.java)
+//            startActivity(intent)
 
         }
 
@@ -198,8 +201,8 @@ class WXPayEntryActivity : BaseActivity(), IWXAPIEventHandler {
      * 微信支付
      */
     private fun weChatPay(wxPayBean: WxPayBean) {
-        api = WXAPIFactory.createWXAPI(this, "wx159898ada9f8208a",false)
-        api!!.registerApp("wx159898ada9f8208a")
+        api = WXAPIFactory.createWXAPI(this, wxPayBean.appid,false)
+        api!!.registerApp(wxPayBean.appid)
 
         val payRunnable = Runnable {
             val req = PayReq()
@@ -209,7 +212,7 @@ class WXPayEntryActivity : BaseActivity(), IWXAPIEventHandler {
             req.nonceStr = wxPayBean.noncestr
             req.timeStamp = wxPayBean.timestamp
             req.packageValue = "Sign=WXPay"
-            req.sign = wxPayBean.sign2
+            req.sign = wxPayBean.sign
 
           api!!.sendReq(req)//发送调起微信的请求
         }
@@ -220,16 +223,41 @@ class WXPayEntryActivity : BaseActivity(), IWXAPIEventHandler {
 
 
     private fun testWxRequest() {
-        //weixinPay
         val params = HashMap<String, Any>()
-        val json = Gson().toJson(params)
+        params["ordNum"] = "GYM1910152420862712"
+        params["payType"] = 2
+        //memberOrderPay
+        val subscription = Network.getInstance("获取验证码", this)
+                .memberOrderPayWx(params,
+                        ProgressSubscriber("获取验证码", object : SubscriberOnNextListener<Bean<WxPayBean>> {
+                            override fun onNext(code: Bean<WxPayBean>) {
+                                weChatPay(code.data)
+                            }
+
+                            override fun onError(error: String) {
+
+                            }
+                        }, this, false))
 
     }
 
-    private fun requestAliPayInfo(type: Int) {
+    private fun requestAliPayInfo() {
         val params = HashMap<String, Any>()
-        params["ordNum"] = orderNum
-        params["payType"] = type
+        params["ordNum"] = "GYM1910152420862712"
+        params["payType"] = 1
+        //memberOrderPay
+        val subscription = Network.getInstance("获取验证码", this)
+                .memberOrderPay(params,
+                        ProgressSubscriber("获取验证码", object : SubscriberOnNextListener<Bean<String>> {
+                            override fun onNext(code: Bean<String>) {
+                                aliPayInfo = code.data
+                                zhifubaoPay()
+                            }
+
+                            override fun onError(error: String) {
+
+                            }
+                        }, this, false))
 
     }
 
@@ -278,7 +306,7 @@ class WXPayEntryActivity : BaseActivity(), IWXAPIEventHandler {
         val requestBody = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), json)
 
 //        subscription = Network.getInstance("支付二次验证", this)
-//            .getFinalPayResult(
+//            .requestAliPayInfo(
 //                requestBody,
 //                ProgressSubscriber<OrderResultBean>(
 //                    "支付二次验证",

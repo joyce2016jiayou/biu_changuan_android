@@ -2,8 +2,12 @@ package com.noplugins.keepfit.android.util.net;
 
 
 import com.alibaba.fastjson.annotation.JSONField;
+import com.noplugins.keepfit.android.bean.LoginBean;
+import com.noplugins.keepfit.android.bean.WxPayBean;
 import com.noplugins.keepfit.android.entity.AddClassEntity;
+import com.noplugins.keepfit.android.entity.CheckEntity;
 import com.noplugins.keepfit.android.entity.ClassTypeEntity;
+import com.noplugins.keepfit.android.entity.LoginEntity;
 import com.noplugins.keepfit.android.entity.TeacherEntity;
 import com.noplugins.keepfit.android.util.net.entity.Bean;
 import com.noplugins.keepfit.android.util.net.entity.Token;
@@ -70,7 +74,18 @@ public interface MyService {
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
     @POST("userlogin")
-    Observable<Bean<Object>> login(@Body RequestBody json);
+    Observable<Bean<LoginEntity>> login(@Body RequestBody json);
+
+
+
+    /**
+     * 验证码登陆登录
+     *
+     * @return
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("verifyCodeLogin")
+    Observable<Bean<LoginBean>> verifyCodeLogin(@Body RequestBody json);
 
     /**
      * 修改密码
@@ -124,7 +139,7 @@ public interface MyService {
      */
     @FormUrlEncoded
     @POST("getAuditResult")
-    Observable<Bean<Object>> get_check_status(@FieldMap Map<String, String> map);
+    Observable<Bean<CheckEntity>> get_check_status(@Body RequestBody json);
 
     /**
      * 获取审核状态
@@ -369,5 +384,22 @@ public interface MyService {
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
     @POST("findAreaPlace")
     Observable<Bean<List<ClassTypeEntity>>> get_class_type(@Body RequestBody json);
+
+    /**
+     * 获取支付信息 -支付宝
+     *
+     * @return
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("memberOrderPay")
+    Observable<Bean<String>> memberOrderPay(@Body RequestBody json);
+    /**
+     * 获取支付信息 -微信
+     *
+     * @return
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("memberOrderPay")
+    Observable<Bean<WxPayBean>> memberOrderPayWx(@Body RequestBody json);
 
 }

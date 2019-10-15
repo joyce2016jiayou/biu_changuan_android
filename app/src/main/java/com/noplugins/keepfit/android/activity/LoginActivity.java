@@ -159,95 +159,95 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void Login() {
-        Map<String, String> params = new HashMap<>();
-        params.put("password", edit_password.getText().toString());
-        params.put("phone", edit_phone_number.getText().toString());
-        Gson gson = new Gson();
-        String json_params = gson.toJson(params);
-        Log.e(TAG, "登录参数：" + json_params);
-        String json = new Gson().toJson(params);//要传递的json
-        RequestBody requestBody = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), json);
-
-        subscription = Network.getInstance("登录", getApplicationContext())
-                .login(requestBody, new ProgressSubscriberNew<>(LoginEntity.class, new GsonSubscriberOnNextListener<LoginEntity>() {
-                    @Override
-                    public void on_post_entity(LoginEntity loginEntity, String s) {
-                        Log.e(TAG, "登录成功：" + s);
-                        if (is_save_number) {//保存密码
-
-                        } else {
-//                            Intent intent = new Intent(LoginActivity.this, UserPermissionSelectActivity.class);
-//                            startActivity(intent);
-//                            finish();
-                        }
-                        //保存密码
-                        SpUtils.putString(getApplicationContext(), AppConstants.TOKEN, loginEntity.getToken());
-                        SharedPreferencesHelper.put(getApplicationContext(), Network.phone_number, edit_phone_number.getText().toString());
-                        SharedPreferencesHelper.put(getApplicationContext(), Network.changguan_number, loginEntity.getGymAreaNum());
-
-
-                        //type 0  type 1场馆主 2经理  3前台
-//                        if (loginEntity.getType() == 0) {//没有提交过审核资料
-//                            SharedPreferencesHelper.put(getApplicationContext(), Network.no_submit_information, "true");
+//        Map<String, String> params = new HashMap<>();
+//        params.put("password", edit_password.getText().toString());
+//        params.put("phone", edit_phone_number.getText().toString());
+//        Gson gson = new Gson();
+//        String json_params = gson.toJson(params);
+//        Log.e(TAG, "登录参数：" + json_params);
+//        String json = new Gson().toJson(params);//要传递的json
+//        RequestBody requestBody = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), json);
 //
-//                            Intent intent = new Intent(LoginActivity.this, UserPermissionSelectActivity.class);
-//                            startActivity(intent);
-//                            finish();
-//                        } else {//已经提交过资料
-//                            Intent intent = new Intent(LoginActivity.this, KeepFitActivity.class);
-//                            startActivity(intent);
-//                            finish();
+//        subscription = Network.getInstance("登录", getApplicationContext())
+//                .login(requestBody, new ProgressSubscriberNew<>(LoginEntity.class, new GsonSubscriberOnNextListener<LoginEntity>() {
+//                    @Override
+//                    public void on_post_entity(LoginEntity loginEntity, String s) {
+//                        Log.e(TAG, "登录成功：" + s);
+//                        if (is_save_number) {//保存密码
+//
+//                        } else {
+////                            Intent intent = new Intent(LoginActivity.this, UserPermissionSelectActivity.class);
+////                            startActivity(intent);
+////                            finish();
 //                        }
-                        get_check_status();
-
-                    }
-                }, new SubscriberOnNextListener<Bean<Object>>() {
-                    @Override
-                    public void onNext(Bean<Object> result) {
-                    }
-
-                    @Override
-                    public void onError(String error) {
-                        Log.e(TAG, "登录失败：" + error);
-                        Toast.makeText(getApplicationContext(), error, Toast.LENGTH_SHORT).show();
-                    }
-                }, this, true));
+//                        //保存密码
+//                        SpUtils.putString(getApplicationContext(), AppConstants.TOKEN, loginEntity.getToken());
+//                        SharedPreferencesHelper.put(getApplicationContext(), Network.phone_number, edit_phone_number.getText().toString());
+//                        SharedPreferencesHelper.put(getApplicationContext(), Network.changguan_number, loginEntity.getGymAreaNum());
+//
+//
+//                        //type 0  type 1场馆主 2经理  3前台
+////                        if (loginEntity.getType() == 0) {//没有提交过审核资料
+////                            SharedPreferencesHelper.put(getApplicationContext(), Network.no_submit_information, "true");
+////
+////                            Intent intent = new Intent(LoginActivity.this, UserPermissionSelectActivity.class);
+////                            startActivity(intent);
+////                            finish();
+////                        } else {//已经提交过资料
+////                            Intent intent = new Intent(LoginActivity.this, KeepFitActivity.class);
+////                            startActivity(intent);
+////                            finish();
+////                        }
+//                        get_check_status();
+//
+//                    }
+//                }, new SubscriberOnNextListener<Bean<Object>>() {
+//                    @Override
+//                    public void onNext(Bean<Object> result) {
+//                    }
+//
+//                    @Override
+//                    public void onError(String error) {
+//                        Log.e(TAG, "登录失败：" + error);
+//                        Toast.makeText(getApplicationContext(), error, Toast.LENGTH_SHORT).show();
+//                    }
+//                }, this, true));
 
     }
 
     private void get_check_status() {
-        Map<String, String> params = new HashMap<>();
-        params.put("token", SpUtils.getString(getApplicationContext(), AppConstants.TOKEN));
-        Log.e("获取审核状态参数", params.toString());
-        subscription = Network.getInstance("获取审核状态", getApplicationContext())
-                .get_check_status(params,
-                        new ProgressSubscriberNew<>(CheckEntity.class, new GsonSubscriberOnNextListener<CheckEntity>() {
-                            @Override
-                            public void on_post_entity(CheckEntity checkEntity, String get_message_id) {
-                                Log.e(TAG, "获取审核状态成功：" + checkEntity.getStatus());
-                                //成功1，失败0，没有提交过资料-2
-                                if (checkEntity.getStatus() == 1) {
-                                    Intent intent = new Intent(LoginActivity.this, KeepFitActivity.class);
-                                    startActivity(intent);
-                                } else if (checkEntity.getStatus() == 0) {
-                                    Intent intent = new Intent(LoginActivity.this, CheckStatusFailActivity.class);
-                                    startActivity(intent);
-                                } else if (checkEntity.getStatus() == -2) {
-                                    Intent intent = new Intent(LoginActivity.this, UserPermissionSelectActivity.class);
-                                    startActivity(intent);
-                                    finish();
-                                }
-                            }
-                        }, new SubscriberOnNextListener<Bean<Object>>() {
-                            @Override
-                            public void onNext(Bean<Object> result) {
-                            }
-
-                            @Override
-                            public void onError(String error) {
-                                Log.e(TAG, "获取审核状态报错：" + error);
-                            }
-                        }, this, false));
+//        Map<String, String> params = new HashMap<>();
+//        params.put("token", SpUtils.getString(getApplicationContext(), AppConstants.TOKEN));
+//        Log.e("获取审核状态参数", params.toString());
+//        subscription = Network.getInstance("获取审核状态", getApplicationContext())
+//                .get_check_status(params,
+//                        new ProgressSubscriberNew<>(CheckEntity.class, new GsonSubscriberOnNextListener<CheckEntity>() {
+//                            @Override
+//                            public void on_post_entity(CheckEntity checkEntity, String get_message_id) {
+//                                Log.e(TAG, "获取审核状态成功：" + checkEntity.getStatus());
+//                                //成功1，失败0，没有提交过资料-2
+//                                if (checkEntity.getStatus() == 1) {
+//                                    Intent intent = new Intent(LoginActivity.this, KeepFitActivity.class);
+//                                    startActivity(intent);
+//                                } else if (checkEntity.getStatus() == 0) {
+//                                    Intent intent = new Intent(LoginActivity.this, CheckStatusFailActivity.class);
+//                                    startActivity(intent);
+//                                } else if (checkEntity.getStatus() == -2) {
+//                                    Intent intent = new Intent(LoginActivity.this, UserPermissionSelectActivity.class);
+//                                    startActivity(intent);
+//                                    finish();
+//                                }
+//                            }
+//                        }, new SubscriberOnNextListener<Bean<Object>>() {
+//                            @Override
+//                            public void onNext(Bean<Object> result) {
+//                            }
+//
+//                            @Override
+//                            public void onError(String error) {
+//                                Log.e(TAG, "获取审核状态报错：" + error);
+//                            }
+//                        }, this, false));
 
 
     }

@@ -12,6 +12,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.adapter.TabItemAdapter;
+import com.noplugins.keepfit.android.base.BaseFragment;
 import com.noplugins.keepfit.android.entity.PieBean;
 import com.noplugins.keepfit.android.util.ui.ViewPagerFragment;
 import com.openxu.cview.chart.bean.ChartLable;
@@ -27,7 +28,7 @@ import butterknife.ButterKnife;
 /**
  * 发现页
  */
-public class StatisticsFragment extends ViewPagerFragment {
+public class StatisticsFragment extends BaseFragment {
     private View view;
     @BindView(R.id.view_pager)
     ViewPager view_pager;
@@ -51,12 +52,20 @@ public class StatisticsFragment extends ViewPagerFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (view == null) {
             view = inflater.inflate(R.layout.discovers_fragment, container, false);
-            ButterKnife.bind(this, view);//绑定黄牛刀
-            initView();
+
         }
 
 
         return view;
+    }
+
+    @Override
+    protected void onFragmentVisibleChange(boolean isVisible) {
+        super.onFragmentVisibleChange(isVisible);
+        if (isVisible){
+            ButterKnife.bind(this, view);//绑定黄牛刀
+            initView();
+        }
     }
 
     private void initView() {
@@ -110,10 +119,6 @@ public class StatisticsFragment extends ViewPagerFragment {
     }
 
 
-    @Override
-    public void fetchData() {
-
-    }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override

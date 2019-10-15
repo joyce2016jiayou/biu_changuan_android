@@ -7,8 +7,12 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.noplugins.keepfit.android.bean.LoginBean;
+import com.noplugins.keepfit.android.bean.WxPayBean;
 import com.noplugins.keepfit.android.entity.AddClassEntity;
+import com.noplugins.keepfit.android.entity.CheckEntity;
 import com.noplugins.keepfit.android.entity.ClassTypeEntity;
+import com.noplugins.keepfit.android.entity.LoginEntity;
 import com.noplugins.keepfit.android.entity.TeacherEntity;
 import com.noplugins.keepfit.android.global.AppConstants;
 import com.noplugins.keepfit.android.util.SpUtils;
@@ -224,13 +228,29 @@ public class Network {
      * @param subscriber
      * @return
      */
-    public Subscription login(RequestBody params, Subscriber<Bean<Object>> subscriber) {
-        return service.login(params)
+    public Subscription login(Map<String, Object> params, Subscriber<Bean<LoginEntity>> subscriber) {
+        return service.login(retuen_json_params(params))
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
     }
+
+
+    /**
+     * 登录
+     *
+     * @param subscriber
+     * @return
+     */
+    public Subscription verifyCodeLogin(Map<String, Object> params, Subscriber<Bean<LoginBean>> subscriber) {
+        return service.verifyCodeLogin(retuen_json_params(params))
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
 
     /**
      * 修改密码
@@ -308,8 +328,8 @@ public class Network {
      * @param subscriber
      * @return
      */
-    public Subscription get_check_status(Map<String, String> params, Subscriber<Bean<Object>> subscriber) {
-        return service.get_check_status(params)
+    public Subscription get_check_status(Map<String, Object> params, Subscriber<Bean<CheckEntity>> subscriber) {
+        return service.get_check_status(retuen_json_params(params))
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -689,4 +709,27 @@ public class Network {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
     }
+
+    /**
+     * memberOrderPay-支付宝
+     */
+    public Subscription memberOrderPay(Map<String, Object> params, Subscriber<Bean<String>> subscriber) {
+        return service.memberOrderPay(retuen_json_params(params))
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * memberOrderPay-微信
+     */
+    public Subscription memberOrderPayWx(Map<String, Object> params, Subscriber<Bean<WxPayBean>> subscriber) {
+        return service.memberOrderPayWx(retuen_json_params(params))
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
 }

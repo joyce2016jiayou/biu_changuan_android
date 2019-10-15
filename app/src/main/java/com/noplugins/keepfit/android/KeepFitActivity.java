@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
@@ -26,6 +27,9 @@ import com.noplugins.keepfit.android.fragment.StatisticsFragment;
 import com.noplugins.keepfit.android.fragment.ViewFragment;
 import com.noplugins.keepfit.android.fragment.MineFragment;
 import com.noplugins.keepfit.android.fragment.MessageFragment;
+import com.noplugins.keepfit.android.fragment.mine.MyFragment;
+import com.noplugins.keepfit.android.global.AppConstants;
+import com.noplugins.keepfit.android.util.SpUtils;
 import com.noplugins.keepfit.android.util.data.SharedPreferencesHelper;
 import com.noplugins.keepfit.android.util.eventbus.MessageEvent;
 import com.noplugins.keepfit.android.util.net.Network;
@@ -58,9 +62,18 @@ public class KeepFitActivity extends BaseActivity {
     LinearLayout message_view;
     @BindView(R.id.message_num_tv)
     TextView message_num_tv;
-
+    @BindView(R.id.btn_home)
+    RelativeLayout btn_home;
+    @BindView(R.id.btn_shipu)
+    RelativeLayout btn_shipu;
+    @BindView(R.id.btn_movie)
+    RelativeLayout btn_movie;
+    @BindView(R.id.btn_mine)
+    RelativeLayout btn_mine;
     @BindViews({R.id.home_img, R.id.shipu_img, R.id.movie_img, R.id.mine_img})
     List<ImageView> bottom_iamge_views;
+
+
     private SoundPool sp;//声明一个SoundPool
     private int music;//定义一个整型用load（）；来设置suondID
     private List<Fragment> tabFragments = new ArrayList<>();
@@ -74,6 +87,9 @@ public class KeepFitActivity extends BaseActivity {
     public void initView() {
         setContentLayout(R.layout.activity_keepfit);
         ButterKnife.bind(this);
+        if (SpUtils.getInt(getApplicationContext(), AppConstants.USER_TYPE) == 3){
+            btn_shipu.setVisibility(View.GONE);
+        }
         isShowTitle(false);
         MyApplication.addDestoryActivity(this, "KeepFitActivity");
         //注册eventbus
@@ -138,7 +154,7 @@ public class KeepFitActivity extends BaseActivity {
         tabFragments.add(ViewFragment.homeInstance("第一页"));
         tabFragments.add(StatisticsFragment.newInstance("第二页"));
         tabFragments.add(MessageFragment.newInstance("第三页"));
-        tabFragments.add(MineFragment.myInstance("第四页"));
+        tabFragments.add(MyFragment.Companion.newInstance("第四页"));
         //初始化viewpager
         ContentPagerAdapterMy contentAdapter = new ContentPagerAdapterMy(getSupportFragmentManager(), tabFragments);
         viewpager_content.setAdapter(contentAdapter);

@@ -6,12 +6,14 @@ import java.util.List;
 public class AppConstants {
 
     public static final String TOKEN = "login_token";
+    public static final String CHANGGUAN_NUM = "changguan_num";
 
     public static final String FIRST_OPEN = "first_open";
     public static final String FIRST_QUANYI = "first_quanyi";
     public static final String FIRST_PASSWPRD = "first_password";
     public static final String PHONE = "phone";
     public static final String USER_NAME = "userNum";
+    public static final String USER_TYPE = "userType";
     public static final String NAME = "userName";
     public static final String TEACHER_TYPE = "teacher_type";//判断是否审核过
     public static final String SELECT_TEACHER_TYPE = "select_teacher_type";//教练类型
