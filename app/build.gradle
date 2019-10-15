@@ -237,5 +237,10 @@ dependencies {
     //adapter
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.47-androidx'
 
+    //高德定位
+    implementation 'com.amap.api:location:latest.integration'
+    //高德搜索
+    implementation 'com.amap.api:search:latest.integration'
+
 
 }

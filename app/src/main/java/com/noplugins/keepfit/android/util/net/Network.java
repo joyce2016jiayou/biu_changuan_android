@@ -8,6 +8,7 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.noplugins.keepfit.android.bean.LoginBean;
+import com.noplugins.keepfit.android.bean.PrivateDetailBean;
 import com.noplugins.keepfit.android.bean.WxPayBean;
 import com.noplugins.keepfit.android.entity.AddClassEntity;
 import com.noplugins.keepfit.android.entity.CheckEntity;
@@ -726,6 +727,17 @@ public class Network {
      */
     public Subscription memberOrderPayWx(Map<String, Object> params, Subscriber<Bean<WxPayBean>> subscriber) {
         return service.memberOrderPayWx(retuen_json_params(params))
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 教练详情
+     */
+    public Subscription teacherDetails(Map<String, Object> params, Subscriber<Bean<PrivateDetailBean>> subscriber) {
+        return service.teacherDetails(retuen_json_params(params))
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

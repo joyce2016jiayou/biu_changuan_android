@@ -3,6 +3,7 @@ package com.noplugins.keepfit.android.util.net;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import com.noplugins.keepfit.android.bean.LoginBean;
+import com.noplugins.keepfit.android.bean.PrivateDetailBean;
 import com.noplugins.keepfit.android.bean.WxPayBean;
 import com.noplugins.keepfit.android.entity.AddClassEntity;
 import com.noplugins.keepfit.android.entity.CheckEntity;
@@ -401,5 +402,14 @@ public interface MyService {
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
     @POST("memberOrderPay")
     Observable<Bean<WxPayBean>> memberOrderPayWx(@Body RequestBody json);
+
+    /**
+     * 教练详情
+     *
+     * @return
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("memberOrderPay")
+    Observable<Bean<PrivateDetailBean>> teacherDetails(@Body RequestBody json);
 
 }

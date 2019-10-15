@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/m70">
+
+        <ImageView
+            android:id="@+id/back_btn"
+            android:layout_width="@dimen/m22"
+            android:layout_height="@dimen/m19"
+            android:layout_gravity="left|center_vertical"
+            android:layout_marginLeft="@dimen/m20"
+            android:src="@drawable/icon_back"
+            android:visibility="visible"
+            android:layout_marginTop="@dimen/m20"/>
+
+        <TextView
+            android:id="@+id/title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="教练详情"
+            android:textColor="@color/contents_text"
+            android:textSize="20sp"
+            android:layout_marginTop="@dimen/m20"
+            android:textStyle="bold"/>
+    </FrameLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/m300">
+
+                <ImageView
+                    android:id="@+id/banner"
+                    android:layout_width="match_parent"
+                    android:scaleType="fitCenter"
+                    android:layout_height="@dimen/m300"/>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/m100"
+                    android:layout_gravity="bottom"
+                    android:orientation="vertical"
+                    android:background="@drawable/private_yy">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="@dimen/m10"
+                        android:gravity="center">
+
+                        <TextView
+                            android:id="@+id/tv_teacher_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="15sp"
+                            android:textColor="@color/contents_text"
+                            android:text="私教姓名"/>
+
+                        <ImageView
+                            android:id="@+id/iv_sex"
+                            android:layout_width="@dimen/m14"
+                            android:layout_height="@dimen/m14"/>
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/m20"
+                        android:layout_marginRight="@dimen/m20"
+                        android:layout_marginBottom="@dimen/m10"
+                        android:layout_gravity="bottom"
+                        android:text="我是气场一米八的大长腿，是一位重度咖啡爱好者，喜欢尝试新事物。"
+                        android:textColor="@color/color_4A4A4A"
+                        android:textSize="12sp"/>
+                </FrameLayout>
+
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/m22">
+
+                <TextView
+                    android:id="@+id/tv_sum_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left|center_vertical"
+                    android:text="累计服务时长：154小时"
+                    android:textSize="12sp"
+                    android:layout_marginLeft="@dimen/m11"
+                    android:textColor="@color/color_4A4A4A"/>
+
+                <TextView
+                    android:id="@+id/tv_teacher_pinfen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|center_vertical"
+                    android:text="7.8fen"
+                    android:textSize="13sp"
+                    android:layout_marginRight="@dimen/m19"
+                    android:textColor="@color/color_F9CE0F"/>
+            </FrameLayout>
+
+            <www.linwg.org.lib.LCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:shadowStartAlpha="10"
+                app:cornerRadius="@dimen/m8"
+                app:shadowSize="@dimen/m2"
+                android:paddingTop="@dimen/m5">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/m5"
+                    android:background="@drawable/shape_btn_bg_white">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="已获标签"
+                        android:layout_marginLeft="@dimen/m10"
+                        android:textSize="12sp"
+                        android:layout_marginTop="@dimen/m2"
+                        android:textColor="@color/color_929292"/>
+
+                    <com.noplugins.keepfit.android.util.ui.ZFlowLayout
+                        android:id="@+id/zf_label"
+                        android:layout_width="match_parent"
+                        android:layout_marginRight="@dimen/m10"
+                        android:layout_marginLeft="@dimen/m10"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+            </www.linwg.org.lib.LCardView>
+
+            <www.linwg.org.lib.LCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:shadowStartAlpha="10"
+                app:cornerRadius="@dimen/m8"
+
+                android:layout_marginTop="@dimen/m5"
+                app:shadowSize="@dimen/m2"
+                android:paddingTop="@dimen/m5">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/m5"
+                    android:background="@drawable/shape_btn_bg_white">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="教练技能"
+                        android:layout_marginLeft="@dimen/m10"
+                        android:textSize="12sp"
+                        android:layout_marginTop="@dimen/m2"
+                        android:textColor="@color/color_929292"/>
+
+                    <com.noplugins.keepfit.android.util.ui.ZFlowLayout
+                        android:id="@+id/zf_skill"
+                        android:layout_width="match_parent"
+                        android:layout_marginRight="@dimen/m10"
+                        android:layout_marginLeft="@dimen/m10"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+            </www.linwg.org.lib.LCardView>
+
+
+            <TextView
+                android:id="@+id/tv_yaoqing"
+                android:layout_width="@dimen/m209"
+                android:layout_height="@dimen/m50"
+                android:background="@drawable/shape_btn_bg_40"
+                android:layout_gravity="bottom|center_horizontal"
+                android:text="邀请"
+                android:textSize="20sp"
+                android:layout_marginTop="@dimen/m30"
+                android:textColor="@color/contents_text"
+                android:layout_marginBottom="@dimen/m20"
+                android:gravity="center"/>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

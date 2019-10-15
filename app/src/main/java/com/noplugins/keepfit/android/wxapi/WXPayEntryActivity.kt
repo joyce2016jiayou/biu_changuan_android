@@ -224,7 +224,7 @@ class WXPayEntryActivity : BaseActivity(), IWXAPIEventHandler {
 
     private fun testWxRequest() {
         val params = HashMap<String, Any>()
-        params["ordNum"] = "GYM1910152420862712"
+        params["ordNum"] = "GYM1910152420862"
         params["payType"] = 2
         //memberOrderPay
         val subscription = Network.getInstance("获取验证码", this)
@@ -243,7 +243,7 @@ class WXPayEntryActivity : BaseActivity(), IWXAPIEventHandler {
 
     private fun requestAliPayInfo() {
         val params = HashMap<String, Any>()
-        params["ordNum"] = "GYM1910152420862712"
+        params["ordNum"] = "GYM191015242086271211111"
         params["payType"] = 1
         //memberOrderPay
         val subscription = Network.getInstance("获取验证码", this)

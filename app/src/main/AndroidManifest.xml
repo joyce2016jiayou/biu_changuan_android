@@ -347,7 +347,8 @@
         <activity android:name=".activity.user.SetPasswordActivity" />
         <activity
             android:name=".wxapi.WXPayEntryActivity"
-            android:exported="true" /> <!-- Required  . Enable it you can get statistics data with channel -->
+            android:exported="true" />
+        <activity android:name=".activity.mine.TeacherDetailActivity" /> <!-- Required  . Enable it you can get statistics data with channel -->
         <meta-data
             android:name="JPUSH_CHANNEL"
             android:value="default_developer" />
