@@ -27,7 +27,7 @@
     <string name="edit_hint17">请输入身份证号</string>
     <string name="edit_hint18">请输入营业执照上的企业名称</string>
     <string name="edit_hint19">请输入营业执照上的企业注册号</string>
-    <string name="edit_hint20">以上信息提交后不可更改</string>
+    <string name="edit_hint20">以上信息提交后不可更改!</string>
     <string name="edit_hint21">请输入课程名称</string>
     <string name="edit_hint22">请输入限制人数</string>
     <string name="edit_hint23">请输入课程详情</string>
@@ -41,6 +41,15 @@
     <string name="edit_hint31">请输入旧密码</string>
     <string name="edit_hint32">请输入新密码</string>
     <string name="edit_hint33">请再次确认密码</string>
+    <string name="edit_hint34">请输入统一社会信用代码</string>
+    <string name="edit_hint35">请输入收到的金额</string>
+    <string name="edit_hint36">请输入企业账户号码</string>
+    <string name="edit_hint37">请输入用户名</string>
+    <string name="edit_hint38">请输入身份证号</string>
+    <string name="edit_hint39">请输入银行卡号</string>
+    <string name="edit_hint40">请输入手机号</string>
+    <string name="edit_hint41">请输入验证码</string>
+
 
     <string name="tv1">登录</string>
     <string name="tv2">注册即代表您同意哔哟</string>
@@ -173,6 +182,18 @@
     <string name="tv129">购买会员，您将享受哔哟为您提供的以下服务：</string>
     <string name="tv130">试用7天</string>
     <string name="tv131">购买会员</string>
+    <string name="tv132">资质审核</string>
+    <string name="tv133">企业名称</string>
+    <string name="tv134">验证金额</string>
+    <string name="tv135">企业账号</string>
+    <string name="tv136">设置提现账户</string>
+    <string name="tv137">企业名称</string>
+    <string name="tv138">用户名</string>
+    <string name="tv139">身份证号</string>
+    <string name="tv140">银行卡号</string>
+    <string name="tv141">手机号</string>
+    <string name="tv142">验证码</string>
+    <string name="tv143">提交审核</string>
 
     <string name="tv_select">请选择</string>
     <string name="tv_qianbao">钱包</string>
@@ -193,16 +214,18 @@
     <string name="alert_dialog_tishi9">照片不能为空！</string>
     <string name="alert_dialog_tishi10">标签不能为空！</string>
     <string name="alert_dialog_tishi11">功能性场所不能为空！</string>
-    <string name="alert_dialog_tishi12">法人信息不能为空！</string>
-    <string name="alert_dialog_tishi13">身份证不能为空！</string>
-    <string name="alert_dialog_tishi14">企业名字不能为空！</string>
-    <string name="alert_dialog_tishi15">企业注册号不能为空！</string>
+    <string name="alert_dialog_tishi12">企业名称不能为空！</string>
+    <string name="alert_dialog_tishi13">统一社会信用代码不能为空！</string>
+    <string name="alert_dialog_tishi14">法人信息不能为空！</string>
+    <string name="alert_dialog_tishi15">身份证号不能为空！</string>
     <string name="alert_dialog_tishi16">团课名称不能为空！</string>
     <string name="alert_dialog_tishi17">团课人数不能为空！</string>
     <string name="alert_dialog_tishi18">课程介绍不能为空！</string>
     <string name="alert_dialog_tishi19">适合人群不能为空！</string>
     <string name="alert_dialog_tishi20">注意事项不能为空！</string>
     <string name="alert_dialog_tishi21">不能超过最大人数！</string>
+    <string name="alert_dialog_tishi22">企业账号不能为空！</string>
+    <string name="alert_dialog_tishi23">验证金额不能为空！</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:visibility="visible">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/m20"
+        android:layout_marginRight="@dimen/m20"
+        android:layout_marginTop="@dimen/m19"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv137"
+            android:textColor="@color/top_heiziti"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/tixian_compny_name"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/m31"
+            android:layout_marginLeft="@dimen/m4"
+            android:background="@drawable/edit_bg"
+            android:hint="@string/edit_hint16"
+            android:paddingLeft="@dimen/m20"
+            android:singleLine="true"
+            android:text="哔哔哔旗舰店"
+            android:textColor="@color/top_heiziti"
+            android:textColorHint="@color/color_9B9B9B"
+            android:textSize="13sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/m20"
+        android:layout_marginRight="@dimen/m20"
+        android:layout_marginTop="@dimen/m19"
+        android:layout_marginBottom="@dimen/m19"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv135"
+            android:textColor="@color/top_heiziti"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/tixian_qiye_zhanghao"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/m31"
+            android:layout_marginLeft="@dimen/m4"
+            android:background="@drawable/edit_bg"
+            android:hint="@string/edit_hint16"
+            android:paddingLeft="@dimen/m20"
+            android:singleLine="true"
+            android:text="123123123456456"
+            android:textColor="@color/top_heiziti"
+            android:textColorHint="@color/color_9B9B9B"
+            android:textSize="13sp" />
+    </LinearLayout>
+</LinearLayout>

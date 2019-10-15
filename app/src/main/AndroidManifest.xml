@@ -69,7 +69,8 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.mine.CostAccountingActivity"></activity>
+        <activity android:name=".activity.SubmitInformationSelectActivity"></activity>
+        <activity android:name=".activity.mine.CostAccountingActivity" />
         <activity android:name=".activity.mine.CgPriceActivity" />
         <activity android:name=".activity.user.Login2Activity">
             <intent-filter>

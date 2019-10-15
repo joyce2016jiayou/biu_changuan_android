@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:id="@+id/tixian_compny_layout"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/m20"
+                android:layout_marginTop="@dimen/m30"
+                android:text="提现账户"
+                android:textColor="#ff181818"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/m10"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/m18">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginLeft="@dimen/m58"
+                        android:gravity="center_horizontal"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/compny_check_btn"
+                            android:layout_width="@dimen/m20"
+                            android:layout_height="@dimen/m20"
+                            android:layout_gravity="center_vertical"
+                            android:background="@drawable/check_compny_btn"
+                            android:button="@null"
+                            android:checked="true" />
+
+                        <LinearLayout
+                            android:layout_width="@dimen/m88"
+                            android:layout_height="@dimen/m30"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/m5"
+                            android:background="@drawable/huang_kuang"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="公 司"
+                                android:textColor="#ff181818"
+                                android:textSize="15sp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/m43"
+                        android:gravity="center_horizontal"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/geren_check_btn"
+                            android:layout_width="@dimen/m20"
+                            android:layout_height="@dimen/m20"
+                            android:layout_gravity="center_vertical"
+                            android:background="@drawable/check_compny_btn"
+                            android:button="@null"
+                            android:checked="false" />
+
+                        <LinearLayout
+                            android:layout_width="@dimen/m88"
+                            android:layout_height="@dimen/m30"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/m5"
+                            android:background="@drawable/huang_kuang"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="个 人"
+                                android:textColor="#ff181818"
+                                android:textSize="15sp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <include
+                    android:id="@+id/com_layout"
+                    layout="@+id/com_layout" />
+
+                <include
+                    android:id="@+id/geren_layout"
+                    layout="@+id/geren_layout" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/m20"
+                android:layout_marginTop="@dimen/m10"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/m17"
+                    android:layout_height="@dimen/m17"
+                    android:src="@drawable/gantanhao" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/m10"
+                    android:text="@string/edit_hint20"
+                    android:textColor="@color/color_9B9B9B"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/submit_shenhe_btn"
+            android:layout_width="@dimen/m209"
+            android:layout_height="@dimen/m50"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/m28"
+            android:background="@drawable/tixian_btn"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/tv143"
+                android:textColor="@color/top_heiziti"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

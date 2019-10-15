@@ -65,7 +65,7 @@ public class InformationCheckActivity extends BaseActivity {
 
     @Override
     public void doBusiness(Context mContext) {
-        String[] titles = new String[]{"基础资料", "营业资料", "提交审核"};
+        String[] titles = new String[]{"基础资料", "营业资料", "待审核"};
         //设置进度标题
         stepView.setTitles(titles);
         /*//设置前进

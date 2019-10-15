@@ -44,14 +44,18 @@ public class InformationResultFragement extends ViewPagerFragment {
             ButterKnife.bind(this, view);//绑定黄牛刀
             initView();
 
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    Intent intent = new Intent(getActivity(), KeepFitActivity.class);
-                    startActivity(intent);
-                    getActivity().finish();
-                }
-            }, 2000);
+//            new Handler().postDelayed(new Runnable() {
+//                @Override
+//                public void run() {
+//                    Intent intent = new Intent(getActivity(), KeepFitActivity.class);
+//                    startActivity(intent);
+//                    getActivity().finish();
+//                }
+//            }, 2000);
+
+            //获取审核结果，如果成功就进购买页面，不成功就继续保留在此页面
+
+
         }
         return view;
     }

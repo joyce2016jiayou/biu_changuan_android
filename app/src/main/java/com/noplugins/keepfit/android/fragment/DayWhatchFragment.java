@@ -70,7 +70,7 @@ public class DayWhatchFragment extends ViewPagerFragment {
         return fragment;
     }
 
-    //注册广播接收器
+   /* //注册广播接收器
     LocalBroadcastManager broadcastManager;
     private void registerReceiver() {
         broadcastManager = LocalBroadcastManager.getInstance(getActivity());
@@ -95,19 +95,19 @@ public class DayWhatchFragment extends ViewPagerFragment {
                 });
             }
         }
-    };
+    };*/
 
-    @Override
+    /*@Override
     public void onDetach() {
         super.onDetach();
         broadcastManager.unregisterReceiver(mRefreshReceiver);
 
     }
-
+*/
     @Override
     public void fetchData() {
         //获取日视角课程接口
-        get_date_class_resource("");
+        //get_date_class_resource("");
     }
 
     @Override
@@ -117,7 +117,7 @@ public class DayWhatchFragment extends ViewPagerFragment {
             view = inflater.inflate(R.layout.fragment_day_whatch, container, false);
             ButterKnife.bind(this, view);//绑定黄牛刀
             initView();
-            registerReceiver();
+            //registerReceiver();
         }
         return view;
     }
@@ -134,9 +134,6 @@ public class DayWhatchFragment extends ViewPagerFragment {
         });
 
     }
-
-
-
 
 
     public void get_date_class_resource(String selectdate) {

@@ -7,9 +7,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -39,18 +43,36 @@ import static com.zhy.http.okhttp.log.LoggerInterceptor.TAG;
 
 
 public class BusinessInformationFragment extends ViewPagerFragment {
-
+    @BindView(R.id.submit_btn)
+    LinearLayout submit_btn;
+    @BindView(R.id.qiye_mingcheng_name)
+    EditText qiye_mingcheng_name;
+    @BindView(R.id.yingyezhizhao_xingyong_edittext)
+    EditText yingyezhizhao_xingyong_edittext;
     @BindView(R.id.faren_name)
     EditText faren_name;
     @BindView(R.id.icon_id_card)
     EditText icon_id_card;
-    @BindView(R.id.qiye_name)
-    EditText qiye_name;
-    @BindView(R.id.qiye_zhucehao)
-    EditText qiye_zhucehao;
-    @BindView(R.id.submit_btn)
-    LinearLayout submit_btn;
-
+    @BindView(R.id.qiye_zhanghao)
+    EditText qiye_zhanghao;
+    @BindView(R.id.yanzheng_jine)
+    EditText yanzheng_jine;
+    @BindView(R.id.tixian_compny_name)
+    EditText tixian_compny_name;
+    @BindView(R.id.tixian_qiye_zhanghao)
+    EditText tixian_qiye_zhanghao;
+    @BindView(R.id.tixian_compny_layout)
+    RelativeLayout tixian_compny_layout;
+    @BindView(R.id.yingye_ziliao_layout)
+    LinearLayout yingye_ziliao_layout;
+    @BindView(R.id.com_layout)
+    LinearLayout com_layout;
+    @BindView(R.id.geren_layout)
+    LinearLayout geren_layout;
+    @BindView(R.id.compny_check_btn)
+    RadioButton compny_check_btn;
+    @BindView(R.id.geren_check_btn)
+    RadioButton geren_check_btn;
 
     private View view;
     private InformationEntity informationEntity;
@@ -80,44 +102,72 @@ public class BusinessInformationFragment extends ViewPagerFragment {
     }
 
     private void initView() {
-        back_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getActivity().finish();
-            }
-        });
         submit_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (check_value()) {
-                    informationEntity = mainActivity.informationEntity;//获取基础资料信息
-                    informationEntity.setLegal_person(faren_name.getText().toString());
-                    informationEntity.setCard_num(icon_id_card.getText().toString());
-                    informationEntity.setCompany_name(qiye_name.getText().toString());
-                    informationEntity.setCompany_code(qiye_zhucehao.getText().toString());
+                //切换到提现布局
+                yingye_ziliao_layout.setVisibility(View.GONE);
+                tixian_compny_layout.setVisibility(View.VISIBLE);
+                compny_check_btn.setChecked(true);
 
-                    //提交审核资料
-                    submit_information();
-                } else {
-                    return;
-                }
+//                if (check_value()) {
+//
+//                    /*informationEntity = mainActivity.informationEntity;//获取基础资料信息
+//                    informationEntity.setLegal_person(faren_name.getText().toString());
+//                    informationEntity.setCard_num(icon_id_card.getText().toString());
+//                    informationEntity.setCompany_name(qiye_zhanghao.getText().toString());
+//
+//                    //提交审核资料
+//                    submit_information();*/
+//                } else {
+//                    return;
+//                }
+
 
             }
         });
+
+        compny_check_btn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) {
+                    com_layout.setVisibility(View.VISIBLE);
+                    geren_layout.setVisibility(View.GONE);
+                    geren_check_btn.setChecked(false);
+                }
+            }
+        });
+        geren_check_btn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) {
+                    com_layout.setVisibility(View.GONE);
+                    geren_layout.setVisibility(View.VISIBLE);
+                    compny_check_btn.setChecked(false);
+                }
+            }
+        });
+
     }
 
     private boolean check_value() {
-        if (TextUtils.isEmpty(faren_name.getText())) {
+        if (TextUtils.isEmpty(qiye_mingcheng_name.getText())) {
             Toast.makeText(getActivity(), R.string.alert_dialog_tishi12, Toast.LENGTH_SHORT).show();
             return false;
-        } else if (TextUtils.isEmpty(icon_id_card.getText())) {
+        } else if (TextUtils.isEmpty(yingyezhizhao_xingyong_edittext.getText())) {
             Toast.makeText(getActivity(), R.string.alert_dialog_tishi13, Toast.LENGTH_SHORT).show();
             return false;
-        } else if (TextUtils.isEmpty(qiye_name.getText())) {
+        } else if (TextUtils.isEmpty(faren_name.getText())) {
             Toast.makeText(getActivity(), R.string.alert_dialog_tishi14, Toast.LENGTH_SHORT).show();
             return false;
-        } else if (TextUtils.isEmpty(qiye_zhucehao.getText())) {
+        } else if (TextUtils.isEmpty(icon_id_card.getText())) {
             Toast.makeText(getActivity(), R.string.alert_dialog_tishi15, Toast.LENGTH_SHORT).show();
+            return false;
+        } else if (TextUtils.isEmpty(qiye_zhanghao.getText())) {
+            Toast.makeText(getActivity(), R.string.alert_dialog_tishi22, Toast.LENGTH_SHORT).show();
+            return false;
+        } else if (TextUtils.isEmpty(yanzheng_jine.getText())) {
+            Toast.makeText(getActivity(), R.string.alert_dialog_tishi23, Toast.LENGTH_SHORT).show();
             return false;
         } else {
             return true;
@@ -175,6 +225,7 @@ public class BusinessInformationFragment extends ViewPagerFragment {
                 }, getActivity(), true));
     }
 
+
     ImageView back_btn;
 
     @Override
@@ -186,6 +237,12 @@ public class BusinessInformationFragment extends ViewPagerFragment {
             stepView = (StepView) mainActivity.findViewById(R.id.sv);
             viewpager_content = mainActivity.findViewById(R.id.viewpager_content);
             back_btn = mainActivity.findViewById(R.id.back_btn);
+            back_btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    getActivity().finish();
+                }
+            });
         }
 
     }

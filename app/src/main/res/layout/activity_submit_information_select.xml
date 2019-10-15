@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.SubmitInformationSelectActivity">
+
+    <TextView
+        android:id="@+id/tv1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/m30"
+        android:layout_marginTop="@dimen/m89"
+        android:text="@string/tv132"
+        android:textColor="#ff1d1d1d"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/img"
+        android:layout_width="@dimen/m137"
+        android:layout_height="@dimen/m175"
+        android:layout_below="@+id/tv1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/m35"
+        android:src="@drawable/zizhi_shenhe" />
+
+    <TextView
+        android:id="@+id/tv2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/img"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/m10"
+        android:text="您暂无权限"
+        android:textColor="#ffb7b7b7"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/tv3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/m6"
+        android:text="请提交企业资料后进行申请"
+        android:textColor="#ffb7b7b7"
+        android:textSize="15sp" />
+
+    <LinearLayout
+        android:id="@+id/submit_btn"
+        android:layout_width="@dimen/m270"
+        android:layout_height="@dimen/m50"
+        android:layout_below="@+id/tv3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/m75"
+        android:background="@drawable/submit_zizhi_btn"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="提交审核资料"
+            android:textColor="#ff181818"
+            android:textSize="20sp" />
+    </LinearLayout>
+</RelativeLayout>
