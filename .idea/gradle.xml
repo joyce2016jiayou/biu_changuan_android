@@ -3,15 +3,25 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
-        <compositeConfiguration>
-          <compositeBuild compositeDefinitionSource="SCRIPT" />
-        </compositeConfiguration>
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/Jpush" />
+            <option value="$PROJECT_DIR$/LoadManager" />
+            <option value="$PROJECT_DIR$/Logger" />
+            <option value="$PROJECT_DIR$/Popup" />
+            <option value="$PROJECT_DIR$/WheelPicker" />
+            <option value="$PROJECT_DIR$/WheelView" />
+            <option value="$PROJECT_DIR$/XrefreshLibrary" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/calendarview" />
+            <option value="$PROJECT_DIR$/easyPhotos" />
+            <option value="$PROJECT_DIR$/okhttputils" />
+            <option value="$PROJECT_DIR$/spinner_lib" />
+            <option value="$PROJECT_DIR$/timelinelibrary" />
+            <option value="$PROJECT_DIR$/viewpagerindicator" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

@@ -1,15 +1,20 @@
 package com.noplugins.keepfit.android.fragment.mine
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.noplugins.keepfit.android.R
+import com.noplugins.keepfit.android.activity.AboutActivity
+import com.noplugins.keepfit.android.activity.WalletActivity
+import com.noplugins.keepfit.android.activity.mine.TeacherManagerActivity
 import com.noplugins.keepfit.android.adapter.mine.FunctionAdapter
 import com.noplugins.keepfit.android.base.BaseFragment
 import com.noplugins.keepfit.android.bean.mine.MineBean
 import com.noplugins.keepfit.android.bean.mine.MineFunctionBean
 import com.noplugins.keepfit.android.global.AppConstants
+import com.noplugins.keepfit.android.util.BaseUtils
 import com.noplugins.keepfit.android.util.SpUtils
 import kotlinx.android.synthetic.main.fragment_mine.*
 
@@ -67,6 +72,48 @@ class MyFragment:BaseFragment(){
         fuctionBean.add(min9)
         val functionAdapter = FunctionAdapter(activity, fuctionBean)
         gv_function.adapter = functionAdapter
+
+        //
+        gv_function.setOnItemClickListener { parent, view, position, id ->
+            if (BaseUtils.isFastClick()) {
+                when (fuctionBean[position].name) {
+                    "钱包" -> {
+                        val intent = Intent(activity, WalletActivity::class.java)
+                        startActivity(intent)
+                    }
+                    "权限管理" -> {
+                        val intent = Intent(activity, WalletActivity::class.java)
+                        startActivity(intent)
+                    }
+                    "场馆价格" -> {
+                        val intent = Intent(activity, WalletActivity::class.java)
+                        startActivity(intent)
+                    }
+                    "成本核算" -> {
+                        val intent = Intent(activity, WalletActivity::class.java)
+                        startActivity(intent)
+                    }
+                    "教练管理" -> {
+                        val intent = Intent(activity, TeacherManagerActivity::class.java)
+                        startActivity(intent)
+                    }
+                    "问题反馈" -> {
+                        val intent = Intent(activity, TeacherManagerActivity::class.java)
+                        startActivity(intent)
+                    }
+                    "账号安全" -> {
+                        val intent = Intent(activity, TeacherManagerActivity::class.java)
+                        startActivity(intent)
+                    }
+                    "关于" -> {
+                        val intent = Intent(activity, AboutActivity::class.java)
+                        startActivity(intent)
+                    }
+                    "客服帮助" -> {
+                    }
+                }
+            }
+        }
     }
 
 }

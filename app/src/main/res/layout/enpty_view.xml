@@ -8,12 +8,5 @@
             android:id="@+id/iv_empty_view"
             android:layout_width="212dp"
             android:layout_height="176dp"
-            android:src="@mipmap/ic_launcher"/>
-    <TextView
-            android:id="@+id/tv_empty_tips"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="这里空空如也～"
-            android:textColor="@color/color_6D7278"
-            android:textSize="13sp"/>
+            android:src="@drawable/nothing"/>
 </LinearLayout>
