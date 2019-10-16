@@ -54,35 +54,40 @@ class Login2Activity : BaseActivity() {
     }
 
     override fun doBusiness(mContext: Context) {
-        yanzhengma_tv.setOnClickListener(View.OnClickListener {
-            if (yanzhengma_tv.text.toString() == "密码登录") {
-                Log.e("登录方式", "验证码登录")
+        qiehuan_login.setOnClickListener(View.OnClickListener {
 
-                is_yanzhengma_logon = true
-                yanzhengma_tv.text = "密码登录"
-                edit_password.inputType = InputType.TYPE_CLASS_NUMBER
-                edit_password.filters = arrayOf<InputFilter>(InputFilter.LengthFilter(6)) //最大输入长度
+            when (qiehuan_login.text.toString()) {
+                "验证码登录" -> {
+                    Log.e("登录方式", "验证码登录")
 
-                val s = SpannableString("请输入验证码")//这里输入自己想要的提示文字
-                edit_password.hint = s
-                img_password.setImageResource(R.drawable.yanzhengma_icon)
-                tv_send.visibility = View.VISIBLE
+                    is_yanzhengma_logon = true
+                    qiehuan_login.text = "密码登录"
+                    edit_password.inputType = InputType.TYPE_CLASS_NUMBER
+                    edit_password.filters = arrayOf<InputFilter>(InputFilter.LengthFilter(6)) //最大输入长度
 
-                forget_password_btn.visibility = View.GONE
-            } else {
-                Log.e("登录方式", "密码登录")
+                    val s = SpannableString("请输入验证码")//这里输入自己想要的提示文字
+                    edit_password.hint = s
+                    img_password.setImageResource(R.drawable.yanzhengma_icon)
+                    tv_send.visibility = View.VISIBLE
 
-                is_yanzhengma_logon = false
-                yanzhengma_tv.text = "验证码登录"
-                edit_password.inputType = InputType.TYPE_CLASS_TEXT
-                edit_password.filters = arrayOf<InputFilter>(InputFilter.LengthFilter(18)) //最大输入长度
+                    forget_password_btn.visibility = View.GONE
+                }
 
-                val s = SpannableString("请输入密码")//这里输入自己想要的提示文字
-                edit_password.hint = s
-                img_password.setImageResource(R.drawable.password_icon)
-                tv_send.visibility = View.GONE
+                "密码登录" -> {
+                    Log.e("登录方式", "密码登录")
 
-                forget_password_btn.visibility = View.VISIBLE
+                    is_yanzhengma_logon = false
+                    qiehuan_login.text = "验证码登录"
+                    edit_password.inputType = InputType.TYPE_CLASS_TEXT
+                    edit_password.filters = arrayOf<InputFilter>(InputFilter.LengthFilter(18)) //最大输入长度
+
+                    val s = SpannableString("请输入密码")//这里输入自己想要的提示文字
+                    edit_password.hint = s
+                    img_password.setImageResource(R.drawable.password_icon)
+                    tv_send.visibility = View.GONE
+
+                    forget_password_btn.visibility = View.VISIBLE
+                }
             }
         })
         //发送验证码
@@ -153,7 +158,7 @@ class Login2Activity : BaseActivity() {
         params["phone"] = edit_phone_number.text.toString()
         subscription = Network.getInstance("验证验证码和登录", this)
                 .verifyCodeLogin(params,
-                        ProgressSubscriber("验证验证码和登录", object : SubscriberOnNextListener<Bean<LoginBean>>{
+                        ProgressSubscriber("验证验证码和登录", object : SubscriberOnNextListener<Bean<LoginBean>> {
                             override fun onNext(result: Bean<LoginBean>) {
                                 login_btn.loadingComplete()
                                 save_resource(result.data)
@@ -163,7 +168,6 @@ class Login2Activity : BaseActivity() {
                                 } else {//设置过密码
                                     get_check_status()
                                 }
-                                save_resource(result.data)
                             }
 
                             override fun onError(error: String) {
