@@ -6,7 +6,7 @@
     android:background="@color/white"
     android:orientation="vertical"
     tools:context=".fragment.BusinessInformationFragment">
-
+    <!--营业资料-->
     <LinearLayout
         android:id="@+id/yingye_ziliao_layout"
         android:layout_width="match_parent"
@@ -67,9 +67,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/m20"
-                android:layout_marginRight="@dimen/m20"
-
                 android:layout_marginTop="@dimen/m25"
+
+                android:layout_marginRight="@dimen/m20"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -113,8 +113,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/m20"
-                android:layout_marginRight="@dimen/m20"
                 android:layout_marginTop="@dimen/m20"
+                android:layout_marginRight="@dimen/m20"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -143,8 +143,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/m20"
-                android:layout_marginRight="@dimen/m20"
                 android:layout_marginTop="@dimen/m20"
+                android:layout_marginRight="@dimen/m20"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -173,8 +173,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/m20"
-                android:layout_marginRight="@dimen/m20"
                 android:layout_marginTop="@dimen/m20"
+                android:layout_marginRight="@dimen/m20"
+                android:layout_marginBottom="@dimen/m19"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -206,7 +207,8 @@
                 android:layout_marginTop="@dimen/m20"
                 android:layout_marginBottom="@dimen/m20"
                 android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -289,13 +291,13 @@
     </LinearLayout>
 
 
+    <!--提现账户-->
 
-
-
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/tixian_compny_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         android:visibility="gone">
 
         <LinearLayout
@@ -401,6 +403,7 @@
                 <include
                     android:id="@+id/com_layout"
                     layout="@layout/com_layout_item" />
+
                 <include
                     android:id="@+id/geren_layout"
                     layout="@layout/geren_layout" />
@@ -434,9 +437,8 @@
             android:id="@+id/submit_shenhe_btn"
             android:layout_width="@dimen/m209"
             android:layout_height="@dimen/m50"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_gravity="center_horizontal"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginTop="@dimen/m150"
             android:layout_marginBottom="@dimen/m28"
             android:background="@drawable/tixian_btn"
             android:gravity="center">
@@ -452,7 +454,7 @@
         </LinearLayout>
 
 
-    </RelativeLayout>
+    </LinearLayout>
 
 
 </LinearLayout>

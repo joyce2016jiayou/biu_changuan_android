@@ -49,6 +49,7 @@ class WXPayEntryActivity : BaseActivity(), IWXAPIEventHandler {
     private var wxPayInfo = ""
     private var dialogType = -1
     override fun initBundle(parms: Bundle?) {
+
     }
 
     override fun initView() {
@@ -201,7 +202,7 @@ class WXPayEntryActivity : BaseActivity(), IWXAPIEventHandler {
      * 微信支付
      */
     private fun weChatPay(wxPayBean: WxPayBean) {
-        api = WXAPIFactory.createWXAPI(this, wxPayBean.appid,false)
+        api = WXAPIFactory.createWXAPI(this, wxPayBean.appid, false)
         api!!.registerApp(wxPayBean.appid)
 
         val payRunnable = Runnable {
@@ -214,7 +215,7 @@ class WXPayEntryActivity : BaseActivity(), IWXAPIEventHandler {
             req.packageValue = "Sign=WXPay"
             req.sign = wxPayBean.sign
 
-          api!!.sendReq(req)//发送调起微信的请求
+            api!!.sendReq(req)//发送调起微信的请求
         }
         // 必须异步调用
         val payThread = Thread(payRunnable)
@@ -268,10 +269,10 @@ class WXPayEntryActivity : BaseActivity(), IWXAPIEventHandler {
 
     private fun showAlert(ctx: Context, info: String, onDismiss: DialogInterface.OnDismissListener?) {
         androidx.appcompat.app.AlertDialog.Builder(ctx)
-            .setMessage(info)
-            .setPositiveButton("确认", null)
-            .setOnDismissListener(onDismiss)
-            .show()
+                .setMessage(info)
+                .setPositiveButton("确认", null)
+                .setOnDismissListener(onDismiss)
+                .show()
     }
 
     private fun showToast(ctx: Context, msg: String) {
@@ -288,7 +289,6 @@ class WXPayEntryActivity : BaseActivity(), IWXAPIEventHandler {
         }
         return sb.toString()
     }
-
 
 
     override fun onBackPressed() {

@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <!--权限1-->
+        <LinearLayout
+            android:id="@+id/quanxian1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/m44"
+                    android:layout_height="@dimen/m44"
+                    android:layout_marginLeft="@dimen/m40"
+                    android:src="@drawable/img1" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/m44"
+                    android:layout_marginLeft="@dimen/m20"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:text="三端融合"
+                        android:textColor="#ff181818"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:text="场馆+教练+用户，随时随地管理场馆，只需一个APP。"
+                        android:textColor="#ff181818"
+                        android:textSize="11sp" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/m30"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/m44"
+                    android:layout_height="@dimen/m44"
+                    android:layout_marginLeft="@dimen/m40"
+                    android:src="@drawable/img1" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/m44"
+                    android:layout_marginLeft="@dimen/m20"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:text="场馆管理"
+                        android:textColor="#ff181818"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:text="客流变化，课程安排，均在APP实现。"
+                        android:textColor="#ff181818"
+                        android:textSize="11sp" />
+                </RelativeLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+        <!--权限2-->
+        <LinearLayout
+            android:id="@+id/quanxian2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/m44"
+                    android:layout_height="@dimen/m44"
+                    android:layout_marginLeft="@dimen/m40"
+                    android:src="@drawable/img1" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/m44"
+                    android:layout_marginLeft="@dimen/m20"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:text="三端融合"
+                        android:textColor="#ff181818"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:text="场馆+教练+用户，随时随地管理场馆，只需一个APP。"
+                        android:textColor="#ff181818"
+                        android:textSize="11sp" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/m30"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/m44"
+                    android:layout_height="@dimen/m44"
+                    android:layout_marginLeft="@dimen/m40"
+                    android:src="@drawable/img1" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/m44"
+                    android:layout_marginLeft="@dimen/m20"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:text="场馆管理"
+                        android:textColor="#ff181818"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:text="客流变化，课程安排，均在APP实现。"
+                        android:textColor="#ff181818"
+                        android:textSize="11sp" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/m30"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/m44"
+                    android:layout_height="@dimen/m44"
+                    android:layout_marginLeft="@dimen/m40"
+                    android:src="@drawable/img1" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/m44"
+                    android:layout_marginLeft="@dimen/m20"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:text="数据统计"
+                        android:textColor="#ff181818"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:text="可视化数据统计，当日、月、年盈利情况，一目了然。"
+                        android:textColor="#ff181818"
+                        android:textSize="11sp" />
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+        <!--权限3-->
+        <LinearLayout
+            android:id="@+id/quanxian3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/m44"
+                    android:layout_height="@dimen/m44"
+                    android:layout_marginLeft="@dimen/m40"
+                    android:src="@drawable/img1" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/m44"
+                    android:layout_marginLeft="@dimen/m20"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:text="三端融合"
+                        android:textColor="#ff181818"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:text="场馆+教练+用户，随时随地管理场馆，只需一个APP。"
+                        android:textColor="#ff181818"
+                        android:textSize="11sp" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/m30"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/m44"
+                    android:layout_height="@dimen/m44"
+                    android:layout_marginLeft="@dimen/m40"
+                    android:src="@drawable/img1" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/m44"
+                    android:layout_marginLeft="@dimen/m20"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:text="场馆管理"
+                        android:textColor="#ff181818"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:text="客流变化，课程安排，均在APP实现。"
+                        android:textColor="#ff181818"
+                        android:textSize="11sp" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/m30"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/m44"
+                    android:layout_height="@dimen/m44"
+                    android:layout_marginLeft="@dimen/m40"
+                    android:src="@drawable/img1" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/m44"
+                    android:layout_marginLeft="@dimen/m20"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:text="数据统计"
+                        android:textColor="#ff181818"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:text="可视化数据统计，当日、月、年盈利情况，一目了然。"
+                        android:textColor="#ff181818"
+                        android:textSize="11sp" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/m30"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/m44"
+                    android:layout_height="@dimen/m44"
+                    android:layout_marginLeft="@dimen/m40"
+                    android:src="@drawable/img1" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/m44"
+                    android:layout_marginLeft="@dimen/m20"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:text="行业报表"
+                        android:textColor="#ff181818"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:text="可年终总结专属于你的年度报表。"
+                        android:textColor="#ff181818"
+                        android:textSize="11sp" />
+                </RelativeLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+
+</LinearLayout>

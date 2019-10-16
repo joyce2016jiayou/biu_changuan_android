@@ -194,6 +194,9 @@
     <string name="tv141">手机号</string>
     <string name="tv142">验证码</string>
     <string name="tv143">提交审核</string>
+    <string name="tv144">开通会员</string>
+    <string name="tv145">开启会员</string>
+    <string name="tv146">哔哟终身会员</string>
 
     <string name="tv_select">请选择</string>
     <string name="tv_qianbao">钱包</string>
@@ -226,6 +229,11 @@
     <string name="alert_dialog_tishi21">不能超过最大人数！</string>
     <string name="alert_dialog_tishi22">企业账号不能为空！</string>
     <string name="alert_dialog_tishi23">验证金额不能为空！</string>
+    <string name="alert_dialog_tishi24">用户名不能为空！</string>
+    <string name="alert_dialog_tishi25">身份证号不能为空！</string>
+    <string name="alert_dialog_tishi26">银行卡号不能为空！</string>
+    <string name="alert_dialog_tishi27">企业名称不能为空！</string>
+    <string name="alert_dialog_tishi28">企业账号不能为空！</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

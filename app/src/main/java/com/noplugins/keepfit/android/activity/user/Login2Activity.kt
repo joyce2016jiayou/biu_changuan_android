@@ -16,6 +16,7 @@ import butterknife.ButterKnife
 import com.noplugins.keepfit.android.KeepFitActivity
 import com.noplugins.keepfit.android.R
 import com.noplugins.keepfit.android.activity.CheckStatusFailActivity
+import com.noplugins.keepfit.android.activity.SubmitInformationSelectActivity
 import com.noplugins.keepfit.android.activity.UserPermissionSelectActivity
 import com.noplugins.keepfit.android.activity.mine.CgPriceActivity
 import com.noplugins.keepfit.android.base.BaseActivity
@@ -150,7 +151,7 @@ class Login2Activity : BaseActivity() {
         params["phone"] = edit_phone_number.text.toString()
         subscription = Network.getInstance("验证验证码和登录", this)
                 .verifyCodeLogin(params,
-                        ProgressSubscriber("验证验证码和登录", object : SubscriberOnNextListener<Bean<LoginBean>>{
+                        ProgressSubscriber("验证验证码和登录", object : SubscriberOnNextListener<Bean<LoginBean>> {
                             override fun onNext(result: Bean<LoginBean>) {
                                 login_btn.loadingComplete()
                                 if (result.data.havePassword == 0) {//没有设置过密码
@@ -164,6 +165,7 @@ class Login2Activity : BaseActivity() {
 
                             override fun onError(error: String) {
                                 login_btn.loadingComplete()
+                                finish()
 
                             }
                         }, this, false))
@@ -185,6 +187,7 @@ class Login2Activity : BaseActivity() {
                                 SpUtils.putString(applicationContext, AppConstants.CHANGGUAN_NUM, result.data.gymAreaNum)
 
                                 get_check_status()
+
                             }
 
                             override fun onError(error: String) {
@@ -232,16 +235,16 @@ class Login2Activity : BaseActivity() {
         no_agree_btn.setOnClickListener(View.OnClickListener { popupWindow.dismiss() })
     }
 
-    private fun save_resource(login:LoginBean) {
+    private fun save_resource(login: LoginBean) {
         SpUtils.putString(applicationContext, AppConstants.TOKEN, login.token)
         SpUtils.putString(applicationContext, AppConstants.USER_NAME, login.gymUserNum)
         SpUtils.putInt(applicationContext, AppConstants.USER_TYPE, login.type)
         SpUtils.putString(applicationContext, AppConstants.PHONE, edit_phone_number.text.toString())
     }
 
-    private fun get_check_status(){
+    private fun get_check_status() {
         val params = HashMap<String, Any>()
-        params["token"] = SpUtils.getString(applicationContext,AppConstants.TOKEN)
+        params["token"] = SpUtils.getString(applicationContext, AppConstants.TOKEN)
         val subscription = Network.getInstance("获取审核状态", this)
                 .get_check_status(params,
                         ProgressSubscriber("获取审核状态", object : SubscriberOnNextListener<Bean<CheckEntity>> {
@@ -256,7 +259,7 @@ class Login2Activity : BaseActivity() {
                                         startActivity(intent)
                                     }
                                     result.data.status == -2 -> {
-                                        val intent = Intent(this@Login2Activity, UserPermissionSelectActivity::class.java)
+                                        val intent = Intent(this@Login2Activity, SubmitInformationSelectActivity::class.java)
                                         startActivity(intent)
                                         finish()
                                     }

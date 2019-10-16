@@ -1,6 +1,7 @@
 package com.noplugins.keepfit.android.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.noplugins.keepfit.android.R;
+import com.noplugins.keepfit.android.activity.HeTongActivity;
 import com.noplugins.keepfit.android.activity.InformationCheckActivity;
 import com.noplugins.keepfit.android.entity.InformationEntity;
 import com.noplugins.keepfit.android.entity.UrlEntity;
@@ -62,7 +64,7 @@ public class BusinessInformationFragment extends ViewPagerFragment {
     @BindView(R.id.tixian_qiye_zhanghao)
     EditText tixian_qiye_zhanghao;
     @BindView(R.id.tixian_compny_layout)
-    RelativeLayout tixian_compny_layout;
+    LinearLayout tixian_compny_layout;
     @BindView(R.id.yingye_ziliao_layout)
     LinearLayout yingye_ziliao_layout;
     @BindView(R.id.com_layout)
@@ -73,6 +75,14 @@ public class BusinessInformationFragment extends ViewPagerFragment {
     RadioButton compny_check_btn;
     @BindView(R.id.geren_check_btn)
     RadioButton geren_check_btn;
+    @BindView(R.id.submit_shenhe_btn)
+    LinearLayout submit_shenhe_btn;
+    @BindView(R.id.edit_shenhe_user_name)
+    EditText edit_shenhe_user_name;
+    @BindView(R.id.edit_shenhe_idcard)
+    EditText edit_shenhe_idcard;
+    @BindView(R.id.edit_shenhe_bankcard_number)
+    EditText edit_shenhe_bankcard_number;
 
     private View view;
     private InformationEntity informationEntity;
@@ -105,23 +115,26 @@ public class BusinessInformationFragment extends ViewPagerFragment {
         submit_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //切换到提现布局
-                yingye_ziliao_layout.setVisibility(View.GONE);
-                tixian_compny_layout.setVisibility(View.VISIBLE);
-                compny_check_btn.setChecked(true);
 
-//                if (check_value()) {
-//
-//                    /*informationEntity = mainActivity.informationEntity;//获取基础资料信息
-//                    informationEntity.setLegal_person(faren_name.getText().toString());
-//                    informationEntity.setCard_num(icon_id_card.getText().toString());
-//                    informationEntity.setCompany_name(qiye_zhanghao.getText().toString());
-//
-//                    //提交审核资料
-//                    submit_information();*/
-//                } else {
-//                    return;
-//                }
+
+                if (check_value()) {
+                    //切换到提现布局
+                    yingye_ziliao_layout.setVisibility(View.GONE);
+                    tixian_compny_layout.setVisibility(View.VISIBLE);
+                    compny_check_btn.setChecked(true);
+
+                    Intent intent = new Intent(getActivity(), HeTongActivity.class);
+                    startActivity(intent);
+                    /*informationEntity = mainActivity.informationEntity;//获取基础资料信息
+                    informationEntity.setLegal_person(faren_name.getText().toString());
+                    informationEntity.setCard_num(icon_id_card.getText().toString());
+                    informationEntity.setCompany_name(qiye_zhanghao.getText().toString());
+
+                    //提交审核资料
+                    submit_information();*/
+                } else {
+                    return;
+                }
 
 
             }
@@ -148,11 +161,42 @@ public class BusinessInformationFragment extends ViewPagerFragment {
             }
         });
 
+        //提交审核
+        submit_shenhe_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (compny_check_btn.isChecked()) {//提交公司
+
+                } else if (geren_check_btn.isChecked()) {//提交个人
+                    if (check_shenhe_value()) {
+                        //提交审核
+                    }
+                }
+
+            }
+        });
+
     }
+
+    private boolean check_shenhe_value() {
+        if (TextUtils.isEmpty(edit_shenhe_user_name.getText())) {
+            Toast.makeText(getActivity(), R.string.alert_dialog_tishi24, Toast.LENGTH_SHORT).show();
+            return false;
+        } else if (TextUtils.isEmpty(edit_shenhe_idcard.getText())) {
+            Toast.makeText(getActivity(), R.string.alert_dialog_tishi25, Toast.LENGTH_SHORT).show();
+            return false;
+        } else if (TextUtils.isEmpty(edit_shenhe_bankcard_number.getText())) {
+            Toast.makeText(getActivity(), R.string.alert_dialog_tishi26, Toast.LENGTH_SHORT).show();
+            return false;
+        } else {
+            return true;
+        }
+    }
+
 
     private boolean check_value() {
         if (TextUtils.isEmpty(qiye_mingcheng_name.getText())) {
-            Toast.makeText(getActivity(), R.string.alert_dialog_tishi12, Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), R.string.alert_dialog_tishi27, Toast.LENGTH_SHORT).show();
             return false;
         } else if (TextUtils.isEmpty(yingyezhizhao_xingyong_edittext.getText())) {
             Toast.makeText(getActivity(), R.string.alert_dialog_tishi13, Toast.LENGTH_SHORT).show();
@@ -164,10 +208,7 @@ public class BusinessInformationFragment extends ViewPagerFragment {
             Toast.makeText(getActivity(), R.string.alert_dialog_tishi15, Toast.LENGTH_SHORT).show();
             return false;
         } else if (TextUtils.isEmpty(qiye_zhanghao.getText())) {
-            Toast.makeText(getActivity(), R.string.alert_dialog_tishi22, Toast.LENGTH_SHORT).show();
-            return false;
-        } else if (TextUtils.isEmpty(yanzheng_jine.getText())) {
-            Toast.makeText(getActivity(), R.string.alert_dialog_tishi23, Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), R.string.alert_dialog_tishi28, Toast.LENGTH_SHORT).show();
             return false;
         } else {
             return true;

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".activity.BuyHuiYuanActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/m68">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/img"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/m294"
+                android:background="@drawable/bg_member"
+                android:orientation="horizontal" />
+
+            <TextView
+                android:id="@+id/tv1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/m49"
+                android:text="@string/tv146"
+                android:textColor="@color/top_heiziti"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/touxiang_image"
+                android:layout_width="@dimen/m60"
+                android:layout_height="@dimen/m60"
+                android:layout_below="@+id/tv1"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/m35"
+                android:src="@drawable/touxiang"
+                app:civ_border_color="@android:color/transparent"
+                app:civ_border_width="0dp" />
+
+            <TextView
+                android:id="@+id/changuan_name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/touxiang_image"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/m6"
+                android:text="哔哔哔旗舰店"
+                android:textColor="#ff502b0e"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <RelativeLayout
+                android:id="@+id/tv2"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/m21"
+                android:layout_below="@+id/img"
+                android:layout_marginLeft="@dimen/m21">
+
+                <ImageView
+                    android:layout_width="@dimen/m63"
+                    android:layout_height="@dimen/m10"
+                    android:layout_alignParentBottom="true"
+
+                    android:src="@drawable/bg_membe_lin" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:text="会员套餐"
+                    android:textColor="#ff181818"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+
+            <include
+                android:id="@+id/includ"
+                layout="@layout/select_buy_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv2" />
+
+            <RelativeLayout
+                android:id="@+id/rel1"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/m21"
+                android:layout_below="@+id/includ"
+                android:layout_marginLeft="@dimen/m21"
+                android:layout_marginTop="@dimen/m20">
+
+                <ImageView
+                    android:layout_width="@dimen/m63"
+                    android:layout_height="@dimen/m10"
+                    android:layout_alignParentBottom="true"
+                    android:src="@drawable/bg_membe_lin" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:text="会员权益"
+                    android:textColor="#ff181818"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+
+            <include
+                layout="@layout/detail_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rel1"
+                android:layout_marginTop="@dimen/m20" />
+
+
+        </RelativeLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/m68"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/button_bg"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="立即开通"
+            android:textColor="#ff502b0e"
+            android:textSize="20sp" />
+    </LinearLayout>
+</RelativeLayout>
