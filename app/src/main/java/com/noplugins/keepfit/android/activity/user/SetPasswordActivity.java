@@ -83,13 +83,7 @@ public class SetPasswordActivity extends BaseActivity {
                         Toast.makeText(SetPasswordActivity.this, "请输入正确的格式！", Toast.LENGTH_SHORT).show();
                         return;
                     } else {
-
-
-
                         set_password();
-                        Intent intent = new Intent(SetPasswordActivity.this, KeepFitActivity.class);
-                        startActivity(intent);
-                        finish();
                     }
 
                 }
@@ -101,36 +95,33 @@ public class SetPasswordActivity extends BaseActivity {
 
     private void set_password() {
         Map<String, Object> params = new HashMap<>();
-        if (null != SpUtils.getString(getApplicationContext(), AppConstants.USER_NAME)) {
-            params.put("userNum", SpUtils.getString(getApplicationContext(), AppConstants.USER_NAME));
-
-        }
+        params.put("phone", SpUtils.getString(getApplicationContext(), AppConstants.PHONE));
         params.put("password", edit_password_again.getText().toString());
-//        subscription = Network.getInstance("设置密码", this)
-//                .set_password(params,
-//                        new ProgressSubscriber<>("设置密码", new SubscriberOnNextListener<Bean<String>>() {
-//                            @Override
-//                            public void onNext(Bean<String> result) {
-//                                sure_btn.loadingComplete();
-//
-//                                if(null!=SpUtils.getString(getApplicationContext(),AppConstants.TEACHER_TYPE)){
-//                                    if(SpUtils.getString(getApplicationContext(),AppConstants.TEACHER_TYPE).length()>0){//已经审核过了
-//                                        Intent intent = new Intent(SetPasswordActivity.this, KeepFitActivity.class);
-//                                        startActivity(intent);
-//                                    }else{//未审核
-//                                        Intent intent = new Intent(SetPasswordActivity.this, KeepFitActivity.class);
-//                                        startActivity(intent);
-//                                    }
-//                                }
-//
-//                            }
-//
-//                            @Override
-//                            public void onError(String error) {
-//                                sure_btn.loadingComplete();
-//
-//
-//                            }
-//                        }, this, false));
+        subscription = Network.getInstance("设置密码", this)
+                .setPassword(params,
+                        new ProgressSubscriber<>("设置密码", new SubscriberOnNextListener<Bean<String>>() {
+                            @Override
+                            public void onNext(Bean<String> result) {
+                                sure_btn.loadingComplete();
+
+                                if(null!=SpUtils.getString(getApplicationContext(),AppConstants.TEACHER_TYPE)){
+                                    if(SpUtils.getString(getApplicationContext(),AppConstants.TEACHER_TYPE).length()>0){//已经审核过了
+                                        Intent intent = new Intent(SetPasswordActivity.this, KeepFitActivity.class);
+                                        startActivity(intent);
+                                    }else{//未审核
+                                        Intent intent = new Intent(SetPasswordActivity.this, KeepFitActivity.class);
+                                        startActivity(intent);
+                                    }
+                                }
+
+                            }
+
+                            @Override
+                            public void onError(String error) {
+                                sure_btn.loadingComplete();
+
+
+                            }
+                        }, this, false));
     }
 }

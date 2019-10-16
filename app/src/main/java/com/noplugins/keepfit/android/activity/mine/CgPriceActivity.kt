@@ -12,6 +12,7 @@ import com.noplugins.keepfit.android.adapter.HighAdapter
 import com.noplugins.keepfit.android.base.BaseActivity
 import com.noplugins.keepfit.android.bean.HighBean
 import com.noplugins.keepfit.android.bean.PriceBean
+import com.noplugins.keepfit.android.util.BaseUtils
 import com.noplugins.keepfit.android.util.ui.pop.CommonPopupWindow
 import kotlinx.android.synthetic.main.activity_cg_price.*
 
@@ -19,7 +20,11 @@ class CgPriceActivity :BaseActivity() {
 
     val list:MutableList<HighBean> = ArrayList()
     var adapter: HighAdapter ?= null
+    var form = "main"
     override fun initBundle(parms: Bundle?) {
+        if (parms!=null){
+            form = parms.getString("form","main")
+        }
     }
 
     override fun initView() {
@@ -72,6 +77,9 @@ class CgPriceActivity :BaseActivity() {
         }
         fl_hesuan.setOnClickListener {
             val intent = Intent(this,CostAccountingActivity::class.java)
+            val bundle = Bundle()
+            bundle.putString("form", "pay")
+            intent.putExtras(bundle)
             startActivity(intent)
         }
 
@@ -96,5 +104,8 @@ class CgPriceActivity :BaseActivity() {
         popupWindow.showAsDropDown(iv_tips,0,-15)
     }
 
-
+    override fun onBackPressed() {
+        setResult(3)
+        finish()
+    }
 }

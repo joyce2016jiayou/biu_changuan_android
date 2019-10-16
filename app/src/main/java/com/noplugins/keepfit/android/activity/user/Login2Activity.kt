@@ -16,6 +16,7 @@ import butterknife.ButterKnife
 import com.noplugins.keepfit.android.KeepFitActivity
 import com.noplugins.keepfit.android.R
 import com.noplugins.keepfit.android.activity.CheckStatusFailActivity
+import com.noplugins.keepfit.android.activity.UpdatePasswordActivity
 import com.noplugins.keepfit.android.activity.UserPermissionSelectActivity
 import com.noplugins.keepfit.android.activity.mine.CgPriceActivity
 import com.noplugins.keepfit.android.base.BaseActivity
@@ -52,35 +53,40 @@ class Login2Activity : BaseActivity() {
     }
 
     override fun doBusiness(mContext: Context) {
-        yanzhengma_tv.setOnClickListener(View.OnClickListener {
-            if (yanzhengma_tv.text.toString() == "密码登录") {
-                Log.e("登录方式", "验证码登录")
+        qiehuan_login.setOnClickListener(View.OnClickListener {
 
-                is_yanzhengma_logon = true
-                yanzhengma_tv.text = "密码登录"
-                edit_password.inputType = InputType.TYPE_CLASS_NUMBER
-                edit_password.filters = arrayOf<InputFilter>(InputFilter.LengthFilter(6)) //最大输入长度
+            when(qiehuan_login.text.toString()){
+                "验证码登录" -> {
+                    Log.e("登录方式", "验证码登录")
 
-                val s = SpannableString("请输入验证码")//这里输入自己想要的提示文字
-                edit_password.hint = s
-                img_password.setImageResource(R.drawable.yanzhengma_icon)
-                tv_send.visibility = View.VISIBLE
+                    is_yanzhengma_logon = true
+                    qiehuan_login.text = "密码登录"
+                    edit_password.inputType = InputType.TYPE_CLASS_NUMBER
+                    edit_password.filters = arrayOf<InputFilter>(InputFilter.LengthFilter(6)) //最大输入长度
 
-                forget_password_btn.visibility = View.GONE
-            } else {
-                Log.e("登录方式", "密码登录")
+                    val s = SpannableString("请输入验证码")//这里输入自己想要的提示文字
+                    edit_password.hint = s
+                    img_password.setImageResource(R.drawable.yanzhengma_icon)
+                    tv_send.visibility = View.VISIBLE
 
-                is_yanzhengma_logon = false
-                yanzhengma_tv.text = "验证码登录"
-                edit_password.inputType = InputType.TYPE_CLASS_TEXT
-                edit_password.filters = arrayOf<InputFilter>(InputFilter.LengthFilter(18)) //最大输入长度
+                    forget_password_btn.visibility = View.GONE
+                }
 
-                val s = SpannableString("请输入密码")//这里输入自己想要的提示文字
-                edit_password.hint = s
-                img_password.setImageResource(R.drawable.password_icon)
-                tv_send.visibility = View.GONE
+                "密码登录"-> {
+                    Log.e("登录方式", "密码登录")
 
-                forget_password_btn.visibility = View.VISIBLE
+                    is_yanzhengma_logon = false
+                    qiehuan_login.text = "验证码登录"
+                    edit_password.inputType = InputType.TYPE_CLASS_TEXT
+                    edit_password.filters = arrayOf<InputFilter>(InputFilter.LengthFilter(18)) //最大输入长度
+
+                    val s = SpannableString("请输入密码")//这里输入自己想要的提示文字
+                    edit_password.hint = s
+                    img_password.setImageResource(R.drawable.password_icon)
+                    tv_send.visibility = View.GONE
+
+                    forget_password_btn.visibility = View.VISIBLE
+                }
             }
         })
         //发送验证码
@@ -136,7 +142,8 @@ class Login2Activity : BaseActivity() {
 
         //忘记密码
         forget_password_btn.setOnClickListener(View.OnClickListener {
-
+            val intent = Intent(this@Login2Activity, SettingPwdActivity::class.java)
+            startActivity(intent)
         })
     }
 
@@ -153,13 +160,13 @@ class Login2Activity : BaseActivity() {
                         ProgressSubscriber("验证验证码和登录", object : SubscriberOnNextListener<Bean<LoginBean>>{
                             override fun onNext(result: Bean<LoginBean>) {
                                 login_btn.loadingComplete()
+                                save_resource(result.data)
                                 if (result.data.havePassword == 0) {//没有设置过密码
                                     val intent = Intent(this@Login2Activity, SetPasswordActivity::class.java)
                                     startActivity(intent)
                                 } else {//设置过密码
                                     get_check_status()
                                 }
-                                save_resource(result.data)
                             }
 
                             override fun onError(error: String) {
@@ -183,8 +190,12 @@ class Login2Activity : BaseActivity() {
                                 SpUtils.putString(applicationContext, AppConstants.TOKEN, result.data.token)
                                 SpUtils.putString(applicationContext, AppConstants.PHONE, edit_phone_number.text.toString())
                                 SpUtils.putString(applicationContext, AppConstants.CHANGGUAN_NUM, result.data.gymAreaNum)
+                                SpUtils.putString(applicationContext, AppConstants.USER_NAME, result.data.gymAreaNum)
+                                SpUtils.putInt(applicationContext, AppConstants.USER_TYPE, result.data.type)
 
-                                get_check_status()
+//                                get_check_status()
+                                val intent = Intent(this@Login2Activity, KeepFitActivity::class.java)
+                                startActivity(intent)
                             }
 
                             override fun onError(error: String) {

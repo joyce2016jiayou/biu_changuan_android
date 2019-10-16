@@ -1,8 +1,12 @@
 package com.noplugins.keepfit.android.util;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+
+import com.noplugins.keepfit.android.KeepFitActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,4 +52,11 @@ public class BaseUtils {
         lastClickTime = curClickTime;
         return flag;
     }
+
+    public static void backMain(Activity activity,int flag){
+        Intent intent = new Intent(activity, KeepFitActivity.class);
+        intent.putExtra("flag", flag);
+        activity.startActivity(intent);
+    }
+
 }

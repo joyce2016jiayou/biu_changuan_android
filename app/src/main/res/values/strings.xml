@@ -242,4 +242,42 @@
     <string name="tv_now_tixian">立即提现</string>
     <string name="tv_bill">账单</string>
 
+
+    <string name="tv_sum_sr">总收入</string>
+    <string name="tv_day_sr">今日收入</string>
+    <string name="tv_month_sr">本月收入</string>
+
+    <string name="tv_zclb">支出类别</string>
+    <string name="tv_zcje">支出金额</string>
+    <string name="tv_sqsj">申请时间</string>
+    <string name="tv_txyh">提现银行</string>
+    <string name="tv_dqzt">当前状态</string>
+    <string name="tv_srlb">收入类别</string>
+    <string name="tv_srje">收入金额</string>
+    <string name="tv_kcmc">课程名称</string>
+    <string name="tv_cgmc">场馆名称</string>
+    <string name="tv_sksj">收款时间</string>
+    <string name="tixian_3day">提现申请已提交，我们会在三个工作日内进行处理，请等待～</string>
+    <string name="add_card">添加银行卡</string>
+    <string name="tv_input_card">请输入银行卡号</string>
+    <string name="tv_card_man">持卡人</string>
+    <string name="tv_card_num">卡号</string>
+    <string name="write_info">填写银行卡信息</string>
+    <string name="tv_card_type">卡类型</string>
+    <string name="tv_binding">绑 定</string>
+    <string name="shenfen_yz">身份验证</string>
+    <string name="yzm">验证码</string>
+    <string name="unbinding_tips">您确认要解绑场馆吗？解绑后需要重新绑定才会在该场馆显示哦～</string>
+    <string name="instructor_tips">可单选/全选/全不选 来决定是否接受相应课程类型的约课 如未选择某类型，则不会收到该课程类型的约课</string>
+    <string name="man_skill">个人签名</string>
+
+    <string name="tv_txzh">提现账户</string>
+    <string name="tv_txje">提现金额</string>
+    <string name="tv_txsj">提现时间</string>
+
+    <string name="tv_rzzh">入账账户</string>
+    <string name="tv_rzsj">入账时间</string>
+    <string name="tv_rzkc">入账课程</string>
+    <string name="tv_rzje">入账金额</string>
+
 </resources>

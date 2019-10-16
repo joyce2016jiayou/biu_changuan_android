@@ -80,6 +80,7 @@ class TeacherManagerActivity : BaseActivity(), AMapLocationListener {
 //            startActivity(intent)
         }
         back_btn.setOnClickListener {
+            setResult(3)
             finish()
         }
     }
@@ -188,6 +189,11 @@ class TeacherManagerActivity : BaseActivity(), AMapLocationListener {
     companion object {
 
         private const val PERMISSIONS = 100//请求码
+    }
+
+    override fun onBackPressed() {
+        setResult(3)
+        finish()
     }
 
 }

@@ -99,6 +99,7 @@ public class ProductAdviceActivity extends BaseActivity {
         back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                setResult(3);
                 finish();
             }
         });
@@ -141,6 +142,7 @@ public class ProductAdviceActivity extends BaseActivity {
                     @Override
                     public void on_post_entity(String s, String message_id) {
                         Toast.makeText(getApplicationContext(), message_id, Toast.LENGTH_SHORT).show();
+                        setResult(3);
                         finish();
                     }
                 }, new SubscriberOnNextListener<Bean<Object>>() {
@@ -155,5 +157,11 @@ public class ProductAdviceActivity extends BaseActivity {
                         Toast.makeText(getApplicationContext(), error, Toast.LENGTH_SHORT).show();
                     }
                 }, this, true));
+    }
+
+    @Override
+    public void onBackPressed() {
+        setResult(3);
+        finish();
     }
 }

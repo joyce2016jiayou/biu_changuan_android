@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.noplugins.keepfit.android.R;
+import com.noplugins.keepfit.android.activity.user.Login2Activity;
 import com.noplugins.keepfit.android.base.BaseActivity;
 import com.noplugins.keepfit.android.callback.DialogCallBack;
 import com.noplugins.keepfit.android.util.ActivityCollectorUtil;
@@ -50,6 +51,7 @@ public class ZhangHaoSafeActivity extends BaseActivity {
         back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                setResult(3);
                 finish();
             }
         });
@@ -85,12 +87,18 @@ public class ZhangHaoSafeActivity extends BaseActivity {
     }
 
     private void toLogin(){
-        Intent intent = new Intent(ZhangHaoSafeActivity.this, LoginActivity.class);
+        Intent intent = new Intent(ZhangHaoSafeActivity.this, Login2Activity.class);
         SharedPreferencesHelper.put(getApplicationContext(), Network.login_token, "");
         SharedPreferencesHelper.put(getApplicationContext(), Network.phone_number, "");
         SharedPreferencesHelper.put(getApplicationContext(), Network.changguan_number, "");
         startActivity(intent);
         ActivityCollectorUtil.finishAllActivity();
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        setResult(3);
+        finish();
     }
 }

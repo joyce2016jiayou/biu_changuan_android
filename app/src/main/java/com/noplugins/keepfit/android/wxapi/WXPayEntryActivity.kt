@@ -98,8 +98,6 @@ class WXPayEntryActivity : BaseActivity(), IWXAPIEventHandler {
             if (type == 3) {
                 testWxRequest()
             }
-//            val intent = Intent(this@WXPayEntryActivity, CgPriceActivity::class.java)
-//            startActivity(intent)
 
         }
 
@@ -137,6 +135,13 @@ class WXPayEntryActivity : BaseActivity(), IWXAPIEventHandler {
 //            builder.setTitle(R.string.app_tip)
 //            builder.setMessage(getString(R.string.pay_result_callback_msg, resp.errCode.toString()))
 //            builder.show()
+            if (resp.errCode.toString() == "0"){
+                val intent = Intent(this@WXPayEntryActivity, CgPriceActivity::class.java)
+                val bundle = Bundle()
+                bundle.putString("form", "pay")
+                intent.putExtras(bundle)
+                startActivity(intent)
+            }
         }
     }
 
@@ -160,6 +165,11 @@ class WXPayEntryActivity : BaseActivity(), IWXAPIEventHandler {
                         // 该笔订单是否真实支付成功，需要依赖服务端的异步通知。
                         Handler().postDelayed(Runnable {
                             twoYanzhen()
+                            val intent = Intent(this@WXPayEntryActivity, CgPriceActivity::class.java)
+                            val bundle = Bundle()
+                            bundle.putString("form", "pay")
+                            intent.putExtras(bundle)
+                            startActivity(intent)
                         }, 1000)
                     } else {
                         // 该笔订单真实的支付结果，需要依赖服务端的异步通知。
@@ -201,7 +211,7 @@ class WXPayEntryActivity : BaseActivity(), IWXAPIEventHandler {
      * 微信支付
      */
     private fun weChatPay(wxPayBean: WxPayBean) {
-        api = WXAPIFactory.createWXAPI(this, wxPayBean.appid,false)
+        api = WXAPIFactory.createWXAPI(this, wxPayBean.appid, false)
         api!!.registerApp(wxPayBean.appid)
 
         val payRunnable = Runnable {
@@ -214,7 +224,7 @@ class WXPayEntryActivity : BaseActivity(), IWXAPIEventHandler {
             req.packageValue = "Sign=WXPay"
             req.sign = wxPayBean.sign
 
-          api!!.sendReq(req)//发送调起微信的请求
+            api!!.sendReq(req)//发送调起微信的请求
         }
         // 必须异步调用
         val payThread = Thread(payRunnable)
@@ -268,10 +278,10 @@ class WXPayEntryActivity : BaseActivity(), IWXAPIEventHandler {
 
     private fun showAlert(ctx: Context, info: String, onDismiss: DialogInterface.OnDismissListener?) {
         androidx.appcompat.app.AlertDialog.Builder(ctx)
-            .setMessage(info)
-            .setPositiveButton("确认", null)
-            .setOnDismissListener(onDismiss)
-            .show()
+                .setMessage(info)
+                .setPositiveButton("确认", null)
+                .setOnDismissListener(onDismiss)
+                .show()
     }
 
     private fun showToast(ctx: Context, msg: String) {
@@ -288,7 +298,6 @@ class WXPayEntryActivity : BaseActivity(), IWXAPIEventHandler {
         }
         return sb.toString()
     }
-
 
 
     override fun onBackPressed() {

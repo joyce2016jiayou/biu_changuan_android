@@ -36,9 +36,16 @@ public class AboutActivity extends BaseActivity {
         back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                setResult(3);
                 finish();
             }
         });
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        setResult(3);
+        finish();
     }
 }

@@ -11,8 +11,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
 import com.google.gson.Gson;
 import com.noplugins.keepfit.android.activity.BuyActivity;
@@ -77,7 +79,7 @@ public class KeepFitActivity extends BaseActivity {
     private SoundPool sp;//声明一个SoundPool
     private int music;//定义一个整型用load（）；来设置suondID
     private List<Fragment> tabFragments = new ArrayList<>();
-
+    ContentPagerAdapterMy contentAdapter;
     @Override
     public void initBundle(Bundle bundle) {
     }
@@ -94,6 +96,23 @@ public class KeepFitActivity extends BaseActivity {
         MyApplication.addDestoryActivity(this, "KeepFitActivity");
         //注册eventbus
         //EventBus.getDefault().register(this);
+        //初始化页面
+        tabFragments.add(ViewFragment.homeInstance("第一页"));
+        tabFragments.add(StatisticsFragment.newInstance("第二页"));
+        tabFragments.add(MessageFragment.newInstance("第三页"));
+        tabFragments.add(MyFragment.Companion.newInstance("第四页"));
+        //初始化viewpager
+        contentAdapter = new ContentPagerAdapterMy(getSupportFragmentManager(), tabFragments);
+        viewpager_content.setAdapter(contentAdapter);
+
+
+        //初始化音效
+        sp = new SoundPool(10, AudioManager.STREAM_SYSTEM, 5);//第一个参数为同时播放数据流的最大个数，第二数据流类型，第三为声音质量
+        music = sp.load(this, R.raw.button, 1); //把你的声音素材放到res/raw里，第2个参数即为资源文件，第3个为音乐的优先级
+
+
+        //获取消息总数，设置消息总数
+        get_message_all();
     }
 
     @Override
@@ -108,7 +127,10 @@ public class KeepFitActivity extends BaseActivity {
         super.onResume();
         if (null != getIntent().getExtras()) {
             Bundle parms = getIntent().getExtras();
-            if (parms.getString("jpush_enter").equals("jpush_enter1")) {
+            if (parms.getString("jpush_enter","").equals("")){
+                return;
+            }
+            if (parms.getString("jpush_enter","").equals("jpush_enter1")) {
 
                 viewpager_content.setCurrentItem(2);
                 xianshi_three();
@@ -143,32 +165,13 @@ public class KeepFitActivity extends BaseActivity {
             }
         } else {
             //初始化首页
-            viewpager_content.setCurrentItem(0);
+//            viewpager_content.setCurrentItem(0);
 
         }
     }
 
     @Override
     public void doBusiness(Context mContext) {
-        //初始化页面
-        tabFragments.add(ViewFragment.homeInstance("第一页"));
-        tabFragments.add(StatisticsFragment.newInstance("第二页"));
-        tabFragments.add(MessageFragment.newInstance("第三页"));
-        tabFragments.add(MyFragment.Companion.newInstance("第四页"));
-        //初始化viewpager
-        ContentPagerAdapterMy contentAdapter = new ContentPagerAdapterMy(getSupportFragmentManager(), tabFragments);
-        viewpager_content.setAdapter(contentAdapter);
-
-
-        //初始化音效
-        sp = new SoundPool(10, AudioManager.STREAM_SYSTEM, 5);//第一个参数为同时播放数据流的最大个数，第二数据流类型，第三为声音质量
-        music = sp.load(this, R.raw.button, 1); //把你的声音素材放到res/raw里，第2个参数即为资源文件，第3个为音乐的优先级
-
-
-        //获取消息总数，设置消息总数
-        get_message_all();
-
-
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -254,6 +257,14 @@ public class KeepFitActivity extends BaseActivity {
         }
     }
 
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        Log.d("这是什么？","这是我的锅吧");
+        viewpager_content.setCurrentItem(3);
+        xianshi_four();
+    }
+
     private void xianshi_one() {
         bottom_iamge_views.get(0).setImageResource(R.drawable.icon_home_on);
         bottom_iamge_views.get(1).setImageResource(R.drawable.icon_discover_off);
@@ -283,5 +294,24 @@ public class KeepFitActivity extends BaseActivity {
         bottom_iamge_views.get(3).setImageResource(R.drawable.icon_user_on);
     }
 
-
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==1){
+            // 在这设置选中你要显示的fragment
+            if (resultCode == 0){
+                viewpager_content.setCurrentItem(0);
+                xianshi_one();
+            } else if (resultCode == 1){
+                viewpager_content.setCurrentItem(1);
+                xianshi_two();
+            } else if (resultCode == 2){
+                viewpager_content.setCurrentItem(2);
+                xianshi_three();
+            } else if (resultCode == 3){
+                viewpager_content.setCurrentItem(3);
+                xianshi_four();
+            }
+        }
+    }
 }

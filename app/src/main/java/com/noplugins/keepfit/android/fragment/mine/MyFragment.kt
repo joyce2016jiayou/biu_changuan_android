@@ -7,11 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import com.noplugins.keepfit.android.R
 import com.noplugins.keepfit.android.activity.AboutActivity
-import com.noplugins.keepfit.android.activity.WalletActivity
+import com.noplugins.keepfit.android.activity.ProductAdviceActivity
+import com.noplugins.keepfit.android.activity.ZhangHaoSafeActivity
+import com.noplugins.keepfit.android.activity.mine.CgPriceActivity
+import com.noplugins.keepfit.android.activity.mine.CostAccountingActivity
 import com.noplugins.keepfit.android.activity.mine.TeacherManagerActivity
+import com.noplugins.keepfit.android.activity.mine.WalletActivity
 import com.noplugins.keepfit.android.adapter.mine.FunctionAdapter
 import com.noplugins.keepfit.android.base.BaseFragment
-import com.noplugins.keepfit.android.bean.mine.MineBean
 import com.noplugins.keepfit.android.bean.mine.MineFunctionBean
 import com.noplugins.keepfit.android.global.AppConstants
 import com.noplugins.keepfit.android.util.BaseUtils
@@ -79,35 +82,35 @@ class MyFragment:BaseFragment(){
                 when (fuctionBean[position].name) {
                     "钱包" -> {
                         val intent = Intent(activity, WalletActivity::class.java)
-                        startActivity(intent)
+                         activity!!.startActivityForResult(intent, 1)
                     }
                     "权限管理" -> {
                         val intent = Intent(activity, WalletActivity::class.java)
-                        startActivity(intent)
+                         activity!!.startActivityForResult(intent, 1)
                     }
                     "场馆价格" -> {
-                        val intent = Intent(activity, WalletActivity::class.java)
-                        startActivity(intent)
+                        val intent = Intent(activity, CgPriceActivity::class.java)
+                         activity!!.startActivityForResult(intent, 1)
                     }
                     "成本核算" -> {
-                        val intent = Intent(activity, WalletActivity::class.java)
-                        startActivity(intent)
+                        val intent = Intent(activity, CostAccountingActivity::class.java)
+                         activity!!.startActivityForResult(intent, 1)
                     }
                     "教练管理" -> {
                         val intent = Intent(activity, TeacherManagerActivity::class.java)
-                        startActivity(intent)
+                         activity!!.startActivityForResult(intent, 1)
                     }
                     "问题反馈" -> {
-                        val intent = Intent(activity, TeacherManagerActivity::class.java)
-                        startActivity(intent)
+                        val intent = Intent(activity, ProductAdviceActivity::class.java)
+                        activity!!.startActivityForResult(intent, 1)
                     }
                     "账号安全" -> {
-                        val intent = Intent(activity, TeacherManagerActivity::class.java)
-                        startActivity(intent)
+                        val intent = Intent(activity, ZhangHaoSafeActivity::class.java)
+                        activity!!.startActivityForResult(intent, 1)
                     }
                     "关于" -> {
                         val intent = Intent(activity, AboutActivity::class.java)
-                        startActivity(intent)
+                         activity!!.startActivityForResult(intent, 1)
                     }
                     "客服帮助" -> {
                     }
