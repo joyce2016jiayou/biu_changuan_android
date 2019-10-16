@@ -79,14 +79,16 @@ public class SplashActivity extends BaseActivity {
     @Override
     public void doBusiness(Context mContext) {
         if (panduan_net()) {
-            if ("".equals(SharedPreferencesHelper.get(getApplicationContext(), Network.login_token, ""))) {
+            if ("".equals(SpUtils.getString(getApplicationContext(), AppConstants.TOKEN, ""))) {
                 Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
             } else {
                 //防止在第一次，选择角色的时候退出了，导致，第二次进来直接进主页
                 //获取审核状态
-                get_check_status();
+//                get_check_status();
+                Intent intent = new Intent(SplashActivity.this, KeepFitActivity.class);
+                startActivity(intent);
             }
 
 

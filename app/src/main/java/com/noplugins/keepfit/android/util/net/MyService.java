@@ -5,6 +5,8 @@ import com.alibaba.fastjson.annotation.JSONField;
 import com.noplugins.keepfit.android.bean.LoginBean;
 import com.noplugins.keepfit.android.bean.PrivateDetailBean;
 import com.noplugins.keepfit.android.bean.WxPayBean;
+import com.noplugins.keepfit.android.bean.mine.BalanceListBean;
+import com.noplugins.keepfit.android.bean.mine.WalletBean;
 import com.noplugins.keepfit.android.entity.AddClassEntity;
 import com.noplugins.keepfit.android.entity.CheckEntity;
 import com.noplugins.keepfit.android.entity.ClassTypeEntity;
@@ -94,7 +96,7 @@ public interface MyService {
      * @return
      */
     @FormUrlEncoded
-    @POST("resetPassword")
+    @POST("forgetPassword")
     Observable<Bean<String>> update_password(@FieldMap Map<String, String> map);
 
     /**
@@ -411,5 +413,60 @@ public interface MyService {
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
     @POST("memberOrderPay")
     Observable<Bean<PrivateDetailBean>> teacherDetails(@Body RequestBody json);
+
+    /**
+     * 钱包
+     *
+     * @return
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("myBalance")
+    Observable<Bean<WalletBean>> myBalance(@Body RequestBody json);
+
+    /**
+     * 明细列表
+     *
+     * @return
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("myBalanceList")
+    Observable<Bean<BalanceListBean>> myBalanceList(@Body RequestBody json);
+
+    /**
+     * 明细详情
+     *
+     * @return
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("myBalance")
+    Observable<Bean<BalanceListBean.ListBean>> myBalanceListDetail(@Body RequestBody json);
+
+    /**
+     *
+     * 修改手机号
+     * @return
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("updatePhone")
+    Observable<Bean<String>> updatePhone(@Body RequestBody json);
+
+    /**
+     *
+     * 设置密码
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("setPassword")
+    Observable<Bean<String>> setPassword(@FieldMap Map<String, Object> params);
+
+    /**
+     *
+     * 修改密码
+     * @return
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("forgetPassword")
+    Observable<Bean<String>> forgetPassword(@Body RequestBody json);
+
 
 }

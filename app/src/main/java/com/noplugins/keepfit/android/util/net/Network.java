@@ -10,6 +10,8 @@ import com.google.gson.GsonBuilder;
 import com.noplugins.keepfit.android.bean.LoginBean;
 import com.noplugins.keepfit.android.bean.PrivateDetailBean;
 import com.noplugins.keepfit.android.bean.WxPayBean;
+import com.noplugins.keepfit.android.bean.mine.BalanceListBean;
+import com.noplugins.keepfit.android.bean.mine.WalletBean;
 import com.noplugins.keepfit.android.entity.AddClassEntity;
 import com.noplugins.keepfit.android.entity.CheckEntity;
 import com.noplugins.keepfit.android.entity.ClassTypeEntity;
@@ -743,5 +745,74 @@ public class Network {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
     }
+
+    /**
+     * 钱包
+     */
+    public Subscription myBalance(Map<String, Object> params, Subscriber<Bean<WalletBean>> subscriber) {
+        return service.myBalance(retuen_json_params(params))
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 明细列表
+     */
+    public Subscription myBalanceList(Map<String, Object> params, Subscriber<Bean<BalanceListBean>> subscriber) {
+        return service.myBalanceList(retuen_json_params(params))
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 明细详情
+     */
+    public Subscription myBalanceListDetail(Map<String, Object> params, Subscriber<Bean<BalanceListBean.ListBean>> subscriber) {
+        return service.myBalanceListDetail(retuen_json_params(params))
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 修改手机号
+     */
+    public Subscription updatePhone(Map<String, Object> params, Subscriber<Bean<String>> subscriber) {
+        return service.updatePhone(retuen_json_params(params))
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 设置密码
+     */
+    public Subscription setPassword(Map<String, Object> params, Subscriber<Bean<String>> subscriber) {
+        return service.setPassword(params)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 修改密码
+     */
+    public Subscription forgetPassword(Map<String, Object> params, Subscriber<Bean<String>> subscriber) {
+        return service.forgetPassword(retuen_json_params(params))
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+
+
 
 }

@@ -17,6 +17,7 @@ import com.noplugins.keepfit.android.KeepFitActivity
 import com.noplugins.keepfit.android.R
 import com.noplugins.keepfit.android.activity.CheckStatusFailActivity
 import com.noplugins.keepfit.android.activity.SubmitInformationSelectActivity
+import com.noplugins.keepfit.android.activity.UpdatePasswordActivity
 import com.noplugins.keepfit.android.activity.UserPermissionSelectActivity
 import com.noplugins.keepfit.android.activity.mine.CgPriceActivity
 import com.noplugins.keepfit.android.base.BaseActivity
@@ -137,7 +138,8 @@ class Login2Activity : BaseActivity() {
 
         //忘记密码
         forget_password_btn.setOnClickListener(View.OnClickListener {
-
+            val intent = Intent(this@Login2Activity, SettingPwdActivity::class.java)
+            startActivity(intent)
         })
     }
 
@@ -151,9 +153,10 @@ class Login2Activity : BaseActivity() {
         params["phone"] = edit_phone_number.text.toString()
         subscription = Network.getInstance("验证验证码和登录", this)
                 .verifyCodeLogin(params,
-                        ProgressSubscriber("验证验证码和登录", object : SubscriberOnNextListener<Bean<LoginBean>> {
+                        ProgressSubscriber("验证验证码和登录", object : SubscriberOnNextListener<Bean<LoginBean>>{
                             override fun onNext(result: Bean<LoginBean>) {
                                 login_btn.loadingComplete()
+                                save_resource(result.data)
                                 if (result.data.havePassword == 0) {//没有设置过密码
                                     val intent = Intent(this@Login2Activity, SetPasswordActivity::class.java)
                                     startActivity(intent)
@@ -165,7 +168,6 @@ class Login2Activity : BaseActivity() {
 
                             override fun onError(error: String) {
                                 login_btn.loadingComplete()
-                                finish()
 
                             }
                         }, this, false))
@@ -185,9 +187,12 @@ class Login2Activity : BaseActivity() {
                                 SpUtils.putString(applicationContext, AppConstants.TOKEN, result.data.token)
                                 SpUtils.putString(applicationContext, AppConstants.PHONE, edit_phone_number.text.toString())
                                 SpUtils.putString(applicationContext, AppConstants.CHANGGUAN_NUM, result.data.gymAreaNum)
+                                SpUtils.putString(applicationContext, AppConstants.USER_NAME, result.data.gymAreaNum)
+                                SpUtils.putInt(applicationContext, AppConstants.USER_TYPE, result.data.type)
 
-                                get_check_status()
-
+//                                get_check_status()
+                                val intent = Intent(this@Login2Activity, KeepFitActivity::class.java)
+                                startActivity(intent)
                             }
 
                             override fun onError(error: String) {

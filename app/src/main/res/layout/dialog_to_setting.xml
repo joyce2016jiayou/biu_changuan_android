@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:gravity="center"
+              android:layout_height="match_parent">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:background="@drawable/rizhi_pop_bg"
+            android:layout_marginLeft="@dimen/m32"
+            android:layout_marginRight="@dimen/m32"
+            android:layout_height="@dimen/m160"
+            android:paddingLeft="@dimen/m10"
+            android:paddingRight="@dimen/m10">
+        <TextView
+                android:id="@+id/tv1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_4A4A4A"
+                android:textSize="18sp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/m15"
+                android:layout_gravity="center_horizontal"
+                android:text="提现密码"
+                />
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="您还为设置提现密码，快去设置吧～"
+                android:textSize="15sp"
+                android:layout_marginTop="@dimen/m20"
+                android:textColor="@color/color_4A4A4A"
+                />
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/m30"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+
+
+            <LinearLayout
+                    android:id="@+id/cancel_layout"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:orientation="vertical"
+                    android:layout_marginRight="@dimen/m15"
+                    android:gravity="center"
+                    android:background="@drawable/shape_btn_bg_gray"
+                    android:layout_height="@dimen/m39"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginStart="0dp">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="normal"
+                        android:text="@string/cancel"
+                        android:textSize="18sp"
+                        android:textColor="@color/top_heiziti"
+                        />
+            </LinearLayout>
+            <LinearLayout
+                    android:id="@+id/sure_layout"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_marginLeft="@dimen/m15"
+                    android:background="@drawable/shape_btn_bg_40"
+                    android:layout_height="@dimen/m39">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="normal"
+                        android:text="去设置"
+                        android:textSize="18sp"
+                        android:textColor="@color/white"
+                        />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

@@ -242,5 +242,8 @@ dependencies {
     //高德搜索
     implementation 'com.amap.api:search:latest.integration'
 
+    //pickview
+    implementation project(':pickerview1')
+
 
 }

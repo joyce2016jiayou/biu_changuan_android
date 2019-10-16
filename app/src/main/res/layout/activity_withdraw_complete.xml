@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+              android:id="@+id/ll_content">
+
+    <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/m90">
+
+        <ImageView
+                android:id="@+id/back_btn"
+                android:layout_width="@dimen/m22"
+                android:layout_height="@dimen/m19"
+                android:layout_gravity="left|center_vertical"
+                android:layout_marginLeft="@dimen/m20"
+                android:src="@drawable/icon_back"
+                android:visibility="gone"
+                android:layout_marginTop="@dimen/m20"/>
+
+        <TextView
+                android:id="@+id/title_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="提现"
+                android:textColor="@color/contents_text"
+                android:textSize="20sp"
+                android:layout_marginTop="@dimen/m20"
+                android:textStyle="bold"/>
+        <TextView
+                android:id="@+id/tv_complete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center_vertical"
+                android:text="完成"
+                android:textColor="@color/contents_text"
+                android:textSize="15sp"
+                android:layout_marginRight="@dimen/m20"
+                android:layout_marginTop="@dimen/m20"/>
+
+    </FrameLayout>
+
+    <www.linwg.org.lib.LCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:leftTopCornerRadius="@dimen/m10"
+            app:rightBottomCornerRadius="@dimen/dp_10"
+            app:leftBottomCornerRadius="@dimen/m10"
+            app:rightTopCornerRadius="@dimen/m10"
+            android:id="@+id/rl_money_details"
+            app:leftShadowWidth="0dp"
+            app:rightShadowWidth="0dp">
+        <LinearLayout
+                android:id="@+id/rl_select_card"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="@dimen/m170"
+                android:layout_marginLeft="@dimen/m50"
+                android:layout_marginRight="@dimen/m50"
+                android:gravity="center">
+            <ImageView
+                    android:layout_width="@dimen/m21"
+                    android:layout_height="@dimen/m21"
+                    android:src="@drawable/shalou"/>
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textSize="15sp"
+                    android:textColor="@color/color_6D7278"
+                    android:layout_marginTop="@dimen/m10"
+                    android:text="@string/tixian_3day"
+                    android:lineSpacingExtra="@dimen/m10"/>
+        </LinearLayout>
+    </www.linwg.org.lib.LCardView>
+</LinearLayout>

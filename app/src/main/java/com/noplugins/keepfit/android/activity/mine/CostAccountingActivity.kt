@@ -7,12 +7,16 @@ import android.os.Handler
 import android.view.View
 import com.noplugins.keepfit.android.R
 import com.noplugins.keepfit.android.base.BaseActivity
+import com.noplugins.keepfit.android.util.BaseUtils
 import kotlinx.android.synthetic.main.activity_cost_accounting.*
 
 class CostAccountingActivity : BaseActivity() {
+    var form = "main"
     override fun initBundle(parms: Bundle?) {
+        if (parms!=null){
+            form = parms.getString("form","main")
+        }
     }
-
     override fun initView() {
         setContentView(R.layout.activity_cost_accounting)
     }
@@ -26,11 +30,16 @@ class CostAccountingActivity : BaseActivity() {
             }, 2000)
 
         }
+        back_btn.setOnClickListener {
+            setResult(3)
+            finish()
+        }
 
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
 
+    override fun onBackPressed() {
+        setResult(3)
+        finish()
     }
 }

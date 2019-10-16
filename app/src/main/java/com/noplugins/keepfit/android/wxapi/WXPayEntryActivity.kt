@@ -99,8 +99,6 @@ class WXPayEntryActivity : BaseActivity(), IWXAPIEventHandler {
             if (type == 3) {
                 testWxRequest()
             }
-//            val intent = Intent(this@WXPayEntryActivity, CgPriceActivity::class.java)
-//            startActivity(intent)
 
         }
 
@@ -138,6 +136,13 @@ class WXPayEntryActivity : BaseActivity(), IWXAPIEventHandler {
 //            builder.setTitle(R.string.app_tip)
 //            builder.setMessage(getString(R.string.pay_result_callback_msg, resp.errCode.toString()))
 //            builder.show()
+            if (resp.errCode.toString() == "0"){
+                val intent = Intent(this@WXPayEntryActivity, CgPriceActivity::class.java)
+                val bundle = Bundle()
+                bundle.putString("form", "pay")
+                intent.putExtras(bundle)
+                startActivity(intent)
+            }
         }
     }
 
@@ -161,6 +166,11 @@ class WXPayEntryActivity : BaseActivity(), IWXAPIEventHandler {
                         // 该笔订单是否真实支付成功，需要依赖服务端的异步通知。
                         Handler().postDelayed(Runnable {
                             twoYanzhen()
+                            val intent = Intent(this@WXPayEntryActivity, CgPriceActivity::class.java)
+                            val bundle = Bundle()
+                            bundle.putString("form", "pay")
+                            intent.putExtras(bundle)
+                            startActivity(intent)
                         }, 1000)
                     } else {
                         // 该笔订单真实的支付结果，需要依赖服务端的异步通知。

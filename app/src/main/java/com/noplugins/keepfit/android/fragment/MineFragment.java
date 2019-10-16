@@ -1,6 +1,5 @@
 package com.noplugins.keepfit.android.fragment;
 
-import android.app.UiAutomation;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,9 +13,8 @@ import com.noplugins.keepfit.android.activity.ChangGuandetailActivity;
 import com.noplugins.keepfit.android.activity.HightLowTImeActivity;
 import com.noplugins.keepfit.android.activity.PermissionActivity;
 import com.noplugins.keepfit.android.activity.ProductAdviceActivity;
-import com.noplugins.keepfit.android.activity.UpdatePasswordActivity;
-import com.noplugins.keepfit.android.activity.WalletActivity;
 import com.noplugins.keepfit.android.activity.ZhangHaoSafeActivity;
+import com.noplugins.keepfit.android.activity.mine.WalletActivity;
 import com.noplugins.keepfit.android.util.ui.ViewPagerFragment;
 
 import butterknife.BindView;
