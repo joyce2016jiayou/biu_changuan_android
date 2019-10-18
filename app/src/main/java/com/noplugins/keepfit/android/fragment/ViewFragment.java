@@ -108,13 +108,13 @@ public class ViewFragment extends ViewPagerFragment {
         if (view == null) {
             view = inflater.inflate(R.layout.home_fragment, container, false);
             ButterKnife.bind(this, view);//绑定黄牛刀
-            initView();
-
-            //注册广播接收器
-            registerReceiver();
-
-            //获取视角数据
-            getDates();
+//            initView();
+//
+//            //注册广播接收器
+//            registerReceiver();
+//
+//            //获取视角数据
+//            getDates();
 
         }
         return view;

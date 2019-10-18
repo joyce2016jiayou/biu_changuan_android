@@ -245,5 +245,7 @@ dependencies {
     //pickview
     implementation project(':pickerview1')
 
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
 
 }

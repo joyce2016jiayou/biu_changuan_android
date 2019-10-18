@@ -21,6 +21,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.adapter.TabItemAdapter;
+import com.noplugins.keepfit.android.base.BaseFragment;
 import com.noplugins.keepfit.android.util.data.DateHelper;
 import com.noplugins.keepfit.android.util.eventbus.MessageEvent;
 import com.noplugins.keepfit.android.util.ui.ViewPagerFragment;
@@ -34,7 +35,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MessageFragment extends ViewPagerFragment {
+public class MessageFragment extends BaseFragment {
 
     private View view;
     @BindView(R.id.view_pager)
@@ -86,13 +87,19 @@ public class MessageFragment extends ViewPagerFragment {
     public View onCreateView( LayoutInflater inflater,  ViewGroup container,  Bundle savedInstanceState) {
         if (view == null) {
             view = inflater.inflate(R.layout.questions_and_answers_fragment, container, false);
-            ButterKnife.bind(this, view);//绑定黄牛刀
-            initView();
-            registerReceiver();
-            EventBus.getDefault().register(this);
+
 
         }
         return view;
+    }
+
+    @Override
+    protected void onFragmentFirstVisible() {
+        super.onFragmentFirstVisible();
+        ButterKnife.bind(this, view);//绑定黄牛刀
+        initView();
+        registerReceiver();
+        EventBus.getDefault().register(this);
     }
 
     @Override
@@ -263,10 +270,6 @@ public class MessageFragment extends ViewPagerFragment {
                 lin4.setVisibility(View.VISIBLE);
                 break;
         }
-    }
-    @Override
-    public void fetchData() {
-
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {

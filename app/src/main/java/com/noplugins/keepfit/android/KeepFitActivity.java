@@ -25,11 +25,11 @@ import com.noplugins.keepfit.android.base.BaseActivity;
 import com.noplugins.keepfit.android.base.MyApplication;
 import com.noplugins.keepfit.android.entity.CheckEntity;
 import com.noplugins.keepfit.android.entity.MaxMessageEntity;
-import com.noplugins.keepfit.android.fragment.StatisticsFragment;
 import com.noplugins.keepfit.android.fragment.ViewFragment;
 import com.noplugins.keepfit.android.fragment.MineFragment;
 import com.noplugins.keepfit.android.fragment.MessageFragment;
 import com.noplugins.keepfit.android.fragment.mine.MyFragment;
+import com.noplugins.keepfit.android.fragment.statistics.StatisticsFragment;
 import com.noplugins.keepfit.android.global.AppConstants;
 import com.noplugins.keepfit.android.util.SpUtils;
 import com.noplugins.keepfit.android.util.data.SharedPreferencesHelper;
@@ -98,7 +98,7 @@ public class KeepFitActivity extends BaseActivity {
         //EventBus.getDefault().register(this);
         //初始化页面
         tabFragments.add(ViewFragment.homeInstance("第一页"));
-        tabFragments.add(StatisticsFragment.newInstance("第二页"));
+        tabFragments.add(StatisticsFragment.Companion.newInstance("第二页"));
         tabFragments.add(MessageFragment.newInstance("第三页"));
         tabFragments.add(MyFragment.Companion.newInstance("第四页"));
         //初始化viewpager
@@ -112,7 +112,7 @@ public class KeepFitActivity extends BaseActivity {
 
 
         //获取消息总数，设置消息总数
-        get_message_all();
+//        get_message_all();
     }
 
     @Override

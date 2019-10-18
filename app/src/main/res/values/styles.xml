@@ -102,4 +102,14 @@
         <item name="android:windowBackground">@drawable/photo_choose_bg2</item>
         <item name="android:windowCloseOnTouchOutside">true</item>
     </style>
+
+    <style name="barchartBar">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:drawablePadding">5dp</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/contents_text</item>
+    </style>
 </resources>

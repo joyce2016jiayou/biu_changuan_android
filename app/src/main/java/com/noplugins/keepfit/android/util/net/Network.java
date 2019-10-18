@@ -56,7 +56,7 @@ import rx.schedulers.Schedulers;
  * Created by shiyujia02 on 2017/8/16.
  */
 public class Network {
-    public static final int DEFAULT_TIMEOUT = 7;
+    public static final int DEFAULT_TIMEOUT = 15;
     private static Network mInstance;
     public MyService service;
     //测试服
@@ -149,9 +149,9 @@ public class Network {
                         return chain.proceed(request);
                     }
                 })
-                .writeTimeout(DEFAULT_TIMEOUT, TimeUnit.MINUTES)//设置写的超时时间
-                .connectTimeout(DEFAULT_TIMEOUT, TimeUnit.MINUTES)//超时处理
-                .readTimeout(DEFAULT_TIMEOUT, TimeUnit.MINUTES)
+                .writeTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)//设置写的超时时间
+                .connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)//超时处理
+                .readTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
                 .build();
 
         Gson gson = new GsonBuilder()

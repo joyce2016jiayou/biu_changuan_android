@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/m10"
+        android:layout_marginRight="@dimen/m10">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/contents_text"
+            android:text="产品消费占比"/>
+        <www.linwg.org.lib.LCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:cornerRadius="@dimen/m10">
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/picChart"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/m210"
+                android:layout_gravity="center" />
+        </www.linwg.org.lib.LCardView>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/contents_text"
+            android:text="销售额同比/环比占比"/>
+        <www.linwg.org.lib.LCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cornerRadius="@dimen/m10">
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/lineChart"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/m216"
+                android:layout_marginBottom="@dimen/m20"/>
+        </www.linwg.org.lib.LCardView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/contents_text"
+            android:text="精细化运作图"/>
+        <www.linwg.org.lib.LCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cornerRadius="@dimen/m10">
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/barChart"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/m270"/>
+        </www.linwg.org.lib.LCardView>
+
+    </LinearLayout>
+</ScrollView>

@@ -74,11 +74,11 @@
         <activity android:name=".activity.SubmitInformationSelectActivity"></activity>
         <activity android:name=".activity.mine.CgPriceActivity" />
         <activity android:name=".activity.user.Login2Activity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
         </activity>
         <activity android:name=".activity.BuyHuiYuanActivity"></activity>
         <activity android:name=".activity.HeTongActivity">
@@ -160,14 +160,18 @@
             android:name=".SplashActivity"
             android:screenOrientation="portrait">
 
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
 
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
         </activity>
-        <activity android:name=".KeepFitActivity" /> <!-- 存储权限 authorities="你的包名+fileprovider" -->
+        <activity android:name=".KeepFitActivity"
+            android:launchMode="singleTask">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <!-- 存储权限 authorities="你的包名+fileprovider" -->
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.noplugins.keepfit.android.fileprovider"
@@ -227,12 +231,7 @@
             android:name="com.tencent.connect.common.AssistActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-        <activity
-            android:name=".activity.WithdrawActivity"
-            android:windowSoftInputMode="adjustPan|stateHidden" />
-        <activity
-            android:name=".activity.WalletActivity"
-            android:windowSoftInputMode="adjustPan|stateHidden" />
+
         <activity android:name=".activity.BillActivity" /> <!-- 极光 -->
         <!-- Required SDK 核心功能 -->
         <!-- 可配置android:process参数将PushService放在其他进程中 -->
