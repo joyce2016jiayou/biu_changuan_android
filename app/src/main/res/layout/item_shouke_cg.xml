@@ -81,14 +81,11 @@
                     android:gravity="center"
                     android:orientation="horizontal">
 
-                <TextView
-                        android:id="@+id/tv_address"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/m5"
-                        android:textSize="13sp"
-                        android:textColor="@color/contents_text"
-                        tools:text="杭州市萧山区市民中心广场89号"/>
+                <com.noplugins.keepfit.android.util.ui.ZFlowLayout
+                    android:id="@+id/fl_private_skill"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" />
             </LinearLayout>
         </RelativeLayout>
 

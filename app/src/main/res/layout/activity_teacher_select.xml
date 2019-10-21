@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/ll_content">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/m70">
+
+        <ImageView
+            android:id="@+id/back_btn"
+            android:layout_width="@dimen/m22"
+            android:layout_height="@dimen/m19"
+            android:layout_gravity="left|center_vertical"
+            android:layout_marginLeft="@dimen/m20"
+            android:src="@drawable/icon_back"
+            android:layout_marginTop="@dimen/m20"/>
+
+        <TextView
+            android:id="@+id/title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="教练选择"
+            android:textColor="@color/contents_text"
+            android:textSize="20sp"
+            android:layout_marginTop="@dimen/m20"
+            android:textStyle="bold"/>
+        <ImageView
+            android:id="@+id/queren_btn"
+            android:layout_width="@dimen/m22"
+            android:layout_height="@dimen/m22"
+            android:layout_gravity="right|center_vertical"
+            android:layout_marginRight="@dimen/m20"
+            android:src="@drawable/queren_img"
+            android:layout_marginTop="@dimen/m20"/>
+    </FrameLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_toRightOf="@+id/back_btn"
+        android:layout_height="@dimen/m55"
+        android:layout_marginRight="@dimen/m15"
+        android:layout_marginLeft="@dimen/m15"
+        android:background="@drawable/sousuo_bg"
+        android:layout_centerVertical="true">
+
+        <ImageView
+            android:id="@+id/iv_search"
+            android:layout_width="@dimen/m26"
+            android:layout_height="@dimen/m26"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/m32"
+            android:visibility="gone"
+            android:src="@drawable/sousuo_big"/>
+
+        <EditText
+            android:id="@+id/edit_search"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/m55"
+            android:layout_centerVertical="true"
+            android:textSize="13sp"
+            android:paddingLeft="@dimen/m68"
+            android:paddingRight="@dimen/m10"
+            android:inputType="text"
+            android:singleLine="true"
+            android:imeOptions="actionSearch"
+            android:textColor="@color/contents_text"
+            android:background="@null"/>
+
+        <ImageView
+            android:id="@+id/iv_delete_edit"
+            android:layout_width="@dimen/m16"
+            android:visibility="gone"
+            android:layout_height="@dimen/m16"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/m32"
+            android:src="@drawable/deleted_edit"/>
+        <LinearLayout
+            android:id="@+id/ll_sousuo"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_centerInParent="true">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="搜索"
+                android:textColor="@color/color_6D7278"
+                android:textSize="15sp"/>
+            <ImageView
+                android:layout_width="@dimen/m21"
+                android:layout_height="@dimen/m21"
+                android:layout_marginTop="@dimen/m2"
+                android:src="@drawable/sousuo"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginRight="@dimen/m20"
+        android:layout_marginTop="@dimen/m15"
+        android:layout_marginLeft="@dimen/m20">
+        <FrameLayout
+            android:id="@+id/ll_location"
+            android:layout_width="wrap_content"
+            android:minWidth="@dimen/m70"
+            android:layout_height="@dimen/m22"
+            android:visibility="gone"
+            android:background="@drawable/shape_btn_bg_gray">
+
+            <TextView
+                android:id="@+id/tv_location"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/m22"
+                android:text="闵行区"
+                android:gravity="center"
+                android:layout_marginLeft="@dimen/m5"
+                android:textColor="@color/color_6D7278"
+                android:textSize="13sp"/>
+
+            <ImageView
+                android:layout_width="@dimen/m14"
+                android:layout_height="@dimen/m8"
+                android:layout_gravity="end|center_vertical"
+                android:layout_marginRight="@dimen/m5"
+                android:src="@drawable/icon_xiala" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/class_eat"
+            android:layout_width="wrap_content"
+            android:minWidth="@dimen/m85"
+            android:layout_height="@dimen/m22"
+            android:layout_marginLeft="@dimen/m5"
+            android:visibility="gone"
+            android:background="@drawable/shape_btn_bg_gray">
+
+            <TextView
+                android:id="@+id/tv_class_select"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/m22"
+                android:text="课程类型"
+                android:gravity="center"
+                android:layout_marginLeft="@dimen/m5"
+                android:textColor="@color/color_6D7278"
+                android:textSize="13sp"/>
+
+            <ImageView
+                android:layout_width="@dimen/m14"
+                android:layout_height="@dimen/m8"
+                android:layout_gravity="end|center_vertical"
+                android:layout_marginRight="@dimen/m5"
+                android:src="@drawable/icon_xiala" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/teacher_year"
+            android:layout_width="wrap_content"
+            android:minWidth="@dimen/m85"
+            android:layout_height="@dimen/m22"
+            android:layout_marginLeft="@dimen/m5"
+            android:background="@drawable/shape_btn_bg_gray">
+
+            <TextView
+                android:id="@+id/tv_year_select"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/m22"
+                android:text="从业年限"
+                android:gravity="center"
+                android:layout_marginLeft="@dimen/m5"
+                android:textColor="@color/color_6D7278"
+                android:textSize="13sp"/>
+
+            <ImageView
+                android:layout_width="@dimen/m14"
+                android:layout_height="@dimen/m8"
+                android:layout_gravity="end|center_vertical"
+                android:layout_marginRight="@dimen/m5"
+                android:src="@drawable/icon_xiala" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/teacher_sex"
+            android:layout_width="wrap_content"
+            android:minWidth="@dimen/m57"
+            android:layout_height="@dimen/m22"
+            android:layout_marginLeft="@dimen/m5"
+            android:background="@drawable/shape_btn_bg_gray">
+
+            <TextView
+                android:id="@+id/tv_sex_select"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/m22"
+                android:text="性别"
+                android:gravity="center"
+                android:layout_marginLeft="@dimen/m5"
+                android:textColor="@color/color_6D7278"
+                android:textSize="13sp"/>
+
+            <ImageView
+                android:layout_width="@dimen/m14"
+                android:layout_height="@dimen/m8"
+                android:layout_gravity="end|center_vertical"
+                android:layout_marginRight="@dimen/m5"
+                android:src="@drawable/icon_xiala" />
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </androidx.recyclerview.widget.RecyclerView>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+</LinearLayout>

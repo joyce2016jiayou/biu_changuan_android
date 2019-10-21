@@ -19,10 +19,10 @@ import com.noplugins.keepfit.android.R
 //import com.noplugins.keepfit.android.activity.ClassShouquanActivity
 import com.noplugins.keepfit.android.adapter.TabItemAdapter
 import com.noplugins.keepfit.android.base.BaseActivity
-import com.noplugins.keepfit.android.fragment.cg.BindingFragment
-import com.noplugins.keepfit.android.fragment.cg.JujueFragment
-import com.noplugins.keepfit.android.fragment.cg.SqAndYaoqinFragment
-import com.noplugins.keepfit.android.fragment.cg.YaoqinFragment
+import com.noplugins.keepfit.android.fragment.teacher.BindingFragment
+import com.noplugins.keepfit.android.fragment.teacher.JujueFragment
+import com.noplugins.keepfit.android.fragment.teacher.SqAndYaoqinFragment
+import com.noplugins.keepfit.android.fragment.teacher.YaoqinFragment
 import com.noplugins.keepfit.android.global.AppConstants
 import com.noplugins.keepfit.android.util.SpUtils
 import kotlinx.android.synthetic.main.activity_teacher_manager.*
@@ -76,8 +76,8 @@ class TeacherManagerActivity : BaseActivity(), AMapLocationListener {
     override fun doBusiness(mContext: Context?) {
         rbOnClick()
         tv_complete.setOnClickListener {
-//            val intent = Intent(this, ClassShouquanActivity::class.java)
-//            startActivity(intent)
+            val intent = Intent(this, TeacherSelectActivity::class.java)
+            startActivity(intent)
         }
         back_btn.setOnClickListener {
             setResult(3)

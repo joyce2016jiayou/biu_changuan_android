@@ -3,6 +3,16 @@ package com.noplugins.keepfit.android.entity;
 public class LoginEntity {
     private int type;
 
+    private int havePayPassWord;
+
+    public int getHavePayPassWord() {
+        return havePayPassWord;
+    }
+
+    public void setHavePayPassWord(int havePayPassWord) {
+        this.havePayPassWord = havePayPassWord;
+    }
+
     public String getGymAreaNum() {
         return gymAreaNum;
     }

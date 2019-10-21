@@ -53,9 +53,9 @@ class VerificationPhoneActivity : BaseActivity() {
             if (intent.getBooleanExtra("update", false)) {
                 updatePhone()
             } else {
-//                val intent = Intent(this, UpdatePasswordActivity::class.java)
-//                startActivity(intent)
-//                finish()
+                val intent = Intent(this, UpdatePasswordActivity::class.java)
+                startActivity(intent)
+                finish()
             }
 
         }

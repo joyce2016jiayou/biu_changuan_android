@@ -17,8 +17,8 @@ public class HighAdapter extends BaseQuickAdapter<HighBean, BaseViewHolder> {
 
     @Override
     protected void convert(@NonNull BaseViewHolder helper, HighBean item) {
-        helper.setText(R.id.tv_time_part,"时段：  "+item.getStartDate()+"-"+item.getEndDate());
-        helper.setText(R.id.tv_price,"价格：  ¥"+item.getPrice());
+        helper.setText(R.id.tv_time_part,"时段：  "+item.getHigh_time_start()+"-"+item.getHigh_time_end());
+        helper.setText(R.id.tv_price,"价格：  ¥"+item.getHigh_time_price());
         helper.addOnClickListener(R.id.iv_delete);
     }
 }

@@ -1,4 +1,4 @@
-package com.noplugins.keepfit.android.fragment.cg
+package com.noplugins.keepfit.android.fragment.teacher
 
 import android.content.Intent
 import android.os.Bundle
@@ -14,6 +14,7 @@ import com.noplugins.keepfit.android.activity.mine.TeacherDetailActivity
 import com.noplugins.keepfit.android.adapter.ShoukeCgAdapter
 import com.noplugins.keepfit.android.base.BaseFragment
 import com.noplugins.keepfit.android.bean.CgListBean
+import com.noplugins.keepfit.android.bean.TeacherBean
 import com.noplugins.keepfit.android.global.AppConstants
 import com.noplugins.keepfit.android.util.SpUtils
 import com.noplugins.keepfit.android.util.net.Network
@@ -33,7 +34,7 @@ class YaoqinFragment : BaseFragment()  {
             return fragment
         }
     }
-    var  datas:MutableList<CgListBean.AreaListBean> = ArrayList()
+    var  datas:MutableList<TeacherBean> = ArrayList()
     lateinit var adapterManager : ShoukeCgAdapter
     var newView: View? = null
     var page = 1
@@ -72,15 +73,15 @@ class YaoqinFragment : BaseFragment()  {
                     val toInfo = Intent(activity, TeacherDetailActivity::class.java)
                     val bundle = Bundle()
                     bundle.putInt("type",1)
-                    bundle.putString("cgNum",datas[position].areaNum)
+                    bundle.putString("cgNum",datas[position].teacherNum)
                     toInfo.putExtras(bundle)
                     startActivity(toInfo)
                 }
                 R.id.tv_jieshou -> {
-                    agreeBinding(datas[position].gymBindingNum,1)
+                    agreeBinding(datas[position].teacherNum,1)
                 }
                 R.id.tv_jujue -> {
-                    agreeBinding(datas[position].gymBindingNum,2)
+                    agreeBinding(datas[position].teacherNum,2)
                 }
 
             }
@@ -101,52 +102,52 @@ class YaoqinFragment : BaseFragment()  {
 
     private fun requestData(){
         val params = HashMap<String, Any>()
-        params["teacherNum"] = SpUtils.getString(activity, AppConstants.USER_NAME)
-        params["status"] = 3
-        params["longitude"] = SpUtils.getString(activity,AppConstants.LON)
-        params["latitude"] = SpUtils.getString(activity,AppConstants.LAT)
-//        val subscription = Network.getInstance("场馆列表", activity)
-//            .myBindingArea(
-//                params,
-//                ProgressSubscriber("场馆列表", object : SubscriberOnNextListener<Bean<List<CgListBean.AreaListBean>>> {
-//                    override fun onNext(result: Bean<List<CgListBean.AreaListBean>>) {
-////                        setting(result.data.areaList)
-//                        if (page == 1){
-//                            datas.clear()
-//                            datas.addAll(result.data)
-//                        } else{
-//                            datas.addAll(result.data)
-//                        }
-//                        adapterManager.notifyDataSetChanged()
-//                    }
-//
-//                    override fun onError(error: String) {
-//
-//                    }
-//                }, activity, false)
-//            )
+        params["areaNum"] = SpUtils.getString(activity, AppConstants.CHANGGUAN_NUM)
+        params["status"] =3
+        params["page"] = page
+        val subscription = Network.getInstance("场馆列表", activity)
+                .teacherManner(
+                        params,
+                        ProgressSubscriber("场馆列表", object : SubscriberOnNextListener<Bean<List<TeacherBean>>> {
+                            override fun onNext(result: Bean<List<TeacherBean>>) {
+//                        setting(result.data.areaList)
+                                if (page == 1){
+                                    datas.clear()
+                                    datas.addAll(result.data)
+                                } else{
+                                    datas.addAll(result.data)
+                                }
+                                adapterManager.notifyDataSetChanged()
+                            }
+
+                            override fun onError(error: String) {
+
+                            }
+                        }, activity, false)
+                )
 
     }
 //
 
-    private fun agreeBinding(bindingNum:String,status:Int){
+    private fun agreeBinding(teacherNum:String,agree:Int){
         val params = HashMap<String, Any>()
-        params["bindingNum"] = bindingNum
-        params["status"] = status
-//        val subscription = Network.getInstance("场馆列表", activity)
-//            .agreeBindingArea(
-//                params,
-//                ProgressSubscriber("场馆列表", object : SubscriberOnNextListener<Bean<String>> {
-//                    override fun onNext(result: Bean<String>) {
-////                        setting(result.data.areaList)
-//                        requestData()
-//                    }
-//
-//                    override fun onError(error: String) {
-//
-//                    }
-//                }, activity, false)
-//            )
+        params["teacherNum"] = teacherNum
+        params["areaNum"] = SpUtils.getString(activity,AppConstants.CHANGGUAN_NUM)
+        params["agree"] = agree
+        val subscription = Network.getInstance("同意拒绝", activity)
+            .agreeBindingArea(
+                params,
+                ProgressSubscriber("同意拒绝", object : SubscriberOnNextListener<Bean<String>> {
+                    override fun onNext(result: Bean<String>) {
+//                        setting(result.data.areaList)
+                        requestData()
+                    }
+
+                    override fun onError(error: String) {
+
+                    }
+                }, activity, false)
+            )
     }
 
 }

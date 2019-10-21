@@ -17,9 +17,6 @@ import com.noplugins.keepfit.android.KeepFitActivity
 import com.noplugins.keepfit.android.R
 import com.noplugins.keepfit.android.activity.CheckStatusFailActivity
 import com.noplugins.keepfit.android.activity.SubmitInformationSelectActivity
-import com.noplugins.keepfit.android.activity.UpdatePasswordActivity
-import com.noplugins.keepfit.android.activity.UserPermissionSelectActivity
-import com.noplugins.keepfit.android.activity.mine.CgPriceActivity
 import com.noplugins.keepfit.android.base.BaseActivity
 import com.noplugins.keepfit.android.bean.LoginBean
 import com.noplugins.keepfit.android.entity.CheckEntity
@@ -33,7 +30,6 @@ import com.noplugins.keepfit.android.util.net.entity.Bean
 import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriber
 import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener
 import com.noplugins.keepfit.android.util.ui.pop.CommonPopupWindow
-import com.noplugins.keepfit.android.wxapi.WXPayEntryActivity
 import kotlinx.android.synthetic.main.activity_login2.*
 import java.util.*
 
@@ -193,6 +189,7 @@ class Login2Activity : BaseActivity() {
                                 SpUtils.putString(applicationContext, AppConstants.CHANGGUAN_NUM, result.data.gymAreaNum)
                                 SpUtils.putString(applicationContext, AppConstants.USER_NAME, result.data.gymAreaNum)
                                 SpUtils.putInt(applicationContext, AppConstants.USER_TYPE, result.data.type)
+                                SpUtils.putInt(applicationContext,AppConstants.IS_TX,result.data.havePayPassWord)
 
 //                                get_check_status()
                                 val intent = Intent(this@Login2Activity, KeepFitActivity::class.java)
@@ -249,6 +246,7 @@ class Login2Activity : BaseActivity() {
         SpUtils.putString(applicationContext, AppConstants.USER_NAME, login.gymUserNum)
         SpUtils.putInt(applicationContext, AppConstants.USER_TYPE, login.type)
         SpUtils.putString(applicationContext, AppConstants.PHONE, edit_phone_number.text.toString())
+        SpUtils.putInt(applicationContext,AppConstants.IS_TX,login.havePayPassWord)
     }
 
     private fun get_check_status() {

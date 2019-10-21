@@ -6,6 +6,8 @@ import com.noplugins.keepfit.android.bean.CalenderEntity;
 import com.noplugins.keepfit.android.bean.DictionaryeBean;
 import com.noplugins.keepfit.android.bean.LoginBean;
 import com.noplugins.keepfit.android.bean.PrivateDetailBean;
+import com.noplugins.keepfit.android.bean.TeacherBean;
+import com.noplugins.keepfit.android.bean.TeacherDetailBean;
 import com.noplugins.keepfit.android.bean.RiChengBean;
 import com.noplugins.keepfit.android.bean.WxPayBean;
 import com.noplugins.keepfit.android.bean.mine.BalanceListBean;
@@ -81,6 +83,7 @@ public interface MyService {
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
     @POST("userlogin")
     Observable<Bean<LoginEntity>> login(@Body RequestBody json);
+
 
 
     /**
@@ -299,14 +302,14 @@ public interface MyService {
     @POST("setHighAndLowTime")
     Observable<Bean<Object>> setHighAndLowTime(@Body RequestBody json);
 
-    /**
-     * 设置高低峰时段
-     *
-     * @return 是否设置成功
-     */
-    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
-    @POST("teacherDetail")
-    Observable<Bean<Object>> teacherDetail(@Body RequestBody json);
+//    /**
+//     * 设置高低峰时段
+//     *
+//     * @return 是否设置成功
+//     */
+//    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+//    @POST("teacherDetail")
+//    Observable<Bean<Object>> teacherDetail(@Body RequestBody json);
 
 
     /**
@@ -398,7 +401,6 @@ public interface MyService {
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
     @POST("memberOrderPay")
     Observable<Bean<String>> memberOrderPay(@Body RequestBody json);
-
     /**
      * 获取支付信息 -微信
      *
@@ -445,8 +447,8 @@ public interface MyService {
     Observable<Bean<BalanceListBean.ListBean>> myBalanceListDetail(@Body RequestBody json);
 
     /**
-     * 修改手机号
      *
+     * 修改手机号
      * @return
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
@@ -454,8 +456,8 @@ public interface MyService {
     Observable<Bean<String>> updatePhone(@Body RequestBody json);
 
     /**
-     * 设置密码
      *
+     * 设置密码
      * @return
      */
     @FormUrlEncoded
@@ -463,14 +465,88 @@ public interface MyService {
     Observable<Bean<String>> setPassword(@FieldMap Map<String, Object> params);
 
     /**
-     * 修改密码
      *
+     * 修改密码
      * @return
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
     @POST("forgetPassword")
     Observable<Bean<String>> forgetPassword(@Body RequestBody json);
 
+    /**
+     * 设置提现密码
+     *
+     * @return
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("setPayPassWord")
+    Observable<Bean<String>> settingPayPassword(@Body RequestBody json);
+
+    /**
+     *提现
+     *
+     * @return
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("withdrawDeposit")
+    Observable<Bean<String>> withdrawDeposit(@Body RequestBody json);
+
+
+    /**
+     *教练管理列表
+     *
+     * @return
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("teacherManner")
+    Observable<Bean<List<TeacherBean>>> teacherManner(@Body RequestBody json);
+
+    /**
+     *教练类型管理列表
+     *
+     * @return
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("teacherMannerList")
+    Observable<Bean<List<TeacherBean>>> teacherMannerList(@Body RequestBody json);
+
+
+    /**
+     *教练详情
+     *
+     * @return
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("teacherDetail")
+    Observable<Bean<TeacherDetailBean>> teacherDetail(@Body RequestBody json);
+
+
+    /**
+     *同意你拒绝
+     *
+     * @return
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("agreeTeacherApply")
+    Observable<Bean<String>> agreeBindingArea(@Body RequestBody json);
+
+    /**
+     * 精细化时间段
+     *
+     * @return
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("setHighTime")
+    Observable<Bean<String>> setHighTime(@Body RequestBody json);
+
+    /**
+     * 成本核算
+     *
+     * @return
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("updateCost")
+    Observable<Bean<String>> updateCost(@Body RequestBody json);
     /**
      * 获取日历
      */

@@ -39,6 +39,19 @@
         <item>经理</item>
         <item>前台</item>
     </string-array>
+
+    <string-array name="private_year_types">
+        <item>0–3年</item>
+        <item>3–5年</item>
+        <item>5年以上</item>
+        <item>全部</item>
+    </string-array>
+
+    <string-array name="private_sex_types">
+        <item>女</item>
+        <item>男</item>
+        <item>全部</item>
+    </string-array>
     <string-array name="store_types">
         <item>威尔士</item>
         <item>厦门拉登</item>

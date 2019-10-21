@@ -19,6 +19,15 @@ public class LoginBean {
     private int type;
     private String MasterName;
     private String token;
+    private int havePayPassWord;
+
+    public int getHavePayPassWord() {
+        return havePayPassWord;
+    }
+
+    public void setHavePayPassWord(int havePayPassWord) {
+        this.havePayPassWord = havePayPassWord;
+    }
 
     public String getGymAreaNum() {
         return gymAreaNum;

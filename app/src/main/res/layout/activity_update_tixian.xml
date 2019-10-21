@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:orientation="vertical">
+
+   <LinearLayout
+           android:id="@+id/ll_main"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="vertical">
+       <FrameLayout
+               android:layout_width="match_parent"
+               android:layout_height="@dimen/m90">
+
+           <ImageView
+                   android:id="@+id/back_btn"
+                   android:layout_width="@dimen/m22"
+                   android:layout_height="@dimen/m19"
+                   android:layout_gravity="left|center_vertical"
+                   android:layout_marginLeft="@dimen/m20"
+                   android:src="@drawable/icon_back"
+                   android:layout_marginTop="@dimen/m20"/>
+
+           <TextView
+                   android:id="@+id/title_tv"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_gravity="center"
+                   android:text="设置提现密码"
+                   android:textColor="@color/contents_text"
+                   android:textSize="20sp"
+                   android:layout_marginTop="@dimen/m20"
+                   android:textStyle="bold"/>
+       </FrameLayout>
+
+       <www.linwg.org.lib.LCardView
+               android:layout_width="match_parent"
+               android:layout_height="@dimen/m56"
+               app:leftTopCornerRadius="@dimen/m10"
+               app:rightBottomCornerRadius="@dimen/dp_10"
+               app:leftBottomCornerRadius="@dimen/m10"
+               app:rightTopCornerRadius="@dimen/m10"
+               app:leftShadowWidth="0dp"
+               app:rightShadowWidth="0dp">
+           <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:layout_marginLeft="@dimen/m20"
+                   android:orientation="horizontal"
+                   android:gravity="center">
+
+               <ImageView
+                       android:layout_width="20dp"
+                       android:layout_height="23dp"
+                       android:layout_gravity="center_vertical"
+                       android:src="@drawable/icon_password" />
+
+               <EditText
+                       android:id="@+id/edit_new_password1"
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"
+                       android:layout_marginLeft="5dp"
+                       android:layout_marginRight="25dp"
+                       android:background="@null"
+                       android:hint="@string/edit_hint2"
+                       android:inputType="textPassword"
+                       android:maxLength="16"
+                       android:password="true"
+                       android:singleLine="true"
+                       android:textColor="@color/color_ACACAC"
+                       android:textColorHint="@color/color_ACACAC"
+                       android:textSize="15sp" />
+           </LinearLayout>
+       </www.linwg.org.lib.LCardView>
+
+       <www.linwg.org.lib.LCardView
+               android:layout_width="match_parent"
+               android:layout_height="@dimen/m56"
+               app:leftTopCornerRadius="@dimen/m10"
+               app:rightBottomCornerRadius="@dimen/dp_10"
+               app:leftBottomCornerRadius="@dimen/m10"
+               app:rightTopCornerRadius="@dimen/m10"
+               app:leftShadowWidth="0dp"
+               app:rightShadowWidth="0dp">
+           <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:layout_marginLeft="@dimen/m20"
+                   android:gravity="center"
+                   android:orientation="horizontal">
+
+               <ImageView
+                       android:layout_width="20dp"
+                       android:layout_height="23dp"
+                       android:layout_gravity="center_vertical"
+                       android:src="@drawable/icon_password" />
+
+               <EditText
+                       android:id="@+id/edit_password2"
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"
+                       android:layout_marginLeft="5dp"
+                       android:layout_marginRight="25dp"
+                       android:background="@null"
+                       android:hint="请再次确认密码"
+                       android:inputType="textPassword"
+                       android:password="true"
+                       android:maxLength="16"
+                       android:singleLine="true"
+                       android:textColor="@color/color_ACACAC"
+                       android:textColorHint="@color/color_ACACAC"
+                       android:textSize="15sp" />
+           </LinearLayout>
+       </www.linwg.org.lib.LCardView>
+
+       <TextView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:text="请输入6位包含数字的密码"
+               android:layout_marginLeft="@dimen/m20"
+               android:layout_marginTop="@dimen/m6"
+               android:textColor="@color/color_929292"
+               android:textSize="12sp"/>
+   </LinearLayout>
+
+    <FrameLayout
+            android:layout_below="@+id/ll_main"
+            android:layout_width="@dimen/m225"
+            android:layout_height="@dimen/m50"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/m200">
+
+        <TextView
+                android:id="@+id/login_btn"
+                android:layout_width="@dimen/m225"
+                android:layout_height="@dimen/m50"
+                android:gravity="center"
+                android:layout_gravity="bottom"
+                android:text="完  成"
+                android:background="@drawable/shape_btn_bg_40"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+    </FrameLayout>
+</RelativeLayout>

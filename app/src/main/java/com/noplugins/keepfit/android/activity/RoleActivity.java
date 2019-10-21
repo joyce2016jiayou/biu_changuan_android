@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.google.gson.Gson;
 import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.adapter.RoleAdapter;
@@ -96,6 +97,7 @@ public class RoleActivity extends BaseActivity {
         back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                setResult(3);
                 finish();
             }
         });
@@ -124,29 +126,41 @@ public class RoleActivity extends BaseActivity {
         rc_view_add.setNestedScrollingEnabled(false);//禁止滑动
         datas = new ArrayList<>();
         completeDatas = new ArrayList<>();
-        roleAdapter_add = new RoleAdapter(this, completeDatas,posts, R.layout.role_item);
+        roleAdapter_add = new RoleAdapter(completeDatas);
         rc_view_add.setAdapter(roleAdapter_add);
-        roleAdapter_add.setOnItemDeleteClickListener(new RoleAdapter.onItemClick() {
+        roleAdapter = new RoleAdapter(datas);
+        rc_view.setAdapter(roleAdapter);
+        roleAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
-            public void onItemClick(int position,ArrayList<RoleBean.RoleEntity> datas) {
-                datas.remove(position);
-                roleAdapter_add.notifyItemRemoved(position);
-                if (position != datas.size()) {
-                    roleAdapter_add.notifyItemRangeChanged(position, roleAdapter_add.getItemCount());
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                switch (view.getId()){
+                    case R.id.Add_btn:
+                        delete(position);
+                        break;
+                    case R.id.post_type_spinner:
+
+                        break;
                 }
             }
         });
 
 
-        roleAdapter = new RoleAdapter(this, datas,posts, R.layout.role_item);
-        rc_view.setAdapter(roleAdapter);
-        roleAdapter.setOnItemDeleteClickListener(new RoleAdapter.onItemClick() {
+        roleAdapter_add.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
-            public void onItemClick(int position,ArrayList<RoleBean.RoleEntity> datas) {
-                delete(position);
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                switch (view.getId()){
+                    case R.id.Add_btn:
+                        adapter.notifyItemRemoved(position);
+                        if (position != completeDatas.size()) {
+                            adapter.notifyItemRangeChanged(position, completeDatas.size() - position);
+                        }
+                        completeDatas.remove(position);
+                        break;
+                    case R.id.post_type_spinner:
+                        break;
+                }
             }
         });
-
 
     }
 
@@ -283,5 +297,11 @@ public class RoleActivity extends BaseActivity {
                     }
                 }, this, true));
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        setResult(3);
+        finish();
     }
 }

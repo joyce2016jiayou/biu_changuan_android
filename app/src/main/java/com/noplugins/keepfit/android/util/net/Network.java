@@ -11,6 +11,8 @@ import com.noplugins.keepfit.android.bean.CalenderEntity;
 import com.noplugins.keepfit.android.bean.DictionaryeBean;
 import com.noplugins.keepfit.android.bean.LoginBean;
 import com.noplugins.keepfit.android.bean.PrivateDetailBean;
+import com.noplugins.keepfit.android.bean.TeacherBean;
+import com.noplugins.keepfit.android.bean.TeacherDetailBean;
 import com.noplugins.keepfit.android.bean.RiChengBean;
 import com.noplugins.keepfit.android.bean.WxPayBean;
 import com.noplugins.keepfit.android.bean.mine.BalanceListBean;
@@ -185,6 +187,7 @@ public class Network {
     }
 
 
+
     private RequestBody retuen_json_object(Object params) {
         Gson gson = new Gson();
         String json_params = gson.toJson(params);
@@ -193,6 +196,7 @@ public class Network {
         RequestBody requestBody = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), json);
         return requestBody;
     }
+
 
 
     /**
@@ -208,6 +212,8 @@ public class Network {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
     }
+
+
 
 
     /**
@@ -353,6 +359,7 @@ public class Network {
     }
 
 
+
     /**
      * 课程列表
      *
@@ -467,6 +474,7 @@ public class Network {
     }
 
 
+
     /**
      * 获取教练列表
      *
@@ -557,13 +565,13 @@ public class Network {
      * @param subscriber
      * @return
      */
-    public Subscription teacherDetail(RequestBody params, Subscriber<Bean<Object>> subscriber) {
-        return service.teacherDetail(params)
-                .subscribeOn(Schedulers.io())
-                .unsubscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(subscriber);
-    }
+//    public Subscription teacherDetail(RequestBody params, Subscriber<Bean<Object>> subscriber) {
+//        return service.teacherDetail(params)
+//                .subscribeOn(Schedulers.io())
+//                .unsubscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(subscriber);
+//    }
 
     /**
      * 批量绑定角色
@@ -809,6 +817,114 @@ public class Network {
                 .subscribe(subscriber);
     }
 
+    /**
+     * 设置提现密码
+     */
+    public Subscription settingPayPassword(Map<String, Object> params, Subscriber<Bean<String>> subscriber) {
+        return service.settingPayPassword(retuen_json_params(params))
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 提现
+     * @param params
+     * @param subscriber
+     * @return
+     */
+    public Subscription withdrawDeposit(Map<String, Object> params, Subscriber<Bean<String>> subscriber) {
+        return service.withdrawDeposit(retuen_json_object(params))
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 教练详情
+     *
+     * @param subscriber
+     * @return
+     */
+    public Subscription teacherDetail(Map<String, Object> params, Subscriber<Bean<TeacherDetailBean>> subscriber) {
+        return service.teacherDetail(retuen_json_object(params))
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 添加教练列表
+     *
+     * @param subscriber
+     * @return
+     */
+    public Subscription teacherMannerList(Map<String, Object> params, Subscriber<Bean<List<TeacherBean>>> subscriber) {
+        return service.teacherMannerList(retuen_json_object(params))
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 教练管理
+     *
+     * @param subscriber
+     * @return
+     */
+    public Subscription teacherManner(Map<String, Object> params, Subscriber<Bean<List<TeacherBean>>> subscriber) {
+        return service.teacherManner(retuen_json_object(params))
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 同意，拒绝
+     * @param params
+     * @param subscriber
+     * @return
+     */
+    public Subscription agreeBindingArea(Map<String, Object> params, Subscriber<Bean<String>> subscriber) {
+        return service.agreeBindingArea(retuen_json_object(params))
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 精细化时间段
+     * @param params
+     * @param subscriber
+     * @return
+     */
+    public Subscription setHighTime(Map<String, Object> params, Subscriber<Bean<String>> subscriber) {
+        return service.setHighTime(retuen_json_object(params))
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 成本核算
+     * @param params
+     * @param subscriber
+     * @return
+     */
+    public Subscription updateCost(Map<String, Object> params, Subscriber<Bean<String>> subscriber) {
+        return service.updateCost(retuen_json_object(params))
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
     /**
      * 获取日历
      *

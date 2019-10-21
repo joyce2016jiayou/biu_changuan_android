@@ -354,7 +354,7 @@
                 android:layout_height="@dimen/m50"
                 android:background="@drawable/shape_btn_bg_40"
                 android:layout_gravity="bottom|center_horizontal"
-                android:text="完成上架"
+                android:text="保存设置"
                 android:textSize="20sp"
                 android:layout_marginTop="@dimen/m30"
                 android:textColor="@color/contents_text"

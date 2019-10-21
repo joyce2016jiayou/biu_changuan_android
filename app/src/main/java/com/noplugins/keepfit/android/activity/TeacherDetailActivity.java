@@ -85,24 +85,24 @@ public class TeacherDetailActivity extends BaseActivity {
         RequestBody requestBody = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), json);
         Log.e(TAG, "教练详情参数：" + json_params);
 
-        subscription = Network.getInstance("教练详情", this)
-                .teacherDetail(requestBody, new ProgressSubscriberNew<>(TeacherDetailEntity.class, new GsonSubscriberOnNextListener<TeacherDetailEntity>() {
-                    @Override
-                    public void on_post_entity(TeacherDetailEntity entity, String s) {
-                        Log.e("教练详情成功", "教练详情成功:");
-                        set_detail_value(entity);
-                    }
-                }, new SubscriberOnNextListener<Bean<Object>>() {
-                    @Override
-                    public void onNext(Bean<Object> result) {
-
-                    }
-
-                    @Override
-                    public void onError(String error) {
-                        Log.e("课程列表失败", "课程列表失败:" + error);
-                    }
-                }, this, true));
+//        subscription = Network.getInstance("教练详情", this)
+//                .teacherDetail(requestBody, new ProgressSubscriberNew<>(TeacherDetailEntity.class, new GsonSubscriberOnNextListener<TeacherDetailEntity>() {
+//                    @Override
+//                    public void on_post_entity(TeacherDetailEntity entity, String s) {
+//                        Log.e("教练详情成功", "教练详情成功:");
+//                        set_detail_value(entity);
+//                    }
+//                }, new SubscriberOnNextListener<Bean<Object>>() {
+//                    @Override
+//                    public void onNext(Bean<Object> result) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onError(String error) {
+//                        Log.e("课程列表失败", "课程列表失败:" + error);
+//                    }
+//                }, this, true));
 
     }
 

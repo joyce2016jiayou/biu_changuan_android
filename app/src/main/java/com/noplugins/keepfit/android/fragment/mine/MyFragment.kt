@@ -6,9 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.noplugins.keepfit.android.R
-import com.noplugins.keepfit.android.activity.AboutActivity
-import com.noplugins.keepfit.android.activity.ProductAdviceActivity
-import com.noplugins.keepfit.android.activity.ZhangHaoSafeActivity
+import com.noplugins.keepfit.android.activity.*
 import com.noplugins.keepfit.android.activity.mine.CgPriceActivity
 import com.noplugins.keepfit.android.activity.mine.CostAccountingActivity
 import com.noplugins.keepfit.android.activity.mine.TeacherManagerActivity
@@ -45,6 +43,10 @@ class MyFragment:BaseFragment(){
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setting()
+        ll_info.setOnClickListener {
+            val intent = Intent(activity, ChangGuandetailActivity::class.java)
+            activity!!.startActivityForResult(intent, 1)
+        }
     }
 
     private fun setting() {
@@ -85,7 +87,7 @@ class MyFragment:BaseFragment(){
                          activity!!.startActivityForResult(intent, 1)
                     }
                     "权限管理" -> {
-                        val intent = Intent(activity, WalletActivity::class.java)
+                        val intent = Intent(activity, RoleActivity::class.java)
                          activity!!.startActivityForResult(intent, 1)
                     }
                     "场馆价格" -> {

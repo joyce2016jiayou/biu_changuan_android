@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.huantansheng.easyphotos.EasyPhotos;
+import com.huantansheng.easyphotos.models.album.entity.Photo;
 import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.adapter.ExRecyclerAdapter;
 import com.noplugins.keepfit.android.base.BaseActivity;
@@ -26,6 +28,7 @@ import com.noplugins.keepfit.android.util.ui.ProgressUtil;
 import com.noplugins.keepfit.android.util.ui.StepView;
 import com.noplugins.keepfit.android.util.ui.jiugongge.CCRSortableNinePhotoLayout;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -56,6 +59,8 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
     ImageView delete_icon_btn;
     @BindView(R.id.logo_image)
     ImageView logo_image;
+    @BindView(R.id.select_numbers_tv)
+    TextView select_numbers_tv;
 
     @BindView(R.id.changguan_name)
     EditText changguan_name;
@@ -126,6 +131,7 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
         back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                setResult(3);
                 finish();
             }
         });
@@ -271,5 +277,49 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
     @Override
     public void onClickNinePhotoItem(CCRSortableNinePhotoLayout sortableNinePhotoLayout, View view, int position, String model, ArrayList<String> models) {
 
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (RESULT_OK == resultCode) {
+            //相机或相册回调
+            if (requestCode == 101) {
+                //返回对象集合：如果你需要了解图片的宽、高、大小、用户是否选中原图选项等信息，可以用这个
+                ArrayList<Photo> resultPhotos = data.getParcelableArrayListExtra(EasyPhotos.RESULT_PHOTOS);
+//                for (int i = 0; i < resultPhotos.size(); i++) {
+//                    Log.e("图片地址", resultPhotos.get(i).path);
+//                }
+                //返回图片地址集合：如果你只需要获取图片的地址，可以用这个
+                ArrayList<String> resultPaths = data.getStringArrayListExtra(EasyPhotos.RESULT_PATHS);
+                //返回图片地址集合时如果你需要知道用户选择图片时是否选择了原图选项，用如下方法获取
+                boolean selectedOriginal = data.getBooleanExtra(EasyPhotos.RESULT_SELECTED_ORIGINAL, false);
+                strings.addAll(resultPaths);
+                mPhotosSnpl.setData(strings);//设置九宫格
+                ValueResources.select_iamges_size = strings.size();
+                select_numbers_tv.setText(ValueResources.select_iamges_size + "/9");
+
+                return;
+            } else {//添加icon,上传icon
+                ArrayList<String> resultPaths = data.getStringArrayListExtra(EasyPhotos.RESULT_PATHS);
+                if (resultPaths.size() > 0) {
+                    icon_image_path = resultPaths.get(0);
+                    File icon_iamge_file = new File(icon_image_path);
+                    Glide.with(getApplicationContext()).load(icon_iamge_file).into(logo_image);
+                    delete_icon_btn.setVisibility(View.VISIBLE);
+                }
+
+            }
+
+
+        } else if (RESULT_CANCELED == resultCode) {
+            //Toast.makeText(this, "cancel", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        setResult(3);
+        finish();
     }
 }

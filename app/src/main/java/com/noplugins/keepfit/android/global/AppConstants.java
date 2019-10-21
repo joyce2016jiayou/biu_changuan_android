@@ -8,6 +8,8 @@ public class AppConstants {
     public static final String TOKEN = "login_token";
     public static final String CHANGGUAN_NUM = "changguan_num";
 
+    public static final String IS_TX = "istixian";
+
     public static final String FIRST_OPEN = "first_open";
     public static final String FIRST_QUANYI = "first_quanyi";
     public static final String FIRST_PASSWPRD = "first_password";

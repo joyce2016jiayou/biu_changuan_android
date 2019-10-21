@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+<CheckBox
+        android:id="@+id/ck_select"
+        android:layout_width="@dimen/m20"
+        android:layout_height="@dimen/m20"
+        android:button="@null"
+        android:layout_marginLeft="@dimen/m11"
+        android:layout_marginRight="@dimen/m5"
+        android:background="@drawable/btn_checkbox"/>
+
+    <RelativeLayout
+            android:id="@+id/rl_detail"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/m120"
+            android:background="@drawable/juxing_item_bg"
+            android:padding="@dimen/m14">
+        <ImageView
+                android:id="@+id/iv_cg_logo"
+                android:layout_width="@dimen/m90"
+                android:layout_height="@dimen/m90"/>
+        
+        <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/ll_cg"
+                android:orientation="horizontal"
+                android:layout_toRightOf="@+id/iv_cg_logo"
+                android:layout_marginLeft="@dimen/m20"
+                android:layout_marginTop="@dimen/m13">
+            <TextView
+                    android:id="@+id/tv_teacher_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/contents_text"
+                    android:textSize="13sp"
+                    tools:text="张三"/>
+            <!--todo-->
+        </FrameLayout>
+
+        <TextView
+                android:id="@+id/tv_service_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/iv_cg_logo"
+                android:layout_below="@id/ll_cg"
+                android:textSize="13sp"
+                tools:text="累计服务时长：210h"
+                android:layout_marginLeft="@dimen/m20"
+                android:layout_marginTop="@dimen/m13"
+                android:textColor="@color/color_4A4A4A"
+                />
+
+        <LinearLayout
+                android:layout_below="@+id/tv_service_time"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="@dimen/m20"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/m11"
+                android:layout_toRightOf="@id/iv_cg_logo"
+                android:gravity="center"
+                android:orientation="horizontal">
+            <com.noplugins.keepfit.android.util.ui.ZFlowLayout
+                android:id="@+id/fl_private_skill"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+        </LinearLayout>
+
+    </RelativeLayout>
+</LinearLayout>
