@@ -8,7 +8,6 @@ import android.graphics.Paint;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
-
 import com.othershe.calendarview.R;
 import com.othershe.calendarview.utils.CalendarUtil;
 

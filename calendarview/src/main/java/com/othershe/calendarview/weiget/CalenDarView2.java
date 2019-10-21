@@ -5,10 +5,7 @@ import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.util.SparseArray;
 import android.view.View;
-import android.widget.LinearLayout;
-
 import androidx.viewpager.widget.ViewPager;
-
 import com.othershe.calendarview.R;
 import com.othershe.calendarview.bean.AttrsBean;
 import com.othershe.calendarview.bean.DateBean;
@@ -20,11 +17,7 @@ import com.othershe.calendarview.listener.OnSingleChooseListener;
 import com.othershe.calendarview.utils.CalendarUtil;
 import com.othershe.calendarview.utils.SolarUtil;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class CalenDarView2 extends ViewPager{
     //记录当前PagerAdapter的position

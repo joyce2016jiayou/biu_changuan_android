@@ -1,7 +1,6 @@
 package com.othershe.calendarview.listener;
 
 import android.view.View;
-
 import com.othershe.calendarview.bean.DateBean;
 
 /**

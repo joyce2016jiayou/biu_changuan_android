@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -121,7 +120,7 @@ public class MonthView2 extends ViewGroup {
                 people__number_layout.setVisibility(VISIBLE);
                 class_number.setText(date.getClass_number());//课程数量
                 class_people.setText(date.getClass_people_number());//课程人数
-            }else{
+            } else {
                 class_number_layout.setVisibility(INVISIBLE);
                 people__number_layout.setVisibility(INVISIBLE);
 

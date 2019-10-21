@@ -9,6 +9,17 @@ public class DateBean {
     private String term;//节气
     private boolean is_out_class;//课程是否过期
 
+
+    public boolean isIs_show_current_day_color() {
+        return is_show_current_day_color;
+    }
+
+    public void setIs_show_current_day_color(boolean is_show_current_day_color) {
+        this.is_show_current_day_color = is_show_current_day_color;
+    }
+
+    private boolean is_show_current_day_color;
+
     public boolean isIs_show_circle() {
         return is_show_circle;
     }

@@ -1,12 +1,9 @@
 package com.othershe.calendarview.weiget;
 
-import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
-
 import androidx.viewpager.widget.PagerAdapter;
-
 import com.othershe.calendarview.bean.AttrsBean;
 import com.othershe.calendarview.bean.DateBean;
 import com.othershe.calendarview.bean.MothEntity;
@@ -16,7 +13,6 @@ import com.othershe.calendarview.utils.SolarUtil;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;

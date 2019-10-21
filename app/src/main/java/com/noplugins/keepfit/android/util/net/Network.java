@@ -7,8 +7,11 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.noplugins.keepfit.android.bean.CalenderEntity;
+import com.noplugins.keepfit.android.bean.DictionaryeBean;
 import com.noplugins.keepfit.android.bean.LoginBean;
 import com.noplugins.keepfit.android.bean.PrivateDetailBean;
+import com.noplugins.keepfit.android.bean.RiChengBean;
 import com.noplugins.keepfit.android.bean.WxPayBean;
 import com.noplugins.keepfit.android.bean.mine.BalanceListBean;
 import com.noplugins.keepfit.android.bean.mine.WalletBean;
@@ -182,7 +185,6 @@ public class Network {
     }
 
 
-
     private RequestBody retuen_json_object(Object params) {
         Gson gson = new Gson();
         String json_params = gson.toJson(params);
@@ -191,7 +193,6 @@ public class Network {
         RequestBody requestBody = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), json);
         return requestBody;
     }
-
 
 
     /**
@@ -207,8 +208,6 @@ public class Network {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
     }
-
-
 
 
     /**
@@ -354,7 +353,6 @@ public class Network {
     }
 
 
-
     /**
      * 课程列表
      *
@@ -467,7 +465,6 @@ public class Network {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
     }
-
 
 
     /**
@@ -812,7 +809,33 @@ public class Network {
                 .subscribe(subscriber);
     }
 
+    /**
+     * 获取日历
+     *
+     * @param subscriber
+     * @return
+     */
+    public Subscription get_rili(Map<String, Object> params, Subscriber<Bean<CalenderEntity>> subscriber) {
+        return service.get_rili(retuen_json_params(params))
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
 
-
+    public Subscription get_shouye_date(Map<String, Object> params, Subscriber<Bean<RiChengBean>> subscriber) {
+        return service.get_shouye_date(retuen_json_params(params))
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+    public Subscription get_types(Map<String, Object> params, Subscriber<Bean<List<DictionaryeBean>>> subscriber) {
+        return service.get_types(retuen_json_params(params))
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
 
 }

@@ -2,8 +2,11 @@ package com.noplugins.keepfit.android.util.net;
 
 
 import com.alibaba.fastjson.annotation.JSONField;
+import com.noplugins.keepfit.android.bean.CalenderEntity;
+import com.noplugins.keepfit.android.bean.DictionaryeBean;
 import com.noplugins.keepfit.android.bean.LoginBean;
 import com.noplugins.keepfit.android.bean.PrivateDetailBean;
+import com.noplugins.keepfit.android.bean.RiChengBean;
 import com.noplugins.keepfit.android.bean.WxPayBean;
 import com.noplugins.keepfit.android.bean.mine.BalanceListBean;
 import com.noplugins.keepfit.android.bean.mine.WalletBean;
@@ -78,7 +81,6 @@ public interface MyService {
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
     @POST("userlogin")
     Observable<Bean<LoginEntity>> login(@Body RequestBody json);
-
 
 
     /**
@@ -396,6 +398,7 @@ public interface MyService {
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
     @POST("memberOrderPay")
     Observable<Bean<String>> memberOrderPay(@Body RequestBody json);
+
     /**
      * 获取支付信息 -微信
      *
@@ -442,8 +445,8 @@ public interface MyService {
     Observable<Bean<BalanceListBean.ListBean>> myBalanceListDetail(@Body RequestBody json);
 
     /**
-     *
      * 修改手机号
+     *
      * @return
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
@@ -451,8 +454,8 @@ public interface MyService {
     Observable<Bean<String>> updatePhone(@Body RequestBody json);
 
     /**
-     *
      * 设置密码
+     *
      * @return
      */
     @FormUrlEncoded
@@ -460,13 +463,38 @@ public interface MyService {
     Observable<Bean<String>> setPassword(@FieldMap Map<String, Object> params);
 
     /**
-     *
      * 修改密码
+     *
      * @return
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
     @POST("forgetPassword")
     Observable<Bean<String>> forgetPassword(@Body RequestBody json);
+
+    /**
+     * 获取日历
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("yearView")
+    Observable<Bean<CalenderEntity>> get_rili(@Body RequestBody json);
+
+    /**
+     * 获取首页数据
+     *
+     * @return
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("areaSchedule")
+    Observable<Bean<RiChengBean>> get_shouye_date(@Body RequestBody json);
+
+    /**
+     * 获取首页类型
+     *
+     * @return
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("searchDict")
+    Observable<Bean<List<DictionaryeBean>>> get_types(@Body RequestBody json);
 
 
 }

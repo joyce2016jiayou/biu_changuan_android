@@ -112,4 +112,9 @@
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">@color/contents_text</item>
     </style>
+    <!--设置向右动画-->
+    <style name="top_to_bottom" parent="@android:style/Animation">
+        <item name="android:windowEnterAnimation">@anim/push_scale_left_in</item>
+        <item name="android:windowExitAnimation">@anim/push_scale_left_out</item>
+    </style>
 </resources>

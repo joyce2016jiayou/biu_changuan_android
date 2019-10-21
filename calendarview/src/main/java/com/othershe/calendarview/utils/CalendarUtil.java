@@ -3,7 +3,6 @@ package com.othershe.calendarview.utils;
 import android.content.Context;
 import android.text.TextUtils;
 import android.util.TypedValue;
-
 import com.othershe.calendarview.bean.DateBean;
 
 import java.util.ArrayList;

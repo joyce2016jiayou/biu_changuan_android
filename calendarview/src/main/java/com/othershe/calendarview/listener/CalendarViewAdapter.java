@@ -2,7 +2,6 @@ package com.othershe.calendarview.listener;
 
 import android.view.View;
 import android.widget.TextView;
-
 import com.othershe.calendarview.bean.DateBean;
 
 public interface CalendarViewAdapter {

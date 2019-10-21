@@ -11,7 +11,6 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.othershe.calendarview.R;
 import com.othershe.calendarview.bean.AttrsBean;
 import com.othershe.calendarview.bean.DateBean;
@@ -113,15 +112,9 @@ public class MonthView extends ViewGroup {
 
             if (date.isIs_show_circle()) {//是否显示圆点
                 circle_status.setVisibility(VISIBLE);//如果日期一致就显示圆点，默认是不显示
-                if (date.isIs_out_class()) {//过期
-                    circle_status.setImageResource(R.drawable.circle_bg_hui);
-                } else {
-                    circle_status.setImageResource(R.drawable.circle_bg);
-                }
             } else {
                 circle_status.setVisibility(GONE);
             }
-
 
             //设置上个月和下个月的阳历颜色
             if (date.getType() == 0 || date.getType() == 2) {
@@ -168,8 +161,11 @@ public class MonthView extends ViewGroup {
                     && mAttrsBean.getSingleDate()[1] == date.getSolar()[1]
                     && mAttrsBean.getSingleDate()[2] == date.getSolar()[2]) {
                 lastClickedView = view;
-                setDayColor(view, COLOR_SET);
+                //todo 当前日期
+                setDayColor(view, COLOR_SET, "true_init");
                 findSingleDate = true;
+                //Log.e("精神可嘉发来的", "" + mAttrsBean.getSingleDate()[2]);
+                chooseDays.add(mAttrsBean.getSingleDate()[2]);//保存选中的状态
             }
 
             //找到多选时默认选中的多个日期，并选中（如果有）
@@ -179,7 +175,7 @@ public class MonthView extends ViewGroup {
                             && d[0] == date.getSolar()[0]
                             && d[1] == date.getSolar()[1]
                             && d[2] == date.getSolar()[2]) {
-                        setDayColor(view, COLOR_SET);
+                        setDayColor(view, COLOR_SET, null);
                         chooseDays.add(d[2]);
                         break;
                     }
@@ -219,27 +215,30 @@ public class MonthView extends ViewGroup {
                         if (mAttrsBean.getChooseType() == 1 && chooseListener != null) {//多选的情况
                             boolean flag;
                             if (chooseDays.contains(day)) {
-                                setDayColor(v, COLOR_RESET);
+                                setDayColor(v, COLOR_RESET, null);
                                 chooseDays.remove(day);
                                 flag = false;
                             } else {
-                                setDayColor(v, COLOR_SET);
+                                setDayColor(v, COLOR_SET, null);
                                 chooseDays.add(day);
                                 flag = true;
                             }
                             calendarView.setChooseDate(day, flag, -1);
                             chooseListener.onMultiChoose(v, date, flag);
                         } else {
+                            // TODO: 2019-08-19 单选逻辑设置
                             calendarView.setLastClickDay(day);
                             if (lastClickedView != null) {
-                                setDayColor(lastClickedView, COLOR_RESET);
+                                setDayColor(lastClickedView, COLOR_RESET, null);
+                                /**将当前的日期永远设置成蓝色,所以刷新*/
+                                multiChooseRefresh1((HashSet<Integer>) chooseDays);
                             }
-                            setDayColor(v, COLOR_SET);
+                            setDayColor(v, COLOR_SET, null);
                             lastClickedView = v;
-
                             if (clickListener != null) {
                                 clickListener.onSingleChoose(v, date);
                             }
+
                         }
                     } else if (date.getType() == 0) {//点击上月
                         if (mAttrsBean.isSwitchChoose()) {
@@ -273,7 +272,8 @@ public class MonthView extends ViewGroup {
         text.setTag("holiday");
     }
 
-    private void setDayColor(View v, int type) {
+
+    private void setDayColor(View v, int type, String is_today) {
         TextView solarDay = (TextView) v.findViewById(R.id.solar_day);
         TextView lunarDay = (TextView) v.findViewById(R.id.lunar_day);
         LinearLayout lin_tv_bg = (LinearLayout) v.findViewById(R.id.lin_tv_bg);
@@ -290,10 +290,20 @@ public class MonthView extends ViewGroup {
                 lunarDay.setTextColor(mAttrsBean.getColorLunar());
             }
         } else if (type == 1) {
-            lin_tv_bg.setBackgroundResource(mAttrsBean.getDayBg());
-            solarDay.setTextColor(mAttrsBean.getColorChoose());
+            if (null != is_today && is_today.equals("true")) {
+                solarDay.setTextColor(getResources().getColor(R.color.color_75CEE1));
+            } else if (null != is_today && is_today.equals("true_init")) {
+                solarDay.setTextColor(getResources().getColor(R.color.white));
+                lin_tv_bg.setBackgroundResource(mAttrsBean.getDayBg());
+
+            } else {
+                lin_tv_bg.setBackgroundResource(mAttrsBean.getDayBg());
+                solarDay.setTextColor(mAttrsBean.getColorChoose());
+            }
             lunarDay.setTextColor(mAttrsBean.getColorChoose());
         }
+
+
     }
 
     @Override
@@ -304,9 +314,9 @@ public class MonthView extends ViewGroup {
         int width = wm.getDefaultDisplay().getWidth();
         int widthSpecSize = width;
 //        int widthSpecSize = View.MeasureSpec.getSize(widthMeasureSpec);
-        int heightSpecSize = dip2px(mContext, 470);
+        //int heightSpecSize = dip2px(mContext, 180);
 
-        //int heightSpecSize = View.MeasureSpec.getSize(heightMeasureSpec);
+        int heightSpecSize = View.MeasureSpec.getSize(heightMeasureSpec);
 
         int itemWidth = widthSpecSize / COLUMN;
 
@@ -367,7 +377,7 @@ public class MonthView extends ViewGroup {
 
     public void refresh(int day, boolean flag) {
         if (lastClickedView != null) {
-            setDayColor(lastClickedView, COLOR_RESET);
+            setDayColor(lastClickedView, COLOR_RESET, null);
         }
         if (!flag) {
             return;
@@ -376,7 +386,8 @@ public class MonthView extends ViewGroup {
         if (destView == null) {
             return;
         }
-        setDayColor(destView, COLOR_SET);
+
+        setDayColor(destView, COLOR_SET, null);
         lastClickedView = destView;
         invalidate();
     }
@@ -388,7 +399,15 @@ public class MonthView extends ViewGroup {
      */
     public void multiChooseRefresh(HashSet<Integer> set) {
         for (Integer day : set) {
-            setDayColor(findDestView(day), COLOR_SET);
+            setDayColor(findDestView(day), COLOR_SET, null);
+            chooseDays.add(day);
+        }
+        invalidate();
+    }
+
+    public void multiChooseRefresh1(HashSet<Integer> set) {
+        for (Integer day : set) {
+            setDayColor(findDestView(day), COLOR_SET, "true");
             chooseDays.add(day);
         }
         invalidate();

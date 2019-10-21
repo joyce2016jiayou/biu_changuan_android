@@ -8,17 +8,16 @@ import android.graphics.Paint;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
-
 import com.othershe.calendarview.R;
 import com.othershe.calendarview.utils.CalendarUtil;
 
 public class WeekView extends View {
 
-    //private String[] weekArray = {"日", "一", "二", "三", "四", "五", "六"};
-    private String[] weekArray = {"S", "M", "T", "W", "T", "F", "S"};// TODO: 2019-07-30
+    private String[] weekArray = {"日", "一", "二", "三", "四", "五", "六"};
+//    private String[] weekArray = {"S", "M", "T", "W", "T", "F", "S"};// TODO: 2019-07-30
 
-    private int weekSize=18;//文字尺寸
-    private int weekColor = Color.WHITE;//文字颜色
+    private int weekSize=15;//文字尺寸
+    private int weekColor = Color.BLACK;//文字颜色
 
     private Paint mPaint;
     private Context context;

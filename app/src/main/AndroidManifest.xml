@@ -73,13 +73,7 @@
         <activity android:name=".activity.mine.CostAccountingActivity" />
         <activity android:name=".activity.SubmitInformationSelectActivity"></activity>
         <activity android:name=".activity.mine.CgPriceActivity" />
-        <activity android:name=".activity.user.Login2Activity">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
-
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
-        </activity>
+        <activity android:name=".activity.user.Login2Activity"></activity>
         <activity android:name=".activity.BuyHuiYuanActivity"></activity>
         <activity android:name=".activity.HeTongActivity">
 
@@ -162,12 +156,11 @@
 
 
         </activity>
-        <activity android:name=".KeepFitActivity"
+        <activity
+            android:name=".KeepFitActivity"
             android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

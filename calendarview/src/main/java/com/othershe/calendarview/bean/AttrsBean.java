@@ -1,7 +1,6 @@
 package com.othershe.calendarview.bean;
 
 import android.graphics.Color;
-
 import com.othershe.calendarview.R;
 
 import java.util.List;

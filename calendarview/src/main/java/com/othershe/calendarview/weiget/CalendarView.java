@@ -4,25 +4,18 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.util.SparseArray;
-
 import androidx.viewpager.widget.ViewPager;
-
 import com.othershe.calendarview.R;
 import com.othershe.calendarview.bean.AttrsBean;
 import com.othershe.calendarview.bean.DateBean;
-import com.othershe.calendarview.bean.MothEntity;
 import com.othershe.calendarview.listener.CalendarViewAdapter;
 import com.othershe.calendarview.listener.OnMultiChooseListener;
-import com.othershe.calendarview.listener.OnSingleChooseListener;
 import com.othershe.calendarview.listener.OnPagerChangeListener;
+import com.othershe.calendarview.listener.OnSingleChooseListener;
 import com.othershe.calendarview.utils.CalendarUtil;
 import com.othershe.calendarview.utils.SolarUtil;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class CalendarView extends ViewPager {
     //记录当前PagerAdapter的position
@@ -98,10 +91,10 @@ public class CalendarView extends ViewPager {
         mAttrsBean.setEndDate(endDate);
     }
 
-    public void init(List<MothEntity.DataBean> mothEntities) {
+    public void init(List<String> mothEntities) {
         //根据设定的日期范围计算日历的页数
         count = (endDate[0] - startDate[0]) * 12 + endDate[1] - startDate[1] + 1;
-        calendarPagerAdapter = new CalendarPagerAdapter(count,mothEntities);
+        calendarPagerAdapter = new CalendarPagerAdapter(count, mothEntities);
         calendarPagerAdapter.setAttrsBean(mAttrsBean);
         calendarPagerAdapter.setOnCalendarViewAdapter(item_layout, calendarViewAdapter);
         setAdapter(calendarPagerAdapter);
@@ -178,10 +171,11 @@ public class CalendarView extends ViewPager {
         if (mAttrsBean.getChooseType() == 1) {//多选
             if (chooseDate.get(position) != null)
                 monthView.multiChooseRefresh(chooseDate.get(position));
-        } else {
+        } else {//单选
             //单选时，如果设置切换月份不选中上次选中的日期但如果切换回有选中日期的页则需要刷新选中，或者切换选中开启则需要刷新选中
             boolean flag = (!mAttrsBean.isSwitchChoose() && lastClickDate[0] == position)
                     || mAttrsBean.isSwitchChoose();
+
             monthView.refresh(lastClickDate[1], flag);
         }
     }
@@ -469,6 +463,7 @@ public class CalendarView extends ViewPager {
         if (!isIllegal(singleDate)) {
             singleDate = null;
         }
+        mAttrsBean.getSingleDate();
         mAttrsBean.setSingleDate(singleDate);
         return this;
     }

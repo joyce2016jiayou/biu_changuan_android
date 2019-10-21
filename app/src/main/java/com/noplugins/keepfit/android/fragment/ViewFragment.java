@@ -123,10 +123,10 @@ public class ViewFragment extends ViewPagerFragment {
     private void getDates() {
         Map<String, Object> params = new HashMap<>();
         //当前的月份
-        if(cDate[1]<=9){
-            params.put("month",cDate[0]+"0"+cDate[1]);
-        }else{
-            params.put("month",""+cDate[0]+cDate[1]);
+        if (cDate[1] <= 9) {
+            params.put("month", cDate[0] + "0" + cDate[1]);
+        } else {
+            params.put("month", "" + cDate[0] + cDate[1]);
         }
         Gson gson = new Gson();
         String json_params = gson.toJson(params);
@@ -140,10 +140,10 @@ public class ViewFragment extends ViewPagerFragment {
                     public void on_post_entity(MothEntity entity, String s) {
                         dataBeans = entity.getData();
                         Log.e("获取月视角成功", entity.getData().size() + "获取月视角成功" + s);
-                        for(int i=0;i<entity.getData().size();i++){
-                            Log.e("DayEntity数据Days",entity.getData().get(i).getDays()+"");
-                            Log.e("DayEntity数据Count",entity.getData().get(i).getCount()+"");
-                            Log.e("DayEntity数据Num",entity.getData().get(i).getNum()+"");
+                        for (int i = 0; i < entity.getData().size(); i++) {
+                            Log.e("DayEntity数据Days", entity.getData().get(i).getDays() + "");
+                            Log.e("DayEntity数据Count", entity.getData().get(i).getCount() + "");
+                            Log.e("DayEntity数据Num", entity.getData().get(i).getNum() + "");
                         }
 
                     }
@@ -182,21 +182,22 @@ public class ViewFragment extends ViewPagerFragment {
                     shijiao_qiehuan_btn.setText("日");
                     viewpager_content.setCurrentItem(1);
                     xiala_icon.setVisibility(View.INVISIBLE);
-                    if(cDate[1]<=9){
-                        date_tv.setText("0"+cDate[1]+"月");//显示当前月份
-                    }else{
-                        date_tv.setText(cDate[1]+"月");//显示当前月份
+                    if (cDate[1] <= 9) {
+                        date_tv.setText("0" + cDate[1] + "月");//显示当前月份
+                    } else {
+                        date_tv.setText(cDate[1] + "月");//显示当前月份
                     }
 
 
                 }
             }
         });
-        date_tv.setText(DateHelper.get_date2(cDate[1],cDate[2]));
+        date_tv.setText(DateHelper.get_date2(cDate[1], cDate[2]));
         //扫码按钮
         saoma_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 AndPermission.with(getActivity())
                         .permission(Permission.CAMERA, Permission.READ_EXTERNAL_STORAGE)
                         .onGranted(new Action() {
@@ -233,6 +234,7 @@ public class ViewFragment extends ViewPagerFragment {
                                 Toast.makeText(getActivity(), "没有权限无法扫描呦", Toast.LENGTH_LONG).show();
                             }
                         }).start();
+
             }
         });
 
@@ -266,7 +268,7 @@ public class ViewFragment extends ViewPagerFragment {
     @Override
     public void onResume() {
         int id = getActivity().getIntent().getIntExtra("id", 0);
-        if(id==2){
+        if (id == 2) {
             viewpager_content.setCurrentItem(0);
         }
         super.onResume();
@@ -301,12 +303,12 @@ public class ViewFragment extends ViewPagerFragment {
         //设置逻辑
         CalendarView calendarView = view.findViewById(R.id.calendar);
         TextView title_tv = (TextView) view.findViewById(R.id.title);
-        calendarView
-                .setStartEndDate("2019.01", "2025.12")
-                .setDisableStartEndDate("2019.01.01", "2025.12.30")
-                .setInitDate(cDate[0] + "." + cDate[1])
-                .setSingleDate(cDate[0] + "." + cDate[1] + "." + cDate[2])
-                .init(dataBeans);
+//        calendarView
+//                .setStartEndDate("2019.01", "2025.12")
+//                .setDisableStartEndDate("2019.01.01", "2025.12.30")
+//                .setInitDate(cDate[0] + "." + cDate[1])
+//                .setSingleDate(cDate[0] + "." + cDate[1] + "." + cDate[2])
+//                .init(dataBeans);
 
         //设置title
         title_tv.setText(cDate[0] + "年" + cDate[1] + "月");
@@ -327,7 +329,7 @@ public class ViewFragment extends ViewPagerFragment {
         calendarView.setOnSingleChooseListener(new OnSingleChooseListener() {
             @Override
             public void onSingleChoose(View view, DateBean date) {
-                date_tv.setText(DateHelper.get_date2(date.getSolar()[1],date.getSolar()[2]));
+                date_tv.setText(DateHelper.get_date2(date.getSolar()[1], date.getSolar()[2]));
                 popupWindow.dismiss();
                 //日视角刷新数据
                 String select_date = DateHelper.get_date(date.getSolar()[0], date.getSolar()[1], date.getSolar()[2]);
@@ -338,8 +340,6 @@ public class ViewFragment extends ViewPagerFragment {
                 intent.putExtra("select_date", select_date);
 
                 LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(intent);
-
-
             }
         });
 
@@ -356,6 +356,7 @@ public class ViewFragment extends ViewPagerFragment {
 
     //注册广播接收器
     LocalBroadcastManager broadcastManager;
+
     private void registerReceiver() {
         broadcastManager = LocalBroadcastManager.getInstance(getActivity());
         IntentFilter intentFilter = new IntentFilter();
@@ -372,16 +373,16 @@ public class ViewFragment extends ViewPagerFragment {
                 String select_month = intent.getStringExtra("select_month");
                 String select_date = intent.getStringExtra("select_date");
                 String month_select_date = intent.getStringExtra("mselect_date");
-                Log.e("月视角选择的日期",month_select_date);
+                Log.e("月视角选择的日期", month_select_date);
                 // 在主线程中刷新UI，用Handler来实现
                 new Handler().post(new Runnable() {
                     public void run() {
-                        Log.e("表示从月视角进来的", "选择日期"+month_select_date);
+                        Log.e("表示从月视角进来的", "选择日期" + month_select_date);
                         //切换日视角需要更新的view
                         viewpager_content.setCurrentItem(0);
                         shijiao_qiehuan_btn.setText("月");
                         xiala_icon.setVisibility(View.VISIBLE);
-                        String select_data_tv= DateHelper.get_date2(Integer.valueOf(select_month),Integer.valueOf(select_date));
+                        String select_data_tv = DateHelper.get_date2(Integer.valueOf(select_month), Integer.valueOf(select_date));
                         date_tv.setText(select_data_tv);
                         //更新日视角数据
                         Intent intent = new Intent("zachary");
@@ -391,16 +392,17 @@ public class ViewFragment extends ViewPagerFragment {
 
                     }
                 });
-            }else if("upadte_month".equals(refresh)) {//切换月份
+            } else if ("upadte_month".equals(refresh)) {//切换月份
                 String change_month = intent.getStringExtra("change_month");
-                if(Integer.valueOf(change_month)<=9){
-                    date_tv.setText("0"+change_month+"月");
-                }else{
-                    date_tv.setText(change_month+"月");
+                if (Integer.valueOf(change_month) <= 9) {
+                    date_tv.setText("0" + change_month + "月");
+                } else {
+                    date_tv.setText(change_month + "月");
                 }
             }
         }
     };
+
     @Override
     public void onDetach() {
         super.onDetach();

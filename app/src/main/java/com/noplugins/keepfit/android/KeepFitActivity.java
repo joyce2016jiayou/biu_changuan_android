@@ -25,6 +25,7 @@ import com.noplugins.keepfit.android.base.BaseActivity;
 import com.noplugins.keepfit.android.base.MyApplication;
 import com.noplugins.keepfit.android.entity.CheckEntity;
 import com.noplugins.keepfit.android.entity.MaxMessageEntity;
+import com.noplugins.keepfit.android.fragment.RiChengFragment;
 import com.noplugins.keepfit.android.fragment.ViewFragment;
 import com.noplugins.keepfit.android.fragment.MineFragment;
 import com.noplugins.keepfit.android.fragment.MessageFragment;
@@ -80,6 +81,7 @@ public class KeepFitActivity extends BaseActivity {
     private int music;//定义一个整型用load（）；来设置suondID
     private List<Fragment> tabFragments = new ArrayList<>();
     ContentPagerAdapterMy contentAdapter;
+
     @Override
     public void initBundle(Bundle bundle) {
     }
@@ -89,7 +91,7 @@ public class KeepFitActivity extends BaseActivity {
     public void initView() {
         setContentLayout(R.layout.activity_keepfit);
         ButterKnife.bind(this);
-        if (SpUtils.getInt(getApplicationContext(), AppConstants.USER_TYPE) == 3){
+        if (SpUtils.getInt(getApplicationContext(), AppConstants.USER_TYPE) == 3) {
             btn_shipu.setVisibility(View.GONE);
         }
         isShowTitle(false);
@@ -97,7 +99,7 @@ public class KeepFitActivity extends BaseActivity {
         //注册eventbus
         //EventBus.getDefault().register(this);
         //初始化页面
-        tabFragments.add(ViewFragment.homeInstance("第一页"));
+        tabFragments.add(RiChengFragment.homeInstance("第一页"));
         tabFragments.add(StatisticsFragment.Companion.newInstance("第二页"));
         tabFragments.add(MessageFragment.newInstance("第三页"));
         tabFragments.add(MyFragment.Companion.newInstance("第四页"));
@@ -127,10 +129,10 @@ public class KeepFitActivity extends BaseActivity {
         super.onResume();
         if (null != getIntent().getExtras()) {
             Bundle parms = getIntent().getExtras();
-            if (parms.getString("jpush_enter","").equals("")){
+            if (parms.getString("jpush_enter", "").equals("")) {
                 return;
             }
-            if (parms.getString("jpush_enter","").equals("jpush_enter1")) {
+            if (parms.getString("jpush_enter", "").equals("jpush_enter1")) {
 
                 viewpager_content.setCurrentItem(2);
                 xianshi_three();
@@ -224,9 +226,6 @@ public class KeepFitActivity extends BaseActivity {
     }
 
 
-
-
-
     @OnClick({R.id.btn_home, R.id.btn_shipu, R.id.btn_movie, R.id.btn_mine})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -260,7 +259,7 @@ public class KeepFitActivity extends BaseActivity {
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        Log.d("这是什么？","这是我的锅吧");
+        Log.d("这是什么？", "这是我的锅吧");
         viewpager_content.setCurrentItem(3);
         xianshi_four();
     }
@@ -297,18 +296,18 @@ public class KeepFitActivity extends BaseActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==1){
+        if (requestCode == 1) {
             // 在这设置选中你要显示的fragment
-            if (resultCode == 0){
+            if (resultCode == 0) {
                 viewpager_content.setCurrentItem(0);
                 xianshi_one();
-            } else if (resultCode == 1){
+            } else if (resultCode == 1) {
                 viewpager_content.setCurrentItem(1);
                 xianshi_two();
-            } else if (resultCode == 2){
+            } else if (resultCode == 2) {
                 viewpager_content.setCurrentItem(2);
                 xianshi_three();
-            } else if (resultCode == 3){
+            } else if (resultCode == 3) {
                 viewpager_content.setCurrentItem(3);
                 xianshi_four();
             }
