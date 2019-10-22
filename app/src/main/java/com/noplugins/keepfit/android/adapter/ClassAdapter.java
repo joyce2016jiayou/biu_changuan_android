@@ -93,16 +93,25 @@ public class ClassAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder> i
                 holder.status_img.setImageResource(R.drawable.ongoing);
             }
             if (resultBean.getCourseType() == 1) {//团课
-                holder.type_icon_tv.setText("团");
                 holder.type_icon_bg.setBackgroundResource(R.drawable.zi_bg);
             } else if (resultBean.getCourseType() == 2) {//私教
-                holder.type_icon_tv.setText("私");
                 holder.type_icon_bg.setBackgroundResource(R.drawable.trainer);
             } else {//健身
-                holder.type_icon_tv.setText("馆");
                 holder.type_icon_bg.setBackgroundResource(R.drawable.venue);
             }
-            holder.phone_or_name_tv.setText(resultBean.getPerson() + "人");
+            String daochang_person = "";
+            if (resultBean.getApplayNum().length() > 0) {
+                daochang_person = resultBean.getApplayNum();
+            } else {
+                daochang_person = "0";
+            }
+            String max_person = "";
+            if (resultBean.getMaxNum().length() > 0) {
+                max_person = resultBean.getMaxNum();
+            } else {
+                max_person = "0";
+            }
+            holder.phone_or_name_tv.setText(daochang_person + "/" + max_person + "人");
             holder.time_tv.setText(resultBean.getCourseTime());
             holder.class_type.setText(resultBean.getClassName());
             holder.money_tv.setText(resultBean.getPrice());

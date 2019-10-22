@@ -317,11 +317,6 @@ public class RiChengFragment extends ViewPagerFragment {
     }
 
     private void init_class_date_resource() {
-//        Map<String, Object> params = new HashMap<>();
-//        params.put("areaNum", "GYM19091216883274");
-//        params.put("date", "2019-10-15");
-//        params.put("courseType", "2");
-//        params.put("courseStatus", "3");
         Map<String, Object> params1 = new HashMap<>();
         params1.put("areaNum", "GYM19091216883274");//todo替换场馆编号
         params1.put("date", select_date_str);

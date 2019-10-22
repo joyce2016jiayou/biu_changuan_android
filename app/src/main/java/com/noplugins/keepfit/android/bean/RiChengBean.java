@@ -51,6 +51,29 @@ public class RiChengBean {
         private String className;
         private String userName;
         private String courseTime;
+        private String applayNum;
+
+        public String getApplayNum() {
+            return applayNum;
+        }
+
+        public void setApplayNum(String applayNum) {
+            this.applayNum = applayNum;
+        }
+
+        public String getMaxNum() {
+            return maxNum;
+        }
+
+        public void setMaxNum(String maxNum) {
+            this.maxNum = maxNum;
+        }
+
+        private String maxNum;
+
+
+
+
 
         public int getCourseType() {
             return courseType;
