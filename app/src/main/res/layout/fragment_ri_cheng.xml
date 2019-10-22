@@ -228,6 +228,7 @@
             android:id="@+id/select_status_btn"
             android:layout_width="@dimen/m103"
             android:layout_height="@dimen/m29"
+            android:layout_marginLeft="@dimen/m18"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:background="@drawable/filter_box1">

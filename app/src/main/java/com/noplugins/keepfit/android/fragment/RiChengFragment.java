@@ -18,10 +18,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
 import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.activity.AddClassActivity;
+import com.noplugins.keepfit.android.adapter.ClassAdapter;
 import com.noplugins.keepfit.android.adapter.TypeAdapter;
 import com.noplugins.keepfit.android.bean.CalenderEntity;
 import com.noplugins.keepfit.android.bean.DateViewEntity;
@@ -94,7 +96,16 @@ public class RiChengFragment extends ViewPagerFragment {
     ImageView saoma_btn;
     @BindView(R.id.more_btn)
     LinearLayout more_btn;
-
+    @BindView(R.id.status_tv)
+    TextView status_tv;
+    @BindView(R.id.types_tv)
+    TextView types_tv;
+    @BindView(R.id.select_status_btn)
+    RelativeLayout select_status_btn;
+    @BindView(R.id.select_types_btn)
+    RelativeLayout select_types_btn;
+    @BindView(R.id.class_recycler_view)
+    RecyclerView class_recycler_view;
     private String select_date_str = "";
     private View view;
     private int[] cDate;
@@ -138,7 +149,7 @@ public class RiChengFragment extends ViewPagerFragment {
         select_store_type.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                select_type_pop();
+                select_store_pop();
             }
         });
 
@@ -207,6 +218,49 @@ public class RiChengFragment extends ViewPagerFragment {
                 getActivity().startActivity(intent);
             }
         });
+        //选择状态
+        select_status_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                select_status_pop();
+            }
+        });
+        //选择类型
+        select_types_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                select_types_pop();
+            }
+        });
+    }
+
+
+    private void select_types_pop() {
+        CommonPopupWindow popupWindow = new CommonPopupWindow.Builder(getActivity())
+                .setView(R.layout.select_type_layout)
+                .setBackGroundLevel(1f)//0.5f
+                .setAnimationStyle(R.style.top_to_bottom)
+                .setWidthAndHeight(select_types_btn.getWidth() - 20,
+                        WindowManager.LayoutParams.WRAP_CONTENT)
+                .setOutSideTouchable(true).create();
+        //popupWindow.showAsDropDown(select_zhengshu_type);
+        popupWindow.showAsDropDown(select_types_btn, 15, -20);
+        /**设置逻辑*/
+        View view = popupWindow.getContentView();
+        List<String> strings = new ArrayList<>();
+        for (int i = 0; i < select_types.size(); i++) {
+            strings.add(select_types.get(i).getName());
+        }
+        TypeAdapter typeAdapter = new TypeAdapter(strings, getActivity());
+        ListView listView = view.findViewById(R.id.listview);
+        listView.setAdapter(typeAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                types_tv.setText(select_types.get(i).getName());
+                popupWindow.dismiss();
+            }
+        });
     }
 
     private void get_types() {
@@ -249,7 +303,6 @@ public class RiChengFragment extends ViewPagerFragment {
                         }, getActivity(), false));
     }
 
-
     private void init_class_date_resource(String select_date) {
         Map<String, Object> params = new HashMap<>();
         params.put("areaNum", "GYM19091216883274");
@@ -269,6 +322,18 @@ public class RiChengFragment extends ViewPagerFragment {
                                 }
                                 init_clander_view(dates);
 
+                                LinearLayoutManager class_linearLayoutManager = new LinearLayoutManager(getActivity());
+                                class_recycler_view.setLayoutManager(class_linearLayoutManager);
+
+                                //设置课程数据
+                                ClassAdapter classAdapter = new ClassAdapter(result.getData().getResult(), getActivity());
+                                class_recycler_view.setAdapter(classAdapter);
+                                classAdapter.setOnItemClickListener(new ClassAdapter.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(View view, int position) {
+
+                                    }
+                                });
 
                             }
 
@@ -280,7 +345,6 @@ public class RiChengFragment extends ViewPagerFragment {
 
 
     }
-
 
     private void init_clander_view(List<String> strings) {
         title.setText(cDate[0] + "年" + cDate[1] + "月");
@@ -323,12 +387,40 @@ public class RiChengFragment extends ViewPagerFragment {
         });
     }
 
-    private void select_type_pop() {
+    private void select_status_pop() {
         CommonPopupWindow popupWindow = new CommonPopupWindow.Builder(getActivity())
                 .setView(R.layout.select_type_layout)
                 .setBackGroundLevel(1f)//0.5f
                 .setAnimationStyle(R.style.top_to_bottom)
-                .setWidthAndHeight(select_store_type.getWidth() - 30,
+                .setWidthAndHeight(select_status_btn.getWidth() - 20,
+                        WindowManager.LayoutParams.WRAP_CONTENT)
+                .setOutSideTouchable(true).create();
+        //popupWindow.showAsDropDown(select_zhengshu_type);
+        popupWindow.showAsDropDown(select_status_btn, 15, -20);
+        /**设置逻辑*/
+        View view = popupWindow.getContentView();
+        List<String> strings = new ArrayList<>();
+        for (int i = 0; i < select_status.size(); i++) {
+            strings.add(select_status.get(i).getName());
+        }
+        TypeAdapter typeAdapter = new TypeAdapter(strings, getActivity());
+        ListView listView = view.findViewById(R.id.listview);
+        listView.setAdapter(typeAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                status_tv.setText(select_status.get(i).getName());
+                popupWindow.dismiss();
+            }
+        });
+    }
+
+    private void select_store_pop() {
+        CommonPopupWindow popupWindow = new CommonPopupWindow.Builder(getActivity())
+                .setView(R.layout.select_type_layout)
+                .setBackGroundLevel(1f)//0.5f
+                .setAnimationStyle(R.style.top_to_bottom)
+                .setWidthAndHeight(select_store_type.getWidth() - 20,
                         WindowManager.LayoutParams.WRAP_CONTENT)
                 .setOutSideTouchable(true).create();
         //popupWindow.showAsDropDown(select_zhengshu_type);
@@ -364,7 +456,6 @@ public class RiChengFragment extends ViewPagerFragment {
         /**
          * 处理二维码扫描结果
          */
-        // 扫描二维码/条码回传
         if (requestCode == REQUEST_CODE_SCAN && resultCode == RESULT_OK) {
             if (data != null) {
                 String content = data.getStringExtra(Constant.CODED_CONTENT);

@@ -165,12 +165,7 @@
         <activity
             android:name=".SplashActivity"
             android:screenOrientation="portrait"></activity>
-        <activity
-            android:name=".KeepFitActivity"
-            android:screenOrientation="portrait">
 
-
-        </activity>
         <activity
             android:name=".KeepFitActivity"
             android:launchMode="singleTask">
