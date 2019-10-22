@@ -170,7 +170,10 @@ public class ExRecyclerAdapter extends RecyclerView.Adapter<ExRecyclerAdapter.Vi
             holder.spinner_changsuo_type.setSelectedIndex(hashMap.get(position));
         }
 
-
+        if (datas.size() > 0){
+            holder.xianzhi_number.setText(datas.get(position).getPlace());
+            holder.spinner_changsuo_type.setSelectedIndex(datas.get(position).getType());
+        }
 
 
 

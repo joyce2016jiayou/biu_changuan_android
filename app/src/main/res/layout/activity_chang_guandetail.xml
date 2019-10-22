@@ -55,6 +55,7 @@
                     android:layout_marginBottom="19dp"
                     android:layout_marginRight="20dp"
                     android:text="@string/tv123"
+                    android:id="@+id/tv_complete"
                     android:textColor="@color/top_heiziti"
                     android:textSize="17sp" />
             </RelativeLayout>

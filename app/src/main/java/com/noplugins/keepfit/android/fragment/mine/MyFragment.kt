@@ -13,11 +13,17 @@ import com.noplugins.keepfit.android.activity.mine.TeacherManagerActivity
 import com.noplugins.keepfit.android.activity.mine.WalletActivity
 import com.noplugins.keepfit.android.adapter.mine.FunctionAdapter
 import com.noplugins.keepfit.android.base.BaseFragment
+import com.noplugins.keepfit.android.bean.ChangguanBean
 import com.noplugins.keepfit.android.bean.mine.MineFunctionBean
 import com.noplugins.keepfit.android.global.AppConstants
 import com.noplugins.keepfit.android.util.BaseUtils
 import com.noplugins.keepfit.android.util.SpUtils
+import com.noplugins.keepfit.android.util.net.Network
+import com.noplugins.keepfit.android.util.net.entity.Bean
+import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriber
+import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener
 import kotlinx.android.synthetic.main.fragment_mine.*
+import java.util.HashMap
 
 class MyFragment:BaseFragment(){
     companion object {
@@ -42,6 +48,7 @@ class MyFragment:BaseFragment(){
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        requestArea()
         setting()
         ll_info.setOnClickListener {
             val intent = Intent(activity, ChangGuandetailActivity::class.java)
@@ -119,6 +126,34 @@ class MyFragment:BaseFragment(){
                 }
             }
         }
+    }
+
+    private fun requestArea(){
+        val params = HashMap<String, Any>()
+//        params["userNum"] = SpUtils.getString(this, AppConstants.USER_NAME)
+        params["areaNum"] = SpUtils.getString(activity,AppConstants.CHANGGUAN_NUM)
+
+        val subscription = Network.getInstance("我的", activity)
+                .myArea(
+                        params,
+                        ProgressSubscriber("我的", object : SubscriberOnNextListener<Bean<ChangguanBean>> {
+                            override fun onNext(result: Bean<ChangguanBean>) {
+                                setting(result.data)
+                            }
+
+                            override fun onError(error: String) {
+
+
+                            }
+                        }, activity, false)
+                )
+    }
+
+    private fun setting(cg:ChangguanBean){
+        tv_user_Name.text = cg.area.areaName
+        tv_score.text = "${cg.area.finalGradle}分"
+        tv_cg_time.text = "营业时间：${cg.area.businessStart}-${cg.area.businessEnd}"
+        tv_cg_address.text = cg.area.address
     }
 
 }

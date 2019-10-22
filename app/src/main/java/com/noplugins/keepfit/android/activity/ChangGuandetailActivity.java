@@ -7,7 +7,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,18 +23,40 @@ import com.huantansheng.easyphotos.models.album.entity.Photo;
 import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.adapter.ExRecyclerAdapter;
 import com.noplugins.keepfit.android.base.BaseActivity;
+import com.noplugins.keepfit.android.base.MyApplication;
+import com.noplugins.keepfit.android.bean.ChangguanBean;
+import com.noplugins.keepfit.android.bean.UpPicBean;
 import com.noplugins.keepfit.android.entity.BiaoqianEntity;
+import com.noplugins.keepfit.android.entity.InformationEntity;
 import com.noplugins.keepfit.android.entity.ItemBean;
+import com.noplugins.keepfit.android.entity.QiNiuToken;
+import com.noplugins.keepfit.android.global.AppConstants;
 import com.noplugins.keepfit.android.resource.ValueResources;
 import com.noplugins.keepfit.android.util.GlideEngine;
+import com.noplugins.keepfit.android.util.SpUtils;
+import com.noplugins.keepfit.android.util.net.Network;
+import com.noplugins.keepfit.android.util.net.entity.Bean;
+import com.noplugins.keepfit.android.util.net.progress.GsonSubscriberOnNextListener;
+import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriber;
+import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriberNew;
+import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener;
 import com.noplugins.keepfit.android.util.ui.NoScrollViewPager;
 import com.noplugins.keepfit.android.util.ui.ProgressUtil;
 import com.noplugins.keepfit.android.util.ui.StepView;
 import com.noplugins.keepfit.android.util.ui.jiugongge.CCRSortableNinePhotoLayout;
+import com.qiniu.android.http.ResponseInfo;
+import com.qiniu.android.storage.UpCompletionHandler;
+import com.qiniu.android.storage.UploadManager;
+import com.qiniu.android.storage.UploadOptions;
+
+import org.json.JSONObject;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
@@ -41,6 +67,8 @@ import cn.qqtheme.framework.wheelview.contract.OnTimeSelectedListener;
 import cn.qqtheme.framework.wheelview.entity.TimeEntity;
 import lib.demo.spinner.MaterialSpinner;
 import rx.Subscription;
+import top.zibin.luban.Luban;
+import top.zibin.luban.OnCompressListener;
 
 public class ChangGuandetailActivity extends BaseActivity implements CCRSortableNinePhotoLayout.Delegate {
     @BindView(R.id.back_btn)
@@ -61,6 +89,9 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
     ImageView logo_image;
     @BindView(R.id.select_numbers_tv)
     TextView select_numbers_tv;
+    @BindView(R.id.tv_complete)
+    TextView tv_complete;
+
 
     @BindView(R.id.changguan_name)
     EditText changguan_name;
@@ -81,6 +112,25 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
     @BindView(R.id.qiye_zhucehao)
     EditText qiye_zhucehao;
 
+    @BindView(R.id.checkbox_youyang)
+    CheckBox checkbox_youyang;
+    @BindView(R.id.checkbox_wuyang)
+    CheckBox checkbox_wuyang;
+    @BindView(R.id.checkbox_tuancao)
+    CheckBox checkbox_tuancao;
+    @BindView(R.id.checkbox_danche)
+    CheckBox checkbox_danche;
+    @BindView(R.id.checkbox_youyong)
+    CheckBox checkbox_youyong;
+    @BindView(R.id.checkbox_wifi)
+    CheckBox checkbox_wifi;
+    @BindView(R.id.checkbox_genyi)
+    CheckBox checkbox_genyi;
+    @BindView(R.id.checkbox_linyu)
+    CheckBox checkbox_linyu;
+    @BindView(R.id.checkbox_cesuo)
+    CheckBox checkbox_cesuo;
+
     private View view;
     private StepView stepView;
     private LinearLayoutManager linearLayoutManager;
@@ -96,7 +146,18 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
     private String icon_net_path = "";
     private List<BiaoqianEntity> biaoqianEntities = new ArrayList<>();
     private List<String> jiugongge_iamges = new ArrayList<>();
+    private List<InformationEntity.GymPicBean> upList_iamges = new ArrayList<>();
     private ProgressUtil progress_upload;
+
+    /**
+     * 七牛云
+     **/
+    //指定upToken, 强烈建议从服务端提供get请求获取
+    private String uptoken = "xxxxxxxxx:xxxxxxx:xxxxxxxxxx";
+    private SimpleDateFormat sdf;
+    private String qiniu_key;
+    private UploadManager uploadManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -110,6 +171,10 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
     @Override
     public void initView() {
         setContentLayout(R.layout.activity_chang_guandetail);
+        /**七牛云**/
+        uploadManager = MyApplication.uploadManager;
+        sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+        qiniu_key = "icon_" + sdf.format(new Date());
         ButterKnife.bind(this);
         isShowTitle(false);
 
@@ -124,6 +189,11 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
 
         //添加场馆icon
         set_icon_image();
+
+        select_biaoqian();
+        getToken();//获取七牛云token
+
+        requestData();
     }
 
     @Override
@@ -135,22 +205,245 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
                 finish();
             }
         });
+
+        tv_complete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                withLs();
+            }
+        });
+
     }
 
-    private void requestData(){
+    private void requestData() {
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("areaNum", SpUtils.getString(getApplicationContext(), AppConstants.CHANGGUAN_NUM));
+        subscription = Network.getInstance("场馆信息", this)
+                .myArea(params, new ProgressSubscriber<ChangguanBean>("场馆信息",
+                        new SubscriberOnNextListener<Bean<ChangguanBean>>() {
+                            @Override
+                            public void onNext(Bean<ChangguanBean> changguanBeanBean) {
+                                setting(changguanBeanBean.getData());
+                            }
+
+                            @Override
+                            public void onError(String error) {
+
+                            }
+                        }, this, false));
+    }
+
+    private void setting(ChangguanBean cg) {
+        changguan_name.setText(cg.getArea().getAreaName());
+        edit_address.setText(cg.getArea().getAddress());
+        tell_edit.setText(cg.getArea().getPhone());
+        edit_email.setText(cg.getArea().getEmail());
+
+        faren_name.setText(cg.getArea().getLegalPerson());
+        icon_id_card.setText(cg.getArea().getCardNum());
+        qiye_name.setText(cg.getArea().getCompanyName());
+        qiye_zhucehao.setText(cg.getArea().getCompanyCode());
+
+        edittext_area.setText(cg.getArea().getArea() + "");
+        spinner_type.setSelectedIndex(cg.getArea().getType());
+        time1_edit.setText(cg.getArea().getBusinessStart());
+        time2_edit.setText(cg.getArea().getBusinessEnd());
+
+        datas.clear();
+        for (int i = 0; i < cg.getPlace().size(); i++) {
+            ItemBean itemBean = new ItemBean();
+            itemBean.setPlace(cg.getPlace().get(i).getMaxNum() + "");
+            itemBean.setType(cg.getPlace().get(i).getPlaceType());
+            datas.add(itemBean);
+        }
+        exRecyclerAdapter.notifyDataSetChanged();
+
+        Glide.with(this)
+                .load(cg.getArea().getLogo())
+                .into(logo_image);
+        delete_icon_btn.setVisibility(View.VISIBLE);
+
+        for (int i = 0; i < cg.getPic().size(); i++) {
+            strings.add(cg.getPic().get(i).getUrl());
+        }
+        mPhotosSnpl.setData(strings);
+        ValueResources.select_iamges_size = strings.size();
+        select_numbers_tv.setText(ValueResources.select_iamges_size + "/9");
+
+        String[] biaoqian = cg.getArea().getFacility().split(",");
+        for (int i = 0; i < biaoqian.length; i++) {
+            switch (biaoqian[i]) {
+                case "1":
+                    checkbox_youyang.setChecked(true);
+                    break;
+                case "2":
+                    checkbox_wuyang.setChecked(true);
+                    break;
+                case "3":
+                    checkbox_tuancao.setChecked(true);
+                    break;
+                case "4":
+                    checkbox_danche.setChecked(true);
+                    break;
+                case "5":
+                    checkbox_youyong.setChecked(true);
+                    break;
+                case "6":
+                    checkbox_wifi.setChecked(true);
+                    break;
+                case "7":
+                    checkbox_genyi.setChecked(true);
+                    break;
+                case "8":
+                    checkbox_cesuo.setChecked(true);
+                    break;
+
+            }
+        }
+
 
     }
 
-    private void setting(){
-        changguan_name.setText("");
-        edit_address.setText("");
-        tell_edit.setText("");
-        edit_email.setText("");
-        faren_name.setText("");
-        icon_id_card.setText("");
-        qiye_name.setText("");
-        qiye_zhucehao.setText("");
+
+    private String get_selete_biaoqian() {
+        StringBuffer type_buffer = new StringBuffer();
+        for (int i = 0; i < biaoqianEntities.size(); i++) {
+            if (i == biaoqianEntities.size() - 1) {
+                type_buffer.append(biaoqianEntities.get(i).getNumber());
+            } else {
+                type_buffer.append(biaoqianEntities.get(i).getNumber()).append(",");
+            }
+        }
+        //Log.e("选择的标签编号", image_buffer.toString() + "");
+        return type_buffer.toString();
     }
+
+    private BiaoqianEntity biaoqianEntity = new BiaoqianEntity();
+    private BiaoqianEntity biaoqianEntity1 = new BiaoqianEntity();
+    private BiaoqianEntity biaoqianEntity2 = new BiaoqianEntity();
+    private BiaoqianEntity biaoqianEntity3 = new BiaoqianEntity();
+    private BiaoqianEntity biaoqianEntity4 = new BiaoqianEntity();
+    private BiaoqianEntity biaoqianEntity5 = new BiaoqianEntity();
+    private BiaoqianEntity biaoqianEntity6 = new BiaoqianEntity();
+    private BiaoqianEntity biaoqianEntity7 = new BiaoqianEntity();
+    private BiaoqianEntity biaoqianEntity8 = new BiaoqianEntity();
+
+    private void select_biaoqian() {
+        checkbox_youyang.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) {
+                    biaoqianEntity.setIndex(1);
+                    biaoqianEntity.setNumber(1);
+                    biaoqianEntities.add(biaoqianEntity);
+                } else {
+
+                    biaoqianEntities.remove(biaoqianEntity);
+
+                }
+            }
+        });
+        checkbox_wuyang.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) {
+                    biaoqianEntity1.setIndex(2);
+                    biaoqianEntity1.setNumber(2);
+                    biaoqianEntities.add(biaoqianEntity1);
+                } else {
+                    biaoqianEntities.remove(biaoqianEntity1);
+                }
+            }
+        });
+        checkbox_tuancao.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) {
+                    biaoqianEntity2.setIndex(3);
+                    biaoqianEntity2.setNumber(3);
+                    biaoqianEntities.add(biaoqianEntity2);
+                } else {
+                    biaoqianEntities.remove(biaoqianEntity2);
+                }
+            }
+        });
+        checkbox_danche.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) {
+                    biaoqianEntity3.setIndex(4);
+                    biaoqianEntity3.setNumber(4);
+                    biaoqianEntities.add(biaoqianEntity3);
+                } else {
+                    biaoqianEntities.remove(biaoqianEntity3);
+                }
+            }
+        });
+        checkbox_youyong.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) {
+                    biaoqianEntity4.setIndex(5);
+                    biaoqianEntity4.setNumber(5);
+                    biaoqianEntities.add(biaoqianEntity4);
+                } else {
+                    biaoqianEntities.remove(biaoqianEntity4);
+                }
+            }
+        });
+        checkbox_wifi.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) {
+                    biaoqianEntity5.setIndex(6);
+                    biaoqianEntity5.setNumber(6);
+                    biaoqianEntities.add(biaoqianEntity5);
+                } else {
+                    biaoqianEntities.remove(biaoqianEntity5);
+                }
+            }
+        });
+        checkbox_genyi.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) {
+                    biaoqianEntity6.setIndex(7);
+                    biaoqianEntity6.setNumber(7);
+                    biaoqianEntities.add(biaoqianEntity6);
+                } else {
+                    biaoqianEntities.remove(biaoqianEntity6);
+                }
+            }
+        });
+        checkbox_linyu.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) {
+                    biaoqianEntity7.setIndex(8);
+                    biaoqianEntity7.setNumber(8);
+                    biaoqianEntities.add(biaoqianEntity7);
+                } else {
+                    biaoqianEntities.remove(biaoqianEntity7);
+                }
+            }
+        });
+        checkbox_cesuo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+
+                if (b) {
+                    biaoqianEntity8.setIndex(9);
+                    biaoqianEntity8.setNumber(9);
+                    biaoqianEntities.add(biaoqianEntity8);
+                } else {
+                    biaoqianEntities.remove(biaoqianEntity8);
+                }
+            }
+        });
+
+
+    }
+
 
     private void set_xiala_select() {
         String[] typeArrays = getResources().getStringArray(R.array.identify_types);
@@ -189,6 +482,7 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
             }
         });
     }
+
     private void time_check(TextView textView) {
         picker = new TimePicker(this, TimeMode.HOUR_24);
         Calendar calendar = Calendar.getInstance();
@@ -271,7 +565,9 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
     @Override
     public void onClickDeleteNinePhotoItem(CCRSortableNinePhotoLayout sortableNinePhotoLayout, View view, int position, String model, ArrayList<String> models) {
         mPhotosSnpl.removeItem(position);
+        strings.remove(position);
         ValueResources.select_iamges_size = ValueResources.select_iamges_size - 1;
+        select_numbers_tv.setText(ValueResources.select_iamges_size + "/9");
     }
 
     @Override
@@ -315,6 +611,229 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
         } else if (RESULT_CANCELED == resultCode) {
             //Toast.makeText(this, "cancel", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    /**
+     * 获取7牛 token
+     */
+    private void getToken() {
+        subscription = Network.getInstance("获取七牛云token", this)
+                .get_qiniu_token(new HashMap<>(), new ProgressSubscriberNew<>(QiNiuToken.class, new GsonSubscriberOnNextListener<QiNiuToken>() {
+                    @Override
+                    public void on_post_entity(QiNiuToken qiNiuToken, String s) {
+                        Log.e("获取到的token", "获取到的token" + qiNiuToken.getToken());
+                        uptoken = qiNiuToken.getToken();
+
+                    }
+                }, new SubscriberOnNextListener<Bean<Object>>() {
+                    @Override
+                    public void onNext(Bean<Object> result) {
+                    }
+
+                    @Override
+                    public void onError(String error) {
+                        Log.e("获取到的token失败", error);
+                    }
+                }, this, true));
+
+    }
+
+
+    private void withListLs() {
+
+        for (int i = 0; i < strings.size(); i++) {
+            File file = new File(strings.get(i));
+            int a = i;
+            Luban.with(this)
+                    .load(file)
+                    .ignoreBy(100)
+                    .setTargetDir(getPath())
+                    .setFocusAlpha(false)
+                    .setCompressListener(new OnCompressListener() {
+                        @Override
+                        public void onStart() {
+                        }
+
+                        @Override
+                        public void onSuccess(File file) {
+                            strings.set(a, file.getPath());
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+
+                        }
+                    }).launch();
+        }
+
+        upListToQiniu();
+    }
+
+    /**
+     * list上传到七牛云
+     */
+    private void upListToQiniu() {
+        progress_upload = new ProgressUtil();
+        progress_upload.showProgressDialog(this, "载入中...");
+        for (int i = 0; i < strings.size(); i++) {
+            //上传icon
+            int num = i + 2;
+            uploadManager.put(strings.get(i), qiniu_key, uptoken,
+                    (key, info, response) -> {
+                        //res包含hash、key等信息，具体字段取决于上传策略的设置
+                        if (info.isOK()) {
+                            Log.e("qiniu", "Upload Success");
+//                            icon_net_path = key;
+                            InformationEntity.GymPicBean bean = new InformationEntity.GymPicBean();
+                            bean.setQiniu_key(key);
+                            bean.setOrder_num(num);
+                            upList_iamges.add(bean);
+                            Log.e("打印key：", icon_net_path);
+                            //测试资料上传的
+                            //getUrlTest(icon_net_path);
+                            String headpicPath = "http://upload.qiniup.com/" + key;
+                            Log.e("返回的地址", headpicPath);
+                        } else {
+                            Log.e("qiniu", "Upload Fail");
+                            //如果失败，这里可以把info信息上报自己的服务器，便于后面分析上传错误原因
+                        }
+                    }, new UploadOptions(null, "test-type", true,
+                            null, null));
+        }
+        progress_upload.dismissProgressDialog();
+
+        requestUpdate();
+    }
+
+    /**
+     * logo上传到七牛云
+     */
+    private void upLogoToQiniu() {
+        progress_upload = new ProgressUtil();
+        progress_upload.showProgressDialog(this, "载入中...");
+        //上传icon
+        uploadManager.put(icon_image_path, qiniu_key, uptoken,
+                (key, info, response) -> {
+                    //res包含hash、key等信息，具体字段取决于上传策略的设置
+                    if (info.isOK()) {
+                        Log.e("qiniu", "Upload Success");
+                        InformationEntity.GymPicBean bean = new InformationEntity.GymPicBean();
+                        bean.setQiniu_key(key);
+                        bean.setOrder_num(1);
+                        upList_iamges.add(bean);
+                        //测试资料上传的
+                        //getUrlTest(icon_net_path);
+                        String headpicPath = "http://upload.qiniup.com/" + key;
+                        Log.e("返回的地址", headpicPath);
+                    } else {
+                        Log.e("qiniu", "Upload Fail");
+                        //如果失败，这里可以把info信息上报自己的服务器，便于后面分析上传错误原因
+                    }
+                    progress_upload.dismissProgressDialog();
+                }, new UploadOptions(null, "test-type", true, null, null));
+
+        withListLs();
+    }
+
+    private void withLs() {
+        File file = new File(icon_image_path);
+        Luban.with(this)
+                .load(file)
+                .ignoreBy(100)
+                .setTargetDir(getPath())
+                .setFocusAlpha(false)
+                .setCompressListener(new OnCompressListener() {
+                    @Override
+                    public void onStart() {
+                    }
+
+                    @Override
+                    public void onSuccess(File file) {
+                        icon_image_path = file.getPath();
+                        Log.d("Luban", "luban压缩 成功！原图:${photos.path}");
+                        Log.d("Luban", "luban压缩 成功！imgurl:$icon_image_path");
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+                }).launch();
+        upLogoToQiniu();
+    }
+
+    private String getPath() {
+        String path = Environment.getExternalStorageDirectory() + "/Luban/image/";
+        File file = new File(path);
+        if (file.mkdirs()) {
+            return path;
+        }
+        return path;
+    }
+
+    /**
+     * request
+     */
+    private void requestUpdate() {
+
+        InformationEntity informationEntity = new InformationEntity();
+        informationEntity.setArea_name(changguan_name.getText().toString());//场馆名称
+        if (changguan_type.equals("综合会所")) {//场馆类型
+            informationEntity.setType(1);
+        } else {//工作室
+            informationEntity.setType(2);
+        }
+        informationEntity.setArea(Integer.valueOf(edittext_area.getText().toString()));//场馆面积
+        informationEntity.setPhone(tell_edit.getText().toString());//电话号码
+        informationEntity.setEmail(edit_email.getText().toString());//邮箱
+        informationEntity.setBusiness_start(time1_edit.getText().toString());//营业开始时间
+        informationEntity.setBusiness_end(time2_edit.getText().toString());//营业结束时间
+        informationEntity.setAddress(edit_address.getText().toString());//地址
+
+        informationEntity.setFacility(get_selete_biaoqian());
+        //获取选择的功能性场所类型
+        ArrayList<ItemBean> itemBeans = exRecyclerAdapter.getData();
+        List<InformationEntity.GymPlacesBean> gymPlacesBeans = new ArrayList<>();
+        for (int i = 0; i < itemBeans.size(); i++) {
+            InformationEntity.GymPlacesBean gymPlacesBean = new InformationEntity.GymPlacesBean();
+            if (null == itemBeans.get(i).getPlace()) {
+                gymPlacesBean.setMax_num(0);
+            } else {
+                gymPlacesBean.setMax_num(Integer.valueOf(itemBeans.get(i).getPlace()));
+            }
+            if (itemBeans.get(i).getType_name().equals("有氧操房")) {
+                gymPlacesBean.setPlace_type("1");
+            } else if (itemBeans.get(i).getType_name().equals("动态单车")) {
+                gymPlacesBean.setPlace_type("2");
+            } else {
+                gymPlacesBean.setPlace_type("3");
+
+            }
+            gymPlacesBeans.add(gymPlacesBean);
+
+        }
+
+        informationEntity.setGymPlaces(gymPlacesBeans);
+        informationEntity.setGym_pic(upList_iamges);
+
+
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("areaNum", informationEntity);
+        subscription = Network.getInstance("场馆信息", this)
+                .submitAudit(params, new ProgressSubscriber<String>("场馆信息",
+                        new SubscriberOnNextListener<Bean<String>>() {
+                            @Override
+                            public void onNext(Bean<String> changguanBeanBean) {
+                                Toast.makeText(getApplicationContext(), "修改成功",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+
+                            @Override
+                            public void onError(String error) {
+
+                            }
+                        }, this, false));
+
     }
 
     @Override

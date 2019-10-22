@@ -8,6 +8,7 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.noplugins.keepfit.android.bean.CalenderEntity;
+import com.noplugins.keepfit.android.bean.ChangguanBean;
 import com.noplugins.keepfit.android.bean.DictionaryeBean;
 import com.noplugins.keepfit.android.bean.LoginBean;
 import com.noplugins.keepfit.android.bean.PrivateDetailBean;
@@ -20,6 +21,7 @@ import com.noplugins.keepfit.android.bean.mine.WalletBean;
 import com.noplugins.keepfit.android.entity.AddClassEntity;
 import com.noplugins.keepfit.android.entity.CheckEntity;
 import com.noplugins.keepfit.android.entity.ClassTypeEntity;
+import com.noplugins.keepfit.android.entity.InformationEntity;
 import com.noplugins.keepfit.android.entity.LoginEntity;
 import com.noplugins.keepfit.android.entity.TeacherEntity;
 import com.noplugins.keepfit.android.global.AppConstants;
@@ -953,5 +955,25 @@ public class Network {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
     }
+
+    /**
+     * 我的场馆信息
+     */
+    public Subscription myArea(Map<String, Object> params, Subscriber<Bean<ChangguanBean>> subscriber) {
+        return service.myArea(retuen_json_object(params))
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    public Subscription submitAudit(Map<String, Object> params, Subscriber<Bean<String>> subscriber) {
+        return service.submitAudit(retuen_json_object(params))
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
 
 }
