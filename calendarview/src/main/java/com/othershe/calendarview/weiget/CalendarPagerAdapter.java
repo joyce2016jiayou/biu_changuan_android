@@ -68,9 +68,8 @@ public class CalendarPagerAdapter extends PagerAdapter {
             for (int k = 0; k < mothEntities.size(); k++) {
                 String date_item1 = mothEntities.get(k);
                 String date_item2 = get_date(solars[0], solars[1], solars[2]);
-                Log.e("比较的日期", "date_item1:" + date_item1 + "date_item2---->" + date_item2);
+                //Log.e("比较的日期", "date_item1:" + date_item1 + "date_item2---->" + date_item2);
                 if (date_item1.equals(date_item2)) {
-                    Log.e("设置会点", "设置会点");
                     dateBeans.get(i).setIs_show_circle(true);//是否显示灰点
                 }
             }

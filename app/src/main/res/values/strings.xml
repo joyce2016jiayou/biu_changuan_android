@@ -49,6 +49,10 @@
     <string name="edit_hint39">请输入银行卡号</string>
     <string name="edit_hint40">请输入手机号</string>
     <string name="edit_hint41">请输入验证码</string>
+    <string name="edit_hint42">省</string>
+    <string name="edit_hint43">市</string>
+    <string name="edit_hint44">区</string>
+    <string name="edit_hint45">详细地址</string>
 
 
     <string name="tv1">登录</string>
@@ -77,7 +81,7 @@
     <string name="tv24">营业时间</string>
     <string name="tv25">人</string>
     <string name="tv26">最多选择三项</string>
-    <string name="tv27">地址</string>
+    <string name="tv27">场馆地址</string>
     <string name="tv28">功能性场所</string>
     <string name="tv29">LOGO</string>
     <string name="tv30">更多照片</string>
@@ -198,6 +202,7 @@
     <string name="tv145">开启会员</string>
     <string name="tv146">哔哟终身会员</string>
     <string name="tv147">日程</string>
+    <string name="tv148">拨打</string>
 
     <string name="tv_select">请选择</string>
     <string name="tv_qianbao">钱包</string>
@@ -288,5 +293,6 @@
     <string name="tv_rzsj">入账时间</string>
     <string name="tv_rzkc">入账课程</string>
     <string name="tv_rzje">入账金额</string>
+
 
 </resources>

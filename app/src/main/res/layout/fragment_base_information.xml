@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:spinner="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -10,8 +10,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <!--第一块-->
         <LinearLayout
@@ -105,10 +105,10 @@
                         android:layout_height="36dp"
                         android:layout_marginLeft="4dp"
                         android:background="@null"
-                        android:singleLine="true"
-                        android:maxLength="11"
-                        android:inputType="number"
                         android:hint="@string/edit_hint9"
+                        android:inputType="number"
+                        android:maxLength="11"
+                        android:singleLine="true"
                         android:textColor="@color/top_heiziti"
                         android:textColorHint="@color/color_9B9B9B"
                         android:textSize="13sp" />
@@ -148,10 +148,10 @@
                         android:layout_height="36dp"
                         android:background="@null"
                         android:gravity="center"
-                        android:singleLine="true"
-                        android:maxLength="11"
-                        android:inputType="number"
                         android:hint="@string/edit_hint10"
+                        android:inputType="number"
+                        android:maxLength="11"
+                        android:singleLine="true"
                         android:textColor="@color/top_heiziti"
                         android:textColorHint="@color/color_9B9B9B"
                         android:textSize="13sp" />
@@ -180,8 +180,8 @@
                         android:layout_marginStart="4dp"
                         android:layout_marginLeft="4dp"
                         android:background="@null"
-                        android:singleLine="true"
                         android:hint="@string/edit_hint11"
+                        android:singleLine="true"
                         android:textColor="@color/top_heiziti"
                         android:textColorHint="@color/color_9B9B9B"
                         android:textSize="13sp" />
@@ -259,17 +259,79 @@
                     android:textColor="@color/top_heiziti"
                     android:textSize="16sp" />
 
-                <EditText
-                    android:id="@+id/edit_address"
-                    android:layout_width="264dp"
-                    android:layout_height="36dp"
-                    android:layout_marginLeft="4dp"
-                    android:background="@null"
-                    android:hint="@string/edit_hint15"
-                    android:singleLine="true"
-                    android:textColor="@color/top_heiziti"
-                    android:textColorHint="@color/color_9B9B9B"
-                    android:textSize="13sp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/m10"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/sheng_tv"
+                            android:layout_width="73dp"
+                            android:layout_height="36dp"
+                            android:background="@null"
+                            android:gravity="center"
+                            android:hint="@string/edit_hint42"
+                            android:singleLine="true"
+                            android:textColor="@color/top_heiziti"
+                            android:textColorHint="@color/color_9B9B9B"
+                            android:textSize="13sp" />
+
+                        <LinearLayout
+                            android:layout_width="@dimen/m24"
+                            android:layout_height="wrap_content"
+                            android:background="#fff4f4f4" />
+
+                        <TextView
+                            android:id="@+id/shi_tv"
+                            android:layout_width="73dp"
+                            android:layout_height="36dp"
+                            android:background="@null"
+                            android:gravity="center"
+                            android:hint="@string/edit_hint43"
+                            android:singleLine="true"
+                            android:textColor="@color/top_heiziti"
+                            android:textColorHint="@color/color_9B9B9B"
+                            android:textSize="13sp" />
+
+                        <LinearLayout
+                            android:layout_width="@dimen/m24"
+                            android:layout_height="wrap_content"
+                            android:background="#fff4f4f4" />
+
+                        <TextView
+                            android:id="@+id/qu_tv"
+                            android:layout_width="73dp"
+                            android:layout_height="36dp"
+                            android:background="@null"
+                            android:gravity="center"
+                            android:hint="@string/edit_hint44"
+                            android:singleLine="true"
+                            android:textColor="@color/top_heiziti"
+                            android:textColorHint="@color/color_9B9B9B"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+
+                    <EditText
+                        android:id="@+id/edit_address"
+                        android:layout_width="264dp"
+                        android:layout_height="36dp"
+                        android:layout_marginTop="@dimen/m10"
+                        android:background="@null"
+                        android:hint="@string/edit_hint45"
+                        android:paddingLeft="@dimen/m10"
+                        android:singleLine="true"
+                        android:textColor="@color/top_heiziti"
+                        android:textColorHint="@color/color_9B9B9B"
+                        android:textSize="13sp" />
+                </LinearLayout>
+
             </LinearLayout>
 
             <LinearLayout
@@ -306,24 +368,24 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/tv29"
-                    android:layout_marginTop="3dp"
                     android:layout_gravity="center_vertical"
+                    android:layout_marginTop="3dp"
+                    android:text="@string/tv29"
                     android:textColor="@color/top_heiziti"
                     android:textSize="16sp" />
 
                 <RelativeLayout
                     android:layout_width="54dp"
-                    android:layout_marginLeft="50dp"
+                    android:layout_height="54dp"
                     android:layout_gravity="center_vertical"
-                    android:layout_height="54dp">
+                    android:layout_marginLeft="50dp">
 
                     <ImageView
                         android:id="@+id/logo_image"
                         android:layout_width="44dp"
-                        android:layout_alignParentBottom="true"
-                        android:layout_alignParentLeft="true"
                         android:layout_height="44dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentBottom="true"
                         android:scaleType="centerCrop"
                         android:src="@drawable/jia_image" />
 
@@ -331,71 +393,73 @@
                         android:id="@+id/delete_icon_btn"
                         android:layout_width="16dp"
                         android:layout_height="16dp"
-                        android:layout_marginRight="3dp"
-                        android:clickable="true"
-                        android:layout_marginTop="3dp"
-                        android:visibility="invisible"
                         android:layout_alignParentTop="true"
                         android:layout_alignParentRight="true"
-                        android:src="@drawable/delete_image" />
+                        android:layout_marginTop="3dp"
+                        android:layout_marginRight="3dp"
+                        android:clickable="true"
+                        android:src="@drawable/delete_image"
+                        android:visibility="invisible" />
                 </RelativeLayout>
             </LinearLayout>
 
             <!--九宫格图片-->
             <LinearLayout
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="28dp"
                 android:layout_marginTop="11dp"
-                android:orientation="horizontal"
-                android:layout_height="wrap_content">
+                android:orientation="horizontal">
+
                 <LinearLayout
                     android:layout_width="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
                     <LinearLayout
                         android:layout_width="wrap_content"
-                        android:orientation="horizontal"
+                        android:layout_height="wrap_content"
                         android:gravity="bottom"
-                        android:layout_height="wrap_content">
+                        android:orientation="horizontal">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/tv30"
-                            android:textSize="15sp"
                             android:textColor="@color/top_heiziti"
-                            />
+                            android:textSize="15sp" />
+
                         <TextView
                             android:id="@+id/select_numbers_tv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/color_9B9B9B"
-                            android:textSize="8sp"
                             android:layout_marginLeft="5dp"
                             android:text="@string/tv31"
-                            />
+                            android:textColor="@color/color_9B9B9B"
+                            android:textSize="8sp" />
                     </LinearLayout>
 
                     <TextView
                         android:layout_width="77dp"
-                        android:layout_marginTop="3dp"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/color_9B9B9B"
-                        android:textSize="11sp"
+                        android:layout_marginTop="3dp"
                         android:text="@string/tv32"
-                        />
+                        android:textColor="@color/color_9B9B9B"
+                        android:textSize="11sp" />
                 </LinearLayout>
+
                 <com.noplugins.keepfit.android.util.ui.jiugongge.CCRSortableNinePhotoLayout
                     android:id="@+id/snpl_moment_add_photos"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
                     app:bga_snpl_deleteDrawable="@drawable/delete_image"
                     app:bga_snpl_deleteDrawableOverlapQuarter="false"
                     app:bga_snpl_editable="true"
                     app:bga_snpl_itemCornerRadius="0dp"
                     app:bga_snpl_itemSpanCount="4"
                     app:bga_snpl_itemWhiteSpacing="5dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
                     app:bga_snpl_itemWidth="0dp"
                     app:bga_snpl_maxItemCount="9"
                     app:bga_snpl_placeholderDrawable="@mipmap/bga_pp_ic_holder_dark"
@@ -409,23 +473,25 @@
         <!--第三块-->
         <LinearLayout
             android:layout_width="match_parent"
-            android:orientation="vertical"
+            android:layout_height="138dp"
             android:background="@drawable/yingye_bg"
-            android:layout_height="138dp">
+            android:orientation="vertical">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/tv33"
-                android:layout_marginTop="19dp"
                 android:layout_marginLeft="28dp"
+                android:layout_marginTop="19dp"
+                android:text="@string/tv33"
                 android:textColor="@color/top_heiziti"
                 android:textSize="16sp" />
+
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="11dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_height="wrap_content">
+                android:layout_marginTop="11dp"
+                android:orientation="horizontal">
 
                 <CheckBox
                     android:id="@+id/checkbox_youyang"
@@ -440,45 +506,49 @@
                     android:id="@+id/checkbox_wuyang"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_marginLeft="23dp"
                     android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="23dp"
                     android:background="@drawable/selector_btn_wuyang"
                     android:button="@null"
                     android:checked="false" />
+
                 <CheckBox
                     android:id="@+id/checkbox_tuancao"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_marginLeft="23dp"
                     android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="23dp"
                     android:background="@drawable/selector_btn_tuancao"
                     android:button="@null"
                     android:checked="false" />
+
                 <CheckBox
                     android:id="@+id/checkbox_danche"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_marginLeft="23dp"
                     android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="23dp"
                     android:background="@drawable/selector_btn_danche"
                     android:button="@null"
                     android:checked="false" />
+
                 <CheckBox
                     android:id="@+id/checkbox_youyong"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_marginLeft="23dp"
                     android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="23dp"
                     android:background="@drawable/selector_btn_youyong"
                     android:button="@null"
                     android:checked="false" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="5dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_height="wrap_content">
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
 
                 <CheckBox
                     android:id="@+id/checkbox_wifi"
@@ -493,26 +563,28 @@
                     android:id="@+id/checkbox_genyi"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_marginLeft="23dp"
                     android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="23dp"
                     android:background="@drawable/selector_btn_genyi"
                     android:button="@null"
                     android:checked="false" />
+
                 <CheckBox
                     android:id="@+id/checkbox_linyu"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_marginLeft="23dp"
                     android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="23dp"
                     android:background="@drawable/selector_btn_linyu"
                     android:button="@null"
                     android:checked="false" />
+
                 <CheckBox
                     android:id="@+id/checkbox_cesuo"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_marginLeft="23dp"
                     android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="23dp"
                     android:background="@drawable/selector_btn_cesuo"
                     android:button="@null"
                     android:checked="false" />
@@ -525,10 +597,10 @@
             android:id="@+id/next_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/tv34"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="1dp"
             android:layout_marginBottom="13dp"
+            android:text="@string/tv34"
             android:textColor="@color/color_4A4A4A"
             android:textSize="20sp" />
 

@@ -1,12 +1,16 @@
 package com.noplugins.keepfit.android.fragment;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.nfc.Tag;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,6 +29,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
+import com.bigkoo.pickerview.listener.CustomListener;
+import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
+import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.huantansheng.easyphotos.EasyPhotos;
@@ -36,6 +44,7 @@ import com.noplugins.keepfit.android.activity.UserPermissionSelectActivity;
 import com.noplugins.keepfit.android.adapter.CameraSelectAdapter;
 import com.noplugins.keepfit.android.adapter.ExRecyclerAdapter;
 import com.noplugins.keepfit.android.base.MyApplication;
+import com.noplugins.keepfit.android.bean.JsonBean;
 import com.noplugins.keepfit.android.entity.BiaoqianEntity;
 import com.noplugins.keepfit.android.entity.InformationEntity;
 import com.noplugins.keepfit.android.entity.ItemBean;
@@ -46,6 +55,7 @@ import com.noplugins.keepfit.android.entity.UrlEntity;
 import com.noplugins.keepfit.android.resource.ValueResources;
 import com.noplugins.keepfit.android.util.GlideEngine;
 import com.noplugins.keepfit.android.util.data.SharedPreferencesHelper;
+import com.noplugins.keepfit.android.util.net.GetJsonDataUtil;
 import com.noplugins.keepfit.android.util.net.Network;
 import com.noplugins.keepfit.android.util.net.RxUtils;
 import com.noplugins.keepfit.android.util.net.entity.Bean;
@@ -53,6 +63,7 @@ import com.noplugins.keepfit.android.util.net.progress.GsonSubscriberOnNextListe
 import com.noplugins.keepfit.android.util.net.progress.ProgressHUD;
 import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriberNew;
 import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener;
+import com.noplugins.keepfit.android.util.screen.KeyboardUtils;
 import com.noplugins.keepfit.android.util.ui.NoScrollViewPager;
 import com.noplugins.keepfit.android.util.ui.ProgressUtil;
 import com.noplugins.keepfit.android.util.ui.StepView;
@@ -65,6 +76,7 @@ import com.qiniu.android.storage.UpProgressHandler;
 import com.qiniu.android.storage.UploadManager;
 import com.qiniu.android.storage.UploadOptions;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -147,6 +159,13 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
     CheckBox checkbox_linyu;
     @BindView(R.id.checkbox_cesuo)
     CheckBox checkbox_cesuo;
+    @BindView(R.id.sheng_tv)
+    TextView sheng_tv;
+    @BindView(R.id.shi_tv)
+    TextView shi_tv;
+    @BindView(R.id.qu_tv)
+    TextView qu_tv;
+
     private View view;
     private StepView stepView;
     private LinearLayoutManager linearLayoutManager;
@@ -164,6 +183,18 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
     private List<String> jiugongge_iamges = new ArrayList<>();
     private ProgressUtil progress_upload;
     private InformationCheckActivity mainActivity;
+    private static final int MSG_LOAD_DATA = 0x0001;
+    private static final int MSG_LOAD_SUCCESS = 0x0002;
+    private static final int MSG_LOAD_FAILED = 0x0003;
+    private static boolean isLoaded = false;
+    OptionsPickerView select_city_pop;
+    private List<JsonBean> options1Items = new ArrayList<>();
+    private ArrayList<ArrayList<String>> options2Items = new ArrayList<>();
+    private ArrayList<ArrayList<ArrayList<String>>> options3Items = new ArrayList<>();
+    private Thread thread;
+
+
+
     /**
      * 七牛云
      **/
@@ -213,7 +244,8 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
     }
 
     private void initView() {
-
+        //加载省市区
+        initDate();
 
         //设置下拉选择框
         set_xiala_select();
@@ -226,7 +258,6 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
 
         //添加场馆icon
         set_icon_image();
-
 
         //点击下一步
         next_btn.setOnClickListener(new View.OnClickListener() {
@@ -295,8 +326,191 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
 
             }
         });
+
+        sheng_tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                select_address_pop();
+            }
+        });
+        shi_tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                select_address_pop();
+            }
+        });
+        qu_tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                select_address_pop();
+            }
+        });
     }
 
+    /**
+     * 选择城市pop
+     */
+    private void select_address_pop() {
+        mHandler.sendEmptyMessage(MSG_LOAD_DATA);//加载城市json数据
+        if (isLoaded) {
+            showPickerView();
+        } else {
+            //Toast.makeText(getActivity(), "Please waiting until the data is parsed", Toast.LENGTH_SHORT).show();
+        }
+        //影藏键盘
+        KeyboardUtils.hideSoftKeyboard(getActivity());
+    }
+
+    private void showPickerView() {
+        select_city_pop = new OptionsPickerBuilder(getActivity(), new OnOptionsSelectListener() {
+            @Override
+            public void onOptionsSelect(int options1, int option2, int options3, View v) {
+                //返回的分别是三个级别的选中位置
+                String opt1tx = options1Items.size() > 0 ?
+                        options1Items.get(options1).getPickerViewText() : "";
+
+                String opt2tx = options2Items.size() > 0
+                        && options2Items.get(options1).size() > 0 ?
+                        options2Items.get(options1).get(option2) : "";
+
+                String opt3tx = options2Items.size() > 0
+                        && options3Items.get(options1).size() > 0
+                        && options3Items.get(options1).get(option2).size() > 0 ?
+                        options3Items.get(options1).get(option2).get(options3) : "";
+
+                String tx = opt1tx + opt2tx + opt3tx;
+                sheng_tv.setText(opt1tx);
+                shi_tv.setText(opt2tx);
+                qu_tv.setText(opt3tx);
+
+                Log.e("选择的地址", tx);
+            }
+        })
+                .setLayoutRes(R.layout.select_city_pop, new CustomListener() {
+                    @Override
+                    public void customLayout(View v) {
+                        TextView quxiao_btn = (TextView) v.findViewById(R.id.quxiao_btn);
+                        TextView sure_btn = (TextView) v.findViewById(R.id.sure_btn);
+                        sure_btn.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                select_city_pop.returnData();
+                                select_city_pop.dismiss();
+                            }
+                        });
+                        quxiao_btn.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                select_city_pop.dismiss();
+                            }
+                        });
+                    }
+                })
+                .setBgColor(Color.parseColor("#00000000"))
+                .setDividerColor(Color.parseColor("#00000000"))
+                .setContentTextSize(20)
+                .setOutSideCancelable(true)
+                .setLineSpacingMultiplier(2.0f)
+                .build();
+
+        select_city_pop.setPicker(options1Items, options2Items,options3Items);//二级选择器
+        select_city_pop.show();
+    }
+
+    private void initDate() {
+        /**
+         * 注意：assets 目录下的Json文件仅供参考，实际使用可自行替换文件
+         * 关键逻辑在于循环体
+         */
+        String JsonData = new GetJsonDataUtil().getJson(getActivity(), "province.json");//获取assets目录下的json文件数据
+
+        ArrayList<JsonBean> jsonBean = parseData(JsonData);//用Gson 转成实体
+
+        /**
+         * 添加省份数据
+         *
+         * 注意：如果是添加的JavaBean实体，则实体类需要实现 IPickerViewData 接口，
+         * PickerView会通过getPickerViewText方法获取字符串显示出来。
+         */
+        options1Items = jsonBean;
+
+        for (int i = 0; i < jsonBean.size(); i++) {//遍历省份
+            ArrayList<String> cityList = new ArrayList<>();//该省的城市列表（第二级）
+            ArrayList<ArrayList<String>> province_AreaList = new ArrayList<>();//该省的所有地区列表（第三极）
+
+            for (int c = 0; c < jsonBean.get(i).getCityList().size(); c++) {//遍历该省份的所有城市
+                String cityName = jsonBean.get(i).getCityList().get(c).getName();
+                cityList.add(cityName);//添加城市
+                ArrayList<String> city_AreaList = new ArrayList<>();//该城市的所有地区列表
+                //如果无地区数据，建议添加空字符串，防止数据为null 导致三个选项长度不匹配造成崩溃
+                /*if (jsonBean.get(i).getCityList().get(c).getArea() == null
+                        || jsonBean.get(i).getCityList().get(c).getArea().size() == 0) {
+                    city_AreaList.add("");
+                } else {
+                    city_AreaList.addAll(jsonBean.get(i).getCityList().get(c).getArea());
+                }*/
+                city_AreaList.addAll(jsonBean.get(i).getCityList().get(c).getArea());
+                province_AreaList.add(city_AreaList);//添加该省所有地区数据
+            }
+
+            /**
+             * 添加城市数据
+             */
+            options2Items.add(cityList);
+
+            /**
+             * 添加地区数据
+             */
+            options3Items.add(province_AreaList);
+        }
+
+        mHandler.sendEmptyMessage(MSG_LOAD_SUCCESS);
+    }
+    public ArrayList<JsonBean> parseData(String result) {//Gson 解析
+        ArrayList<JsonBean> detail = new ArrayList<>();
+        try {
+            JSONArray data = new JSONArray(result);
+            Gson gson = new Gson();
+            for (int i = 0; i < data.length(); i++) {
+                JsonBean entity = gson.fromJson(data.optJSONObject(i).toString(), JsonBean.class);
+                detail.add(entity);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            mHandler.sendEmptyMessage(MSG_LOAD_FAILED);
+        }
+        return detail;
+    }
+
+    @SuppressLint("HandlerLeak")
+    private Handler mHandler = new Handler() {
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case MSG_LOAD_DATA:
+                    if (thread == null) {//如果已创建就不再重新创建子线程了
+                        //Toast.makeText(getActivity(), "Begin Parse Data", Toast.LENGTH_SHORT).show();
+                        thread = new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                // 子线程中解析省市区数据
+                                initDate();
+                            }
+                        });
+                        thread.start();
+                    }
+                    break;
+
+                case MSG_LOAD_SUCCESS:
+                    //Toast.makeText(getActivity(), "Parse Succeed", Toast.LENGTH_SHORT).show();
+                    isLoaded = true;
+                    break;
+
+                case MSG_LOAD_FAILED:
+                    //Toast.makeText(getActivity(), "Parse Failed", Toast.LENGTH_SHORT).show();
+                    break;
+            }
+        }
+    };
 
     public InformationEntity getDates() {
         InformationEntity informationEntity = new InformationEntity();

@@ -107,9 +107,12 @@ public class RiChengFragment extends ViewPagerFragment {
     @BindView(R.id.class_recycler_view)
     RecyclerView class_recycler_view;
     private String select_date_str = "";
+    private String select_coursetype_str = "";
+    private String select_courcestatus_str = "";
     private View view;
     private int[] cDate;
     private int REQUEST_CODE_SCAN = 111;
+    List<String> dates = new ArrayList<>();
 
     List<DictionaryeBean> select_types = new ArrayList<>();
     List<DictionaryeBean> select_status = new ArrayList<>();
@@ -135,16 +138,16 @@ public class RiChengFragment extends ViewPagerFragment {
     }
 
     private void initview() {
-        //获取类型和状态
-        get_types();
-
-        //获取课程数据
-        init_class_date_resource("");
-
         select_date_str = DateHelper.get_date(cDate[0], cDate[1], cDate[2]);
-
         date_tv.setText(select_date_str);
         week_tv.setText(DateHelper.getWeek(select_date_str));
+        //获取日历数据
+        get_rili_resouce();
+        //获取类型和状态
+        get_types();
+        //获取课程数据
+        init_class_date_resource();
+
 
         select_store_type.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -234,34 +237,44 @@ public class RiChengFragment extends ViewPagerFragment {
         });
     }
 
+    private void get_rili_resouce() {
+        Map<String, Object> params = new HashMap<>();
+        params.put("areaNum", "GYM19091216883274");
+        params.put("date", "2019-10-15");
+        params.put("courseType", "2");
+        params.put("courseStatus", "3");
 
-    private void select_types_pop() {
-        CommonPopupWindow popupWindow = new CommonPopupWindow.Builder(getActivity())
-                .setView(R.layout.select_type_layout)
-                .setBackGroundLevel(1f)//0.5f
-                .setAnimationStyle(R.style.top_to_bottom)
-                .setWidthAndHeight(select_types_btn.getWidth() - 20,
-                        WindowManager.LayoutParams.WRAP_CONTENT)
-                .setOutSideTouchable(true).create();
-        //popupWindow.showAsDropDown(select_zhengshu_type);
-        popupWindow.showAsDropDown(select_types_btn, 15, -20);
-        /**设置逻辑*/
-        View view = popupWindow.getContentView();
-        List<String> strings = new ArrayList<>();
-        for (int i = 0; i < select_types.size(); i++) {
-            strings.add(select_types.get(i).getName());
+        Map<String, Object> params1 = new HashMap<>();
+        params1.put("areaNum", "GYM19091216883274");//todo替换场馆编号
+        params1.put("date", select_date_str);
+        if (select_coursetype_str.length() > 0) {
+            params1.put("courseType", select_coursetype_str);
         }
-        TypeAdapter typeAdapter = new TypeAdapter(strings, getActivity());
-        ListView listView = view.findViewById(R.id.listview);
-        listView.setAdapter(typeAdapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                types_tv.setText(select_types.get(i).getName());
-                popupWindow.dismiss();
-            }
-        });
+        if (select_courcestatus_str.length() > 0) {
+            params1.put("courseStatus", select_courcestatus_str);
+        }
+        Subscription subscription = Network.getInstance("获取首页数据", getActivity())
+                .get_shouye_date(params1,
+                        new ProgressSubscriber<>("获取首页数据", new SubscriberOnNextListener<Bean<RiChengBean>>() {
+                            @Override
+                            public void onNext(Bean<RiChengBean> result) {
+                                //设置日历数据
+                                if (dates.size() > 0) {
+                                    dates.clear();
+                                }
+                                for (int i = 0; i < result.getData().getMonth().size(); i++) {
+                                    dates.add(result.getData().getMonth().get(i).getDays());
+                                }
+                                init_clander_view(dates);
+                            }
+
+                            @Override
+                            public void onError(String error) {
+
+                            }
+                        }, getActivity(), false));
     }
+
 
     private void get_types() {
         Map<String, Object> params = new HashMap<>();
@@ -303,30 +316,30 @@ public class RiChengFragment extends ViewPagerFragment {
                         }, getActivity(), false));
     }
 
-    private void init_class_date_resource(String select_date) {
-        Map<String, Object> params = new HashMap<>();
-        params.put("areaNum", "GYM19091216883274");
-        params.put("date", "2019-10-15");
-        params.put("courseType", "2");
-        params.put("courseStatus", "3");
+    private void init_class_date_resource() {
+//        Map<String, Object> params = new HashMap<>();
+//        params.put("areaNum", "GYM19091216883274");
+//        params.put("date", "2019-10-15");
+//        params.put("courseType", "2");
+//        params.put("courseStatus", "3");
+        Map<String, Object> params1 = new HashMap<>();
+        params1.put("areaNum", "GYM19091216883274");//todo替换场馆编号
+        params1.put("date", select_date_str);
+        if (select_coursetype_str.length() > 0) {
+            params1.put("courseType", select_coursetype_str);
+        }
+        if (select_courcestatus_str.length() > 0) {
+            params1.put("courseStatus", select_courcestatus_str);
+        }
         Subscription subscription = Network.getInstance("获取首页数据", getActivity())
-                .get_shouye_date(params,
+                .get_shouye_date(params1,
                         new ProgressSubscriber<>("获取首页数据", new SubscriberOnNextListener<Bean<RiChengBean>>() {
                             @Override
                             public void onNext(Bean<RiChengBean> result) {
-
-                                //设置日历数据
-                                List<String> dates = new ArrayList<>();
-                                for (int i = 0; i < result.getData().getMonth().size(); i++) {
-                                    dates.add(result.getData().getMonth().get(i).getDays());
-                                }
-                                init_clander_view(dates);
-
+                                //设置课程数据
                                 LinearLayoutManager class_linearLayoutManager = new LinearLayoutManager(getActivity());
                                 class_recycler_view.setLayoutManager(class_linearLayoutManager);
-
-                                //设置课程数据
-                                ClassAdapter classAdapter = new ClassAdapter(result.getData().getResult(), getActivity());
+                                ClassAdapter classAdapter = new ClassAdapter(result.getData().getResult(), RiChengFragment.this);
                                 class_recycler_view.setAdapter(classAdapter);
                                 classAdapter.setOnItemClickListener(new ClassAdapter.OnItemClickListener() {
                                     @Override
@@ -360,9 +373,9 @@ public class RiChengFragment extends ViewPagerFragment {
                 //date_tv.setText(DateHelper.get_date2(date.getSolar()[1],date.getSolar()[2]));
                 //日视角刷新数据
                 select_date_str = DateHelper.get_date(date.getSolar()[0], date.getSolar()[1], date.getSolar()[2]);
-                Log.e("选择的日期", select_date_str);
+                //Log.e("选择的日期", select_date_str);
                 //刷新课程
-                //get_date_class_resource(select_date_str);
+                init_class_date_resource();
             }
         });
         calendar.setOnPagerChangeListener(new OnPagerChangeListener() {
@@ -400,6 +413,7 @@ public class RiChengFragment extends ViewPagerFragment {
         /**设置逻辑*/
         View view = popupWindow.getContentView();
         List<String> strings = new ArrayList<>();
+        strings.add("全部状态");
         for (int i = 0; i < select_status.size(); i++) {
             strings.add(select_status.get(i).getName());
         }
@@ -409,8 +423,49 @@ public class RiChengFragment extends ViewPagerFragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                status_tv.setText(select_status.get(i).getName());
+                status_tv.setText(strings.get(i));
+                if (i == 0) {
+                    select_courcestatus_str = "";
+                } else {
+                    select_courcestatus_str = select_status.get(i - 1).getValue();
+                }
                 popupWindow.dismiss();
+                init_class_date_resource();//重新请求课程
+            }
+        });
+    }
+
+    private void select_types_pop() {
+        CommonPopupWindow popupWindow = new CommonPopupWindow.Builder(getActivity())
+                .setView(R.layout.select_type_layout)
+                .setBackGroundLevel(1f)//0.5f
+                .setAnimationStyle(R.style.top_to_bottom)
+                .setWidthAndHeight(select_types_btn.getWidth() - 20,
+                        WindowManager.LayoutParams.WRAP_CONTENT)
+                .setOutSideTouchable(true).create();
+        //popupWindow.showAsDropDown(select_zhengshu_type);
+        popupWindow.showAsDropDown(select_types_btn, 15, -20);
+        /**设置逻辑*/
+        View view = popupWindow.getContentView();
+        List<String> strings = new ArrayList<>();
+        strings.add("全部类型");
+        for (int i = 0; i < select_types.size(); i++) {
+            strings.add(select_types.get(i).getName());
+        }
+        TypeAdapter typeAdapter = new TypeAdapter(strings, getActivity());
+        ListView listView = view.findViewById(R.id.listview);
+        listView.setAdapter(typeAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                types_tv.setText(strings.get(i));
+                if (i == 0) {
+                    select_coursetype_str = "";
+                } else {
+                    select_coursetype_str = select_types.get(i - 1).getValue();
+                }
+                popupWindow.dismiss();
+                init_class_date_resource();//重新请求课程
             }
         });
     }

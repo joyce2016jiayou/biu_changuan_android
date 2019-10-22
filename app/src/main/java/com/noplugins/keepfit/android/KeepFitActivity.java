@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.gson.Gson;
+import com.huantansheng.easyphotos.models.puzzle.Line;
 import com.noplugins.keepfit.android.activity.BuyActivity;
 import com.noplugins.keepfit.android.activity.CheckStatusFailActivity;
 import com.noplugins.keepfit.android.activity.UserPermissionSelectActivity;
@@ -66,14 +67,24 @@ public class KeepFitActivity extends BaseActivity {
     @BindView(R.id.message_num_tv)
     TextView message_num_tv;
     @BindView(R.id.btn_home)
-    RelativeLayout btn_home;
+    LinearLayout btn_home;
     @BindView(R.id.btn_shipu)
-    RelativeLayout btn_shipu;
+    LinearLayout btn_shipu;
     @BindView(R.id.btn_movie)
     RelativeLayout btn_movie;
     @BindView(R.id.btn_mine)
-    RelativeLayout btn_mine;
+    LinearLayout btn_mine;
+    @BindView(R.id.tv1)
+    TextView tv1;
+    @BindView(R.id.tv2)
+    TextView tv2;
+    @BindView(R.id.tv3)
+    TextView tv3;
+    @BindView(R.id.tv4)
+    TextView tv4;
+
     @BindViews({R.id.home_img, R.id.shipu_img, R.id.movie_img, R.id.mine_img})
+
     List<ImageView> bottom_iamge_views;
 
 
@@ -266,31 +277,48 @@ public class KeepFitActivity extends BaseActivity {
 
     private void xianshi_one() {
         bottom_iamge_views.get(0).setImageResource(R.drawable.icon_home_on);
+        tv1.setTextColor(getResources().getColor(R.color.color_F6C82A));
         bottom_iamge_views.get(1).setImageResource(R.drawable.icon_discover_off);
+        tv2.setTextColor(getResources().getColor(R.color.color_4A4A4A));
         bottom_iamge_views.get(2).setImageResource(R.drawable.icon_issue_off);
+        tv3.setTextColor(getResources().getColor(R.color.color_4A4A4A));
         bottom_iamge_views.get(3).setImageResource(R.drawable.icon_user_off);
-
+        tv4.setTextColor(getResources().getColor(R.color.color_4A4A4A));
     }
 
     private void xianshi_two() {
         bottom_iamge_views.get(0).setImageResource(R.drawable.icon_home_off);
+        tv1.setTextColor(getResources().getColor(R.color.color_4A4A4A));
         bottom_iamge_views.get(1).setImageResource(R.drawable.icon_discover_on);
+        tv2.setTextColor(getResources().getColor(R.color.color_F6C82A));
         bottom_iamge_views.get(2).setImageResource(R.drawable.icon_issue_off);
+        tv3.setTextColor(getResources().getColor(R.color.color_4A4A4A));
         bottom_iamge_views.get(3).setImageResource(R.drawable.icon_user_off);
+        tv4.setTextColor(getResources().getColor(R.color.color_4A4A4A));
     }
 
     private void xianshi_three() {
         bottom_iamge_views.get(0).setImageResource(R.drawable.icon_home_off);
+        tv1.setTextColor(getResources().getColor(R.color.color_4A4A4A));
         bottom_iamge_views.get(1).setImageResource(R.drawable.icon_discover_off);
+        tv2.setTextColor(getResources().getColor(R.color.color_4A4A4A));
         bottom_iamge_views.get(2).setImageResource(R.drawable.icon_issue_on);
+        tv3.setTextColor(getResources().getColor(R.color.color_F6C82A));
         bottom_iamge_views.get(3).setImageResource(R.drawable.icon_user_off);
+        tv4.setTextColor(getResources().getColor(R.color.color_4A4A4A));
+
     }
 
     private void xianshi_four() {
         bottom_iamge_views.get(0).setImageResource(R.drawable.icon_home_off);
+        tv1.setTextColor(getResources().getColor(R.color.color_4A4A4A));
         bottom_iamge_views.get(1).setImageResource(R.drawable.icon_discover_off);
+        tv2.setTextColor(getResources().getColor(R.color.color_4A4A4A));
         bottom_iamge_views.get(2).setImageResource(R.drawable.icon_issue_off);
+        tv3.setTextColor(getResources().getColor(R.color.color_4A4A4A));
         bottom_iamge_views.get(3).setImageResource(R.drawable.icon_user_on);
+        tv4.setTextColor(getResources().getColor(R.color.color_F6C82A));
+
     }
 
     @Override

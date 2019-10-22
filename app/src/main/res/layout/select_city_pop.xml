@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/transparent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/m358"
+        android:background="@drawable/sex_pop_bg">
+
+        <LinearLayout
+            android:id="@+id/optionspicker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/m50"
+            android:orientation="horizontal">
+
+            <com.contrarywind.view.WheelView
+                android:id="@+id/options1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/m50"
+                android:layout_weight="1" />
+
+            <com.contrarywind.view.WheelView
+                android:id="@+id/options2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <com.contrarywind.view.WheelView
+                android:id="@+id/options3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/m50"
+
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="@dimen/m20"
+            android:layout_marginRight="@dimen/m20"
+            android:layout_marginBottom="@dimen/m37">
+
+            <TextView
+                android:id="@+id/quxiao_btn"
+                android:layout_width="@dimen/m140"
+                android:layout_height="@dimen/m44"
+                android:layout_alignParentLeft="true"
+                android:background="@drawable/quxiao_bg2"
+                android:gravity="center"
+                android:text="@string/alert_dialog_cached_cancel"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/sure_btn"
+                android:layout_width="@dimen/m140"
+                android:layout_height="@dimen/m44"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/queding_bg2"
+                android:gravity="center"
+                android:text="@string/tv4"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</RelativeLayout>
