@@ -14,6 +14,15 @@ public class ItemBean {
     private String place;//限制人数
     private boolean focus;
     private String type_name;//类型
+    private int type;
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
 
     public String getType_name() {
         return type_name;

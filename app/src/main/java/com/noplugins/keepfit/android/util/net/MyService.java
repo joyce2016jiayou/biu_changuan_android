@@ -3,6 +3,7 @@ package com.noplugins.keepfit.android.util.net;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import com.noplugins.keepfit.android.bean.CalenderEntity;
+import com.noplugins.keepfit.android.bean.ChangguanBean;
 import com.noplugins.keepfit.android.bean.DictionaryeBean;
 import com.noplugins.keepfit.android.bean.LoginBean;
 import com.noplugins.keepfit.android.bean.PrivateDetailBean;
@@ -15,6 +16,7 @@ import com.noplugins.keepfit.android.bean.mine.WalletBean;
 import com.noplugins.keepfit.android.entity.AddClassEntity;
 import com.noplugins.keepfit.android.entity.CheckEntity;
 import com.noplugins.keepfit.android.entity.ClassTypeEntity;
+import com.noplugins.keepfit.android.entity.InformationEntity;
 import com.noplugins.keepfit.android.entity.LoginEntity;
 import com.noplugins.keepfit.android.entity.TeacherEntity;
 import com.noplugins.keepfit.android.util.net.entity.Bean;
@@ -572,5 +574,23 @@ public interface MyService {
     @POST("searchDict")
     Observable<Bean<List<DictionaryeBean>>> get_types(@Body RequestBody json);
 
+
+    /**
+     * 获取首页数据
+     *
+     * @return
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("myArea")
+    Observable<Bean<ChangguanBean>> myArea(@Body RequestBody json);
+
+    /**
+     * 修改场馆数据
+     *
+     * @return
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("submitAudit")
+    Observable<Bean<String>> submitAudit(@Body RequestBody json);
 
 }

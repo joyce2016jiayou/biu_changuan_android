@@ -16,6 +16,7 @@ import com.noplugins.keepfit.android.activity.BuyActivity;
 import com.noplugins.keepfit.android.activity.CheckStatusFailActivity;
 import com.noplugins.keepfit.android.activity.LoginActivity;
 import com.noplugins.keepfit.android.activity.UserPermissionSelectActivity;
+import com.noplugins.keepfit.android.activity.user.Login2Activity;
 import com.noplugins.keepfit.android.base.BaseActivity;
 import com.noplugins.keepfit.android.entity.CheckEntity;
 import com.noplugins.keepfit.android.global.AppConstants;
@@ -80,7 +81,7 @@ public class SplashActivity extends BaseActivity {
     public void doBusiness(Context mContext) {
         if (panduan_net()) {
             if ("".equals(SpUtils.getString(getApplicationContext(), AppConstants.TOKEN, ""))) {
-                Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+                Intent intent = new Intent(SplashActivity.this, Login2Activity.class);
                 startActivity(intent);
                 finish();
             } else {

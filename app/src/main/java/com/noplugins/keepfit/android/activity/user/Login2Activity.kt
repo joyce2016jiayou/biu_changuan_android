@@ -187,6 +187,7 @@ class Login2Activity : BaseActivity() {
                                 SpUtils.putString(applicationContext, AppConstants.TOKEN, result.data.token)
                                 SpUtils.putString(applicationContext, AppConstants.PHONE, edit_phone_number.text.toString())
                                 SpUtils.putString(applicationContext, AppConstants.CHANGGUAN_NUM, result.data.gymAreaNum)
+                                SpUtils.putString(applicationContext, AppConstants.CHANGGUAN_NUM, "GYM19091236750176")
                                 SpUtils.putString(applicationContext, AppConstants.USER_NAME, result.data.gymAreaNum)
                                 SpUtils.putInt(applicationContext, AppConstants.USER_TYPE, result.data.type)
                                 SpUtils.putInt(applicationContext,AppConstants.IS_TX,result.data.havePayPassWord)

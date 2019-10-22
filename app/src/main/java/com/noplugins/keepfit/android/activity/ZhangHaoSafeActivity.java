@@ -14,7 +14,9 @@ import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.activity.user.Login2Activity;
 import com.noplugins.keepfit.android.base.BaseActivity;
 import com.noplugins.keepfit.android.callback.DialogCallBack;
+import com.noplugins.keepfit.android.global.AppConstants;
 import com.noplugins.keepfit.android.util.ActivityCollectorUtil;
+import com.noplugins.keepfit.android.util.SpUtils;
 import com.noplugins.keepfit.android.util.data.SharedPreferencesHelper;
 import com.noplugins.keepfit.android.util.net.Network;
 import com.noplugins.keepfit.android.util.ui.PopWindowHelper;
@@ -42,7 +44,7 @@ public class ZhangHaoSafeActivity extends BaseActivity {
         setContentLayout(R.layout.activity_zhang_hao_safe);
         ButterKnife.bind(this);
         isShowTitle(false);
-        phone_number_tv.setText((String)SharedPreferencesHelper.get(getApplicationContext(), Network.phone_number, ""));
+        phone_number_tv.setText(SpUtils.getString(getApplicationContext(), AppConstants.PHONE));
     }
 
     @Override
