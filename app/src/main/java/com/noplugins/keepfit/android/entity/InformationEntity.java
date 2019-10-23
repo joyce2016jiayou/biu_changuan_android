@@ -37,6 +37,43 @@ public class InformationEntity {
     private String company_code;
     private List<GymPlacesBean> gymPlaces;
     private List<GymPicBean> gym_pic;
+    private String province;
+    private String city;
+    private String district;
+
+    public String getBank_card_num() {
+        return bank_card_num;
+    }
+
+    public void setBank_card_num(String bank_card_num) {
+        this.bank_card_num = bank_card_num;
+    }
+
+    private String bank_card_num;
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(String district) {
+        this.district = district;
+    }
 
     public String getArea_name() {
         return area_name;

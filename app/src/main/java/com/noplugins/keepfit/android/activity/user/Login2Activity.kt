@@ -180,9 +180,9 @@ class Login2Activity : BaseActivity() {
         params["phone"] = edit_phone_number.text.toString()
         params["password"] = edit_password.text.toString()
 
-        val subscription = Network.getInstance("获取验证码", this)
+        val subscription = Network.getInstance("密码登录", this)
                 .login(params,
-                        ProgressSubscriber("获取验证码", object : SubscriberOnNextListener<Bean<LoginEntity>> {
+                        ProgressSubscriber("密码登录", object : SubscriberOnNextListener<Bean<LoginEntity>> {
                             override fun onNext(result: Bean<LoginEntity>) {
                                 SpUtils.putString(applicationContext, AppConstants.TOKEN, result.data.token)
                                 SpUtils.putString(applicationContext, AppConstants.PHONE, edit_phone_number.text.toString())
@@ -190,11 +190,10 @@ class Login2Activity : BaseActivity() {
                                 SpUtils.putString(applicationContext, AppConstants.CHANGGUAN_NUM, "GYM19091236750176")
                                 SpUtils.putString(applicationContext, AppConstants.USER_NAME, result.data.gymAreaNum)
                                 SpUtils.putInt(applicationContext, AppConstants.USER_TYPE, result.data.type)
-                                SpUtils.putInt(applicationContext,AppConstants.IS_TX,result.data.havePayPassWord)
-
-//                                get_check_status()
-                                val intent = Intent(this@Login2Activity, KeepFitActivity::class.java)
-                                startActivity(intent)
+                                SpUtils.putInt(applicationContext, AppConstants.IS_TX, result.data.havePayPassWord)
+                                get_check_status()
+//                                val intent = Intent(this@Login2Activity, KeepFitActivity::class.java)
+//                                startActivity(intent)
                             }
 
                             override fun onError(error: String) {
@@ -247,7 +246,7 @@ class Login2Activity : BaseActivity() {
         SpUtils.putString(applicationContext, AppConstants.USER_NAME, login.gymUserNum)
         SpUtils.putInt(applicationContext, AppConstants.USER_TYPE, login.type)
         SpUtils.putString(applicationContext, AppConstants.PHONE, edit_phone_number.text.toString())
-        SpUtils.putInt(applicationContext,AppConstants.IS_TX,login.havePayPassWord)
+        SpUtils.putInt(applicationContext, AppConstants.IS_TX, login.havePayPassWord)
     }
 
     private fun get_check_status() {
@@ -257,6 +256,7 @@ class Login2Activity : BaseActivity() {
                 .get_check_status(params,
                         ProgressSubscriber("获取审核状态", object : SubscriberOnNextListener<Bean<CheckEntity>> {
                             override fun onNext(result: Bean<CheckEntity>) {
+                                //成功1,失败0,没有提交过资料-2,2没有银行卡,3审核中
                                 when {
                                     result.data.status == 1 -> {
                                         val intent = Intent(this@Login2Activity, KeepFitActivity::class.java)

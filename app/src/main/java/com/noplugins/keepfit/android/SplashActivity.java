@@ -15,8 +15,10 @@ import android.widget.ImageView;
 import com.noplugins.keepfit.android.activity.BuyActivity;
 import com.noplugins.keepfit.android.activity.CheckStatusFailActivity;
 import com.noplugins.keepfit.android.activity.LoginActivity;
+import com.noplugins.keepfit.android.activity.SubmitInformationSelectActivity;
 import com.noplugins.keepfit.android.activity.UserPermissionSelectActivity;
 import com.noplugins.keepfit.android.activity.user.Login2Activity;
+import com.noplugins.keepfit.android.activity.user.SetPasswordActivity;
 import com.noplugins.keepfit.android.base.BaseActivity;
 import com.noplugins.keepfit.android.entity.CheckEntity;
 import com.noplugins.keepfit.android.global.AppConstants;
@@ -39,6 +41,7 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.jpush.android.cache.Sp;
+import rx.Subscription;
 
 public class SplashActivity extends BaseActivity {
     @BindView(R.id.splash_image)
@@ -85,11 +88,8 @@ public class SplashActivity extends BaseActivity {
                 startActivity(intent);
                 finish();
             } else {
-                //防止在第一次，选择角色的时候退出了，导致，第二次进来直接进主页
                 //获取审核状态
-//                get_check_status();
-                Intent intent = new Intent(SplashActivity.this, KeepFitActivity.class);
-                startActivity(intent);
+                get_check_status();
             }
 
 
@@ -121,14 +121,12 @@ public class SplashActivity extends BaseActivity {
         Map<String, Object> params = new HashMap<>();
         params.put("token", SpUtils.getString(getApplicationContext(), AppConstants.TOKEN));
         Log.e("获取审核状态参数", params.toString());
-
-        subscription = Network.getInstance("教练列表", this)
+        Subscription subscription = Network.getInstance("获取审核状态", this)
                 .get_check_status(params,
-                        new ProgressSubscriber<>("教练列表", new SubscriberOnNextListener<Bean<CheckEntity>>() {
+                        new ProgressSubscriber<>("获取审核状态", new SubscriberOnNextListener<Bean<CheckEntity>>() {
                             @Override
                             public void onNext(Bean<CheckEntity> result) {
                                 Log.e(TAG, "获取审核状态成功：" + result.getData().getStatus());
-                                //成功1，失败0，没有提交过资料-2
                                 if (result.getData().getStatus() == 1) {
                                     Intent intent = new Intent(SplashActivity.this, KeepFitActivity.class);
                                     startActivity(intent);
@@ -136,7 +134,7 @@ public class SplashActivity extends BaseActivity {
                                     Intent intent = new Intent(SplashActivity.this, CheckStatusFailActivity.class);
                                     startActivity(intent);
                                 } else if (result.getData().getStatus() == -2) {
-                                    Intent intent = new Intent(SplashActivity.this, UserPermissionSelectActivity.class);
+                                    Intent intent = new Intent(SplashActivity.this, SubmitInformationSelectActivity.class);
                                     startActivity(intent);
                                     finish();
                                 }
@@ -146,8 +144,7 @@ public class SplashActivity extends BaseActivity {
                             public void onError(String error) {
 
                             }
-                        }, this, true));
-
+                        }, this, false));
 
 
     }

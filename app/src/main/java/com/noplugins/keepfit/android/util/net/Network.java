@@ -7,6 +7,7 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.noplugins.keepfit.android.bean.BindCardBean;
 import com.noplugins.keepfit.android.bean.CalenderEntity;
 import com.noplugins.keepfit.android.bean.ChangguanBean;
 import com.noplugins.keepfit.android.bean.DictionaryeBean;
@@ -333,19 +334,31 @@ public class Network {
     }
 
     /**
-     * 获取验证码
+     * 获取审核状态
      *
      * @param subscriber
      * @return
      */
     public Subscription get_check_status(Map<String, Object> params, Subscriber<Bean<CheckEntity>> subscriber) {
-        return service.get_check_status(retuen_json_params(params))
+        return service.get_check_status(params)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
     }
-
+    /**
+     * 绑定银行卡
+     *
+     * @param subscriber
+     * @return
+     */
+    public Subscription bind_card(Map<String, Object> params, Subscriber<Bean<BindCardBean>> subscriber) {
+        return service.bind_card(retuen_json_params(params))
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
     /**
      * 获取课程
      *

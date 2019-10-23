@@ -2,6 +2,7 @@ package com.noplugins.keepfit.android.util.net;
 
 
 import com.alibaba.fastjson.annotation.JSONField;
+import com.noplugins.keepfit.android.bean.BindCardBean;
 import com.noplugins.keepfit.android.bean.CalenderEntity;
 import com.noplugins.keepfit.android.bean.ChangguanBean;
 import com.noplugins.keepfit.android.bean.DictionaryeBean;
@@ -87,7 +88,6 @@ public interface MyService {
     Observable<Bean<LoginEntity>> login(@Body RequestBody json);
 
 
-
     /**
      * 验证码登陆登录
      *
@@ -149,7 +149,15 @@ public interface MyService {
      */
     @FormUrlEncoded
     @POST("getAuditResult")
-    Observable<Bean<CheckEntity>> get_check_status(@Body RequestBody json);
+    Observable<Bean<CheckEntity>> get_check_status(@FieldMap Map<String, Object> json);
+    /**
+     * 绑定银行卡
+     *
+     * @return
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("bindingBank")
+    Observable<Bean<BindCardBean>> bind_card(@Body RequestBody map);
 
     /**
      * 获取审核状态
@@ -403,6 +411,7 @@ public interface MyService {
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
     @POST("memberOrderPay")
     Observable<Bean<String>> memberOrderPay(@Body RequestBody json);
+
     /**
      * 获取支付信息 -微信
      *
@@ -449,8 +458,8 @@ public interface MyService {
     Observable<Bean<BalanceListBean.ListBean>> myBalanceListDetail(@Body RequestBody json);
 
     /**
-     *
      * 修改手机号
+     *
      * @return
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
@@ -458,8 +467,8 @@ public interface MyService {
     Observable<Bean<String>> updatePhone(@Body RequestBody json);
 
     /**
-     *
      * 设置密码
+     *
      * @return
      */
     @FormUrlEncoded
@@ -467,8 +476,8 @@ public interface MyService {
     Observable<Bean<String>> setPassword(@FieldMap Map<String, Object> params);
 
     /**
-     *
      * 修改密码
+     *
      * @return
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
@@ -485,7 +494,7 @@ public interface MyService {
     Observable<Bean<String>> settingPayPassword(@Body RequestBody json);
 
     /**
-     *提现
+     * 提现
      *
      * @return
      */
@@ -495,7 +504,7 @@ public interface MyService {
 
 
     /**
-     *教练管理列表
+     * 教练管理列表
      *
      * @return
      */
@@ -504,7 +513,7 @@ public interface MyService {
     Observable<Bean<List<TeacherBean>>> teacherManner(@Body RequestBody json);
 
     /**
-     *教练类型管理列表
+     * 教练类型管理列表
      *
      * @return
      */
@@ -514,7 +523,7 @@ public interface MyService {
 
 
     /**
-     *教练详情
+     * 教练详情
      *
      * @return
      */
@@ -524,7 +533,7 @@ public interface MyService {
 
 
     /**
-     *同意你拒绝
+     * 同意你拒绝
      *
      * @return
      */
@@ -549,6 +558,7 @@ public interface MyService {
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
     @POST("updateCost")
     Observable<Bean<String>> updateCost(@Body RequestBody json);
+
     /**
      * 获取日历
      */

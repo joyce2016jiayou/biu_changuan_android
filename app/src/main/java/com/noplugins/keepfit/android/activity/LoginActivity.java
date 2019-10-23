@@ -225,7 +225,6 @@ public class LoginActivity extends BaseActivity {
 //                            @Override
 //                            public void on_post_entity(CheckEntity checkEntity, String get_message_id) {
 //                                Log.e(TAG, "获取审核状态成功：" + checkEntity.getStatus());
-//                                //成功1，失败0，没有提交过资料-2
 //                                if (checkEntity.getStatus() == 1) {
 //                                    Intent intent = new Intent(LoginActivity.this, KeepFitActivity.class);
 //                                    startActivity(intent);

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -11,12 +12,20 @@ import android.widget.Toast;
 
 import com.noplugins.keepfit.android.KeepFitActivity;
 import com.noplugins.keepfit.android.R;
+import com.noplugins.keepfit.android.activity.CheckStatusFailActivity;
+import com.noplugins.keepfit.android.activity.LoginActivity;
+import com.noplugins.keepfit.android.activity.SubmitInformationSelectActivity;
+import com.noplugins.keepfit.android.activity.UserPermissionSelectActivity;
 import com.noplugins.keepfit.android.base.BaseActivity;
+import com.noplugins.keepfit.android.bean.RiChengBean;
+import com.noplugins.keepfit.android.entity.CheckEntity;
 import com.noplugins.keepfit.android.global.AppConstants;
 import com.noplugins.keepfit.android.util.SpUtils;
 import com.noplugins.keepfit.android.util.net.Network;
 import com.noplugins.keepfit.android.util.net.entity.Bean;
+import com.noplugins.keepfit.android.util.net.progress.GsonSubscriberOnNextListener;
 import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriber;
+import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriberNew;
 import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener;
 import com.noplugins.keepfit.android.util.ui.LoadingButton;
 import com.noplugins.keepfit.android.wxapi.WXPayEntryActivity;
@@ -57,9 +66,10 @@ public class SetPasswordActivity extends BaseActivity {
         tiaoguo_tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(SetPasswordActivity.this, WXPayEntryActivity.class);
-                startActivity(intent);
-                finish();
+                get_check_status();
+//                Intent intent = new Intent(SetPasswordActivity.this, WXPayEntryActivity.class);
+//                startActivity(intent);
+//                finish();
             }
         });
         sure_btn.setBtnOnClickListener(new View.OnClickListener() {
@@ -104,15 +114,18 @@ public class SetPasswordActivity extends BaseActivity {
                             public void onNext(Bean<String> result) {
                                 sure_btn.loadingComplete();
 
-                                if(null!=SpUtils.getString(getApplicationContext(),AppConstants.TEACHER_TYPE)){
-                                    if(SpUtils.getString(getApplicationContext(),AppConstants.TEACHER_TYPE).length()>0){//已经审核过了
-                                        Intent intent = new Intent(SetPasswordActivity.this, KeepFitActivity.class);
-                                        startActivity(intent);
-                                    }else{//未审核
-                                        Intent intent = new Intent(SetPasswordActivity.this, KeepFitActivity.class);
-                                        startActivity(intent);
-                                    }
-                                }
+//                                if(null!=SpUtils.getString(getApplicationContext(),AppConstants.TEACHER_TYPE)){
+//                                    if(SpUtils.getString(getApplicationContext(),AppConstants.TEACHER_TYPE).length()>0){//已经审核过了
+//                                        Intent intent = new Intent(SetPasswordActivity.this, KeepFitActivity.class);
+//                                        startActivity(intent);
+//                                    }else{//未审核
+//
+//                                        Intent intent = new Intent(SetPasswordActivity.this, KeepFitActivity.class);
+//                                        startActivity(intent);
+//                                    }
+//                                }
+                                //获取审核状态
+                                get_check_status();
 
                             }
 
@@ -124,4 +137,37 @@ public class SetPasswordActivity extends BaseActivity {
                             }
                         }, this, false));
     }
+
+    private void get_check_status() {
+        Map<String, Object> params = new HashMap<>();
+        params.put("token", SpUtils.getString(getApplicationContext(), AppConstants.TOKEN));
+        Log.e("获取审核状态参数", params.toString());
+        Subscription subscription = Network.getInstance("获取审核状态", this)
+                .get_check_status(params,
+                        new ProgressSubscriber<>("获取审核状态", new SubscriberOnNextListener<Bean<CheckEntity>>() {
+                            @Override
+                            public void onNext(Bean<CheckEntity> result) {
+                                Log.e(TAG, "获取审核状态成功：" + result.getData().getStatus());
+                                if (result.getData().getStatus() == 1) {
+                                    Intent intent = new Intent(SetPasswordActivity.this, KeepFitActivity.class);
+                                    startActivity(intent);
+                                } else if (result.getData().getStatus() == 0) {
+                                    Intent intent = new Intent(SetPasswordActivity.this, CheckStatusFailActivity.class);
+                                    startActivity(intent);
+                                } else if (result.getData().getStatus() == -2) {
+                                    Intent intent = new Intent(SetPasswordActivity.this, SubmitInformationSelectActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                            }
+
+                            @Override
+                            public void onError(String error) {
+
+                            }
+                        }, this, false));
+
+
+    }
+
 }

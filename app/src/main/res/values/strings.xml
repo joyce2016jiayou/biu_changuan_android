@@ -53,6 +53,8 @@
     <string name="edit_hint43">市</string>
     <string name="edit_hint44">区</string>
     <string name="edit_hint45">详细地址</string>
+    <string name="edit_hint46">如：光大银行通化分行</string>
+
 
 
     <string name="tv1">登录</string>
@@ -189,7 +191,7 @@
     <string name="tv132">资质审核</string>
     <string name="tv133">企业名称</string>
     <string name="tv134">验证金额</string>
-    <string name="tv135">企业账号</string>
+    <string name="tv135">企业银行账号</string>
     <string name="tv136">设置提现账户</string>
     <string name="tv137">企业名称</string>
     <string name="tv138">用户名</string>
@@ -203,6 +205,7 @@
     <string name="tv146">哔哟终身会员</string>
     <string name="tv147">日程</string>
     <string name="tv148">拨打</string>
+    <string name="tv149">开户银行</string>
 
     <string name="tv_select">请选择</string>
     <string name="tv_qianbao">钱包</string>
@@ -240,6 +243,7 @@
     <string name="alert_dialog_tishi26">银行卡号不能为空！</string>
     <string name="alert_dialog_tishi27">企业名称不能为空！</string>
     <string name="alert_dialog_tishi28">企业账号不能为空！</string>
+    <string name="alert_dialog_tishi29">省市区不能为空！</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

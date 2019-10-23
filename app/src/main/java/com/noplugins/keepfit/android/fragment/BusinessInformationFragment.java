@@ -18,15 +18,24 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.noplugins.keepfit.android.KeepFitActivity;
 import com.noplugins.keepfit.android.R;
+import com.noplugins.keepfit.android.SplashActivity;
+import com.noplugins.keepfit.android.activity.CheckStatusFailActivity;
 import com.noplugins.keepfit.android.activity.HeTongActivity;
 import com.noplugins.keepfit.android.activity.InformationCheckActivity;
+import com.noplugins.keepfit.android.activity.SubmitInformationSelectActivity;
+import com.noplugins.keepfit.android.bean.BindCardBean;
+import com.noplugins.keepfit.android.entity.CheckEntity;
 import com.noplugins.keepfit.android.entity.InformationEntity;
 import com.noplugins.keepfit.android.entity.UrlEntity;
+import com.noplugins.keepfit.android.global.AppConstants;
+import com.noplugins.keepfit.android.util.SpUtils;
 import com.noplugins.keepfit.android.util.data.SharedPreferencesHelper;
 import com.noplugins.keepfit.android.util.net.Network;
 import com.noplugins.keepfit.android.util.net.entity.Bean;
 import com.noplugins.keepfit.android.util.net.progress.GsonSubscriberOnNextListener;
+import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriber;
 import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriberNew;
 import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener;
 import com.noplugins.keepfit.android.util.ui.NoScrollViewPager;
@@ -83,6 +92,12 @@ public class BusinessInformationFragment extends ViewPagerFragment {
     EditText edit_shenhe_idcard;
     @BindView(R.id.edit_shenhe_bankcard_number)
     EditText edit_shenhe_bankcard_number;
+    @BindView(R.id.compny_kaihuhang)
+    EditText compny_kaihuhang;
+    @BindView(R.id.geren_kaihuhang)
+    EditText geren_kaihuhang;
+    @BindView(R.id.kaihuhang_edit)
+    EditText kaihuhang_edit;
 
     private View view;
     private InformationEntity informationEntity;
@@ -118,20 +133,22 @@ public class BusinessInformationFragment extends ViewPagerFragment {
 
 
                 if (check_value()) {
-                    //切换到提现布局
-                    yingye_ziliao_layout.setVisibility(View.GONE);
-                    tixian_compny_layout.setVisibility(View.VISIBLE);
-                    compny_check_btn.setChecked(true);
 
-                    Intent intent = new Intent(getActivity(), HeTongActivity.class);
-                    startActivity(intent);
-                    /*informationEntity = mainActivity.informationEntity;//获取基础资料信息
-                    informationEntity.setLegal_person(faren_name.getText().toString());
-                    informationEntity.setCard_num(icon_id_card.getText().toString());
-                    informationEntity.setCompany_name(qiye_zhanghao.getText().toString());
+                    //跳转到合同页面
+                    /*Intent intent = new Intent(getActivity(), HeTongActivity.class);
+                    startActivity(intent);*/
+
+                    informationEntity = mainActivity.informationEntity;//获取基础资料信息
+                    informationEntity.setCompany_name(qiye_mingcheng_name.getText().toString());//公司名字
+                    informationEntity.setCompany_code(yingyezhizhao_xingyong_edittext.getText().toString());//社会统一码
+                    informationEntity.setLegal_person(faren_name.getText().toString());//法人姓名
+                    informationEntity.setCard_num(icon_id_card.getText().toString());//身份证号
+                    informationEntity.setBank_card_num(qiye_zhanghao.getText().toString());//企业账号
+                    //开户银行
+
 
                     //提交审核资料
-                    submit_information();*/
+                    submit_information();
                 } else {
                     return;
                 }
@@ -166,10 +183,11 @@ public class BusinessInformationFragment extends ViewPagerFragment {
             @Override
             public void onClick(View view) {
                 if (compny_check_btn.isChecked()) {//提交公司
-
+                    bind_card(true);
                 } else if (geren_check_btn.isChecked()) {//提交个人
                     if (check_shenhe_value()) {
                         //提交审核
+                        bind_card(false);
                     }
                 }
 
@@ -177,6 +195,41 @@ public class BusinessInformationFragment extends ViewPagerFragment {
         });
 
     }
+
+    private void bind_card(boolean is_bind_compny) {
+        Map<String, Object> params = new HashMap<>();
+        BindCardBean bindCardBean = new BindCardBean();
+        if (is_bind_compny) {
+            bindCardBean.setUserName(tixian_compny_name.getText().toString());
+            bindCardBean.setBankNum(tixian_qiye_zhanghao.getText().toString());
+            bindCardBean.setBankName(compny_kaihuhang.getText().toString());//开户行
+        } else {
+            bindCardBean.setUserName(edit_shenhe_user_name.getText().toString());//用户名
+            bindCardBean.setCardNum(edit_shenhe_idcard.getText().toString());//身份证号
+            bindCardBean.setBankNum(edit_shenhe_bankcard_number.getText().toString());//银行卡号
+            bindCardBean.setBankName(geren_kaihuhang.getText().toString());//开户行
+        }
+        Subscription subscription = Network.getInstance("绑定银行卡", getActivity())
+                .bind_card(params,
+                        new ProgressSubscriber<>("绑定银行卡", new SubscriberOnNextListener<Bean<BindCardBean>>() {
+                            @Override
+                            public void onNext(Bean<BindCardBean> result) {
+                                //切换到第三个进度条
+                                viewpager_content.setCurrentItem(2);
+                                int step = stepView.getCurrentStep();//设置进度条
+                                stepView.setCurrentStep((step + 1) % stepView.getStepNum());
+                                //删除缓存的状态,目的是下次进启动页的时候不会跳转"角色选择页面"
+                                SharedPreferencesHelper.remove(getActivity(), Network.no_submit_information);
+
+                            }
+
+                            @Override
+                            public void onError(String error) {
+
+                            }
+                        }, getActivity(), false));
+    }
+
 
     private boolean check_shenhe_value() {
         if (TextUtils.isEmpty(edit_shenhe_user_name.getText())) {
@@ -244,12 +297,13 @@ public class BusinessInformationFragment extends ViewPagerFragment {
                     @Override
                     public void on_post_entity(String entity, String s) {
                         Log.e("提交审核资料成功", entity + "提交审核资料成功" + s);
-                        viewpager_content.setCurrentItem(2);
-                        int step = stepView.getCurrentStep();//设置进度条
-                        stepView.setCurrentStep((step + 1) % stepView.getStepNum());
 
-                        //删除缓存的状态,目的是下次进启动页的时候不会跳转"角色选择页面"
-                        SharedPreferencesHelper.remove(getActivity(), Network.no_submit_information);
+                        //切换到提现布局
+                        yingye_ziliao_layout.setVisibility(View.GONE);
+                        tixian_compny_layout.setVisibility(View.VISIBLE);
+                        compny_check_btn.setChecked(true);
+                        //设置公司账户为默认值-加接口 todo
+
 
                     }
                 }, new SubscriberOnNextListener<Bean<Object>>() {

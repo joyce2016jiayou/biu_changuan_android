@@ -20,4 +20,14 @@ public class CheckEntity {
     }
 
     private int status;
+
+    public String getHaveMember() {
+        return haveMember;
+    }
+
+    public void setHaveMember(String haveMember) {
+        this.haveMember = haveMember;
+    }
+
+    private String haveMember;
 }

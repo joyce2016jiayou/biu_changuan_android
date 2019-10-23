@@ -194,7 +194,6 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
     private Thread thread;
 
 
-
     /**
      * 七牛云
      **/
@@ -263,8 +262,8 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
         next_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*if (check_value()) {
-                 *//**七牛云*//*
+                if (check_value()) {
+                    //七牛云
                     progress_upload = new ProgressUtil();
                     progress_upload.showProgressDialog(getActivity(), "载入中...");
                     //上传icon
@@ -318,11 +317,8 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
                     }
                 } else {
                     return;
-                }*/
-                //跳转下一个页面
-                viewpager_content.setCurrentItem(1);
-                int step = stepView.getCurrentStep();//设置进度条
-                stepView.setCurrentStep((step + 1) % stepView.getStepNum());
+                }
+
 
             }
         });
@@ -413,7 +409,7 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
                 .setLineSpacingMultiplier(2.0f)
                 .build();
 
-        select_city_pop.setPicker(options1Items, options2Items,options3Items);//二级选择器
+        select_city_pop.setPicker(options1Items, options2Items, options3Items);//二级选择器
         select_city_pop.show();
     }
 
@@ -466,6 +462,7 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
 
         mHandler.sendEmptyMessage(MSG_LOAD_SUCCESS);
     }
+
     public ArrayList<JsonBean> parseData(String result) {//Gson 解析
         ArrayList<JsonBean> detail = new ArrayList<>();
         try {
@@ -525,7 +522,6 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
         informationEntity.setEmail(edit_email.getText().toString());//邮箱
         informationEntity.setBusiness_start(time1_edit.getText().toString());//营业开始时间
         informationEntity.setBusiness_end(time2_edit.getText().toString());//营业结束时间
-        informationEntity.setAddress(edit_address.getText().toString());//地址
         //获取选择的功能性场所类型
         ArrayList<ItemBean> itemBeans = exRecyclerAdapter.getData();
         List<InformationEntity.GymPlacesBean> gymPlacesBeans = new ArrayList<>();
@@ -566,6 +562,13 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
             gym_pic.add(jiugongge_icon);
         }
         informationEntity.setGym_pic(gym_pic);//设置九宫格图片
+
+        //设置省市区
+        informationEntity.setAddress(edit_address.getText().toString());//地址
+        informationEntity.setProvince(sheng_tv.getText().toString());
+        informationEntity.setCity(shi_tv.getText().toString());
+        informationEntity.setDistrict(qu_tv.getText().toString());
+
         return informationEntity;
     }
 
@@ -582,6 +585,9 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
             return false;
         } else if (TextUtils.isEmpty(edit_email.getText())) {
             Toast.makeText(getActivity(), R.string.alert_dialog_tishi6, Toast.LENGTH_SHORT).show();
+            return false;
+        } else if (TextUtils.isEmpty(sheng_tv.getText())) {
+            Toast.makeText(getActivity(), R.string.alert_dialog_tishi29, Toast.LENGTH_SHORT).show();
             return false;
         } else if (TextUtils.isEmpty(edit_address.getText())) {
             Toast.makeText(getActivity(), R.string.alert_dialog_tishi7, Toast.LENGTH_SHORT).show();
