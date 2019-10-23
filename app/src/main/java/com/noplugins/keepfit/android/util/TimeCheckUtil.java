@@ -121,4 +121,13 @@ public class TimeCheckUtil {
         }
         return timeArray;
     }
+
+    public static String removeSecond(String time){
+        if (time.length()<8){
+            return time;
+        }
+
+        String newtime = time.substring(0,time.lastIndexOf(":"));
+        return newtime;
+    }
 }

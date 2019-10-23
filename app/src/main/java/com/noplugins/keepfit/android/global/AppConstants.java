@@ -28,6 +28,8 @@ public class AppConstants {
     public static final String LON = "currentLon";//精度
     public static String IS_SET_ALIAS = "is_set_alias";
 
+    public static final String COST = "cost";
+
 
 
     //团课同意

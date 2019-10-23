@@ -8,9 +8,12 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.noplugins.keepfit.android.bean.BindCardBean;
+import com.noplugins.keepfit.android.bean.BankCradBean;
 import com.noplugins.keepfit.android.bean.CalenderEntity;
+import com.noplugins.keepfit.android.bean.CgBindingBean;
 import com.noplugins.keepfit.android.bean.ChangguanBean;
 import com.noplugins.keepfit.android.bean.DictionaryeBean;
+import com.noplugins.keepfit.android.bean.HightListBean;
 import com.noplugins.keepfit.android.bean.LoginBean;
 import com.noplugins.keepfit.android.bean.PrivateDetailBean;
 import com.noplugins.keepfit.android.bean.TeacherBean;
@@ -980,13 +983,62 @@ public class Network {
                 .subscribe(subscriber);
     }
 
-    public Subscription submitAudit(Map<String, Object> params, Subscriber<Bean<String>> subscriber) {
+    public Subscription submitAudit(InformationEntity params, Subscriber<Bean<String>> subscriber) {
         return service.submitAudit(retuen_json_object(params))
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
     }
+
+    /**
+     * 场馆绑定教练
+     */
+
+    public Subscription areaInviteTeacher(CgBindingBean params, Subscriber<Bean<String>> subscriber) {
+        return service.areaInviteTeacher(retuen_json_object(params))
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 提现
+     */
+    public Subscription areaWithdraw(Map<String, Object> params, Subscriber<Bean<String>> subscriber) {
+        return service.areaWithdraw(retuen_json_object(params))
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 提现
+     */
+    public Subscription bankCard(Map<String, Object> params, Subscriber<Bean<BankCradBean>> subscriber) {
+        return service.bankCard(retuen_json_object(params))
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 获取高峰时间价格
+     */
+    public Subscription findAreaPrice(Map<String, Object> params, Subscriber<Bean<List<HightListBean>>> subscriber) {
+        return service.findAreaPrice(retuen_json_object(params))
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+
+
+
 
 
 }

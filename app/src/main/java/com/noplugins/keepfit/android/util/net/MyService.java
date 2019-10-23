@@ -3,9 +3,11 @@ package com.noplugins.keepfit.android.util.net;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import com.noplugins.keepfit.android.bean.BindCardBean;
+import com.noplugins.keepfit.android.bean.BankCradBean;
 import com.noplugins.keepfit.android.bean.CalenderEntity;
 import com.noplugins.keepfit.android.bean.ChangguanBean;
 import com.noplugins.keepfit.android.bean.DictionaryeBean;
+import com.noplugins.keepfit.android.bean.HightListBean;
 import com.noplugins.keepfit.android.bean.LoginBean;
 import com.noplugins.keepfit.android.bean.PrivateDetailBean;
 import com.noplugins.keepfit.android.bean.TeacherBean;
@@ -436,7 +438,7 @@ public interface MyService {
      * @return
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
-    @POST("myBalance")
+    @POST("searchWallet")
     Observable<Bean<WalletBean>> myBalance(@Body RequestBody json);
 
     /**
@@ -445,7 +447,7 @@ public interface MyService {
      * @return
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
-    @POST("myBalanceList")
+    @POST("searchWalletDetail")
     Observable<Bean<BalanceListBean>> myBalanceList(@Body RequestBody json);
 
     /**
@@ -454,12 +456,12 @@ public interface MyService {
      * @return
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
-    @POST("myBalance")
+    @POST("myWalletDetail")
     Observable<Bean<BalanceListBean.ListBean>> myBalanceListDetail(@Body RequestBody json);
 
     /**
-     * 修改手机号
      *
+     * 修改手机号
      * @return
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
@@ -467,8 +469,8 @@ public interface MyService {
     Observable<Bean<String>> updatePhone(@Body RequestBody json);
 
     /**
-     * 设置密码
      *
+     * 设置密码
      * @return
      */
     @FormUrlEncoded
@@ -476,8 +478,8 @@ public interface MyService {
     Observable<Bean<String>> setPassword(@FieldMap Map<String, Object> params);
 
     /**
-     * 修改密码
      *
+     * 修改密码
      * @return
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
@@ -494,7 +496,7 @@ public interface MyService {
     Observable<Bean<String>> settingPayPassword(@Body RequestBody json);
 
     /**
-     * 提现
+     *提现
      *
      * @return
      */
@@ -504,7 +506,7 @@ public interface MyService {
 
 
     /**
-     * 教练管理列表
+     *教练管理列表
      *
      * @return
      */
@@ -513,7 +515,7 @@ public interface MyService {
     Observable<Bean<List<TeacherBean>>> teacherManner(@Body RequestBody json);
 
     /**
-     * 教练类型管理列表
+     *教练类型管理列表
      *
      * @return
      */
@@ -523,7 +525,7 @@ public interface MyService {
 
 
     /**
-     * 教练详情
+     *教练详情
      *
      * @return
      */
@@ -533,7 +535,7 @@ public interface MyService {
 
 
     /**
-     * 同意你拒绝
+     *同意你拒绝
      *
      * @return
      */
@@ -558,7 +560,6 @@ public interface MyService {
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
     @POST("updateCost")
     Observable<Bean<String>> updateCost(@Body RequestBody json);
-
     /**
      * 获取日历
      */
@@ -602,5 +603,41 @@ public interface MyService {
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
     @POST("submitAudit")
     Observable<Bean<String>> submitAudit(@Body RequestBody json);
+
+    /**
+     * 场馆绑定教练
+     *
+     * @return
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("areaInviteTeacher")
+    Observable<Bean<String>> areaInviteTeacher(@Body RequestBody json);
+
+    /**
+     * 提现
+     *
+     * @return
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("areaWithdraw")
+    Observable<Bean<String>> areaWithdraw(@Body RequestBody json);
+
+    /**
+     * 银行卡
+     *
+     * @return
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("bankCard")
+    Observable<Bean<BankCradBean>> bankCard(@Body RequestBody json);
+
+    /**
+     * 获取高峰时间价格
+     *
+     * @return
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("findAreaPrice")
+    Observable<Bean<List<HightListBean>>> findAreaPrice(@Body RequestBody json);
 
 }

@@ -15,12 +15,15 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.CheckBox
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.lwjfork.code.CodeEditText
+import com.nanchen.bankcardutil.BankInfoUtil
 import com.noplugins.keepfit.android.R
 import com.noplugins.keepfit.android.activity.mine.VerificationPhoneActivity
 import com.noplugins.keepfit.android.base.BaseActivity
+import com.noplugins.keepfit.android.bean.BankCradBean
 import com.noplugins.keepfit.android.global.AppConstants
 import com.noplugins.keepfit.android.util.HideDataUtil
 import com.noplugins.keepfit.android.util.SpUtils
@@ -47,10 +50,13 @@ class WithdrawActivity : BaseActivity() {
         setContentView(R.layout.activity_withdraw)
         tv_name.text = "持卡人  "+SpUtils.getString(this, AppConstants.NAME)
         //超过1000元可以提现
-        val ss = SpannableString("超过500元可以提现")//定义hint的值
+        val ss = SpannableString("超过1000元可以提现")//定义hint的值
         val ass = AbsoluteSizeSpan(15, true)//设置字体大小 true表示单位是sp
         ss.setSpan(ass, 0, ss.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         et_withdraw_money.hint = SpannedString(ss)
+        tv_withdraw_ok.isClickable = false
+
+        requestBankCard()
     }
 
     override fun onResume() {
@@ -77,6 +83,10 @@ class WithdrawActivity : BaseActivity() {
 
         tv_withdraw_ok.setOnClickListener {
             //提现操作
+            if (et_withdraw_money.text.toString().toDouble() < 1000){
+               Toast.makeText(applicationContext,"提现金额不能小于1000",Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
             toInputPwd(tv_withdraw_ok)
         }
         et_withdraw_money.addTextChangedListener(object :TextWatcher{
@@ -172,14 +182,41 @@ class WithdrawActivity : BaseActivity() {
         }
     }
 
+    private fun requestBankCard(){
+
+        val params = HashMap<String, Any>()
+        params["areaNum"] = SpUtils.getString(this, AppConstants.CHANGGUAN_NUM)
+        val subscription = Network.getInstance("银行卡", this)
+                .bankCard(
+                        params,
+                        ProgressSubscriber("银行卡", object : SubscriberOnNextListener<Bean<BankCradBean>> {
+                            override fun onNext(result: Bean<BankCradBean>) {
+                                setting(result.data)
+                            }
+
+                            override fun onError(error: String) {
+
+
+                            }
+                        }, this, false)
+                )
+    }
+
+    private fun setting(bankCradBean: BankCradBean){
+        val card = BankInfoUtil(bankCradBean.bankCardNum)
+        tv_bank_name.text = card.bankName
+        tv_card_type.text = card.cardType
+        tv_card_number.text = HideDataUtil.hideCardNo(bankCradBean.bankCardNum)
+    }
     private fun request(pwd:String){
         //withdrawDeposit
         val params = HashMap<String, Any>()
-        params["teacherNum"] = SpUtils.getString(this, AppConstants.USER_NAME)
+        params["areaNum"] = SpUtils.getString(this, AppConstants.CHANGGUAN_NUM)
         params["money"] = et_withdraw_money.text.toString().trim()
         params["paypassword"] = pwd
+        params["userNum"] = SpUtils.getString(this, AppConstants.USER_NAME)
         val subscription = Network.getInstance("提现", this)
-                .withdrawDeposit(
+                .areaWithdraw(
                         params,
                         ProgressSubscriber("提现", object : SubscriberOnNextListener<Bean<String>> {
                             override fun onNext(result: Bean<String>) {

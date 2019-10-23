@@ -211,7 +211,7 @@
                     android:layout_marginLeft="@dimen/m24"
                     android:textColor="@color/color_705C00"
                     android:textSize="13sp"
-                    android:text="场馆全天时段价格： 20"
+                    android:text="场馆全天时段价格： 0"
                     android:gravity="center"
                     android:layout_marginBottom="@dimen/m14"
                     android:layout_marginRight="@dimen/m24"/>
@@ -250,7 +250,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/m7"
-                                android:text="全天时段价格"
+                                android:text="细化时段价格"
                                 android:textColor="@color/color_22243D"
                                 android:textSize="13sp" />
                         </LinearLayout>

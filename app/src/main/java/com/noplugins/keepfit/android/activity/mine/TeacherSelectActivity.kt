@@ -12,6 +12,7 @@ import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.CheckBox
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.Gson
 import com.noplugins.keepfit.android.R
@@ -19,6 +20,7 @@ import com.noplugins.keepfit.android.adapter.CgTeacherSelectAdapter
 import com.noplugins.keepfit.android.adapter.PopUpAdapter
 import com.noplugins.keepfit.android.base.BaseActivity
 import com.noplugins.keepfit.android.bean.BindingCgBean
+import com.noplugins.keepfit.android.bean.CgBindingBean
 import com.noplugins.keepfit.android.bean.TeacherBean
 import com.noplugins.keepfit.android.global.AppConstants
 import com.noplugins.keepfit.android.util.SpUtils
@@ -40,7 +42,7 @@ class TeacherSelectActivity : BaseActivity() {
     lateinit var adapter: CgTeacherSelectAdapter
     lateinit var layoutManager:LinearLayoutManager
     private var data: MutableList<TeacherBean> = ArrayList()
-    private var submitList: MutableList<BindingCgBean> = ArrayList()
+    private var submitList: MutableList<CgBindingBean.TeacherNumBean> = ArrayList()
     override fun initBundle(parms: Bundle?) {
 
     }
@@ -57,12 +59,7 @@ class TeacherSelectActivity : BaseActivity() {
             finish()
         }
         queren_btn.setOnClickListener {
-
-//            val gson = Gson().toJson(submitList)
-//            Log.d("tag",gson)
-//            if (submitList.size > 0){
-//                submitData()
-//            }
+            binding()
         }
         iv_delete_edit.setOnClickListener {
             edit_search.setText("")
@@ -198,14 +195,13 @@ class TeacherSelectActivity : BaseActivity() {
                     //选中或者取消选中
                     if ((view as CheckBox).isChecked){
                         Log.d("item","点击了")
-                        val bindingCgBean = BindingCgBean()
-                        bindingCgBean.areaNum = data[position].teacherNum
-                        bindingCgBean.teacherNum = SpUtils.getString(this,AppConstants.USER_NAME)
+                        val bindingCgBean = CgBindingBean.TeacherNumBean()
+                        bindingCgBean.num = data[position].teacherNum
                         submitList.add(bindingCgBean)
                     } else {
                         Log.d("item","取消了")
                         for (i in 0 until submitList.size){
-                            if (submitList[i].teacherNum == data[position].teacherNum){
+                            if (submitList[i].num == data[position].teacherNum){
                                 submitList.removeAt(i)
                                 return@setOnItemChildClickListener
                             }
@@ -278,14 +274,35 @@ class TeacherSelectActivity : BaseActivity() {
                         val chabox = childAt.findViewById<CheckBox>(R.id.ck_select)
                         chabox.isChecked = true
                     }
-                    val bindingCgBean = BindingCgBean()
-                    bindingCgBean.areaNum = data[item].teacherNum
-                    bindingCgBean.teacherNum = SpUtils.getString(this,AppConstants.USER_NAME)
+
+                    val bindingCgBean = CgBindingBean.TeacherNumBean()
+                    bindingCgBean.num = data[item].teacherNum
                     submitList.add(bindingCgBean)
                 }
 
 
             }
         }
+    }
+
+
+    private fun binding(){
+//        val params = HashMap<String, Any>()
+        val cgBinding = CgBindingBean()
+        cgBinding.areaNum = SpUtils.getString(applicationContext,AppConstants.CHANGGUAN_NUM)
+        cgBinding.teacherNum = submitList
+        val subscription = Network.getInstance("场馆绑定教练", this)
+                .areaInviteTeacher(
+                        cgBinding,
+                        ProgressSubscriber("场馆绑定教练", object : SubscriberOnNextListener<Bean<String>> {
+                            override fun onNext(result: Bean<String>) {
+                                Toast.makeText(applicationContext,result.message,Toast.LENGTH_SHORT).show()
+                            }
+
+                            override fun onError(error: String) {
+                                Toast.makeText(applicationContext,error,Toast.LENGTH_SHORT).show()
+                            }
+                        }, this, false)
+                )
     }
 }
