@@ -18,6 +18,7 @@ import com.noplugins.keepfit.android.bean.mine.MineFunctionBean
 import com.noplugins.keepfit.android.global.AppConstants
 import com.noplugins.keepfit.android.util.BaseUtils
 import com.noplugins.keepfit.android.util.SpUtils
+import com.noplugins.keepfit.android.util.TimeCheckUtil
 import com.noplugins.keepfit.android.util.net.Network
 import com.noplugins.keepfit.android.util.net.entity.Bean
 import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriber
@@ -152,7 +153,7 @@ class MyFragment:BaseFragment(){
     private fun setting(cg:ChangguanBean){
         tv_user_Name.text = cg.area.areaName
         tv_score.text = "${cg.area.finalGradle}分"
-        tv_cg_time.text = "营业时间：${cg.area.businessStart}-${cg.area.businessEnd}"
+        tv_cg_time.text = "营业时间：${TimeCheckUtil.removeSecond(cg.area.businessStart)}-${TimeCheckUtil.removeSecond(cg.area.businessEnd)}"
         tv_cg_address.text = cg.area.address
     }
 

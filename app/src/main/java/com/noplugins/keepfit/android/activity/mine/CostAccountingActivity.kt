@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.noplugins.keepfit.android.R
@@ -25,10 +26,11 @@ import java.math.RoundingMode
 
 class CostAccountingActivity : BaseActivity() {
     var form = "main"
-    var cost = ""
+    var cost = 0.0
     override fun initBundle(parms: Bundle?) {
         if (parms != null) {
             form = parms.getString("form", "main")
+            Log.d("tag__AAA",form)
         }
     }
 
@@ -53,10 +55,11 @@ class CostAccountingActivity : BaseActivity() {
 
         }
         back_btn.setOnClickListener {
-            if (form == "pay" && cost.toString() != "") {
+            if (form == "pay" && cost != 0.0) {
                 val mIntent = Intent()//没有任何参数（意图），只是用来传递数据
                 mIntent.putExtra("cost", cost)
                 setResult(RESULT_OK, mIntent)
+                Log.d("tag__BBB",form)
             } else {
                 setResult(3)
             }
@@ -71,8 +74,7 @@ class CostAccountingActivity : BaseActivity() {
         if (et_fangzu.text.toString() == ""||et_nengyuan.text.toString()==""||
                 et_renyuan.text.toString()==""||et_yunying.text.toString()==""||
                 et_renci.text.toString()=="") {
-            cost = "计算错误，请输入正确的内容"
-            tv_result.text = "$cost"
+            tv_result.text = "计算错误，请输入正确的内容"
             return
         }
         val fangzu = et_fangzu.text.toString().toBigDecimal()
@@ -80,8 +82,10 @@ class CostAccountingActivity : BaseActivity() {
         val renyuan = et_renyuan.text.toString().toBigDecimal()
         val yunying = et_yunying.text.toString().toBigDecimal()
         val sum = et_renci.text.toString().toBigDecimal()
-        cost = (fangzu.add(nengyuan).add(renyuan).add(yunying)).divide(sum, 2, RoundingMode.HALF_UP).toPlainString()
+        cost = (fangzu.add(nengyuan).add(renyuan).add(yunying)).divide(sum, 2, RoundingMode.HALF_UP).toDouble()
         tv_result.text = "当前经营成本： $cost/人/次"
+
+        SpUtils.putString(applicationContext,AppConstants.COST,"$cost/人/次")
         request()
     }
 
@@ -106,7 +110,7 @@ class CostAccountingActivity : BaseActivity() {
 
     override fun onBackPressed() {
 
-        if (form == "pay" && cost.toString() != "") {
+        if (form == "pay" && cost!=0.0) {
             val mIntent = Intent()//没有任何参数（意图），只是用来传递数据
             mIntent.putExtra("cost", cost)
             setResult(RESULT_OK, mIntent)

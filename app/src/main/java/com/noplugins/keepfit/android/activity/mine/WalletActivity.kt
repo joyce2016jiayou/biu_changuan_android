@@ -9,6 +9,7 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import com.noplugins.keepfit.android.R
 import com.noplugins.keepfit.android.activity.mine.VerificationPhoneActivity
 import com.noplugins.keepfit.android.base.BaseActivity
@@ -32,12 +33,10 @@ class WalletActivity : BaseActivity() {
 
     override fun initView() {
         setContentView(R.layout.activity_wallet)
-//        if (SpUtils.getInt(applicationContext,AppConstants.USER_TYPE) == 1){
-////            ll_tixian.visibility = View.VISIBLE
-////            tv_pay_mx.visibility = View.VISIBLE
-////        }
-        ll_tixian.visibility = View.VISIBLE
-        tv_pay_mx.visibility = View.VISIBLE
+        if (SpUtils.getInt(applicationContext,AppConstants.USER_TYPE) == 1){
+            ll_tixian.visibility = View.VISIBLE
+            tv_pay_mx.visibility = View.VISIBLE
+        }
         requestData()
     }
 
@@ -57,6 +56,10 @@ class WalletActivity : BaseActivity() {
 //
 
             if (SpUtils.getInt(applicationContext,AppConstants.IS_TX) == 1){
+                if (finalCanWithdraw < 1000){
+                    Toast.makeText(applicationContext,"可提现金额必须大于1000",Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
                 val intent = Intent(this, WithdrawActivity::class.java)
                 val bundle = Bundle()
                 bundle.putDouble("finalCanWithdraw",finalCanWithdraw)
@@ -123,11 +126,9 @@ class WalletActivity : BaseActivity() {
                 ProgressSubscriber("我的钱包", object : SubscriberOnNextListener<Bean<WalletBean>> {
                     override fun onNext(result: Bean<WalletBean>) {
                         setting(result.data)
-
                     }
 
                     override fun onError(error: String) {
-
 
                     }
                 }, this, false)

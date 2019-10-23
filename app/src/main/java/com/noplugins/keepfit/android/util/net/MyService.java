@@ -2,9 +2,11 @@ package com.noplugins.keepfit.android.util.net;
 
 
 import com.alibaba.fastjson.annotation.JSONField;
+import com.noplugins.keepfit.android.bean.BankCradBean;
 import com.noplugins.keepfit.android.bean.CalenderEntity;
 import com.noplugins.keepfit.android.bean.ChangguanBean;
 import com.noplugins.keepfit.android.bean.DictionaryeBean;
+import com.noplugins.keepfit.android.bean.HightListBean;
 import com.noplugins.keepfit.android.bean.LoginBean;
 import com.noplugins.keepfit.android.bean.PrivateDetailBean;
 import com.noplugins.keepfit.android.bean.TeacherBean;
@@ -427,7 +429,7 @@ public interface MyService {
      * @return
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
-    @POST("myBalance")
+    @POST("searchWallet")
     Observable<Bean<WalletBean>> myBalance(@Body RequestBody json);
 
     /**
@@ -436,7 +438,7 @@ public interface MyService {
      * @return
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
-    @POST("myBalanceList")
+    @POST("searchWalletDetail")
     Observable<Bean<BalanceListBean>> myBalanceList(@Body RequestBody json);
 
     /**
@@ -445,7 +447,7 @@ public interface MyService {
      * @return
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
-    @POST("myBalance")
+    @POST("myWalletDetail")
     Observable<Bean<BalanceListBean.ListBean>> myBalanceListDetail(@Body RequestBody json);
 
     /**
@@ -592,5 +594,41 @@ public interface MyService {
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
     @POST("submitAudit")
     Observable<Bean<String>> submitAudit(@Body RequestBody json);
+
+    /**
+     * 场馆绑定教练
+     *
+     * @return
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("areaInviteTeacher")
+    Observable<Bean<String>> areaInviteTeacher(@Body RequestBody json);
+
+    /**
+     * 提现
+     *
+     * @return
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("areaWithdraw")
+    Observable<Bean<String>> areaWithdraw(@Body RequestBody json);
+
+    /**
+     * 银行卡
+     *
+     * @return
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("bankCard")
+    Observable<Bean<BankCradBean>> bankCard(@Body RequestBody json);
+
+    /**
+     * 获取高峰时间价格
+     *
+     * @return
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("findAreaPrice")
+    Observable<Bean<List<HightListBean>>> findAreaPrice(@Body RequestBody json);
 
 }

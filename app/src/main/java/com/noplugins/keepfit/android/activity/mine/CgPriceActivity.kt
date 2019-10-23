@@ -12,9 +12,11 @@ import com.noplugins.keepfit.android.adapter.DatePriceTestAdapter
 import com.noplugins.keepfit.android.adapter.HighAdapter
 import com.noplugins.keepfit.android.base.BaseActivity
 import com.noplugins.keepfit.android.bean.HighBean
+import com.noplugins.keepfit.android.bean.HightListBean
 import com.noplugins.keepfit.android.bean.PriceBean
 import com.noplugins.keepfit.android.global.AppConstants
 import com.noplugins.keepfit.android.util.SpUtils
+import com.noplugins.keepfit.android.util.TimeCheckUtil
 import com.noplugins.keepfit.android.util.net.Network
 import com.noplugins.keepfit.android.util.net.entity.Bean
 import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriber
@@ -56,7 +58,13 @@ class CgPriceActivity : BaseActivity() {
 
         grid_view.adapter = adapter
 
+        tv_hesuan.text = SpUtils.getString(applicationContext,AppConstants.COST)
         initAdapter()
+        if (form == "main"){
+            requestHightTime()
+        }
+
+
     }
 
     private fun initAdapter() {
@@ -135,7 +143,7 @@ class CgPriceActivity : BaseActivity() {
             val bundle = Bundle()
             bundle.putString("form", "pay")
             intent.putExtras(bundle)
-            startActivity(intent)
+            startActivityForResult(intent, 1)
         }
 
         tv_high_add.setOnClickListener {
@@ -185,7 +193,42 @@ class CgPriceActivity : BaseActivity() {
                             }
 
                             override fun onError(error: String) {
+                                Toast.makeText(applicationContext, error, Toast.LENGTH_SHORT).show()
+                            }
+                        }, this, false)
+                )
+    }
 
+
+    private fun requestHightTime(){
+        val params = HashMap<String, Any>()
+        params["areaNum"] = SpUtils.getString(applicationContext,AppConstants.CHANGGUAN_NUM)
+        subscription = Network.getInstance("获取精准化时间", this)
+                .findAreaPrice(
+                        params,
+                        ProgressSubscriber("获取精准化时间", object : SubscriberOnNextListener<Bean<List<HightListBean>>> {
+                            override fun onNext(result: Bean<List<HightListBean>>) {
+                                //
+                                //HighBean
+
+                                for (i in 0 until result.data.size){
+                                    val highBean = HighBean()
+                                    highBean.gym_area_num = result.data[i].gymAreaNum
+                                    highBean.high_time_start = TimeCheckUtil.removeSecond(result.data[i].highTimeStart)
+                                    highBean.high_time_end = TimeCheckUtil.removeSecond(result.data[i].highTimeEnd)
+                                    highBean.high_time_price = result.data[i].highTimePrice.toString()
+                                    highBean.normal_price = result.data[i].normalPrice.toString()
+                                    list.add(highBean)
+                                }
+
+                                et_price.setText("${result.data[0].normalPrice}")
+                                tv_price.text = "场馆全天时段价格：¥${result.data[0].normalPrice}"
+
+                                adapter!!.notifyDataSetChanged()
+                            }
+
+                            override fun onError(error: String) {
+                                Toast.makeText(applicationContext, error, Toast.LENGTH_SHORT).show()
                             }
                         }, this, false)
                 )

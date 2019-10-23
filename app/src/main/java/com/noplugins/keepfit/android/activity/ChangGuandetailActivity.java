@@ -34,6 +34,7 @@ import com.noplugins.keepfit.android.global.AppConstants;
 import com.noplugins.keepfit.android.resource.ValueResources;
 import com.noplugins.keepfit.android.util.GlideEngine;
 import com.noplugins.keepfit.android.util.SpUtils;
+import com.noplugins.keepfit.android.util.TimeCheckUtil;
 import com.noplugins.keepfit.android.util.net.Network;
 import com.noplugins.keepfit.android.util.net.entity.Bean;
 import com.noplugins.keepfit.android.util.net.progress.GsonSubscriberOnNextListener;
@@ -246,8 +247,8 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
 
         edittext_area.setText(cg.getArea().getArea() + "");
         spinner_type.setSelectedIndex(cg.getArea().getType());
-        time1_edit.setText(cg.getArea().getBusinessStart());
-        time2_edit.setText(cg.getArea().getBusinessEnd());
+        time1_edit.setText(TimeCheckUtil.removeSecond(cg.getArea().getBusinessStart()));
+        time2_edit.setText(TimeCheckUtil.removeSecond(cg.getArea().getBusinessEnd()));
 
         datas.clear();
         for (int i = 0; i < cg.getPlace().size(); i++) {
@@ -817,10 +818,8 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
         informationEntity.setGym_pic(upList_iamges);
 
 
-        HashMap<String, Object> params = new HashMap<>();
-        params.put("areaNum", informationEntity);
         subscription = Network.getInstance("场馆信息", this)
-                .submitAudit(params, new ProgressSubscriber<String>("场馆信息",
+                .submitAudit(informationEntity, new ProgressSubscriber<String>("场馆信息",
                         new SubscriberOnNextListener<Bean<String>>() {
                             @Override
                             public void onNext(Bean<String> changguanBeanBean) {
