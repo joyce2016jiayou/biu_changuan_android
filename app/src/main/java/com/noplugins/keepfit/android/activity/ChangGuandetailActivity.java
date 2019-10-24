@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -53,6 +54,7 @@ import com.qiniu.android.storage.UploadOptions;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -66,6 +68,13 @@ import cn.qqtheme.framework.wheelpicker.TimePicker;
 import cn.qqtheme.framework.wheelview.annotation.TimeMode;
 import cn.qqtheme.framework.wheelview.contract.OnTimeSelectedListener;
 import cn.qqtheme.framework.wheelview.entity.TimeEntity;
+import io.reactivex.Observable;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.ObservableSource;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Function;
+import io.reactivex.functions.Predicate;
+import io.reactivex.schedulers.Schedulers;
 import lib.demo.spinner.MaterialSpinner;
 import rx.Subscription;
 import top.zibin.luban.Luban;
@@ -266,6 +275,10 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
 
         for (int i = 0; i < cg.getPic().size(); i++) {
             strings.add(cg.getPic().get(i).getUrl());
+            InformationEntity.GymPicBean bean = new InformationEntity.GymPicBean();
+            bean.setQiniu_key(cg.getPic().get(i).getQiniuKey());
+            bean.setOrder_num(i+2);
+            upList_iamges.add(bean);
         }
         mPhotosSnpl.setData(strings);
         ValueResources.select_iamges_size = strings.size();
@@ -567,6 +580,9 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
     public void onClickDeleteNinePhotoItem(CCRSortableNinePhotoLayout sortableNinePhotoLayout, View view, int position, String model, ArrayList<String> models) {
         mPhotosSnpl.removeItem(position);
         strings.remove(position);
+        if (position <= upList_iamges.size()-1 && upList_iamges.size() !=0){
+            upList_iamges.remove(position);
+        }
         ValueResources.select_iamges_size = ValueResources.select_iamges_size - 1;
         select_numbers_tv.setText(ValueResources.select_iamges_size + "/9");
     }
@@ -640,11 +656,149 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
     }
 
 
+    @SuppressLint("CheckResult")
     private void withListLs() {
+        int i = 0;
+        Observable
+                .fromIterable(strings)
+                .filter(new Predicate<String>() {
+                    @Override
+                    public boolean test(String s) throws Exception {
 
-        for (int i = 0; i < strings.size(); i++) {
-            File file = new File(strings.get(i));
-            int a = i;
+                        return s.substring(0,4).equals("http");
+                    }
+                })
+                .concatMap((Function<String, ObservableSource<File>>) path ->
+                        Observable.create((ObservableOnSubscribe<File>) emitter -> {
+                            File file = new File(path);
+                            Luban.with(this)
+                                    .load(file)
+                                    .ignoreBy(100)
+                                    .setTargetDir(getPath())
+                                    .setFocusAlpha(false)
+                                    .setCompressListener(new OnCompressListener() {
+                                        @Override
+                                        public void onStart() {
+                                        }
+
+                                        @Override
+                                        public void onSuccess(File file) {
+                                            emitter.onNext(file);
+                                            emitter.onComplete();
+                                        }
+
+                                        @Override
+                                        public void onError(Throwable e) {
+                                            emitter.onError(e);
+                                        }
+                                    }).launch();
+
+                        }).subscribeOn(Schedulers.io())
+                )
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(response -> {
+                    //todo
+                    strings.set(0, response.getPath());
+                    // 如果全部完成，调用成功接口
+                    if (upList_iamges.size() == strings.size()) {
+                        upListToQiniu();
+                    }
+                }, throwable -> {
+                });
+
+
+    }
+
+    /**
+     * list上传到七牛云
+     */
+    @SuppressLint("CheckResult")
+    private void upListToQiniu() {
+        progress_upload = new ProgressUtil();
+        progress_upload.showProgressDialog(this, "载入中...");
+        Observable
+                .fromIterable(strings)
+                .filter(new Predicate<String>() {
+                    @Override
+                    public boolean test(String s) throws Exception {
+
+                        return s.substring(0,4).equals("http");
+                    }
+                })
+                .concatMap((Function<String, ObservableSource<String>>) path ->
+                        Observable.create((ObservableOnSubscribe<String>) emitter -> {
+                           uploadManager.put(path, qiniu_key, uptoken,
+                                    (key, info, response) -> {
+                                        if (info.isOK()) {
+                                            // 上传成功，发送这张图片的文件名
+                                            emitter.onNext(key);
+                                            emitter.onComplete();
+                                        } else {
+                                            // 上传失败，告辞
+                                            emitter.onError(new IOException(info.error));
+                                        }
+                                    },  new UploadOptions(null, "test-type", true,
+                                           null, null));
+
+
+                        }).subscribeOn(Schedulers.io())
+                )
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(response -> {
+                    InformationEntity.GymPicBean bean = new InformationEntity.GymPicBean();
+                    bean.setQiniu_key(response);
+                    bean.setOrder_num(upList_iamges.size()+2);
+                    upList_iamges.add(bean);
+                    // 如果全部完成，调用成功接口
+                    if (upList_iamges.size() == strings.size()) {
+                        requestUpdate();
+                        progress_upload.dismissProgressDialog();
+                    }
+                }, throwable -> {
+                    //
+                    progress_upload.dismissProgressDialog();
+                });
+
+
+
+
+    }
+
+    /**
+     * logo上传到七牛云
+     */
+    InformationEntity.GymPicBean logoBean;
+    private void upLogoToQiniu() {
+        if (!"".equals(icon_image_path)){
+            progress_upload = new ProgressUtil();
+            progress_upload.showProgressDialog(this, "载入中...");
+            //上传icon
+            uploadManager.put(icon_image_path, qiniu_key, uptoken,
+                    (key, info, response) -> {
+                        //res包含hash、key等信息，具体字段取决于上传策略的设置
+                        if (info.isOK()) {
+                            Log.e("qiniu", "Upload Success");
+                            logoBean = new InformationEntity.GymPicBean();
+                            logoBean.setQiniu_key(key);
+                            logoBean.setOrder_num(1);
+                            //测试资料上传的
+                            //getUrlTest(icon_net_path);
+                            String headpicPath = "http://upload.qiniup.com/" + key;
+                            Log.e("返回的地址", headpicPath);
+                        } else {
+                            Log.e("qiniu", "Upload Fail");
+                            //如果失败，这里可以把info信息上报自己的服务器，便于后面分析上传错误原因
+                        }
+                        progress_upload.dismissProgressDialog();
+                    }, new UploadOptions(null, "test-type", true, null, null));
+        }
+
+        withListLs();
+    }
+
+    private void withLs() {
+        if (!"".equals(icon_image_path)){
+            File file = new File(icon_image_path);
             Luban.with(this)
                     .load(file)
                     .ignoreBy(100)
@@ -657,7 +811,9 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
 
                         @Override
                         public void onSuccess(File file) {
-                            strings.set(a, file.getPath());
+                            icon_image_path = file.getPath();
+                            Log.d("Luban", "luban压缩 成功！原图:${photos.path}");
+                            Log.d("Luban", "luban压缩 成功！imgurl:$icon_image_path");
                         }
 
                         @Override
@@ -666,100 +822,6 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
                         }
                     }).launch();
         }
-
-        upListToQiniu();
-    }
-
-    /**
-     * list上传到七牛云
-     */
-    private void upListToQiniu() {
-        progress_upload = new ProgressUtil();
-        progress_upload.showProgressDialog(this, "载入中...");
-        for (int i = 0; i < strings.size(); i++) {
-            //上传icon
-            int num = i + 2;
-            uploadManager.put(strings.get(i), qiniu_key, uptoken,
-                    (key, info, response) -> {
-                        //res包含hash、key等信息，具体字段取决于上传策略的设置
-                        if (info.isOK()) {
-                            Log.e("qiniu", "Upload Success");
-//                            icon_net_path = key;
-                            InformationEntity.GymPicBean bean = new InformationEntity.GymPicBean();
-                            bean.setQiniu_key(key);
-                            bean.setOrder_num(num);
-                            upList_iamges.add(bean);
-                            Log.e("打印key：", icon_net_path);
-                            //测试资料上传的
-                            //getUrlTest(icon_net_path);
-                            String headpicPath = "http://upload.qiniup.com/" + key;
-                            Log.e("返回的地址", headpicPath);
-                        } else {
-                            Log.e("qiniu", "Upload Fail");
-                            //如果失败，这里可以把info信息上报自己的服务器，便于后面分析上传错误原因
-                        }
-                    }, new UploadOptions(null, "test-type", true,
-                            null, null));
-        }
-        progress_upload.dismissProgressDialog();
-
-        requestUpdate();
-    }
-
-    /**
-     * logo上传到七牛云
-     */
-    private void upLogoToQiniu() {
-        progress_upload = new ProgressUtil();
-        progress_upload.showProgressDialog(this, "载入中...");
-        //上传icon
-        uploadManager.put(icon_image_path, qiniu_key, uptoken,
-                (key, info, response) -> {
-                    //res包含hash、key等信息，具体字段取决于上传策略的设置
-                    if (info.isOK()) {
-                        Log.e("qiniu", "Upload Success");
-                        InformationEntity.GymPicBean bean = new InformationEntity.GymPicBean();
-                        bean.setQiniu_key(key);
-                        bean.setOrder_num(1);
-                        upList_iamges.add(bean);
-                        //测试资料上传的
-                        //getUrlTest(icon_net_path);
-                        String headpicPath = "http://upload.qiniup.com/" + key;
-                        Log.e("返回的地址", headpicPath);
-                    } else {
-                        Log.e("qiniu", "Upload Fail");
-                        //如果失败，这里可以把info信息上报自己的服务器，便于后面分析上传错误原因
-                    }
-                    progress_upload.dismissProgressDialog();
-                }, new UploadOptions(null, "test-type", true, null, null));
-
-        withListLs();
-    }
-
-    private void withLs() {
-        File file = new File(icon_image_path);
-        Luban.with(this)
-                .load(file)
-                .ignoreBy(100)
-                .setTargetDir(getPath())
-                .setFocusAlpha(false)
-                .setCompressListener(new OnCompressListener() {
-                    @Override
-                    public void onStart() {
-                    }
-
-                    @Override
-                    public void onSuccess(File file) {
-                        icon_image_path = file.getPath();
-                        Log.d("Luban", "luban压缩 成功！原图:${photos.path}");
-                        Log.d("Luban", "luban压缩 成功！imgurl:$icon_image_path");
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-                }).launch();
         upLogoToQiniu();
     }
 
@@ -777,6 +839,9 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
      */
     private void requestUpdate() {
 
+        if (logoBean!= null){
+            upList_iamges.add(logoBean);
+        }
         InformationEntity informationEntity = new InformationEntity();
         informationEntity.setArea_name(changguan_name.getText().toString());//场馆名称
         if (changguan_type.equals("综合会所")) {//场馆类型
