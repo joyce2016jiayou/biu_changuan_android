@@ -160,6 +160,15 @@ public interface MyService {
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
     @POST("bindingBank")
     Observable<Bean<BindCardBean>> bind_card(@Body RequestBody map);
+    /**
+     * 生成订单
+     *
+     * @return
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("memberOrder")
+    Observable<Bean<String>> get_order(@Body RequestBody map);
+
 
     /**
      * 获取审核状态

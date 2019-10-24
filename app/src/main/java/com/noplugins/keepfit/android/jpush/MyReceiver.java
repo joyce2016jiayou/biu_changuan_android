@@ -76,7 +76,7 @@ public class MyReceiver extends BroadcastReceiver {
                 String type_id = jsonObject.getString("type");
                 Log.e("极光返回的页面跳转的ID", type_id);
                 Intent itent = new Intent(context, KeepFitActivity.class);
-                Bundle message_bunder = new Bundle();
+                /*Bundle message_bunder = new Bundle();
                 switch (type_id) {
                     case "1"://跳转到消息第一项
                         message_bunder.putString("jpush_enter1", "jpush_enter1");
@@ -94,7 +94,7 @@ public class MyReceiver extends BroadcastReceiver {
                         break;
                     }
                 }
-                itent.putExtras(message_bunder);
+                itent.putExtras(message_bunder);*/
                 itent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 context.startActivity(itent);
 

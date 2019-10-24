@@ -220,7 +220,6 @@ public class BusinessInformationFragment extends ViewPagerFragment {
                                 stepView.setCurrentStep((step + 1) % stepView.getStepNum());
                                 //删除缓存的状态,目的是下次进启动页的时候不会跳转"角色选择页面"
                                 SharedPreferencesHelper.remove(getActivity(), Network.no_submit_information);
-
                             }
 
                             @Override

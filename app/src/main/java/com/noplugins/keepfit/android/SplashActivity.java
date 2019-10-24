@@ -145,8 +145,6 @@ public class SplashActivity extends BaseActivity {
 
                             }
                         }, this, false));
-
-
     }
 
     private Handler mHandler = new Handler(Looper.getMainLooper());

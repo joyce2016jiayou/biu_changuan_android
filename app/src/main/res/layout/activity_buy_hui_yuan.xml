@@ -123,6 +123,7 @@
     </ScrollView>
 
     <LinearLayout
+        android:id="@+id/buy_btn"
         android:layout_width="match_parent"
         android:layout_height="@dimen/m68"
         android:layout_alignParentBottom="true"

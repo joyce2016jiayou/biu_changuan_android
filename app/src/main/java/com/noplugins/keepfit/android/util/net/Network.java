@@ -362,6 +362,20 @@ public class Network {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
     }
+
+    /**
+     * 生成订单
+     *
+     * @param subscriber
+     * @return
+     */
+    public Subscription get_order(Map<String, Object> params, Subscriber<Bean<String>> subscriber) {
+        return service.get_order(retuen_json_params(params))
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
     /**
      * 获取课程
      *

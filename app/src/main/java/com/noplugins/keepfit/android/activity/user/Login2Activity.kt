@@ -171,8 +171,6 @@ class Login2Activity : BaseActivity() {
 
                             }
                         }, this, false))
-        val intent = Intent(this@Login2Activity, SetPasswordActivity::class.java)
-        startActivity(intent)
     }
 
     private fun password_login() {
