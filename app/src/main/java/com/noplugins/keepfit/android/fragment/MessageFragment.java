@@ -22,6 +22,8 @@ import androidx.viewpager.widget.ViewPager;
 import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.adapter.TabItemAdapter;
 import com.noplugins.keepfit.android.base.BaseFragment;
+import com.noplugins.keepfit.android.global.AppConstants;
+import com.noplugins.keepfit.android.util.SpUtils;
 import com.noplugins.keepfit.android.util.data.DateHelper;
 import com.noplugins.keepfit.android.util.eventbus.MessageEvent;
 import com.noplugins.keepfit.android.util.ui.ViewPagerFragment;
@@ -84,7 +86,7 @@ public class MessageFragment extends BaseFragment {
     }
 
     @Override
-    public View onCreateView( LayoutInflater inflater,  ViewGroup container,  Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (view == null) {
             view = inflater.inflate(R.layout.questions_and_answers_fragment, container, false);
 
@@ -109,30 +111,27 @@ public class MessageFragment extends BaseFragment {
 
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN,sticky = true)
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void upadate(MessageEvent messageEvent) {
         if (messageEvent.getMessage().equals("jpush_main_enter1")) {//获取消息总数，设置消息总数
             view_pager.setCurrentItem(0);
             setTabTextColorAndImageView(0);
-        }else if(messageEvent.getMessage().equals("jpush_main_enter2")){
+        } else if (messageEvent.getMessage().equals("jpush_main_enter2")) {
             view_pager.setCurrentItem(1);
             setTabTextColorAndImageView(1);
-        }else if(messageEvent.getMessage().equals("jpush_main_enter3")){
+        } else if (messageEvent.getMessage().equals("jpush_main_enter3")) {
             view_pager.setCurrentItem(2);
             setTabTextColorAndImageView(2);
-        }else if(messageEvent.getMessage().equals("jpush_main_enter4")){
+        } else if (messageEvent.getMessage().equals("jpush_main_enter4")) {
             view_pager.setCurrentItem(3);
             setTabTextColorAndImageView(3);
         }
     }
 
 
-
-
-
-
     //注册广播接收器
     LocalBroadcastManager broadcastManager;
+
     private void registerReceiver() {
         broadcastManager = LocalBroadcastManager.getInstance(getActivity());
         IntentFilter intentFilter = new IntentFilter();
@@ -145,32 +144,31 @@ public class MessageFragment extends BaseFragment {
         public void onReceive(Context context, Intent intent) {
             String is_read = intent.getStringExtra("is_read");
             String type_number = intent.getStringExtra("type_number");
-            if(type_number.equals("1")){
-                if(is_read.equals("true")){//已读,第一个提现不显示
+            if (type_number.equals("1")) {
+                if (is_read.equals("true")) {//已读,第一个提现不显示
                     circle1.setVisibility(View.GONE);
-                }else{//未读
+                } else {//未读
                     circle1.setVisibility(View.GONE);
                 }
-            }else if(type_number.equals("2")){
-                if(is_read.equals("true")){//已读
+            } else if (type_number.equals("2")) {
+                if (is_read.equals("true")) {//已读
                     circle2.setVisibility(View.GONE);
-                }else{//未读
+                } else {//未读
                     circle2.setVisibility(View.VISIBLE);
                 }
-            }else if(type_number.equals("3")){
-                if(is_read.equals("true")){//已读
+            } else if (type_number.equals("3")) {
+                if (is_read.equals("true")) {//已读
                     circle3.setVisibility(View.GONE);
-                }else{//未读
+                } else {//未读
                     circle3.setVisibility(View.VISIBLE);
                 }
-            }else if(type_number.equals("4")){
-                if(is_read.equals("true")){//已读
+            } else if (type_number.equals("4")) {
+                if (is_read.equals("true")) {//已读
                     circle4.setVisibility(View.GONE);
-                }else{//未读
+                } else {//未读
                     circle4.setVisibility(View.VISIBLE);
                 }
             }
-
 
 
         }
@@ -182,11 +180,18 @@ public class MessageFragment extends BaseFragment {
         mFragments.add(SystemMessageFragment.newInstance("系统消息"));
         mFragments.add(UserMessageFragment.newInstance("用户消息"));
         mFragments.add(AreaSubmitFragment.newInstance("场地申请"));
-
-        zhanghu_message_layout.setOnClickListener(onClickListener);
-        system_message_layout.setOnClickListener(onClickListener);
-        user_message_layout.setOnClickListener(onClickListener);
-        area_message_layout.setOnClickListener(onClickListener);
+        if (SpUtils.getInt(getActivity(), AppConstants.USER_TYPE) == 1) {//场馆主
+            zhanghu_message_layout.setOnClickListener(onClickListener);
+            system_message_layout.setOnClickListener(onClickListener);
+            user_message_layout.setOnClickListener(onClickListener);
+            area_message_layout.setOnClickListener(onClickListener);
+        } else if (SpUtils.getInt(getActivity(), AppConstants.USER_TYPE) == 2) {//经理
+            system_message_layout.setOnClickListener(onClickListener);
+            user_message_layout.setOnClickListener(onClickListener);
+            area_message_layout.setOnClickListener(onClickListener);
+        } else if (SpUtils.getInt(getActivity(), AppConstants.USER_TYPE) == 3) {//前台
+            user_message_layout.setOnClickListener(onClickListener);
+        }
 
 
         TabItemAdapter myAdapter = new TabItemAdapter(getChildFragmentManager(), mFragments);// 初始化adapter
@@ -195,7 +200,8 @@ public class MessageFragment extends BaseFragment {
 
         view_pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPs) {}
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPs) {
+            }
 
             @Override
             public void onPageSelected(int position) {
@@ -275,7 +281,7 @@ public class MessageFragment extends BaseFragment {
     View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            switch (view.getId()){
+            switch (view.getId()) {
                 case R.id.zhanghu_message_layout:
                     view_pager.setCurrentItem(0);
                     break;

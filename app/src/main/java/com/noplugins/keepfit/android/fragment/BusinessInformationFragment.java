@@ -21,6 +21,7 @@ import com.google.gson.Gson;
 import com.noplugins.keepfit.android.KeepFitActivity;
 import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.SplashActivity;
+import com.noplugins.keepfit.android.activity.BuyHuiYuanActivity;
 import com.noplugins.keepfit.android.activity.CheckStatusFailActivity;
 import com.noplugins.keepfit.android.activity.HeTongActivity;
 import com.noplugins.keepfit.android.activity.InformationCheckActivity;
@@ -215,11 +216,16 @@ public class BusinessInformationFragment extends ViewPagerFragment {
                             @Override
                             public void onNext(Bean<BindCardBean> result) {
                                 //切换到第三个进度条
-                                viewpager_content.setCurrentItem(2);
+                                /*viewpager_content.setCurrentItem(2);
                                 int step = stepView.getCurrentStep();//设置进度条
                                 stepView.setCurrentStep((step + 1) % stepView.getStepNum());
                                 //删除缓存的状态,目的是下次进启动页的时候不会跳转"角色选择页面"
-                                SharedPreferencesHelper.remove(getActivity(), Network.no_submit_information);
+                                SharedPreferencesHelper.remove(getActivity(), Network.no_submit_information);*/
+
+                                //跳购买页面
+                                Intent intent = new Intent(getActivity(), BuyHuiYuanActivity.class);
+                                startActivity(intent);
+
                             }
 
                             @Override

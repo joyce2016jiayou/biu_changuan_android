@@ -1,6 +1,10 @@
 package com.noplugins.keepfit.android.entity;
 
 public class CheckEntity {
+    private String gymAreaNum;
+    private String haveMember;
+    private int status;
+
     public String getGymAreaNum() {
         return gymAreaNum;
     }
@@ -9,7 +13,6 @@ public class CheckEntity {
         this.gymAreaNum = gymAreaNum;
     }
 
-    private String gymAreaNum;
 
     public int getStatus() {
         return status;
@@ -19,7 +22,6 @@ public class CheckEntity {
         this.status = status;
     }
 
-    private int status;
 
     public String getHaveMember() {
         return haveMember;
@@ -29,5 +31,4 @@ public class CheckEntity {
         this.haveMember = haveMember;
     }
 
-    private String haveMember;
 }

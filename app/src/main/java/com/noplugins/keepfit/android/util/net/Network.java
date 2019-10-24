@@ -193,7 +193,6 @@ public class Network {
     }
 
 
-
     private RequestBody retuen_json_object(Object params) {
         Gson gson = new Gson();
         String json_params = gson.toJson(params);
@@ -202,7 +201,6 @@ public class Network {
         RequestBody requestBody = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), json);
         return requestBody;
     }
-
 
 
     /**
@@ -218,8 +216,6 @@ public class Network {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
     }
-
-
 
 
     /**
@@ -349,6 +345,7 @@ public class Network {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
     }
+
     /**
      * 绑定银行卡
      *
@@ -376,6 +373,7 @@ public class Network {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
     }
+
     /**
      * 获取课程
      *
@@ -389,7 +387,6 @@ public class Network {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
     }
-
 
 
     /**
@@ -504,7 +501,6 @@ public class Network {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
     }
-
 
 
     /**
@@ -862,6 +858,7 @@ public class Network {
 
     /**
      * 提现
+     *
      * @param params
      * @param subscriber
      * @return
@@ -918,6 +915,7 @@ public class Network {
 
     /**
      * 同意，拒绝
+     *
      * @param params
      * @param subscriber
      * @return
@@ -932,6 +930,7 @@ public class Network {
 
     /**
      * 精细化时间段
+     *
      * @param params
      * @param subscriber
      * @return
@@ -946,6 +945,7 @@ public class Network {
 
     /**
      * 成本核算
+     *
      * @param params
      * @param subscriber
      * @return
@@ -957,6 +957,7 @@ public class Network {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
     }
+
     /**
      * 获取日历
      *
@@ -978,6 +979,7 @@ public class Network {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
     }
+
     public Subscription get_types(Map<String, Object> params, Subscriber<Bean<List<DictionaryeBean>>> subscriber) {
         return service.get_types(retuen_json_params(params))
                 .subscribeOn(Schedulers.io())
@@ -1049,10 +1051,6 @@ public class Network {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
     }
-
-
-
-
 
 
 }

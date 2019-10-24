@@ -15,7 +15,7 @@ public class AppConstants {
     public static final String FIRST_PASSWPRD = "first_password";
     public static final String PHONE = "phone";
     public static final String USER_NAME = "userNum";
-    public static final String USER_TYPE = "userType";
+    public static final String USER_TYPE = "userType";//0游客，1，场馆主，2经理，3前台
     public static final String NAME = "userName";
     public static final String TEACHER_TYPE = "teacher_type";//判断是否审核过
     public static final String SELECT_TEACHER_TYPE = "select_teacher_type";//教练类型
