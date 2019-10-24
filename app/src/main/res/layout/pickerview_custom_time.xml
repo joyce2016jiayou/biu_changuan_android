@@ -1,104 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:background="@color/transparent"
-                android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/transparent"
+    android:orientation="vertical">
 
     <RelativeLayout
-            android:layout_width="match_parent"
-            android:background="@drawable/shape_btn_bg_white"
-            android:layout_height="@dimen/m358">
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/m358"
+        android:background="@drawable/shape_btn_bg_white">
 
         <!--此部分需要完整复制过去，删减或者更改ID会导致初始化找不到内容而报空-->
         <LinearLayout
-                android:id="@+id/timepicker"
-                android:layout_width="match_parent"
-                android:layout_marginTop="@dimen/m60"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+            android:id="@+id/timepicker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/m60"
+            android:orientation="horizontal">
 
             <com.contrarywind.view.WheelView
-                    android:id="@+id/year"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/m50"
-                    android:layout_weight="1"/>
+                android:id="@+id/year"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/m50"
+                android:layout_weight="1" />
 
             <LinearLayout
-                    android:layout_marginLeft="@dimen/m15"
-                    android:layout_width="@dimen/m44"
-                    android:background="@drawable/zhixian1"
-                    android:layout_gravity="center"
-                    android:layout_height="@dimen/m2"
-                    />
+                android:layout_width="@dimen/m44"
+                android:layout_height="@dimen/m2"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/m15"
+                android:background="@drawable/zhixian1" />
 
             <com.contrarywind.view.WheelView
-                    android:id="@+id/month"
-                    android:layout_width="match_parent"
-                    android:layout_marginRight="@dimen/m50"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"/>
+                android:id="@+id/month"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/m50"
+                android:layout_weight="1" />
 
             <com.contrarywind.view.WheelView
-                    android:id="@+id/day"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:layout_weight="1"/>
+                android:id="@+id/day"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:visibility="gone" />
 
             <com.contrarywind.view.WheelView
-                    android:id="@+id/hour"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:layout_weight="1"/>
+                android:id="@+id/hour"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:visibility="gone" />
 
             <com.contrarywind.view.WheelView
-                    android:id="@+id/min"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:layout_weight="1"/>
+                android:id="@+id/min"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:visibility="gone" />
 
             <com.contrarywind.view.WheelView
-                    android:id="@+id/second"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:layout_weight="1"/>
+                android:id="@+id/second"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:visibility="gone" />
         </LinearLayout>
 
-        <RelativeLayout
-                android:layout_marginLeft="@dimen/m20"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="@dimen/m20"
+            android:layout_marginRight="@dimen/m20"
+            android:layout_marginBottom="@dimen/m37"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/quxiao_btn"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/m44"
+                android:layout_alignParentLeft="true"
+                android:layout_weight="1"
+                android:background="@drawable/shape_btn_bg_gray_40"
+                android:gravity="center"
+                android:text="取消"
+                android:textColor="@color/white"
                 android:layout_marginRight="@dimen/m20"
-                android:layout_width="match_parent"
-                android:layout_marginBottom="@dimen/m37"
-                android:layout_alignParentBottom="true"
-                android:layout_height="wrap_content">
+                android:textSize="20sp" />
 
             <TextView
-                    android:id="@+id/quxiao_btn"
-                    android:text="取消"
-                    android:textSize="20sp"
-                    android:background="@drawable/shape_btn_bg_gray_40"
-                    android:textColor="@color/white"
-                    android:layout_width="@dimen/m140"
-                    android:gravity="center"
-                    android:layout_alignParentLeft="true"
-                    android:layout_height="@dimen/m44"/>
-
-            <TextView
-                    android:id="@+id/sure_btn"
-                    android:text="确认"
-                    android:textSize="20sp"
-                    android:background="@drawable/shape_btn_bg_40"
-                    android:textColor="@color/white"
-                    android:gravity="center"
-                    android:layout_width="@dimen/m140"
-                    android:layout_alignParentRight="true"
-                    android:layout_height="@dimen/m44"/>
-        </RelativeLayout>
+                android:id="@+id/sure_btn"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/m44"
+                android:layout_alignParentRight="true"
+                android:layout_weight="1"
+                android:background="@drawable/shape_btn_bg_40"
+                android:gravity="center"
+                android:layout_marginLeft="@dimen/m20"
+                android:text="确认"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+        </LinearLayout>
     </RelativeLayout>
 
 </RelativeLayout>

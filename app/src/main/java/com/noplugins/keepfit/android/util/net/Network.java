@@ -19,6 +19,7 @@ import com.noplugins.keepfit.android.bean.PrivateDetailBean;
 import com.noplugins.keepfit.android.bean.TeacherBean;
 import com.noplugins.keepfit.android.bean.TeacherDetailBean;
 import com.noplugins.keepfit.android.bean.RiChengBean;
+import com.noplugins.keepfit.android.bean.UserStatisticsBean;
 import com.noplugins.keepfit.android.bean.WxPayBean;
 import com.noplugins.keepfit.android.bean.mine.BalanceListBean;
 import com.noplugins.keepfit.android.bean.mine.WalletBean;
@@ -172,7 +173,7 @@ public class Network {
 
         retrofit = new Retrofit.Builder()
                 .client(client)
-                .baseUrl(get_main_url("main"))//设置请求网址根部
+                .baseUrl(get_main_url("test"))//设置请求网址根部
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
@@ -1044,6 +1045,14 @@ public class Network {
      */
     public Subscription findAreaPrice(Map<String, Object> params, Subscriber<Bean<List<HightListBean>>> subscriber) {
         return service.findAreaPrice(retuen_json_object(params))
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    public Subscription statistics(Map<String, Object> params, Subscriber<Bean<UserStatisticsBean>> subscriber) {
+        return service.statistics(retuen_json_object(params))
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

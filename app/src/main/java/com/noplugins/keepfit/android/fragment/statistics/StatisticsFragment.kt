@@ -2,6 +2,7 @@ package com.noplugins.keepfit.android.fragment.statistics
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,11 +27,8 @@ class StatisticsFragment:BaseFragment() {
     var newView: View? = null
 
     private lateinit var fragments: MutableList<Fragment>
-    private var transition: FragmentTransaction? = null
-
-    private var userFragment:ToUserFragment?=null
-    private var productFragment:ToProductFragment?=null
-
+    private var currentFragment = Fragment()
+    private var currentIndex = 0
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         if (newView == null) {
             newView = inflater.inflate(R.layout.fragment_statistics, container, false)
@@ -41,35 +39,52 @@ class StatisticsFragment:BaseFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         fragments = ArrayList()
-        onClick()
-    }
+        fragments.add(ToUserFragment.newInstance(""))
+        fragments.add(ToProductFragment.newInstance(""))
+        showFragment()
 
-
-    private fun onClick(){
-        userFragment = ToUserFragment.newInstance("用户")
-        fragments.add(userFragment!!)
-        hideOthersFragment(userFragment!!, true)
 
         rl_user.setOnClickListener {
+
             changeBtn(1)
-            if (userFragment == null) {
-                userFragment = ToUserFragment.newInstance("用户")
-                fragments.add(userFragment!!)
-                hideOthersFragment(userFragment!!, true)
-            } else {
-                hideOthersFragment(userFragment!!, false)
-            }
+            currentIndex = 0
+            showFragment()
         }
         rl_product.setOnClickListener {
+
             changeBtn(2)
-            if (productFragment == null) {
-                productFragment = ToProductFragment.newInstance("产品")
-                fragments.add(productFragment!!)
-                hideOthersFragment(productFragment!!, true)
-            } else {
-                hideOthersFragment(productFragment!!, false)
-            }
+            currentIndex = 1
+            showFragment()
         }
+
+
+    }
+
+    private fun showFragment() {
+
+        val transaction = childFragmentManager.beginTransaction()
+
+        //如果之前没有添加过
+        if (!fragments[currentIndex].isAdded) {
+            transaction
+                    .hide(currentFragment)
+                    .add(R.id.main_container_content, fragments[currentIndex], "" + currentIndex)  //第三个参数为添加当前的fragment时绑定一个tag
+
+        } else {
+            transaction
+                    .hide(currentFragment)
+                    .show(fragments[currentIndex])
+        }
+
+        currentFragment = fragments[currentIndex]
+
+        transaction.commit()
+
+    }
+
+    private fun onClick(){
+
+
     }
 
     private fun changeBtn(select:Int){
@@ -94,17 +109,29 @@ class StatisticsFragment:BaseFragment() {
      * @param showFragment 要增加的fragment
      * @param add          true：增加fragment；false：切换fragment
      */
-    private fun hideOthersFragment(showFragment: Fragment, add: Boolean) {
-        transition = this.childFragmentManager.beginTransaction()
-        if (add)
-            transition!!.add(R.id.main_container_content, showFragment)
-        fragments.forEach { fragment ->
-            if (showFragment == fragment) {
-                transition!!.show(fragment)
-            } else {
-                transition!!.hide(fragment)
-            }
-        }
-        transition!!.commit()
+//    private fun hideOthersFragment(showFragment: Fragment, add: Boolean) {
+//        if (add)
+//            transition!!.add(R.id.main_container_content, showFragment)
+//        fragments.forEach { fragment ->
+//            if (showFragment == fragment) {
+//                transition!!.show(fragment)
+//            } else {
+//                transition!!.hide(fragment)
+//            }
+//        }
+//        transition!!.commit()
+//    }
+
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        Log.d("tongji","onSaveInstanceState")
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+//        userFragment = null
+//        productFragment = null
+    }
+
 }

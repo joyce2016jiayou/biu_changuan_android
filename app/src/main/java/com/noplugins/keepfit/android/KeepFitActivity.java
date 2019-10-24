@@ -102,8 +102,9 @@ public class KeepFitActivity extends BaseActivity {
     public void initView() {
         setContentLayout(R.layout.activity_keepfit);
         ButterKnife.bind(this);
-        if (SpUtils.getInt(getApplicationContext(), AppConstants.USER_TYPE) == 3) {
-            btn_shipu.setVisibility(View.GONE);
+        if (SpUtils.getInt(getApplicationContext(), AppConstants.USER_TYPE) == 1 ||
+                SpUtils.getInt(getApplicationContext(), AppConstants.USER_TYPE) == 2) {
+            btn_shipu.setVisibility(View.VISIBLE);
         }
         isShowTitle(false);
         MyApplication.addDestoryActivity(this, "KeepFitActivity");
@@ -116,6 +117,7 @@ public class KeepFitActivity extends BaseActivity {
         tabFragments.add(MyFragment.Companion.newInstance("第四页"));
         //初始化viewpager
         contentAdapter = new ContentPagerAdapterMy(getSupportFragmentManager(), tabFragments);
+        viewpager_content.setScroll(false);
         viewpager_content.setAdapter(contentAdapter);
 
 

@@ -147,7 +147,7 @@ class TeacherSelectActivity : BaseActivity() {
         }
 
         val listSex = resources.getStringArray(R.array.private_sex_types).toMutableList()
-        popWindow3 = SpinnerPopWindow(context,
+        popWindow3 = SpinnerPopWindow(applicationContext,
                 listSex,
                 PopUpAdapter.OnItemClickListener { _, _, position ->
                     tv_sex_select.text = listSex[position]

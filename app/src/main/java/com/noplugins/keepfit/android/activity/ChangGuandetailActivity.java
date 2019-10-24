@@ -188,6 +188,7 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
         ButterKnife.bind(this);
         isShowTitle(false);
 
+        spinner_type.setClickable(false);
         //设置下拉选择框
         set_xiala_select();
 
@@ -264,6 +265,7 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
             ItemBean itemBean = new ItemBean();
             itemBean.setPlace(cg.getPlace().get(i).getMaxNum() + "");
             itemBean.setType(cg.getPlace().get(i).getPlaceType());
+            itemBean.setPlace_num(cg.getPlace().get(i).getPlaceNum());
             datas.add(itemBean);
         }
         exRecyclerAdapter.notifyDataSetChanged();
@@ -578,11 +580,16 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
 
     @Override
     public void onClickDeleteNinePhotoItem(CCRSortableNinePhotoLayout sortableNinePhotoLayout, View view, int position, String model, ArrayList<String> models) {
+//        strings.remove(position);
         mPhotosSnpl.removeItem(position);
-        strings.remove(position);
+        Log.d("remove","strings.size():"+strings.size());
         if (position <= upList_iamges.size()-1 && upList_iamges.size() !=0){
             upList_iamges.remove(position);
+        } else {
+            jiugongge_iamges.remove(position+upList_iamges.size());
         }
+
+
         ValueResources.select_iamges_size = ValueResources.select_iamges_size - 1;
         select_numbers_tv.setText(ValueResources.select_iamges_size + "/9");
     }
@@ -608,6 +615,7 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
                 //返回图片地址集合时如果你需要知道用户选择图片时是否选择了原图选项，用如下方法获取
                 boolean selectedOriginal = data.getBooleanExtra(EasyPhotos.RESULT_SELECTED_ORIGINAL, false);
                 strings.addAll(resultPaths);
+                jiugongge_iamges.addAll(resultPaths);
                 mPhotosSnpl.setData(strings);//设置九宫格
                 ValueResources.select_iamges_size = strings.size();
                 select_numbers_tv.setText(ValueResources.select_iamges_size + "/9");
@@ -656,20 +664,23 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
     }
 
 
+    int i = 0;
     @SuppressLint("CheckResult")
     private void withListLs() {
-        int i = 0;
-        Observable
-                .fromIterable(strings)
-                .filter(new Predicate<String>() {
-                    @Override
-                    public boolean test(String s) throws Exception {
 
-                        return s.substring(0,4).equals("http");
-                    }
-                })
-                .concatMap((Function<String, ObservableSource<File>>) path ->
-                        Observable.create((ObservableOnSubscribe<File>) emitter -> {
+        if (jiugongge_iamges.size() == 0){
+            upListToQiniu();
+            return;
+        }
+
+        if (upList_iamges.size() == strings.size()){
+            upListToQiniu();
+            return;
+        }
+        Observable
+                .fromIterable(jiugongge_iamges)
+                .flatMap((Function<String, ObservableSource<File>>)
+                        path -> Observable.create(emitter -> {
                             File file = new File(path);
                             Luban.with(this)
                                     .load(file)
@@ -679,11 +690,13 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
                                     .setCompressListener(new OnCompressListener() {
                                         @Override
                                         public void onStart() {
+                                            Log.d("luban","开始："+path);
                                         }
 
                                         @Override
                                         public void onSuccess(File file) {
                                             emitter.onNext(file);
+                                            Log.d("luban","压缩成功:"+file.getPath());
                                             emitter.onComplete();
                                         }
 
@@ -692,18 +705,20 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
                                             emitter.onError(e);
                                         }
                                     }).launch();
-
-                        }).subscribeOn(Schedulers.io())
+                        })
                 )
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(response -> {
                     //todo
-                    strings.set(0, response.getPath());
+                    Log.d("luban","发射成功:"+response.getPath());
+                    jiugongge_iamges.set(i, response.getPath());
+                    i++;
                     // 如果全部完成，调用成功接口
-                    if (upList_iamges.size() == strings.size()) {
+                    if (i == jiugongge_iamges.size()) {
                         upListToQiniu();
                     }
                 }, throwable -> {
+                    Log.d("luban","异常了");
                 });
 
 
@@ -714,19 +729,17 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
      */
     @SuppressLint("CheckResult")
     private void upListToQiniu() {
+        if (upList_iamges.size() == strings.size()){
+            requestUpdate();
+            return;
+        }
         progress_upload = new ProgressUtil();
         progress_upload.showProgressDialog(this, "载入中...");
         Observable
-                .fromIterable(strings)
-                .filter(new Predicate<String>() {
-                    @Override
-                    public boolean test(String s) throws Exception {
-
-                        return s.substring(0,4).equals("http");
-                    }
-                })
+                .fromIterable(jiugongge_iamges)
                 .concatMap((Function<String, ObservableSource<String>>) path ->
                         Observable.create((ObservableOnSubscribe<String>) emitter -> {
+                            Log.d("qiniu",path);
                            uploadManager.put(path, qiniu_key, uptoken,
                                     (key, info, response) -> {
                                         if (info.isOK()) {
@@ -749,9 +762,11 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
                     bean.setQiniu_key(response);
                     bean.setOrder_num(upList_iamges.size()+2);
                     upList_iamges.add(bean);
+                    Log.d("qiniu","上传发射成功:"+response);
                     // 如果全部完成，调用成功接口
                     if (upList_iamges.size() == strings.size()) {
-                        requestUpdate();
+//                        requestUpdate();
+                        Log.d("qiniu","全部上传完成");
                         progress_upload.dismissProgressDialog();
                     }
                 }, throwable -> {
@@ -843,6 +858,7 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
             upList_iamges.add(logoBean);
         }
         InformationEntity informationEntity = new InformationEntity();
+        informationEntity.setArea_num(SpUtils.getString(getApplicationContext(),AppConstants.CHANGGUAN_NUM));
         informationEntity.setArea_name(changguan_name.getText().toString());//场馆名称
         if (changguan_type.equals("综合会所")) {//场馆类型
             informationEntity.setType(1);
@@ -855,6 +871,11 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
         informationEntity.setBusiness_start(time1_edit.getText().toString());//营业开始时间
         informationEntity.setBusiness_end(time2_edit.getText().toString());//营业结束时间
         informationEntity.setAddress(edit_address.getText().toString());//地址
+
+        informationEntity.setLegal_person(faren_name.getText().toString().trim());
+        informationEntity.setCard_num(icon_id_card.getText().toString().trim());
+        informationEntity.setCompany_name(qiye_name.getText().toString().trim());
+        informationEntity.setCompany_code(qiye_zhucehao.getText().toString().trim());
 
         informationEntity.setFacility(get_selete_biaoqian());
         //获取选择的功能性场所类型
@@ -875,6 +896,7 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
                 gymPlacesBean.setPlace_type("3");
 
             }
+            gymPlacesBean.setPlace_num(itemBeans.get(i).getPlace_num());
             gymPlacesBeans.add(gymPlacesBean);
 
         }
