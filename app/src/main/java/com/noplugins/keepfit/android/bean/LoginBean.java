@@ -16,7 +16,7 @@ public class LoginBean {
     private int havePassword;
     private String gymUserNum;
     private int firstLoad;
-    private int type;
+    private int type;//3.前台 2经理，1场馆主,0默认状态
     private String MasterName;
     private String token;
     private int havePayPassWord;

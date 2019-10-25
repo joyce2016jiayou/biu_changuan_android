@@ -16,6 +16,7 @@ import butterknife.ButterKnife
 import com.noplugins.keepfit.android.KeepFitActivity
 import com.noplugins.keepfit.android.R
 import com.noplugins.keepfit.android.activity.CheckStatusFailActivity
+import com.noplugins.keepfit.android.activity.HeTongActivity
 import com.noplugins.keepfit.android.activity.SubmitInformationSelectActivity
 import com.noplugins.keepfit.android.base.BaseActivity
 import com.noplugins.keepfit.android.bean.LoginBean
@@ -260,20 +261,31 @@ class Login2Activity : BaseActivity() {
                         ProgressSubscriber("获取审核状态", object : SubscriberOnNextListener<Bean<CheckEntity>> {
                             override fun onNext(result: Bean<CheckEntity>) {
                                 //成功1,失败0,没有提交过资料-2,2没有银行卡,3审核中
-                                when {
-                                    result.data.status == 1 -> {
+                                if (result.data.status == 1) {//成功
+                                    //0没买过，1是2999 2是3999 3是6999
+                                    if (result.data.haveMember == "0") {
+                                        val intent = Intent(this@Login2Activity, HeTongActivity::class.java)
+                                        startActivity(intent)
+                                    } else if (result.data.haveMember == "1") {
+                                        SpUtils.putString(applicationContext, AppConstants.USER_DENGJI, "2999")
+                                        val intent = Intent(this@Login2Activity, KeepFitActivity::class.java)
+                                        startActivity(intent)
+                                    } else if (result.data.haveMember == "2") {
+                                        SpUtils.putString(applicationContext, AppConstants.USER_DENGJI, "3999")
+                                        val intent = Intent(this@Login2Activity, KeepFitActivity::class.java)
+                                        startActivity(intent)
+                                    } else if (result.data.haveMember == "3") {
+                                        SpUtils.putString(applicationContext, AppConstants.USER_DENGJI, "6999")
                                         val intent = Intent(this@Login2Activity, KeepFitActivity::class.java)
                                         startActivity(intent)
                                     }
-                                    result.data.status == 0 -> {
-                                        val intent = Intent(this@Login2Activity, CheckStatusFailActivity::class.java)
-                                        startActivity(intent)
-                                    }
-                                    result.data.status == -2 -> {
-                                        val intent = Intent(this@Login2Activity, SubmitInformationSelectActivity::class.java)
-                                        startActivity(intent)
-                                        finish()
-                                    }
+                                } else if (result.data.status == 0) {//失败
+                                    val intent = Intent(this@Login2Activity, CheckStatusFailActivity::class.java)
+                                    startActivity(intent)
+                                } else if (result.data.status == -2) {//没有提交过
+                                    val intent = Intent(this@Login2Activity, SubmitInformationSelectActivity::class.java)
+                                    startActivity(intent)
+                                    finish()
                                 }
                             }
 
