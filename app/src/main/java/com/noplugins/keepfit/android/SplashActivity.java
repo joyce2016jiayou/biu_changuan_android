@@ -91,7 +91,10 @@ public class SplashActivity extends BaseActivity {
                 finish();
             } else {
                 //获取审核状态
-                get_check_status();
+                if (SpUtils.getInt(getApplicationContext(),AppConstants.USER_TYPE) == 1){
+                    get_check_status();
+                }
+
             }
 
 
@@ -147,9 +150,11 @@ public class SplashActivity extends BaseActivity {
                                         Intent intent = new Intent(SplashActivity.this, KeepFitActivity.class);
                                         startActivity(intent);
                                     }
+                                    finish();
                                 } else if (result.getData().getStatus() == 0) {//失败
                                     Intent intent = new Intent(SplashActivity.this, CheckStatusFailActivity.class);
                                     startActivity(intent);
+                                    finish();
                                 } else if (result.getData().getStatus() == -2) {//没有提交过
                                     Intent intent = new Intent(SplashActivity.this, SubmitInformationSelectActivity.class);
                                     startActivity(intent);
@@ -159,7 +164,9 @@ public class SplashActivity extends BaseActivity {
 
                             @Override
                             public void onError(String error) {
-
+                                Intent intent = new Intent(SplashActivity.this, Login2Activity.class);
+                                startActivity(intent);
+                                finish();
                             }
                         }, this, false));
     }

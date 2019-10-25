@@ -16,6 +16,7 @@ import butterknife.ButterKnife
 import com.noplugins.keepfit.android.KeepFitActivity
 import com.noplugins.keepfit.android.R
 import com.noplugins.keepfit.android.activity.CheckStatusFailActivity
+import com.noplugins.keepfit.android.activity.HeTongActivity
 import com.noplugins.keepfit.android.activity.SubmitInformationSelectActivity
 import com.noplugins.keepfit.android.base.BaseActivity
 import com.noplugins.keepfit.android.bean.LoginBean
@@ -157,6 +158,17 @@ class Login2Activity : BaseActivity() {
                         ProgressSubscriber("验证验证码和登录", object : SubscriberOnNextListener<Bean<LoginBean>> {
                             override fun onNext(result: Bean<LoginBean>) {
                                 login_btn.loadingComplete()
+                                when(result.data.memberService){
+                                    1-> {
+                                        SpUtils.putString(applicationContext,AppConstants.USER_DENGJI,"2999")
+                                    }
+                                    2-> {
+                                        SpUtils.putString(applicationContext,AppConstants.USER_DENGJI,"3999")
+                                    }
+                                    3-> {
+                                        SpUtils.putString(applicationContext,AppConstants.USER_DENGJI,"6999")
+                                    }
+                                }
                                 save_resource(result.data)
                                 if (result.data.havePassword == 0) {//没有设置过密码
                                     val intent = Intent(this@Login2Activity, SetPasswordActivity::class.java)
@@ -191,7 +203,23 @@ class Login2Activity : BaseActivity() {
                                 SpUtils.putString(applicationContext, AppConstants.USER_NAME, result.data.gymUserNum)
                                 SpUtils.putInt(applicationContext, AppConstants.USER_TYPE, result.data.type)
                                 SpUtils.putInt(applicationContext, AppConstants.IS_TX, result.data.havePayPassWord)
-                                get_check_status()
+
+                                when(result.data.memberService){
+                                    1-> {
+                                        SpUtils.putString(applicationContext,AppConstants.USER_DENGJI,"2999")
+                                    }
+                                    2-> {
+                                        SpUtils.putString(applicationContext,AppConstants.USER_DENGJI,"3999")
+                                    }
+                                    3-> {
+                                        SpUtils.putString(applicationContext,AppConstants.USER_DENGJI,"6999")
+                                    }
+                                }
+
+                                if (result.data.type == 1){
+                                    get_check_status()
+                                }
+
 //                                val intent = Intent(this@Login2Activity, KeepFitActivity::class.java)
 //                                startActivity(intent)
                                 login_btn.loadingComplete()
@@ -262,8 +290,14 @@ class Login2Activity : BaseActivity() {
                                 //成功1,失败0,没有提交过资料-2,2没有银行卡,3审核中
                                 when {
                                     result.data.status == 1 -> {
-                                        val intent = Intent(this@Login2Activity, KeepFitActivity::class.java)
-                                        startActivity(intent)
+                                        if (result.data.haveMember == "0") run {
+                                            val intent = Intent(this@Login2Activity, HeTongActivity::class.java)
+                                            startActivity(intent)
+                                        } else {
+                                            val intent = Intent(this@Login2Activity, KeepFitActivity::class.java)
+                                            startActivity(intent)
+                                        }
+
                                     }
                                     result.data.status == 0 -> {
                                         val intent = Intent(this@Login2Activity, CheckStatusFailActivity::class.java)

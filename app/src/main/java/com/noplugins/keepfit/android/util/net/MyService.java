@@ -12,6 +12,7 @@ import com.noplugins.keepfit.android.bean.CompnyBean;
 import com.noplugins.keepfit.android.bean.DictionaryeBean;
 import com.noplugins.keepfit.android.bean.HightListBean;
 import com.noplugins.keepfit.android.bean.LoginBean;
+import com.noplugins.keepfit.android.bean.OrderResultBean;
 import com.noplugins.keepfit.android.bean.PrivateDetailBean;
 import com.noplugins.keepfit.android.bean.TeacherBean;
 import com.noplugins.keepfit.android.bean.TeacherDetailBean;
@@ -678,5 +679,12 @@ public interface MyService {
     @POST("statistics")
     Observable<Bean<UserStatisticsBean>> statistics(@Body RequestBody json);
 
-
+    /**
+     * pay 二次验证
+     *
+     * @return
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("getPayResult")
+    Observable<Bean<OrderResultBean>> getPayResult(@Body RequestBody json);
 }

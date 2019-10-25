@@ -20,6 +20,15 @@ public class LoginBean {
     private String MasterName;
     private String token;
     private int havePayPassWord;
+    private int memberService;
+
+    public int getMemberService() {
+        return memberService;
+    }
+
+    public void setMemberService(int memberService) {
+        this.memberService = memberService;
+    }
 
     public int getHavePayPassWord() {
         return havePayPassWord;
