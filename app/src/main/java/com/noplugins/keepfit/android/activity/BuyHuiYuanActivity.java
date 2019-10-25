@@ -8,10 +8,12 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.noplugins.keepfit.android.KeepFitActivity;
 import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.SplashActivity;
 import com.noplugins.keepfit.android.base.BaseActivity;
+import com.noplugins.keepfit.android.bean.BuyInformationBean;
 import com.noplugins.keepfit.android.entity.CheckEntity;
 import com.noplugins.keepfit.android.global.AppConstants;
 import com.noplugins.keepfit.android.util.SpUtils;
@@ -26,6 +28,7 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import de.hdodenhof.circleimageview.CircleImageView;
 import rx.Subscription;
 
 public class BuyHuiYuanActivity extends BaseActivity {
@@ -45,6 +48,9 @@ public class BuyHuiYuanActivity extends BaseActivity {
     TextView changuan_name_tv;
     @BindView(R.id.buy_btn)
     LinearLayout buy_btn;
+    @BindView(R.id.touxiang_image)
+    CircleImageView touxiang_image;
+
 
     private String select_order_money = "";
     private String select_order_type = "";
@@ -66,6 +72,7 @@ public class BuyHuiYuanActivity extends BaseActivity {
     public void doBusiness(Context mContext) {
         select_order_money = "3999";
         select_order_type = "2";
+        get_huiyuan_information();
         lin1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -101,9 +108,35 @@ public class BuyHuiYuanActivity extends BaseActivity {
         });
     }
 
+    private void get_huiyuan_information() {
+        Map<String, Object> params = new HashMap<>();
+        params.put("areaNum", SpUtils.getString(getApplicationContext(),AppConstants.CHANGGUAN_NUM));
+        Subscription subscription = Network.getInstance("获取购买信息", this)
+                .get_buy_information(params,
+                        new ProgressSubscriber<>("获取购买信息", new SubscriberOnNextListener<Bean<BuyInformationBean>>() {
+                            @Override
+                            public void onNext(Bean<BuyInformationBean> result) {
+                                set_information(result.getData());
+                            }
+
+                            @Override
+                            public void onError(String error) {
+
+                            }
+                        }, this, false));
+    }
+
+    private void set_information(BuyInformationBean data) {
+        Glide.with(getApplicationContext())
+                .load(data.getLogo())
+                .into(touxiang_image);
+        changuan_name_tv.setText(data.getAreaName());
+
+    }
+
     private void get_order_number() {
         Map<String, Object> params = new HashMap<>();
-        params.put("gymAreaNum", "1111111");
+        params.put("gymAreaNum", "GYM19091236750176");
         params.put("orderMoney", select_order_money);
         params.put("orderType", select_order_type);
         Subscription subscription = Network.getInstance("生成订单", this)

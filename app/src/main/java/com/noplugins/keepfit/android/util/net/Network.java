@@ -9,9 +9,12 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.noplugins.keepfit.android.bean.BindCardBean;
 import com.noplugins.keepfit.android.bean.BankCradBean;
+import com.noplugins.keepfit.android.bean.BuyInformationBean;
 import com.noplugins.keepfit.android.bean.CalenderEntity;
 import com.noplugins.keepfit.android.bean.CgBindingBean;
 import com.noplugins.keepfit.android.bean.ChangguanBean;
+import com.noplugins.keepfit.android.bean.CheckBean;
+import com.noplugins.keepfit.android.bean.CompnyBean;
 import com.noplugins.keepfit.android.bean.DictionaryeBean;
 import com.noplugins.keepfit.android.bean.HightListBean;
 import com.noplugins.keepfit.android.bean.LoginBean;
@@ -172,7 +175,7 @@ public class Network {
 
         retrofit = new Retrofit.Builder()
                 .client(client)
-                .baseUrl(get_main_url("main"))//设置请求网址根部
+                .baseUrl(get_main_url("test"))//设置请求网址根部
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
@@ -324,8 +327,8 @@ public class Network {
      * @param subscriber
      * @return
      */
-    public Subscription submit_information(RequestBody params, Subscriber<Bean<Object>> subscriber) {
-        return service.submit_information(params)
+    public Subscription submit_information(Map<String, Object> params, Subscriber<Bean<CheckBean>> subscriber) {
+        return service.submit_information(retuen_json_params(params))
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -347,13 +350,28 @@ public class Network {
     }
 
     /**
+     * 获取公司信息
+     *
+     * @param subscriber
+     * @return
+     */
+    public Subscription get_compny_information(Map<String, Object> params, Subscriber<Bean<CompnyBean>> subscriber) {
+        return service.get_compny_information(retuen_json_params(params))
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+
+    /**
      * 绑定银行卡
      *
      * @param subscriber
      * @return
      */
-    public Subscription bind_card(Map<String, Object> params, Subscriber<Bean<BindCardBean>> subscriber) {
-        return service.bind_card(retuen_json_params(params))
+    public Subscription bind_card(BindCardBean params, Subscriber<Bean<String>> subscriber) {
+        return service.bind_card(retuen_json_object(params))
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -368,6 +386,20 @@ public class Network {
      */
     public Subscription get_order(Map<String, Object> params, Subscriber<Bean<String>> subscriber) {
         return service.get_order(retuen_json_params(params))
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 生成订单
+     *
+     * @param subscriber
+     * @return
+     */
+    public Subscription get_buy_information(Map<String, Object> params, Subscriber<Bean<BuyInformationBean>> subscriber) {
+        return service.get_buy_information(retuen_json_params(params))
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

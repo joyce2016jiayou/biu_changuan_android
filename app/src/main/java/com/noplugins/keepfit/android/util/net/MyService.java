@@ -4,8 +4,11 @@ package com.noplugins.keepfit.android.util.net;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.noplugins.keepfit.android.bean.BindCardBean;
 import com.noplugins.keepfit.android.bean.BankCradBean;
+import com.noplugins.keepfit.android.bean.BuyInformationBean;
 import com.noplugins.keepfit.android.bean.CalenderEntity;
 import com.noplugins.keepfit.android.bean.ChangguanBean;
+import com.noplugins.keepfit.android.bean.CheckBean;
+import com.noplugins.keepfit.android.bean.CompnyBean;
 import com.noplugins.keepfit.android.bean.DictionaryeBean;
 import com.noplugins.keepfit.android.bean.HightListBean;
 import com.noplugins.keepfit.android.bean.LoginBean;
@@ -142,7 +145,7 @@ public interface MyService {
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
     @POST("submitAudit")
-    Observable<Bean<Object>> submit_information(@Body RequestBody json);
+    Observable<Bean<CheckBean>> submit_information(@Body RequestBody json);
 
     /**
      * 获取审核状态
@@ -153,13 +156,22 @@ public interface MyService {
     @POST("getAuditResult")
     Observable<Bean<CheckEntity>> get_check_status(@FieldMap Map<String, Object> json);
     /**
+     * 获取公司信息
+     *
+     * @return
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("getAreaAccount")
+    Observable<Bean<CompnyBean>> get_compny_information(@Body RequestBody map);
+
+    /**
      * 绑定银行卡
      *
      * @return
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
     @POST("bindingBank")
-    Observable<Bean<BindCardBean>> bind_card(@Body RequestBody map);
+    Observable<Bean<String>> bind_card(@Body RequestBody map);
     /**
      * 生成订单
      *
@@ -168,7 +180,14 @@ public interface MyService {
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
     @POST("memberOrder")
     Observable<Bean<String>> get_order(@Body RequestBody map);
-
+    /**
+     * 获取购买信息
+     *
+     * @return
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("getBuyAreaData")
+    Observable<Bean<BuyInformationBean>> get_buy_information(@Body RequestBody map);
 
     /**
      * 获取审核状态

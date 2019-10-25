@@ -27,6 +27,8 @@ import com.noplugins.keepfit.android.activity.HeTongActivity;
 import com.noplugins.keepfit.android.activity.InformationCheckActivity;
 import com.noplugins.keepfit.android.activity.SubmitInformationSelectActivity;
 import com.noplugins.keepfit.android.bean.BindCardBean;
+import com.noplugins.keepfit.android.bean.CheckBean;
+import com.noplugins.keepfit.android.bean.CompnyBean;
 import com.noplugins.keepfit.android.entity.CheckEntity;
 import com.noplugins.keepfit.android.entity.InformationEntity;
 import com.noplugins.keepfit.android.entity.UrlEntity;
@@ -48,6 +50,7 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cn.jpush.android.cache.Sp;
 import okhttp3.RequestBody;
 import rx.Subscription;
 
@@ -106,6 +109,7 @@ public class BusinessInformationFragment extends ViewPagerFragment {
     private Subscription subscription;//Rxjava
     private NoScrollViewPager viewpager_content;
     private StepView stepView;
+    ImageView back_btn;
 
 
     public static BusinessInformationFragment homeInstance(String title) {
@@ -128,16 +132,13 @@ public class BusinessInformationFragment extends ViewPagerFragment {
     }
 
     private void initView() {
+
+
         submit_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
                 if (check_value()) {
 
-                    //跳转到合同页面
-                    /*Intent intent = new Intent(getActivity(), HeTongActivity.class);
-                    startActivity(intent);*/
 
                     informationEntity = mainActivity.informationEntity;//获取基础资料信息
                     informationEntity.setCompany_name(qiye_mingcheng_name.getText().toString());//公司名字
@@ -145,8 +146,7 @@ public class BusinessInformationFragment extends ViewPagerFragment {
                     informationEntity.setLegal_person(faren_name.getText().toString());//法人姓名
                     informationEntity.setCard_num(icon_id_card.getText().toString());//身份证号
                     informationEntity.setBank_card_num(qiye_zhanghao.getText().toString());//企业账号
-                    //开户银行
-
+                    informationEntity.setBankName(kaihuhang_edit.getText().toString());//开户行
 
                     //提交审核资料
                     submit_information();
@@ -198,7 +198,6 @@ public class BusinessInformationFragment extends ViewPagerFragment {
     }
 
     private void bind_card(boolean is_bind_compny) {
-        Map<String, Object> params = new HashMap<>();
         BindCardBean bindCardBean = new BindCardBean();
         if (is_bind_compny) {
             bindCardBean.setUserName(tixian_compny_name.getText().toString());
@@ -211,10 +210,10 @@ public class BusinessInformationFragment extends ViewPagerFragment {
             bindCardBean.setBankName(geren_kaihuhang.getText().toString());//开户行
         }
         Subscription subscription = Network.getInstance("绑定银行卡", getActivity())
-                .bind_card(params,
-                        new ProgressSubscriber<>("绑定银行卡", new SubscriberOnNextListener<Bean<BindCardBean>>() {
+                .bind_card(bindCardBean,
+                        new ProgressSubscriber<>("绑定银行卡", new SubscriberOnNextListener<Bean<String>>() {
                             @Override
-                            public void onNext(Bean<BindCardBean> result) {
+                            public void onNext(Bean<String> result) {
                                 //切换到第三个进度条
                                 /*viewpager_content.setCurrentItem(2);
                                 int step = stepView.getCurrentStep();//设置进度条
@@ -222,8 +221,8 @@ public class BusinessInformationFragment extends ViewPagerFragment {
                                 //删除缓存的状态,目的是下次进启动页的时候不会跳转"角色选择页面"
                                 SharedPreferencesHelper.remove(getActivity(), Network.no_submit_information);*/
 
-                                //跳购买页面
-                                Intent intent = new Intent(getActivity(), BuyHuiYuanActivity.class);
+                                //跳转到合同页面
+                                Intent intent = new Intent(getActivity(), HeTongActivity.class);
                                 startActivity(intent);
 
                             }
@@ -291,42 +290,56 @@ public class BusinessInformationFragment extends ViewPagerFragment {
         params.put("company_code", informationEntity.getCompany_code());
         params.put("gymPlaces", informationEntity.getGymPlaces());
         params.put("gym_pic", informationEntity.getGym_pic());
-        Gson gson = new Gson();
-        String json_params = gson.toJson(params);
-        String json = new Gson().toJson(params);//要传递的json
-        RequestBody requestBody = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), json);
+        params.put("province", informationEntity.getProvince());
+        params.put("city", informationEntity.getCity());
+        params.put("district", informationEntity.getDistrict());
+        params.put("bank_card_num", informationEntity.getBank_card_num());
+        params.put("bank_name", informationEntity.getBankName());
+        Subscription subscription = Network.getInstance("提交审核资料", getActivity())
+                .submit_information(params,
+                        new ProgressSubscriber<>("提交审核资料", new SubscriberOnNextListener<Bean<CheckBean>>() {
+                            @Override
+                            public void onNext(Bean<CheckBean> result) {
+                                //缓存场馆ID
+                                SpUtils.putString(getActivity(), AppConstants.CHANGGUAN_NUM, result.getData().getAreaNum());
+                                //获取公司账户的数据
+                                get_compny_resource(result.getData().getAreaNum());
+                            }
 
-        Log.e(TAG, "提交基础资料参数：" + json_params);
-        subscription = Network.getInstance("提交审核资料", getActivity())
-                .submit_information(requestBody, new ProgressSubscriberNew<>(String.class, new GsonSubscriberOnNextListener<String>() {
-                    @Override
-                    public void on_post_entity(String entity, String s) {
-                        Log.e("提交审核资料成功", entity + "提交审核资料成功" + s);
+                            @Override
+                            public void onError(String error) {
 
-                        //切换到提现布局
-                        yingye_ziliao_layout.setVisibility(View.GONE);
-                        tixian_compny_layout.setVisibility(View.VISIBLE);
-                        compny_check_btn.setChecked(true);
-                        //设置公司账户为默认值-加接口 todo
-
-
-                    }
-                }, new SubscriberOnNextListener<Bean<Object>>() {
-                    @Override
-                    public void onNext(Bean<Object> result) {
-
-                    }
-
-                    @Override
-                    public void onError(String error) {
-                        Log.e("提交审核资料失败", "提交审核资料失败:" + error);
-
-                    }
-                }, getActivity(), true));
+                            }
+                        }, getActivity(), false));
     }
 
+    private void get_compny_resource(String changguan_number) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("areaNum", changguan_number);
+        Subscription subscription = Network.getInstance("获取公司信息", getActivity())
+                .get_compny_information(params,
+                        new ProgressSubscriber<>("获取公司信息", new SubscriberOnNextListener<Bean<CompnyBean>>() {
+                            @Override
+                            public void onNext(Bean<CompnyBean> result) {
+                                //切换到提现布局
+                                yingye_ziliao_layout.setVisibility(View.GONE);
+                                tixian_compny_layout.setVisibility(View.VISIBLE);
+                                compny_check_btn.setChecked(true);
 
-    ImageView back_btn;
+                                tixian_compny_name.setText(result.getData().getCardOwner());
+                                tixian_qiye_zhanghao.setText(result.getData().getBankCardNum());
+                                compny_kaihuhang.setText(result.getData().getBankName());
+                            }
+
+                            @Override
+                            public void onError(String error) {
+
+                            }
+                        }, getActivity(), false));
+
+
+    }
+
 
     @Override
     public void onAttach(Context activity) {

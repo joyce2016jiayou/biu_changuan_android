@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:background="@color/white"
     android:orientation="vertical"
-    android:visibility="visible">
+    android:visibility="gone">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -120,7 +120,7 @@
             android:layout_height="@dimen/m31"
             android:layout_marginLeft="@dimen/m4"
             android:background="@drawable/edit_bg"
-            android:enabled="false"
+            android:enabled="true"
             android:hint="@string/edit_hint46"
             android:paddingLeft="@dimen/m20"
             android:singleLine="true"
