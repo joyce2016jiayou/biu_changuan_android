@@ -10,17 +10,17 @@ public class BuyInformationBean {
      * priceThree : 6999
      */
 
-    private int priceOne;
+    private double priceOne;
     private String areaName;
     private String logo;
-    private int priceTwo;
-    private int priceThree;
+    private double priceTwo;
+    private double priceThree;
 
-    public int getPriceOne() {
+    public double getPriceOne() {
         return priceOne;
     }
 
-    public void setPriceOne(int priceOne) {
+    public void setPriceOne(double priceOne) {
         this.priceOne = priceOne;
     }
 
@@ -40,19 +40,19 @@ public class BuyInformationBean {
         this.logo = logo;
     }
 
-    public int getPriceTwo() {
+    public double getPriceTwo() {
         return priceTwo;
     }
 
-    public void setPriceTwo(int priceTwo) {
+    public void setPriceTwo(double priceTwo) {
         this.priceTwo = priceTwo;
     }
 
-    public int getPriceThree() {
+    public double getPriceThree() {
         return priceThree;
     }
 
-    public void setPriceThree(int priceThree) {
+    public void setPriceThree(double priceThree) {
         this.priceThree = priceThree;
     }
 }

@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.noplugins.keepfit.android.KeepFitActivity
 import com.noplugins.keepfit.android.R
 import com.noplugins.keepfit.android.adapter.DatePriceTestAdapter
 import com.noplugins.keepfit.android.adapter.HighAdapter
@@ -245,6 +246,12 @@ class CgPriceActivity : BaseActivity() {
     }
 
     override fun onBackPressed() {
+        if (form == "pay"){
+            val intent = Intent(this, KeepFitActivity::class.java)
+            startActivity(intent)
+            finish()
+            return
+        }
         setResult(3)
         finish()
     }

@@ -2,9 +2,17 @@ package com.noplugins.keepfit.android.entity;
 
 public class LoginEntity {
     private int type;
-
+private int memberService;
     private int havePayPassWord;
     private String gymUserNum;
+
+    public int getMemberService() {
+        return memberService;
+    }
+
+    public void setMemberService(int memberService) {
+        this.memberService = memberService;
+    }
 
     public String getGymUserNum() {
         return gymUserNum;

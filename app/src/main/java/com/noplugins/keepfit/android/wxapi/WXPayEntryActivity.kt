@@ -22,8 +22,11 @@ import com.google.gson.Gson
 import com.noplugins.keepfit.android.R
 import com.noplugins.keepfit.android.activity.mine.CgPriceActivity
 import com.noplugins.keepfit.android.base.BaseActivity
+import com.noplugins.keepfit.android.bean.OrderResultBean
 import com.noplugins.keepfit.android.bean.WxPayBean
+import com.noplugins.keepfit.android.global.AppConstants
 import com.noplugins.keepfit.android.pay.PayResult
+import com.noplugins.keepfit.android.util.SpUtils
 import com.noplugins.keepfit.android.util.net.Network
 import com.noplugins.keepfit.android.util.net.entity.Bean
 import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriber
@@ -44,11 +47,14 @@ class WXPayEntryActivity : BaseActivity(), IWXAPIEventHandler {
     private var type = -1
 
     private var orderNum: String = ""
-    private var price: Double = 0.0
+    private var price = ""
 
     private var aliPayInfo = ""
     private var wxPayInfo = ""
     private var dialogType = -1
+    private var cgName = ""
+    private var privcetType = -1
+    private var logo = ""
     override fun initBundle(parms: Bundle?) {
         /*
          bundle.putString("order_number", result.getData());//订单编号
@@ -59,32 +65,35 @@ class WXPayEntryActivity : BaseActivity(), IWXAPIEventHandler {
          */
         if (parms!=null){
             orderNum = parms.getString("order_number","")
-            price = parms.getString("money","0").toDouble()
-            tv_cg_name.text = parms.getString("changguan_name")
-            when(parms.getString("type")!!.toInt()){
-                1 -> {
-                    //2999
-                    tv_vip.text = "终身会员"
-                }
-                2 -> {
-                    //3999
-                    tv_vip.text = "超值终身会员"
-                }
-                3 -> {
-                    //6999
-                    tv_vip.text = "豪华终身会员"
-                }
-            }
-            Glide.with(this)
-                    .load(parms.getString("img_url",""))
-                    .into(iv_logo)
+            price = parms.getString("money","0")
+            cgName = parms.getString("changguan_name","")
+            privcetType = parms.getString("type")!!.toInt()
+            logo = parms.getString("img_url","")
+
         }
     }
 
     override fun initView() {
         setContentView(R.layout.activity_order_confirm)
-
-
+        tv_cg_name.text = cgName
+        when(privcetType){
+            1 -> {
+                //2999
+                tv_vip.text = "终身会员"
+            }
+            2 -> {
+                //3999
+                tv_vip.text = "超值终身会员"
+            }
+            3 -> {
+                //6999
+                tv_vip.text = "豪华终身会员"
+            }
+        }
+        Glide.with(this)
+                .load(logo)
+                .into(iv_logo)
+        tv_vip_price.text = "¥$price"
     }
 
     override fun doBusiness(mContext: Context?) {
@@ -196,13 +205,7 @@ class WXPayEntryActivity : BaseActivity(), IWXAPIEventHandler {
                         // 该笔订单是否真实支付成功，需要依赖服务端的异步通知。
                         Handler().postDelayed(Runnable {
                             twoYanzhen()
-                            Toast.makeText(applicationContext,"支付成功",Toast.LENGTH_SHORT).show()
-                            val intent = Intent(this@WXPayEntryActivity, CgPriceActivity::class.java)
-                            val bundle = Bundle()
-                            bundle.putString("form", "pay")
-                            intent.putExtras(bundle)
-                            startActivity(intent)
-                        }, 1000)
+                        }, 1500)
                     } else {
                         // 该笔订单真实的支付结果，需要依赖服务端的异步通知。
 //                        toPayError()
@@ -343,33 +346,51 @@ class WXPayEntryActivity : BaseActivity(), IWXAPIEventHandler {
     private fun twoYanzhen() {
         val params = HashMap<String, Any>()
         params["orderNum"] = orderNum
-        val json = Gson().toJson(params)
-        val requestBody = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), json)
-
-//        subscription = Network.getInstance("支付二次验证", this)
-//            .requestAliPayInfo(
-//                requestBody,
-//                ProgressSubscriber<OrderResultBean>(
-//                    "支付二次验证",
-//                    object : SubscriberOnNextListener<Bean<OrderResultBean>> {
-//                        override fun onNext(result: Bean<OrderResultBean>) {
-//                            if (result.data.order.status.toInt() == 1) {
+        subscription = Network.getInstance("支付二次验证", this)
+            .getPayResult(
+                    params,
+                ProgressSubscriber<OrderResultBean>(
+                    "支付二次验证",
+                    object : SubscriberOnNextListener<Bean<OrderResultBean>> {
+                        override fun onNext(result: Bean<OrderResultBean>) {
+                            if (result.data.payResult == 1) {
 //                                toPayOK()
-//                            } else {
+                                var sf = ""
+                                when(privcetType){
+                                    1-> {
+                                        sf = "2999"
+                                    }
+                                    2-> {
+                                        sf = "3999"
+                                    }
+                                    3-> {
+                                        sf = "6999"
+                                    }
+                                }
+                                SpUtils.putString(applicationContext,AppConstants.USER_DENGJI,sf)
+                                Toast.makeText(applicationContext,"支付成功",Toast.LENGTH_SHORT).show()
+                                val intent = Intent(this@WXPayEntryActivity, CgPriceActivity::class.java)
+                                val bundle = Bundle()
+                                bundle.putString("form", "pay")
+                                intent.putExtras(bundle)
+                                startActivity(intent)
+                                finish()
+                            } else {
 //                                toPayError()
-//                            }
-//
-//                        }
-//
-//                        override fun onError(error: String) {
-//                            Log.e(TAG, "支付二次验证：" + error)
-//                            Toast.makeText(applicationContext, error, Toast.LENGTH_SHORT).show()
-//                        }
-//                    },
-//                    this,
-//                    true
-//                )
-//            )
+
+                            }
+
+                        }
+
+                        override fun onError(error: String) {
+                            Log.e(TAG, "支付二次验证：" + error)
+                            Toast.makeText(applicationContext, error, Toast.LENGTH_SHORT).show()
+                        }
+                    },
+                    this,
+                    true
+                )
+            )
     }
 
 }

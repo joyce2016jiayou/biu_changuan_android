@@ -32,6 +32,7 @@ import com.noplugins.keepfit.android.fragment.MineFragment;
 import com.noplugins.keepfit.android.fragment.MessageFragment;
 import com.noplugins.keepfit.android.fragment.mine.MyFragment;
 import com.noplugins.keepfit.android.fragment.statistics.StatisticsFragment;
+import com.noplugins.keepfit.android.fragment.teacher.Is2999Fragment;
 import com.noplugins.keepfit.android.global.AppConstants;
 import com.noplugins.keepfit.android.util.SpUtils;
 import com.noplugins.keepfit.android.util.data.SharedPreferencesHelper;
@@ -102,17 +103,27 @@ public class KeepFitActivity extends BaseActivity {
     public void initView() {
         setContentLayout(R.layout.activity_keepfit);
         ButterKnife.bind(this);
-        if (SpUtils.getInt(getApplicationContext(), AppConstants.USER_TYPE) == 1 ||
-                SpUtils.getInt(getApplicationContext(), AppConstants.USER_TYPE) == 2) {
-            btn_shipu.setVisibility(View.VISIBLE);
+        if (SpUtils.getString(getApplicationContext(),AppConstants.USER_DENGJI).equals("2999")){
+            btn_shipu.setVisibility(View.GONE);
+        } else {
+            if (SpUtils.getInt(getApplicationContext(), AppConstants.USER_TYPE) == 1 ||
+                    SpUtils.getInt(getApplicationContext(), AppConstants.USER_TYPE) == 2) {
+                btn_shipu.setVisibility(View.VISIBLE);
+            }
         }
+
         isShowTitle(false);
         MyApplication.addDestoryActivity(this, "KeepFitActivity");
         //注册eventbus
         //EventBus.getDefault().register(this);
         //初始化页面
         tabFragments.add(RiChengFragment.homeInstance("第一页"));
-        tabFragments.add(StatisticsFragment.Companion.newInstance("第二页"));
+        if (SpUtils.getString(getApplicationContext(),AppConstants.USER_DENGJI).equals("2999")){
+            tabFragments.add(Is2999Fragment.Companion.newInstance("第二页"));
+        } else {
+            tabFragments.add(StatisticsFragment.Companion.newInstance("第二页"));
+        }
+
         tabFragments.add(MessageFragment.newInstance("第三页"));
         tabFragments.add(MyFragment.Companion.newInstance("第四页"));
         //初始化viewpager

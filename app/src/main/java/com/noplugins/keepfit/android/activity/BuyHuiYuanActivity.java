@@ -140,7 +140,7 @@ public class BuyHuiYuanActivity extends BaseActivity {
     private void get_order_number() {
         Map<String, Object> params = new HashMap<>();
         params.put("gymAreaNum", "GYM19091236750176");
-        params.put("orderMoney", select_order_money);
+        params.put("orderMoney", 0.02);
         params.put("orderType", select_order_type);
         Subscription subscription = Network.getInstance("生成订单", this)
                 .get_order(params,
