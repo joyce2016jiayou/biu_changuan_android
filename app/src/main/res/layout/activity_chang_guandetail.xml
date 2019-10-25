@@ -41,7 +41,7 @@
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
                     android:layout_marginBottom="19dp"
-                    android:text="@string/tv105"
+                    android:text="更新场馆信息"
                     android:textColor="@color/top_heiziti"
                     android:textSize="25sp"
                     android:textStyle="bold" />
@@ -167,6 +167,7 @@
                             android:singleLine="true"
                             android:textColor="@color/top_heiziti"
                             android:textColorHint="@color/color_9B9B9B"
+                            android:enabled="false"
                             android:textSize="13sp" />
 
                         <ImageView
@@ -325,6 +326,7 @@
                         android:singleLine="true"
                         android:textColor="@color/top_heiziti"
                         android:textColorHint="@color/color_9B9B9B"
+                        android:enabled="false"
                         android:textSize="13sp" />
                 </LinearLayout>
 
@@ -626,6 +628,7 @@
                         android:layout_marginLeft="4dp"
                         android:background="@null"
                         android:hint="@string/edit_hint16"
+                        android:enabled="false"
                         android:singleLine="true"
                         android:textColor="@color/top_heiziti"
                         android:textColorHint="@color/color_9B9B9B"
@@ -653,6 +656,7 @@
                         android:layout_marginLeft="4dp"
                         android:background="@null"
                         android:hint="@string/edit_hint17"
+                        android:enabled="false"
                         android:singleLine="true"
                         android:textColor="@color/top_heiziti"
                         android:textColorHint="@color/color_9B9B9B"
@@ -681,6 +685,7 @@
                         android:singleLine="true"
                         android:background="@null"
                         android:hint="@string/edit_hint18"
+                        android:enabled="false"
                         android:textColor="@color/top_heiziti"
                         android:textColorHint="@color/color_9B9B9B"
                         android:textSize="13sp" />
@@ -709,6 +714,7 @@
                         android:singleLine="true"
                         android:hint="@string/edit_hint18"
                         android:textColor="@color/top_heiziti"
+                        android:enabled="false"
                         android:textColorHint="@color/color_9B9B9B"
                         android:textSize="13sp" />
                 </LinearLayout>

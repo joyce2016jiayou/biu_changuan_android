@@ -5,7 +5,31 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <FrameLayout
+        android:id="@+id/select_time"
+        android:layout_width="wrap_content"
+        android:minWidth="@dimen/m110"
+        android:layout_height="@dimen/m29"
+        android:layout_gravity="right"
+        android:background="@drawable/shape_btn_bg_gray">
 
+        <TextView
+            android:id="@+id/tv_select_time"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/m27"
+            android:text="2019年10月"
+            android:gravity="center_vertical|left"
+            android:layout_marginLeft="@dimen/m10"
+            android:textColor="@color/color_4A4A4A"
+            android:textSize="15sp"/>
+
+        <ImageView
+            android:layout_width="@dimen/m14"
+            android:layout_height="@dimen/m8"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginRight="@dimen/m10"
+            android:src="@drawable/icon_xiala" />
+    </FrameLayout>
     <ScrollView
         android:orientation="vertical"
         android:layout_width="match_parent"

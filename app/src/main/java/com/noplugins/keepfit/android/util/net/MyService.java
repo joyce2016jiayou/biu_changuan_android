@@ -16,6 +16,7 @@ import com.noplugins.keepfit.android.bean.PrivateDetailBean;
 import com.noplugins.keepfit.android.bean.TeacherBean;
 import com.noplugins.keepfit.android.bean.TeacherDetailBean;
 import com.noplugins.keepfit.android.bean.RiChengBean;
+import com.noplugins.keepfit.android.bean.UserStatisticsBean;
 import com.noplugins.keepfit.android.bean.WxPayBean;
 import com.noplugins.keepfit.android.bean.mine.BalanceListBean;
 import com.noplugins.keepfit.android.bean.mine.WalletBean;
@@ -629,7 +630,7 @@ public interface MyService {
      * @return
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
-    @POST("submitAudit")
+    @POST("updateMyArea")
     Observable<Bean<String>> submitAudit(@Body RequestBody json);
 
     /**
@@ -667,5 +668,15 @@ public interface MyService {
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
     @POST("findAreaPrice")
     Observable<Bean<List<HightListBean>>> findAreaPrice(@Body RequestBody json);
+
+    /**
+     * 统计
+     *
+     * @return
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("statistics")
+    Observable<Bean<UserStatisticsBean>> statistics(@Body RequestBody json);
+
 
 }

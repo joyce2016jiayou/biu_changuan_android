@@ -22,6 +22,16 @@ public class InformationEntity {
      * gym_pic : [{"order_num":1,"url":"www.logo99.com"},{"order_num":"2","url":"www.url2.com"},{"order_num":"3","url":"www.url6.com"}]
      */
 
+    private String area_num;
+
+    public String getArea_num() {
+        return area_num;
+    }
+
+    public void setArea_num(String area_num) {
+        this.area_num = area_num;
+    }
+
     private String area_name;
     private int type;
     private int area;
@@ -221,6 +231,16 @@ public class InformationEntity {
         }
 
         private String place_type;
+
+        private String place_num;
+
+        public String getPlace_num() {
+            return place_num;
+        }
+
+        public void setPlace_num(String place_num) {
+            this.place_num = place_num;
+        }
 
         public int getMax_num() {
             return max_num;

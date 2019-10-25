@@ -6,30 +6,61 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <FrameLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/m70">
-
-        <ImageView
-            android:id="@+id/back_btn"
-            android:layout_width="@dimen/m22"
-            android:layout_height="@dimen/m19"
-            android:layout_gravity="left|center_vertical"
-            android:layout_marginLeft="@dimen/m20"
-            android:src="@drawable/icon_back"
-            android:layout_marginTop="@dimen/m20"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/m58">
 
         <TextView
-            android:id="@+id/title_tv"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="运营"
-            android:textColor="@color/contents_text"
-            android:textSize="20sp"
-            android:layout_marginTop="@dimen/m20"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/m20"
+            android:text="@string/tv_yunying"
+            android:textColor="#181818"
+            android:textSize="26sp"
             android:textStyle="bold" />
-    </FrameLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/select_store_type"
+            android:layout_width="@dimen/m221"
+            android:layout_height="@dimen/m43"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/m26"
+            android:background="@drawable/filter_box">
+
+            <TextView
+                android:id="@+id/store_type_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:background="@null"
+                android:enabled="false"
+                android:gravity="center_vertical"
+                android:hint="@string/tv38"
+                android:paddingLeft="@dimen/m20"
+                android:text="威尔士"
+                android:textColor="@color/top_heiziti"
+                android:textColorHint="@color/color_929292"
+                android:textSize="13sp" />
+
+            <ImageView
+                android:layout_width="@dimen/m14"
+                android:layout_height="@dimen/m8"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="right|center_vertical"
+                android:layout_marginRight="@dimen/m20"
+                android:src="@drawable/xiala" />
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -98,6 +129,7 @@
         android:id="@+id/main_container_content"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:background="@color/transparent"/>
 
 </LinearLayout>

@@ -17,6 +17,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import com.alipay.sdk.app.PayTask
+import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import com.noplugins.keepfit.android.R
 import com.noplugins.keepfit.android.activity.mine.CgPriceActivity
@@ -49,7 +50,35 @@ class WXPayEntryActivity : BaseActivity(), IWXAPIEventHandler {
     private var wxPayInfo = ""
     private var dialogType = -1
     override fun initBundle(parms: Bundle?) {
-
+        /*
+         bundle.putString("order_number", result.getData());//订单编号
+         bundle.putString("type", select_order_type);//支付类型
+         bundle.putString("money", select_order_money);//钱
+         bundle.putString("changguan_name", changuan_name_tv.getText().toString());//场馆名字
+         bundle.putString("img_url", changuan_name_tv.getText().toString());//图片地址
+         */
+        if (parms!=null){
+            orderNum = parms.getString("order_number","")
+            price = parms.getString("money","0").toDouble()
+            tv_cg_name.text = parms.getString("changguan_name")
+            when(parms.getString("type")!!.toInt()){
+                1 -> {
+                    //2999
+                    tv_vip.text = "终身会员"
+                }
+                2 -> {
+                    //3999
+                    tv_vip.text = "超值终身会员"
+                }
+                3 -> {
+                    //6999
+                    tv_vip.text = "豪华终身会员"
+                }
+            }
+            Glide.with(this)
+                    .load(parms.getString("img_url",""))
+                    .into(iv_logo)
+        }
     }
 
     override fun initView() {
@@ -137,6 +166,7 @@ class WXPayEntryActivity : BaseActivity(), IWXAPIEventHandler {
 //            builder.setMessage(getString(R.string.pay_result_callback_msg, resp.errCode.toString()))
 //            builder.show()
             if (resp.errCode.toString() == "0"){
+                Toast.makeText(applicationContext,"支付成功",Toast.LENGTH_SHORT).show()
                 val intent = Intent(this@WXPayEntryActivity, CgPriceActivity::class.java)
                 val bundle = Bundle()
                 bundle.putString("form", "pay")
@@ -166,6 +196,7 @@ class WXPayEntryActivity : BaseActivity(), IWXAPIEventHandler {
                         // 该笔订单是否真实支付成功，需要依赖服务端的异步通知。
                         Handler().postDelayed(Runnable {
                             twoYanzhen()
+                            Toast.makeText(applicationContext,"支付成功",Toast.LENGTH_SHORT).show()
                             val intent = Intent(this@WXPayEntryActivity, CgPriceActivity::class.java)
                             val bundle = Bundle()
                             bundle.putString("form", "pay")
@@ -235,12 +266,12 @@ class WXPayEntryActivity : BaseActivity(), IWXAPIEventHandler {
 
     private fun testWxRequest() {
         val params = HashMap<String, Any>()
-        params["ordNum"] = "GYM1910152420862"
+        params["ordNum"] = orderNum
         params["payType"] = 2
         //memberOrderPay
-        val subscription = Network.getInstance("获取验证码", this)
+        val subscription = Network.getInstance("微信支付", this)
                 .memberOrderPayWx(params,
-                        ProgressSubscriber("获取验证码", object : SubscriberOnNextListener<Bean<WxPayBean>> {
+                        ProgressSubscriber("微信支付", object : SubscriberOnNextListener<Bean<WxPayBean>> {
                             override fun onNext(code: Bean<WxPayBean>) {
                                 weChatPay(code.data)
                             }
@@ -254,12 +285,12 @@ class WXPayEntryActivity : BaseActivity(), IWXAPIEventHandler {
 
     private fun requestAliPayInfo() {
         val params = HashMap<String, Any>()
-        params["ordNum"] = "GYM191015242086271211111"
+        params["ordNum"] = orderNum
         params["payType"] = 1
         //memberOrderPay
-        val subscription = Network.getInstance("获取验证码", this)
+        val subscription = Network.getInstance("支付宝支付", this)
                 .memberOrderPay(params,
-                        ProgressSubscriber("获取验证码", object : SubscriberOnNextListener<Bean<String>> {
+                        ProgressSubscriber("支付宝支付", object : SubscriberOnNextListener<Bean<String>> {
                             override fun onNext(code: Bean<String>) {
                                 aliPayInfo = code.data
                                 zhifubaoPay()
