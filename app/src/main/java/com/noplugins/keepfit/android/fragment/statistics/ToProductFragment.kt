@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import com.bigkoo.pickerview.builder.TimePickerBuilder
 import com.bigkoo.pickerview.listener.OnTimeSelectListener
 import com.bigkoo.pickerview.view.TimePickerView
@@ -31,11 +32,17 @@ import java.util.*
 import kotlin.collections.ArrayList
 import com.github.mikephil.charting.components.LegendEntry
 import com.github.mikephil.charting.components.Legend
+import com.noplugins.keepfit.android.bean.UserStatisticsBean
+import com.noplugins.keepfit.android.util.net.Network
+import com.noplugins.keepfit.android.util.net.entity.Bean
+import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriber
+import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener
 import com.noplugins.keepfit.android.util.screen.KeyboardUtils
 
 class ToProductFragment : BaseFragment() {
 
     var selectDate = "2019-10"
+
     companion object {
         fun newInstance(title: String): ToProductFragment {
             val fragment = ToProductFragment()
@@ -58,6 +65,7 @@ class ToProductFragment : BaseFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+
         select_time.setOnClickListener {
             select_time_pop()
         }
@@ -65,48 +73,102 @@ class ToProductFragment : BaseFragment() {
 
     }
 
-    override fun onFragmentVisibleChange(isVisible: Boolean) {
-        super.onFragmentVisibleChange(isVisible)
-        setting()
-    }
-    private fun setting(){
-        val strings = ArrayList<PieEntry>()
-        strings.add(PieEntry(40f, "aaa"))
-        strings.add(PieEntry(160f, "bbb"))
-        val colors = ArrayList<Int>()
+    override fun onFragmentFirstVisible() {
+        super.onFragmentFirstVisible()
         colors.add(Color.parseColor("#707BCC"))
         colors.add(Color.parseColor("#5CCEFF"))
-//        initPieChart(picChart,strings,colors)
-        initAllPieChart(picChart,strings,colors,true)
+        colors.add(Color.parseColor("#5CCEEF"))
+        initAllPieChart(true)
+        initLineChart()
+        initBarChart()
+        requestUser(false)
+    }
+//    override fun onFragmentVisibleChange(isVisible: Boolean) {
+//        super.onFragmentVisibleChange(isVisible)
+////        setting()
+//
+//    }
 
-        //1.设置x轴和y轴的点
-        val entries:MutableList<Entry>  = ArrayList()
-        for (i in 0 until 12)
-            entries.add(Entry(i.toFloat(), Random().nextInt(12).toFloat()))
-
-        val entries1:MutableList<Entry>  = ArrayList()
-        for (i in 0 until 12)
-            entries1.add(Entry(i.toFloat(), Random().nextInt(12).toFloat()))
-        initLineChart(lineChart,entries,entries1)
-
-
-        val values:MutableList<BarEntry> = ArrayList()
-
-        for (i in 0 until 4) {
-            val mul =  1
-            val val1 = (Math.random() * mul).toFloat() + mul / 3
-            val val2 = (Math.random() * mul).toFloat() + mul / 3
-            val val3 = (Math.random() * mul).toFloat() + mul / 3
-
-            values.add(BarEntry(
-                    i.toFloat(),
-                    floatArrayOf(val1, val2, val3)))
+    val xiaoshouStrings = ArrayList<PieEntry>()
+    val colors = ArrayList<Int>()
+    val entries = ArrayList<Entry>()
+    val entries1 = ArrayList<Entry>()
+    val values = ArrayList<BarEntry>()
+    val functionList = ArrayList<UserStatisticsBean.FunctionBean>()
+    private fun setting(user: UserStatisticsBean) {
+        xiaoshouStrings.clear()
+        entries.clear()
+        entries1.clear()
+        values.clear()
+        functionList.clear()
+        functionList.addAll(user.function)
+        user.sales.product.forEach {
+            xiaoshouStrings.add(PieEntry(it.percent.toFloat(), it.type))
         }
-        initBarChart(barChart,values)
+//
+        user.sales.y2y.forEachIndexed { index, y2yBean ->
+            entries.add(Entry(index.toFloat(), y2yBean.percent.toFloat()))
+        }
+        user.sales.m2m.forEachIndexed { index, m2mBean ->
+            entries1.add(Entry(index.toFloat(), m2mBean.percent.toFloat()))
+        }
+
+        user.function.forEachIndexed { index, functionBean ->
+            values.add(BarEntry(index.toFloat(),
+                    floatArrayOf(functionBean.prices[0].price.toFloat(),
+                            functionBean.prices[1].price.toFloat(),
+                            functionBean.prices[2].price.toFloat())))
+        }
+
+
+
+        val dataSet = PieDataSet(xiaoshouStrings, "")
+        dataSet.colors = colors
+        val pieData = PieData(dataSet)
+        pieData.setDrawValues(true)
+        pieData.setValueFormatter(com.noplugins.keepfit.android.chart.PercentFormatter(picChart))
+        pieData.setValueTextSize(9f)
+        picChart.data = pieData
+        picChart.invalidate()
+
+
+        val dataSet2 = LineDataSet(entries, "Label") // add entries to dataset
+        dataSet2.color = colors[0]//线条颜色
+        dataSet2.setCircleColor(colors[0])//圆点颜色
+        dataSet2.lineWidth = 1f//线条宽度
+
+        val dataSet1 = LineDataSet(entries1, "Label") // add entries to dataset
+        dataSet1.color = colors[1]//线条颜色
+        dataSet1.setCircleColor(colors[1])//圆点颜色
+        dataSet1.lineWidth = 1f//线条宽度
+        val dataSets = ArrayList<ILineDataSet>()
+//        dataSet1.valueFormatter = PercentFormatter()
+        dataSets.add(dataSet2)
+        dataSets.add(dataSet1)
+        //3.chart设置数据
+        val lineData = LineData(dataSets)
+        lineData.setDrawValues(false)
+        lineChart.data = lineData
+        lineChart.invalidate()
+
+        val set1 = BarDataSet(values, "")
+        set1.setDrawIcons(false)
+        set1.colors = getColors().asList()
+//      set1.setStackLabels(String[]{"Births", "Divorces", "Marriages"})
+        val dataBarSets: MutableList<IBarDataSet> = ArrayList()
+        dataBarSets.add(set1)
+
+        val data = BarData(dataBarSets)
+        data.setValueFormatter(StackedValueFormatter(false, "", 1))
+        data.setValueTextColor(Color.WHITE)
+        barChart.data = data
+        barChart.setFitBars(true)
+        barChart.invalidate()
+
     }
 
-    private fun initAllPieChart(picChart: PieChart, strings:List<PieEntry>, colors:List<Int>, isLabel: Boolean){
-        val dataSet = PieDataSet(strings, "")
+    private fun initAllPieChart(isLabel: Boolean) {
+        val dataSet = PieDataSet(xiaoshouStrings, "")
         dataSet.colors = colors
         val pieData = PieData(dataSet)
 //        pieData.setDrawValues(true)
@@ -138,15 +200,16 @@ class ToProductFragment : BaseFragment() {
 
 
     }
-    private fun initLineChart(lineChart: LineChart, entries:List<Entry>, entries1: List<Entry>){
+
+    private fun initLineChart() {
         val dataSet = LineDataSet(entries, "Label") // add entries to dataset
-        dataSet.color = Color.parseColor("#7d7d7d")//线条颜色
-        dataSet.setCircleColor(Color.parseColor("#7d7d7d"))//圆点颜色
+        dataSet.color = colors[0]//线条颜色
+        dataSet.setCircleColor(colors[0])//圆点颜色
         dataSet.lineWidth = 1f//线条宽度
 
         val dataSet1 = LineDataSet(entries1, "Label") // add entries to dataset
-        dataSet1.color = Color.parseColor("#6DD400")//线条颜色
-        dataSet1.setCircleColor(Color.parseColor("#6DD400"))//圆点颜色
+        dataSet1.color = colors[1]//线条颜色
+        dataSet1.setCircleColor(colors[1])//圆点颜色
         dataSet1.lineWidth = 1f//线条宽度
         val dataSets = ArrayList<ILineDataSet>()
         dataSet.valueFormatter = PercentFormatter()
@@ -216,34 +279,44 @@ class ToProductFragment : BaseFragment() {
         leftAxis.setDrawGridLines(true)
 
 
-
-
     }
-    private fun initBarChart(barChart: BarChart, values:List<BarEntry>){
-        val set1: BarDataSet
-       if (barChart.data != null &&
-               barChart.data.dataSetCount > 0) {
-            set1 = barChart.data.getDataSetByIndex(0) as BarDataSet
-           set1.values = values
-           barChart.data.notifyDataChanged()
-           barChart.notifyDataSetChanged()
-        } else {
-            set1 = BarDataSet(values, "")
-            set1.setDrawIcons(false)
-           set1.colors = getColors().asList()
-//            set1.setStackLabels(String[]{"Births", "Divorces", "Marriages"})
 
-            val dataSets:MutableList<IBarDataSet> = ArrayList()
-            dataSets.add(set1)
+    private fun initBarChart() {
+//        val set1: BarDataSet
+//        if (barChart.data != null &&
+//                barChart.data.dataSetCount > 0) {
+//            set1 = barChart.data.getDataSetByIndex(0) as BarDataSet
+//            set1.values = values
+//            barChart.data.notifyDataChanged()
+//            barChart.notifyDataSetChanged()
+//        } else {
+//            set1 = BarDataSet(values, "")
+//            set1.setDrawIcons(false)
+//            set1.colors = getColors().asList()
+////            set1.setStackLabels(String[]{"Births", "Divorces", "Marriages"})
+//
+//            val dataSets: MutableList<IBarDataSet> = ArrayList()
+//            dataSets.add(set1)
+//
+//            val data = BarData(dataSets)
+//            data.setValueFormatter(StackedValueFormatter(false, "", 1))
+//            data.setValueTextColor(Color.WHITE)
+//
+//            barChart.data = data
+//        }
 
-            val data = BarData(dataSets)
-            data.setValueFormatter( StackedValueFormatter(false, "", 1))
-            data.setValueTextColor(Color.WHITE)
+        val set1 = BarDataSet(values, "")
+        set1.setDrawIcons(false)
+        set1.colors = getColors().asList()
+//      set1.setStackLabels(String[]{"Births", "Divorces", "Marriages"})
+        val dataSets: MutableList<IBarDataSet> = ArrayList()
+        dataSets.add(set1)
 
-           barChart.data = data
-        }
+        val data = BarData(dataSets)
+        data.setValueFormatter(StackedValueFormatter(false, "", 1))
+        data.setValueTextColor(Color.WHITE)
 
-
+        barChart.data = data
 
         barChart.setFitBars(true)
         barChart.invalidate()
@@ -310,18 +383,14 @@ class ToProductFragment : BaseFragment() {
     private fun getColors(): IntArray {
 
         // have as many colors as stack-values per entry
-        val colors = IntArray(3)
-
-        System.arraycopy(ColorTemplate.MATERIAL_COLORS, 0, colors, 0, 3)
-
-        return colors
+        return colors.toIntArray()
     }
 
-    private fun getEntries():List<LegendEntry>{
+    private fun getEntries(): List<LegendEntry> {
         val entries = ArrayList<LegendEntry>()
-        for (i in 0 until 3){
+        for (i in 0 until values.size) {
             entries.add(LegendEntry(
-                    ":500",
+                    "${functionList[i].value}",
                     Legend.LegendForm.CIRCLE,
                     10f,
                     9f,
@@ -354,7 +423,7 @@ class ToProductFragment : BaseFragment() {
             tv_select_time.text = select_year.toString() + "年" + select_month + "月"
             selectDate = "$select_year-$select_month"
 
-//            requestProduct()
+            requestUser(true)
         })
                 .setDate(selectedDate)
                 .setRangDate(startDate, endDate)
@@ -380,5 +449,26 @@ class ToProductFragment : BaseFragment() {
 
         //影藏键盘
         KeyboardUtils.hideSoftKeyboard(activity)
+    }
+
+    private fun requestUser(isBoolean: Boolean) {
+
+        val params = HashMap<String, Any>()
+        params["type"] = 2
+        params["date"] = selectDate
+        params["areaNum"] = "GYM19091283573448"
+        val subscription = Network.getInstance("精准化时间", activity)
+                .statistics(
+                        params,
+                        ProgressSubscriber("精准化时间", object : SubscriberOnNextListener<Bean<UserStatisticsBean>> {
+                            override fun onNext(result: Bean<UserStatisticsBean>) {
+                                setting(result.data)
+                            }
+
+                            override fun onError(error: String) {
+                                Toast.makeText(activity, error, Toast.LENGTH_SHORT).show()
+                            }
+                        }, activity, isBoolean)
+                )
     }
 }

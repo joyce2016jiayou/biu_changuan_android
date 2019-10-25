@@ -58,14 +58,13 @@ class Login2Activity : BaseActivity() {
 
                     is_yanzhengma_logon = true
                     qiehuan_login.text = "密码登录"
-                    edit_password.inputType = InputType.TYPE_CLASS_NUMBER
                     edit_password.filters = arrayOf<InputFilter>(InputFilter.LengthFilter(6)) //最大输入长度
 
                     val s = SpannableString("请输入验证码")//这里输入自己想要的提示文字
                     edit_password.hint = s
                     img_password.setImageResource(R.drawable.yanzhengma_icon)
                     tv_send.visibility = View.VISIBLE
-
+                    edit_password.inputType = InputType.TYPE_CLASS_NUMBER
                     forget_password_btn.visibility = View.GONE
                 }
 
@@ -83,6 +82,7 @@ class Login2Activity : BaseActivity() {
                     tv_send.visibility = View.GONE
 
                     forget_password_btn.visibility = View.VISIBLE
+                    edit_password.inputType = 0x00000081
                 }
             }
         })
@@ -185,18 +185,20 @@ class Login2Activity : BaseActivity() {
                                 SpUtils.putString(applicationContext, AppConstants.TOKEN, result.data.token)
                                 SpUtils.putString(applicationContext, AppConstants.PHONE, edit_phone_number.text.toString())
                                 SpUtils.putString(applicationContext, AppConstants.CHANGGUAN_NUM, result.data.gymAreaNum)
-                                SpUtils.putString(applicationContext, AppConstants.CHANGGUAN_NUM, "GYM19091236750176")
+//                                SpUtils.putString(applicationContext, AppConstants.CHANGGUAN_NUM, "GYM19091236750176")
                                 SpUtils.putString(applicationContext, AppConstants.USER_NAME, result.data.gymAreaNum)
                                 SpUtils.putInt(applicationContext, AppConstants.USER_TYPE, result.data.type)
                                 SpUtils.putInt(applicationContext, AppConstants.IS_TX, result.data.havePayPassWord)
                                 get_check_status()
 //                                val intent = Intent(this@Login2Activity, KeepFitActivity::class.java)
 //                                startActivity(intent)
+                                login_btn.loadingComplete()
                             }
 
                             override fun onError(error: String) {
                                 Log.e(TAG, "登录失败：$error")
                                 Toast.makeText(applicationContext, error, Toast.LENGTH_SHORT).show()
+                                login_btn.loadingComplete()
                             }
                         }, this, false))
     }
@@ -245,6 +247,7 @@ class Login2Activity : BaseActivity() {
         SpUtils.putInt(applicationContext, AppConstants.USER_TYPE, login.type)
         SpUtils.putString(applicationContext, AppConstants.PHONE, edit_phone_number.text.toString())
         SpUtils.putInt(applicationContext, AppConstants.IS_TX, login.havePayPassWord)
+        SpUtils.putString(applicationContext, AppConstants.CHANGGUAN_NUM, login.gymAreaNum)
     }
 
     private fun get_check_status() {

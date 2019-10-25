@@ -10,6 +10,7 @@ import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 
 import com.noplugins.keepfit.android.activity.BuyActivity;
@@ -127,7 +128,7 @@ public class SplashActivity extends BaseActivity {
                             @Override
                             public void onNext(Bean<CheckEntity> result) {
                                 Log.e(TAG, "获取审核状态成功：" + result.getData().getStatus());
-                                if (result.getData().getStatus() == 1) {
+                                if (result.getData().getStatus() == 0) {
                                     Intent intent = new Intent(SplashActivity.this, KeepFitActivity.class);
                                     startActivity(intent);
                                 } else if (result.getData().getStatus() == 0) {
@@ -142,7 +143,10 @@ public class SplashActivity extends BaseActivity {
 
                             @Override
                             public void onError(String error) {
-
+                                Toast.makeText(getApplicationContext(),error,Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(SplashActivity.this, Login2Activity.class);
+                                startActivity(intent);
+                                finish();
                             }
                         }, this, false));
     }

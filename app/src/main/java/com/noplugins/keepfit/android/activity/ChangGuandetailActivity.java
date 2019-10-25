@@ -190,7 +190,6 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
         ButterKnife.bind(this);
         isShowTitle(false);
 
-        spinner_type.setClickable(false);
         //设置下拉选择框
         set_xiala_select();
 
@@ -258,7 +257,8 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
         qiye_zhucehao.setText(cg.getArea().getCompanyCode());
 
         edittext_area.setText(cg.getArea().getArea() + "");
-        spinner_type.setSelectedIndex(cg.getArea().getType());
+        spinner_type.setSelectedIndex(cg.getArea().getType()-1);
+        spinner_type.setClickable(false);
         time1_edit.setText(TimeCheckUtil.removeSecond(cg.getArea().getBusinessStart()));
         time2_edit.setText(TimeCheckUtil.removeSecond(cg.getArea().getBusinessEnd()));
 
@@ -769,7 +769,7 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
                     Log.d("qiniu","上传发射成功:"+response);
                     // 如果全部完成，调用成功接口
                     if (upList_iamges.size() == strings.size()) {
-//                        requestUpdate();
+                        requestUpdate();
                         Log.d("qiniu","全部上传完成");
                         progress_upload.dismissProgressDialog();
                     }
@@ -926,7 +926,7 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
         }
 
         informationEntity.setGymPlaces(gymPlacesBeans);
-        informationEntity.setGym_pic(upList_iamges);
+        informationEntity.setGymPic(upList_iamges);
 
 
         subscription = Network.getInstance("场馆信息", this)
@@ -934,7 +934,7 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
                         new SubscriberOnNextListener<Bean<String>>() {
                             @Override
                             public void onNext(Bean<String> changguanBeanBean) {
-                                Toast.makeText(getApplicationContext(), "修改成功",
+                                Toast.makeText(ChangGuandetailActivity.this, "当前场馆信息修改成功",
                                         Toast.LENGTH_SHORT).show();
                             }
 

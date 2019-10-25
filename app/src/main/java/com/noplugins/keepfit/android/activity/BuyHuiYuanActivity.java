@@ -55,6 +55,8 @@ public class BuyHuiYuanActivity extends BaseActivity {
     private String select_order_money = "";
     private String select_order_type = "";
 
+    private String logo;
+
 
     @Override
     public void initBundle(Bundle parms) {
@@ -130,6 +132,7 @@ public class BuyHuiYuanActivity extends BaseActivity {
         Glide.with(getApplicationContext())
                 .load(data.getLogo())
                 .into(touxiang_image);
+        logo = data.getLogo();
         changuan_name_tv.setText(data.getAreaName());
 
     }
@@ -150,7 +153,7 @@ public class BuyHuiYuanActivity extends BaseActivity {
                                 bundle.putString("type", select_order_type);//支付类型
                                 bundle.putString("money", select_order_money);//钱
                                 bundle.putString("changguan_name", changuan_name_tv.getText().toString());//场馆名字
-                                bundle.putString("img_url", changuan_name_tv.getText().toString());//图片地址
+                                bundle.putString("img_url", logo);//图片地址
                                 intent.putExtras(bundle);
                                 startActivity(intent);
                             }
