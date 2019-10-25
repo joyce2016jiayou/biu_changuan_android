@@ -4,6 +4,15 @@ public class LoginEntity {
     private int type;
 
     private int havePayPassWord;
+    private String gymUserNum;
+
+    public String getGymUserNum() {
+        return gymUserNum;
+    }
+
+    public void setGymUserNum(String gymUserNum) {
+        this.gymUserNum = gymUserNum;
+    }
 
     public int getHavePayPassWord() {
         return havePayPassWord;

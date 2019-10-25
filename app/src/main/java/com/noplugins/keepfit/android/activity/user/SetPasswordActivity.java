@@ -105,7 +105,7 @@ public class SetPasswordActivity extends BaseActivity {
 
     private void set_password() {
         Map<String, Object> params = new HashMap<>();
-        params.put("phone", SpUtils.getString(getApplicationContext(), AppConstants.PHONE));
+        params.put("userNum", SpUtils.getString(getApplicationContext(), AppConstants.USER_NAME));
         params.put("password", edit_password_again.getText().toString());
         subscription = Network.getInstance("设置密码", this)
                 .setPassword(params,
