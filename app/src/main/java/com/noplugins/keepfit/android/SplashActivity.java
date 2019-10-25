@@ -79,7 +79,6 @@ public class SplashActivity extends BaseActivity {
             mHandler.removeCallbacks(mRegularAction);   //把runable移除队列
             mHandler = null;
         }
-
     }
 
     @Override
@@ -91,8 +90,20 @@ public class SplashActivity extends BaseActivity {
                 finish();
             } else {
                 //获取审核状态
-                if (SpUtils.getInt(getApplicationContext(),AppConstants.USER_TYPE) == 1){
+                if (SpUtils.getInt(getApplicationContext(), AppConstants.USER_TYPE) == 1) {//只有场馆主身份才能调取审核接口
+                    //获取审核状态
                     get_check_status();
+                } else if (SpUtils.getInt(getApplicationContext(), AppConstants.USER_TYPE) == 2) {//经理
+                    //根据身份价格显示
+                    Intent intent1 = new Intent(SplashActivity.this, KeepFitActivity.class);
+                    startActivity(intent1);
+                } else if (SpUtils.getInt(getApplicationContext(), AppConstants.USER_TYPE) == 3) {//前台
+                    //根据身份价格显示
+                    Intent intent1 = new Intent(SplashActivity.this, KeepFitActivity.class);
+                    startActivity(intent1);
+                } else if (SpUtils.getInt(getApplicationContext(), AppConstants.USER_TYPE) == 0) {//默认，跳审核页
+                    Intent intent1 = new Intent(SplashActivity.this, SubmitInformationSelectActivity.class);
+                    startActivity(intent1);
                 }
 
             }
@@ -131,12 +142,14 @@ public class SplashActivity extends BaseActivity {
                         new ProgressSubscriber<>("获取审核状态", new SubscriberOnNextListener<Bean<CheckEntity>>() {
                             @Override
                             public void onNext(Bean<CheckEntity> result) {
-                                Log.e(TAG, "获取审核状态成功：" + result.getData().getStatus());
+
                                 if (result.getData().getStatus() == 1) {//成功
                                     //0没买过，1是2999 2是3999 3是6999
                                     if (result.getData().getHaveMember().equals("0")) {
+                                        //判断有没有提交过审核资料
                                         Intent intent = new Intent(SplashActivity.this, HeTongActivity.class);
                                         startActivity(intent);
+
                                     } else if (result.getData().getHaveMember().equals("1")) {
                                         SpUtils.putString(getApplicationContext(), AppConstants.USER_DENGJI, "2999");
                                         Intent intent = new Intent(SplashActivity.this, KeepFitActivity.class);

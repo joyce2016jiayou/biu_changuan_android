@@ -12,7 +12,9 @@ import android.widget.Toast;
 
 import com.noplugins.keepfit.android.KeepFitActivity;
 import com.noplugins.keepfit.android.R;
+import com.noplugins.keepfit.android.SplashActivity;
 import com.noplugins.keepfit.android.activity.CheckStatusFailActivity;
+import com.noplugins.keepfit.android.activity.HeTongActivity;
 import com.noplugins.keepfit.android.activity.LoginActivity;
 import com.noplugins.keepfit.android.activity.SubmitInformationSelectActivity;
 import com.noplugins.keepfit.android.activity.UserPermissionSelectActivity;
@@ -66,10 +68,14 @@ public class SetPasswordActivity extends BaseActivity {
         tiaoguo_tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                get_check_status();
-//                Intent intent = new Intent(SetPasswordActivity.this, WXPayEntryActivity.class);
-//                startActivity(intent);
-//                finish();
+                //获取审核状态
+                if (SpUtils.getInt(getApplicationContext(), AppConstants.USER_TYPE) == 1) {
+                    get_check_status();
+                } else {
+                    Intent intent = new Intent(SetPasswordActivity.this, SubmitInformationSelectActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
         sure_btn.setBtnOnClickListener(new View.OnClickListener() {
@@ -125,7 +131,9 @@ public class SetPasswordActivity extends BaseActivity {
 //                                    }
 //                                }
                                 //获取审核状态
-                                get_check_status();
+                                if (SpUtils.getInt(getApplicationContext(), AppConstants.USER_TYPE) == 1) {
+                                    get_check_status();
+                                }
 
                             }
 
@@ -147,14 +155,33 @@ public class SetPasswordActivity extends BaseActivity {
                         new ProgressSubscriber<>("获取审核状态", new SubscriberOnNextListener<Bean<CheckEntity>>() {
                             @Override
                             public void onNext(Bean<CheckEntity> result) {
-                                Log.e(TAG, "获取审核状态成功：" + result.getData().getStatus());
-                                if (result.getData().getStatus() == 1) {
-                                    Intent intent = new Intent(SetPasswordActivity.this, KeepFitActivity.class);
-                                    startActivity(intent);
-                                } else if (result.getData().getStatus() == 0) {
+
+                                if (result.getData().getStatus() == 1) {//成功
+                                    //0没买过，1是2999 2是3999 3是6999
+                                    if (result.getData().getHaveMember().equals("0")) {
+                                        //判断有没有提交过审核资料
+                                        Intent intent = new Intent(SetPasswordActivity.this, HeTongActivity.class);
+                                        startActivity(intent);
+
+                                    } else if (result.getData().getHaveMember().equals("1")) {
+                                        SpUtils.putString(getApplicationContext(), AppConstants.USER_DENGJI, "2999");
+                                        Intent intent = new Intent(SetPasswordActivity.this, KeepFitActivity.class);
+                                        startActivity(intent);
+                                    } else if (result.getData().getHaveMember().equals("2")) {
+                                        SpUtils.putString(getApplicationContext(), AppConstants.USER_DENGJI, "3999");
+                                        Intent intent = new Intent(SetPasswordActivity.this, KeepFitActivity.class);
+                                        startActivity(intent);
+                                    } else if (result.getData().getHaveMember().equals("3")) {
+                                        SpUtils.putString(getApplicationContext(), AppConstants.USER_DENGJI, "6999");
+                                        Intent intent = new Intent(SetPasswordActivity.this, KeepFitActivity.class);
+                                        startActivity(intent);
+                                    }
+                                    finish();
+                                } else if (result.getData().getStatus() == 0) {//失败
                                     Intent intent = new Intent(SetPasswordActivity.this, CheckStatusFailActivity.class);
                                     startActivity(intent);
-                                } else if (result.getData().getStatus() == -2) {
+                                    finish();
+                                } else if (result.getData().getStatus() == -2) {//没有提交过
                                     Intent intent = new Intent(SetPasswordActivity.this, SubmitInformationSelectActivity.class);
                                     startActivity(intent);
                                     finish();
@@ -163,7 +190,9 @@ public class SetPasswordActivity extends BaseActivity {
 
                             @Override
                             public void onError(String error) {
-
+                                Intent intent = new Intent(SetPasswordActivity.this, Login2Activity.class);
+                                startActivity(intent);
+                                finish();
                             }
                         }, this, false));
 
