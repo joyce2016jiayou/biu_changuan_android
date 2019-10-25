@@ -10,6 +10,7 @@ import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 
 import com.noplugins.keepfit.android.activity.BuyActivity;
@@ -128,7 +129,7 @@ public class SplashActivity extends BaseActivity {
                             @Override
                             public void onNext(Bean<CheckEntity> result) {
                                 Log.e(TAG, "获取审核状态成功：" + result.getData().getStatus());
-                                if (result.getData().getStatus() == 1) {
+                                if (result.getData().getStatus() == 1) {//成功
                                     //0没买过，1是2999 2是3999 3是6999
                                     if (result.getData().getHaveMember().equals("0")) {
                                         Intent intent = new Intent(SplashActivity.this, HeTongActivity.class);
@@ -146,11 +147,10 @@ public class SplashActivity extends BaseActivity {
                                         Intent intent = new Intent(SplashActivity.this, KeepFitActivity.class);
                                         startActivity(intent);
                                     }
-
-                                } else if (result.getData().getStatus() == 0) {
+                                } else if (result.getData().getStatus() == 0) {//失败
                                     Intent intent = new Intent(SplashActivity.this, CheckStatusFailActivity.class);
                                     startActivity(intent);
-                                } else if (result.getData().getStatus() == -2) {
+                                } else if (result.getData().getStatus() == -2) {//没有提交过
                                     Intent intent = new Intent(SplashActivity.this, SubmitInformationSelectActivity.class);
                                     startActivity(intent);
                                     finish();

@@ -860,7 +860,7 @@ public class Network {
      * 设置密码
      */
     public Subscription setPassword(Map<String, Object> params, Subscriber<Bean<String>> subscriber) {
-        return service.setPassword(params)
+        return service.setPassword(retuen_json_params(params))
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

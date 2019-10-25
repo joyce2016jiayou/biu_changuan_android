@@ -3,6 +3,7 @@
     <string-array name="identify_types">
         <item>综合会所</item>
         <item>工作室</item>
+        <item>主题馆</item>
     </string-array>
     <string-array name="gongneng_types">
         <item>有氧操房</item>

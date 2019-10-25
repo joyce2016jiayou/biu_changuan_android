@@ -47,6 +47,7 @@ public class InformationEntity {
     private String company_code;
     private List<GymPlacesBean> gymPlaces;
     private List<GymPicBean> gym_pic;
+    private List<GymPicBean> gymPic;
     private String province;
     private String city;
     private String district;
@@ -59,6 +60,14 @@ public class InformationEntity {
 
     public void setBankName(String bankName) {
         this.bankName = bankName;
+    }
+
+    public List<GymPicBean> getGymPic() {
+        return gymPic;
+    }
+
+    public void setGymPic(List<GymPicBean> gymPic) {
+        this.gymPic = gymPic;
     }
 
     public String getBank_card_num() {

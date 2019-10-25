@@ -502,9 +502,9 @@ public interface MyService {
      * 设置密码
      * @return
      */
-    @FormUrlEncoded
+    @Headers({"Content-Type: application/json", "Accept: application/json"})
     @POST("setPassword")
-    Observable<Bean<String>> setPassword(@FieldMap Map<String, Object> params);
+    Observable<Bean<String>> setPassword(@Body RequestBody params);
 
     /**
      *
