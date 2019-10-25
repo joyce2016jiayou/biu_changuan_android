@@ -159,6 +159,8 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
     private List<InformationEntity.GymPicBean> upList_iamges = new ArrayList<>();
     private ProgressUtil progress_upload;
 
+    private String old_logo = "";
+
     /**
      * 七牛云
      **/
@@ -270,6 +272,7 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
         }
         exRecyclerAdapter.notifyDataSetChanged();
 
+        old_logo = cg.getArea().getLogo();
         Glide.with(this)
                 .load(cg.getArea().getLogo())
                 .into(logo_image);
@@ -548,6 +551,7 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
             @Override
             public void onClick(View view) {
                 icon_image_path = "";
+                old_logo = "";
                 delete_icon_btn.setVisibility(View.INVISIBLE);
                 Glide.with(ChangGuandetailActivity.this).load(R.drawable.jia_image).into(logo_image);
             }
@@ -853,6 +857,26 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
      * request
      */
     private void requestUpdate() {
+
+        if ("".equals(changguan_name.getText().toString())){
+            //
+            Toast.makeText(getApplicationContext(), "场馆名称不可为空", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if ("".equals(tell_edit.getText().toString())){
+            //
+            Toast.makeText(getApplicationContext(), "电话不可为空", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if ("".equals(edit_email.getText().toString())){
+            //
+            Toast.makeText(getApplicationContext(), "邮箱不可为空", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if ("".equals(old_logo) && "".equals(icon_image_path)){
+            Toast.makeText(getApplicationContext(), "场馆Logo不可为空", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         if (logoBean!= null){
             upList_iamges.add(logoBean);
