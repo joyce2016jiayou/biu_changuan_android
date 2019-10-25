@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
@@ -20,6 +22,9 @@ public class HeTongActivity extends BaseActivity {
     LinearLayout kaiqi_huiyuan_btn;
     @BindView(R.id.xieyi_check_btn)
     CheckBox xieyi_check_btn;
+    @BindView(R.id.webView)
+    WebView webView;
+    String linkCss;
 
     private boolean is_check;
 
@@ -37,6 +42,14 @@ public class HeTongActivity extends BaseActivity {
 
     @Override
     public void doBusiness(Context mContext) {
+
+        webView = (WebView) findViewById(R.id.webView);
+        //自适应屏幕
+        WebSettings webSettings = webView.getSettings();
+        webSettings.setUseWideViewPort(true);//设置此属性，可任意比例缩放
+        webSettings.setLoadWithOverviewMode(true);
+        webView.loadUrl("file:///android_asset/hetong.html");
+
         xieyi_check_btn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -62,4 +75,5 @@ public class HeTongActivity extends BaseActivity {
 
 
     }
+
 }
