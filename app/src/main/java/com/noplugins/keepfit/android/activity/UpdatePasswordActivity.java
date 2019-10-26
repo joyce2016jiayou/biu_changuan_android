@@ -73,12 +73,6 @@ public class UpdatePasswordActivity extends BaseActivity {
             return;
         }
         Map<String, String> params = new HashMap<>();
-        String gymAreaNum;
-        if ("".equals(SharedPreferencesHelper.get(this, Network.changguan_number, "").toString())) {
-            gymAreaNum = "";
-        } else {
-            gymAreaNum = SharedPreferencesHelper.get(this, Network.changguan_number, "").toString();
-        }
         params.put("gymAreaNum", SpUtils.getString(getApplicationContext(), AppConstants.USER_NAME));
         params.put("oldPassWord", edit_old_password.getText().toString());
         params.put("phone", (String)SharedPreferencesHelper.get(getApplicationContext(), Network.phone_number, ""));
@@ -129,9 +123,9 @@ public class UpdatePasswordActivity extends BaseActivity {
 
     private void toLogin(){
         Intent intent = new Intent(UpdatePasswordActivity.this, LoginActivity.class);
-        SharedPreferencesHelper.put(getApplicationContext(), Network.login_token, "");
-        SharedPreferencesHelper.put(getApplicationContext(), Network.phone_number, "");
-        SharedPreferencesHelper.put(getApplicationContext(), Network.changguan_number, "");
+        SpUtils.putString(getApplicationContext(), AppConstants.TOKEN, "");
+        SpUtils.putString(getApplicationContext(),AppConstants.PHONE, "");
+        SpUtils.putString(getApplicationContext(), AppConstants.CHANGGUAN_NUM, "");
         startActivity(intent);
         ActivityCollectorUtil.finishAllActivity();
 

@@ -4,9 +4,10 @@ import java.util.List;
 
 public class ClassDetailEntity {
 
+
     /**
-     * course : {"id":62,"courseNum":"GYM19080804881206","gymAreaNum":"GYM19072138381319","genTeacherNum":"","gymPlaceNum":"","courseName":"个风格","type":"1","price":500,"courseType":1,"classType":1,"courseTime":null,"loop":false,"target":1,"difficulty":1,"loopCycle":1,"maxNum":1,"suitPerson":"呵呵","applyNum":null,"courseDes":"凤飞飞","tips":"经济","remark":"","lable":null,"checkStatus":1,"reason":"","startTime":1565956800000,"endTime":1565960400000,"createDate":"2019-08-08 19:16:47","updateDate":"2019-08-08 19:16:47","comeNum":0,"status":1,"deleted":false,"extendBigint01":null,"extendBigint02":null,"extendBigint03":null,"extendBigint04":null,"extendBigint05":null,"extendDec01":null,"extendDec02":null,"extendDec03":null,"extendDec04":null,"extendDec05":null,"extendVar02":null,"extendVar03":null,"extendVar04":null,"extendVar05":null,"extendVar01":null,"placeType":null}
-     * teacherList : [{"teacherNum":"Gen123","teacherName":"测试","phone":"123","password":"","card":"","logoUrl":null,"teacherType":null,"tips":null,"skill":"1,2,3,4","serviceDur":null,"createDate":1563862366000,"updateDate":"2019-07-23 14:12:51","deleted":0,"inviteStatus":0}]
+     * teacherList : [{"teacherNum":"GEN34567","teacherName":"张磊","phone":"18923142312","year":3,"sex":0,"card":" ","label":"3,4,5","logoUrl":"http://qnimg.ahcomg.com/jiaolian4","teacherType":2,"tips":"每一个人都拥有生命，但并非每个人都懂得生命，乃至于珍惜生命","grade":960,"skill":"3,4","serviceDur":1760,"createDate":"2019-09-12 11:11:49","updateDate":"2019-09-12 11:11:49","deleted":0,"inviteStatus":1,"gymInviteNum":"GYM19102642449792"}]
+     * course : {"id":46,"courseNum":"GYM19102665489744","gymAreaNum":"GYM19102698188019","genTeacherNum":"","gymPlaceNum":"有氧操房","imgUrl":"","courseName":"金林测试团课1","type":"1","price":3500,"courseType":1,"classType":1,"loop":false,"target":4,"difficulty":1,"loopCycle":1,"maxNum":20,"suitPerson":"适合人群测试","courseDes":"测试团课介绍","tips":"注意事项测试","remark":"","reason":"","startTime":1572328800000,"endTime":1572331500000,"createDate":"2019-10-26 14:39:13","updateDate":"2019-10-26 14:39:13","comeNum":0,"status":3,"putaway":1,"deleted":false}
      */
 
     private CourseBean course;
@@ -30,53 +31,35 @@ public class ClassDetailEntity {
 
     public static class CourseBean {
         /**
-         * id : 62
-         * courseNum : GYM19080804881206
-         * gymAreaNum : GYM19072138381319
+         * id : 46
+         * courseNum : GYM19102665489744
+         * gymAreaNum : GYM19102698188019
          * genTeacherNum :
-         * gymPlaceNum :
-         * courseName : 个风格
+         * gymPlaceNum : 有氧操房
+         * imgUrl :
+         * courseName : 金林测试团课1
          * type : 1
-         * price : 500
+         * price : 3500
          * courseType : 1
          * classType : 1
-         * courseTime : null
          * loop : false
-         * target : 1
+         * target : 4
          * difficulty : 1
          * loopCycle : 1
-         * maxNum : 1
-         * suitPerson : 呵呵
-         * applyNum : null
-         * courseDes : 凤飞飞
-         * tips : 经济
+         * maxNum : 20
+         * suitPerson : 适合人群测试
+         * courseDes : 测试团课介绍
+         * tips : 注意事项测试
          * remark :
-         * lable : null
-         * checkStatus : 1
          * reason :
-         * startTime : 1565956800000
-         * endTime : 1565960400000
-         * createDate : 2019-08-08 19:16:47
-         * updateDate : 2019-08-08 19:16:47
+         * startTime : 1572328800000
+         * endTime : 1572331500000
+         * createDate : 2019-10-26 14:39:13
+         * updateDate : 2019-10-26 14:39:13
          * comeNum : 0
-         * status : 1
+         * status : 3
+         * putaway : 1
          * deleted : false
-         * extendBigint01 : null
-         * extendBigint02 : null
-         * extendBigint03 : null
-         * extendBigint04 : null
-         * extendBigint05 : null
-         * extendDec01 : null
-         * extendDec02 : null
-         * extendDec03 : null
-         * extendDec04 : null
-         * extendDec05 : null
-         * extendVar02 : null
-         * extendVar03 : null
-         * extendVar04 : null
-         * extendVar05 : null
-         * extendVar01 : null
-         * placeType : null
          */
 
         private int id;
@@ -84,24 +67,21 @@ public class ClassDetailEntity {
         private String gymAreaNum;
         private String genTeacherNum;
         private String gymPlaceNum;
+        private String imgUrl;
         private String courseName;
         private String type;
         private int price;
         private int courseType;
         private int classType;
-        private Object courseTime;
         private boolean loop;
         private int target;
         private int difficulty;
         private int loopCycle;
         private int maxNum;
         private String suitPerson;
-        private Object applyNum;
         private String courseDes;
         private String tips;
         private String remark;
-        private Object lable;
-        private int checkStatus;
         private String reason;
         private long startTime;
         private long endTime;
@@ -109,8 +89,17 @@ public class ClassDetailEntity {
         private String updateDate;
         private int comeNum;
         private int status;
+        private int putaway;
         private boolean deleted;
-        private int placeType;
+        private double finalPrice;
+
+        public double getFinalPrice() {
+            return finalPrice;
+        }
+
+        public void setFinalPrice(double finalPrice) {
+            this.finalPrice = finalPrice;
+        }
 
         public int getId() {
             return id;
@@ -152,6 +141,14 @@ public class ClassDetailEntity {
             this.gymPlaceNum = gymPlaceNum;
         }
 
+        public String getImgUrl() {
+            return imgUrl;
+        }
+
+        public void setImgUrl(String imgUrl) {
+            this.imgUrl = imgUrl;
+        }
+
         public String getCourseName() {
             return courseName;
         }
@@ -190,14 +187,6 @@ public class ClassDetailEntity {
 
         public void setClassType(int classType) {
             this.classType = classType;
-        }
-
-        public Object getCourseTime() {
-            return courseTime;
-        }
-
-        public void setCourseTime(Object courseTime) {
-            this.courseTime = courseTime;
         }
 
         public boolean isLoop() {
@@ -248,14 +237,6 @@ public class ClassDetailEntity {
             this.suitPerson = suitPerson;
         }
 
-        public Object getApplyNum() {
-            return applyNum;
-        }
-
-        public void setApplyNum(Object applyNum) {
-            this.applyNum = applyNum;
-        }
-
         public String getCourseDes() {
             return courseDes;
         }
@@ -278,22 +259,6 @@ public class ClassDetailEntity {
 
         public void setRemark(String remark) {
             this.remark = remark;
-        }
-
-        public Object getLable() {
-            return lable;
-        }
-
-        public void setLable(Object lable) {
-            this.lable = lable;
-        }
-
-        public int getCheckStatus() {
-            return checkStatus;
-        }
-
-        public void setCheckStatus(int checkStatus) {
-            this.checkStatus = checkStatus;
         }
 
         public String getReason() {
@@ -352,6 +317,14 @@ public class ClassDetailEntity {
             this.status = status;
         }
 
+        public int getPutaway() {
+            return putaway;
+        }
+
+        public void setPutaway(int putaway) {
+            this.putaway = putaway;
+        }
+
         public boolean isDeleted() {
             return deleted;
         }
@@ -359,48 +332,48 @@ public class ClassDetailEntity {
         public void setDeleted(boolean deleted) {
             this.deleted = deleted;
         }
-
-        public int getPlaceType() {
-            return placeType;
-        }
-
-        public void setPlaceType(int placeType) {
-            this.placeType = placeType;
-        }
     }
 
     public static class TeacherListBean {
         /**
-         * teacherNum : Gen123
-         * teacherName : 测试
-         * phone : 123
-         * password :
+         * teacherNum : GEN34567
+         * teacherName : 张磊
+         * phone : 18923142312
+         * year : 3
+         * sex : 0
          * card :
-         * logoUrl : null
-         * teacherType : null
-         * tips : null
-         * skill : 1,2,3,4
-         * serviceDur : null
-         * createDate : 1563862366000
-         * updateDate : 2019-07-23 14:12:51
+         * label : 3,4,5
+         * logoUrl : http://qnimg.ahcomg.com/jiaolian4
+         * teacherType : 2
+         * tips : 每一个人都拥有生命，但并非每个人都懂得生命，乃至于珍惜生命
+         * grade : 960
+         * skill : 3,4
+         * serviceDur : 1760
+         * createDate : 2019-09-12 11:11:49
+         * updateDate : 2019-09-12 11:11:49
          * deleted : 0
-         * inviteStatus : 0
+         * inviteStatus : 1
+         * gymInviteNum : GYM19102642449792
          */
 
         private String teacherNum;
         private String teacherName;
         private String phone;
-        private String password;
+        private int year;
+        private int sex;
         private String card;
-        private Object logoUrl;
-        private Object teacherType;
-        private Object tips;
+        private String label;
+        private String logoUrl;
+        private int teacherType;
+        private String tips;
+        private int grade;
         private String skill;
-        private Object serviceDur;
-        private long createDate;
+        private int serviceDur;
+        private String createDate;
         private String updateDate;
         private int deleted;
         private int inviteStatus;
+        private String gymInviteNum;
 
         public String getTeacherNum() {
             return teacherNum;
@@ -426,12 +399,20 @@ public class ClassDetailEntity {
             this.phone = phone;
         }
 
-        public String getPassword() {
-            return password;
+        public int getYear() {
+            return year;
         }
 
-        public void setPassword(String password) {
-            this.password = password;
+        public void setYear(int year) {
+            this.year = year;
+        }
+
+        public int getSex() {
+            return sex;
+        }
+
+        public void setSex(int sex) {
+            this.sex = sex;
         }
 
         public String getCard() {
@@ -442,28 +423,44 @@ public class ClassDetailEntity {
             this.card = card;
         }
 
-        public Object getLogoUrl() {
+        public String getLabel() {
+            return label;
+        }
+
+        public void setLabel(String label) {
+            this.label = label;
+        }
+
+        public String getLogoUrl() {
             return logoUrl;
         }
 
-        public void setLogoUrl(Object logoUrl) {
+        public void setLogoUrl(String logoUrl) {
             this.logoUrl = logoUrl;
         }
 
-        public Object getTeacherType() {
+        public int getTeacherType() {
             return teacherType;
         }
 
-        public void setTeacherType(Object teacherType) {
+        public void setTeacherType(int teacherType) {
             this.teacherType = teacherType;
         }
 
-        public Object getTips() {
+        public String getTips() {
             return tips;
         }
 
-        public void setTips(Object tips) {
+        public void setTips(String tips) {
             this.tips = tips;
+        }
+
+        public int getGrade() {
+            return grade;
+        }
+
+        public void setGrade(int grade) {
+            this.grade = grade;
         }
 
         public String getSkill() {
@@ -474,19 +471,19 @@ public class ClassDetailEntity {
             this.skill = skill;
         }
 
-        public Object getServiceDur() {
+        public int getServiceDur() {
             return serviceDur;
         }
 
-        public void setServiceDur(Object serviceDur) {
+        public void setServiceDur(int serviceDur) {
             this.serviceDur = serviceDur;
         }
 
-        public long getCreateDate() {
+        public String getCreateDate() {
             return createDate;
         }
 
-        public void setCreateDate(long createDate) {
+        public void setCreateDate(String createDate) {
             this.createDate = createDate;
         }
 
@@ -513,6 +510,13 @@ public class ClassDetailEntity {
         public void setInviteStatus(int inviteStatus) {
             this.inviteStatus = inviteStatus;
         }
-    }
 
+        public String getGymInviteNum() {
+            return gymInviteNum;
+        }
+
+        public void setGymInviteNum(String gymInviteNum) {
+            this.gymInviteNum = gymInviteNum;
+        }
+    }
 }

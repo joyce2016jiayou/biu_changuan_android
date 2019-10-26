@@ -588,4 +588,78 @@ public class DateHelper {
         }
         return Week;
     }
+
+    /**
+     * 根据时间戳获取年份
+     *
+     * @param start_time
+     * @return
+     */
+    public static String get_year(long start_time) {
+        Date date = transForDate(start_time);
+        String year = (date.getYear() + 1900) + "";
+        return year;
+    }
+
+    /**
+     * 根据时间戳获取月份
+     *
+     * @param start_time
+     * @return
+     */
+    public static String get_month(long start_time) {
+        Date date = transForDate(start_time);
+        String month = "";
+        if ((date.getMonth() + 1) <= 9) {
+            month = "0" + (date.getMonth() + 1);
+        } else {
+            month = "" + (date.getMonth() + 1);
+        }
+        return month;
+    }
+    /**
+     * 根据时间戳获取日期
+     *
+     * @param start_time
+     * @return
+     */
+    public static String get_date(long start_time) {
+        Date date = transForDate(start_time);
+        String dates = "";
+        if (date.getDate() <= 9) {
+            dates = "0" + date.getDate();
+        } else {
+            dates = "" + date.getDate();
+        }
+        return dates;
+    }
+    /**
+     * 根据时间戳获取小时
+     * @param start_time
+     * @return
+     */
+    public static int get_hour(long start_time) {
+        Date date = transForDate(start_time);
+        int hour = date.getHours();
+        return hour;
+    }
+
+    /**
+     * 根据时间戳获取分钟
+     * @param start_time
+     * @return
+     */
+    public static int get_minite(long start_time) {
+        Date date = transForDate(start_time);
+        int hour = date.getMinutes();
+        return hour;
+    }
+
+    public static String timeDay(long start_time){
+        return get_year(start_time)+"."+get_month(start_time)+"."+get_date(start_time);
+    }
+
+    public static String timeHourAndMinite(long start_time){
+        return get_hour(start_time)+":"+get_minite(start_time);
+    }
 }

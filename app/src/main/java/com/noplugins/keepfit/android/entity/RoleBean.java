@@ -18,11 +18,20 @@ public class RoleBean {
         private String gymAreaNum;
         private String userNum;
         private String userName;
+        private String name;
         private String phone;
         private int type = 0;
         private int userType;
         private boolean focus;
         private int deleted = -1;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
 
         public String getUserName() {
             return userName;

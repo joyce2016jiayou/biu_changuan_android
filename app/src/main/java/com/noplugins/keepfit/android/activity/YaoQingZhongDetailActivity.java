@@ -81,6 +81,7 @@ public class YaoQingZhongDetailActivity extends BaseActivity {
     private LinearLayoutManager layoutManager;
     private YaoQingZhongDetailAdapter yaoQingZhongDetailAdapter;
     private String gymCourseNum;
+    private int number = 0;
 
     @Override
     public void initBundle(Bundle parms) {
@@ -130,8 +131,9 @@ public class YaoQingZhongDetailActivity extends BaseActivity {
                         }else{
                             recycler_view.setVisibility(View.GONE);
                             //设置信息
-                            set_information(entity);
                         }
+
+                        set_information(entity);
 
                     }
                 }, new SubscriberOnNextListener<Bean<Object>>() {
@@ -152,18 +154,18 @@ public class YaoQingZhongDetailActivity extends BaseActivity {
         xianzhi_number_tv.setText("("+entity.getCourse().getComeNum() + "/" + entity.getCourse().getMaxNum()+")");
         class_name.setText(entity.getCourse().getCourseName());
         teacher_name.setText(entity.getCourse().getGenTeacherNum());
-        price_tv.setText("￥"+entity.getCourse().getPrice()+"/人");
+        price_tv.setText("￥"+entity.getCourse().getFinalPrice()+"/人");
         class_name1.setText(entity.getCourse().getCourseName());
         teacher_name_tv.setText(entity.getCourse().getGenTeacherNum());
-        if(entity.getCourse().getPlaceType()==1){
+        if(entity.getCourse().getClassType()==1){
             class_room.setText("有氧操房");
-        }else if(entity.getCourse().getPlaceType()==2){
+        }else if(entity.getCourse().getClassType()==2){
             class_room.setText("动感单车");
-        }else if(entity.getCourse().getPlaceType()==3){
+        }else if(entity.getCourse().getClassType()==3){
             class_room.setText("瑜伽房");
         }
 
-        price.setText("￥"+entity.getCourse().getPrice()+"/人");
+        price.setText("￥"+entity.getCourse().getFinalPrice()+"/人");
         people_xianzhi.setText(entity.getCourse().getMaxNum()+"人");
         if(entity.getCourse().isLoop()){//有循环
             class_xunhuan.setVisibility(View.VISIBLE);
@@ -183,6 +185,7 @@ public class YaoQingZhongDetailActivity extends BaseActivity {
         if(entity.getTeacherList().size()>0){
             class_status.setText("已邀请");
             yaoqing_number_tv.setText(entity.getTeacherList().size()+"/5");
+            number = entity.getTeacherList().size();
         }else{
             class_status.setText("未邀请");
             yaoqing_number_tv.setVisibility(View.GONE);
@@ -199,6 +202,7 @@ public class YaoQingZhongDetailActivity extends BaseActivity {
                 Bundle bundle = new Bundle();
                 bundle.putString("create_time",entity.getCourse().getCreateDate());
                 bundle.putString("gym_course_num",entity.getCourse().getCourseNum());
+                bundle.putInt("number",number);
                 intent.putExtras(bundle);
                 startActivity(intent);
             }

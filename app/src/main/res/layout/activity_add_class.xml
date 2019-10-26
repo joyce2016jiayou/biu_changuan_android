@@ -43,20 +43,18 @@
         </RelativeLayout>
 
 
-        <com.andview.refreshview.XRefreshView
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
             android:id="@+id/xrefreshview"
             android:layout_width="match_parent"
-            android:background="@color/color_F8F8F8"
             android:layout_height="match_parent">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view"
                 android:layout_width="match_parent"
-                android:background="@color/color_F8F8F8"
                 android:layout_height="match_parent"
                 android:scrollbars="vertical" />
 
-        </com.andview.refreshview.XRefreshView>
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
 
     </LinearLayout>

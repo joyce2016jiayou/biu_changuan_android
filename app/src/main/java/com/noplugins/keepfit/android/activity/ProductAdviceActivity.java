@@ -13,6 +13,8 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.base.BaseActivity;
+import com.noplugins.keepfit.android.global.AppConstants;
+import com.noplugins.keepfit.android.util.SpUtils;
 import com.noplugins.keepfit.android.util.data.SharedPreferencesHelper;
 import com.noplugins.keepfit.android.util.net.Network;
 import com.noplugins.keepfit.android.util.net.entity.Bean;
@@ -120,13 +122,7 @@ public class ProductAdviceActivity extends BaseActivity {
     private void submit() {
         //
         Map<String, String> params = new HashMap<>();
-        String gymAreaNum;
-        if ("".equals(SharedPreferencesHelper.get(this, Network.changguan_number, "").toString())) {
-            gymAreaNum = "";
-        } else {
-            gymAreaNum = SharedPreferencesHelper.get(this, Network.changguan_number, "").toString();
-        }
-        params.put("gymAreaNum", gymAreaNum);
+        params.put("gymAreaNum", SpUtils.getString(getApplicationContext(), AppConstants.CHANGGUAN_NUM));
         params.put("gymUserNum", (String) SharedPreferencesHelper.get(getApplicationContext(), "phone_number", ""));
         params.put("feedbackType", "" + type);
         params.put("feedbackDes", edit_content.getText().toString());

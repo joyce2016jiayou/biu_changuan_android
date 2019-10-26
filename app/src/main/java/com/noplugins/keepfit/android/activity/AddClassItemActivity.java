@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.base.BaseActivity;
+import com.noplugins.keepfit.android.bean.DictionaryeBean;
 import com.noplugins.keepfit.android.callback.DialogCallBack;
 import com.noplugins.keepfit.android.entity.AddClassEntity;
 import com.noplugins.keepfit.android.entity.ClassEntity;
@@ -120,12 +121,25 @@ public class AddClassItemActivity extends BaseActivity {
         setContentLayout(R.layout.activity_add_class_item);
         ButterKnife.bind(this);
         isShowTitle(false);
+        cDate = CalendarUtil.getCurrentDate();
+        select_tuanke_type();
+
+        select_target_type();
+
+        select_nandu_type();
+
+        //select_room_type();
+
+        select_xunhuan_type();
+
+        select_time();
+        //获取房间类型
+        get_class_type();
     }
 
     @Override
     public void doBusiness(Context mContext) {
 
-        cDate = CalendarUtil.getCurrentDate();
         back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -147,19 +161,7 @@ public class AddClassItemActivity extends BaseActivity {
             }
         });
 
-        select_tuanke_type();
 
-        select_target_type();
-
-        select_nandu_type();
-
-        //select_room_type();
-
-        select_xunhuan_type();
-
-        select_time();
-        //获取房间类型
-        get_class_type();
 
     }
 
@@ -227,13 +229,7 @@ public class AddClassItemActivity extends BaseActivity {
 
     private void add_class() {
         Map<String, Object> params = new HashMap<>();
-        String gymAreaNum;
-        if ("".equals(SharedPreferencesHelper.get(this, Network.changguan_number, "").toString())) {
-            gymAreaNum = "";
-        } else {
-            gymAreaNum = SharedPreferencesHelper.get(this, Network.changguan_number, "").toString();
-        }
-        params.put("gym_area_num", gymAreaNum);//场馆编号
+        params.put("gym_area_num", SpUtils.getString(getApplicationContext(), AppConstants.CHANGGUAN_NUM));//场馆编号
         params.put("course_name", edit_class_name.getText().toString());//团课名称
         if (select_target_type.equals("燃脂")) {//训练目标  1燃脂2塑形3体态改善
             params.put("target", "1");
@@ -351,9 +347,9 @@ public class AddClassItemActivity extends BaseActivity {
             month_tv.setText("" + cDate[1]);//显示当前月份
         }
         if (cDate[2] <= 9) {
-            month_tv.setText("0" + cDate[2]);//显示当前月份
+            date_tv.setText("0" + cDate[2]);//显示当前月份
         } else {
-            month_tv.setText("" + cDate[2]);//显示当前月份
+            date_tv.setText("" + cDate[2]);//显示当前月份
         }
 
         select_date.setOnClickListener(new View.OnClickListener() {
@@ -443,13 +439,7 @@ public class AddClassItemActivity extends BaseActivity {
 
     private void search_room_people(int position) {
         Map<String, Object> params = new HashMap<>();
-        String gymAreaNum;
-        if ("".equals(SharedPreferencesHelper.get(this, Network.changguan_number, "").toString())) {
-            gymAreaNum = "";
-        } else {
-            gymAreaNum = SharedPreferencesHelper.get(this, Network.changguan_number, "").toString();
-        }
-        params.put("gymAreaNum", gymAreaNum);//场馆编号
+        params.put("gymAreaNum", SpUtils.getString(getApplicationContext(), AppConstants.CHANGGUAN_NUM));//场馆编号
         if (classTypeEntities.size() > 0) {
             params.put("PlaceType", classTypeEntities.get(position).getKey());
         }
@@ -518,7 +508,31 @@ public class AddClassItemActivity extends BaseActivity {
     }
 
     private void select_tuanke_type() {
-        String[] typeArrays = getResources().getStringArray(R.array.target_types);
+        Map<String, Object> params = new HashMap<>();
+        params.put("object", 6);
+        subscription = Network.getInstance("获取团课字典", this)
+                .get_types(params,
+                        new ProgressSubscriber<>("获取团课字典", new SubscriberOnNextListener<Bean<List<DictionaryeBean>>>() {
+                            @Override
+                            public void onNext(Bean<List<DictionaryeBean>> addClassEntityBean) {
+                                initTuankeType(addClassEntityBean.getData());
+                            }
+
+                            @Override
+                            public void onError(String error) {
+
+                            }
+                        }, this, false));
+
+
+    }
+
+    private void initTuankeType(List<DictionaryeBean> list){
+        List<String> typeArrays = new ArrayList<>();
+        for (DictionaryeBean dictionaryeBean:list){
+            typeArrays.add(dictionaryeBean.getName());
+        }
+
         tuanke_type_spinner.setItems(typeArrays);
         tuanke_type_spinner.setSelectedIndex(0);
         tuanke_type_spinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {

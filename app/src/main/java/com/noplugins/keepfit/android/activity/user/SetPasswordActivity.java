@@ -154,7 +154,7 @@ public class SetPasswordActivity extends BaseActivity {
                                 } else if (result.getData().getStatus() == 0) {
                                     Intent intent = new Intent(SetPasswordActivity.this, CheckStatusFailActivity.class);
                                     startActivity(intent);
-                                } else if (result.getData().getStatus() == -2) {
+                                } else if (result.getData().getStatus() == -2||result.getData().getStatus() == 4) {
                                     Intent intent = new Intent(SetPasswordActivity.this, SubmitInformationSelectActivity.class);
                                     startActivity(intent);
                                     finish();

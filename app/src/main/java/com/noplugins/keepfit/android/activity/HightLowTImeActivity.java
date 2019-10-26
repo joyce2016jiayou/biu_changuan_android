@@ -19,6 +19,8 @@ import com.noplugins.keepfit.android.adapter.HightLowTimeAdapter;
 import com.noplugins.keepfit.android.base.BaseActivity;
 import com.noplugins.keepfit.android.entity.HightLowTimeEntity;
 import com.noplugins.keepfit.android.entity.TimeSelectEntity;
+import com.noplugins.keepfit.android.global.AppConstants;
+import com.noplugins.keepfit.android.util.SpUtils;
 import com.noplugins.keepfit.android.util.TimePickerUtils;
 import com.noplugins.keepfit.android.util.data.SharedPreferencesHelper;
 import com.noplugins.keepfit.android.util.net.Network;
@@ -179,13 +181,7 @@ public class HightLowTImeActivity extends BaseActivity {
                 return;
             }
             HightLowTimeEntity hightLowTimeEntity = new HightLowTimeEntity();
-            String gymAreaNum;
-            if ("".equals(SharedPreferencesHelper.get(this, Network.changguan_number, "").toString())) {
-                gymAreaNum = "";
-            } else {
-                gymAreaNum = SharedPreferencesHelper.get(this, Network.changguan_number, "").toString();
-            }
-            hightLowTimeEntity.setGym_area_num(gymAreaNum);
+            hightLowTimeEntity.setGym_area_num(SpUtils.getString(getApplicationContext(), AppConstants.CHANGGUAN_NUM));
             hightLowTimeEntity.setHigh_time_start(tvStartTime.getText().toString());
             hightLowTimeEntity.setHigh_time_end(tvEndTime.getText().toString());
             hightLowTimeEntity.setNormal_price("38");

@@ -29,9 +29,11 @@ import com.noplugins.keepfit.android.bean.mine.BalanceListBean;
 import com.noplugins.keepfit.android.bean.mine.WalletBean;
 import com.noplugins.keepfit.android.entity.AddClassEntity;
 import com.noplugins.keepfit.android.entity.CheckEntity;
+import com.noplugins.keepfit.android.entity.ClassEntity;
 import com.noplugins.keepfit.android.entity.ClassTypeEntity;
 import com.noplugins.keepfit.android.entity.InformationEntity;
 import com.noplugins.keepfit.android.entity.LoginEntity;
+import com.noplugins.keepfit.android.entity.RoleBean;
 import com.noplugins.keepfit.android.entity.TeacherEntity;
 import com.noplugins.keepfit.android.global.AppConstants;
 import com.noplugins.keepfit.android.util.SpUtils;
@@ -429,8 +431,8 @@ public class Network {
      * @param subscriber
      * @return
      */
-    public Subscription class_list(Map<String, Object> params, Subscriber<Bean<Object>> subscriber) {
-        return service.class_list(params)
+    public Subscription class_list(Map<String, Object> params, Subscriber<Bean<ClassEntity>> subscriber) {
+        return service.class_list(retuen_json_params(params))
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -641,8 +643,8 @@ public class Network {
      * @param subscriber
      * @return
      */
-    public Subscription binding_role(RequestBody params, Subscriber<Bean<Object>> subscriber) {
-        return service.bindingRole(params)
+    public Subscription binding_role(RoleBean params, Subscriber<Bean<Object>> subscriber) {
+        return service.bindingRole(retuen_json_object(params))
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -655,7 +657,7 @@ public class Network {
      * @param subscriber
      * @return
      */
-    public Subscription findBindingRoles(RequestBody params, Subscriber<Bean<Object>> subscriber) {
+    public Subscription findBindingRoles(RequestBody params, Subscriber<Bean<RoleBean>> subscriber) {
         return service.findBindingRoles(params)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())

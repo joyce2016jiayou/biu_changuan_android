@@ -23,9 +23,11 @@ import com.noplugins.keepfit.android.bean.mine.BalanceListBean;
 import com.noplugins.keepfit.android.bean.mine.WalletBean;
 import com.noplugins.keepfit.android.entity.AddClassEntity;
 import com.noplugins.keepfit.android.entity.CheckEntity;
+import com.noplugins.keepfit.android.entity.ClassEntity;
 import com.noplugins.keepfit.android.entity.ClassTypeEntity;
 import com.noplugins.keepfit.android.entity.InformationEntity;
 import com.noplugins.keepfit.android.entity.LoginEntity;
+import com.noplugins.keepfit.android.entity.RoleBean;
 import com.noplugins.keepfit.android.entity.TeacherEntity;
 import com.noplugins.keepfit.android.util.net.entity.Bean;
 import com.noplugins.keepfit.android.util.net.entity.Token;
@@ -214,9 +216,9 @@ public interface MyService {
      *
      * @return
      */
-    @FormUrlEncoded
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
     @POST("resourceList")
-    Observable<Bean<Object>> class_list(@FieldMap Map<String, Object> map);
+    Observable<Bean<ClassEntity>> class_list(@Body RequestBody map);
 
     /**
      * 获取审核状态
@@ -370,7 +372,7 @@ public interface MyService {
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
     @POST("findBindingRoles")
-    Observable<Bean<Object>> findBindingRoles(@Body RequestBody json);
+    Observable<Bean<RoleBean>> findBindingRoles(@Body RequestBody json);
 
     /**
      * 批量绑定教练
