@@ -211,9 +211,9 @@ public class BusinessInformationFragment extends ViewPagerFragment {
         }
         Subscription subscription = Network.getInstance("绑定银行卡", getActivity())
                 .bind_card(bindCardBean,
-                        new ProgressSubscriber<>("绑定银行卡", new SubscriberOnNextListener<Bean<String>>() {
+                        new ProgressSubscriber<>("绑定银行卡", new SubscriberOnNextListener<Bean<Object>>() {
                             @Override
-                            public void onNext(Bean<String> result) {
+                            public void onNext(Bean<Object> result) {
                                 //切换到第三个进度条
                                 /*viewpager_content.setCurrentItem(2);
                                 int step = stepView.getCurrentStep();//设置进度条

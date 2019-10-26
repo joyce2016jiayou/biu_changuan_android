@@ -57,7 +57,7 @@ public class RoleAdapter extends BaseQuickAdapter<RoleBean.RoleEntity, BaseViewH
         }
 
         //必须在判断tag后给editText赋值，否则会数据错乱
-        item_editText.setText(item.getName());
+        item_editText.setText(item.getUserName());
         et_phone.setText(item.getPhone());
 
         TextWatcher watcher = new TextWatcher() {
@@ -74,7 +74,7 @@ public class RoleAdapter extends BaseQuickAdapter<RoleBean.RoleEntity, BaseViewH
             @Override
             public void afterTextChanged(Editable editable) {
                 if (!TextUtils.isEmpty(editable)) {
-                    item.setName(editable + "");
+                    item.setUserName(editable + "");
                 }
             }
         };

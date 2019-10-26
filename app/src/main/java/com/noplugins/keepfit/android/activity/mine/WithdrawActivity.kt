@@ -218,8 +218,8 @@ class WithdrawActivity : BaseActivity() {
         val subscription = Network.getInstance("提现", this)
                 .areaWithdraw(
                         params,
-                        ProgressSubscriber("提现", object : SubscriberOnNextListener<Bean<String>> {
-                            override fun onNext(result: Bean<String>) {
+                        ProgressSubscriber("提现", object : SubscriberOnNextListener<Bean<Any>> {
+                            override fun onNext(result: Bean<Any>) {
                                 toComplete()
                             }
 

@@ -137,8 +137,8 @@ class YaoqinFragment : BaseFragment()  {
         val subscription = Network.getInstance("同意拒绝", activity)
             .agreeBindingArea(
                 params,
-                ProgressSubscriber("同意拒绝", object : SubscriberOnNextListener<Bean<String>> {
-                    override fun onNext(result: Bean<String>) {
+                ProgressSubscriber("同意拒绝", object : SubscriberOnNextListener<Bean<Any>> {
+                    override fun onNext(result: Bean<Any>) {
 //                        setting(result.data.areaList)
                         requestData()
                     }

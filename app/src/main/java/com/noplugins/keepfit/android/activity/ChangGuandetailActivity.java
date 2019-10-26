@@ -930,10 +930,10 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
 
 
         subscription = Network.getInstance("场馆信息", this)
-                .submitAudit(informationEntity, new ProgressSubscriber<String>("场馆信息",
-                        new SubscriberOnNextListener<Bean<String>>() {
+                .submitAudit(informationEntity, new ProgressSubscriber<Object>("场馆信息",
+                        new SubscriberOnNextListener<Bean<Object>>() {
                             @Override
-                            public void onNext(Bean<String> changguanBeanBean) {
+                            public void onNext(Bean<Object> changguanBeanBean) {
                                 Toast.makeText(ChangGuandetailActivity.this, "当前场馆信息修改成功",
                                         Toast.LENGTH_SHORT).show();
                             }

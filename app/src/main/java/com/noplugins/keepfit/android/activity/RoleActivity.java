@@ -20,6 +20,8 @@ import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.adapter.RoleAdapter;
 import com.noplugins.keepfit.android.base.BaseActivity;
 import com.noplugins.keepfit.android.entity.RoleBean;
+import com.noplugins.keepfit.android.global.AppConstants;
+import com.noplugins.keepfit.android.util.SpUtils;
 import com.noplugins.keepfit.android.util.data.SharedPreferencesHelper;
 import com.noplugins.keepfit.android.util.net.Network;
 import com.noplugins.keepfit.android.util.net.entity.Bean;
@@ -255,6 +257,7 @@ public class RoleActivity extends BaseActivity {
                 return;
             }
             RoleBean.RoleEntity roleBean = new RoleBean.RoleEntity();
+            roleBean.setType(1);
 
             if (post_type_spinner.getText().toString().equals("经理")){
                 roleBean.setUserType(2);
@@ -265,9 +268,9 @@ public class RoleActivity extends BaseActivity {
 
 //            roleBean.setGymAreaNum((String) SharedPreferencesHelper.get(getApplicationContext(),
 //                    "changguan_number", "GYM19072138381319"));
-            roleBean.setName(et_name.getText().toString());
+            roleBean.setUserName(et_name.getText().toString());
             roleBean.setPhone(edit_phone.getText().toString());
-            roleBean.setGymAreaNum("GYM19072138381319");
+            roleBean.setGymAreaNum(SpUtils.getString(getApplicationContext(), AppConstants.CHANGGUAN_NUM));
             completeDatas.add(roleBean);
         }
 

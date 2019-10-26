@@ -96,8 +96,8 @@ class CostAccountingActivity : BaseActivity() {
         subscription = Network.getInstance("成本核算", this)
                 .updateCost(
                         params,
-                        ProgressSubscriber("成本核算", object : SubscriberOnNextListener<Bean<String>> {
-                            override fun onNext(result: Bean<String>) {
+                        ProgressSubscriber("成本核算", object : SubscriberOnNextListener<Bean<Any>> {
+                            override fun onNext(result: Bean<Any>) {
                                 Toast.makeText(applicationContext, "上传成功", Toast.LENGTH_SHORT).show()
                             }
 

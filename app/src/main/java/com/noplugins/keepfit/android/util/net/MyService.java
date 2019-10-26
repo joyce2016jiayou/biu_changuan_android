@@ -111,7 +111,7 @@ public interface MyService {
      */
     @FormUrlEncoded
     @POST("forgetPassword")
-    Observable<Bean<String>> update_password(@FieldMap Map<String, String> map);
+    Observable<Bean<Object>> update_password(@FieldMap Map<String, String> map);
 
     /**
      * 修改密码
@@ -173,7 +173,7 @@ public interface MyService {
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
     @POST("bindingBank")
-    Observable<Bean<String>> bind_card(@Body RequestBody map);
+    Observable<Bean<Object>> bind_card(@Body RequestBody map);
     /**
      * 生成订单
      *
@@ -496,7 +496,7 @@ public interface MyService {
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
     @POST("updatePhone")
-    Observable<Bean<String>> updatePhone(@Body RequestBody json);
+    Observable<Bean<Object>> updatePhone(@Body RequestBody json);
 
     /**
      *
@@ -514,7 +514,7 @@ public interface MyService {
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
     @POST("forgetPassword")
-    Observable<Bean<String>> forgetPassword(@Body RequestBody json);
+    Observable<Bean<Object>> forgetPassword(@Body RequestBody json);
 
     /**
      * 设置提现密码
@@ -523,7 +523,7 @@ public interface MyService {
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
     @POST("setPayPassWord")
-    Observable<Bean<String>> settingPayPassword(@Body RequestBody json);
+    Observable<Bean<Object>> settingPayPassword(@Body RequestBody json);
 
     /**
      *提现
@@ -532,7 +532,7 @@ public interface MyService {
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
     @POST("withdrawDeposit")
-    Observable<Bean<String>> withdrawDeposit(@Body RequestBody json);
+    Observable<Bean<Object>> withdrawDeposit(@Body RequestBody json);
 
 
     /**
@@ -571,7 +571,7 @@ public interface MyService {
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
     @POST("agreeTeacherApply")
-    Observable<Bean<String>> agreeBindingArea(@Body RequestBody json);
+    Observable<Bean<Object>> agreeBindingArea(@Body RequestBody json);
 
     /**
      * 精细化时间段
@@ -580,7 +580,7 @@ public interface MyService {
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
     @POST("setHighTime")
-    Observable<Bean<String>> setHighTime(@Body RequestBody json);
+    Observable<Bean<Object>> setHighTime(@Body RequestBody json);
 
     /**
      * 成本核算
@@ -589,7 +589,7 @@ public interface MyService {
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
     @POST("updateCost")
-    Observable<Bean<String>> updateCost(@Body RequestBody json);
+    Observable<Bean<Object>> updateCost(@Body RequestBody json);
     /**
      * 获取日历
      */
@@ -632,7 +632,7 @@ public interface MyService {
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
     @POST("updateMyArea")
-    Observable<Bean<String>> submitAudit(@Body RequestBody json);
+    Observable<Bean<Object>> submitAudit(@Body RequestBody json);
 
     /**
      * 场馆绑定教练
@@ -641,7 +641,7 @@ public interface MyService {
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
     @POST("areaInviteTeacher")
-    Observable<Bean<String>> areaInviteTeacher(@Body RequestBody json);
+    Observable<Bean<Object>> areaInviteTeacher(@Body RequestBody json);
 
     /**
      * 提现
@@ -650,7 +650,7 @@ public interface MyService {
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
     @POST("areaWithdraw")
-    Observable<Bean<String>> areaWithdraw(@Body RequestBody json);
+    Observable<Bean<Object>> areaWithdraw(@Body RequestBody json);
 
     /**
      * 银行卡

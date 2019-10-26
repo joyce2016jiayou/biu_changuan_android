@@ -122,7 +122,8 @@
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
             android:name=".activity.AddClassItemActivity"
-            android:windowSoftInputMode="adjustPan|stateHidden" />
+            android:windowSoftInputMode="adjustPan|stateHidden"
+            android:hardwareAccelerated="false"/>
         <activity
             android:name=".activity.AddClassDetailActivity"
             android:windowSoftInputMode="adjustPan|stateHidden" />

@@ -20,6 +20,8 @@ import com.noplugins.keepfit.android.entity.AddClassEntity;
 import com.noplugins.keepfit.android.entity.ClassEntity;
 import com.noplugins.keepfit.android.entity.ClassTypeEntity;
 import com.noplugins.keepfit.android.entity.MaxPeopleEntity;
+import com.noplugins.keepfit.android.global.AppConstants;
+import com.noplugins.keepfit.android.util.SpUtils;
 import com.noplugins.keepfit.android.util.data.SharedPreferencesHelper;
 import com.noplugins.keepfit.android.util.net.Network;
 import com.noplugins.keepfit.android.util.net.entity.Bean;
@@ -163,13 +165,8 @@ public class AddClassItemActivity extends BaseActivity {
 
     private void get_class_type() {
         Map<String, Object> params = new HashMap<>();
-        String gymAreaNum;
-        if ("".equals(SharedPreferencesHelper.get(this, Network.changguan_number, "").toString())) {
-            gymAreaNum = "";
-        } else {
-            gymAreaNum = SharedPreferencesHelper.get(this, Network.changguan_number, "").toString();
-        }
-        params.put("areaNum", gymAreaNum);//场馆编号
+
+        params.put("areaNum", SpUtils.getString(getApplicationContext(), AppConstants.CHANGGUAN_NUM));//场馆编号
         subscription = Network.getInstance("获取房间类型", this)
                 .get_class_type(params,
                         new ProgressSubscriber<>("获取房间类型", new SubscriberOnNextListener<Bean<List<ClassTypeEntity>>>() {

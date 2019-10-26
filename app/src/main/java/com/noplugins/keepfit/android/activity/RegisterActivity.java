@@ -215,25 +215,25 @@ public class RegisterActivity extends BaseActivity {
     };
 
     private void Check_YanZhengMa() {
-        Map<String, Object> params = new HashMap<>();
-        params.put("code", edit_yanzhengma.getText().toString());
-        params.put("messageid", message_id);
-        params.put("phone",edit_phone_number.getText().toString());
-        subscription = Network.getInstance("验证验证码", this)
-                .check_yanzhengma(params,
-                        new ProgressSubscriber<>("验证验证码", new SubscriberOnNextListener<Bean<String>>() {
-                            @Override
-                            public void onNext(Bean<String> result) {
-                                register();
-
-                            }
-
-                            @Override
-                            public void onError(String error) {
-                                Toast.makeText(getApplicationContext(), "验证码输入不正确！", Toast.LENGTH_SHORT).show();
-
-                            }
-                        }, this, false));
+//        Map<String, Object> params = new HashMap<>();
+//        params.put("code", edit_yanzhengma.getText().toString());
+//        params.put("messageid", message_id);
+//        params.put("phone",edit_phone_number.getText().toString());
+//        subscription = Network.getInstance("验证验证码", this)
+//                .check_yanzhengma(params,
+//                        new ProgressSubscriber<>("验证验证码", new SubscriberOnNextListener<Bean<String>>() {
+//                            @Override
+//                            public void onNext(Bean<String> result) {
+//                                register();
+//
+//                            }
+//
+//                            @Override
+//                            public void onError(String error) {
+//                                Toast.makeText(getApplicationContext(), "验证码输入不正确！", Toast.LENGTH_SHORT).show();
+//
+//                            }
+//                        }, this, false));
     }
 
     private void register() {

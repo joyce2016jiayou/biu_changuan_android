@@ -294,8 +294,8 @@ class TeacherSelectActivity : BaseActivity() {
         val subscription = Network.getInstance("场馆绑定教练", this)
                 .areaInviteTeacher(
                         cgBinding,
-                        ProgressSubscriber("场馆绑定教练", object : SubscriberOnNextListener<Bean<String>> {
-                            override fun onNext(result: Bean<String>) {
+                        ProgressSubscriber("场馆绑定教练", object : SubscriberOnNextListener<Bean<Any>> {
+                            override fun onNext(result: Bean<Any>) {
                                 Toast.makeText(applicationContext,result.message,Toast.LENGTH_SHORT).show()
                             }
 
