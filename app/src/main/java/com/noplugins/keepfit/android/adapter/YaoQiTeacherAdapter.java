@@ -28,6 +28,7 @@ import com.noplugins.keepfit.android.util.data.SharedPreferencesHelper;
 import com.noplugins.keepfit.android.util.net.Network;
 import com.noplugins.keepfit.android.util.net.entity.Bean;
 import com.noplugins.keepfit.android.util.net.progress.GsonSubscriberOnNextListener;
+import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriber;
 import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriberNew;
 import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener;
 
@@ -173,29 +174,17 @@ public class YaoQiTeacherAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHo
     private void cancel_invite() {
         Map<String, Object> params = new HashMap<>();
         params.put("gymInviteNum", gymInviteNum);//老师编号
-        Gson gson = new Gson();
-        String json_params = gson.toJson(params);
-        String json = new Gson().toJson(params);//要传递的json
-        RequestBody requestBody = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), json);
-        Log.e(TAG, "取消邀请参数：" + json_params);
         Subscription subscription = Network.getInstance("取消邀请", context).
-                cancel_invite(requestBody, new ProgressSubscriberNew<>(String.class, new GsonSubscriberOnNextListener<String>() {
+                cancel_invite(params, new ProgressSubscriber<>("", new SubscriberOnNextListener<Bean<Object>>() {
                     @Override
-                    public void on_post_entity(String entity, String s) {
-                        Log.e("取消邀请成功", "取消邀请成功");
+                    public void onNext(Bean<Object> objectBean) {
                         select_num--;
                         yaoqing_number_tv.setText("(" + select_num + "/5)");
-                    }
-                }, new SubscriberOnNextListener<Bean<Object>>() {
-                    @Override
-                    public void onNext(Bean<Object> result) {
-
                     }
 
                     @Override
                     public void onError(String error) {
                         Toast.makeText(context, error, Toast.LENGTH_SHORT).show();
-                        Log.e("取消邀请失败", "取消邀请失败:" + error);
                     }
                 }, context, true));
     }

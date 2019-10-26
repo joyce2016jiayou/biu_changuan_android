@@ -559,8 +559,8 @@ public class Network {
      * @param subscriber
      * @return
      */
-    public Subscription cancel_invite(RequestBody params, Subscriber<Bean<Object>> subscriber) {
-        return service.cancel_invite(params)
+    public Subscription cancel_invite(Map<String, Object> params, Subscriber<Bean<Object>> subscriber) {
+        return service.cancel_invite(retuen_json_params(params))
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
