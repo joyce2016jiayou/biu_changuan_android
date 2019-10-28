@@ -215,8 +215,11 @@ class Login2Activity : BaseActivity() {
                                         SpUtils.putString(applicationContext,AppConstants.USER_DENGJI,"6999")
                                     }
                                 }
-
-                                if (result.data.type == 1){
+                                if (result.data.type == 0){
+                                    val intent = Intent(this@Login2Activity, SubmitInformationSelectActivity::class.java)
+                                    startActivity(intent)
+                                }
+                                else if (result.data.type == 1){
                                     get_check_status()
                                 }
 

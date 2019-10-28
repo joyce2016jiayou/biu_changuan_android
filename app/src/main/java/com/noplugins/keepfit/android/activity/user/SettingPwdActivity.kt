@@ -92,8 +92,8 @@ class SettingPwdActivity : BaseActivity() {
         params["password"] = edit_new_password.text.toString()
         subscription = Network.getInstance("设置密码", this)
             .forgetPassword(params,
-                ProgressSubscriber("设置密码", object : SubscriberOnNextListener<Bean<String>> {
-                    override fun onNext(result: Bean<String>) {
+                ProgressSubscriber("设置密码", object : SubscriberOnNextListener<Bean<Any>> {
+                    override fun onNext(result: Bean<Any>) {
                         finish()
                     }
 

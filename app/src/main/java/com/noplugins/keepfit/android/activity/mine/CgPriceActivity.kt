@@ -25,7 +25,8 @@ import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener
 import com.noplugins.keepfit.android.util.ui.pop.CommonPopupWindow
 import com.ycuwq.datepicker.time.HourAndMinDialogFragment
 import kotlinx.android.synthetic.main.activity_cg_price.*
-import java.util.HashMap
+import java.util.*
+import kotlin.collections.ArrayList
 
 class CgPriceActivity : BaseActivity() {
 
@@ -187,8 +188,8 @@ class CgPriceActivity : BaseActivity() {
         subscription = Network.getInstance("精准化时间", this)
                 .setHighTime(
                         params,
-                        ProgressSubscriber("精准化时间", object : SubscriberOnNextListener<Bean<String>> {
-                            override fun onNext(result: Bean<String>) {
+                        ProgressSubscriber("精准化时间", object : SubscriberOnNextListener<Bean<Any>> {
+                            override fun onNext(result: Bean<Any>) {
                                 Toast.makeText(applicationContext, "设置成功", Toast.LENGTH_SHORT).show()
                                 finish()
                             }

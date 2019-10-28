@@ -187,10 +187,10 @@ public class ForgetPasswordActivity extends BaseActivity {
         params.put("password", edit_sure_password.getText().toString());
         subscription = Network.getInstance("修改密码", getApplicationContext())
                 .submit_password(params,
-                        new ProgressSubscriber<>("修改密码", new SubscriberOnNextListener<Bean<String>>() {
+                        new ProgressSubscriber<>("修改密码", new SubscriberOnNextListener<Bean<Object>>() {
                             @Override
-                            public void onNext(Bean<String> result) {
-                                message_id = result.getData();
+                            public void onNext(Bean<Object> result) {
+//                                message_id = result.getData();
                                 //Logger.e(TAG, "接收验证码成功：" + message_id);
                                 Log.e(TAG, "修改密码成功：" + message_id);
                                 Toast.makeText(getApplicationContext(), "修改密码成功！", Toast.LENGTH_SHORT).show();

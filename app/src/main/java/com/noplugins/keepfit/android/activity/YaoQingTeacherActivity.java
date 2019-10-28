@@ -67,6 +67,7 @@ public class YaoQingTeacherActivity extends BaseActivity {
     public void initBundle(Bundle parms) {
         create_time = parms.getString("create_time");
         gym_course_num = parms.getString("gym_course_num");
+        parms.getInt("number",0);
         Log.e("创建的时间", create_time);
     }
 

@@ -556,7 +556,7 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
         gym_pic.add(icon_pic);
         for (int i = 0; i < jiugongge_iamges.size(); i++) {
             InformationEntity.GymPicBean jiugongge_icon = new InformationEntity.GymPicBean();
-            jiugongge_icon.setOrder_num((i + 1));
+            jiugongge_icon.setOrder_num((i + 2));
             //jiugongge_icon.setUrl(jiugongge_iamges.get(i));
             jiugongge_icon.setQiniu_key(jiugongge_iamges.get(i));
             gym_pic.add(jiugongge_icon);

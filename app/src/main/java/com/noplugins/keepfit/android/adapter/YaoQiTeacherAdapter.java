@@ -22,10 +22,13 @@ import com.noplugins.keepfit.android.activity.YaoQingTeacherActivity;
 import com.noplugins.keepfit.android.entity.AddClassEntity;
 import com.noplugins.keepfit.android.entity.InViteEntity;
 import com.noplugins.keepfit.android.entity.TeacherEntity;
+import com.noplugins.keepfit.android.global.AppConstants;
+import com.noplugins.keepfit.android.util.SpUtils;
 import com.noplugins.keepfit.android.util.data.SharedPreferencesHelper;
 import com.noplugins.keepfit.android.util.net.Network;
 import com.noplugins.keepfit.android.util.net.entity.Bean;
 import com.noplugins.keepfit.android.util.net.progress.GsonSubscriberOnNextListener;
+import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriber;
 import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriberNew;
 import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener;
 
@@ -99,7 +102,11 @@ public class YaoQiTeacherAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHo
                 holder.yaoqing_tv.setText("取消邀请");
             } else if (teacherBean.getInviteStatus() == 1) {
                 holder.yaoqing_tv.setText("已邀请");
+                select_num++;
+                yaoqing_number_tv.setText("(" + select_num + "/5)");
             } else if (teacherBean.getInviteStatus() == 2) {
+                select_num++;
+                yaoqing_number_tv.setText("(" + select_num + "/5)");
                 holder.yaoqing_tv.setText("接受邀请");
             } else if (teacherBean.getInviteStatus() == 3) {
                 holder.yaoqing_tv.setText("拒绝邀请");
@@ -127,19 +134,19 @@ public class YaoQiTeacherAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHo
                         if (holder.yaoqing_tv.getText().equals("邀请")) {
                             holder.yaoqing_tv.setText("取消邀请");
                             Log.e("邀请", "邀请");
-                            select_num++;
+
 
                             //邀请
                             invite(teacherBean);
                         } else {
                             holder.yaoqing_tv.setText("邀请");
-                            select_num--;
 
                             Log.e("取消邀请", "取消邀请");
                             //取消邀请
                             cancel_invite();
+
                         }
-                        yaoqing_number_tv.setText("(" + select_num + "/5)");
+
 
                         /*if(teacherBean.getInviteType()==0){
 
@@ -167,42 +174,24 @@ public class YaoQiTeacherAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHo
     private void cancel_invite() {
         Map<String, Object> params = new HashMap<>();
         params.put("gymInviteNum", gymInviteNum);//老师编号
-        Gson gson = new Gson();
-        String json_params = gson.toJson(params);
-        String json = new Gson().toJson(params);//要传递的json
-        RequestBody requestBody = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), json);
-        Log.e(TAG, "取消邀请参数：" + json_params);
         Subscription subscription = Network.getInstance("取消邀请", context).
-                cancel_invite(requestBody, new ProgressSubscriberNew<>(String.class, new GsonSubscriberOnNextListener<String>() {
+                cancel_invite(params, new ProgressSubscriber<>("", new SubscriberOnNextListener<Bean<Object>>() {
                     @Override
-                    public void on_post_entity(String entity, String s) {
-                        Log.e("取消邀请成功", "取消邀请成功");
-
-
-                    }
-                }, new SubscriberOnNextListener<Bean<Object>>() {
-                    @Override
-                    public void onNext(Bean<Object> result) {
-
+                    public void onNext(Bean<Object> objectBean) {
+                        select_num--;
+                        yaoqing_number_tv.setText("(" + select_num + "/5)");
                     }
 
                     @Override
                     public void onError(String error) {
                         Toast.makeText(context, error, Toast.LENGTH_SHORT).show();
-                        Log.e("取消邀请失败", "取消邀请失败:" + error);
                     }
                 }, context, true));
     }
 
     private void invite(TeacherEntity.TeacherBean teacherBean) {
         Map<String, Object> params = new HashMap<>();
-        String gymAreaNum;
-        if ("".equals(SharedPreferencesHelper.get(context, "changguan_number", "").toString())) {
-            gymAreaNum = "";
-        } else {
-            gymAreaNum = SharedPreferencesHelper.get(context, "changguan_number", "").toString();
-        }
-        params.put("gym_area_num", gymAreaNum);//场馆编号
+        params.put("gym_area_num", SpUtils.getString(context, AppConstants.CHANGGUAN_NUM));//场馆编号
         params.put("gen_teacher_num", teacherBean.getTeacherNum());//场馆编号
         params.put("gym_course_num", gym_course_num);
         Gson gson = new Gson();
@@ -216,6 +205,8 @@ public class YaoQiTeacherAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHo
                     public void on_post_entity(InViteEntity entity, String s) {
                         Log.e("邀请成功", "邀请成功" + entity.getData());
                         gymInviteNum = entity.getData();
+                        select_num++;
+                        yaoqing_number_tv.setText("(" + select_num + "/5)");
                     }
                 }, new SubscriberOnNextListener<Bean<Object>>() {
                     @Override

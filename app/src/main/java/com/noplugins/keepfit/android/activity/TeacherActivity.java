@@ -155,27 +155,27 @@ public class TeacherActivity extends BaseActivity {
         Logger.d(objJson);
 
         RequestBody requestBody = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), objJson);
-
-        subscription = Network.getInstance("绑定用户", getApplicationContext())
-                .binding_role(requestBody,new ProgressSubscriberNew<>(Object.class, (o, message_id) -> {
-                    if (message_id.equals("success")){
-                        //绑定成功！
-                        Toast.makeText(getApplicationContext(), "删除成功！", Toast.LENGTH_SHORT).show();
-                        completeDatas.remove(position);
-                        roleAdapter.notifyItemRemoved(position);
-                        roleAdapter.notifyDataSetChanged();
-                    }
-                }, new SubscriberOnNextListener<Bean<Object>>() {
-                    @Override
-                    public void onNext(Bean<Object> result) {
-                    }
-
-                    @Override
-                    public void onError(String error) {
-                        Log.e(TAG, "修改失败：" + error);
-                        Toast.makeText(getApplicationContext(), error, Toast.LENGTH_SHORT).show();
-                    }
-                }, this, true));
+//
+//        subscription = Network.getInstance("绑定用户", getApplicationContext())
+//                .binding_role(requestBody,new ProgressSubscriberNew<>(Object.class, (o, message_id) -> {
+//                    if (message_id.equals("success")){
+//                        //绑定成功！
+//                        Toast.makeText(getApplicationContext(), "删除成功！", Toast.LENGTH_SHORT).show();
+//                        completeDatas.remove(position);
+//                        roleAdapter.notifyItemRemoved(position);
+//                        roleAdapter.notifyDataSetChanged();
+//                    }
+//                }, new SubscriberOnNextListener<Bean<Object>>() {
+//                    @Override
+//                    public void onNext(Bean<Object> result) {
+//                    }
+//
+//                    @Override
+//                    public void onError(String error) {
+//                        Log.e(TAG, "修改失败：" + error);
+//                        Toast.makeText(getApplicationContext(), error, Toast.LENGTH_SHORT).show();
+//                    }
+//                }, this, true));
     }
 
     private void getBindingUserList(){

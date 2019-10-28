@@ -79,6 +79,7 @@ public class SplashActivity extends BaseActivity {
             mHandler.removeCallbacks(mRegularAction);   //把runable移除队列
             mHandler = null;
         }
+
     }
 
     @Override
@@ -142,14 +143,12 @@ public class SplashActivity extends BaseActivity {
                         new ProgressSubscriber<>("获取审核状态", new SubscriberOnNextListener<Bean<CheckEntity>>() {
                             @Override
                             public void onNext(Bean<CheckEntity> result) {
-
+                                Log.e(TAG, "获取审核状态成功：" + result.getData().getStatus());
                                 if (result.getData().getStatus() == 1) {//成功
                                     //0没买过，1是2999 2是3999 3是6999
                                     if (result.getData().getHaveMember().equals("0")) {
-                                        //判断有没有提交过审核资料
                                         Intent intent = new Intent(SplashActivity.this, HeTongActivity.class);
                                         startActivity(intent);
-
                                     } else if (result.getData().getHaveMember().equals("1")) {
                                         SpUtils.putString(getApplicationContext(), AppConstants.USER_DENGJI, "2999");
                                         Intent intent = new Intent(SplashActivity.this, KeepFitActivity.class);
@@ -168,7 +167,7 @@ public class SplashActivity extends BaseActivity {
                                     Intent intent = new Intent(SplashActivity.this, CheckStatusFailActivity.class);
                                     startActivity(intent);
                                     finish();
-                                } else if (result.getData().getStatus() == -2) {//没有提交过
+                                } else if (result.getData().getStatus() == -2||result.getData().getStatus() == 4) {//没有提交过
                                     Intent intent = new Intent(SplashActivity.this, SubmitInformationSelectActivity.class);
                                     startActivity(intent);
                                     finish();
@@ -207,23 +206,14 @@ public class SplashActivity extends BaseActivity {
      * @return
      */
     private boolean panduan_net() {
-        boolean is_net_true;
-        //判断是不是用户断网了
-        ConnectivityManager connMgr = (ConnectivityManager) this
+        boolean isAvailable = false ;
+        ConnectivityManager cm = (ConnectivityManager) getApplicationContext()
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = connMgr
-                .getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-        boolean isWifiConn = networkInfo.isConnected();
-        networkInfo = connMgr.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
-        boolean isMobileConn = networkInfo.isConnected();
-        if (isMobileConn || isWifiConn) {
-
-            is_net_true = true;
-        } else {
-            is_net_true = false;
+        NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+        if(networkInfo!=null && networkInfo.isAvailable()){
+            isAvailable = true;
         }
-
-        return is_net_true;
+        return isAvailable;
     }
 
     @Override

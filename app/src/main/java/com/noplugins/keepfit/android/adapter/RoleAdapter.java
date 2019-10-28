@@ -12,6 +12,8 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.entity.RoleBean;
+import com.noplugins.keepfit.android.global.AppConstants;
+import com.noplugins.keepfit.android.util.SpUtils;
 ;
 import java.util.List;
 
@@ -59,6 +61,14 @@ public class RoleAdapter extends BaseQuickAdapter<RoleBean.RoleEntity, BaseViewH
         //必须在判断tag后给editText赋值，否则会数据错乱
         item_editText.setText(item.getName());
         et_phone.setText(item.getPhone());
+        if (item.getUserType()!=0){
+            materialSpinner.setSelectedIndex(item.getUserType()-2);
+            item_editText.setEnabled(false);
+            et_phone.setEnabled(false);
+            materialSpinner.setClickable(false);
+        }
+        item.setGymAreaNum(SpUtils.getString(mContext, AppConstants.CHANGGUAN_NUM));
+        item.setUserName(item.getName());
 
         TextWatcher watcher = new TextWatcher() {
             @Override
@@ -74,7 +84,7 @@ public class RoleAdapter extends BaseQuickAdapter<RoleBean.RoleEntity, BaseViewH
             @Override
             public void afterTextChanged(Editable editable) {
                 if (!TextUtils.isEmpty(editable)) {
-                    item.setName(editable + "");
+                    item.setUserName(editable + "");
                 }
             }
         };

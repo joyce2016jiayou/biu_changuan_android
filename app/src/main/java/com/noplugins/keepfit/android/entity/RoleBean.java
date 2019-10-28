@@ -17,12 +17,29 @@ public class RoleBean {
     public static class RoleEntity{
         private String gymAreaNum;
         private String userNum;
+        private String userName;
         private String name;
         private String phone;
         private int type = 0;
         private int userType;
         private boolean focus;
         private int deleted = -1;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getUserName() {
+            return userName;
+        }
+
+        public void setUserName(String userName) {
+            this.userName = userName;
+        }
 
         public int getDeleted() {
             return deleted;
@@ -48,13 +65,7 @@ public class RoleBean {
             this.userNum = userNum;
         }
 
-        public String getName() {
-            return name;
-        }
 
-        public void setName(String name) {
-            this.name = name;
-        }
 
         public String getPhone() {
             return phone;

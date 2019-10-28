@@ -90,9 +90,9 @@ public class ZhangHaoSafeActivity extends BaseActivity {
 
     private void toLogin(){
         Intent intent = new Intent(ZhangHaoSafeActivity.this, Login2Activity.class);
-        SharedPreferencesHelper.put(getApplicationContext(), Network.login_token, "");
-        SharedPreferencesHelper.put(getApplicationContext(), Network.phone_number, "");
-        SharedPreferencesHelper.put(getApplicationContext(), Network.changguan_number, "");
+        SpUtils.putString(getApplicationContext(), AppConstants.TOKEN, "");
+        SpUtils.putString(getApplicationContext(),AppConstants.PHONE, "");
+        SpUtils.putString(getApplicationContext(), AppConstants.CHANGGUAN_NUM, "");
         startActivity(intent);
         ActivityCollectorUtil.finishAllActivity();
 

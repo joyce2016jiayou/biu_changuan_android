@@ -62,8 +62,8 @@ class UpdatePasswordActivity : BaseActivity() {
         params["password"] = edit_new_password1.text.toString()
         subscription = Network.getInstance("设置提现密码", this)
             .settingPayPassword(params,
-                ProgressSubscriber("设置提现密码", object : SubscriberOnNextListener<Bean<String>> {
-                    override fun onNext(result: Bean<String>) {
+                ProgressSubscriber("设置提现密码", object : SubscriberOnNextListener<Bean<Any>> {
+                    override fun onNext(result: Bean<Any>) {
 //                        toLogin()
                         finish()
                     }

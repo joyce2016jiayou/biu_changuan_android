@@ -65,8 +65,11 @@ class MyFragment : BaseFragment(), EasyPermissions.PermissionCallbacks {
         requestArea()
         setting()
         ll_info.setOnClickListener {
-            val intent = Intent(activity, ChangGuandetailActivity::class.java)
-            activity!!.startActivityForResult(intent, 1)
+            if (BaseUtils.isFastClick()){
+                val intent = Intent(activity, ChangGuandetailActivity::class.java)
+                activity!!.startActivityForResult(intent, 1)
+            }
+
         }
     }
 

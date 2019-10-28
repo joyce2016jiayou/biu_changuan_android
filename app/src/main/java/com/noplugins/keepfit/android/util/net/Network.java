@@ -29,9 +29,11 @@ import com.noplugins.keepfit.android.bean.mine.BalanceListBean;
 import com.noplugins.keepfit.android.bean.mine.WalletBean;
 import com.noplugins.keepfit.android.entity.AddClassEntity;
 import com.noplugins.keepfit.android.entity.CheckEntity;
+import com.noplugins.keepfit.android.entity.ClassEntity;
 import com.noplugins.keepfit.android.entity.ClassTypeEntity;
 import com.noplugins.keepfit.android.entity.InformationEntity;
 import com.noplugins.keepfit.android.entity.LoginEntity;
+import com.noplugins.keepfit.android.entity.RoleBean;
 import com.noplugins.keepfit.android.entity.TeacherEntity;
 import com.noplugins.keepfit.android.global.AppConstants;
 import com.noplugins.keepfit.android.util.SpUtils;
@@ -273,7 +275,7 @@ public class Network {
      * @param subscriber
      * @return
      */
-    public Subscription submit_password(Map<String, String> params, Subscriber<Bean<String>> subscriber) {
+    public Subscription submit_password(Map<String, String> params, Subscriber<Bean<Object>> subscriber) {
         return service.update_password(params)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
@@ -372,7 +374,7 @@ public class Network {
      * @param subscriber
      * @return
      */
-    public Subscription bind_card(BindCardBean params, Subscriber<Bean<String>> subscriber) {
+    public Subscription bind_card(BindCardBean params, Subscriber<Bean<Object>> subscriber) {
         return service.bind_card(retuen_json_object(params))
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
@@ -429,8 +431,8 @@ public class Network {
      * @param subscriber
      * @return
      */
-    public Subscription class_list(Map<String, Object> params, Subscriber<Bean<Object>> subscriber) {
-        return service.class_list(params)
+    public Subscription class_list(Map<String, Object> params, Subscriber<Bean<ClassEntity>> subscriber) {
+        return service.class_list(retuen_json_params(params))
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -557,8 +559,8 @@ public class Network {
      * @param subscriber
      * @return
      */
-    public Subscription cancel_invite(RequestBody params, Subscriber<Bean<Object>> subscriber) {
-        return service.cancel_invite(params)
+    public Subscription cancel_invite(Map<String, Object> params, Subscriber<Bean<Object>> subscriber) {
+        return service.cancel_invite(retuen_json_params(params))
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -641,8 +643,8 @@ public class Network {
      * @param subscriber
      * @return
      */
-    public Subscription binding_role(RequestBody params, Subscriber<Bean<Object>> subscriber) {
-        return service.bindingRole(params)
+    public Subscription binding_role(RoleBean params, Subscriber<Bean<Object>> subscriber) {
+        return service.bindingRole(retuen_json_object(params))
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -655,7 +657,7 @@ public class Network {
      * @param subscriber
      * @return
      */
-    public Subscription findBindingRoles(RequestBody params, Subscriber<Bean<Object>> subscriber) {
+    public Subscription findBindingRoles(RequestBody params, Subscriber<Bean<RoleBean>> subscriber) {
         return service.findBindingRoles(params)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
@@ -849,7 +851,7 @@ public class Network {
     /**
      * 修改手机号
      */
-    public Subscription updatePhone(Map<String, Object> params, Subscriber<Bean<String>> subscriber) {
+    public Subscription updatePhone(Map<String, Object> params, Subscriber<Bean<Object>> subscriber) {
         return service.updatePhone(retuen_json_params(params))
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
@@ -871,7 +873,7 @@ public class Network {
     /**
      * 修改密码
      */
-    public Subscription forgetPassword(Map<String, Object> params, Subscriber<Bean<String>> subscriber) {
+    public Subscription forgetPassword(Map<String, Object> params, Subscriber<Bean<Object>> subscriber) {
         return service.forgetPassword(retuen_json_params(params))
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
@@ -882,7 +884,7 @@ public class Network {
     /**
      * 设置提现密码
      */
-    public Subscription settingPayPassword(Map<String, Object> params, Subscriber<Bean<String>> subscriber) {
+    public Subscription settingPayPassword(Map<String, Object> params, Subscriber<Bean<Object>> subscriber) {
         return service.settingPayPassword(retuen_json_params(params))
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
@@ -897,7 +899,7 @@ public class Network {
      * @param subscriber
      * @return
      */
-    public Subscription withdrawDeposit(Map<String, Object> params, Subscriber<Bean<String>> subscriber) {
+    public Subscription withdrawDeposit(Map<String, Object> params, Subscriber<Bean<Object>> subscriber) {
         return service.withdrawDeposit(retuen_json_object(params))
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
@@ -954,7 +956,7 @@ public class Network {
      * @param subscriber
      * @return
      */
-    public Subscription agreeBindingArea(Map<String, Object> params, Subscriber<Bean<String>> subscriber) {
+    public Subscription agreeBindingArea(Map<String, Object> params, Subscriber<Bean<Object>> subscriber) {
         return service.agreeBindingArea(retuen_json_object(params))
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
@@ -969,7 +971,7 @@ public class Network {
      * @param subscriber
      * @return
      */
-    public Subscription setHighTime(Map<String, Object> params, Subscriber<Bean<String>> subscriber) {
+    public Subscription setHighTime(Map<String, Object> params, Subscriber<Bean<Object>> subscriber) {
         return service.setHighTime(retuen_json_object(params))
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
@@ -984,7 +986,7 @@ public class Network {
      * @param subscriber
      * @return
      */
-    public Subscription updateCost(Map<String, Object> params, Subscriber<Bean<String>> subscriber) {
+    public Subscription updateCost(Map<String, Object> params, Subscriber<Bean<Object>> subscriber) {
         return service.updateCost(retuen_json_object(params))
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
@@ -1033,7 +1035,7 @@ public class Network {
                 .subscribe(subscriber);
     }
 
-    public Subscription submitAudit(InformationEntity params, Subscriber<Bean<String>> subscriber) {
+    public Subscription submitAudit(InformationEntity params, Subscriber<Bean<Object>> subscriber) {
         return service.submitAudit(retuen_json_object(params))
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
@@ -1045,7 +1047,7 @@ public class Network {
      * 场馆绑定教练
      */
 
-    public Subscription areaInviteTeacher(CgBindingBean params, Subscriber<Bean<String>> subscriber) {
+    public Subscription areaInviteTeacher(CgBindingBean params, Subscriber<Bean<Object>> subscriber) {
         return service.areaInviteTeacher(retuen_json_object(params))
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
@@ -1056,7 +1058,7 @@ public class Network {
     /**
      * 提现
      */
-    public Subscription areaWithdraw(Map<String, Object> params, Subscriber<Bean<String>> subscriber) {
+    public Subscription areaWithdraw(Map<String, Object> params, Subscriber<Bean<Object>> subscriber) {
         return service.areaWithdraw(retuen_json_object(params))
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())

@@ -20,9 +20,12 @@ import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.adapter.RoleAdapter;
 import com.noplugins.keepfit.android.base.BaseActivity;
 import com.noplugins.keepfit.android.entity.RoleBean;
+import com.noplugins.keepfit.android.global.AppConstants;
+import com.noplugins.keepfit.android.util.SpUtils;
 import com.noplugins.keepfit.android.util.data.SharedPreferencesHelper;
 import com.noplugins.keepfit.android.util.net.Network;
 import com.noplugins.keepfit.android.util.net.entity.Bean;
+import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriber;
 import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriberNew;
 import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener;
 import com.orhanobut.logger.Logger;
@@ -65,6 +68,7 @@ public class RoleActivity extends BaseActivity {
     private ArrayList<RoleBean.RoleEntity> completeDatas;
 
     private List<Object> posts;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,9 +85,6 @@ public class RoleActivity extends BaseActivity {
         ButterKnife.bind(this);
         isShowTitle(false);
         posts = new ArrayList<>();
-        tv_user_name.setText((String)SharedPreferencesHelper.get(getApplicationContext(),Network.username,""));
-        tv_user_phone.setText((String)SharedPreferencesHelper.get(getApplicationContext(),Network.phone,""));
-        tv_zhiwei_name.setText("场馆主");
         set_jiugongge_view();
 
         getBindingUserList();
@@ -128,12 +129,13 @@ public class RoleActivity extends BaseActivity {
         completeDatas = new ArrayList<>();
         roleAdapter_add = new RoleAdapter(completeDatas);
         rc_view_add.setAdapter(roleAdapter_add);
+
         roleAdapter = new RoleAdapter(datas);
         rc_view.setAdapter(roleAdapter);
         roleAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                switch (view.getId()){
+                switch (view.getId()) {
                     case R.id.Add_btn:
                         delete(position);
                         break;
@@ -148,7 +150,7 @@ public class RoleActivity extends BaseActivity {
         roleAdapter_add.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                switch (view.getId()){
+                switch (view.getId()) {
                     case R.id.Add_btn:
                         adapter.notifyItemRemoved(position);
                         if (position != completeDatas.size()) {
@@ -165,26 +167,35 @@ public class RoleActivity extends BaseActivity {
     }
 
 
-    private void getBindingUserList(){
+    private void getBindingUserList() {
         datas.clear();
         Map<String, Object> params = new HashMap<>();
-        params.put("area_num", "GYM19080921749396");
+        params.put("area_num", SpUtils.getString(getApplicationContext(), AppConstants.CHANGGUAN_NUM));
         String json = new Gson().toJson(params);//要传递的json
         RequestBody requestBody = RequestBody.create(null, json);
 
         subscription = Network.getInstance("获取已绑定用户", getApplicationContext())
-                .findBindingRoles(requestBody,new ProgressSubscriberNew<>(RoleBean.class, (o, message_id) -> {
-                    datas.addAll(o.getUserList());
-                    roleAdapter.notifyDataSetChanged();
-                }, new SubscriberOnNextListener<Bean<Object>>() {
+                .findBindingRoles(requestBody, new ProgressSubscriber<>("获取已绑定用户",
+                        new SubscriberOnNextListener<Bean<RoleBean>>() {
                     @Override
-                    public void onNext(Bean<Object> result) {
+                    public void onNext(Bean<RoleBean> roleBeanBean) {
+                        if (roleBeanBean.getData().getUserList() != null) {
+                            datas.addAll(roleBeanBean.getData().getUserList());
+                            datas.remove(0);
+                            tv_user_name.setText(roleBeanBean.getData().getUserList().get(0).getName());
+                            tv_user_phone.setText(roleBeanBean.getData().getUserList().get(0).getPhone());
+                            tv_zhiwei_name.setText("场馆主");
+                            roleAdapter.notifyDataSetChanged();
+                        }
+
+                        Toast.makeText(getApplicationContext(),roleBeanBean.getMessage()
+                                ,Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onError(String error) {
-                        Log.e(TAG, "获取失败：" + error);
-                        Toast.makeText(getApplicationContext(), error, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),error
+                                ,Toast.LENGTH_SHORT).show();
                     }
                 }, this, true));
 
@@ -194,34 +205,32 @@ public class RoleActivity extends BaseActivity {
      * 删除
      */
 
-    private void delete(int position){
-        datas.get(position).setType(1);
-
+    List<RoleBean.RoleEntity> list = new ArrayList<>();
+    private void delete(int position) {
+        list.clear();
+        Log.d("delete","position:"+position);
+        datas.get(position).setType(0);
         RoleBean roleBean = new RoleBean();
-        roleBean.setUserList(datas);
-        Gson gson = new Gson();
-        String objJson = gson.toJson(roleBean);
-        Logger.d(objJson);
-
-        RequestBody requestBody = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), objJson);
-
-        subscription = Network.getInstance("绑定用户", getApplicationContext())
-                .binding_role(requestBody,new ProgressSubscriberNew<>(Object.class, (o, message_id) -> {
-                    if (message_id.equals("success")){
-                        //绑定成功！
-                        Toast.makeText(getApplicationContext(), "删除成功！", Toast.LENGTH_SHORT).show();
-                        datas.remove(position);
-                        roleAdapter.notifyItemRemoved(position);
-                        roleAdapter.notifyDataSetChanged();
-                    }
-                }, new SubscriberOnNextListener<Bean<Object>>() {
+        list.add(datas.get(position));
+        roleBean.setUserList(list);
+        subscription = Network.getInstance("解除绑定用户", getApplicationContext())
+                .binding_role(roleBean, new ProgressSubscriber<>("", new SubscriberOnNextListener<Bean<Object>>() {
                     @Override
-                    public void onNext(Bean<Object> result) {
+                    public void onNext(Bean<Object> objectBean) {
+                        if (objectBean.getMessage().equals("success")){
+                            Toast.makeText(getApplicationContext(), "解除绑定用户成功！", Toast.LENGTH_SHORT).show();
+                            datas.remove(position);
+                            roleAdapter.notifyItemRemoved(position);
+                            roleAdapter.notifyDataSetChanged();
+                        } else {
+                            Toast.makeText(getApplicationContext(), objectBean.getMessage(), Toast.LENGTH_SHORT).show();
+
+                        }
+
                     }
 
                     @Override
                     public void onError(String error) {
-                        Log.e(TAG, "修改失败：" + error);
                         Toast.makeText(getApplicationContext(), error, Toast.LENGTH_SHORT).show();
                     }
                 }, this, true));
@@ -231,8 +240,8 @@ public class RoleActivity extends BaseActivity {
     /**
      * 完成只设置新增
      */
-    private void toComplete(){
-        Log.d("data","---"+rc_view_add.getChildCount());
+    private void toComplete() {
+        Log.d("data", "---" + rc_view_add.getChildCount());
 
         completeDatas.clear();
         for (int i = 0; i < rc_view_add.getChildCount(); i++) {
@@ -242,58 +251,52 @@ public class RoleActivity extends BaseActivity {
 //            EditText edit_role = layout.findViewById(R.id.edit_role);
             MaterialSpinner post_type_spinner = layout.findViewById(R.id.post_type_spinner);
 
-            if (TextUtils.isEmpty(et_name.getText().toString())){
+            if (TextUtils.isEmpty(et_name.getText().toString())) {
                 Toast.makeText(getApplicationContext(), "姓名不能为空！", Toast.LENGTH_SHORT).show();
                 return;
             }
-            if (TextUtils.isEmpty(edit_phone.getText().toString())){
+            if (TextUtils.isEmpty(edit_phone.getText().toString())) {
                 Toast.makeText(getApplicationContext(), "手机号不能为空！", Toast.LENGTH_SHORT).show();
                 return;
             }
-            if (post_type_spinner.getText().toString().equals("请选择")){
+            if (post_type_spinner.getText().toString().equals("请选择")) {
                 Toast.makeText(getApplicationContext(), "职位不能为空！", Toast.LENGTH_SHORT).show();
                 return;
             }
             RoleBean.RoleEntity roleBean = new RoleBean.RoleEntity();
+            roleBean.setType(1);
 
-            if (post_type_spinner.getText().toString().equals("经理")){
+            if (post_type_spinner.getText().toString().equals("经理")) {
                 roleBean.setUserType(2);
             }
-            if (post_type_spinner.getText().toString().equals("前台")){
+            if (post_type_spinner.getText().toString().equals("前台")) {
                 roleBean.setUserType(3);
             }
 
-//            roleBean.setGymAreaNum((String) SharedPreferencesHelper.get(getApplicationContext(),
-//                    "changguan_number", "GYM19072138381319"));
-            roleBean.setName(et_name.getText().toString());
+            roleBean.setUserName(et_name.getText().toString());
             roleBean.setPhone(edit_phone.getText().toString());
-            roleBean.setGymAreaNum("GYM19072138381319");
+            roleBean.setGymAreaNum(SpUtils.getString(getApplicationContext(), AppConstants.CHANGGUAN_NUM));
             completeDatas.add(roleBean);
         }
 
         RoleBean roleBean = new RoleBean();
         roleBean.setUserList(completeDatas);
-        Gson gson = new Gson();
-        String objJson = gson.toJson(roleBean);
-        Logger.d(objJson);
-
-        RequestBody requestBody = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), objJson);
-
         subscription = Network.getInstance("绑定用户", getApplicationContext())
-                .binding_role(requestBody,new ProgressSubscriberNew<>(Object.class, (o, message_id) -> {
-                    if (message_id.equals("success")){
-                        //绑定成功！
-                        Toast.makeText(getApplicationContext(), "绑定成功", Toast.LENGTH_SHORT).show();
-                    }
-                }, new SubscriberOnNextListener<Bean<Object>>() {
+                .binding_role(roleBean, new ProgressSubscriber<>("绑定用户", new SubscriberOnNextListener<Bean<Object>>() {
                     @Override
-                    public void onNext(Bean<Object> result) {
+                    public void onNext(Bean<Object> objectBean) {
+                        completeDatas.clear();
+                        roleAdapter_add.notifyDataSetChanged();
+                        getBindingUserList();
+                        Toast.makeText(getApplicationContext(),objectBean.getMessage(),
+                                Toast.LENGTH_SHORT).show();
+
                     }
 
                     @Override
                     public void onError(String error) {
-                        Log.e(TAG, "修改失败：" + error);
-                        Toast.makeText(getApplicationContext(), error, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),error,
+                                Toast.LENGTH_SHORT).show();
                     }
                 }, this, true));
 
