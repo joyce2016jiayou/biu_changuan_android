@@ -320,7 +320,7 @@ class Login2Activity : BaseActivity() {
                                     val intent = Intent(this@Login2Activity, CheckStatusFailActivity::class.java)
                                     startActivity(intent)
                                     finish()
-                                } else if (result.data.status == -2) {//没有提交过
+                                } else if (result.data.status == -2||result.data.status == 4) {//没有提交过
                                     val intent = Intent(this@Login2Activity, SubmitInformationSelectActivity::class.java)
                                     startActivity(intent)
                                     finish()

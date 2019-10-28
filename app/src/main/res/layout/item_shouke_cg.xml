@@ -1,85 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
 <www.linwg.org.lib.LCardView xmlns:android="http://schemas.android.com/apk/res/android"
-                             xmlns:tools="http://schemas.android.com/tools"
-                             xmlns:app="http://schemas.android.com/apk/res-auto"
-                             android:layout_width="match_parent"
-                             android:layout_height="wrap_content"
-                             app:cornerRadius="@dimen/m10"
-                             android:layout_marginRight="@dimen/m20"
-                             android:layout_marginLeft="@dimen/m20"
-                             android:padding="@dimen/m14">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/m20"
+    android:layout_marginRight="@dimen/m20"
+    android:padding="@dimen/m14"
+    app:cornerRadius="@dimen/m10">
 
     <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
         android:id="@+id/rl_jump"
-            android:orientation="vertical">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <TextView
-                android:id="@+id/tv_item"
-                android:layout_width="@dimen/m59"
-                android:layout_height="@dimen/m24"
-                android:textSize="13sp"
-                android:textColor="@color/contents_text"
-                android:gravity="center"
-                android:layout_gravity="right"
-                android:text="已上架"
-                android:background="@drawable/type_bg"
-                android:layout_marginRight="@dimen/m10"
-                android:layout_marginTop="@dimen/m10"/>
+            android:id="@+id/tv_item"
+            android:layout_width="@dimen/m59"
+            android:layout_height="@dimen/m24"
+            android:layout_gravity="right"
+            android:layout_marginTop="@dimen/m10"
+            android:layout_marginRight="@dimen/m10"
+            android:background="@drawable/type_bg"
+            android:gravity="center"
+            android:text="已上架"
+            android:textColor="@color/contents_text"
+            android:textSize="13sp" />
 
         <RelativeLayout
-                android:id="@+id/rl_detail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/m14">
+            android:id="@+id/rl_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/m14">
 
             <ImageView
-                    android:id="@+id/iv_cg_logo"
-                    android:layout_width="@dimen/m90"
-                    android:layout_height="@dimen/m90"/>
+                android:id="@+id/iv_cg_logo"
+                android:layout_width="@dimen/m90"
+                android:layout_height="@dimen/m90" />
 
             <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/ll_cg"
-                    android:orientation="horizontal"
-                    android:layout_toRightOf="@+id/iv_cg_logo"
-                    android:layout_marginLeft="@dimen/m20"
-                    android:layout_marginTop="@dimen/m13">
+                android:id="@+id/ll_cg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/m20"
+                android:layout_marginTop="@dimen/m13"
+                android:layout_toRightOf="@+id/iv_cg_logo"
+                android:orientation="horizontal">
 
                 <TextView
-                        android:id="@+id/tv_cg_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/contents_text"
-                        android:textSize="13sp"
-                        tools:text="原动力-萧山店·综合会所"/>
+                    android:id="@+id/tv_cg_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/contents_text"
+                    android:textSize="13sp"
+                    tools:text="原动力-萧山店·综合会所" />
                 <!--todo-->
             </FrameLayout>
 
             <TextView
-                    android:id="@+id/tv_cg_ar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/iv_cg_logo"
-                    android:layout_below="@id/ll_cg"
-                    android:textSize="13sp"
-                    tools:text="面积：1000m²"
-                    android:layout_marginLeft="@dimen/m20"
-                    android:layout_marginTop="@dimen/m13"
-                    android:textColor="@color/contents_text"
-                    />
+                android:id="@+id/tv_cg_ar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ll_cg"
+                android:layout_marginLeft="@dimen/m20"
+                android:layout_marginTop="@dimen/m13"
+                android:layout_toRightOf="@+id/iv_cg_logo"
+                android:textColor="@color/contents_text"
+                android:textSize="13sp"
+                tools:text="面积：1000m²" />
 
             <LinearLayout
-                    android:layout_below="@+id/tv_cg_ar"
-                    android:layout_width="wrap_content"
-                    android:layout_marginLeft="@dimen/m20"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/m11"
-                    android:layout_toRightOf="@id/iv_cg_logo"
-                    android:gravity="center"
-                    android:orientation="horizontal">
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_cg_ar"
+                android:layout_marginLeft="@dimen/m20"
+                android:layout_marginTop="@dimen/m11"
+                android:layout_toRightOf="@id/iv_cg_logo"
+                android:gravity="center"
+                android:orientation="horizontal">
 
                 <com.noplugins.keepfit.android.util.ui.ZFlowLayout
                     android:id="@+id/fl_private_skill"
@@ -90,35 +89,35 @@
         </RelativeLayout>
 
         <LinearLayout
-                android:id="@+id/ll_caozuo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="right"
-                android:visibility="gone"
-                android:layout_marginBottom="@dimen/m10">
+            android:id="@+id/ll_caozuo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/m10"
+            android:gravity="right"
+            android:orientation="horizontal"
+            android:visibility="gone">
 
             <TextView
-                    android:id="@+id/tv_jujue"
-                    android:layout_width="@dimen/m59"
-                    android:layout_height="@dimen/m24"
-                    android:textSize="13sp"
-                    android:gravity="center"
-                    android:textColor="@color/contents_text"
-                    android:background="@drawable/chongxin"
-                    android:layout_marginRight="@dimen/m20"
-                    android:text="拒绝"/>
+                android:id="@+id/tv_jujue"
+                android:layout_width="@dimen/m59"
+                android:layout_height="@dimen/m24"
+                android:layout_marginRight="@dimen/m20"
+                android:background="@drawable/chongxin"
+                android:gravity="center"
+                android:text="拒绝"
+                android:textColor="@color/contents_text"
+                android:textSize="13sp" />
 
             <TextView
-                    android:id="@+id/tv_jieshou"
-                    android:layout_width="@dimen/m59"
-                    android:layout_height="@dimen/m24"
-                    android:textSize="13sp"
-                    android:gravity="center"
-                    android:textColor="@color/contents_text"
-                    android:background="@drawable/chongxin"
-                    android:layout_marginRight="@dimen/m10"
-                    android:text="接受"/>
+                android:id="@+id/tv_jieshou"
+                android:layout_width="@dimen/m59"
+                android:layout_height="@dimen/m24"
+                android:layout_marginRight="@dimen/m10"
+                android:background="@drawable/chongxin"
+                android:gravity="center"
+                android:text="接受"
+                android:textColor="@color/contents_text"
+                android:textSize="13sp" />
         </LinearLayout>
     </LinearLayout>
 

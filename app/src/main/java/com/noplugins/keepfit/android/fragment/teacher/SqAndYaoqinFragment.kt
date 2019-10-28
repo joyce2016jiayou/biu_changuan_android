@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
@@ -49,7 +50,7 @@ class SqAndYaoqinFragment : BaseFragment()  {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         initAdapter()
-        requestData()
+
     }
 
     override fun onFragmentVisibleChange(isVisible: Boolean) {
@@ -57,6 +58,11 @@ class SqAndYaoqinFragment : BaseFragment()  {
         if (isVisible){
 //            requestData()
         }
+    }
+
+    override fun onFragmentFirstVisible() {
+        super.onFragmentFirstVisible()
+        requestData()
     }
 
     private fun initAdapter(){
@@ -72,10 +78,16 @@ class SqAndYaoqinFragment : BaseFragment()  {
                     //跳转到详情页 需要携带状态
                     val toInfo = Intent(activity, TeacherDetailActivity::class.java)
                     val bundle = Bundle()
-                    bundle.putInt("type",1)
+                    bundle.putInt("type",4)
                     bundle.putString("cgNum",datas[position].teacherNum)
                     toInfo.putExtras(bundle)
                     startActivity(toInfo)
+                }
+                R.id.tv_jieshou -> {
+                    agreeBinding(datas[position].teacherNum,1)
+                }
+                R.id.tv_jujue -> {
+                    agreeBinding(datas[position].teacherNum,2)
                 }
             }
         }
@@ -111,6 +123,28 @@ class SqAndYaoqinFragment : BaseFragment()  {
                                     datas.addAll(result.data)
                                 }
                                 adapterManager.notifyDataSetChanged()
+                            }
+
+                            override fun onError(error: String) {
+
+                            }
+                        }, activity, false)
+                )
+    }
+
+    private fun agreeBinding(teacherNum:String,agree:Int){
+        val params = HashMap<String, Any>()
+        params["teacherNum"] = teacherNum
+        params["areaNum"] = SpUtils.getString(activity,AppConstants.CHANGGUAN_NUM)
+        params["agree"] = agree
+        val subscription = Network.getInstance("同意拒绝", activity)
+                .agreeBindingArea(
+                        params,
+                        ProgressSubscriber("同意拒绝", object : SubscriberOnNextListener<Bean<Any>> {
+                            override fun onNext(result: Bean<Any>) {
+//                        setting(result.data.areaList)
+                                Toast.makeText(activity,"操作成功！", Toast.LENGTH_SHORT).show()
+                                requestData()
                             }
 
                             override fun onError(error: String) {

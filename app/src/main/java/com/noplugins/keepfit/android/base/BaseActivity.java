@@ -2,12 +2,12 @@ package com.noplugins.keepfit.android.base;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,17 +17,14 @@ import android.widget.RelativeLayout;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.noplugins.keepfit.android.KeepFitActivity;
 import com.noplugins.keepfit.android.R;
-import com.noplugins.keepfit.android.jpush.TagAliasOperatorHelper;
 import com.noplugins.keepfit.android.util.ActivityCollectorUtil;
-import com.noplugins.keepfit.android.util.SoftHideKeyBoardUtil;
 import com.noplugins.keepfit.android.util.ToolbarControl;
 import com.noplugins.keepfit.android.util.permission.EasyPermissions;
 import com.noplugins.keepfit.android.util.permission.PermissionActivity;
 import com.noplugins.keepfit.android.util.screen.AndroidWorkaround;
 import com.orhanobut.logger.Logger;
-
-import org.greenrobot.eventbus.EventBus;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -36,7 +33,6 @@ import cn.jpush.android.api.JPushInterface;
 import rx.Subscription;
 
 import static android.webkit.WebView.enableSlowWholeDocumentDraw;
-import static com.noplugins.keepfit.android.jpush.TagAliasOperatorHelper.sequence;
 
 public abstract class BaseActivity extends AppCompatActivity implements EasyPermissions.PermissionCallbacks {
 
@@ -65,7 +61,6 @@ public abstract class BaseActivity extends AppCompatActivity implements EasyPerm
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT); // 禁用横屏
         ActivityCollectorUtil.addActivity(this);
         //设置沉浸栏
         set_status_bar();
@@ -108,10 +103,7 @@ public abstract class BaseActivity extends AppCompatActivity implements EasyPerm
 
         doBusiness(getApplicationContext());
 
-
     }
-
-
 
     private void set_status_bar() {
         if (Build.VERSION.SDK_INT >= 21) {
@@ -141,6 +133,11 @@ public abstract class BaseActivity extends AppCompatActivity implements EasyPerm
 //        } else {
 //            StatusBarUtil.transparencyBar(this);
 //        }
+
+        View decor = getWindow().getDecorView();
+        int ui = decor.getSystemUiVisibility();
+        ui |=View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR; //设置状态栏中字体的颜色为黑色
+        decor.setSystemUiVisibility(ui);
     }
 
 
@@ -199,7 +196,6 @@ public abstract class BaseActivity extends AppCompatActivity implements EasyPerm
         super.onDestroy();
         unsubscribe();//取消订阅
         ActivityCollectorUtil.removeActivity(this);
-
     }
 
     protected void unsubscribe() {
@@ -230,6 +226,12 @@ public abstract class BaseActivity extends AppCompatActivity implements EasyPerm
      */
     public abstract void doBusiness(Context mContext);
 
+
+    public void toMain() {
+        Intent intent = new Intent(this, KeepFitActivity.class);
+        startActivity(intent);
+        this.finish();
+    }
 
     /**
      * 权限回调接口
@@ -295,5 +297,19 @@ public abstract class BaseActivity extends AppCompatActivity implements EasyPerm
         EasyPermissions.checkDeniedPermissionsNeverAskAgain(this,
                 getString(R.string.perm_tip),
                 R.string.setting, R.string.cancel, null, perms);
+    }
+
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        //拦截返回键
+        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK){
+            //判断触摸UP事件才会进行返回事件处理
+            if (event.getAction() == KeyEvent.ACTION_UP) {
+                onBackPressed();
+            }
+            //只要是返回事件，直接返回true，表示消费掉
+            return true;
+        }
+        return super.dispatchKeyEvent(event);
     }
 }

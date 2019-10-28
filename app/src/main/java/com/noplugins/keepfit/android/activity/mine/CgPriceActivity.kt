@@ -253,7 +253,10 @@ class CgPriceActivity : BaseActivity() {
             finish()
             return
         }
-        setResult(3)
+        val intent = Intent(this, KeepFitActivity::class.java)
+//        startActivity(intent,3)
+        setResult(3,intent)
+
         finish()
     }
 }

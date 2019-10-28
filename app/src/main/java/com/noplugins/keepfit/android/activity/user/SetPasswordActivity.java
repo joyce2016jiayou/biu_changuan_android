@@ -12,25 +12,17 @@ import android.widget.Toast;
 
 import com.noplugins.keepfit.android.KeepFitActivity;
 import com.noplugins.keepfit.android.R;
-import com.noplugins.keepfit.android.SplashActivity;
 import com.noplugins.keepfit.android.activity.CheckStatusFailActivity;
-import com.noplugins.keepfit.android.activity.HeTongActivity;
-import com.noplugins.keepfit.android.activity.LoginActivity;
 import com.noplugins.keepfit.android.activity.SubmitInformationSelectActivity;
-import com.noplugins.keepfit.android.activity.UserPermissionSelectActivity;
 import com.noplugins.keepfit.android.base.BaseActivity;
-import com.noplugins.keepfit.android.bean.RiChengBean;
 import com.noplugins.keepfit.android.entity.CheckEntity;
 import com.noplugins.keepfit.android.global.AppConstants;
 import com.noplugins.keepfit.android.util.SpUtils;
 import com.noplugins.keepfit.android.util.net.Network;
 import com.noplugins.keepfit.android.util.net.entity.Bean;
-import com.noplugins.keepfit.android.util.net.progress.GsonSubscriberOnNextListener;
 import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriber;
-import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriberNew;
 import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener;
 import com.noplugins.keepfit.android.util.ui.LoadingButton;
-import com.noplugins.keepfit.android.wxapi.WXPayEntryActivity;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -131,9 +123,10 @@ public class SetPasswordActivity extends BaseActivity {
 //                                    }
 //                                }
                                 //获取审核状态
-                                if (SpUtils.getInt(getApplicationContext(), AppConstants.USER_TYPE) == 1) {
-                                    get_check_status();
-                                }
+//                                if (SpUtils.getInt(getApplicationContext(), AppConstants.USER_TYPE) == 1) {
+//
+//                                }
+                                get_check_status();
 
                             }
 

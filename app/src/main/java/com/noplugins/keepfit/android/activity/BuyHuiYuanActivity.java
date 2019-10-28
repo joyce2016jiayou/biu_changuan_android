@@ -3,19 +3,15 @@ package com.noplugins.keepfit.android.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.noplugins.keepfit.android.KeepFitActivity;
 import com.noplugins.keepfit.android.R;
-import com.noplugins.keepfit.android.SplashActivity;
 import com.noplugins.keepfit.android.base.BaseActivity;
 import com.noplugins.keepfit.android.bean.BuyInformationBean;
-import com.noplugins.keepfit.android.entity.CheckEntity;
 import com.noplugins.keepfit.android.global.AppConstants;
 import com.noplugins.keepfit.android.util.SpUtils;
 import com.noplugins.keepfit.android.util.net.Network;
@@ -159,13 +155,12 @@ public class BuyHuiYuanActivity extends BaseActivity {
                             @Override
                             public void onNext(Bean<String> result) {
                                 Intent intent = new Intent(BuyHuiYuanActivity.this, WXPayEntryActivity.class);
-                                Bundle bundle = new Bundle();
-                                bundle.putString("order_number", result.getData());//订单编号
-                                bundle.putString("type", select_order_type);//支付类型
-                                bundle.putString("money", select_order_money);//钱
-                                bundle.putString("changguan_name", changuan_name_tv.getText().toString());//场馆名字
-                                bundle.putString("img_url", logo);//图片地址
-                                intent.putExtras(bundle);
+                                intent.putExtra("order_number", result.getData());//订单编号
+                                intent.putExtra("type", select_order_type);//支付类型
+                                intent.putExtra("money", select_order_money);//钱
+                                intent.putExtra("changguan_name", changuan_name_tv.getText().toString());//场馆名字
+                                intent.putExtra("img_url", logo);//图片地址
+//                                intent.putExtras(bundle);
                                 startActivity(intent);
                             }
 

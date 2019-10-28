@@ -24,7 +24,7 @@ import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener
 import kotlinx.android.synthetic.main.fragment_manager_teacher_1.*
 import java.util.HashMap
 
-class JujueFragment : BaseFragment()  {
+class JujueFragment : BaseFragment() {
     companion object {
         fun newInstance(title: String): JujueFragment {
             val fragment = JujueFragment()
@@ -34,8 +34,9 @@ class JujueFragment : BaseFragment()  {
             return fragment
         }
     }
-    var  datas:MutableList<TeacherBean> = ArrayList()
-    lateinit var adapterManager : ShoukeCgAdapter
+
+    var datas: MutableList<TeacherBean> = ArrayList()
+    lateinit var adapterManager: ShoukeCgAdapter
     var newView: View? = null
     var page = 1
 
@@ -49,17 +50,21 @@ class JujueFragment : BaseFragment()  {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         initAdapter()
+//        requestData()
+    }
+
+    //    override fun onFragmentVisibleChange(isVisible: Boolean) {
+//        super.onFragmentVisibleChange(isVisible)
+//        if (isVisible){
+//            requestData()
+//        }
+//    }
+    override fun onFragmentFirstVisible() {
+        super.onFragmentFirstVisible()
         requestData()
     }
 
-    override fun onFragmentVisibleChange(isVisible: Boolean) {
-        super.onFragmentVisibleChange(isVisible)
-        if (isVisible){
-            requestData()
-        }
-    }
-
-    private fun initAdapter(){
+    private fun initAdapter() {
         rv_list.layoutManager = LinearLayoutManager(context)
         adapterManager = ShoukeCgAdapter(datas)
         val view = LayoutInflater.from(context).inflate(R.layout.enpty_view, rv_list, false)
@@ -67,13 +72,13 @@ class JujueFragment : BaseFragment()  {
         rv_list.adapter = adapterManager
 
         adapterManager.setOnItemChildClickListener { adapter, view, position ->
-            when(view.id){
+            when (view.id) {
                 R.id.rl_jump -> {
                     //跳转到详情页 需要携带状态
                     val toInfo = Intent(activity, TeacherDetailActivity::class.java)
                     val bundle = Bundle()
-                    bundle.putInt("type",1)
-                    bundle.putString("cgNum",datas[position].teacherNum)
+                    bundle.putInt("type", 2)
+                    bundle.putString("cgNum", datas[position].teacherNum)
                     toInfo.putExtras(bundle)
                     startActivity(toInfo)
                 }
@@ -92,7 +97,7 @@ class JujueFragment : BaseFragment()  {
 
     }
 
-    private fun requestData(){
+    private fun requestData() {
         val params = HashMap<String, Any>()
         params["areaNum"] = SpUtils.getString(activity, AppConstants.CHANGGUAN_NUM)
         params["status"] = 2
@@ -103,10 +108,10 @@ class JujueFragment : BaseFragment()  {
                         ProgressSubscriber("场馆列表", object : SubscriberOnNextListener<Bean<List<TeacherBean>>> {
                             override fun onNext(result: Bean<List<TeacherBean>>) {
 //                        setting(result.data.areaList)
-                                if (page == 1){
+                                if (page == 1) {
                                     datas.clear()
                                     datas.addAll(result.data)
-                                } else{
+                                } else {
                                     datas.addAll(result.data)
                                 }
                                 adapterManager.notifyDataSetChanged()

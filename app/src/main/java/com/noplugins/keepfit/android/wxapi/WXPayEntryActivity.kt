@@ -2,8 +2,6 @@ package com.noplugins.keepfit.android.wxapi
 
 
 import android.annotation.SuppressLint
-import android.app.AlertDialog
-import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
@@ -12,9 +10,6 @@ import android.os.Handler
 import android.os.Message
 import android.text.TextUtils
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
 import com.alipay.sdk.app.PayTask
 import com.bumptech.glide.Glide
@@ -31,7 +26,7 @@ import com.noplugins.keepfit.android.util.net.Network
 import com.noplugins.keepfit.android.util.net.entity.Bean
 import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriber
 import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener
-import com.orhanobut.logger.Logger
+import com.noplugins.keepfit.android.util.ui.ProgressUtil
 import com.tencent.mm.opensdk.constants.ConstantsAPI
 import com.tencent.mm.opensdk.modelbase.BaseReq
 import com.tencent.mm.opensdk.modelbase.BaseResp
@@ -40,7 +35,6 @@ import com.tencent.mm.opensdk.openapi.IWXAPI
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler
 import com.tencent.mm.opensdk.openapi.WXAPIFactory
 import kotlinx.android.synthetic.main.activity_order_confirm.*
-import okhttp3.RequestBody
 import java.util.*
 
 class WXPayEntryActivity : BaseActivity(), IWXAPIEventHandler {
@@ -53,8 +47,9 @@ class WXPayEntryActivity : BaseActivity(), IWXAPIEventHandler {
     private var wxPayInfo = ""
     private var dialogType = -1
     private var cgName = ""
-    private var privcetType = -1
+    private var privcetType = ""
     private var logo = ""
+    private val progress_upload = ProgressUtil()
     override fun initBundle(parms: Bundle?) {
         /*
          bundle.putString("order_number", result.getData());//订单编号
@@ -63,29 +58,31 @@ class WXPayEntryActivity : BaseActivity(), IWXAPIEventHandler {
          bundle.putString("changguan_name", changuan_name_tv.getText().toString());//场馆名字
          bundle.putString("img_url", changuan_name_tv.getText().toString());//图片地址
          */
-        if (parms!=null){
-            orderNum = parms.getString("order_number","")
-            price = parms.getString("money","0")
-            cgName = parms.getString("changguan_name","")
-            privcetType = parms.getString("type")!!.toInt()
-            logo = parms.getString("img_url","")
 
-        }
     }
-
+    private var api: IWXAPI? = null
     override fun initView() {
         setContentView(R.layout.activity_order_confirm)
+        if (intent!=null){
+            orderNum = intent.getStringExtra("order_number")
+            price = intent.getStringExtra("money")
+            cgName = intent.getStringExtra("changguan_name")
+            privcetType = intent.getStringExtra("type")
+            logo = intent.getStringExtra("img_url")
+
+        }
         tv_cg_name.text = cgName
+
         when(privcetType){
-            1 -> {
+            "1" -> {
                 //2999
                 tv_vip.text = "终身会员"
             }
-            2 -> {
+            "2" -> {
                 //3999
                 tv_vip.text = "超值终身会员"
             }
-            3 -> {
+            "3" -> {
                 //6999
                 tv_vip.text = "豪华终身会员"
             }
@@ -94,6 +91,10 @@ class WXPayEntryActivity : BaseActivity(), IWXAPIEventHandler {
                 .load(logo)
                 .into(iv_logo)
         tv_vip_price.text = "¥$price"
+
+        api = WXAPIFactory.createWXAPI(this, "wx5460a045edfffc8c")
+        api!!.registerApp("wx5460a045edfffc8c")
+        api!!.handleIntent(intent, this)
     }
 
     override fun doBusiness(mContext: Context?) {
@@ -143,7 +144,7 @@ class WXPayEntryActivity : BaseActivity(), IWXAPIEventHandler {
 
     }
 
-    private var api: IWXAPI? = null
+
 
 
     private val SDK_PAY_FLAG = 1
@@ -161,6 +162,7 @@ class WXPayEntryActivity : BaseActivity(), IWXAPIEventHandler {
 
     override fun onReq(req: BaseReq) {}
 
+
     @SuppressLint("LongLogTag")
     override fun onResp(resp: BaseResp) {
 //        Log.d(TAG, "onPayFinish, errCode = " + resp.errStr)
@@ -169,20 +171,27 @@ class WXPayEntryActivity : BaseActivity(), IWXAPIEventHandler {
         val str = gson.toJson(resp)
         Log.d("GSON", "onPayFinish:$str")
 
+
         if (resp.type == ConstantsAPI.COMMAND_PAY_BY_WX) {
 //            val builder = AlertDialog.Builder(this)
-//            builder.setTitle(R.string.app_tip)
+//            builder.setTitle("为啥")
 //            builder.setMessage(getString(R.string.pay_result_callback_msg, resp.errCode.toString()))
 //            builder.show()
-            if (resp.errCode.toString() == "0"){
-                Toast.makeText(applicationContext,"支付成功",Toast.LENGTH_SHORT).show()
-                val intent = Intent(this@WXPayEntryActivity, CgPriceActivity::class.java)
-                val bundle = Bundle()
-                bundle.putString("form", "pay")
-                intent.putExtras(bundle)
-                startActivity(intent)
+
+            when(resp.errCode){
+//            progress_upload.showProgressDialog(applicationContext, "")
+                0 -> {
+                    //
+                    Log.d("GSSSSSSSS","jinlai le")
+                    twoYanzhen()
+                }
+
+                -2 -> {
+                    Toast.makeText(applicationContext,"支付失败",Toast.LENGTH_SHORT).show()
+                }
             }
         }
+
     }
 
     /**
@@ -203,13 +212,12 @@ class WXPayEntryActivity : BaseActivity(), IWXAPIEventHandler {
                     // 判断resultStatus 为9000则代表支付成功
                     if (TextUtils.equals(resultStatus, "9000")) {
                         // 该笔订单是否真实支付成功，需要依赖服务端的异步通知。
-                        Handler().postDelayed(Runnable {
-                            twoYanzhen()
-                        }, 1500)
+//                        progress_upload.showProgressDialog(applicationContext, "载入中...")
+                        twoYanzhen()
                     } else {
                         // 该笔订单真实的支付结果，需要依赖服务端的异步通知。
 //                        toPayError()
-
+                        Toast.makeText(applicationContext,"支付失败",Toast.LENGTH_SHORT).show()
                     }
                 }
                 SDK_PAY_WECHAT -> {
@@ -246,8 +254,8 @@ class WXPayEntryActivity : BaseActivity(), IWXAPIEventHandler {
      * 微信支付
      */
     private fun weChatPay(wxPayBean: WxPayBean) {
-        api = WXAPIFactory.createWXAPI(this, wxPayBean.appid, false)
-        api!!.registerApp(wxPayBean.appid)
+//        api = WXAPIFactory.createWXAPI(this,"wx5460a045edfffc8c")
+//        api!!.registerApp("wx5460a045edfffc8c")
 
         val payRunnable = Runnable {
             val req = PayReq()
@@ -344,6 +352,7 @@ class WXPayEntryActivity : BaseActivity(), IWXAPIEventHandler {
      * 二次验证
      */
     private fun twoYanzhen() {
+        Thread.sleep(2000)
         val params = HashMap<String, Any>()
         params["orderNum"] = orderNum
         subscription = Network.getInstance("支付二次验证", this)
@@ -353,17 +362,18 @@ class WXPayEntryActivity : BaseActivity(), IWXAPIEventHandler {
                     "支付二次验证",
                     object : SubscriberOnNextListener<Bean<OrderResultBean>> {
                         override fun onNext(result: Bean<OrderResultBean>) {
+                            progress_upload.dismissProgressDialog()
                             if (result.data.payResult == 1) {
 //                                toPayOK()
                                 var sf = ""
                                 when(privcetType){
-                                    1-> {
+                                    "1"-> {
                                         sf = "2999"
                                     }
-                                    2-> {
+                                    "2"-> {
                                         sf = "3999"
                                     }
-                                    3-> {
+                                    "3"-> {
                                         sf = "6999"
                                     }
                                 }
@@ -377,7 +387,9 @@ class WXPayEntryActivity : BaseActivity(), IWXAPIEventHandler {
                                 finish()
                             } else {
 //                                toPayError()
-
+                                progress_upload.dismissProgressDialog()
+                                Toast.makeText(applicationContext,"支付失败",Toast.LENGTH_SHORT)
+                                        .show()
                             }
 
                         }
@@ -388,7 +400,7 @@ class WXPayEntryActivity : BaseActivity(), IWXAPIEventHandler {
                         }
                     },
                     this,
-                    true
+                    false
                 )
             )
     }

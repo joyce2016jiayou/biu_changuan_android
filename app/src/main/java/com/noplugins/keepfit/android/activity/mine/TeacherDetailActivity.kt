@@ -36,9 +36,11 @@ class TeacherDetailActivity : BaseActivity() {
             listItem = parms.getInt("listItem")
             cgNum = parms.getString("cgNum").toString()
             type = parms.getInt("type", -1)
-//            if (type != -1) {
-//                tv_yaoqing.text = "解 绑"
-//            }
+            if (type == 1) {
+                tv_yaoqing.text = "解 绑"
+            } else if (type != -1){
+                tv_yaoqing.visibility = View.GONE
+            }
             requestPrivateData()
         }
     }
@@ -58,12 +60,15 @@ class TeacherDetailActivity : BaseActivity() {
                 return@setOnClickListener
             }
         }
+        back_btn.setOnClickListener {
+            finish()
+        }
     }
 
     private fun requestPrivateData() {
 
         val params = HashMap<String, Any>()
-        params["teacherNum"] = intent.getStringExtra("teacherNum")
+        params["teacherNum"] = cgNum
         params["userNum"] = SpUtils.getString(applicationContext, AppConstants.USER_NAME)
 
         val subscription = Network.getInstance("教练详情", this)

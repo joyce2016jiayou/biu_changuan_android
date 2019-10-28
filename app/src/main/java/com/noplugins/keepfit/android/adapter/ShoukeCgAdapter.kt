@@ -38,9 +38,9 @@ class ShoukeCgAdapter(data: List<TeacherBean>?) : BaseQuickAdapter<TeacherBean, 
             helper.setText(R.id.tv_item, "已拒绝")
         } else if (item.status == 4) {
             helper.setText(R.id.tv_item, "申请中")
+            helper.getView<View>(R.id.ll_caozuo).visibility = View.VISIBLE
         } else if (item.status == 3) {
             helper.setText(R.id.tv_item, "邀请中")
-            helper.getView<View>(R.id.ll_caozuo).visibility = View.VISIBLE
         }
 
         val skill = (helper.getView<ZFlowLayout>(R.id.fl_private_skill))

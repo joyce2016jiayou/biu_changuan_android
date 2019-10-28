@@ -70,6 +70,7 @@ class TeacherManagerActivity : BaseActivity(), AMapLocationListener {
 
     override fun initView() {
         setContentView(R.layout.activity_teacher_manager)
+        initFragment()
         requestPermission()
     }
 
@@ -178,7 +179,7 @@ class TeacherManagerActivity : BaseActivity(), AMapLocationListener {
                 //                    showGPSContacts();
             }
             else -> {
-                initFragment()
+//                initFragment()
             }
         }
         Log.i("permission", "quan xian fan kui")

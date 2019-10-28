@@ -347,7 +347,16 @@
         <activity android:name=".activity.user.SetPasswordActivity" />
         <activity
             android:name=".wxapi.WXPayEntryActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+
+                <data android:scheme="wx5460a045edfffc8c"/>
+            </intent-filter>
+        </activity>
         <activity android:name=".activity.mine.TeacherDetailActivity" />
         <activity android:name=".activity.mine.UpdatePasswordActivity" />
         <activity android:name=".activity.mine.WithdrawActivity" />
