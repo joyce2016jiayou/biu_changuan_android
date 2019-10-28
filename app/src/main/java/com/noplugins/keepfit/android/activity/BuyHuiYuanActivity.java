@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -50,7 +51,8 @@ public class BuyHuiYuanActivity extends BaseActivity {
     LinearLayout buy_btn;
     @BindView(R.id.touxiang_image)
     CircleImageView touxiang_image;
-
+    @BindView(R.id.back_btn)
+    ImageView back_btn;
 
     private String select_order_money = "";
     private String select_order_type = "";
@@ -108,11 +110,17 @@ public class BuyHuiYuanActivity extends BaseActivity {
                 get_order_number();//生成订单
             }
         });
+        back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
     private void get_huiyuan_information() {
         Map<String, Object> params = new HashMap<>();
-        params.put("areaNum", SpUtils.getString(getApplicationContext(),AppConstants.CHANGGUAN_NUM));
+        params.put("areaNum", SpUtils.getString(getApplicationContext(), AppConstants.CHANGGUAN_NUM));
         Subscription subscription = Network.getInstance("获取购买信息", this)
                 .get_buy_information(params,
                         new ProgressSubscriber<>("获取购买信息", new SubscriberOnNextListener<Bean<BuyInformationBean>>() {
@@ -130,7 +138,10 @@ public class BuyHuiYuanActivity extends BaseActivity {
 
     private void set_information(BuyInformationBean data) {
         Glide.with(getApplicationContext())
+
                 .load(data.getLogo())
+                .placeholder(R.drawable.changguan_logo) //加载成功前显示的图片
+                .fallback(R.drawable.changguan_logo) //url为空的时候,显示的图片
                 .into(touxiang_image);
         logo = data.getLogo();
         changuan_name_tv.setText(data.getAreaName());
@@ -139,7 +150,7 @@ public class BuyHuiYuanActivity extends BaseActivity {
 
     private void get_order_number() {
         Map<String, Object> params = new HashMap<>();
-        params.put("gymAreaNum", SpUtils.getString(getApplicationContext(),AppConstants.CHANGGUAN_NUM));
+        params.put("gymAreaNum", SpUtils.getString(getApplicationContext(), AppConstants.CHANGGUAN_NUM));
         params.put("orderMoney", 0.02);
         params.put("orderType", select_order_type);
         Subscription subscription = Network.getInstance("生成订单", this)

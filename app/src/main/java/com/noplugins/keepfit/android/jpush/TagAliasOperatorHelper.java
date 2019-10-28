@@ -232,7 +232,7 @@ public class TagAliasOperatorHelper {
                     logs = "Failed with errorCode = " + code;
                     Log.e(TAG, "设置别名" + logs);
             }
-            ExampleUtil.showToast(logs, context);
+            //ExampleUtil.showToast(logs, context);
         }
     };
 

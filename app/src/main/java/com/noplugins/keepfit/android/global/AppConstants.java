@@ -16,6 +16,7 @@ public class AppConstants {
     public static final String LAT = "currentLat";//维度
     public static final String LON = "currentLon";//精度
     public static final String COST = "cost";
+    public static String IS_SET_ALIAS = "is_set_alias";
 
 
     //团课同意

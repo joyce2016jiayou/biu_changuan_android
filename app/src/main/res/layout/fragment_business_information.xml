@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/m20"
-            android:layout_marginTop="@dimen/m30"
+            android:layout_marginTop="@dimen/m15"
             android:text="工商信息"
             android:textColor="#ff181818"
             android:textSize="16sp" />
@@ -28,8 +28,8 @@
             android:id="@+id/business_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/m10"
             android:background="@color/white"
+            android:layout_marginTop="@dimen/m10"
             android:orientation="vertical"
             android:visibility="visible">
 
@@ -37,8 +37,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/m20"
-                android:layout_marginTop="@dimen/m20"
                 android:layout_marginRight="@dimen/m20"
+                android:layout_marginTop="@dimen/m10"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -67,8 +67,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/m20"
-                android:layout_marginTop="@dimen/m25"
-
+                android:layout_marginTop="@dimen/m15"
                 android:layout_marginRight="@dimen/m20"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
@@ -113,7 +112,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/m20"
-                android:layout_marginTop="@dimen/m20"
+                android:layout_marginTop="@dimen/m15"
                 android:layout_marginRight="@dimen/m20"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
@@ -143,7 +142,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/m20"
-                android:layout_marginTop="@dimen/m20"
+                android:layout_marginTop="@dimen/m15"
                 android:layout_marginRight="@dimen/m20"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
@@ -173,7 +172,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/m20"
-                android:layout_marginTop="@dimen/m20"
+                android:layout_marginTop="@dimen/m15"
                 android:layout_marginRight="@dimen/m20"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
@@ -198,11 +197,12 @@
                     android:textColorHint="@color/color_9B9B9B"
                     android:textSize="13sp" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/m20"
-                android:layout_marginTop="@dimen/m19"
+                android:layout_marginTop="@dimen/m15"
                 android:layout_marginRight="@dimen/m20"
                 android:layout_marginBottom="@dimen/m19"
                 android:gravity="center_vertical"
@@ -234,7 +234,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/m20"
-                android:layout_marginTop="@dimen/m20"
+                android:layout_marginTop="@dimen/m15"
                 android:layout_marginBottom="@dimen/m20"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
@@ -305,7 +305,7 @@
             android:layout_width="@dimen/m209"
             android:layout_height="@dimen/m50"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/m30"
+            android:layout_marginTop="@dimen/m20"
             android:background="@drawable/tixian_btn"
             android:gravity="center">
 
@@ -468,8 +468,7 @@
             android:layout_width="@dimen/m209"
             android:layout_height="@dimen/m50"
             android:layout_gravity="bottom|center_horizontal"
-            android:layout_marginTop="@dimen/m150"
-            android:layout_marginBottom="@dimen/m28"
+            android:layout_marginTop="@dimen/m50"
             android:background="@drawable/tixian_btn"
             android:gravity="center">
 

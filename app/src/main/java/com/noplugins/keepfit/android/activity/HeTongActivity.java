@@ -8,11 +8,14 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.base.BaseActivity;
+import com.noplugins.keepfit.android.callback.DialogCallBack;
+import com.noplugins.keepfit.android.util.ui.PopWindowHelper;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,7 +27,8 @@ public class HeTongActivity extends BaseActivity {
     CheckBox xieyi_check_btn;
     @BindView(R.id.webView)
     WebView webView;
-    String linkCss;
+    @BindView(R.id.back_btn)
+    ImageView back_btn;
 
     private boolean is_check;
 
@@ -73,7 +77,35 @@ public class HeTongActivity extends BaseActivity {
             }
         });
 
+        back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                show_advice_pop();
+            }
+        });
 
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        show_advice_pop();
+    }
+
+    private void show_advice_pop() {
+        PopWindowHelper.public_tishi_pop(HeTongActivity.this, "温馨提示", "是否退出app？", "取消", "确定", new DialogCallBack() {
+            @Override
+            public void save() {
+                Intent home=new Intent(Intent.ACTION_MAIN);
+                home.addCategory(Intent.CATEGORY_HOME);
+                startActivity(home);
+            }
+
+            @Override
+            public void cancel() {
+
+            }
+        });
     }
 
 }

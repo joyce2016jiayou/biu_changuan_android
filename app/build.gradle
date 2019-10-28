@@ -15,7 +15,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
         manifestPlaceholders = [
-                JPUSH_APPKEY : "6b46fbc676a45e4935ad5430",//值来自开发者平台取得的AppKey 6b46fbc676a45e4935ad5430
+                JPUSH_APPKEY : "20183e17254d91a3919075a4",//值来自开发者平台取得的AppKey 6b46fbc676a45e4935ad5430
                 JPUSH_CHANNEL: "default_developer",
         ]
 

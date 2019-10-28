@@ -148,6 +148,7 @@ public class BusinessInformationFragment extends ViewPagerFragment {
                     informationEntity.setBank_card_num(qiye_zhanghao.getText().toString());//企业账号
                     informationEntity.setBankName(kaihuhang_edit.getText().toString());//开户行
 
+
                     //提交审核资料
                     submit_information();
                 } else {

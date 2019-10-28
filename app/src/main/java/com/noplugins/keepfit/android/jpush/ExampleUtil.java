@@ -110,7 +110,7 @@ public class ExampleUtil {
             TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
             ret = telephonyManager.getDeviceId();
         } catch (Exception e) {
-            Logger.e(ExampleUtil.class.getSimpleName(), e.getMessage());
+            //Logger.e(ExampleUtil.class.getSimpleName(), e.getMessage());
         }
         if (isReadableASCII(ret)){
             return ret;

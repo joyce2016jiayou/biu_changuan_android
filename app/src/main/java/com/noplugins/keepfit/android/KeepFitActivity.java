@@ -34,6 +34,7 @@ import com.noplugins.keepfit.android.fragment.mine.MyFragment;
 import com.noplugins.keepfit.android.fragment.statistics.StatisticsFragment;
 import com.noplugins.keepfit.android.fragment.teacher.Is2999Fragment;
 import com.noplugins.keepfit.android.global.AppConstants;
+import com.noplugins.keepfit.android.jpush.TagAliasOperatorHelper;
 import com.noplugins.keepfit.android.util.SpUtils;
 import com.noplugins.keepfit.android.util.data.SharedPreferencesHelper;
 import com.noplugins.keepfit.android.util.eventbus.MessageEvent;
@@ -59,6 +60,8 @@ import butterknife.BindViews;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import okhttp3.RequestBody;
+
+import static com.tencent.bugly.Bugly.applicationContext;
 
 public class KeepFitActivity extends BaseActivity {
     @BindView(R.id.viewpager_content)
@@ -103,7 +106,7 @@ public class KeepFitActivity extends BaseActivity {
     public void initView() {
         setContentLayout(R.layout.activity_keepfit);
         ButterKnife.bind(this);
-        if (SpUtils.getString(getApplicationContext(),AppConstants.USER_DENGJI).equals("2999")){
+        if (SpUtils.getString(getApplicationContext(), AppConstants.USER_DENGJI).equals("2999")) {
             btn_shipu.setVisibility(View.GONE);
         } else {
             if (SpUtils.getInt(getApplicationContext(), AppConstants.USER_TYPE) == 1 ||
@@ -118,7 +121,7 @@ public class KeepFitActivity extends BaseActivity {
         //EventBus.getDefault().register(this);
         //初始化页面
         tabFragments.add(RiChengFragment.homeInstance("第一页"));
-        if (SpUtils.getString(getApplicationContext(),AppConstants.USER_DENGJI).equals("2999")){
+        if (SpUtils.getString(getApplicationContext(), AppConstants.USER_DENGJI).equals("2999")) {
             tabFragments.add(Is2999Fragment.Companion.newInstance("第二页"));
         } else {
             tabFragments.add(StatisticsFragment.Companion.newInstance("第二页"));
@@ -138,7 +141,37 @@ public class KeepFitActivity extends BaseActivity {
 
 
         //获取消息总数，设置消息总数
-//        get_message_all();
+        get_message_all();
+
+        //设置alias
+        loginSuccess();
+
+    }
+
+    private void loginSuccess() {
+        //如果没有缓存的别名，重新获取
+        if ("".equals(SpUtils.getString(getApplicationContext(), AppConstants.IS_SET_ALIAS))) {
+            //设置别名
+            TagAliasOperatorHelper.TagAliasBean tagAliasBean = new TagAliasOperatorHelper.TagAliasBean();
+            TagAliasOperatorHelper.sequence++;
+            //设置用户编号为别名
+            if (null == SpUtils.getString(getApplicationContext(), AppConstants.CHANGGUAN_NUM)) {
+                tagAliasBean.alias = "null_user_id";
+            } else {
+                String user_id = SpUtils.getString(getApplicationContext(), AppConstants.CHANGGUAN_NUM);
+                tagAliasBean.alias = user_id;
+            }
+            tagAliasBean.isAliasAction = true;
+            tagAliasBean.action = TagAliasOperatorHelper.ACTION_SET;
+            TagAliasOperatorHelper.getInstance().handleAction(
+                    getApplicationContext(),
+                    TagAliasOperatorHelper.sequence, tagAliasBean
+            );
+            Log.e("设置的alias", "" + SpUtils.getString(getApplicationContext(), AppConstants.IS_SET_ALIAS));
+        } else {
+            Log.e("已经缓存alias", "" + SpUtils.getString(getApplicationContext(), AppConstants.IS_SET_ALIAS));
+        }
+
     }
 
     @Override

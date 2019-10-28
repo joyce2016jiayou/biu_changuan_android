@@ -156,14 +156,23 @@ public class SetPasswordActivity extends BaseActivity {
                             @Override
                             public void onNext(Bean<CheckEntity> result) {
                                 Log.e(TAG, "获取审核状态成功：" + result.getData().getStatus());
-                                if (result.getData().getStatus() == 1) {
+                                if (result.getData().getHaveMember().equals("0")) {
+                                    Intent intent = new Intent(SetPasswordActivity.this, HeTongActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                } else if (result.getData().getHaveMember().equals("1")) {
+                                    SpUtils.putString(getApplicationContext(), AppConstants.USER_DENGJI, "2999");
                                     Intent intent = new Intent(SetPasswordActivity.this, KeepFitActivity.class);
                                     startActivity(intent);
-                                } else if (result.getData().getStatus() == 0) {
-                                    Intent intent = new Intent(SetPasswordActivity.this, CheckStatusFailActivity.class);
+                                    finish();
+                                } else if (result.getData().getHaveMember().equals("2")) {
+                                    SpUtils.putString(getApplicationContext(), AppConstants.USER_DENGJI, "3999");
+                                    Intent intent = new Intent(SetPasswordActivity.this, KeepFitActivity.class);
                                     startActivity(intent);
-                                } else if (result.getData().getStatus() == -2||result.getData().getStatus() == 4) {
-                                    Intent intent = new Intent(SetPasswordActivity.this, SubmitInformationSelectActivity.class);
+                                    finish();
+                                } else if (result.getData().getHaveMember().equals("3")) {
+                                    SpUtils.putString(getApplicationContext(), AppConstants.USER_DENGJI, "6999");
+                                    Intent intent = new Intent(SetPasswordActivity.this, KeepFitActivity.class);
                                     startActivity(intent);
                                     finish();
                                 }

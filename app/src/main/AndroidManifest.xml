@@ -362,7 +362,7 @@
             android:value="default_developer" />
         <meta-data
             android:name="JPUSH_APPKEY"
-            android:value="6b46fbc676a45e4935ad5430" />
+            android:value="20183e17254d91a3919075a4" />
     </application>
 
 </manifest>

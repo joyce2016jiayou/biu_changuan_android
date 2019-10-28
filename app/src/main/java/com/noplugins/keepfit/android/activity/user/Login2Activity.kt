@@ -174,8 +174,9 @@ class Login2Activity : BaseActivity() {
                                     val intent = Intent(this@Login2Activity, SetPasswordActivity::class.java)
                                     startActivity(intent)
                                 } else {//设置过密码
-                                    get_check_status()
-                                }
+                                    if (result.data.type == 1){
+                                        get_check_status()
+                                    }                                }
                             }
 
                             override fun onError(error: String) {
@@ -297,21 +298,24 @@ class Login2Activity : BaseActivity() {
                                         //判断有没有提交过审核资料
                                         val intent = Intent(this@Login2Activity, HeTongActivity::class.java)
                                         startActivity(intent)
-
+                                        finish()
                                     } else if (result.data.haveMember == "1") {
                                         SpUtils.putString(applicationContext, AppConstants.USER_DENGJI, "2999")
                                         val intent = Intent(this@Login2Activity, KeepFitActivity::class.java)
                                         startActivity(intent)
+                                        finish()
+
                                     } else if (result.data.haveMember == "2") {
                                         SpUtils.putString(applicationContext, AppConstants.USER_DENGJI, "3999")
                                         val intent = Intent(this@Login2Activity, KeepFitActivity::class.java)
                                         startActivity(intent)
+                                        finish()
                                     } else if (result.data.haveMember == "3") {
                                         SpUtils.putString(applicationContext, AppConstants.USER_DENGJI, "6999")
                                         val intent = Intent(this@Login2Activity, KeepFitActivity::class.java)
                                         startActivity(intent)
+                                        finish()
                                     }
-                                    finish()
                                 } else if (result.data.status == 0) {//失败
                                     val intent = Intent(this@Login2Activity, CheckStatusFailActivity::class.java)
                                     startActivity(intent)

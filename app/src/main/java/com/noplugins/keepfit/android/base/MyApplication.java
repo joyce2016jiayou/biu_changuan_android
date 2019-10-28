@@ -177,27 +177,14 @@ public class MyApplication extends MultiDexApplication {
         uploadManager = new UploadManager(config);// 重用uploadManager。一般地，只需要创建一个uploadManager对象
 
         /**极光*/
-        JPushInterface.setDebugMode(true);    // 设置开启日志,发布时请关闭日志
         JPushInterface.init(this);            // 初始化 JPush
+        JPushInterface.setDebugMode(true);    // 设置开启日志,发布时请关闭日志
         String rid = JPushInterface.getRegistrationID(getApplicationContext());
         if (!rid.isEmpty()) {
             registrationId = rid;
             Log.e("极光registrationId", registrationId);
-            //如果没有缓存的别名，重新获取
-            if ("".equals(SharedPreferencesHelper.get(this, Network.is_set_alias, ""))) {
-                //设置别名
-                TagAliasOperatorHelper.TagAliasBean tagAliasBean = new TagAliasOperatorHelper.TagAliasBean();
-                sequence++;
-                tagAliasBean.alias = "android_alias_key_value" + sequence;
-                tagAliasBean.isAliasAction = true;
-                tagAliasBean.action = TagAliasOperatorHelper.ACTION_SET;
-                TagAliasOperatorHelper.getInstance().handleAction(getApplicationContext(), sequence, tagAliasBean);
-            } else {
-                Log.e("已缓存alias", "已缓存alias");
-
-            }
         } else {
-            Toast.makeText(this, "Get registration fail, JPush init failed!", Toast.LENGTH_SHORT).show();
+            Log.e("极光报错", "Get registration fail, JPush init failed!");
         }
 
         /**方法负载过多解决*/

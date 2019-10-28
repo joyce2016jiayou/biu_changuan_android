@@ -149,20 +149,23 @@ public class SplashActivity extends BaseActivity {
                                     if (result.getData().getHaveMember().equals("0")) {
                                         Intent intent = new Intent(SplashActivity.this, HeTongActivity.class);
                                         startActivity(intent);
+                                        finish();
                                     } else if (result.getData().getHaveMember().equals("1")) {
                                         SpUtils.putString(getApplicationContext(), AppConstants.USER_DENGJI, "2999");
                                         Intent intent = new Intent(SplashActivity.this, KeepFitActivity.class);
                                         startActivity(intent);
+                                        finish();
                                     } else if (result.getData().getHaveMember().equals("2")) {
                                         SpUtils.putString(getApplicationContext(), AppConstants.USER_DENGJI, "3999");
                                         Intent intent = new Intent(SplashActivity.this, KeepFitActivity.class);
                                         startActivity(intent);
+                                        finish();
                                     } else if (result.getData().getHaveMember().equals("3")) {
                                         SpUtils.putString(getApplicationContext(), AppConstants.USER_DENGJI, "6999");
                                         Intent intent = new Intent(SplashActivity.this, KeepFitActivity.class);
                                         startActivity(intent);
+                                        finish();
                                     }
-                                    finish();
                                 } else if (result.getData().getStatus() == 0) {//失败
                                     Intent intent = new Intent(SplashActivity.this, CheckStatusFailActivity.class);
                                     startActivity(intent);

@@ -183,7 +183,7 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
     private NoScrollViewPager viewpager_content;
     private String changguan_type = "";
     private Subscription subscription;//Rxjava
-    private String icon_net_path = "";
+    private static String icon_net_path = "";
     private List<BiaoqianEntity> biaoqianEntities = new ArrayList<>();
     private List<String> jiugongge_iamges = new ArrayList<>();
     private ProgressUtil progress_upload;
@@ -413,6 +413,7 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
 
 
     private void upload_icon_work(String img_path) {
+        Log.e("上传icon",img_path);
         uploadManager.put(img_path, qiniu_key, uptoken,
                 new UpCompletionHandler() {
                     @Override
@@ -423,7 +424,7 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
                             //测试资料上传的
                             //getUrlTest(icon_net_path);
                             //Log.e("qiniu", "Upload Success");
-                            //Log.e("打印key：", icon_net_path);
+                            Log.e("上传icon成功：", icon_net_path);
                         } else {
                             Log.e("qiniu", "Upload Fail");
                             //如果失败，这里可以把info信息上报自己的服务器，便于后面分析上传错误原因
@@ -641,13 +642,12 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
         List<InformationEntity.GymPicBean> gym_pic = new ArrayList<>();
         InformationEntity.GymPicBean icon_pic = new InformationEntity.GymPicBean();
         icon_pic.setOrder_num(1);
-        //icon_pic.setUrl(icon_net_path);
+        Log.e("登记反馈说多了",icon_net_path);
         icon_pic.setQiniu_key(icon_net_path);
         gym_pic.add(icon_pic);
         for (int i = 0; i < jiugongge_iamges.size(); i++) {
             InformationEntity.GymPicBean jiugongge_icon = new InformationEntity.GymPicBean();
             jiugongge_icon.setOrder_num((i + 2));
-            //jiugongge_icon.setUrl(jiugongge_iamges.get(i));
             jiugongge_icon.setQiniu_key(jiugongge_iamges.get(i));
             gym_pic.add(jiugongge_icon);
         }
