@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.nfc.Tag;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
@@ -45,6 +46,7 @@ import com.noplugins.keepfit.android.adapter.CameraSelectAdapter;
 import com.noplugins.keepfit.android.adapter.ExRecyclerAdapter;
 import com.noplugins.keepfit.android.base.MyApplication;
 import com.noplugins.keepfit.android.bean.JsonBean;
+import com.noplugins.keepfit.android.callback.ImageCompressCallBack;
 import com.noplugins.keepfit.android.entity.BiaoqianEntity;
 import com.noplugins.keepfit.android.entity.InformationEntity;
 import com.noplugins.keepfit.android.entity.ItemBean;
@@ -104,6 +106,9 @@ import lib.demo.spinner.MaterialSpinner;
 import okhttp3.RequestBody;
 import rx.Subscription;
 import rx.functions.Action1;
+import top.zibin.luban.CompressionPredicate;
+import top.zibin.luban.Luban;
+import top.zibin.luban.OnCompressListener;
 
 import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
@@ -265,55 +270,12 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
                 if (check_value()) {
                     //七牛云
                     progress_upload = new ProgressUtil();
-                    progress_upload.showProgressDialog(getActivity(), "载入中...");
+                    progress_upload.showProgressDialog(getActivity(), "上传中...");
                     //上传icon
-                    uploadManager.put(icon_image_path, qiniu_key, uptoken,
-                            new UpCompletionHandler() {
-                                @Override
-                                public void complete(String key, ResponseInfo info, JSONObject response) {
-                                    //res包含hash、key等信息，具体字段取决于上传策略的设置
-                                    if (info.isOK()) {
-                                        Log.e("qiniu", "Upload Success");
-                                        icon_net_path = key;
-                                        Log.e("打印key：", icon_net_path);
-                                        //测试资料上传的
-                                        //getUrlTest(icon_net_path);
-                                        String headpicPath = "http://upload.qiniup.com/" + key;
-                                        Log.e("返回的地址", headpicPath);
-                                    } else {
-                                        Log.e("qiniu", "Upload Fail");
-                                        //如果失败，这里可以把info信息上报自己的服务器，便于后面分析上传错误原因
-                                    }
-                                    //Log.e("qiniu", key + ",\r\n " + info.path + ",\r\n " + response);
-                                }
-                            }, new UploadOptions(null, "test-type", true, null, null));
+                    upload_icon_image(icon_image_path, false);
                     //上传九宫格
                     for (int i = 0; i < strings.size(); i++) {
-                        String expectKey = UUID.randomUUID().toString();
-                        uploadManager.put(strings.get(i), expectKey, uptoken, new UpCompletionHandler() {
-                            public void complete(String k, ResponseInfo rinfo, JSONObject response) {
-                                if (rinfo.isOK()) {
-                                    Log.e("qiniu", "Upload Success");
-//                                String key = getKey(k, response);
-                                    // String s = k + ", "+ rinfo + ", " + response;
-                                    Log.e("获取到的key", "获取到的key:" + k);
-                                    jiugongge_iamges.add(k);
-                                    if (jiugongge_iamges.size() == strings.size()) {
-                                        progress_upload.dismissProgressDialog();
-
-                                        mainActivity.informationEntity = getDates();
-
-                                        //跳转下一个页面
-                                        viewpager_content.setCurrentItem(1);
-                                        int step = stepView.getCurrentStep();//设置进度条
-                                        stepView.setCurrentStep((step + 1) % stepView.getStepNum());
-                                    }
-                                } else {
-                                    Log.e("qiniu", "Upload Fail");
-                                    //如果失败，这里可以把info信息上报自己的服务器，便于后面分析上传错误原因
-                                }
-                            }
-                        }, new UploadOptions(null, "test-type", true, null, null));
+                        upload_icon_image(strings.get(i), true);
                     }
                 } else {
                     return;
@@ -341,6 +303,134 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
                 select_address_pop();
             }
         });
+    }
+
+    /**
+     * 获取保存压缩图片文件的位置
+     *
+     * @return
+     */
+    private final static String PHOTO_COMPRESS_JPG_BASEPATH = "/" + "TakePhoto" + "/CompressImgs/";
+
+    public static String getCompressJpgFileAbsolutePath() {
+        String fileBasePath = Environment.getExternalStorageDirectory().getAbsolutePath() + PHOTO_COMPRESS_JPG_BASEPATH;
+        File file = new File(fileBasePath);
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+
+        return fileBasePath;
+    }
+
+    private void upload_icon_image(String image_path, boolean is_jiugognge) {
+        Luban.with(getActivity())
+                .load(image_path)
+                .ignoreBy(100)
+                .setTargetDir(getCompressJpgFileAbsolutePath())
+                .filter(new CompressionPredicate() {
+                    @Override
+                    public boolean apply(String path) {
+                        return !(TextUtils.isEmpty(path) || path.toLowerCase().endsWith(".gif"));
+                    }
+                }).setCompressListener(new OnCompressListener() {
+            @Override
+            public void onStart() {
+                // TODO 压缩开始前调用，可以在方法内启动 loading UI
+            }
+
+            @Override
+            public void onSuccess(File file) {
+                // TODO 压缩成功后调用，返回压缩后的图片文件
+                if (is_jiugognge) {//九宫格上传
+                    jiugonggeCallBack.onSucceed(file.getAbsolutePath());
+                } else {
+                    compressCallBack.onSucceed(file.getAbsolutePath());
+                }
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                compressCallBack.onFailure(e.getMessage());
+                // TODO 当压缩过程出现问题时调用
+            }
+        }).launch();
+    }
+
+    ImageCompressCallBack compressCallBack = new ImageCompressCallBack() {
+        @Override
+        public void onSucceed(String data) {
+//            Log.e("压缩过的",data);
+//            File file = new File(data);
+//            Log.e("压缩后的大小", FileSizeUtil.getFileOrFilesSize(file.getAbsolutePath(), 2) + "");
+            upload_icon_work(data);
+        }
+
+        @Override
+        public void onFailure(String msg) {
+            Log.e("压缩失败的", msg);
+        }
+    };
+    ImageCompressCallBack jiugonggeCallBack = new ImageCompressCallBack() {
+        @Override
+        public void onSucceed(String data) {
+//            Log.e("压缩过的",data);
+//            File file = new File(data);
+//            Log.e("压缩后的大小", FileSizeUtil.getFileOrFilesSize(file.getAbsolutePath(), 2) + "");
+            upload_jiugongge_work(data);
+        }
+
+        @Override
+        public void onFailure(String msg) {
+            Log.e("压缩失败的", msg);
+        }
+    };
+
+    private void upload_jiugongge_work(String image_path) {
+        String expectKey = UUID.randomUUID().toString();
+        uploadManager.put(image_path, expectKey, uptoken, new UpCompletionHandler() {
+            public void complete(String k, ResponseInfo rinfo, JSONObject response) {
+                if (rinfo.isOK()) {
+                    Log.e("qiniu", "Upload Success");
+//                                String key = getKey(k, response);
+                    // String s = k + ", "+ rinfo + ", " + response;
+                    //Log.e("获取到的key", "获取到的key:" + k);
+                    jiugongge_iamges.add(k);
+                    if (jiugongge_iamges.size() == strings.size()) {
+                        progress_upload.dismissProgressDialog();
+                        mainActivity.informationEntity = getDates();
+                        //跳转下一个页面
+                        viewpager_content.setCurrentItem(1);
+                        int step = stepView.getCurrentStep();//设置进度条
+                        stepView.setCurrentStep((step + 1) % stepView.getStepNum());
+                    }
+                } else {
+                    Log.e("qiniu", "Upload Fail");
+                    //如果失败，这里可以把info信息上报自己的服务器，便于后面分析上传错误原因
+                }
+            }
+        }, new UploadOptions(null, "test-type", true, null, null));
+    }
+
+
+    private void upload_icon_work(String img_path) {
+        uploadManager.put(img_path, qiniu_key, uptoken,
+                new UpCompletionHandler() {
+                    @Override
+                    public void complete(String key, ResponseInfo info, JSONObject response) {
+                        //res包含hash、key等信息，具体字段取决于上传策略的设置
+                        if (info.isOK()) {
+                            icon_net_path = key;
+                            //测试资料上传的
+                            //getUrlTest(icon_net_path);
+                            //Log.e("qiniu", "Upload Success");
+                            //Log.e("打印key：", icon_net_path);
+                        } else {
+                            Log.e("qiniu", "Upload Fail");
+                            //如果失败，这里可以把info信息上报自己的服务器，便于后面分析上传错误原因
+                        }
+                        //Log.e("qiniu", key + ",\r\n " + info.path + ",\r\n " + response);
+                    }
+                }, new UploadOptions(null, "test-type", true, null, null));
     }
 
     /**

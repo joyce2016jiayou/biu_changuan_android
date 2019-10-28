@@ -31,7 +31,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/tv19"
+                    android:text="@string/tv150"
                     android:textColor="@color/top_heiziti"
                     android:textSize="16sp" />
 
@@ -42,6 +42,7 @@
                     android:layout_marginLeft="4dp"
                     android:background="@null"
                     android:hint="@string/edit_hint8"
+                    android:maxLength="20"
                     android:singleLine="true"
                     android:textColor="@color/top_heiziti"
                     android:textColorHint="@color/color_9B9B9B"
