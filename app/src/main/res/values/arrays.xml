@@ -57,4 +57,12 @@
         <item>威尔士</item>
         <item>厦门拉登</item>
     </string-array>
+
+    <string-array name="team_xlmb">
+        <item>瘦身塑形</item>
+        <item>增重增肌</item>
+        <item>体能训练</item>
+        <item>康复训练</item>
+        <item>体态调整</item>
+    </string-array>
 </resources>

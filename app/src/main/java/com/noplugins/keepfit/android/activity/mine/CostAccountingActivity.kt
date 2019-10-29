@@ -57,7 +57,7 @@ class CostAccountingActivity : BaseActivity() {
         back_btn.setOnClickListener {
             if (form == "pay" && cost != 0.0) {
                 val mIntent = Intent()//没有任何参数（意图），只是用来传递数据
-                mIntent.putExtra("cost", cost)
+                mIntent.putExtra("cost", ""+cost)
                 setResult(RESULT_OK, mIntent)
                 Log.d("tag__BBB",form)
             } else {
@@ -109,10 +109,10 @@ class CostAccountingActivity : BaseActivity() {
     }
 
     override fun onBackPressed() {
-
+        Log.d("pay","pay:"+form)
         if (form == "pay" && cost!=0.0) {
             val mIntent = Intent()//没有任何参数（意图），只是用来传递数据
-            mIntent.putExtra("cost", cost)
+            mIntent.putExtra("cost", ""+cost)
             setResult(RESULT_OK, mIntent)
         } else {
             setResult(3)

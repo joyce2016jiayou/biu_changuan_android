@@ -131,21 +131,17 @@ public class YaoQiTeacherAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHo
 
                     if (select_num < max_selectnum) {
                         //判断是邀请还是取消邀请
-                        if (holder.yaoqing_tv.getText().equals("邀请")) {
-                            holder.yaoqing_tv.setText("取消邀请");
-                            Log.e("邀请", "邀请");
-
-
+                        if (holder.yaoqing_tv.getText().equals("取消邀请")||holder.yaoqing_tv.getText().equals("邀请")) {
                             //邀请
-                            invite(teacherBean);
-                        } else {
-                            holder.yaoqing_tv.setText("邀请");
-
-                            Log.e("取消邀请", "取消邀请");
-                            //取消邀请
-                            cancel_invite();
-
+                            invite(teacherBean,holder.yaoqing_tv);
+                        } else{
+                            if (holder.yaoqing_tv.getText().equals("已邀请")) {
+                                //取消邀请
+                                gymInviteNum = teacherBean.getGymInviteNum();
+                                cancel_invite(holder.yaoqing_tv);
+                            }
                         }
+
 
 
                         /*if(teacherBean.getInviteType()==0){
@@ -157,7 +153,6 @@ public class YaoQiTeacherAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHo
                         }else if(teacherBean.getInviteType()==3){
 
                         }else{
-
 
                         }*/
 
@@ -171,7 +166,7 @@ public class YaoQiTeacherAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHo
         }
     }
 
-    private void cancel_invite() {
+    private void cancel_invite(TextView yaoqing_tv) {
         Map<String, Object> params = new HashMap<>();
         params.put("gymInviteNum", gymInviteNum);//老师编号
         Subscription subscription = Network.getInstance("取消邀请", context).
@@ -180,6 +175,7 @@ public class YaoQiTeacherAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHo
                     public void onNext(Bean<Object> objectBean) {
                         select_num--;
                         yaoqing_number_tv.setText("(" + select_num + "/5)");
+                        yaoqing_tv.setText("取消邀请");
                     }
 
                     @Override
@@ -189,7 +185,7 @@ public class YaoQiTeacherAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHo
                 }, context, true));
     }
 
-    private void invite(TeacherEntity.TeacherBean teacherBean) {
+    private void invite(TeacherEntity.TeacherBean teacherBean,TextView yaoqing_tv) {
         Map<String, Object> params = new HashMap<>();
         params.put("gym_area_num", SpUtils.getString(context, AppConstants.CHANGGUAN_NUM));//场馆编号
         params.put("gen_teacher_num", teacherBean.getTeacherNum());//场馆编号
@@ -205,8 +201,10 @@ public class YaoQiTeacherAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHo
                     public void on_post_entity(InViteEntity entity, String s) {
                         Log.e("邀请成功", "邀请成功" + entity.getData());
                         gymInviteNum = entity.getData();
+                        teacherBean.setGymInviteNum(gymInviteNum);
                         select_num++;
                         yaoqing_number_tv.setText("(" + select_num + "/5)");
+                        yaoqing_tv.setText("已邀请");
                     }
                 }, new SubscriberOnNextListener<Bean<Object>>() {
                     @Override

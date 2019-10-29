@@ -75,7 +75,8 @@
         <activity android:name=".activity.SubmitInformationSelectActivity" />
         <activity android:name=".activity.mine.CgPriceActivity" />
         <activity android:name=".activity.user.Login2Activity"></activity>
-        <activity android:name=".activity.HeTongActivity">
+        <activity android:name=".activity.HeTongActivity"
+            android:launchMode="singleTop">
 
         </activity>
         <activity android:name=".activity.BuyHuiYuanActivity">

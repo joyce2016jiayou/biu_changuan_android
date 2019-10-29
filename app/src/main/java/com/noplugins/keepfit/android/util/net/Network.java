@@ -741,8 +741,8 @@ public class Network {
      * @param subscriber
      * @return
      */
-    public Subscription sen_order(RequestBody params, Subscriber<Bean<Object>> subscriber) {
-        return service.sen_order(params)
+    public Subscription sen_order(Map<String,Object> params, Subscriber<Bean<Object>> subscriber) {
+        return service.sen_order(retuen_json_object(params))
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

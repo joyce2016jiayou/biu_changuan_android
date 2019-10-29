@@ -158,15 +158,15 @@ class Login2Activity : BaseActivity() {
                         ProgressSubscriber("验证验证码和登录", object : SubscriberOnNextListener<Bean<LoginBean>> {
                             override fun onNext(result: Bean<LoginBean>) {
                                 login_btn.loadingComplete()
-                                when(result.data.memberService){
-                                    1-> {
-                                        SpUtils.putString(applicationContext,AppConstants.USER_DENGJI,"2999")
+                                when (result.data.memberService) {
+                                    1 -> {
+                                        SpUtils.putString(applicationContext, AppConstants.USER_DENGJI, "2999")
                                     }
-                                    2-> {
-                                        SpUtils.putString(applicationContext,AppConstants.USER_DENGJI,"3999")
+                                    2 -> {
+                                        SpUtils.putString(applicationContext, AppConstants.USER_DENGJI, "3999")
                                     }
-                                    3-> {
-                                        SpUtils.putString(applicationContext,AppConstants.USER_DENGJI,"6999")
+                                    3 -> {
+                                        SpUtils.putString(applicationContext, AppConstants.USER_DENGJI, "6999")
                                     }
                                 }
                                 save_resource(result.data)
@@ -174,9 +174,10 @@ class Login2Activity : BaseActivity() {
                                     val intent = Intent(this@Login2Activity, SetPasswordActivity::class.java)
                                     startActivity(intent)
                                 } else {//设置过密码
-                                    if (result.data.type == 1){
+                                    if (result.data.type == 1) {
                                         get_check_status()
-                                    }                                }
+                                    }
+                                }
                             }
 
                             override fun onError(error: String) {
@@ -205,22 +206,21 @@ class Login2Activity : BaseActivity() {
                                 SpUtils.putInt(applicationContext, AppConstants.USER_TYPE, result.data.type)
                                 SpUtils.putInt(applicationContext, AppConstants.IS_TX, result.data.havePayPassWord)
 
-                                when(result.data.memberService){
-                                    1-> {
-                                        SpUtils.putString(applicationContext,AppConstants.USER_DENGJI,"2999")
+                                when (result.data.memberService) {
+                                    1 -> {
+                                        SpUtils.putString(applicationContext, AppConstants.USER_DENGJI, "2999")
                                     }
-                                    2-> {
-                                        SpUtils.putString(applicationContext,AppConstants.USER_DENGJI,"3999")
+                                    2 -> {
+                                        SpUtils.putString(applicationContext, AppConstants.USER_DENGJI, "3999")
                                     }
-                                    3-> {
-                                        SpUtils.putString(applicationContext,AppConstants.USER_DENGJI,"6999")
+                                    3 -> {
+                                        SpUtils.putString(applicationContext, AppConstants.USER_DENGJI, "6999")
                                     }
                                 }
-                                if (result.data.type == 0){
+                                if (result.data.type == 0) {
                                     val intent = Intent(this@Login2Activity, SubmitInformationSelectActivity::class.java)
                                     startActivity(intent)
-                                }
-                                else if (result.data.type == 1){
+                                } else if (result.data.type == 1) {
                                     get_check_status()
                                 }
 
@@ -320,7 +320,7 @@ class Login2Activity : BaseActivity() {
                                     val intent = Intent(this@Login2Activity, CheckStatusFailActivity::class.java)
                                     startActivity(intent)
                                     finish()
-                                } else if (result.data.status == -2||result.data.status == 4) {//没有提交过
+                                } else if (result.data.status == -2 || result.data.status == 4) {//没有提交过
                                     val intent = Intent(this@Login2Activity, SubmitInformationSelectActivity::class.java)
                                     startActivity(intent)
                                     finish()

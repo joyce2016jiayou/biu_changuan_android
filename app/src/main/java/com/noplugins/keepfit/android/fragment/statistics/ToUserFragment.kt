@@ -35,6 +35,8 @@ import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.noplugins.keepfit.android.bean.UserStatisticsBean
 import com.noplugins.keepfit.android.chart.RmbFormatter
+import com.noplugins.keepfit.android.global.AppConstants
+import com.noplugins.keepfit.android.util.SpUtils
 import com.noplugins.keepfit.android.util.net.Network
 import com.noplugins.keepfit.android.util.net.entity.Bean
 import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriber
@@ -87,7 +89,7 @@ class ToUserFragment : BaseFragment() {
         val params = HashMap<String, Any>()
         params["type"] = 1
         params["date"] = selectDate
-        params["areaNum"] = "GYM19091283573448"
+        params["areaNum"] = SpUtils.getString(activity, AppConstants.CHANGGUAN_NUM)
         val subscription = Network.getInstance("精准化时间", activity)
                 .statistics(
                         params,

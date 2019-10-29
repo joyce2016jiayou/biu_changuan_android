@@ -33,6 +33,8 @@ import kotlin.collections.ArrayList
 import com.github.mikephil.charting.components.LegendEntry
 import com.github.mikephil.charting.components.Legend
 import com.noplugins.keepfit.android.bean.UserStatisticsBean
+import com.noplugins.keepfit.android.global.AppConstants
+import com.noplugins.keepfit.android.util.SpUtils
 import com.noplugins.keepfit.android.util.net.Network
 import com.noplugins.keepfit.android.util.net.entity.Bean
 import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriber
@@ -172,9 +174,10 @@ class ToProductFragment : BaseFragment() {
         dataSet.colors = colors
         val pieData = PieData(dataSet)
 //        pieData.setDrawValues(true)
+        pieData.setDrawValues(true)
         picChart.setUsePercentValues(true)
-        pieData.setValueFormatter(PercentFormatter(picChart))
-        pieData.setValueTextSize(12f)
+        pieData.setValueFormatter(com.noplugins.keepfit.android.chart.PercentFormatter(picChart))
+        pieData.setValueTextSize(9f)
         picChart.data = pieData
         picChart.invalidate()
         // 不显示图例
@@ -187,13 +190,13 @@ class ToProductFragment : BaseFragment() {
 
 //        legend.setEnabled(false)
         picChart.isRotationEnabled = false
-        picChart.setDrawEntryLabels(isLabel)
         picChart.setEntryLabelColor(Color.BLACK)
+        picChart.setDrawEntryLabels(isLabel)
         val description = Description()
         description.text = ""
         picChart.description = description
         picChart.holeRadius = 0f
-        picChart.x = -100f
+        picChart.x = -120f
         picChart.transparentCircleRadius = 0f
         picChart.extraTopOffset = 20f
         picChart.extraBottomOffset = 20f
@@ -202,7 +205,7 @@ class ToProductFragment : BaseFragment() {
     }
 
     private fun initLineChart() {
-        val dataSet = LineDataSet(entries, "Label") // add entries to dataset
+        val dataSet = LineDataSet(entries, "") // add entries to dataset
         dataSet.color = colors[0]//线条颜色
         dataSet.setCircleColor(colors[0])//圆点颜色
         dataSet.lineWidth = 1f//线条宽度
@@ -456,7 +459,7 @@ class ToProductFragment : BaseFragment() {
         val params = HashMap<String, Any>()
         params["type"] = 2
         params["date"] = selectDate
-        params["areaNum"] = "GYM19091283573448"
+        params["areaNum"] = SpUtils.getString(activity,AppConstants.CHANGGUAN_NUM)
         val subscription = Network.getInstance("精准化时间", activity)
                 .statistics(
                         params,

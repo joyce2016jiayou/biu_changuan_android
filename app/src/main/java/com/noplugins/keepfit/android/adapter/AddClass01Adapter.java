@@ -30,7 +30,7 @@ public class AddClass01Adapter extends BaseQuickAdapter<ClassEntity.DataBean, Ba
     @Override
     protected void convert(@NonNull BaseViewHolder helper, ClassEntity.DataBean item) {
         //课程名称+课程类型+教练名字
-        helper.setText(R.id.class_title_tv,item.getCourse_name()+"·"+item.getType());
+        helper.setText(R.id.class_title_tv,item.getCourse_name()+"·"+getString(Integer.parseInt(item.getType())));
         helper.setText(R.id.class_changdi,item.getGym_place_num()+"");
         helper.setText(R.id.class_people_number,item.getMax_num()+"");
         helper.setText(R.id.class_minute,item.getCourse_time()+"");
@@ -64,5 +64,10 @@ public class AddClass01Adapter extends BaseQuickAdapter<ClassEntity.DataBean, Ba
         helper.setText(R.id.class_status,status);
 
         helper.addOnClickListener(R.id.ll_item);
+    }
+
+    private String getString(int type){
+        String [] array = mContext.getResources().getStringArray(R.array.team_xlmb);
+        return array[type-1];
     }
 }

@@ -17,6 +17,7 @@ import com.andview.refreshview.XRefreshView;
 import com.andview.refreshview.XRefreshViewFooter;
 import com.google.gson.Gson;
 import com.noplugins.keepfit.android.R;
+import com.noplugins.keepfit.android.activity.mine.TeacherDetailActivity;
 import com.noplugins.keepfit.android.adapter.AddClassAdapter;
 import com.noplugins.keepfit.android.adapter.YaoQiTeacherAdapter;
 import com.noplugins.keepfit.android.base.BaseActivity;
@@ -138,7 +139,8 @@ public class YaoQingTeacherActivity extends BaseActivity {
             public void onItemClick(View view, int position) {
                 Intent intent = new Intent(YaoQingTeacherActivity.this, TeacherDetailActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putString("genTeacherNum", dates.get(position).getTeacherNum());
+                bundle.putString("cgNum", dates.get(position).getTeacherNum());
+                bundle.putInt("type",-2);
                 //bundle.putString("gymCourseNum",dates.get(position).ge);
                 intent.putExtras(bundle);
                 startActivity(intent);

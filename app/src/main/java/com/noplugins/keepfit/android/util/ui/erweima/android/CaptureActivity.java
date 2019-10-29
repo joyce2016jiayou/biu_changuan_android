@@ -34,6 +34,7 @@ import com.noplugins.keepfit.android.util.data.SharedPreferencesHelper;
 import com.noplugins.keepfit.android.util.net.Network;
 import com.noplugins.keepfit.android.util.net.entity.Bean;
 import com.noplugins.keepfit.android.util.net.progress.GsonSubscriberOnNextListener;
+import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriber;
 import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriberNew;
 import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener;
 import com.noplugins.keepfit.android.util.ui.erweima.ViewfinderView;
@@ -226,16 +227,11 @@ public class CaptureActivity extends AppCompatActivity implements SurfaceHolder.
 
     private void send_order_number(Result rawResult) {
         Map<String, Object> params = new HashMap<>();
-        params.put("ordNum", rawResult.getText());//场馆编号
-        Gson gson = new Gson();
-        String json_params = gson.toJson(params);
-        String json = new Gson().toJson(params);//要传递的json
-        RequestBody requestBody = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), json);
-        Log.e(TAG, "发送订单：" + json_params);
+        params.put("ordItemNum", rawResult.getText());//场馆编号
         Subscription subscription = Network.getInstance("发送订单", this).
-                sen_order(requestBody, new ProgressSubscriberNew<>(String.class, new GsonSubscriberOnNextListener<String>() {
+                sen_order(params, new ProgressSubscriber<>("", new SubscriberOnNextListener<Bean<Object>>() {
                     @Override
-                    public void on_post_entity(String entity, String s) {
+                    public void onNext(Bean<Object> objectBean) {
                         Log.e("发送订单成功", "发送订单成功");
 
                         Intent intent = getIntent();
@@ -243,16 +239,10 @@ public class CaptureActivity extends AppCompatActivity implements SurfaceHolder.
                         setResult(RESULT_OK, intent);
                         CaptureActivity.this.finish();
                     }
-                }, new SubscriberOnNextListener<Bean<Object>>() {
-                    @Override
-                    public void onNext(Bean<Object> result) {
-
-                    }
 
                     @Override
                     public void onError(String error) {
-                        Log.e("发送订单失败", "发送订单失败" + error);
-
+                        Toast.makeText(CaptureActivity.this, error, Toast.LENGTH_SHORT).show();
                     }
                 }, this, true));
 

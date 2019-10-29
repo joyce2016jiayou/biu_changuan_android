@@ -22,11 +22,29 @@ public class HightListBean {
     private String gymAreaNum;
     private String highTimeStart;
     private String highTimeEnd;
-    private int normalPrice;
-    private int highTimePrice;
+    private double normalPrice;
+    private double highTimePrice;
     private String createDate;
     private String updateDate;
     private int deleted;
+    private double finalHighPrice;
+    private double finalNormalPrice;
+
+    public double getFinalHighPrice() {
+        return finalHighPrice;
+    }
+
+    public void setFinalHighPrice(double finalHighPrice) {
+        this.finalHighPrice = finalHighPrice;
+    }
+
+    public double getFinalNormalPrice() {
+        return finalNormalPrice;
+    }
+
+    public void setFinalNormalPrice(double finalNormalPrice) {
+        this.finalNormalPrice = finalNormalPrice;
+    }
 
     public String getPkname() {
         return pkname;
@@ -76,19 +94,19 @@ public class HightListBean {
         this.highTimeEnd = highTimeEnd;
     }
 
-    public int getNormalPrice() {
+    public double getNormalPrice() {
         return normalPrice;
     }
 
-    public void setNormalPrice(int normalPrice) {
+    public void setNormalPrice(double normalPrice) {
         this.normalPrice = normalPrice;
     }
 
-    public int getHighTimePrice() {
+    public double getHighTimePrice() {
         return highTimePrice;
     }
 
-    public void setHighTimePrice(int highTimePrice) {
+    public void setHighTimePrice(double highTimePrice) {
         this.highTimePrice = highTimePrice;
     }
 

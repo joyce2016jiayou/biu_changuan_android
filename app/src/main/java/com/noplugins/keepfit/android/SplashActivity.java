@@ -103,7 +103,7 @@ public class SplashActivity extends BaseActivity {
                     Intent intent1 = new Intent(SplashActivity.this, KeepFitActivity.class);
                     startActivity(intent1);
                 } else if (SpUtils.getInt(getApplicationContext(), AppConstants.USER_TYPE) == 0) {//默认，跳审核页
-                    Intent intent1 = new Intent(SplashActivity.this, SubmitInformationSelectActivity.class);
+                    Intent intent1 = new Intent(SplashActivity.this, Login2Activity.class);
                     startActivity(intent1);
                 }
 

@@ -143,12 +143,15 @@ public class AddClassActivity extends BaseActivity {
         });
         recycler_view.setAdapter(addClassAdapter);
 
+//        xrefreshview
+        xrefreshview.setEnableLoadMore(false);
+        xrefreshview.setEnableRefresh(false);
         xrefreshview.setOnRefreshListener(refreshLayout -> {
-            refreshLayout.finishRefresh(2000);
+            refreshLayout.finishRefresh(1000);
         });
 
         xrefreshview.setOnLoadMoreListener(refreshLayout -> {
-            refreshLayout.finishRefresh(2000);
+            refreshLayout.finishRefresh(1000);
         });
 
         init_class_date();

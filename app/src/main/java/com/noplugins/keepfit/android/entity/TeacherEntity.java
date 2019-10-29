@@ -40,6 +40,15 @@ public class TeacherEntity {
         private String teacherName;
         private String createDate;
         private int inviteStatus;
+        private String gymInviteNum;
+
+        public String getGymInviteNum() {
+            return gymInviteNum;
+        }
+
+        public void setGymInviteNum(String gymInviteNum) {
+            this.gymInviteNum = gymInviteNum;
+        }
 
         public String getLogoUrl() {
             return logoUrl;

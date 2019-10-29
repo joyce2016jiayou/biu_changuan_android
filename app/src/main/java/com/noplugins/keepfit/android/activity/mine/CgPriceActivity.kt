@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -90,6 +91,9 @@ class CgPriceActivity : BaseActivity() {
         tv_add_price.setOnClickListener {
             if (et_price.text.toString() != "") {
                 tv_price.text = "场馆全天时段价格：¥${et_price.text.toString()}"
+                list.forEach {
+                    it.normal_price = et_price.text.toString()
+                }
             }
         }
         tv_select_time.setOnClickListener {
@@ -212,21 +216,22 @@ class CgPriceActivity : BaseActivity() {
                             override fun onNext(result: Bean<List<HightListBean>>) {
                                 //
                                 //HighBean
+                                if (result.data.isNotEmpty()){
+                                    for (i in 0 until result.data.size){
+                                        val highBean = HighBean()
+                                        highBean.gym_area_num = result.data[i].gymAreaNum
+                                        highBean.high_time_start = TimeCheckUtil.removeSecond(result.data[i].highTimeStart)
+                                        highBean.high_time_end = TimeCheckUtil.removeSecond(result.data[i].highTimeEnd)
+                                        highBean.high_time_price = result.data[i].finalHighPrice.toString()
+                                        highBean.normal_price = result.data[i].finalNormalPrice.toString()
+                                        list.add(highBean)
+                                    }
 
-                                for (i in 0 until result.data.size){
-                                    val highBean = HighBean()
-                                    highBean.gym_area_num = result.data[i].gymAreaNum
-                                    highBean.high_time_start = TimeCheckUtil.removeSecond(result.data[i].highTimeStart)
-                                    highBean.high_time_end = TimeCheckUtil.removeSecond(result.data[i].highTimeEnd)
-                                    highBean.high_time_price = result.data[i].highTimePrice.toString()
-                                    highBean.normal_price = result.data[i].normalPrice.toString()
-                                    list.add(highBean)
+                                    et_price.setText("${result.data[0].finalNormalPrice}")
+                                    tv_price.text = "场馆全天时段价格：¥${result.data[0].finalNormalPrice}"
+
+                                    adapter!!.notifyDataSetChanged()
                                 }
-
-                                et_price.setText("${result.data[0].normalPrice}")
-                                tv_price.text = "场馆全天时段价格：¥${result.data[0].normalPrice}"
-
-                                adapter!!.notifyDataSetChanged()
                             }
 
                             override fun onError(error: String) {
@@ -247,16 +252,17 @@ class CgPriceActivity : BaseActivity() {
     }
 
     override fun onBackPressed() {
+        Log.d("form",form)
         if (form == "pay"){
             val intent = Intent(this, KeepFitActivity::class.java)
             startActivity(intent)
             finish()
             return
         }
-        val intent = Intent(this, KeepFitActivity::class.java)
+//        val intent = Intent(this, KeepFitActivity::class.java)
 //        startActivity(intent,3)
-        setResult(3,intent)
-
+        setResult(3)
+//        startActivity(intent)
         finish()
     }
 }

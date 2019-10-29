@@ -36,18 +36,18 @@ class TeacherDetailActivity : BaseActivity() {
             listItem = parms.getInt("listItem")
             cgNum = parms.getString("cgNum").toString()
             type = parms.getInt("type", -1)
-            if (type == 1) {
-                tv_yaoqing.text = "解 绑"
-            } else if (type != -1){
-                tv_yaoqing.visibility = View.GONE
-            }
+
             requestPrivateData()
         }
     }
 
     override fun initView() {
         setContentView(R.layout.activity_private_detail)
-
+        if (type == 1) {
+            tv_yaoqing.text = "解 绑"
+        } else if (type != -1){
+            tv_yaoqing.visibility = View.GONE
+        }
     }
 
     override fun doBusiness(mContext: Context?) {
@@ -79,7 +79,8 @@ class TeacherDetailActivity : BaseActivity() {
                             }
 
                             override fun onError(error: String) {
-
+                                Toast.makeText(applicationContext,error,Toast.LENGTH_SHORT)
+                                        .show()
                             }
                         }, this, false))
     }
