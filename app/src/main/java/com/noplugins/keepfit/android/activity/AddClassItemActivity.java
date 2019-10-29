@@ -1,5 +1,6 @@
 package com.noplugins.keepfit.android.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -121,7 +122,7 @@ public class AddClassItemActivity extends BaseActivity {
         setContentLayout(R.layout.activity_add_class_item);
         ButterKnife.bind(this);
         isShowTitle(false);
-        cDate = CalendarUtil.getCurrentDate();
+        cDate = CalendarUtil.getCurrent3Date();
         select_tuanke_type();
 
         select_target_type();
@@ -374,7 +375,7 @@ public class AddClassItemActivity extends BaseActivity {
     }
 
     private void select_date() {
-        DateEntity today = DateEntity.today();
+        DateEntity today = DateEntity.to3day();
         datePicker = new DatePicker(this, DateMode.YEAR_MONTH_DAY);
         datePicker.setRange(today, new DateEntity(2022, 12, 31));
         datePicker.setDefaultValue(today);
@@ -450,10 +451,12 @@ public class AddClassItemActivity extends BaseActivity {
         RequestBody requestBody = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), json);
         subscription = Network.getInstance("获取最大人数", this)
                 .get_max_num(requestBody, new ProgressSubscriberNew<>(MaxPeopleEntity.class, new GsonSubscriberOnNextListener<MaxPeopleEntity>() {
+                    @SuppressLint("SetTextI18n")
                     @Override
                     public void on_post_entity(MaxPeopleEntity entity, String s) {
                         Log.e("获取最大人数成功", entity.getData() + "获取最大人数成功" + s);
                         enable_max_people = entity.getData();
+                        edit_tuanke_renshu_number.setText(""+enable_max_people);
                     }
                 }, new SubscriberOnNextListener<Bean<Object>>() {
                     @Override
@@ -488,7 +491,7 @@ public class AddClassItemActivity extends BaseActivity {
     }
 
     private void select_target_type() {
-        String[] typeArrays = getResources().getStringArray(R.array.tuanke_types);
+        String[] typeArrays = getResources().getStringArray(R.array.team_xlmb);
         xunlian_type_spinner.setItems(typeArrays);
         xunlian_type_spinner.setSelectedIndex(0);
         xunlian_type_spinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {

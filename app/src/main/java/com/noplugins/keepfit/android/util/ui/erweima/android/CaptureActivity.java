@@ -227,7 +227,11 @@ public class CaptureActivity extends AppCompatActivity implements SurfaceHolder.
 
     private void send_order_number(Result rawResult) {
         Map<String, Object> params = new HashMap<>();
-        params.put("ordItemNum", rawResult.getText());//场馆编号
+        String arr [] = rawResult.getText().split(":");
+        if (arr.length>1){
+            params.put("ordItemNum", arr[0]);//场馆编号
+            params.put("checkType", arr[1]);//场馆编号
+        }
         Subscription subscription = Network.getInstance("发送订单", this).
                 sen_order(params, new ProgressSubscriber<>("", new SubscriberOnNextListener<Bean<Object>>() {
                     @Override

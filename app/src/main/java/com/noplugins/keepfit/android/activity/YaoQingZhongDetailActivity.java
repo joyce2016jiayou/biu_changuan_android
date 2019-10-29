@@ -182,12 +182,28 @@ public class YaoQingZhongDetailActivity extends BaseActivity {
         }else{//没有循环
             class_xunhuan.setVisibility(View.GONE);
         }
+
+        String status ="";
+        switch (entity.getCourse().getStatus()){
+            case 1:
+                status = "邀请成功";
+                break;
+            case 2:
+                status = "邀请失败";
+                break;
+            case 3:
+                status = "邀请中";
+                add_class_btn.setVisibility(View.VISIBLE);
+                break;
+            case 4:
+                status = "已过期";
+                break;
+        }
+        class_status.setText(status);
         if(entity.getTeacherList().size()>0){
-            class_status.setText("已邀请");
             yaoqing_number_tv.setText(entity.getTeacherList().size()+"/5");
             number = entity.getTeacherList().size();
         }else{
-            class_status.setText("未邀请");
             yaoqing_number_tv.setVisibility(View.GONE);
         }
 

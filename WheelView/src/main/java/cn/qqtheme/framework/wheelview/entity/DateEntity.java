@@ -18,6 +18,14 @@ public class DateEntity extends DateTimeEntity {
         int day = calendar.get(Calendar.DAY_OF_MONTH);
         return new DateEntity(year, month, day);
     }
+    public static DateEntity to3day() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DATE, 3);
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH) + 1;
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        return new DateEntity(year, month, day);
+    }
 
     public DateEntity(int year, int month, int day) {
         super(year, month, day, 0, 0, 0);
