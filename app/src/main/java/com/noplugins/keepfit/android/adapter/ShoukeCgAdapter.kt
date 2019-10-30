@@ -50,11 +50,11 @@ class ShoukeCgAdapter(data: List<TeacherBean>?) : BaseQuickAdapter<TeacherBean, 
                 ViewGroup.MarginLayoutParams(
                         ViewGroup.LayoutParams.WRAP_CONTENT,
                         ViewGroup.LayoutParams.WRAP_CONTENT)
-        layoutParams.setMargins(30, 30, 30, 30)
+        layoutParams.setMargins(15, 20, 15, 20)
         for (i in 0 until arr.size){
             val paramItemView = (mContext as Activity).layoutInflater.inflate(R.layout.adapter_search_histroy, skill,false)
             val keyWordTv = paramItemView.findViewById<TextView>(R.id.tv_content)
-            keyWordTv.setPadding(35,5,35,5)
+            keyWordTv.setPadding(15,5,15,5)
             keyWordTv.text = arr[i]
             skill.addView(paramItemView, layoutParams)
         }

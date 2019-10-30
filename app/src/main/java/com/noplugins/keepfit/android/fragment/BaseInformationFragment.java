@@ -623,9 +623,9 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
             } else {
                 gymPlacesBean.setMax_num(Integer.valueOf(itemBeans.get(i).getPlace()));
             }
-            if (itemBeans.get(i).getType_name().equals("有氧操房")) {
+            if (itemBeans.get(i).getType_name().equals("有氧")) {
                 gymPlacesBean.setPlace_type("1");
-            } else if (itemBeans.get(i).getType_name().equals("动态单车")) {
+            } else if (itemBeans.get(i).getType_name().equals("瑜伽")) {
                 gymPlacesBean.setPlace_type("2");
             } else {
                 gymPlacesBean.setPlace_type("3");

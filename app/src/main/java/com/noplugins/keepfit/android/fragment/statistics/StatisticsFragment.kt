@@ -38,6 +38,13 @@ class StatisticsFragment:BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+
+
+    }
+
+    override fun onFragmentFirstVisible() {
+        super.onFragmentFirstVisible()
         fragments = ArrayList()
         fragments.add(ToUserFragment.newInstance(""))
         fragments.add(ToProductFragment.newInstance(""))
@@ -56,7 +63,6 @@ class StatisticsFragment:BaseFragment() {
             currentIndex = 1
             showFragment()
         }
-
 
     }
 

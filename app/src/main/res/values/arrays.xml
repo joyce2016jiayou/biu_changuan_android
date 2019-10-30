@@ -6,9 +6,9 @@
         <item>主题馆</item>
     </string-array>
     <string-array name="gongneng_types">
-        <item>有氧操房</item>
-        <item>动感单车</item>
-        <item>瑜伽房</item>
+        <item>有氧</item>
+        <item>瑜伽</item>
+        <item>单车房</item>
     </string-array>
     <string-array name="tuanke_types">
         <item>单车</item>
@@ -31,7 +31,7 @@
         <item>困难</item>
     </string-array>
     <string-array name="xunhuan_types">
-        <item>一周</item>
+        <item>单次</item>
         <item>二周</item>
         <item>三周</item>
         <item>四周</item>

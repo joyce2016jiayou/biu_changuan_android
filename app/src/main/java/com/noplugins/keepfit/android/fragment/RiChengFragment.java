@@ -137,6 +137,7 @@ public class RiChengFragment extends ViewPagerFragment {
         return view;
     }
 
+
     private void initview() {
         select_date_str = DateHelper.get_date(cDate[0], cDate[1], cDate[2]);
         date_tv.setText(select_date_str);
@@ -491,7 +492,7 @@ public class RiChengFragment extends ViewPagerFragment {
 
     @Override
     public void fetchData() {
-
+        get_rili_resouce();
     }
 
     @Override

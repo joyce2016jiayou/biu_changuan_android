@@ -96,8 +96,8 @@ public class AddClassItemActivity extends BaseActivity {
     private String select_changguan_type;
     private String select_target_type = "燃脂";
     private String select_nandu_type = "容易";
-    private String select_room_type = "有氧操房";
-    private String select_xunhuan_type = "一周";
+    private String select_room_type = "有氧";
+    private String select_xunhuan_type = "单次";
     private TimePicker picker;
     private DatePicker datePicker;
     //获取当前的日期
@@ -107,6 +107,7 @@ public class AddClassItemActivity extends BaseActivity {
     private int enable_max_people;
     private List<ClassTypeEntity> classTypeEntities = new ArrayList<>();
 
+    private String type = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -123,6 +124,8 @@ public class AddClassItemActivity extends BaseActivity {
         ButterKnife.bind(this);
         isShowTitle(false);
         cDate = CalendarUtil.getCurrent3Date();
+        //获取房间类型
+        get_class_type();
         select_tuanke_type();
 
         select_target_type();
@@ -134,8 +137,7 @@ public class AddClassItemActivity extends BaseActivity {
         select_xunhuan_type();
 
         select_time();
-        //获取房间类型
-        get_class_type();
+
     }
 
     @Override
@@ -167,6 +169,7 @@ public class AddClassItemActivity extends BaseActivity {
     }
 
     private void get_class_type() {
+
         Map<String, Object> params = new HashMap<>();
 
         params.put("areaNum", SpUtils.getString(getApplicationContext(), AppConstants.CHANGGUAN_NUM));//场馆编号
@@ -184,12 +187,14 @@ public class AddClassItemActivity extends BaseActivity {
                                 room_type_spinner.setSelectedIndex(0);
                                 //获取最大人数
                                 search_room_people(0);
+                                type = classTypeEntities.get(0).getKey()+"";
                                 room_type_spinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
 
                                     @Override
                                     public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
                                         select_room_type = item;
                                         //查询每个房间最大能容纳的人数
+                                        type = classTypeEntities.get(position).getKey()+"";
                                         search_room_people(position);
                                     }
                                 });
@@ -200,6 +205,7 @@ public class AddClassItemActivity extends BaseActivity {
                                         spinner.getSelectedIndex();
                                     }
                                 });
+
                             }
 
                             @Override
@@ -248,13 +254,9 @@ public class AddClassItemActivity extends BaseActivity {
         } else {//困难
             params.put("difficulty", "3");
         }
-        if (select_room_type.equals("有氧操房")) {
-            params.put("type", "1");
-        } else if (select_room_type.equals("动态单车")) {
-            params.put("type", "2");
-        } else {
-            params.put("type", "3");
-        }
+
+
+        params.put("type", type);
         if (select_target_type.equals("单车")) {
             params.put("class_type", "1");
         } else if (select_target_type.equals("瑜伽")) {
@@ -279,7 +281,7 @@ public class AddClassItemActivity extends BaseActivity {
         params.put("end_time", year_tv.getText().toString() + "-" + month_tv.getText().toString() + "-" + date_tv.getText().toString() + " "
                 + time2_edit.getText().toString());//结束时间
 
-        if (select_xunhuan_type.equals("一周")) {
+        if (select_xunhuan_type.equals("单次")) {
             params.put("loop_cycle", "1");//循环周数
         } else if (select_xunhuan_type.equals("二周")) {
             params.put("loop_cycle", "2");//循环周数

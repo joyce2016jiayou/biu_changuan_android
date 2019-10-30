@@ -149,7 +149,7 @@ public class ExRecyclerAdapter extends RecyclerView.Adapter<ExRecyclerAdapter.Vi
 
         //设置下拉选择框
         holder.spinner_changsuo_type.setItems(typeArrays);
-        holder.spinner_changsuo_type.setSelectedIndex(0);
+//        holder.spinner_changsuo_type.setSelectedIndex(0);
         hashMap.put(position, 0);
         holder.spinner_changsuo_type.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
             @Override
@@ -171,8 +171,13 @@ public class ExRecyclerAdapter extends RecyclerView.Adapter<ExRecyclerAdapter.Vi
         }
 
         if (datas.size() > 0){
+            Log.d("type","datas.get(position).getType():"+datas.get(position).getType());
             holder.xianzhi_number.setText(datas.get(position).getPlace());
-            holder.spinner_changsuo_type.setSelectedIndex(datas.get(position).getType());
+            if (datas.get(position).getType()> 0){
+                int index = datas.get(position).getType() -1;
+                holder.spinner_changsuo_type.setSelectedIndex(index);
+            }
+
         }
 
 

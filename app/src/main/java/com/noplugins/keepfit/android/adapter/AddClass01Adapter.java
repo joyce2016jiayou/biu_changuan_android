@@ -1,6 +1,7 @@
 package com.noplugins.keepfit.android.adapter;
 
 import android.app.Activity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,14 +36,18 @@ public class AddClass01Adapter extends BaseQuickAdapter<ClassEntity.DataBean, Ba
         helper.setText(R.id.class_people_number,item.getMax_num()+"");
         helper.setText(R.id.class_minute,item.getCourse_time()+"");
         helper.setText(R.id.class_xunhuan,item.getLoop_cycle()+"周循环");
-        String create_date = DateHelper.timeDay(item.getCreate_date());
-        String create_date_time = DateHelper.timeHourAndMinite(item.getCreate_date());
+
+        String create_date = DateHelper.timeDay(item.getStart_time());
+        Log.d("tag","create_date:"+create_date);
+        String create_date_time = DateHelper.timeHourAndMinite(item.getStart_time());
+        Log.d("tag","create_date:"+create_date_time);
         helper.setText(R.id.create_date,create_date);
         helper.setText(R.id.create_time,create_date_time);
+
         String end_date = DateHelper.timeDay(item.getEnd_time());
         String end_date_time = DateHelper.timeHourAndMinite(item.getEnd_time());
         helper.setText(R.id.end_date,end_date);
-        helper.setText(R.id.end_date,end_date_time);
+        helper.setText(R.id.end_time,end_date_time);
 
         //1 邀请成功，2邀请失败，3邀请中 ，4已过期
         String status ="";

@@ -509,6 +509,7 @@ public class DateHelper {
         return temp;
     }
 
+
     /**
      * 获取类似以  2019.09.09 12：00 - 15：00
      * @param create_date_l
@@ -589,6 +590,7 @@ public class DateHelper {
         return Week;
     }
 
+
     /**
      * 根据时间戳获取年份
      *
@@ -655,11 +657,18 @@ public class DateHelper {
         return hour;
     }
 
+
     public static String timeDay(long start_time){
-        return get_year(start_time)+"."+get_month(start_time)+"."+get_date(start_time);
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat simple1 = new SimpleDateFormat("yyyy-MM-dd");
+        calendar.setTimeInMillis(start_time);
+        return simple1.format(calendar.getTimeInMillis());
     }
 
     public static String timeHourAndMinite(long start_time){
-        return get_hour(start_time)+":"+get_minite(start_time);
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat simple1 = new SimpleDateFormat("HH:mm");
+        calendar.setTimeInMillis(start_time);
+        return simple1.format(calendar.getTimeInMillis());
     }
 }
