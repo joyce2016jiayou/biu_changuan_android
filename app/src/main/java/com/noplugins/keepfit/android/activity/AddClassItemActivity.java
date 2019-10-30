@@ -282,7 +282,7 @@ public class AddClassItemActivity extends BaseActivity {
                 + time2_edit.getText().toString());//结束时间
 
         if (select_xunhuan_type.equals("单次")) {
-            params.put("loop_cycle", "1");//循环周数
+            params.put("loop_cycle", "0");//循环周数
         } else if (select_xunhuan_type.equals("二周")) {
             params.put("loop_cycle", "2");//循环周数
         } else if (select_xunhuan_type.equals("三周")) {
