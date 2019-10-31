@@ -21,6 +21,9 @@ import com.noplugins.keepfit.android.util.net.entity.Bean
 import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriber
 import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener
 import kotlinx.android.synthetic.main.fragment_manager_teacher_1.*
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 import java.util.HashMap
 
 class BindingFragment : BaseFragment()  {
@@ -41,6 +44,7 @@ class BindingFragment : BaseFragment()  {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         if (newView == null) {
             newView = inflater.inflate(R.layout.fragment_manager_teacher_1, container, false)
+            EventBus.getDefault().register(this)
         }
         return newView
     }
@@ -51,6 +55,16 @@ class BindingFragment : BaseFragment()  {
 //        requestData()
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public fun upadate(messageEvent:String ) {
+        if (AppConstants.TEAM_YQ_AGREE == messageEvent){
+            requestData()
+        }
+    }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        EventBus.getDefault().unregister(this)
+    }
     override fun onFragmentVisibleChange(isVisible: Boolean) {
         super.onFragmentVisibleChange(isVisible)
         if (isVisible){
@@ -87,11 +101,15 @@ class BindingFragment : BaseFragment()  {
         refresh_layout.setEnableRefresh(false)
         refresh_layout.setOnRefreshListener {
             //下拉刷新
-            refresh_layout.finishRefresh(2000/*,false*/)
+            page = 1
+            requestData()
+            refresh_layout.finishRefresh(1000/*,false*/)
         }
         refresh_layout.setOnLoadMoreListener {
             //上拉加载
-            refresh_layout.finishLoadMore(2000/*,false*/)
+            page++
+            requestData()
+            refresh_layout.finishLoadMore(1000/*,false*/)
         }
 
     }

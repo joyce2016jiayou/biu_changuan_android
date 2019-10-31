@@ -365,6 +365,8 @@ public class RiChengFragment extends ViewPagerFragment {
                 //日视角刷新数据
                 select_date_str = DateHelper.get_date(date.getSolar()[0], date.getSolar()[1], date.getSolar()[2]);
                 //Log.e("选择的日期", select_date_str);
+                date_tv.setText(select_date_str);
+                week_tv.setText(DateHelper.getWeek(select_date_str));
                 //刷新课程
                 init_class_date_resource();
             }

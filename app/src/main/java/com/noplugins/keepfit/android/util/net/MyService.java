@@ -689,4 +689,14 @@ public interface MyService {
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
     @POST("getPayResult")
     Observable<Bean<OrderResultBean>> getPayResult(@Body RequestBody json);
+
+    /**
+     * 解除绑定
+     *
+     * @return
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("deleteTeacherBinding")
+    Observable<Bean<Object>> deleteTeacherBinding(@Body RequestBody json);
+
 }

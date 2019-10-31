@@ -90,11 +90,15 @@ class YaoqinFragment : BaseFragment()  {
         refresh_layout.setEnableRefresh(false)
         refresh_layout.setOnRefreshListener {
             //下拉刷新
-            refresh_layout.finishRefresh(2000/*,false*/)
+            page = 1
+            requestData()
+            refresh_layout.finishRefresh(1000/*,false*/)
         }
         refresh_layout.setOnLoadMoreListener {
             //上拉加载
-            refresh_layout.finishLoadMore(2000/*,false*/)
+            page++
+            requestData()
+            refresh_layout.finishLoadMore(1000/*,false*/)
         }
 
     }

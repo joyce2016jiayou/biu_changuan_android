@@ -1104,6 +1104,15 @@ public class Network {
                 .subscribe(subscriber);
     }
 
+    public Subscription deleteTeacherBinding(Map<String, Object> params, Subscriber<Bean<Object>> subscriber) {
+        return service.deleteTeacherBinding(retuen_json_object(params))
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+
 
 
 }

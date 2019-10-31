@@ -25,6 +25,7 @@ import com.noplugins.keepfit.android.util.net.entity.Bean
 import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriber
 import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener
 import kotlinx.android.synthetic.main.activity_private_detail.*
+import org.greenrobot.eventbus.EventBus
 import java.util.HashMap
 
 class TeacherDetailActivity : BaseActivity() {
@@ -59,17 +60,39 @@ class TeacherDetailActivity : BaseActivity() {
                 finish()
                 return@setOnClickListener
             }
+
+            if (type == 1){
+                unBinding()
+            }
         }
         back_btn.setOnClickListener {
             finish()
         }
     }
 
+    private fun unBinding(){
+        val params = HashMap<String, Any>()
+        params["teacherNum"] = cgNum
+        params["areaNum"] = SpUtils.getString(applicationContext,AppConstants.CHANGGUAN_NUM)
+        val subscription = Network.getInstance("教练解绑", this)
+                .deleteTeacherBinding(params,
+                        ProgressSubscriber("教练解绑", object : SubscriberOnNextListener<Bean<Any>> {
+                            override fun onNext(result: Bean<Any>) {
+                                EventBus.getDefault().post(AppConstants.TEAM_YQ_AGREE)
+                                finish()
+                            }
+
+                            override fun onError(error: String) {
+                                Toast.makeText(applicationContext,error,Toast.LENGTH_SHORT)
+                                        .show()
+                            }
+                        }, this, false))
+    }
+
     private fun requestPrivateData() {
 
         val params = HashMap<String, Any>()
-        params["teacherNum"] = cgNum
-        params["userNum"] = SpUtils.getString(applicationContext, AppConstants.USER_NAME)
+        params["genTeacherNum"] = cgNum
 
         val subscription = Network.getInstance("教练详情", this)
                 .teacherDetail(params,

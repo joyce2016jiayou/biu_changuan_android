@@ -31,17 +31,17 @@ class CgTeacherSelectAdapter(data: List<TeacherBean>?) : BaseQuickAdapter<Teache
 
          val skill = (helper.getView<ZFlowLayout>(R.id.fl_private_skill))
 
-        val arr = item.skillList
+//        val arr = item.skillList
         val layoutParams =
                 ViewGroup.MarginLayoutParams(
                         ViewGroup.LayoutParams.WRAP_CONTENT,
                         ViewGroup.LayoutParams.WRAP_CONTENT)
-        layoutParams.setMargins(30, 30, 30, 30)
-        for (i in 0 until arr.size){
+        layoutParams.setMargins(10, 10, 10, 10)
+        for (i in 0 until item.skillList.size){
             val paramItemView = (mContext as Activity).layoutInflater.inflate(R.layout.adapter_search_histroy, skill,false)
             val keyWordTv = paramItemView.findViewById<TextView>(R.id.tv_content)
-                    keyWordTv.setPadding(35,5,35,5)
-            keyWordTv.text = arr[i]
+                    keyWordTv.setPadding(15,5,15,5)
+            keyWordTv.text = item.skillList[i]
             skill.addView(paramItemView, layoutParams)
         }
     }

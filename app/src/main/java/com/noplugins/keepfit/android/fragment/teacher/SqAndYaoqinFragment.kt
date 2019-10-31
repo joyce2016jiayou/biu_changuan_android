@@ -23,6 +23,7 @@ import com.noplugins.keepfit.android.util.net.entity.Bean
 import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriber
 import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener
 import kotlinx.android.synthetic.main.fragment_manager_teacher_1.*
+import org.greenrobot.eventbus.EventBus
 import java.util.HashMap
 
 class SqAndYaoqinFragment : BaseFragment()  {
@@ -84,10 +85,10 @@ class SqAndYaoqinFragment : BaseFragment()  {
                     startActivity(toInfo)
                 }
                 R.id.tv_jieshou -> {
-                    agreeBinding(datas[position].teacherNum,1)
+                    agreeBinding(datas[position].teacherNum,1,position)
                 }
                 R.id.tv_jujue -> {
-                    agreeBinding(datas[position].teacherNum,2)
+                    agreeBinding(datas[position].teacherNum,2,position)
                 }
             }
         }
@@ -96,11 +97,15 @@ class SqAndYaoqinFragment : BaseFragment()  {
 
         refresh_layout.setOnRefreshListener {
             //下拉刷新
-            refresh_layout.finishRefresh(2000/*,false*/)
+            page = 1
+            requestData()
+            refresh_layout.finishRefresh(1000/*,false*/)
         }
         refresh_layout.setOnLoadMoreListener {
             //上拉加载
-            refresh_layout.finishLoadMore(2000/*,false*/)
+            page++
+            requestData()
+            refresh_layout.finishLoadMore(1000/*,false*/)
         }
 
     }
@@ -132,7 +137,7 @@ class SqAndYaoqinFragment : BaseFragment()  {
                 )
     }
 
-    private fun agreeBinding(teacherNum:String,agree:Int){
+    private fun agreeBinding(teacherNum:String,agree:Int,position:Int){
         val params = HashMap<String, Any>()
         params["teacherNum"] = teacherNum
         params["areaNum"] = SpUtils.getString(activity,AppConstants.CHANGGUAN_NUM)
@@ -144,11 +149,27 @@ class SqAndYaoqinFragment : BaseFragment()  {
                             override fun onNext(result: Bean<Any>) {
 //                        setting(result.data.areaList)
                                 Toast.makeText(activity,"操作成功！", Toast.LENGTH_SHORT).show()
-                                requestData()
+
+                                if (result.code == 0){
+                                    datas.removeAt(position)//删除数据源,移除集合中当前下标的数据
+                                    adapterManager.notifyItemRemoved(position)//刷新被删除的地方
+                                    adapterManager.notifyItemRangeChanged(position, adapterManager.itemCount) //刷新被删除数据，以及其后面的数据
+
+                                    when (agree) {
+                                        1 -> {
+                                            EventBus.getDefault().post(AppConstants.TEAM_YQ_AGREE)
+                                        }
+
+                                        0 -> {
+                                            EventBus.getDefault().post(AppConstants.TEAM_YQ_REFUSE)
+                                        }
+                                    }
+                                }
+//                                requestData()
                             }
 
                             override fun onError(error: String) {
-
+                                Toast.makeText(activity,error, Toast.LENGTH_SHORT).show()
                             }
                         }, activity, false)
                 )

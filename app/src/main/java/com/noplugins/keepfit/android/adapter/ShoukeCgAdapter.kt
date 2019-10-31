@@ -26,7 +26,6 @@ class ShoukeCgAdapter(data: List<TeacherBean>?) : BaseQuickAdapter<TeacherBean, 
                 .into(helper.getView<View>(R.id.iv_cg_logo) as ImageView)
 
         helper
-                .addOnClickListener(R.id.rl_detail)
                 .addOnClickListener(R.id.tv_jujue)
                 .addOnClickListener(R.id.rl_jump)
                 .addOnClickListener(R.id.tv_jieshou)
