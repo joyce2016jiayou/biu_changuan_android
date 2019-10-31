@@ -237,11 +237,15 @@ public class CaptureActivity extends AppCompatActivity implements SurfaceHolder.
                     @Override
                     public void onNext(Bean<Object> objectBean) {
                         Log.e("发送订单成功", "发送订单成功");
-
-                        Intent intent = getIntent();
-                        intent.putExtra(Constant.CODED_CONTENT, rawResult.getText());
-                        setResult(RESULT_OK, intent);
-                        CaptureActivity.this.finish();
+                        if (objectBean.getCode() == 0){
+                            Intent intent = getIntent();
+                            intent.putExtra(Constant.CODED_CONTENT, rawResult.getText());
+                            setResult(RESULT_OK, intent);
+                            CaptureActivity.this.finish();
+                        } else {
+                            Toast.makeText(CaptureActivity.this, objectBean.getMessage(),
+                                    Toast.LENGTH_SHORT).show();
+                        }
                     }
 
                     @Override
