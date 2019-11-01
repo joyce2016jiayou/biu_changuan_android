@@ -89,6 +89,7 @@ class WXPayEntryActivity : BaseActivity(), IWXAPIEventHandler {
         }
         Glide.with(this)
                 .load(logo)
+                .placeholder(R.drawable.logo_gray)
                 .into(iv_logo)
         tv_vip_price.text = "¥$price"
 

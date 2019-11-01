@@ -16,6 +16,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/m50"
+            android:textColor="@color/color_705C00"
+            android:textSize="13sp"
             android:text="时段：  "/>
         <TextView
             android:id="@+id/tv_price"
@@ -23,6 +25,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/m15"
             android:layout_marginLeft="@dimen/m50"
+            android:textColor="@color/color_705C00"
+            android:textSize="13sp"
             android:text="价格：  "/>
     </LinearLayout>
 

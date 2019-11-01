@@ -57,6 +57,7 @@ public class FunctionAdapter extends BaseAdapter {
         holder.tag_value.setText(strings.get(position).getName());
         Glide.with(context)
                 .load(strings.get(position).getDrawImg())
+                .placeholder(R.drawable.logo_gray)
                 .into(holder.iv_img);
 
 

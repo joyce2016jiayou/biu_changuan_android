@@ -96,7 +96,9 @@ public class YaoQiTeacherAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHo
             YouYangViewHolder holder = (YouYangViewHolder) view_holder;
             TeacherEntity.TeacherBean teacherBean = list.get(position);
             holder.teacher_name.setText(teacherBean.getTeacherName());
-            Glide.with(context).load(teacherBean.getLogoUrl()).into(holder.touxiang_image);
+            Glide.with(context).load(teacherBean.getLogoUrl())
+                    .placeholder(R.drawable.logo_gray)
+                    .into(holder.touxiang_image);
             holder.tag_tv.setText(teacherBean.getSkill());
             if (teacherBean.getInviteStatus() == 0) {//获取是否邀请
                 holder.yaoqing_tv.setText("取消邀请");

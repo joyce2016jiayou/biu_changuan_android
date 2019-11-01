@@ -21,6 +21,7 @@ class CgTeacherSelectAdapter(data: List<TeacherBean>?) : BaseQuickAdapter<Teache
         Glide.with(mContext)
                 .load(item.logoUrl)
                 .transform(CenterCrop(mContext), GlideRoundTransform(mContext, 8))
+                .placeholder(R.drawable.logo_gray)
                 .into(helper.getView<ImageView>(R.id.iv_cg_logo))
         helper.addOnClickListener(R.id.rl_detail)
                 .addOnClickListener(R.id.ck_select)

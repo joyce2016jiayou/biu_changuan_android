@@ -140,7 +140,9 @@ class TeacherDetailActivity : BaseActivity() {
 
         tv_sum_time.text = "累计服务时长：${code.serviceDur}小时"
         tv_teacher_pinfen.text = "${code.card}分"
-        Glide.with(this).load(code.logoUrl).into(banner)
+        Glide.with(this).load(code.logoUrl)
+                .placeholder(R.drawable.logo_gray)
+                .into(banner)
         if (code.sex == 1) {
             iv_sex.setImageResource(R.drawable.man_icon)
         } else {

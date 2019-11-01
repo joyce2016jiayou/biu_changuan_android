@@ -6,7 +6,24 @@
     <LinearLayout
         android:layout_width="@dimen/m305"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:background="@drawable/bg_price_tips">
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_705C00"
+            android:text="您已成为哔呦终身会员啦～"
+            android:layout_marginTop="@dimen/m35"
+            android:layout_marginLeft="@dimen/m45"
+            android:textSize="13sp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/m45"
+            android:textSize="13sp"
+            android:textColor="@color/color_705C00"
+            android:layout_marginRight="@dimen/m25"
+            android:layout_marginTop="@dimen/m10"
+            android:text="在此设置您的场馆价格并上架，让更多教练、用户发现你吧！"/>
     </LinearLayout>
 </LinearLayout>

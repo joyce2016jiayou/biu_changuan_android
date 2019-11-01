@@ -62,6 +62,7 @@ class BillDetailInfoActivity : BaseActivity() {
         }
         Glide.with(this)
             .load(typeToDrawble(bean.type))
+                .placeholder(R.drawable.logo_gray)
             .into(iv_logo)
 
         tv_money.text = "-${bean.money}"

@@ -104,6 +104,7 @@ public class YaoQingZhongDetailAdapter extends BaseRecyclerAdapter<RecyclerView.
             }
             Glide.with(context)
                     .load(teacherBean.getLogoUrl())
+                    .placeholder(R.drawable.logo_gray)
                     .into(holder.touxiang_image);
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

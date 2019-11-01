@@ -42,6 +42,7 @@ public class BillDetailAdapter extends BaseQuickAdapter<BalanceListBean.ListBean
 
         Glide.with(mContext)
                 .load(typeToDrawble(item.getType()))
+                .placeholder(R.drawable.logo_gray)
                 .into((ImageView) helper.getView(R.id.iv_logo));
 
 

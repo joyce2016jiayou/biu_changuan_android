@@ -23,6 +23,7 @@ class ShoukeCgAdapter(data: List<TeacherBean>?) : BaseQuickAdapter<TeacherBean, 
         Glide.with(mContext)
                 .load(item.logoUrl)
                 .transform(CenterCrop(mContext), GlideRoundTransform(mContext, 8))
+                .placeholder(R.drawable.logo_gray)
                 .into(helper.getView<View>(R.id.iv_cg_logo) as ImageView)
 
         helper

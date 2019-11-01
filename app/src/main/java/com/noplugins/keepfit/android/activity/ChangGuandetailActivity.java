@@ -275,6 +275,7 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
         old_logo = cg.getArea().getLogo();
         Glide.with(this)
                 .load(cg.getArea().getLogo())
+                .placeholder(R.drawable.logo_gray)
                 .into(logo_image);
         delete_icon_btn.setVisibility(View.VISIBLE);
 

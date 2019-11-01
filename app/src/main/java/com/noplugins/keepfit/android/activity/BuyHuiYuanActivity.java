@@ -136,8 +136,8 @@ public class BuyHuiYuanActivity extends BaseActivity {
         Glide.with(getApplicationContext())
 
                 .load(data.getLogo())
-                .placeholder(R.drawable.changguan_logo) //加载成功前显示的图片
-                .fallback(R.drawable.changguan_logo) //url为空的时候,显示的图片
+                .placeholder(R.drawable.logo_gray) //加载成功前显示的图片
+                .fallback(R.drawable.logo_gray) //url为空的时候,显示的图片
                 .into(touxiang_image);
         logo = data.getLogo();
         changuan_name_tv.setText(data.getAreaName());
