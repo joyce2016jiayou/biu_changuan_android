@@ -83,7 +83,7 @@ public class ClassAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder> i
         if (view_holder instanceof WeiJieShuViewHolder) {
             WeiJieShuViewHolder holder = (WeiJieShuViewHolder) view_holder;
             RiChengBean.ResultBean resultBean = classDateBeans.get(position);
-            holder.coach_name.setText(resultBean.getTeacherName());
+            holder.coach_name.setText(resultBean.getUserName());
             holder.status_tv.setText(resultBean.getUserCheckIn());
             if (resultBean.getCourseStatus() == 1) {//已结束
                 holder.status_img.setImageResource(R.drawable.over);
