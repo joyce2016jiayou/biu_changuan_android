@@ -259,6 +259,9 @@ public class RiChengFragment extends ViewPagerFragment {
                                     dates.clear();
                                 }
                                 for (int i = 0; i < result.getData().getMonth().size(); i++) {
+                                    if (result.getData().getMonth().get(i) == null){
+                                        continue;
+                                    }
                                     dates.add(result.getData().getMonth().get(i).getDays());
                                 }
                                 init_clander_view(dates);
