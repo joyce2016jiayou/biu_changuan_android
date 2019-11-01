@@ -221,8 +221,6 @@ public class CaptureActivity extends AppCompatActivity implements SurfaceHolder.
 
         //请求服务器传订单编号
         send_order_number(rawResult);
-
-
     }
 
     private void send_order_number(Result rawResult) {
