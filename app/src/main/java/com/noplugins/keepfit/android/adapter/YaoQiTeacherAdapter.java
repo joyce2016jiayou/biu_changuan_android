@@ -135,11 +135,12 @@ public class YaoQiTeacherAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHo
                             //邀请
                             invite(teacherBean,holder.yaoqing_tv);
                         } else{
-                            if (holder.yaoqing_tv.getText().equals("已邀请")) {
-                                //取消邀请
-                                gymInviteNum = teacherBean.getGymInviteNum();
-                                cancel_invite(holder.yaoqing_tv);
-                            }
+                            //关闭取消邀请 功能
+//                            if (holder.yaoqing_tv.getText().equals("已邀请")) {
+//                                //取消邀请
+//                                gymInviteNum = teacherBean.getGymInviteNum();
+//                                cancel_invite(holder.yaoqing_tv);
+//                            }
                         }
 
 

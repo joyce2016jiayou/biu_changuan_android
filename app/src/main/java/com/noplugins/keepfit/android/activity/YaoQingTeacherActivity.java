@@ -31,6 +31,8 @@ import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriber;
 import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriberNew;
 import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -84,6 +86,7 @@ public class YaoQingTeacherActivity extends BaseActivity {
         back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                EventBus.getDefault().post("添加课程成功");
                 finish();
             }
         });
@@ -218,4 +221,9 @@ public class YaoQingTeacherActivity extends BaseActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        EventBus.getDefault().post("添加课程成功");
+        finish();
+    }
 }

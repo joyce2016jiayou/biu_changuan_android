@@ -160,9 +160,9 @@ public class YaoQingZhongDetailActivity extends BaseActivity {
         if(entity.getCourse().getClassType()==1){
             class_room.setText("有氧操房");
         }else if(entity.getCourse().getClassType()==2){
-            class_room.setText("动感单车");
-        }else if(entity.getCourse().getClassType()==3){
             class_room.setText("瑜伽房");
+        }else if(entity.getCourse().getClassType()==3){
+            class_room.setText("动感单车");
         }
 
         price.setText("￥"+entity.getCourse().getFinalPrice()+"/人");
@@ -180,7 +180,7 @@ public class YaoQingZhongDetailActivity extends BaseActivity {
             }
 
         }else{//没有循环
-            class_xunhuan.setVisibility(View.GONE);
+            class_xunhuan.setText("单次");
         }
 
         String status ="";

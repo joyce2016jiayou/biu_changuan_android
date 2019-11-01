@@ -311,7 +311,6 @@ public class AddClassItemActivity extends BaseActivity {
                             @Override
                             public void onError(String error) {
                                 Toast.makeText(AddClassItemActivity.this, error, Toast.LENGTH_SHORT).show();
-
                             }
                         }, this, true));
     }

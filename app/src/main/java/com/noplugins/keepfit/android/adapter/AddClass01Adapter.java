@@ -32,10 +32,14 @@ public class AddClass01Adapter extends BaseQuickAdapter<ClassEntity.DataBean, Ba
     protected void convert(@NonNull BaseViewHolder helper, ClassEntity.DataBean item) {
         //课程名称+课程类型+教练名字
         helper.setText(R.id.class_title_tv,item.getCourse_name()+"·"+getString(Integer.parseInt(item.getType())));
-        helper.setText(R.id.class_changdi,item.getGym_place_num()+"");
+        helper.setText(R.id.class_changdi,getRoomString(item.getType()));
         helper.setText(R.id.class_people_number,item.getMax_num()+"");
-        helper.setText(R.id.class_minute,item.getCourse_time()+"");
-        helper.setText(R.id.class_xunhuan,item.getLoop_cycle()+"周循环");
+        helper.setText(R.id.class_minute,toMin(item.getStart_time(),item.getEnd_time()));
+        if (!item.isLoop()){
+            helper.setText(R.id.class_xunhuan,"单次");
+        } else {
+            helper.setText(R.id.class_xunhuan,item.getLoop_cycle()+"周循环");
+        }
 
         String create_date = DateHelper.timeDay(item.getStart_time());
         Log.d("tag","create_date:"+create_date);
@@ -74,5 +78,17 @@ public class AddClass01Adapter extends BaseQuickAdapter<ClassEntity.DataBean, Ba
     private String getString(int type){
         String [] array = mContext.getResources().getStringArray(R.array.team_xlmb);
         return array[type-1];
+    }
+
+    private String getRoomString(String type){
+        int typeInt = Integer.parseInt(type);
+        String [] array = mContext.getResources().getStringArray(R.array.gongneng_types);
+        return array[typeInt-1];
+    }
+
+    private String toMin(long startTime,long endTime){
+        long min = endTime - startTime;
+        int min1 = (int) ((min/1000)/60);
+        return min1+"min";
     }
 }

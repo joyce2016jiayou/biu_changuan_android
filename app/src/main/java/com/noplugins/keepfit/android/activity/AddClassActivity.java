@@ -38,6 +38,10 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -70,6 +74,7 @@ public class AddClassActivity extends BaseActivity {
     public void initView() {
         setContentLayout(R.layout.activity_add_class);
         ButterKnife.bind(this);
+        EventBus.getDefault().register(this);
         set_list_resource();
 
     }
@@ -78,7 +83,18 @@ public class AddClassActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
 
+    }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void upadate(String messageEvent) {
+        if ("添加课程成功".equals(messageEvent)){
+            init_class_date();
+        }
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 
     @Override
