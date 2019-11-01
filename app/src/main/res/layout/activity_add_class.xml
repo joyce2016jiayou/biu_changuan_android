@@ -5,13 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/color_F8F8F8"
     tools:context=".activity.AddClassActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/color_F8F8F8"
         android:orientation="vertical">
 
         <RelativeLayout
@@ -51,8 +49,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scrollbars="vertical" />
+                android:layout_height="match_parent" />
 
         </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
