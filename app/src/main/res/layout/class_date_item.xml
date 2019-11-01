@@ -41,7 +41,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/m10"
                     android:ellipsize="end"
-                    android:singleline="true"
+                    android:singleLine="true"
                     android:text="教练-张晗"
                     android:textColor="#ff4a4a4a"
                     android:textSize="13sp" />

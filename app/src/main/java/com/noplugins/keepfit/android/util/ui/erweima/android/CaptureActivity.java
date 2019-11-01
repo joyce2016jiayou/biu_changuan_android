@@ -30,6 +30,8 @@ import com.noplugins.keepfit.android.activity.MyErWeiMaActivity;
 import com.noplugins.keepfit.android.activity.YaoQingTeacherActivity;
 import com.noplugins.keepfit.android.entity.AddClassEntity;
 import com.noplugins.keepfit.android.entity.TeacherBean;
+import com.noplugins.keepfit.android.global.AppConstants;
+import com.noplugins.keepfit.android.util.SpUtils;
 import com.noplugins.keepfit.android.util.data.SharedPreferencesHelper;
 import com.noplugins.keepfit.android.util.net.Network;
 import com.noplugins.keepfit.android.util.net.entity.Bean;
@@ -51,6 +53,8 @@ import java.util.Map;
 
 import okhttp3.RequestBody;
 import rx.Subscription;
+
+import static com.tencent.bugly.Bugly.applicationContext;
 
 
 /**
@@ -229,12 +233,12 @@ public class CaptureActivity extends AppCompatActivity implements SurfaceHolder.
         if (arr.length>1){
             params.put("ordItemNum", arr[0]);//场馆编号
             params.put("checkType", arr[1]);//场馆编号
+            params.put("areaNum", SpUtils.getString(getApplicationContext(), AppConstants.CHANGGUAN_NUM));
         }
         Subscription subscription = Network.getInstance("发送订单", this).
                 sen_order(params, new ProgressSubscriber<>("", new SubscriberOnNextListener<Bean<Object>>() {
                     @Override
                     public void onNext(Bean<Object> objectBean) {
-                        Log.e("发送订单成功", "发送订单成功");
                         if (objectBean.getCode() == 0){
                             Intent intent = getIntent();
                             intent.putExtra(Constant.CODED_CONTENT, rawResult.getText());
