@@ -20,7 +20,7 @@ public class DateEntity extends DateTimeEntity {
     }
     public static DateEntity to3day() {
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DATE, 3);
+//        calendar.add(Calendar.DATE, 3);
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH) + 1;
         int day = calendar.get(Calendar.DAY_OF_MONTH);

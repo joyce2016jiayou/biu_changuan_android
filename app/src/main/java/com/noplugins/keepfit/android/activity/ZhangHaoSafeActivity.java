@@ -91,11 +91,15 @@ public class ZhangHaoSafeActivity extends BaseActivity {
     private void toLogin(){
         Intent intent = new Intent(ZhangHaoSafeActivity.this, Login2Activity.class);
         SpUtils.putString(getApplicationContext(), AppConstants.TOKEN, "");
-        SpUtils.putString(getApplicationContext(),AppConstants.PHONE, "");
+        SpUtils.putString(getApplicationContext(), AppConstants.PHONE, "");
         SpUtils.putString(getApplicationContext(), AppConstants.CHANGGUAN_NUM, "");
+//                                SpUtils.putString(applicationContext, AppConstants.CHANGGUAN_NUM, "GYM19091236750176")
+        SpUtils.putString(getApplicationContext(), AppConstants.USER_NAME, "");
+        SpUtils.putInt(getApplicationContext(), AppConstants.USER_TYPE, -1);
+        SpUtils.putInt(getApplicationContext(), AppConstants.IS_TX, -1);
+        SpUtils.putString(getApplicationContext(), AppConstants.USER_DENGJI, "");
         startActivity(intent);
         ActivityCollectorUtil.finishAllActivity();
-
     }
 
     @Override

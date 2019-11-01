@@ -54,8 +54,6 @@ import java.util.Map;
 import okhttp3.RequestBody;
 import rx.Subscription;
 
-import static com.tencent.bugly.Bugly.applicationContext;
-
 
 /**
  * @author: yzq
@@ -233,12 +231,13 @@ public class CaptureActivity extends AppCompatActivity implements SurfaceHolder.
         if (arr.length>1){
             params.put("ordItemNum", arr[0]);//场馆编号
             params.put("checkType", arr[1]);//场馆编号
-            params.put("areaNum", SpUtils.getString(getApplicationContext(), AppConstants.CHANGGUAN_NUM));
+            params.put("areaNum", SpUtils.getString(getApplicationContext(), AppConstants.CHANGGUAN_NUM));//场馆编号
         }
         Subscription subscription = Network.getInstance("发送订单", this).
                 sen_order(params, new ProgressSubscriber<>("", new SubscriberOnNextListener<Bean<Object>>() {
                     @Override
                     public void onNext(Bean<Object> objectBean) {
+                        Log.e("发送订单成功", "发送订单成功");
                         if (objectBean.getCode() == 0){
                             Intent intent = getIntent();
                             intent.putExtra(Constant.CODED_CONTENT, rawResult.getText());

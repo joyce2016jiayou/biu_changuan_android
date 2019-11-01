@@ -163,9 +163,6 @@ public class AddClassItemActivity extends BaseActivity {
 
             }
         });
-
-
-
     }
 
     private void get_class_type() {
