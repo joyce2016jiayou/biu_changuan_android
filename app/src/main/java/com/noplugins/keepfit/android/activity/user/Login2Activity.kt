@@ -174,7 +174,10 @@ class Login2Activity : BaseActivity() {
                                     val intent = Intent(this@Login2Activity, SetPasswordActivity::class.java)
                                     startActivity(intent)
                                 } else {//设置过密码
-                                    if (result.data.type == 1) {
+                                    if (result.data.type == 0) {
+                                        val intent = Intent(this@Login2Activity, SubmitInformationSelectActivity::class.java)
+                                        startActivity(intent)
+                                    } else if (result.data.type == 1) {
                                         get_check_status()
                                     }
                                 }

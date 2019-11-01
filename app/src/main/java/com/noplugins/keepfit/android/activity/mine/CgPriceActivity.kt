@@ -61,9 +61,9 @@ class CgPriceActivity : BaseActivity() {
 
         grid_view.adapter = adapter
 
-        tv_hesuan.text = SpUtils.getString(applicationContext,AppConstants.COST)
+        tv_hesuan.text = SpUtils.getString(applicationContext, AppConstants.COST)
         initAdapter()
-        if (form == "main"){
+        if (form == "main") {
             requestHightTime()
         }
 
@@ -195,7 +195,11 @@ class CgPriceActivity : BaseActivity() {
                         ProgressSubscriber("精准化时间", object : SubscriberOnNextListener<Bean<Any>> {
                             override fun onNext(result: Bean<Any>) {
                                 Toast.makeText(applicationContext, "设置成功", Toast.LENGTH_SHORT).show()
-                                finish()
+                                if (form == "pay") {
+                                    val intent = Intent(this@CgPriceActivity, KeepFitActivity::class.java)
+                                    startActivity(intent)
+                                    finish()
+                                }
                             }
 
                             override fun onError(error: String) {
@@ -206,9 +210,9 @@ class CgPriceActivity : BaseActivity() {
     }
 
 
-    private fun requestHightTime(){
+    private fun requestHightTime() {
         val params = HashMap<String, Any>()
-        params["areaNum"] = SpUtils.getString(applicationContext,AppConstants.CHANGGUAN_NUM)
+        params["areaNum"] = SpUtils.getString(applicationContext, AppConstants.CHANGGUAN_NUM)
         subscription = Network.getInstance("获取精准化时间", this)
                 .findAreaPrice(
                         params,
@@ -216,8 +220,8 @@ class CgPriceActivity : BaseActivity() {
                             override fun onNext(result: Bean<List<HightListBean>>) {
                                 //
                                 //HighBean
-                                if (result.data.isNotEmpty()){
-                                    for (i in 0 until result.data.size){
+                                if (result.data.isNotEmpty()) {
+                                    for (i in 0 until result.data.size) {
                                         val highBean = HighBean()
                                         highBean.gym_area_num = result.data[i].gymAreaNum
                                         highBean.high_time_start = TimeCheckUtil.removeSecond(result.data[i].highTimeStart)
@@ -252,8 +256,8 @@ class CgPriceActivity : BaseActivity() {
     }
 
     override fun onBackPressed() {
-        Log.d("form",form)
-        if (form == "pay"){
+        Log.d("form", form)
+        if (form == "pay") {
             val intent = Intent(this, KeepFitActivity::class.java)
             startActivity(intent)
             finish()
