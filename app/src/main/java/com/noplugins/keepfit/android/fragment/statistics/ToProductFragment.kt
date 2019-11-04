@@ -43,7 +43,11 @@ import com.noplugins.keepfit.android.util.screen.KeyboardUtils
 
 class ToProductFragment : BaseFragment() {
 
-    var selectDate = "2019-10"
+    val canler = Calendar.getInstance()
+    val year = canler.get(Calendar.YEAR)
+    val month = if (canler.get(Calendar.MONTH) + 1 > 9) "${canler.get(Calendar.MONTH) + 1}"
+    else "0${canler.get(Calendar.MONTH) + 1}"
+    var selectDate = "$year-$month"
 
     companion object {
         fun newInstance(title: String): ToProductFragment {
@@ -66,7 +70,7 @@ class ToProductFragment : BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
+        tv_select_time.text = selectDate
 
         select_time.setOnClickListener {
             select_time_pop()
@@ -121,7 +125,6 @@ class ToProductFragment : BaseFragment() {
                             functionBean.prices[1].price.toFloat(),
                             functionBean.prices[2].price.toFloat())))
         }
-
 
 
         val dataSet = PieDataSet(xiaoshouStrings, "")
@@ -205,12 +208,12 @@ class ToProductFragment : BaseFragment() {
     }
 
     private fun initLineChart() {
-        val dataSet = LineDataSet(entries, "") // add entries to dataset
+        val dataSet = LineDataSet(entries, "这是1") // add entries to dataset
         dataSet.color = colors[0]//线条颜色
         dataSet.setCircleColor(colors[0])//圆点颜色
         dataSet.lineWidth = 1f//线条宽度
 
-        val dataSet1 = LineDataSet(entries1, "Label") // add entries to dataset
+        val dataSet1 = LineDataSet(entries1, "这是2") // add entries to dataset
         dataSet1.color = colors[1]//线条颜色
         dataSet1.setCircleColor(colors[1])//圆点颜色
         dataSet1.lineWidth = 1f//线条宽度
@@ -267,7 +270,7 @@ class ToProductFragment : BaseFragment() {
         l.verticalAlignment = Legend.LegendVerticalAlignment.TOP
         l.horizontalAlignment = Legend.LegendHorizontalAlignment.CENTER
         l.orientation = Legend.LegendOrientation.HORIZONTAL
-
+        l.setCustom(getLineEntries())
 
         lineChart.setBackgroundColor(Color.WHITE)
         //是否显示边界
@@ -285,28 +288,6 @@ class ToProductFragment : BaseFragment() {
     }
 
     private fun initBarChart() {
-//        val set1: BarDataSet
-//        if (barChart.data != null &&
-//                barChart.data.dataSetCount > 0) {
-//            set1 = barChart.data.getDataSetByIndex(0) as BarDataSet
-//            set1.values = values
-//            barChart.data.notifyDataChanged()
-//            barChart.notifyDataSetChanged()
-//        } else {
-//            set1 = BarDataSet(values, "")
-//            set1.setDrawIcons(false)
-//            set1.colors = getColors().asList()
-////            set1.setStackLabels(String[]{"Births", "Divorces", "Marriages"})
-//
-//            val dataSets: MutableList<IBarDataSet> = ArrayList()
-//            dataSets.add(set1)
-//
-//            val data = BarData(dataSets)
-//            data.setValueFormatter(StackedValueFormatter(false, "", 1))
-//            data.setValueTextColor(Color.WHITE)
-//
-//            barChart.data = data
-//        }
 
         val set1 = BarDataSet(values, "")
         set1.setDrawIcons(false)
@@ -404,6 +385,27 @@ class ToProductFragment : BaseFragment() {
         return entries
     }
 
+    private fun getLineEntries(): List<LegendEntry> {
+        val entries = ArrayList<LegendEntry>()
+        entries.add(LegendEntry(
+                "销售额同比",
+                Legend.LegendForm.CIRCLE,
+                10f,
+                9f,
+                null,
+                getColors()[0]))
+
+        entries.add(LegendEntry(
+                "销售额环比",
+                Legend.LegendForm.CIRCLE,
+                10f,
+                9f,
+                null,
+                getColors()[1]))
+
+        return entries
+    }
+
     lateinit var pvCustomTime: TimePickerView
     private fun select_time_pop() {
 
@@ -459,7 +461,7 @@ class ToProductFragment : BaseFragment() {
         val params = HashMap<String, Any>()
         params["type"] = 2
         params["date"] = selectDate
-        params["areaNum"] = SpUtils.getString(activity,AppConstants.CHANGGUAN_NUM)
+        params["areaNum"] = SpUtils.getString(activity, AppConstants.CHANGGUAN_NUM)
         val subscription = Network.getInstance("精准化时间", activity)
                 .statistics(
                         params,

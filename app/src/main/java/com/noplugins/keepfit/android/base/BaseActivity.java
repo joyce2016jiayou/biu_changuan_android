@@ -2,6 +2,7 @@ package com.noplugins.keepfit.android.base;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -61,6 +62,7 @@ public abstract class BaseActivity extends AppCompatActivity implements EasyPerm
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT); // 禁用横屏
         ActivityCollectorUtil.addActivity(this);
         //设置沉浸栏
         set_status_bar();

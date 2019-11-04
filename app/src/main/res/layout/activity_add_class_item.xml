@@ -46,7 +46,7 @@
         <LinearLayout
             android:id="@+id/center"
             android:layout_width="match_parent"
-            android:layout_height="710dp"
+            android:layout_height="wrap_content"
             android:background="@drawable/class_bg1"
             android:orientation="vertical">
 
@@ -463,7 +463,7 @@
                     <EditText
                         android:id="@+id/edit_class_jieshao"
                         android:layout_width="273dp"
-                        android:minHeight="@dimen/m50"
+                        android:minHeight="@dimen/m120"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="4dp"
                         android:background="@drawable/shape_edit_bg"
@@ -496,7 +496,7 @@
                     <EditText
                         android:id="@+id/edit_shihe_renqun"
                         android:layout_width="273dp"
-                        android:minHeight="@dimen/m30"
+                        android:minHeight="@dimen/m100"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="4dp"
                         android:paddingLeft="2dp"
@@ -529,7 +529,7 @@
                     <EditText
                         android:id="@+id/edit_zhuyi_shixiang"
                         android:layout_width="273dp"
-                        android:minHeight="@dimen/m50"
+                        android:minHeight="@dimen/m120"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="4dp"
                         android:paddingLeft="2dp"

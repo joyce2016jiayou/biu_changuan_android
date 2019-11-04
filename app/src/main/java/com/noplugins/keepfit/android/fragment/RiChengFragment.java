@@ -510,7 +510,7 @@ public class RiChengFragment extends ViewPagerFragment {
         if (requestCode == REQUEST_CODE_SCAN && resultCode == RESULT_OK) {
             if (data != null) {
                 String content = data.getStringExtra(Constant.CODED_CONTENT);
-                Toast.makeText(getActivity(), content, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "扫码成功", Toast.LENGTH_SHORT).show();
             }
         }
     }

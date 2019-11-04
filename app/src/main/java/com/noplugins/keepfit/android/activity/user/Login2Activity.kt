@@ -110,6 +110,7 @@ class Login2Activity : BaseActivity() {
             override fun onClick(view: View) {
                 if (!is_check_fuwu) {
                     Toast.makeText(this@Login2Activity, "请先勾选用户协议！", Toast.LENGTH_SHORT).show()
+                    return
                 } else if (TextUtils.isEmpty(edit_phone_number.getText())) {
                     Toast.makeText(applicationContext, "电话号码不能为空！", Toast.LENGTH_SHORT).show()
                     return
