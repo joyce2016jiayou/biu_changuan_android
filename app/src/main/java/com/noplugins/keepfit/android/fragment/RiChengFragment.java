@@ -249,9 +249,9 @@ public class RiChengFragment extends ViewPagerFragment {
         if (select_courcestatus_str.length() > 0) {
             params1.put("courseStatus", select_courcestatus_str);
         }
-        Subscription subscription = Network.getInstance("获取首页数据", getActivity())
+        Subscription subscription = Network.getInstance("获取日历数据", getActivity())
                 .get_shouye_date(params1,
-                        new ProgressSubscriber<>("获取首页数据", new SubscriberOnNextListener<Bean<RiChengBean>>() {
+                        new ProgressSubscriber<>("获取日历数据", new SubscriberOnNextListener<Bean<RiChengBean>>() {
                             @Override
                             public void onNext(Bean<RiChengBean> result) {
                                 //设置日历数据
@@ -325,9 +325,9 @@ public class RiChengFragment extends ViewPagerFragment {
         if (select_courcestatus_str.length() > 0) {
             params1.put("courseStatus", select_courcestatus_str);
         }
-        Subscription subscription = Network.getInstance("获取首页数据", getActivity())
+        Subscription subscription = Network.getInstance("获取课程数据", getActivity())
                 .get_shouye_date(params1,
-                        new ProgressSubscriber<>("获取首页数据", new SubscriberOnNextListener<Bean<RiChengBean>>() {
+                        new ProgressSubscriber<>("获取课程数据", new SubscriberOnNextListener<Bean<RiChengBean>>() {
                             @Override
                             public void onNext(Bean<RiChengBean> result) {
                                 //设置课程数据

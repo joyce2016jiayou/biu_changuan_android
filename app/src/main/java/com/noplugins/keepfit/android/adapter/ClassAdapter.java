@@ -83,7 +83,6 @@ public class ClassAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder> i
         if (view_holder instanceof WeiJieShuViewHolder) {
             WeiJieShuViewHolder holder = (WeiJieShuViewHolder) view_holder;
             RiChengBean.ResultBean resultBean = classDateBeans.get(position);
-            holder.coach_name.setText(resultBean.getUserName());
             holder.status_tv.setText(resultBean.getUserCheckIn());
             if (resultBean.getCourseStatus() == 1) {//已结束
                 holder.status_img.setImageResource(R.drawable.over);
@@ -91,13 +90,6 @@ public class ClassAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder> i
                 holder.status_img.setImageResource(R.drawable.weikaishi_icon);
             } else {//进行中
                 holder.status_img.setImageResource(R.drawable.ongoing);
-            }
-            if (resultBean.getCourseType() == 1) {//团课
-                holder.type_icon_bg.setBackgroundResource(R.drawable.zi_bg);
-            } else if (resultBean.getCourseType() == 2) {//私教
-                holder.type_icon_bg.setBackgroundResource(R.drawable.trainer);
-            } else {//健身
-                holder.type_icon_bg.setBackgroundResource(R.drawable.venue);
             }
             String daochang_person = "";
             if (resultBean.getApplayNum().length() > 0) {
@@ -111,7 +103,27 @@ public class ClassAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder> i
             } else {
                 max_person = "0";
             }
-            holder.phone_or_name_tv.setText(daochang_person + "/" + max_person + "人");
+            if (resultBean.getCourseType() == 1) {//团课
+                holder.type_icon_bg.setBackgroundResource(R.drawable.zi_bg);
+                holder.phone_or_name_tv.setText(daochang_person + "/" + max_person + "人");
+                holder.coach_name.setText(resultBean.getTeacherName());
+                holder.phone_img.setVisibility(View.GONE);
+
+            } else if (resultBean.getCourseType() == 2) {//私教
+                holder.type_icon_bg.setBackgroundResource(R.drawable.trainer);
+                holder.coach_name.setText(resultBean.getTeacherName());
+                holder.phone_or_name_tv.setText(resultBean.getUserName());
+                holder.phone_img.setVisibility(View.VISIBLE);
+
+            } else {//健身
+                holder.type_icon_bg.setBackgroundResource(R.drawable.venue);
+                holder.coach_name.setText(resultBean.getUserName());
+                holder.phone_or_name_tv.setText(daochang_person + "/" + max_person + "人");
+                holder.phone_img.setVisibility(View.GONE);
+
+            }
+
+
             holder.time_tv.setText(resultBean.getCourseTime());
             holder.class_type.setText(resultBean.getClassName());
             holder.money_tv.setText(resultBean.getPrice());
@@ -119,6 +131,12 @@ public class ClassAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder> i
                 @Override
                 public void onClick(View view) {
                     call_pop(holder, resultBean.getTeacherPhone());
+                }
+            });
+            holder.phone_img.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    call_pop(holder, resultBean.getUserPhone());
                 }
             });
         }
@@ -257,7 +275,7 @@ public class ClassAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder> i
     public class WeiJieShuViewHolder extends RecyclerView.ViewHolder {
         public View view;
         public TextView coach_name, status_tv, type_icon_tv, phone_or_name_tv, time_tv, class_type, money_tv;
-        public ImageView phone_btn, status_img;
+        public ImageView phone_btn, status_img,phone_img;
         public LinearLayout type_icon_bg;
 
         public WeiJieShuViewHolder(View itemView, boolean isItem) {
@@ -274,6 +292,7 @@ public class ClassAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder> i
                 time_tv = view.findViewById(R.id.time_tv);
                 class_type = view.findViewById(R.id.class_type);
                 money_tv = view.findViewById(R.id.money_tv);
+                phone_img = view.findViewById(R.id.phone_img);
             }
         }
     }

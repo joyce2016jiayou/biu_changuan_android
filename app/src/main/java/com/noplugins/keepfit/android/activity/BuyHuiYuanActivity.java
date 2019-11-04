@@ -3,6 +3,7 @@ package com.noplugins.keepfit.android.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -133,8 +134,8 @@ public class BuyHuiYuanActivity extends BaseActivity {
     }
 
     private void set_information(BuyInformationBean data) {
+        Log.e("打印出来的图片地址",data.getLogo());
         Glide.with(getApplicationContext())
-
                 .load(data.getLogo())
                 .placeholder(R.drawable.logo_gray) //加载成功前显示的图片
                 .fallback(R.drawable.logo_gray) //url为空的时候,显示的图片

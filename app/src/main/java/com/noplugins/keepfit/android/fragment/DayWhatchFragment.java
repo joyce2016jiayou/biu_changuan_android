@@ -106,8 +106,7 @@ public class DayWhatchFragment extends ViewPagerFragment {
 */
     @Override
     public void fetchData() {
-        //获取日视角课程接口
-        //get_date_class_resource("");
+
     }
 
     @Override
@@ -123,7 +122,8 @@ public class DayWhatchFragment extends ViewPagerFragment {
     }
 
     private void initView() {
-
+        //获取日视角课程接口
+        get_date_class_resource("");
         add_class_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -179,6 +179,7 @@ public class DayWhatchFragment extends ViewPagerFragment {
                                 Toast.makeText(getActivity(), "获取课程失败！", Toast.LENGTH_SHORT).show();
                             }
                         }, getActivity(), true));
+
 
     }
 
