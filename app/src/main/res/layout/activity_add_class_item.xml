@@ -46,8 +46,9 @@
         <LinearLayout
             android:id="@+id/center"
             android:layout_width="match_parent"
-            android:layout_height="710dp"
-            android:background="@drawable/class_bg1"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="70dp"
+            android:background="@color/white"
             android:orientation="vertical">
 
             <LinearLayout
@@ -463,7 +464,7 @@
                     <EditText
                         android:id="@+id/edit_class_jieshao"
                         android:layout_width="273dp"
-                        android:minHeight="@dimen/m50"
+                        android:minHeight="@dimen/m100"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="4dp"
                         android:background="@drawable/shape_edit_bg"
@@ -471,7 +472,7 @@
                         android:paddingLeft="2dp"
                         android:paddingTop="2dp"
                         android:hint="@string/edit_hint23"
-                        android:maxLength="150"
+                        android:maxLength="140"
                         android:inputType="textMultiLine"
                         android:textColor="@color/top_heiziti"
                         android:textColorHint="@color/color_9B9B9B"
@@ -496,7 +497,7 @@
                     <EditText
                         android:id="@+id/edit_shihe_renqun"
                         android:layout_width="273dp"
-                        android:minHeight="@dimen/m30"
+                        android:minHeight="@dimen/m100"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="4dp"
                         android:paddingLeft="2dp"
@@ -504,7 +505,7 @@
                         android:background="@drawable/shape_edit_bg"
                         android:gravity="top"
                         android:hint="@string/edit_hint24"
-                        android:maxLength="60"
+                        android:maxLength="140"
                         android:inputType="textMultiLine"
                         android:textColor="@color/top_heiziti"
                         android:textColorHint="@color/color_9B9B9B"
@@ -515,6 +516,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:layout_marginBottom="19dp"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
@@ -529,7 +531,7 @@
                     <EditText
                         android:id="@+id/edit_zhuyi_shixiang"
                         android:layout_width="273dp"
-                        android:minHeight="@dimen/m50"
+                        android:minHeight="@dimen/m100"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="4dp"
                         android:paddingLeft="2dp"
@@ -537,12 +539,13 @@
                         android:background="@drawable/shape_edit_bg"
                         android:gravity="top"
                         android:hint="@string/edit_hint25"
-                        android:maxLength="120"
+                        android:maxLength="140"
                         android:inputType="textMultiLine"
                         android:textColor="@color/top_heiziti"
                         android:textColorHint="@color/color_9B9B9B"
                         android:textSize="13sp" />
                 </LinearLayout>
+
             </LinearLayout>
 
 

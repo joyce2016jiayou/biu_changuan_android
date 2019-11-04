@@ -106,6 +106,7 @@ public class ClassAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder> i
             if (resultBean.getCourseType() == 1) {//团课
                 holder.type_icon_bg.setBackgroundResource(R.drawable.zi_bg);
                 holder.phone_or_name_tv.setText(daochang_person + "/" + max_person + "人");
+                holder.phone_or_name_tv.setVisibility(View.VISIBLE);
                 holder.coach_name.setText(resultBean.getTeacherName());
                 holder.phone_img.setVisibility(View.GONE);
 
@@ -113,14 +114,15 @@ public class ClassAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder> i
                 holder.type_icon_bg.setBackgroundResource(R.drawable.trainer);
                 holder.coach_name.setText(resultBean.getTeacherName());
                 holder.phone_or_name_tv.setText(resultBean.getUserName());
+                holder.phone_or_name_tv.setVisibility(View.VISIBLE);
                 holder.phone_img.setVisibility(View.VISIBLE);
 
             } else {//健身
                 holder.type_icon_bg.setBackgroundResource(R.drawable.venue);
-                holder.coach_name.setText(resultBean.getUserName());
-                holder.phone_or_name_tv.setText(daochang_person + "/" + max_person + "人");
+                holder.coach_name.setText(resultBean.getTeacherName());
+                holder.phone_or_name_tv.setVisibility(View.INVISIBLE);
+                //holder.phone_or_name_tv.setText(resultBean.getUserName());
                 holder.phone_img.setVisibility(View.GONE);
-
             }
 
 
@@ -275,7 +277,7 @@ public class ClassAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder> i
     public class WeiJieShuViewHolder extends RecyclerView.ViewHolder {
         public View view;
         public TextView coach_name, status_tv, type_icon_tv, phone_or_name_tv, time_tv, class_type, money_tv;
-        public ImageView phone_btn, status_img,phone_img;
+        public ImageView phone_btn, status_img, phone_img;
         public LinearLayout type_icon_bg;
 
         public WeiJieShuViewHolder(View itemView, boolean isItem) {
