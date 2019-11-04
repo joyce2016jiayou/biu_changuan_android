@@ -23,6 +23,7 @@ import com.noplugins.keepfit.android.util.data.SharedPreferencesHelper;
 import com.noplugins.keepfit.android.util.net.Network;
 import com.noplugins.keepfit.android.util.net.entity.Bean;
 import com.noplugins.keepfit.android.util.net.progress.GsonSubscriberOnNextListener;
+import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriber;
 import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriberNew;
 import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener;
 
@@ -72,36 +73,25 @@ public class UpdatePasswordActivity extends BaseActivity {
             Toast.makeText(this, "确认密码不能为空！", Toast.LENGTH_SHORT).show();
             return;
         }
-        Map<String, String> params = new HashMap<>();
+        Map<String, Object> params = new HashMap<>();
         params.put("gymAreaNum", SpUtils.getString(getApplicationContext(), AppConstants.USER_NAME));
         params.put("oldPassWord", edit_old_password.getText().toString());
         params.put("phone", (String)SharedPreferencesHelper.get(getApplicationContext(), Network.phone_number, ""));
         params.put("newPass1", edit_new_password1.getText().toString());
         params.put("newPass2", edit_password2.getText().toString());
-        Gson gson = new Gson();
-        String json_params = gson.toJson(params);
-        Log.e(TAG, "修改密码的参数：" + json_params);
-        String json = new Gson().toJson(params);//要传递的json
-        RequestBody requestBody = RequestBody.create(null, json);
 
         subscription = Network.getInstance("修改密码", getApplicationContext())
 
-                .update_my_password(requestBody,new ProgressSubscriberNew<>(String.class, new GsonSubscriberOnNextListener<String>() {
-                    @Override
-                    public void on_post_entity(String s, String message_id) {
-                        Toast.makeText(getApplicationContext(), message_id, Toast.LENGTH_SHORT).show();
-                        toLogin();
-                    }
-                }, new SubscriberOnNextListener<Bean<Object>>() {
+                .update_my_password(params,new ProgressSubscriber<>("", new SubscriberOnNextListener<Bean<Object>>() {
                     @Override
                     public void onNext(Bean<Object> objectBean) {
-
+                        Toast.makeText(getApplicationContext(), objectBean.getMessage(), Toast.LENGTH_SHORT).show();
+                        toLogin();
                     }
 
                     @Override
                     public void onError(String error) {
-                        Log.e(TAG, "登录失败：" + error);
-                        Toast.makeText(getApplicationContext(), error, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),error, Toast.LENGTH_SHORT).show();
                     }
                 }, this, true));
     }

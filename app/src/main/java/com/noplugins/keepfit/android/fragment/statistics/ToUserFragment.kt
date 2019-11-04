@@ -47,8 +47,11 @@ import kotlin.collections.ArrayList
 
 
 class ToUserFragment : BaseFragment() {
-
-    var selectDate = "2019-10"
+    val canler = Calendar.getInstance()
+    val year = canler.get(Calendar.YEAR)
+    val month = if (canler.get(Calendar.MONTH) + 1 > 9) "${canler.get(Calendar.MONTH) + 1}"
+    else "0${canler.get(Calendar.MONTH) + 1}"
+    var selectDate = "$year-$month"
     companion object {
         fun newInstance(title: String): ToUserFragment {
             val fragment = ToUserFragment()
@@ -74,6 +77,7 @@ class ToUserFragment : BaseFragment() {
         initPieChart(true)
         initMorePieChart()
 
+        tv_select_time.text = selectDate
         select_time.setOnClickListener {
             select_time_pop()
         }

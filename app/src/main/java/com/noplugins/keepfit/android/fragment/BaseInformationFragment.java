@@ -763,7 +763,7 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
 
             @Override
             public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
-                changguan_type = item;
+                changguan_type = item+1;
             }
         });
         spinner_type.setOnNothingSelectedListener(new MaterialSpinner.OnNothingSelectedListener() {

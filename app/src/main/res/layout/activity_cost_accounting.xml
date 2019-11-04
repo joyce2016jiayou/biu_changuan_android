@@ -84,7 +84,7 @@
                         android:layout_marginLeft="@dimen/m15"
                         android:textSize="15sp"
                         android:textColor="@color/contents_text"
-                        android:text="/ 月"/>
+                        android:text="元/ 月"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -115,7 +115,7 @@
                         android:layout_marginLeft="@dimen/m15"
                         android:textSize="15sp"
                         android:textColor="@color/contents_text"
-                        android:text="/ 月"/>
+                        android:text="元/ 月"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -146,7 +146,7 @@
                         android:layout_marginLeft="@dimen/m15"
                         android:textSize="15sp"
                         android:textColor="@color/contents_text"
-                        android:text="/ 月"/>
+                        android:text="元/ 月"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -177,7 +177,7 @@
                         android:layout_marginLeft="@dimen/m15"
                         android:textSize="15sp"
                         android:textColor="@color/contents_text"
-                        android:text="/ 月"/>
+                        android:text="元/ 月"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -208,7 +208,7 @@
                         android:layout_marginLeft="@dimen/m15"
                         android:textSize="15sp"
                         android:textColor="@color/contents_text"
-                        android:text="/ 月"/>
+                        android:text="元/ 月"/>
                 </LinearLayout>
             </LinearLayout>
         </www.linwg.org.lib.LCardView>

@@ -94,7 +94,8 @@ public class AddClassItemActivity extends BaseActivity {
     EditText edit_price_number;
 
     private String select_changguan_type;
-    private String select_target_type = "燃脂";
+    private String select_target_type = "0";
+    private String select_class_type = "0";
     private String select_nandu_type = "容易";
     private String select_room_type = "有氧";
     private String select_xunhuan_type = "单次";
@@ -235,15 +236,16 @@ public class AddClassItemActivity extends BaseActivity {
         Map<String, Object> params = new HashMap<>();
         params.put("gym_area_num", SpUtils.getString(getApplicationContext(), AppConstants.CHANGGUAN_NUM));//场馆编号
         params.put("course_name", edit_class_name.getText().toString());//团课名称
-        if (select_target_type.equals("燃脂")) {//训练目标  1燃脂2塑形3体态改善
-            params.put("target", "1");
-        } else if (select_target_type.equals("塑形")) {
-            params.put("target", "2");
-        } else if (select_target_type.equals("减压舒缓")) {
-            params.put("target", "3");
-        } else {//"体态改善"
-            params.put("target", "4");
-        }
+//        if (select_target_type.equals("燃脂")) {//训练目标  1燃脂2塑形3体态改善
+//            params.put("target", "1");
+//        } else if (select_target_type.equals("塑形")) {
+//            params.put("target", "2");
+//        } else if (select_target_type.equals("减压舒缓")) {
+//            params.put("target", "3");
+//        } else {//"体态改善"
+//            params.put("target", "4");
+//        }
+        params.put("target", select_target_type);
         if (select_nandu_type.equals("容易")) {//选择难度
             params.put("difficulty", "1");
         } else if (select_nandu_type.equals("中等")) {
@@ -254,22 +256,22 @@ public class AddClassItemActivity extends BaseActivity {
 
 
         params.put("type", type);
-        if (select_target_type.equals("单车")) {
-            params.put("class_type", "1");
-        } else if (select_target_type.equals("瑜伽")) {
-            params.put("class_type", "2");
-        } else if (select_target_type.equals("普拉提")) {
-            params.put("class_type", "3");
-        } else if (select_target_type.equals("拳击/搏击")) {
-            params.put("class_type", "4");
-        } else if (select_target_type.equals("舞蹈")) {
-            params.put("class_type", "5");
-        } else if (select_target_type.equals("功能性课程")) {
-            params.put("class_type", "6");
-        } else {//儿童体适能
-            params.put("class_type", "7");
-        }
-        params.put("class_type", "1");//团课类型：1单车2瑜伽3普拉提4拳击5舞蹈6功能性7儿童
+//        if (select_class_type.equals("单车")) {
+//            params.put("class_type", "1");
+//        } else if (select_class_type.equals("瑜伽")) {
+//            params.put("class_type", "2");
+//        } else if (select_class_type.equals("普拉提")) {
+//            params.put("class_type", "3");
+//        } else if (select_class_type.equals("拳击/搏击")) {
+//            params.put("class_type", "4");
+//        } else if (select_class_type.equals("舞蹈")) {
+//            params.put("class_type", "5");
+//        } else if (select_class_type.equals("功能性课程")) {
+//            params.put("class_type", "6");
+//        } else {//儿童体适能
+//            params.put("class_type", "7");
+//        }
+        params.put("class_type", select_class_type);//团课类型：1单车2瑜伽3普拉提4拳击5舞蹈6功能性7儿童
         params.put("course_type", "1");//1团课，2私教，3健身
         params.put("max_num", edit_tuanke_renshu_number.getText().toString());//人数限制
         params.put("start_time",
@@ -496,7 +498,8 @@ public class AddClassItemActivity extends BaseActivity {
 
             @Override
             public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
-                select_target_type = item;
+//                select_target_type = item;
+                select_target_type = ""+(position+1);
             }
         });
         xunlian_type_spinner.setOnNothingSelectedListener(new MaterialSpinner.OnNothingSelectedListener() {
@@ -540,7 +543,7 @@ public class AddClassItemActivity extends BaseActivity {
 
             @Override
             public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
-                select_target_type = item;
+                select_class_type = ""+(position+1);
             }
         });
         tuanke_type_spinner.setOnNothingSelectedListener(new MaterialSpinner.OnNothingSelectedListener() {

@@ -315,6 +315,9 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
                     checkbox_genyi.setChecked(true);
                     break;
                 case "8":
+                    checkbox_linyu.setChecked(true);
+                    break;
+                case "9":
                     checkbox_cesuo.setChecked(true);
                     break;
 

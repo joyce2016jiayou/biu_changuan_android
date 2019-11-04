@@ -59,6 +59,9 @@ class TeacherSelectActivity : BaseActivity() {
             finish()
         }
         queren_btn.setOnClickListener {
+            if (submitList.size <1){
+                return@setOnClickListener
+            }
             binding()
         }
         iv_delete_edit.setOnClickListener {
@@ -297,6 +300,7 @@ class TeacherSelectActivity : BaseActivity() {
                         ProgressSubscriber("场馆绑定教练", object : SubscriberOnNextListener<Bean<Any>> {
                             override fun onNext(result: Bean<Any>) {
                                 Toast.makeText(applicationContext,result.message,Toast.LENGTH_SHORT).show()
+                                finish()
                             }
 
                             override fun onError(error: String) {

@@ -587,8 +587,8 @@ public class Network {
      * @param subscriber
      * @return
      */
-    public Subscription update_my_password(RequestBody params, Subscriber<Bean<Object>> subscriber) {
-        return service.update_my_password(params)
+    public Subscription update_my_password(Map<String,Object> params, Subscriber<Bean<Object>> subscriber) {
+        return service.update_my_password(retuen_json_object(params))
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
