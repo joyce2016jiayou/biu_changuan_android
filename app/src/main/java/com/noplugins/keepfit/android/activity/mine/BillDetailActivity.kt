@@ -48,6 +48,7 @@ class BillDetailActivity : BaseActivity() {
 
     override fun initView() {
         setContentView(R.layout.activity_bill_detail)
+        tv_select_time.text = selectDate
         initAdapter()
 
     }
