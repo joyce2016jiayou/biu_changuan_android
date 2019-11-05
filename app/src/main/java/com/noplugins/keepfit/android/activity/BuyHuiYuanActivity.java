@@ -139,11 +139,8 @@ public class BuyHuiYuanActivity extends BaseActivity {
     }
 
     private void set_information(BuyInformationBean data) {
-        Log.e("打印出来的图片地址", data.getLogo());
         Glide.with(getApplicationContext())
                 .load(data.getLogo())
-                .placeholder(R.drawable.logo_gray) //加载成功前显示的图片
-                .fallback(R.drawable.logo_gray) //url为空的时候,显示的图片
                 .into(touxiang_image);
         logo = data.getLogo();
         changuan_name_tv.setText(data.getAreaName());
@@ -207,7 +204,6 @@ public class BuyHuiYuanActivity extends BaseActivity {
         lin2.setBackgroundResource(R.drawable.lin_bg1);
         lin3.setBackgroundResource(R.drawable.lin_bg1);
     }
-
 
 
 }

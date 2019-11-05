@@ -14,8 +14,8 @@
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:orientation="vertical">
 
@@ -43,8 +43,6 @@
 
 
         </RelativeLayout>
-
-
 
 
         <!-- 扫描取景框 -->
@@ -121,14 +119,14 @@
         android:id="@+id/my_erweima"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="我的二维码"
-        android:textSize="20sp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
         android:layout_marginBottom="200dp"
-        android:textStyle="bold"
+        android:text="我的二维码"
         android:textColor="#FFBA02"
-        />
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:visibility="gone" />
 
 </RelativeLayout>

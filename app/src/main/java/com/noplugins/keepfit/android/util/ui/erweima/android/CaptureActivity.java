@@ -117,7 +117,6 @@ public class CaptureActivity extends AppCompatActivity implements SurfaceHolder.
         try {
             config = (ZxingConfig) getIntent().getExtras().get(Constant.INTENT_ZXING_CONFIG);
         } catch (Exception e) {
-
             Log.i("config", e.toString());
         }
 
