@@ -188,8 +188,8 @@ public class RoleActivity extends BaseActivity {
                             roleAdapter.notifyDataSetChanged();
                         }
 
-                        Toast.makeText(getApplicationContext(),roleBeanBean.getMessage()
-                                ,Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getApplicationContext(),roleBeanBean.getMessage()
+//                                ,Toast.LENGTH_SHORT).show();
                     }
 
                     @Override

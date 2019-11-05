@@ -19,6 +19,7 @@ import com.noplugins.keepfit.android.util.data.SharedPreferencesHelper;
 import com.noplugins.keepfit.android.util.net.Network;
 import com.noplugins.keepfit.android.util.net.entity.Bean;
 import com.noplugins.keepfit.android.util.net.progress.GsonSubscriberOnNextListener;
+import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriber;
 import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriberNew;
 import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener;
 
@@ -121,35 +122,24 @@ public class ProductAdviceActivity extends BaseActivity {
 
     private void submit() {
         //
-        Map<String, String> params = new HashMap<>();
+        Map<String, Object> params = new HashMap<>();
         params.put("gymAreaNum", SpUtils.getString(getApplicationContext(), AppConstants.CHANGGUAN_NUM));
-        params.put("gymUserNum", (String) SharedPreferencesHelper.get(getApplicationContext(), "phone_number", ""));
+        params.put("gymUserNum", SpUtils.getString(getApplicationContext(),AppConstants.USER_NAME));
         params.put("feedbackType", "" + type);
         params.put("feedbackDes", edit_content.getText().toString());
-        Gson gson = new Gson();
-        String json_params = gson.toJson(params);
-        Log.e(TAG, "修改密码的参数：" + json_params);
-        String json = new Gson().toJson(params);//要传递的json
-        RequestBody requestBody = RequestBody.create(null, json);
 
         subscription = Network.getInstance("产品反馈", getApplicationContext())
 
-                .feedback(requestBody, new ProgressSubscriberNew<>(String.class, new GsonSubscriberOnNextListener<String>() {
-                    @Override
-                    public void on_post_entity(String s, String message_id) {
-                        Toast.makeText(getApplicationContext(), message_id, Toast.LENGTH_SHORT).show();
-                        setResult(3);
-                        finish();
-                    }
-                }, new SubscriberOnNextListener<Bean<Object>>() {
+                .feedback(params, new ProgressSubscriber<>("产品反馈", new SubscriberOnNextListener<Bean<Object>>() {
                     @Override
                     public void onNext(Bean<Object> objectBean) {
-
+                        Toast.makeText(getApplicationContext(), objectBean.getMessage(), Toast.LENGTH_SHORT).show();
+                        setResult(3);
+                        finish();
                     }
 
                     @Override
                     public void onError(String error) {
-                        Log.e(TAG, "登录失败：" + error);
                         Toast.makeText(getApplicationContext(), error, Toast.LENGTH_SHORT).show();
                     }
                 }, this, true));

@@ -43,6 +43,7 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
             android:layout_marginRight="20dp"
+            android:visibility="gone"
             android:layout_marginBottom="15dp"
             android:src="@drawable/kefu" />
     </RelativeLayout>

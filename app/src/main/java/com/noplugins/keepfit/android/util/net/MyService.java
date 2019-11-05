@@ -398,7 +398,7 @@ public interface MyService {
      * @return 是否设置成功
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
-    @POST("feeaBackData")
+    @POST("feedBackData")
     Observable<Bean<Object>> feedback(@Body RequestBody json);
 
     /**

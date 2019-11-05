@@ -39,30 +39,32 @@ class StatisticsFragment:BaseFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        if (fragments.size!=0){
+            fragments = ArrayList()
+            fragments.add(ToUserFragment.newInstance(""))
+            fragments.add(ToProductFragment.newInstance(""))
+            showFragment()
 
+
+            rl_user.setOnClickListener {
+
+                changeBtn(1)
+                currentIndex = 0
+                showFragment()
+            }
+            rl_product.setOnClickListener {
+
+                changeBtn(2)
+                currentIndex = 1
+                showFragment()
+            }
+        }
 
     }
 
     override fun onFragmentFirstVisible() {
         super.onFragmentFirstVisible()
-        fragments = ArrayList()
-        fragments.add(ToUserFragment.newInstance(""))
-        fragments.add(ToProductFragment.newInstance(""))
-        showFragment()
 
-
-        rl_user.setOnClickListener {
-
-            changeBtn(1)
-            currentIndex = 0
-            showFragment()
-        }
-        rl_product.setOnClickListener {
-
-            changeBtn(2)
-            currentIndex = 1
-            showFragment()
-        }
 
     }
 

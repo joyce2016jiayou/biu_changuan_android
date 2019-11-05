@@ -33,8 +33,6 @@
     <string-array name="xunhuan_types">
         <item>单次</item>
         <item>二周</item>
-        <item>三周</item>
-        <item>四周</item>
     </string-array>
     <string-array name="zhiwei_types">
         <item>经理</item>

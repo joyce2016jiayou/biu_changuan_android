@@ -48,6 +48,7 @@
             android:layout_height="wrap_content"
             tools:text="哔哔哔旗舰店"
             android:layout_toRightOf="@+id/iv_logo"
+            android:layout_toLeftOf="@+id/tv_vip_price"
             android:layout_marginLeft="@dimen/m10"
             android:layout_marginTop="@dimen/m9"
             android:textSize="15sp"
