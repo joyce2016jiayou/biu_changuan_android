@@ -144,7 +144,6 @@ public class BuyHuiYuanActivity extends BaseActivity {
                 .into(touxiang_image);
         logo = data.getLogo();
         changuan_name_tv.setText(data.getAreaName());
-
     }
 
     private void get_order_number() {
