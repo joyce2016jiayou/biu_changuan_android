@@ -28,8 +28,10 @@ import java.util.HashMap
 class WalletActivity : BaseActivity() {
     private var walletNum = ""
     private var finalCanWithdraw = 0.0
+    private var havePayPassWord = -1
     override fun initBundle(parms: Bundle?) {
     }
+
 
     override fun initView() {
         setContentView(R.layout.activity_wallet)
@@ -55,7 +57,7 @@ class WalletActivity : BaseActivity() {
 
 //
 
-            if (SpUtils.getInt(applicationContext,AppConstants.IS_TX) == 1){
+            if (havePayPassWord == 1){
                 if (finalCanWithdraw < 1000){
                     Toast.makeText(applicationContext,"可提现金额必须大于1000",Toast.LENGTH_SHORT).show()
                     return@setOnClickListener
@@ -65,10 +67,10 @@ class WalletActivity : BaseActivity() {
                 bundle.putDouble("finalCanWithdraw",finalCanWithdraw)
                 intent.putExtras(bundle)
                 startActivity(intent)
-            } else {
-                //跳转到提现
-                toQueren(btn_tixian)
+                return@setOnClickListener
             }
+            //跳转到提现
+            toQueren(btn_tixian)
 
         }
      }
@@ -106,13 +108,14 @@ class WalletActivity : BaseActivity() {
 
     private fun setting(bean:WalletBean){
         tv_balance.text = "¥ ${bean.finalBalance}"
-        tv_sum_sr.text = "¥ ${bean.finalIncome}"
-        tv_day_sr.text = "¥ ${bean.finaltodayIncome}"
-        tv_month_sr.text = "¥ ${bean.finalmonthIncome}"
-        tv_sum_withdraw.text = "¥ ${bean.finalWithdraw}"
-        tv_now_withdraw.text = "¥ ${bean.finalCanWithdraw}"
+        tv_sum_sr.text = "¥ ${bean.finalTotalIncome}"
+        tv_day_sr.text = "¥ ${bean.finalTotalTodayIncome}"
+        tv_month_sr.text = "¥ ${bean.finalTotalMonthIncome}"
+        tv_sum_withdraw.text = "¥ ${bean.finalTotalWithdraw}"
+        tv_now_withdraw.text = "¥ ${bean.finaTotalCanWithdraw}"
+        havePayPassWord = bean.havePayPassWord
         walletNum = bean.walletNum
-        finalCanWithdraw = bean.finalCanWithdraw
+        finalCanWithdraw = bean.finaTotalCanWithdraw
     }
 
     //myBalance

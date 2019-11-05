@@ -42,7 +42,6 @@ class WithdrawActivity : BaseActivity() {
     override fun initBundle(parms: Bundle?) {
         if (parms!=null){
             finalCanWithdraw = parms.getDouble("finalCanWithdraw")
-            tv_now_money.text = "当前可提现余额$finalCanWithdraw"
         }
     }
 
@@ -63,6 +62,7 @@ class WithdrawActivity : BaseActivity() {
         super.onResume()
     }
     override fun doBusiness(mContext: Context?) {
+        tv_now_money.text = "当前可提现余额$finalCanWithdraw"
         back_btn.setOnClickListener {
             finish()
         }

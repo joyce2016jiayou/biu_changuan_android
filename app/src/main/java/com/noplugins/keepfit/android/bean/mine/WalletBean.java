@@ -42,6 +42,62 @@ public class WalletBean {
     private double finalWithdraw;
     private double finalCanWithdraw;
 
+
+    private double finalTotalWithdraw;
+    private double finaTotalCanWithdraw;
+    private double finalTotalIncome;
+    private double finalTotalTodayIncome;
+    private double finalTotalMonthIncome;
+    private int havePayPassWord;
+
+    public double getFinalTotalWithdraw() {
+        return finalTotalWithdraw;
+    }
+
+    public void setFinalTotalWithdraw(double finalTotalWithdraw) {
+        this.finalTotalWithdraw = finalTotalWithdraw;
+    }
+
+    public double getFinaTotalCanWithdraw() {
+        return finaTotalCanWithdraw;
+    }
+
+    public void setFinaTotalCanWithdraw(double finaTotalCanWithdraw) {
+        this.finaTotalCanWithdraw = finaTotalCanWithdraw;
+    }
+
+    public double getFinalTotalIncome() {
+        return finalTotalIncome;
+    }
+
+    public void setFinalTotalIncome(double finalTotalIncome) {
+        this.finalTotalIncome = finalTotalIncome;
+    }
+
+    public double getFinalTotalTodayIncome() {
+        return finalTotalTodayIncome;
+    }
+
+    public void setFinalTotalTodayIncome(double finalTotalTodayIncome) {
+        this.finalTotalTodayIncome = finalTotalTodayIncome;
+    }
+
+    public double getFinalTotalMonthIncome() {
+        return finalTotalMonthIncome;
+    }
+
+    public void setFinalTotalMonthIncome(double finalTotalMonthIncome) {
+        this.finalTotalMonthIncome = finalTotalMonthIncome;
+    }
+
+    public int getHavePayPassWord() {
+        return havePayPassWord;
+    }
+
+    public void setHavePayPassWord(int havePayPassWord) {
+        this.havePayPassWord = havePayPassWord;
+    }
+
     public String getPkname() {
         return pkname;
     }
