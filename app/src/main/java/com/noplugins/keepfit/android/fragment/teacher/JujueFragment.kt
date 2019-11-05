@@ -42,7 +42,7 @@ class JujueFragment : BaseFragment() {
     lateinit var adapterManager: ShoukeCgAdapter
     var newView: View? = null
     var page = 1
-
+    var formType = -1
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         if (newView == null) {
             newView = inflater.inflate(R.layout.fragment_manager_teacher_1, container, false)
@@ -55,6 +55,10 @@ class JujueFragment : BaseFragment() {
         super.onActivityCreated(savedInstanceState)
         initAdapter()
 //        requestData()
+        if (formType == 2){
+            requestData()
+            formType = -1
+        }
     }
 
     //    override fun onFragmentVisibleChange(isVisible: Boolean) {
@@ -65,8 +69,8 @@ class JujueFragment : BaseFragment() {
 //    }
     @Subscribe(threadMode = ThreadMode.MAIN)
     public fun upadate(messageEvent:String ) {
-        if (AppConstants.TEAM_YQ_REFUSE == messageEvent){
-            requestData()
+        if (AppConstants.TEAM_YQ_REFUSE == messageEvent||AppConstants.TEAM_YQ_AGREE == messageEvent){
+            formType = 2
         }
     }
     override fun onDestroyView() {
@@ -99,7 +103,7 @@ class JujueFragment : BaseFragment() {
             }
         }
         refresh_layout.setEnableLoadMore(false)
-        refresh_layout.setEnableRefresh(false)
+//        refresh_layout.setEnableRefresh(false)
         refresh_layout.setOnRefreshListener {
             //下拉刷新
             page = 1

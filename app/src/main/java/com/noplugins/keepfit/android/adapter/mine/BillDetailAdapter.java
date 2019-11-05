@@ -26,12 +26,12 @@ public class BillDetailAdapter extends BaseQuickAdapter<BalanceListBean.ListBean
     protected void convert(@NonNull BaseViewHolder helper, BalanceListBean.ListBean item) {
         helper.setText(R.id.tv_service_type, typeToString(item.getType()));
         helper.setText(R.id.tv_time, item.getCreateDate());
-        if (helper.getLayoutPosition() % 2 == 0) {
-            helper.setText(R.id.tv_money, "+"+item.getMoney());
+        if (item.getType() != 1) {
+            helper.setText(R.id.tv_money, "+"+item.getFinalMoney());
             ((TextView) helper.getView(R.id.tv_money)).setTextColor(R.color.color_6DD400);
             helper.getView(R.id.tv_tips).setVisibility(View.GONE);
         } else {
-            helper.setText(R.id.tv_money, "-"+item.getMoney());
+            helper.setText(R.id.tv_money, "-"+item.getFinalMoney());
             ((TextView) helper.getView(R.id.tv_money)).setTextColor(R.color.color_F5502F);
             helper.getView(R.id.tv_tips).setVisibility(View.VISIBLE);
             helper.setText(R.id.tv_tips, statusToString(item.getStatus()));
@@ -82,6 +82,8 @@ public class BillDetailAdapter extends BaseQuickAdapter<BalanceListBean.ListBean
                 return "失败";
             case 3:
                 return "处理中";
+            case 4:
+                return "已分成";
             default:
                 return "未知错误";
         }

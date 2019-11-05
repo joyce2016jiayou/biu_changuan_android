@@ -30,32 +30,32 @@ import pub.devrel.easypermissions.AfterPermissionGranted
 import pub.devrel.easypermissions.EasyPermissions
 import java.util.ArrayList
 
-class TeacherManagerActivity : BaseActivity(), AMapLocationListener {
+class TeacherManagerActivity : BaseActivity(){
 
-    override fun onLocationChanged(amapLocation: AMapLocation?) {
-        if (amapLocation != null) {
-            if (amapLocation.errorCode == 0) {
-                //定位成功回调信息，设置相关消息
-                amapLocation.locationType//获取当前定位结果来源，如网络定位结果，详见定位类型表
-                val latitude = amapLocation.latitude//获取纬度
-                val longitude = amapLocation.longitude//获取经度
-                //                        latLonPoint = new LatLonPoint(currentLat, currentLon);  // latlng形式的
-                /*currentLatLng = new LatLng(currentLat, currentLon);*/   //latlng形式的
-                SpUtils.putString(applicationContext, AppConstants.LON, "" + longitude)
-                SpUtils.putString(applicationContext, AppConstants.LAT, "" + latitude)
-
-            } else {
-                //显示错误信息ErrCode是错误码，errInfo是错误信息，详见错误码表。
-                Log.e(
-                        "AmapError", "location Error, ErrCode:"
-                        + amapLocation.errorCode + ", errInfo:"
-                        + amapLocation.errorInfo
-                )
-            }
-
-            initFragment()
-        }
-    }
+//    override fun onLocationChanged(amapLocation: AMapLocation?) {
+//        if (amapLocation != null) {
+//            if (amapLocation.errorCode == 0) {
+//                //定位成功回调信息，设置相关消息
+//                amapLocation.locationType//获取当前定位结果来源，如网络定位结果，详见定位类型表
+//                val latitude = amapLocation.latitude//获取纬度
+//                val longitude = amapLocation.longitude//获取经度
+//                //                        latLonPoint = new LatLonPoint(currentLat, currentLon);  // latlng形式的
+//                /*currentLatLng = new LatLng(currentLat, currentLon);*/   //latlng形式的
+//                SpUtils.putString(applicationContext, AppConstants.LON, "" + longitude)
+//                SpUtils.putString(applicationContext, AppConstants.LAT, "" + latitude)
+//
+//            } else {
+//                //显示错误信息ErrCode是错误码，errInfo是错误信息，详见错误码表。
+//                Log.e(
+//                        "AmapError", "location Error, ErrCode:"
+//                        + amapLocation.errorCode + ", errInfo:"
+//                        + amapLocation.errorInfo
+//                )
+//            }
+//
+//            initFragment()
+//        }
+//    }
 
     private val mFragments = ArrayList<Fragment>()
     //声明AMapLocationClient类对象
@@ -137,31 +137,31 @@ class TeacherManagerActivity : BaseActivity(), AMapLocationListener {
         }
     }
 
-    private fun initGaode() {
-        //初始化定位
-        mLocationClient = AMapLocationClient(this)
-        //设置定位回调监听
-        mLocationClient!!.setLocationListener(this)
-        //初始化AMapLocationClientOption对象
-        mLocationOption = AMapLocationClientOption()
-
-        mLocationOption!!.isOnceLocation = true
-        //        mLocationOption.setOnceLocationLatest(true);
-        // 同时使用网络定位和GPS定位,优先返回最高精度的定位结果,以及对应的地址描述信息
-        mLocationOption!!.locationMode = AMapLocationClientOption.AMapLocationMode.Hight_Accuracy
-        //设置定位间隔,单位毫秒,默认为2000ms，最低1000ms。默认连续定位 切最低时间间隔为1000ms
-        //        mLocationOption.setInterval(3500);
-        //给定位客户端对象设置定位参数
-        mLocationClient!!.setLocationOption(mLocationOption)
-        //启动定位
-        mLocationClient!!.startLocation()
-    }
+//    private fun initGaode() {
+//        //初始化定位
+//        mLocationClient = AMapLocationClient(this)
+//        //设置定位回调监听
+//        mLocationClient!!.setLocationListener(this)
+//        //初始化AMapLocationClientOption对象
+//        mLocationOption = AMapLocationClientOption()
+//
+//        mLocationOption!!.isOnceLocation = true
+//        //        mLocationOption.setOnceLocationLatest(true);
+//        // 同时使用网络定位和GPS定位,优先返回最高精度的定位结果,以及对应的地址描述信息
+//        mLocationOption!!.locationMode = AMapLocationClientOption.AMapLocationMode.Hight_Accuracy
+//        //设置定位间隔,单位毫秒,默认为2000ms，最低1000ms。默认连续定位 切最低时间间隔为1000ms
+//        //        mLocationOption.setInterval(3500);
+//        //给定位客户端对象设置定位参数
+//        mLocationClient!!.setLocationOption(mLocationOption)
+//        //启动定位
+//        mLocationClient!!.startLocation()
+//    }
 
     @AfterPermissionGranted(PERMISSIONS)
     private fun requestPermission() {
         if (EasyPermissions.hasPermissions(this, *mPerms)) {
             //Log.d(TAG, "onClick: 获取读写内存权限,Camera权限和wifi权限");
-            initGaode()
+//            initGaode()
 
         } else {
             EasyPermissions.requestPermissions(this, "获取读写内存权限,Camera权限和wifi权限", PERMISSIONS, *mPerms)
@@ -174,7 +174,7 @@ class TeacherManagerActivity : BaseActivity(), AMapLocationListener {
             // requestCode即所声明的权限获取码，在checkSelfPermission时传入
             PERMISSIONS -> if (grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults.size > 0) {  //有权限
                 // 获取到权限，作相应处理
-                initGaode()
+//                initGaode()
             } else {
                 //                    showGPSContacts();
             }

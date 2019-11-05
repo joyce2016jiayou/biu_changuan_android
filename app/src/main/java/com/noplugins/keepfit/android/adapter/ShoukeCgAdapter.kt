@@ -45,17 +45,18 @@ class ShoukeCgAdapter(data: List<TeacherBean>?) : BaseQuickAdapter<TeacherBean, 
 
         val skill = (helper.getView<ZFlowLayout>(R.id.fl_private_skill))
 
-        val arr = item.skillList
+//        val arr =
+        skill.removeAllViews()
         val layoutParams =
                 ViewGroup.MarginLayoutParams(
                         ViewGroup.LayoutParams.WRAP_CONTENT,
                         ViewGroup.LayoutParams.WRAP_CONTENT)
         layoutParams.setMargins(15, 20, 15, 20)
-        for (i in 0 until arr.size){
+        for (i in 0 until item.skillList.size){
             val paramItemView = (mContext as Activity).layoutInflater.inflate(R.layout.adapter_search_histroy, skill,false)
             val keyWordTv = paramItemView.findViewById<TextView>(R.id.tv_content)
             keyWordTv.setPadding(15,5,15,5)
-            keyWordTv.text = arr[i]
+            keyWordTv.text = item.skillList[i]
             skill.addView(paramItemView, layoutParams)
         }
 

@@ -21,7 +21,7 @@ import com.noplugins.keepfit.android.util.net.Network
 import com.noplugins.keepfit.android.util.net.entity.Bean
 import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriber
 import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener
-import kotlinx.android.synthetic.main.activity_update_password.*
+import kotlinx.android.synthetic.main.activity_update_tixian.*
 import okhttp3.RequestBody
 
 import java.util.HashMap
@@ -45,10 +45,10 @@ class UpdatePasswordActivity : BaseActivity() {
     }
 
     private fun updatePassword() {
-        if (!PwdCheckUtil.isLetterDigit(edit_new_password1.getText().toString())) {
-            Toast.makeText(this, "密码不符合规则！", Toast.LENGTH_SHORT).show()
-            return
-        }
+//        if (!PwdCheckUtil.isLetterDigit(edit_new_password1.getText().toString())) {
+//            Toast.makeText(this, "密码不符合规则！", Toast.LENGTH_SHORT).show()
+//            return
+//        }
         if (TextUtils.isEmpty(edit_new_password1.getText().toString())) {
             Toast.makeText(this, "密码不能为空！", Toast.LENGTH_SHORT).show()
             return
@@ -59,7 +59,7 @@ class UpdatePasswordActivity : BaseActivity() {
         }
         val params = HashMap<String, Any>()
         params["userNum"] = SpUtils.getString(applicationContext, AppConstants.USER_NAME)
-        params["password"] = edit_new_password1.text.toString()
+        params["paypassword"] = edit_new_password1.text.toString()
         subscription = Network.getInstance("设置提现密码", this)
             .settingPayPassword(params,
                 ProgressSubscriber("设置提现密码", object : SubscriberOnNextListener<Bean<Any>> {

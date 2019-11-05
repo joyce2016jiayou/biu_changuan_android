@@ -40,6 +40,7 @@ class BindingFragment : BaseFragment()  {
     lateinit var adapterManager : ShoukeCgAdapter
     var newView: View? = null
     var page = 1
+    var formType = -1
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         if (newView == null) {
@@ -52,13 +53,14 @@ class BindingFragment : BaseFragment()  {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         initAdapter()
-//        requestData()
+
+//
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public fun upadate(messageEvent:String ) {
         if (AppConstants.TEAM_YQ_AGREE == messageEvent){
-            requestData()
+            formType = 2
         }
     }
     override fun onDestroyView() {
@@ -67,9 +69,6 @@ class BindingFragment : BaseFragment()  {
     }
     override fun onFragmentVisibleChange(isVisible: Boolean) {
         super.onFragmentVisibleChange(isVisible)
-        if (isVisible){
-//            requestData()
-        }
     }
 
     override fun onFragmentFirstVisible() {
@@ -98,7 +97,7 @@ class BindingFragment : BaseFragment()  {
             }
         }
         refresh_layout.setEnableLoadMore(false)
-        refresh_layout.setEnableRefresh(false)
+//        refresh_layout.setEnableRefresh(false)
         refresh_layout.setOnRefreshListener {
             //下拉刷新
             page = 1

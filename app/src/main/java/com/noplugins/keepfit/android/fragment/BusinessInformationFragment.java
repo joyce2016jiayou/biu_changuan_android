@@ -295,7 +295,7 @@ public class BusinessInformationFragment extends ViewPagerFragment {
         params.put("district", informationEntity.getDistrict());
         params.put("bank_card_num", informationEntity.getBank_card_num());
         params.put("bank_name", informationEntity.getBankName());
-        params.put("gym_user_num",SpUtils.getString(getActivity(),AppConstants.CHANGGUAN_NUM));
+        params.put("gym_user_num",SpUtils.getString(getActivity(),AppConstants.USER_NAME));
         Subscription subscription = Network.getInstance("提交审核资料", getActivity())
                 .submit_information(params,
                         new ProgressSubscriber<>("提交审核资料", new SubscriberOnNextListener<Bean<CheckBean>>() {

@@ -280,6 +280,8 @@
                                     android:gravity="center_vertical"
                                     android:minWidth="@dimen/m100"
                                     android:paddingLeft="@dimen/m10"
+                                    android:textColor="@color/color_22243D"
+                                    android:textSize="13sp"
                                     android:drawableRight="@drawable/icon_xiala"
                                     android:paddingRight="@dimen/m10"
                                     android:background="@drawable/shape_btn_bg_gray"/>

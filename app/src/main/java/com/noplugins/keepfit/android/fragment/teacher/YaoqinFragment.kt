@@ -87,7 +87,7 @@ class YaoqinFragment : BaseFragment()  {
         }
 
         refresh_layout.setEnableLoadMore(false)
-        refresh_layout.setEnableRefresh(false)
+//        refresh_layout.setEnableRefresh(false)
         refresh_layout.setOnRefreshListener {
             //下拉刷新
             page = 1

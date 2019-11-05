@@ -39,7 +39,7 @@ class BillDetailInfoActivity : BaseActivity() {
         if(bean.type == 1){
             lv_1.visibility = View.VISIBLE
             lv_2.visibility = View.GONE
-            tv_zcje.text ="¥${bean.money}"
+            tv_zcje.text ="¥${bean.finalMoney}"
             tv_sqsj.text= bean.createDate
             tv_txyh.text= ""
             tv_operate.text = "收入-银行"
@@ -48,7 +48,7 @@ class BillDetailInfoActivity : BaseActivity() {
             lv_1.visibility = View.GONE
             lv_2.visibility = View.VISIBLE
 
-            tv_srje.text = "¥${bean.money}"
+            tv_srje.text = "¥${bean.finalMoney}"
             tv_kcmc.text = bean.courseName
             tv_cgmc.text = bean.areaName
             tv_sksj.text = ""

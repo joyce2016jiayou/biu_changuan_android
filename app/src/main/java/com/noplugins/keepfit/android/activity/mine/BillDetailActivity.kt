@@ -34,7 +34,11 @@ class BillDetailActivity : BaseActivity() {
     var walletNum = ""
     var page = 1
     var maxPage = 1
-    var selectDate = "2019-10"
+    val canler = Calendar.getInstance()
+    val year = canler.get(Calendar.YEAR)
+    val month = if (canler.get(Calendar.MONTH) + 1 > 9) "${canler.get(Calendar.MONTH) + 1}"
+    else "0${canler.get(Calendar.MONTH) + 1}"
+    var selectDate = "$year-$month"
     override fun initBundle(parms: Bundle?) {
         if (intent.getStringExtra("walletNum")!=""){
             walletNum = intent.getStringExtra("walletNum")

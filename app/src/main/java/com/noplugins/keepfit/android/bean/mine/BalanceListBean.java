@@ -80,7 +80,7 @@ public class BalanceListBean {
         private String updateDate;
         private int deleted;
         private String remark;
-        private double finalmoney;
+        private double finalMoney;
         /**
          * courseNum :
          * courseName : 课程名称
@@ -91,6 +91,14 @@ public class BalanceListBean {
         private String courseNum;
         private String courseName;
         private String areaName;
+
+        public double getFinalMoney() {
+            return finalMoney;
+        }
+
+        public void setFinalMoney(double finalMoney) {
+            this.finalMoney = finalMoney;
+        }
 
         public String getPkname() {
             return pkname;
@@ -196,13 +204,6 @@ public class BalanceListBean {
             this.remark = remark;
         }
 
-        public double getFinalmoney() {
-            return finalmoney;
-        }
-
-        public void setFinalmoney(double finalmoney) {
-            this.finalmoney = finalmoney;
-        }
 
         public String getCourseNum() {
             return courseNum;

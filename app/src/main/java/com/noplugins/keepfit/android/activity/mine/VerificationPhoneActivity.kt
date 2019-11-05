@@ -33,11 +33,15 @@ class VerificationPhoneActivity : BaseActivity() {
 
     override fun initView() {
         setContentView(R.layout.activity_verification_phone)
-        tv_phone.text = intent.getStringExtra("newPhone")
+//        tv_phone.text = intent.getStringExtra("newPhone")
+//        if (intent.getStringExtra("newPhone") == ""){
+//
+//        }
+        tv_phone.text = SpUtils.getString(applicationContext,AppConstants.PHONE)
         if (intent.getBooleanExtra("update", false)){
             tv_btn_text.text = "完成"
         } else{
-            tv_btn_text.text == "下一步"
+            tv_btn_text.text = "下一步"
         }
 
     }
@@ -50,13 +54,14 @@ class VerificationPhoneActivity : BaseActivity() {
             send()
         }
         btn_ToLogin.setOnClickListener {
-            if (intent.getBooleanExtra("update", false)) {
-                updatePhone()
-            } else {
-                val intent = Intent(this, UpdatePasswordActivity::class.java)
-                startActivity(intent)
-                finish()
-            }
+//            if (intent.getBooleanExtra("update", false)) {
+//                updatePhone()
+//            } else {
+//
+//            }
+            val intent = Intent(this, UpdatePasswordActivity::class.java)
+            startActivity(intent)
+            finish()
 
         }
         back_btn.setOnClickListener {

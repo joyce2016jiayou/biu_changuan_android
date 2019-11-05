@@ -837,15 +837,20 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
                             icon_image_path = file.getPath();
                             Log.d("Luban", "luban压缩 成功！原图:${photos.path}");
                             Log.d("Luban", "luban压缩 成功！imgurl:$icon_image_path");
+                            upLogoToQiniu();
                         }
 
                         @Override
                         public void onError(Throwable e) {
+                            icon_image_path = file.getPath();
+                            upLogoToQiniu();
 
                         }
                     }).launch();
+        } else {
+            upLogoToQiniu();
         }
-        upLogoToQiniu();
+
     }
 
     private String getPath() {
