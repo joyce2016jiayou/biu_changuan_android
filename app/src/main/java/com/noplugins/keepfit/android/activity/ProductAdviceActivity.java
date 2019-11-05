@@ -133,7 +133,7 @@ public class ProductAdviceActivity extends BaseActivity {
                 .feedback(params, new ProgressSubscriber<>("产品反馈", new SubscriberOnNextListener<Bean<Object>>() {
                     @Override
                     public void onNext(Bean<Object> objectBean) {
-                        Toast.makeText(getApplicationContext(), objectBean.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "提交成功", Toast.LENGTH_SHORT).show();
                         setResult(3);
                         finish();
                     }

@@ -120,6 +120,7 @@ class WalletActivity : BaseActivity() {
         val params = HashMap<String, Any>()
 //        params["userNum"] = SpUtils.getString(this, AppConstants.USER_NAME)
         params["gymAreaNum"] = SpUtils.getString(this,AppConstants.CHANGGUAN_NUM)
+        params["gymUserNum"] = SpUtils.getString(this,AppConstants.USER_NAME)
         val subscription = Network.getInstance("我的钱包", this)
             .myBalance(
                 params,

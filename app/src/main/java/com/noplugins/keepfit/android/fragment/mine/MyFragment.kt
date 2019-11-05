@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.LinearLayout
 import android.widget.TextView
+import com.bumptech.glide.Glide
 import com.noplugins.keepfit.android.R
 import com.noplugins.keepfit.android.activity.*
 import com.noplugins.keepfit.android.activity.mine.CgPriceActivity
@@ -241,6 +242,9 @@ class MyFragment : BaseFragment(), EasyPermissions.PermissionCallbacks {
     }
 
     private fun setting(cg: ChangguanBean) {
+        Glide.with(activity)
+                .load(cg.area.logo)
+                .into(iv_logo)
         tv_user_Name.text = cg.area.areaName
         tv_score.text = "${cg.area.finalGradle}分"
         tv_cg_time.text = "营业时间：${TimeCheckUtil.removeSecond(cg.area.businessStart)}-${TimeCheckUtil.removeSecond(cg.area.businessEnd)}"
