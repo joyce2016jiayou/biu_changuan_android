@@ -109,7 +109,6 @@ public class BusinessInformationFragment extends ViewPagerFragment {
     private Subscription subscription;//Rxjava
     private NoScrollViewPager viewpager_content;
     private StepView stepView;
-    ImageView back_btn;
 
 
     public static BusinessInformationFragment homeInstance(String title) {
@@ -350,13 +349,6 @@ public class BusinessInformationFragment extends ViewPagerFragment {
             mainActivity = (InformationCheckActivity) activity;
             stepView = (StepView) mainActivity.findViewById(R.id.sv);
             viewpager_content = mainActivity.findViewById(R.id.viewpager_content);
-            back_btn = mainActivity.findViewById(R.id.back_btn);
-            back_btn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    getActivity().finish();
-                }
-            });
         }
 
     }

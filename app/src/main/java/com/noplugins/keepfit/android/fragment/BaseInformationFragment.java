@@ -57,6 +57,7 @@ import com.noplugins.keepfit.android.entity.UrlEntity;
 import com.noplugins.keepfit.android.resource.ValueResources;
 import com.noplugins.keepfit.android.util.GlideEngine;
 import com.noplugins.keepfit.android.util.data.SharedPreferencesHelper;
+import com.noplugins.keepfit.android.util.data.StringsHelper;
 import com.noplugins.keepfit.android.util.net.GetJsonDataUtil;
 import com.noplugins.keepfit.android.util.net.Network;
 import com.noplugins.keepfit.android.util.net.RxUtils;
@@ -197,6 +198,7 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
     private ArrayList<ArrayList<String>> options2Items = new ArrayList<>();
     private ArrayList<ArrayList<ArrayList<String>>> options3Items = new ArrayList<>();
     private Thread thread;
+    TextView top_title_tv;
 
 
     /**
@@ -234,7 +236,6 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
             initView();
             select_biaoqian();//设置标签监听
             getToken();//获取七牛云token
-
         }
         return view;
     }
@@ -400,6 +401,8 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
                         mainActivity.informationEntity = getDates();
                         //跳转下一个页面
                         viewpager_content.setCurrentItem(1);
+                        mainActivity.select_index = 1;
+                        top_title_tv.setText("营业资料");
                         int step = stepView.getCurrentStep();//设置进度条
                         stepView.setCurrentStep((step + 1) % stepView.getStepNum());
                     }
@@ -413,7 +416,7 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
 
 
     private void upload_icon_work(String img_path) {
-        Log.e("上传icon",img_path);
+        Log.e("上传icon", img_path);
         uploadManager.put(img_path, qiniu_key, uptoken,
                 new UpCompletionHandler() {
                     @Override
@@ -605,8 +608,10 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
         informationEntity.setArea_name(changguan_name.getText().toString());//场馆名称
         if (changguan_type.equals("综合会所")) {//场馆类型
             informationEntity.setType(1);
-        } else {//工作室
+        } else if (changguan_type.equals("工作室")) {//工作室
             informationEntity.setType(2);
+        } else {
+            informationEntity.setType(3);
         }
         informationEntity.setArea(Integer.valueOf(edittext_area.getText().toString()));//场馆面积
         informationEntity.setPhone(tell_edit.getText().toString());//电话号码
@@ -642,7 +647,7 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
         List<InformationEntity.GymPicBean> gym_pic = new ArrayList<>();
         InformationEntity.GymPicBean icon_pic = new InformationEntity.GymPicBean();
         icon_pic.setOrder_num(1);
-        Log.e("登记反馈说多了",icon_net_path);
+        Log.e("登记反馈说多了", icon_net_path);
         icon_pic.setQiniu_key(icon_net_path);
         gym_pic.add(icon_pic);
         for (int i = 0; i < jiugongge_iamges.size(); i++) {
@@ -675,6 +680,9 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
             return false;
         } else if (TextUtils.isEmpty(edit_email.getText())) {
             Toast.makeText(getActivity(), R.string.alert_dialog_tishi6, Toast.LENGTH_SHORT).show();
+            return false;
+        } else if (!StringsHelper.isEmail(edit_email.getText().toString())) {
+            Toast.makeText(getActivity(), R.string.alert_dialog_tishi30, Toast.LENGTH_SHORT).show();
             return false;
         } else if (TextUtils.isEmpty(sheng_tv.getText())) {
             Toast.makeText(getActivity(), R.string.alert_dialog_tishi29, Toast.LENGTH_SHORT).show();
@@ -741,8 +749,6 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
         time1_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
                 time_check(time1_edit);
             }
         });
@@ -763,7 +769,7 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
 
             @Override
             public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
-                changguan_type = item+1;
+                changguan_type = item + 1;
             }
         });
         spinner_type.setOnNothingSelectedListener(new MaterialSpinner.OnNothingSelectedListener() {
@@ -992,7 +998,8 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
         super.onAttach(activity);
         if (activity instanceof InformationCheckActivity) {
             mainActivity = (InformationCheckActivity) activity;
-            stepView = (StepView) mainActivity.findViewById(R.id.sv);
+            top_title_tv = mainActivity.findViewById(R.id.top_title_tv);
+            stepView = mainActivity.findViewById(R.id.sv);
             viewpager_content = mainActivity.findViewById(R.id.viewpager_content);
         }
     }

@@ -3,11 +3,15 @@ package com.noplugins.keepfit.android.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.noplugins.keepfit.android.R;
@@ -23,6 +27,8 @@ import com.noplugins.keepfit.android.wxapi.WXPayEntryActivity;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -134,7 +140,7 @@ public class BuyHuiYuanActivity extends BaseActivity {
     }
 
     private void set_information(BuyInformationBean data) {
-        Log.e("打印出来的图片地址",data.getLogo());
+        Log.e("打印出来的图片地址", data.getLogo());
         Glide.with(getApplicationContext())
                 .load(data.getLogo())
                 .placeholder(R.drawable.logo_gray) //加载成功前显示的图片
@@ -201,5 +207,20 @@ public class BuyHuiYuanActivity extends BaseActivity {
         lin1.setBackgroundResource(R.drawable.lin_select_bg);
         lin2.setBackgroundResource(R.drawable.lin_bg1);
         lin3.setBackgroundResource(R.drawable.lin_bg1);
+    }
+
+
+    private static final int TIME_EXIT = 2000;
+    private long mBackPressed;
+    @Override
+    public void onBackPressed() {
+        if (mBackPressed + TIME_EXIT > System.currentTimeMillis()) {
+            super.onBackPressed();
+            return;
+        } else {
+            Toast.makeText(this, "再点击一次返回退出程序", Toast.LENGTH_SHORT).show();
+            mBackPressed = System.currentTimeMillis();
+
+        }
     }
 }

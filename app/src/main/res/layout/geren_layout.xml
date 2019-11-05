@@ -63,6 +63,7 @@
             android:hint="@string/edit_hint38"
             android:paddingLeft="@dimen/m20"
             android:singleLine="true"
+            android:maxLength="18"
             android:textColor="@color/top_heiziti"
             android:textColorHint="@color/color_9B9B9B"
             android:textSize="13sp" />

@@ -207,6 +207,7 @@
     <string name="tv148">拨打</string>
     <string name="tv149">开户银行</string>
     <string name="tv150">场馆名称</string>
+    <string name="tv151">平台场馆名称</string>
 
     <string name="tv_select">请选择</string>
     <string name="tv_qianbao">钱包</string>
@@ -245,6 +246,7 @@
     <string name="alert_dialog_tishi27">企业名称不能为空！</string>
     <string name="alert_dialog_tishi28">企业账号不能为空！</string>
     <string name="alert_dialog_tishi29">省市区不能为空！</string>
+    <string name="alert_dialog_tishi30">邮箱格式不正确！</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

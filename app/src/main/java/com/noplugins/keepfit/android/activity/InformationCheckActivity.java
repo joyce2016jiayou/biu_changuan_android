@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.adapter.ContentPagerAdapterMy;
@@ -33,16 +34,14 @@ public class InformationCheckActivity extends BaseActivity {
     StepView stepView;
     @BindView(R.id.viewpager_content)
     NoScrollViewPager viewpager_content;
-    @BindView(R.id.back_btn)
-    ImageView back_btn;
+    @BindView(R.id.back_btn_img)
+    ImageView back_btn_img;
+    @BindView(R.id.top_title_tv)
+    TextView top_title_tv;
 
+    public int select_index = 0;
     private List<Fragment> tabFragments = new ArrayList<>();
     public InformationEntity informationEntity;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
 
     @Override
     public void initBundle(Bundle parms) {
@@ -55,10 +54,18 @@ public class InformationCheckActivity extends BaseActivity {
         ButterKnife.bind(this);
         isShowTitle(false);
 
-        back_btn.setOnClickListener(new View.OnClickListener() {
+        back_btn_img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                show_advice_pop();
+                if (select_index == 0) {
+                    show_advice_pop();
+                } else if (select_index == 1) {
+                    top_title_tv.setText("基础资料");
+                    viewpager_content.setCurrentItem(select_index - 1);
+                    int step = stepView.getCurrentStep();
+                    stepView.setCurrentStep(Math.max((step - 1) % stepView.getStepNum(), 0));
+                    select_index = select_index - 1;
+                }
             }
         });
     }
@@ -89,7 +96,15 @@ public class InformationCheckActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        show_advice_pop();
+        if (select_index == 0) {
+            show_advice_pop();
+        } else if (select_index == 1) {
+            top_title_tv.setText("基础资料");
+            viewpager_content.setCurrentItem(select_index - 1);
+            int step = stepView.getCurrentStep();
+            stepView.setCurrentStep(Math.max((step - 1) % stepView.getStepNum(), 0));
+            select_index = select_index - 1;
+        }
     }
 
 
