@@ -140,6 +140,7 @@ class TeacherSelectActivity : BaseActivity() {
                     } else {
                         position + 1
                     }
+                    data.clear()
                     page = 1
                     agreeCourse()
                     popWindow2!!.dismiss()
@@ -160,6 +161,7 @@ class TeacherSelectActivity : BaseActivity() {
                     } else {
                         position
                     }
+                    data.clear()
                     page = 1
                     agreeCourse()
                     popWindow3!!.dismiss()

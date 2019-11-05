@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -79,13 +80,14 @@
                     </LinearLayout>
 
                     <TextView
+                        android:id="@+id/tips"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/m20"
                         android:layout_marginRight="@dimen/m20"
                         android:layout_marginBottom="@dimen/m10"
                         android:layout_gravity="bottom"
-                        android:text="我是气场一米八的大长腿，是一位重度咖啡爱好者，喜欢尝试新事物。"
+                        tools:text="我是气场一米八的大长腿，是一位重度咖啡爱好者，喜欢尝试新事物。"
                         android:textColor="@color/color_4A4A4A"
                         android:textSize="12sp"/>
                 </FrameLayout>

@@ -94,8 +94,8 @@ public class AddClassItemActivity extends BaseActivity {
     EditText edit_price_number;
 
     private String select_changguan_type;
-    private String select_target_type = "0";
-    private String select_class_type = "0";
+    private String select_target_type = "1";
+    private String select_class_type = "1";
     private String select_nandu_type = "容易";
     private String select_room_type = "有氧";
     private String select_xunhuan_type = "单次";

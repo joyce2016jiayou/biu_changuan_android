@@ -109,6 +109,7 @@ class TeacherDetailActivity : BaseActivity() {
     }
 
     private fun setting(code: TeacherDetailBean) {
+        tips.text = code.tips
         val layoutParams =
                 ViewGroup.MarginLayoutParams(
                         ViewGroup.LayoutParams.WRAP_CONTENT,
@@ -139,7 +140,7 @@ class TeacherDetailActivity : BaseActivity() {
         tv_teacher_name.text = code.teacherName
 
         tv_sum_time.text = "累计服务时长：${code.serviceDur}小时"
-        tv_teacher_pinfen.text = "${code.card}分"
+        tv_teacher_pinfen.text = "${code.finalGrade}分"
         Glide.with(this).load(code.logoUrl)
                 .placeholder(R.drawable.logo_gray)
                 .into(banner)

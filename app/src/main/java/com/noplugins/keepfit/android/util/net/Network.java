@@ -699,8 +699,8 @@ public class Network {
      * @param subscriber
      * @return
      */
-    public Subscription feedback(RequestBody params, Subscriber<Bean<Object>> subscriber) {
-        return service.feedback(params)
+    public Subscription feedback(Map<String,Object> params, Subscriber<Bean<Object>> subscriber) {
+        return service.feedback(retuen_json_params(params))
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
