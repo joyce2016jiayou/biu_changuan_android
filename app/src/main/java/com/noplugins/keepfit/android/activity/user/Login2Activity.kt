@@ -9,6 +9,7 @@ import android.text.*
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
+import android.webkit.WebView
 import android.widget.CompoundButton
 import android.widget.TextView
 import android.widget.Toast
@@ -180,6 +181,9 @@ class Login2Activity : BaseActivity() {
                                         startActivity(intent)
                                     } else if (result.data.type == 1) {
                                         get_check_status()
+                                    } else {
+                                        val intent = Intent(this@Login2Activity, KeepFitActivity::class.java)
+                                        startActivity(intent)
                                     }
                                 }
                             }
@@ -227,6 +231,10 @@ class Login2Activity : BaseActivity() {
                                 } else if (result.data.type == 1) {
                                     get_check_status()
                                 }
+                                else {
+                                    val intent = Intent(this@Login2Activity, KeepFitActivity::class.java)
+                                    startActivity(intent)
+                                }
 
 //                                val intent = Intent(this@Login2Activity, KeepFitActivity::class.java)
 //                                startActivity(intent)
@@ -270,6 +278,12 @@ class Login2Activity : BaseActivity() {
         /**设置逻辑 */
         val view = popupWindow.contentView
         val agree_btn = view.findViewById<TextView>(R.id.agree_btn)
+        val webView = view.findViewById<WebView>(R.id.content_layout)
+        //自适应屏幕
+        val webSettings = webView.settings
+        webSettings.useWideViewPort = true//设置此属性，可任意比例缩放
+        webSettings.loadWithOverviewMode = true
+        webView.loadUrl("file:///android_asset/hetong.html")
         agree_btn.setOnClickListener(View.OnClickListener {
             popupWindow.dismiss()
             is_check_fuwu = true
