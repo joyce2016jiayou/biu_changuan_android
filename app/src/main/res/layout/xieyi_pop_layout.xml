@@ -17,18 +17,14 @@
             android:textColor="@color/top_heiziti"
             android:layout_height="wrap_content"/>
 
-    <ScrollView
-            android:id="@+id/content_layout"
-            android:layout_width="match_parent"
-            android:layout_marginTop="@dimen/m65"
-            android:layout_marginBottom="@dimen/m61"
-            android:layout_height="match_parent">
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
 
-        </LinearLayout>
-    </ScrollView>
+    <WebView
+        android:id="@+id/content_layout"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/m65"
+        android:layout_marginBottom="@dimen/m61"
+        android:layout_height="match_parent">
+    </WebView>
 
     <RelativeLayout
             android:layout_marginLeft="@dimen/m88"
