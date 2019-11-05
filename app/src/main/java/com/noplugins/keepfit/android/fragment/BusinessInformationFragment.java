@@ -199,6 +199,7 @@ public class BusinessInformationFragment extends ViewPagerFragment {
 
     private void bind_card(boolean is_bind_compny) {
         BindCardBean bindCardBean = new BindCardBean();
+        bindCardBean.setAreaNum(SpUtils.getString(getActivity(),AppConstants.CHANGGUAN_NUM));
         if (is_bind_compny) {
             bindCardBean.setUserName(tixian_compny_name.getText().toString());
             bindCardBean.setBankNum(tixian_qiye_zhanghao.getText().toString());
