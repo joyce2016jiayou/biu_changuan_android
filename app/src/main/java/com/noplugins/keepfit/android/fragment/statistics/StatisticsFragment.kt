@@ -11,9 +11,14 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.noplugins.keepfit.android.R
 import com.noplugins.keepfit.android.base.BaseFragment
+import com.noplugins.keepfit.android.util.ui.ViewPagerFragment
 import kotlinx.android.synthetic.main.fragment_statistics.*
 
-class StatisticsFragment:BaseFragment() {
+class StatisticsFragment: ViewPagerFragment() {
+    override fun fetchData() {
+
+    }
+
     companion object {
         fun newInstance(title: String): StatisticsFragment {
             val fragment = StatisticsFragment()
@@ -62,11 +67,6 @@ class StatisticsFragment:BaseFragment() {
         }
     }
 
-    override fun onFragmentFirstVisible() {
-        super.onFragmentFirstVisible()
-
-
-    }
 
     private fun showFragment() {
 
@@ -131,10 +131,10 @@ class StatisticsFragment:BaseFragment() {
 //    }
 
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        Log.d("tongji","onSaveInstanceState")
-    }
+//    override fun onSaveInstanceState(outState: Bundle) {
+//        super.onSaveInstanceState(outState)
+//        Log.d("tongji","onSaveInstanceState")
+//    }
 
     override fun onDestroyView() {
         super.onDestroyView()
