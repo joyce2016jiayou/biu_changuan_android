@@ -70,7 +70,6 @@ public class HeTongActivity extends BaseActivity {
                 if (is_check) {
                     Intent intent = new Intent(HeTongActivity.this, BuyHuiYuanActivity.class);
                     startActivity(intent);
-                    finish();
                 } else {
                     Toast.makeText(getApplicationContext(), "请先勾选协议", Toast.LENGTH_SHORT).show();
                 }
@@ -80,32 +79,35 @@ public class HeTongActivity extends BaseActivity {
         back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                show_advice_pop();
+                if (mBackPressed + TIME_EXIT > System.currentTimeMillis()) {
+                    return;
+                } else {
+                    Toast.makeText(HeTongActivity.this, "再点击一次返回退出程序", Toast.LENGTH_SHORT).show();
+                    mBackPressed = System.currentTimeMillis();
+
+                }
             }
         });
-
-
     }
+
+    private static final int TIME_EXIT = 2000;
+    private long mBackPressed;
 
     @Override
     public void onBackPressed() {
-        show_advice_pop();
+        if (mBackPressed + TIME_EXIT > System.currentTimeMillis()) {
+            //super.onBackPressed();
+            Intent intent = new Intent();
+            intent.setAction("android.intent.action.MAIN");
+            intent.addCategory("android.intent.category.HOME");
+            startActivity(intent);
+            return;
+        } else {
+            Toast.makeText(this, "再点击一次返回退出程序", Toast.LENGTH_SHORT).show();
+            mBackPressed = System.currentTimeMillis();
+
+        }
     }
 
-    private void show_advice_pop() {
-        PopWindowHelper.public_tishi_pop(HeTongActivity.this, "温馨提示", "是否退出app？", "取消", "确定", new DialogCallBack() {
-            @Override
-            public void save() {
-                Intent home=new Intent(Intent.ACTION_MAIN);
-                home.addCategory(Intent.CATEGORY_HOME);
-                startActivity(home);
-            }
-
-            @Override
-            public void cancel() {
-
-            }
-        });
-    }
 
 }

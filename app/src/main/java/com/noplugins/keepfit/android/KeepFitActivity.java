@@ -90,8 +90,6 @@ public class KeepFitActivity extends BaseActivity {
     @BindViews({R.id.home_img, R.id.shipu_img, R.id.movie_img, R.id.mine_img})
 
     List<ImageView> bottom_iamge_views;
-
-
     private SoundPool sp;//声明一个SoundPool
     private int music;//定义一个整型用load（）；来设置suondID
     private List<Fragment> tabFragments = new ArrayList<>();
@@ -385,6 +383,24 @@ public class KeepFitActivity extends BaseActivity {
                 viewpager_content.setCurrentItem(3);
                 xianshi_four();
             }
+        }
+    }
+
+    private static final int TIME_EXIT = 2000;
+    private long mBackPressed;
+    @Override
+    public void onBackPressed() {
+        if (mBackPressed + TIME_EXIT > System.currentTimeMillis()) {
+            //super.onBackPressed();
+            Intent intent = new Intent();
+            intent.setAction("android.intent.action.MAIN");
+            intent.addCategory("android.intent.category.HOME");
+            startActivity(intent);
+            return;
+        } else {
+            Toast.makeText(this, "再点击一次返回退出程序", Toast.LENGTH_SHORT).show();
+            mBackPressed = System.currentTimeMillis();
+
         }
     }
 }

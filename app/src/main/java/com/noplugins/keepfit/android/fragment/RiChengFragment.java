@@ -500,6 +500,8 @@ public class RiChengFragment extends ViewPagerFragment {
         get_rili_resouce();
     }
 
+
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

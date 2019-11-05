@@ -109,7 +109,6 @@ public class BuyHuiYuanActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 //1终身会员2超值终身会员3豪华终身会员0默认
-
                 get_order_number();//生成订单
             }
         });
@@ -210,17 +209,5 @@ public class BuyHuiYuanActivity extends BaseActivity {
     }
 
 
-    private static final int TIME_EXIT = 2000;
-    private long mBackPressed;
-    @Override
-    public void onBackPressed() {
-        if (mBackPressed + TIME_EXIT > System.currentTimeMillis()) {
-            super.onBackPressed();
-            return;
-        } else {
-            Toast.makeText(this, "再点击一次返回退出程序", Toast.LENGTH_SHORT).show();
-            mBackPressed = System.currentTimeMillis();
 
-        }
-    }
 }
