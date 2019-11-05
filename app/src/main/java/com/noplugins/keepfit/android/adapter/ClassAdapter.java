@@ -119,7 +119,7 @@ public class ClassAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder> i
 
             } else {//健身
                 holder.type_icon_bg.setBackgroundResource(R.drawable.venue);
-                holder.coach_name.setText(resultBean.getTeacherName());
+                holder.coach_name.setText(resultBean.getUserName());
                 holder.phone_or_name_tv.setVisibility(View.INVISIBLE);
                 //holder.phone_or_name_tv.setText(resultBean.getUserName());
                 holder.phone_img.setVisibility(View.GONE);
@@ -132,7 +132,13 @@ public class ClassAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder> i
             holder.phone_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    call_pop(holder, resultBean.getTeacherPhone());
+                    if (resultBean.getCourseType() == 1 || resultBean.getCourseType() == 2){
+                        call_pop(holder, resultBean.getTeacherPhone());
+                    } else {
+
+                        call_pop(holder, resultBean.getUserPhone());
+                    }
+
                 }
             });
             holder.phone_img.setOnClickListener(new View.OnClickListener() {
