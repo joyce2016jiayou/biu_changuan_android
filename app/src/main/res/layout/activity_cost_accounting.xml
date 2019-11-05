@@ -208,7 +208,7 @@
                         android:layout_marginLeft="@dimen/m15"
                         android:textSize="15sp"
                         android:textColor="@color/contents_text"
-                        android:text="元/ 月"/>
+                        android:text="人次/ 月"/>
                 </LinearLayout>
             </LinearLayout>
         </www.linwg.org.lib.LCardView>

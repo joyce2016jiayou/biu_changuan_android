@@ -26,7 +26,7 @@ class StatisticsFragment:BaseFragment() {
 
     var newView: View? = null
 
-    private lateinit var fragments: MutableList<Fragment>
+    private var fragments: MutableList<Fragment>?=null
     private var currentFragment = Fragment()
     private var currentIndex = 0
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -39,27 +39,27 @@ class StatisticsFragment:BaseFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        if (fragments.size!=0){
+        if (fragments == null){
             fragments = ArrayList()
-            fragments.add(ToUserFragment.newInstance(""))
-            fragments.add(ToProductFragment.newInstance(""))
+            fragments!!.add(ToUserFragment.newInstance("用户"))
+            fragments!!.add(ToProductFragment.newInstance("产品"))
             showFragment()
-
-
-            rl_user.setOnClickListener {
-
-                changeBtn(1)
-                currentIndex = 0
-                showFragment()
-            }
-            rl_product.setOnClickListener {
-
-                changeBtn(2)
-                currentIndex = 1
-                showFragment()
-            }
         }
 
+
+
+        rl_user.setOnClickListener {
+
+            changeBtn(1)
+            currentIndex = 0
+            showFragment()
+        }
+        rl_product.setOnClickListener {
+
+            changeBtn(2)
+            currentIndex = 1
+            showFragment()
+        }
     }
 
     override fun onFragmentFirstVisible() {
@@ -73,18 +73,18 @@ class StatisticsFragment:BaseFragment() {
         val transaction = childFragmentManager.beginTransaction()
 
         //如果之前没有添加过
-        if (!fragments[currentIndex].isAdded) {
+        if (!fragments!![currentIndex].isAdded) {
             transaction
                     .hide(currentFragment)
-                    .add(R.id.main_container_content, fragments[currentIndex], "" + currentIndex)  //第三个参数为添加当前的fragment时绑定一个tag
+                    .add(R.id.main_container_content, fragments!![currentIndex], "" + currentIndex)  //第三个参数为添加当前的fragment时绑定一个tag
 
         } else {
             transaction
                     .hide(currentFragment)
-                    .show(fragments[currentIndex])
+                    .show(fragments!![currentIndex])
         }
 
-        currentFragment = fragments[currentIndex]
+        currentFragment = fragments!![currentIndex]
 
         transaction.commit()
 

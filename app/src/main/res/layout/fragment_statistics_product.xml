@@ -87,11 +87,12 @@
             <www.linwg.org.lib.LCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cornerRadius="@dimen/m10">
+                app:cornerRadius="@dimen/m10"
+                android:layout_marginBottom="@dimen/m30">
                 <com.github.mikephil.charting.charts.BarChart
                     android:id="@+id/barChart"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/m270"/>
+                    android:layout_height="@dimen/m300"/>
             </www.linwg.org.lib.LCardView>
 
         </LinearLayout>

@@ -83,7 +83,7 @@ class ToProductFragment : BaseFragment() {
         super.onFragmentFirstVisible()
         colors.add(Color.parseColor("#707BCC"))
         colors.add(Color.parseColor("#5CCEFF"))
-        colors.add(Color.parseColor("#5CCEEF"))
+        colors.add(Color.parseColor("#828AD3"))
         initAllPieChart(true)
         initLineChart()
         initBarChart()
@@ -101,6 +101,7 @@ class ToProductFragment : BaseFragment() {
     val entries1 = ArrayList<Entry>()
     val values = ArrayList<BarEntry>()
     val functionList = ArrayList<UserStatisticsBean.FunctionBean>()
+    val string:MutableList<String> = ArrayList()
     private fun setting(user: UserStatisticsBean) {
         xiaoshouStrings.clear()
         entries.clear()
@@ -108,6 +109,9 @@ class ToProductFragment : BaseFragment() {
         values.clear()
         functionList.clear()
         functionList.addAll(user.function)
+        functionList.forEach {
+            string.add(it.value)
+        }
         user.sales.product.forEach {
             xiaoshouStrings.add(PieEntry(it.percent.toFloat(), it.type))
         }
@@ -160,6 +164,7 @@ class ToProductFragment : BaseFragment() {
         set1.setDrawIcons(false)
         set1.colors = getColors().asList()
 //      set1.setStackLabels(String[]{"Births", "Divorces", "Marriages"})
+        set1.setStackLabels(string.toTypedArray())
         val dataBarSets: MutableList<IBarDataSet> = ArrayList()
         dataBarSets.add(set1)
 
@@ -169,6 +174,15 @@ class ToProductFragment : BaseFragment() {
         barChart.data = data
         barChart.setFitBars(true)
         barChart.invalidate()
+        val xLabels = barChart.xAxis
+//        xLabels.labelCount = 12
+        xLabels.setValueFormatter(MyXFormatter(string))
+        val l = barChart.legend
+        l.xEntrySpace = 20f
+        l.verticalAlignment = Legend.LegendVerticalAlignment.BOTTOM
+        l.horizontalAlignment = Legend.LegendHorizontalAlignment.CENTER
+        l.orientation = Legend.LegendOrientation.HORIZONTAL
+        l.setCustom(getEntries())
 
     }
 
@@ -292,7 +306,7 @@ class ToProductFragment : BaseFragment() {
         val set1 = BarDataSet(values, "")
         set1.setDrawIcons(false)
         set1.colors = getColors().asList()
-//      set1.setStackLabels(String[]{"Births", "Divorces", "Marriages"})
+//        set1.setStackLabels(string.toTypedArray())
         val dataSets: MutableList<IBarDataSet> = ArrayList()
         dataSets.add(set1)
 
@@ -351,16 +365,6 @@ class ToProductFragment : BaseFragment() {
 
         // setting data
 
-        val l = barChart.legend
-        l.verticalAlignment = Legend.LegendVerticalAlignment.BOTTOM
-
-        l.xEntrySpace = 20f
-        l.horizontalAlignment = Legend.LegendHorizontalAlignment.CENTER
-        l.orientation = Legend.LegendOrientation.HORIZONTAL
-        l.setDrawInside(false)
-        l.setCustom(getEntries())
-        l.formSize = 8f
-        l.formToTextSpace = 4f
 
     }
 
@@ -374,7 +378,7 @@ class ToProductFragment : BaseFragment() {
         val entries = ArrayList<LegendEntry>()
         for (i in 0 until values.size) {
             entries.add(LegendEntry(
-                    "${functionList[i].value}",
+                    "${functionList[0].prices[i].room}",
                     Legend.LegendForm.CIRCLE,
                     10f,
                     9f,

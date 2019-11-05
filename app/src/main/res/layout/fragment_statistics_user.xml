@@ -87,7 +87,8 @@
             <www.linwg.org.lib.LCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cornerRadius="@dimen/m10">
+                app:cornerRadius="@dimen/m10"
+                android:layout_marginBottom="@dimen/m30">
                 <com.github.mikephil.charting.charts.PieChart
                     android:id="@+id/picSexChart"
                     android:layout_width="match_parent"

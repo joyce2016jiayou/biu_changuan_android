@@ -76,7 +76,7 @@ public class UpdatePasswordActivity extends BaseActivity {
         Map<String, Object> params = new HashMap<>();
         params.put("gymAreaNum", SpUtils.getString(getApplicationContext(), AppConstants.USER_NAME));
         params.put("oldPassWord", edit_old_password.getText().toString());
-        params.put("phone", (String)SharedPreferencesHelper.get(getApplicationContext(), Network.phone_number, ""));
+        params.put("phone",SpUtils.getString(getApplicationContext(),AppConstants.PHONE));
         params.put("newPass1", edit_new_password1.getText().toString());
         params.put("newPass2", edit_password2.getText().toString());
 

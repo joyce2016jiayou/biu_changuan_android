@@ -6,7 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -109,6 +111,10 @@ public class AddClassItemActivity extends BaseActivity {
     private List<ClassTypeEntity> classTypeEntities = new ArrayList<>();
 
     private String type = "";
+    @BindView(R.id.center)
+    LinearLayout center;
+    @BindView(R.id.ll_time)
+    LinearLayout ll_time;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -162,6 +168,73 @@ public class AddClassItemActivity extends BaseActivity {
                 }
 
 
+            }
+        });
+
+        center.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                InputMethodManager inputMethodManager =
+                        (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+                edit_class_jieshao.clearFocus();
+                edit_class_name.clearFocus();
+                edit_price_number.clearFocus();
+                edit_shihe_renqun.clearFocus();
+                edit_tuanke_renshu_number.clearFocus();
+                edit_zhuyi_shixiang.clearFocus();
+                return false;
+            }
+        });
+        select_date.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                InputMethodManager inputMethodManager =
+                        (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputMethodManager.hideSoftInputFromWindow(edit_class_jieshao.getWindowToken(), 0);
+                inputMethodManager.hideSoftInputFromWindow(edit_zhuyi_shixiang.getWindowToken(), 0);
+                inputMethodManager.hideSoftInputFromWindow(edit_shihe_renqun.getWindowToken(), 0);
+                edit_class_jieshao.clearFocus();
+                edit_class_name.clearFocus();
+                edit_price_number.clearFocus();
+                edit_shihe_renqun.clearFocus();
+                edit_tuanke_renshu_number.clearFocus();
+                edit_zhuyi_shixiang.clearFocus();
+                return false;
+            }
+        });
+        time1_edit.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                InputMethodManager inputMethodManager =
+                        (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputMethodManager.hideSoftInputFromWindow(edit_class_jieshao.getWindowToken(), 0);
+                inputMethodManager.hideSoftInputFromWindow(edit_zhuyi_shixiang.getWindowToken(), 0);
+                inputMethodManager.hideSoftInputFromWindow(edit_shihe_renqun.getWindowToken(), 0);
+                edit_class_jieshao.clearFocus();
+                edit_class_name.clearFocus();
+                edit_price_number.clearFocus();
+                edit_shihe_renqun.clearFocus();
+                edit_tuanke_renshu_number.clearFocus();
+                edit_zhuyi_shixiang.clearFocus();
+                return false;
+            }
+        });
+        time2_edit.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                InputMethodManager inputMethodManager =
+                        (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputMethodManager.hideSoftInputFromWindow(edit_class_jieshao.getWindowToken(), 0);
+                inputMethodManager.hideSoftInputFromWindow(edit_zhuyi_shixiang.getWindowToken(), 0);
+                inputMethodManager.hideSoftInputFromWindow(edit_shihe_renqun.getWindowToken(), 0);
+                edit_class_jieshao.clearFocus();
+                edit_class_name.clearFocus();
+                edit_price_number.clearFocus();
+                edit_shihe_renqun.clearFocus();
+                edit_tuanke_renshu_number.clearFocus();
+                edit_zhuyi_shixiang.clearFocus();
+                return false;
             }
         });
     }
@@ -554,6 +627,7 @@ public class AddClassItemActivity extends BaseActivity {
             }
         });
     }
+
 
 
 }

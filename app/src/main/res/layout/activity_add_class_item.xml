@@ -370,6 +370,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/ll_time"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="67dp"
@@ -506,7 +507,6 @@
                         android:gravity="top"
                         android:hint="@string/edit_hint24"
                         android:maxLength="140"
-                        android:inputType="textMultiLine"
                         android:textColor="@color/top_heiziti"
                         android:textColorHint="@color/color_9B9B9B"
                         android:textSize="13sp" />
@@ -540,7 +540,6 @@
                         android:gravity="top"
                         android:hint="@string/edit_hint25"
                         android:maxLength="140"
-                        android:inputType="textMultiLine"
                         android:textColor="@color/top_heiziti"
                         android:textColorHint="@color/color_9B9B9B"
                         android:textSize="13sp" />
