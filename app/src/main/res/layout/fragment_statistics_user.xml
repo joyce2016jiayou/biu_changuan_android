@@ -8,14 +8,14 @@
     <FrameLayout
         android:id="@+id/select_time"
         android:layout_width="wrap_content"
-        android:minWidth="@dimen/m110"
+        android:minWidth="@dimen/m140"
         android:layout_height="@dimen/m29"
         android:layout_gravity="right"
         android:background="@drawable/shape_btn_bg_gray">
 
         <TextView
             android:id="@+id/tv_select_time"
-            android:layout_width="match_parent"
+            android:layout_width="@dimen/m100"
             android:layout_height="@dimen/m27"
             android:text="2019年10月"
             android:gravity="center_vertical|left"
