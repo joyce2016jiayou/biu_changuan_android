@@ -2,10 +2,13 @@ package com.noplugins.keepfit.android.base;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -47,6 +50,8 @@ public abstract class BaseActivity extends AppCompatActivity implements EasyPerm
     private boolean isShowTitle;
     protected static final int RC_PERM = 123;
 
+    private boolean isRegistered = false;
+    private NetWorkChangReceiver netWorkChangReceiver;
     /**
      * 设置 app 不随着系统字体的调整而变化
      */
@@ -64,6 +69,15 @@ public abstract class BaseActivity extends AppCompatActivity implements EasyPerm
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT); // 禁用横屏
         ActivityCollectorUtil.addActivity(this);
+
+        //注册网络状态监听广播
+        netWorkChangReceiver = new NetWorkChangReceiver();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(WifiManager.WIFI_STATE_CHANGED_ACTION);
+        filter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);
+        filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(netWorkChangReceiver, filter);
+        isRegistered = true;
         //设置沉浸栏
         set_status_bar();
 
@@ -196,6 +210,10 @@ public abstract class BaseActivity extends AppCompatActivity implements EasyPerm
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        //解绑
+        if (isRegistered) {
+            unregisterReceiver(netWorkChangReceiver);
+        }
         unsubscribe();//取消订阅
         ActivityCollectorUtil.removeActivity(this);
     }
