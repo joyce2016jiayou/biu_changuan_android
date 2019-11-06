@@ -3,6 +3,8 @@ package com.noplugins.keepfit.android.fragment;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,6 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -48,6 +51,9 @@ import com.othershe.calendarview.listener.OnPagerChangeListener;
 import com.othershe.calendarview.listener.OnSingleChooseListener;
 import com.othershe.calendarview.utils.CalendarUtil;
 import com.othershe.calendarview.weiget.CalendarView;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.umeng.socialize.UMShareAPI;
 import com.yanzhenjie.permission.Action;
 import com.yanzhenjie.permission.AndPermission;
@@ -106,6 +112,8 @@ public class RiChengFragment extends ViewPagerFragment {
     RelativeLayout select_types_btn;
     @BindView(R.id.class_recycler_view)
     RecyclerView class_recycler_view;
+    @BindView(R.id.refreshLayout)
+    SmartRefreshLayout refreshLayout;
     private String select_date_str = "";
     private String select_coursetype_str = "";
     private String select_courcestatus_str = "";
@@ -116,6 +124,7 @@ public class RiChengFragment extends ViewPagerFragment {
 
     List<DictionaryeBean> select_types = new ArrayList<>();
     List<DictionaryeBean> select_status = new ArrayList<>();
+    List<RiChengBean.ResultBean> class_list = new ArrayList<>();
 
     public static RiChengFragment homeInstance(String title) {
         RiChengFragment fragment = new RiChengFragment();
@@ -236,12 +245,28 @@ public class RiChengFragment extends ViewPagerFragment {
                 select_types_pop();
             }
         });
+
+        //禁用加载
+        refreshLayout.setEnableLoadMore(false);
+        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                //获取日历数据
+                get_rili_resouce();
+                //获取类型和状态
+                get_types();
+                //获取课程数据
+                init_class_date_resource();
+
+            }
+        });
     }
+
 
     private void get_rili_resouce() {
 
         Map<String, Object> params1 = new HashMap<>();
-        params1.put("areaNum", SpUtils.getString(getActivity(),AppConstants.CHANGGUAN_NUM));//todo替换场馆编号
+        params1.put("areaNum", SpUtils.getString(getActivity(), AppConstants.CHANGGUAN_NUM));//todo替换场馆编号
         params1.put("date", select_date_str);
         if (select_coursetype_str.length() > 0) {
             params1.put("courseType", select_coursetype_str);
@@ -259,7 +284,7 @@ public class RiChengFragment extends ViewPagerFragment {
                                     dates.clear();
                                 }
                                 for (int i = 0; i < result.getData().getMonth().size(); i++) {
-                                    if (result.getData().getMonth().get(i) == null){
+                                    if (result.getData().getMonth().get(i) == null) {
                                         continue;
                                     }
                                     dates.add(result.getData().getMonth().get(i).getDays());
@@ -269,6 +294,7 @@ public class RiChengFragment extends ViewPagerFragment {
 
                             @Override
                             public void onError(String error) {
+                                refreshLayout.finishRefresh(true);
 
                             }
                         }, getActivity(), false));
@@ -283,6 +309,9 @@ public class RiChengFragment extends ViewPagerFragment {
                         new ProgressSubscriber<>("获取类型", new SubscriberOnNextListener<Bean<List<DictionaryeBean>>>() {
                             @Override
                             public void onNext(Bean<List<DictionaryeBean>> result) {
+                                if (select_types.size() > 0) {
+                                    select_types.clear();
+                                }
                                 select_types.addAll(result.getData());
                                 //然后获取状态
                                 get_status();
@@ -290,6 +319,7 @@ public class RiChengFragment extends ViewPagerFragment {
 
                             @Override
                             public void onError(String error) {
+                                refreshLayout.finishRefresh(true);
 
                             }
                         }, getActivity(), false));
@@ -317,7 +347,7 @@ public class RiChengFragment extends ViewPagerFragment {
 
     private void init_class_date_resource() {
         Map<String, Object> params1 = new HashMap<>();
-        params1.put("areaNum", SpUtils.getString(getActivity(),AppConstants.CHANGGUAN_NUM));//todo替换场馆编号
+        params1.put("areaNum", SpUtils.getString(getActivity(), AppConstants.CHANGGUAN_NUM));//todo替换场馆编号
         params1.put("date", select_date_str);
         if (select_coursetype_str.length() > 0) {
             params1.put("courseType", select_coursetype_str);
@@ -330,10 +360,14 @@ public class RiChengFragment extends ViewPagerFragment {
                         new ProgressSubscriber<>("获取课程数据", new SubscriberOnNextListener<Bean<RiChengBean>>() {
                             @Override
                             public void onNext(Bean<RiChengBean> result) {
+                                if (class_list.size() > 0) {
+                                    class_list.clear();
+                                }
+                                class_list.addAll(result.getData().getResult());
                                 //设置课程数据
                                 LinearLayoutManager class_linearLayoutManager = new LinearLayoutManager(getActivity());
                                 class_recycler_view.setLayoutManager(class_linearLayoutManager);
-                                ClassAdapter classAdapter = new ClassAdapter(result.getData().getResult(), RiChengFragment.this);
+                                ClassAdapter classAdapter = new ClassAdapter(class_list, RiChengFragment.this);
                                 class_recycler_view.setAdapter(classAdapter);
                                 classAdapter.setOnItemClickListener(new ClassAdapter.OnItemClickListener() {
                                     @Override
@@ -341,11 +375,14 @@ public class RiChengFragment extends ViewPagerFragment {
 
                                     }
                                 });
+                                refreshLayout.finishRefresh(true);
+
 
                             }
 
                             @Override
                             public void onError(String error) {
+                                refreshLayout.finishRefresh(true);
 
                             }
                         }, getActivity(), false));
@@ -499,7 +536,6 @@ public class RiChengFragment extends ViewPagerFragment {
     public void fetchData() {
         get_rili_resouce();
     }
-
 
 
     @Override
