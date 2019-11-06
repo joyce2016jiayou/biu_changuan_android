@@ -90,7 +90,7 @@ class CgPriceActivity : BaseActivity() {
         }
         tv_add_price.setOnClickListener {
             if (et_price.text.toString() != "") {
-                tv_price.text = "场馆全天时段价格：¥${et_price.text.toString()}"
+                tv_price.text = "场馆全天时段价格：¥${et_price.text.toString()}元/时"
                 list.forEach {
                     it.normal_price = et_price.text.toString()
                 }
@@ -153,6 +153,15 @@ class CgPriceActivity : BaseActivity() {
         }
 
         tv_high_add.setOnClickListener {
+            if (tv_select_time.text == "选择时间"){
+                Toast.makeText(applicationContext, "请选择时间段", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (et_high_price.text.isEmpty()){
+                Toast.makeText(applicationContext, "请输入价格", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
             //add high data
             val highBean = HighBean()
             highBean.high_time_start = startTime
@@ -162,7 +171,7 @@ class CgPriceActivity : BaseActivity() {
             highBean.gym_area_num = SpUtils.getString(applicationContext, AppConstants.CHANGGUAN_NUM)
             list.add(highBean)
             adapter!!.notifyDataSetChanged()
-            tv_select_time.text = "请选择"
+            tv_select_time.text = "选择时间"
             et_high_price.setText("")
         }
 
@@ -232,7 +241,7 @@ class CgPriceActivity : BaseActivity() {
                                     }
 
                                     et_price.setText("${result.data[0].finalNormalPrice}")
-                                    tv_price.text = "场馆全天时段价格：¥${result.data[0].finalNormalPrice}"
+                                    tv_price.text = "场馆全天时段价格：¥${result.data[0].finalNormalPrice}元/时"
 
                                     adapter!!.notifyDataSetChanged()
                                 }

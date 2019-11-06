@@ -12,6 +12,7 @@ import com.google.gson.Gson
 import com.noplugins.keepfit.android.R
 import com.noplugins.keepfit.android.activity.LoginActivity
 import com.noplugins.keepfit.android.base.BaseActivity
+import com.noplugins.keepfit.android.bean.LoginBean
 import com.noplugins.keepfit.android.global.AppConstants
 import com.noplugins.keepfit.android.util.ActivityCollectorUtil
 import com.noplugins.keepfit.android.util.SpUtils
@@ -37,10 +38,10 @@ class VerificationPhoneActivity : BaseActivity() {
 //        if (intent.getStringExtra("newPhone") == ""){
 //
 //        }
-        tv_phone.text = SpUtils.getString(applicationContext,AppConstants.PHONE)
-        if (intent.getBooleanExtra("update", false)){
+        tv_phone.text = SpUtils.getString(applicationContext, AppConstants.PHONE)
+        if (intent.getBooleanExtra("update", false)) {
             tv_btn_text.text = "完成"
-        } else{
+        } else {
             tv_btn_text.text = "下一步"
         }
 
@@ -54,14 +55,14 @@ class VerificationPhoneActivity : BaseActivity() {
             send()
         }
         btn_ToLogin.setOnClickListener {
-//            if (intent.getBooleanExtra("update", false)) {
+            //            if (intent.getBooleanExtra("update", false)) {
 //                updatePhone()
 //            } else {
 //
 //            }
-            val intent = Intent(this, UpdatePasswordActivity::class.java)
-            startActivity(intent)
-            finish()
+
+            verficationCode()
+
 
         }
         back_btn.setOnClickListener {
@@ -73,18 +74,44 @@ class VerificationPhoneActivity : BaseActivity() {
         val params = HashMap<String, String>()
         params["phone"] = tv_phone.text.toString()
         subscription = Network.getInstance("获取验证码", this)
-            .get_yanzhengma(
-                params,
-                ProgressSubscriber("获取验证码", object : SubscriberOnNextListener<Bean<String>> {
-                    override fun onNext(result: Bean<String>) {
-                        messageId = result.data
-                    }
+                .get_yanzhengma(
+                        params,
+                        ProgressSubscriber("获取验证码", object : SubscriberOnNextListener<Bean<String>> {
+                            override fun onNext(result: Bean<String>) {
+                                messageId = result.data
+                            }
 
-                    override fun onError(error: String) {
+                            override fun onError(error: String) {
 
-                    }
-                }, this, false)
-            )
+                            }
+                        }, this, false)
+                )
+    }
+
+
+    private fun verficationCode() {
+        val params = HashMap<String, Any>()
+        params["messageId"] = messageId
+        params["code"] = edit_yzm.text.toString()
+        params["phone"] = tv_phone.text.toString()
+        subscription = Network.getInstance("验证验证码和登录", this)
+                .verifyCodeLogin(params, ProgressSubscriber("验证验证码和登录",
+                        object : SubscriberOnNextListener<Bean<LoginBean>> {
+                            override fun onNext(t: Bean<LoginBean>?) {
+                                val intent = Intent(this@VerificationPhoneActivity, UpdatePasswordActivity::class.java)
+                                startActivity(intent)
+                                finish()
+                            }
+
+                            override fun onError(error: String) {
+                                Log.e(TAG, "修改失败：$error")
+                                Toast.makeText(applicationContext, error, Toast.LENGTH_SHORT).show()
+                            }
+                        },
+                        this,
+                        false
+                )
+                )
     }
 
     private fun updatePhone() {
@@ -98,24 +125,24 @@ class VerificationPhoneActivity : BaseActivity() {
         params["code"] = edit_yzm.text.toString()
         params["userNum"] = SpUtils.getString(applicationContext, AppConstants.USER_NAME)
         subscription = Network.getInstance("修改手机号", this)
-            .updatePhone(
-                params,
-                ProgressSubscriber<Any>(
-                    "修改手机号",
-                    object : SubscriberOnNextListener<Bean<Any>> {
-                        override fun onNext(result: Bean<Any>) {
+                .updatePhone(
+                        params,
+                        ProgressSubscriber<Any>(
+                                "修改手机号",
+                                object : SubscriberOnNextListener<Bean<Any>> {
+                                    override fun onNext(result: Bean<Any>) {
 //                            toLogin()
-                        }
+                                    }
 
-                        override fun onError(error: String) {
-                            Log.e(TAG, "修改失败：$error")
-                            Toast.makeText(applicationContext, error, Toast.LENGTH_SHORT).show()
-                        }
-                    },
-                    this,
-                    false
+                                    override fun onError(error: String) {
+                                        Log.e(TAG, "修改失败：$error")
+                                        Toast.makeText(applicationContext, error, Toast.LENGTH_SHORT).show()
+                                    }
+                                },
+                                this,
+                                false
+                        )
                 )
-            )
     }
 
 
