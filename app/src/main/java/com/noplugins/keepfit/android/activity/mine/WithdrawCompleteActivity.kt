@@ -27,6 +27,7 @@ class WithdrawCompleteActivity : BaseActivity() {
     }
 
     private fun killMe(){
+        EventBus.getDefault().post("提现了金额")
         finish()
     }
 }

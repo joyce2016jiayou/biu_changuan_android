@@ -23,6 +23,9 @@ import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriber
 import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener
 import com.noplugins.keepfit.android.util.ui.pop.CommonPopupWindow
 import kotlinx.android.synthetic.main.activity_wallet.*
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 import java.util.HashMap
 
 class WalletActivity : BaseActivity() {
@@ -35,6 +38,7 @@ class WalletActivity : BaseActivity() {
 
     override fun initView() {
         setContentView(R.layout.activity_wallet)
+        EventBus.getDefault().register(this)
         if (SpUtils.getInt(applicationContext,AppConstants.USER_TYPE) == 1){
             ll_tixian.visibility = View.VISIBLE
             tv_pay_mx.visibility = View.VISIBLE
@@ -57,7 +61,7 @@ class WalletActivity : BaseActivity() {
 
 //
 
-            if (havePayPassWord == 1){
+            if (SpUtils.getInt(applicationContext,AppConstants.IS_TX) == 1){
                 if (finalCanWithdraw < 1000){
                     Toast.makeText(applicationContext,"可提现金额必须大于1000",Toast.LENGTH_SHORT).show()
                     return@setOnClickListener
@@ -74,6 +78,17 @@ class WalletActivity : BaseActivity() {
 
         }
      }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public fun upadate(messageEvent:String ) {
+        if ("提现了金额" == messageEvent){
+            requestData()
+        }
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        EventBus.getDefault().unregister(this)
+    }
 
     private fun toQueren(view1: TextView) {
         val popupWindow = CommonPopupWindow.Builder(this)
