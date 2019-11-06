@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.noplugins.keepfit.android.R;
+import com.noplugins.keepfit.android.activity.user.Login2Activity;
 import com.noplugins.keepfit.android.base.BaseActivity;
 import com.noplugins.keepfit.android.global.AppConstants;
 import com.noplugins.keepfit.android.util.ActivityCollectorUtil;
@@ -112,7 +113,7 @@ public class UpdatePasswordActivity extends BaseActivity {
     }
 
     private void toLogin(){
-        Intent intent = new Intent(UpdatePasswordActivity.this, LoginActivity.class);
+        Intent intent = new Intent(UpdatePasswordActivity.this, Login2Activity.class);
         SpUtils.putString(getApplicationContext(), AppConstants.TOKEN, "");
         SpUtils.putString(getApplicationContext(),AppConstants.PHONE, "");
         SpUtils.putString(getApplicationContext(), AppConstants.CHANGGUAN_NUM, "");

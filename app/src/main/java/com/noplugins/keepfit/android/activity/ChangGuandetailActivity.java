@@ -808,15 +808,19 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
                             //getUrlTest(icon_net_path);
                             String headpicPath = "http://upload.qiniup.com/" + key;
                             Log.e("返回的地址", headpicPath);
+                            withListLs();
                         } else {
                             Log.e("qiniu", "Upload Fail");
                             //如果失败，这里可以把info信息上报自己的服务器，便于后面分析上传错误原因
+                            withListLs();
                         }
                         progress_upload.dismissProgressDialog();
                     }, new UploadOptions(null, "test-type", true, null, null));
+        } else {
+            withListLs();
         }
 
-        withListLs();
+
     }
 
     private void withLs() {

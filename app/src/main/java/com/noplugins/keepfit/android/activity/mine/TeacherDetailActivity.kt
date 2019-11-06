@@ -78,7 +78,9 @@ class TeacherDetailActivity : BaseActivity() {
                 .deleteTeacherBinding(params,
                         ProgressSubscriber("教练解绑", object : SubscriberOnNextListener<Bean<Any>> {
                             override fun onNext(result: Bean<Any>) {
-                                EventBus.getDefault().post(AppConstants.TEAM_YQ_AGREE)
+                                EventBus.getDefault().post("解绑")
+                                Toast.makeText(applicationContext,"解绑成功！",Toast.LENGTH_SHORT)
+                                        .show()
                                 finish()
                             }
 

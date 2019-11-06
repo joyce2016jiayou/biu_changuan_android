@@ -31,6 +31,7 @@ import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener
 import com.noplugins.keepfit.android.util.ui.pop.SpinnerPopWindow
 import com.umeng.socialize.utils.DeviceConfigInternal.context
 import kotlinx.android.synthetic.main.activity_teacher_select.*
+import org.greenrobot.eventbus.EventBus
 import java.util.HashMap
 
 class TeacherSelectActivity : BaseActivity() {
@@ -285,7 +286,6 @@ class TeacherSelectActivity : BaseActivity() {
                     submitList.add(bindingCgBean)
                 }
 
-
             }
         }
     }
@@ -302,6 +302,7 @@ class TeacherSelectActivity : BaseActivity() {
                         ProgressSubscriber("场馆绑定教练", object : SubscriberOnNextListener<Bean<Any>> {
                             override fun onNext(result: Bean<Any>) {
                                 Toast.makeText(applicationContext,result.message,Toast.LENGTH_SHORT).show()
+                                EventBus.getDefault().post("选择教练")
                                 finish()
                             }
 

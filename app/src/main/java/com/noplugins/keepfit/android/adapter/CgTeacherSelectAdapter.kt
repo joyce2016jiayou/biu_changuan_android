@@ -33,6 +33,7 @@ class CgTeacherSelectAdapter(data: List<TeacherBean>?) : BaseQuickAdapter<Teache
          val skill = (helper.getView<ZFlowLayout>(R.id.fl_private_skill))
 
 //        val arr = item.skillList
+        skill.removeAllViews()
         val layoutParams =
                 ViewGroup.MarginLayoutParams(
                         ViewGroup.LayoutParams.WRAP_CONTENT,

@@ -12,6 +12,7 @@ import butterknife.ButterKnife
 import com.google.gson.Gson
 import com.noplugins.keepfit.android.R
 import com.noplugins.keepfit.android.activity.LoginActivity
+import com.noplugins.keepfit.android.activity.user.Login2Activity
 import com.noplugins.keepfit.android.base.BaseActivity
 import com.noplugins.keepfit.android.global.AppConstants
 import com.noplugins.keepfit.android.util.ActivityCollectorUtil
@@ -83,7 +84,7 @@ class UpdatePasswordActivity : BaseActivity() {
     }
 
     private fun toLogin() {
-        val intent = Intent(this@UpdatePasswordActivity, LoginActivity::class.java)
+        val intent = Intent(this@UpdatePasswordActivity, Login2Activity::class.java)
         //退出
         SpUtils.putString(applicationContext, AppConstants.TOKEN, "")
         SpUtils.putString(applicationContext, AppConstants.PHONE, "")

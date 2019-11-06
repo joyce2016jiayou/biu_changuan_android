@@ -53,22 +53,33 @@ class BindingFragment : BaseFragment()  {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         initAdapter()
+        if (formType == 2){
 
+            formType = -1
+        }
 //
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public fun upadate(messageEvent:String ) {
         if (AppConstants.TEAM_YQ_AGREE == messageEvent){
-            formType = 2
+            requestData()
         }
+        if ("解绑" == messageEvent){
+            requestData()
+        }
+
     }
-    override fun onDestroyView() {
-        super.onDestroyView()
+
+    override fun onDestroy() {
+        super.onDestroy()
         EventBus.getDefault().unregister(this)
     }
     override fun onFragmentVisibleChange(isVisible: Boolean) {
         super.onFragmentVisibleChange(isVisible)
+        if (isVisible){
+            requestData()
+        }
     }
 
     override fun onFragmentFirstVisible() {

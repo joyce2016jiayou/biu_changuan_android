@@ -115,6 +115,7 @@ class TeacherManagerActivity : BaseActivity(){
         view_pager.adapter = myAdapter // 设置adapter
         view_pager.currentItem = 0
         setTabTextColorAndImageView(0)// 更改text的颜色还有图片
+        view_pager.offscreenPageLimit = 2
         view_pager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPs: Int) {}
 

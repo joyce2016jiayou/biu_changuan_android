@@ -56,25 +56,25 @@ class JujueFragment : BaseFragment() {
         initAdapter()
 //        requestData()
         if (formType == 2){
-            requestData()
+
             formType = -1
         }
     }
 
-    //    override fun onFragmentVisibleChange(isVisible: Boolean) {
-//        super.onFragmentVisibleChange(isVisible)
-//        if (isVisible){
-//            requestData()
-//        }
-//    }
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public fun upadate(messageEvent:String ) {
-        if (AppConstants.TEAM_YQ_REFUSE == messageEvent||AppConstants.TEAM_YQ_AGREE == messageEvent){
-            formType = 2
+        override fun onFragmentVisibleChange(isVisible: Boolean) {
+        super.onFragmentVisibleChange(isVisible)
+        if (isVisible){
+            requestData()
         }
     }
-    override fun onDestroyView() {
-        super.onDestroyView()
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public fun upadate(messageEvent:String ) {
+        if (AppConstants.TEAM_YQ_REFUSE == messageEvent){
+            requestData()
+        }
+    }
+    override fun onDestroy() {
+        super.onDestroy()
         EventBus.getDefault().unregister(this)
     }
     override fun onFragmentFirstVisible() {

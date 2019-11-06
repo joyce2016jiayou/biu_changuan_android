@@ -45,7 +45,7 @@ public class ProductAdviceActivity extends BaseActivity {
     @BindView(R.id.add_class_teacher_btn)
     LinearLayout add_class_teacher_btn;
 
-    private int type = -1;
+    private int type = 1;
 
     @Override
     public void initBundle(Bundle parms) {

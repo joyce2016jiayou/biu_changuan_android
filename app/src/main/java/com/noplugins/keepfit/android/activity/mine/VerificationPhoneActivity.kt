@@ -11,6 +11,7 @@ import android.widget.Toast
 import com.google.gson.Gson
 import com.noplugins.keepfit.android.R
 import com.noplugins.keepfit.android.activity.LoginActivity
+import com.noplugins.keepfit.android.activity.user.Login2Activity
 import com.noplugins.keepfit.android.base.BaseActivity
 import com.noplugins.keepfit.android.bean.LoginBean
 import com.noplugins.keepfit.android.global.AppConstants
@@ -147,7 +148,7 @@ class VerificationPhoneActivity : BaseActivity() {
 
 
     private fun toLogin() {
-        val intent = Intent(this, LoginActivity::class.java)
+        val intent = Intent(this, Login2Activity::class.java)
         //退出
         SpUtils.putString(applicationContext, AppConstants.TOKEN, "")
         SpUtils.putString(applicationContext, AppConstants.PHONE, "")

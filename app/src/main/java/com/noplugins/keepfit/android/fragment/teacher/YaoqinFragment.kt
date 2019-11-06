@@ -23,6 +23,9 @@ import com.noplugins.keepfit.android.util.net.entity.Bean
 import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriber
 import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener
 import kotlinx.android.synthetic.main.fragment_manager_teacher_1.*
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 import java.util.HashMap
 
 class YaoqinFragment : BaseFragment()  {
@@ -43,8 +46,20 @@ class YaoqinFragment : BaseFragment()  {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         if (newView == null) {
             newView = inflater.inflate(R.layout.fragment_manager_teacher_1, container, false)
+            EventBus.getDefault().register(this)
         }
         return newView
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public fun upadate(messageEvent:String ) {
+        if ("选择教练" == messageEvent){
+            requestData()
+        }
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        EventBus.getDefault().unregister(this)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
