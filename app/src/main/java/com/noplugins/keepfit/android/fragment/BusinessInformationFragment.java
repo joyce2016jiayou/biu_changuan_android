@@ -137,8 +137,6 @@ public class BusinessInformationFragment extends ViewPagerFragment {
             @Override
             public void onClick(View view) {
                 if (check_value()) {
-
-
                     informationEntity = mainActivity.informationEntity;//获取基础资料信息
                     informationEntity.setCompany_name(qiye_mingcheng_name.getText().toString());//公司名字
                     informationEntity.setCompany_code(yingyezhizhao_xingyong_edittext.getText().toString());//社会统一码
@@ -146,8 +144,6 @@ public class BusinessInformationFragment extends ViewPagerFragment {
                     informationEntity.setCard_num(icon_id_card.getText().toString());//身份证号
                     informationEntity.setBank_card_num(qiye_zhanghao.getText().toString());//企业账号
                     informationEntity.setBankName(kaihuhang_edit.getText().toString());//开户行
-
-
                     //提交审核资料
                     submit_information();
                 } else {
@@ -199,7 +195,7 @@ public class BusinessInformationFragment extends ViewPagerFragment {
 
     private void bind_card(boolean is_bind_compny) {
         BindCardBean bindCardBean = new BindCardBean();
-        bindCardBean.setAreaNum(SpUtils.getString(getActivity(),AppConstants.CHANGGUAN_NUM));
+        bindCardBean.setAreaNum(SpUtils.getString(getActivity(), AppConstants.CHANGGUAN_NUM));
         if (is_bind_compny) {
             bindCardBean.setUserName(tixian_compny_name.getText().toString());
             bindCardBean.setBankNum(tixian_qiye_zhanghao.getText().toString());
@@ -296,7 +292,7 @@ public class BusinessInformationFragment extends ViewPagerFragment {
         params.put("district", informationEntity.getDistrict());
         params.put("bank_card_num", informationEntity.getBank_card_num());
         params.put("bank_name", informationEntity.getBankName());
-        params.put("gym_user_num",SpUtils.getString(getActivity(),AppConstants.USER_NAME));
+        params.put("gym_user_num", SpUtils.getString(getActivity(), AppConstants.USER_NAME));
         Subscription subscription = Network.getInstance("提交审核资料", getActivity())
                 .submit_information(params,
                         new ProgressSubscriber<>("提交审核资料", new SubscriberOnNextListener<Bean<CheckBean>>() {

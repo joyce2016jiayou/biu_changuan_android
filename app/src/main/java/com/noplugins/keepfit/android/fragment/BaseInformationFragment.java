@@ -274,6 +274,9 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
                     progress_upload.showProgressDialog(getActivity(), "上传中...");
                     //上传icon
                     upload_icon_image(icon_image_path, false);
+                    if(jiugongge_iamges.size()>0){
+                        jiugongge_iamges.clear();
+                    }
                     //上传九宫格
                     for (int i = 0; i < strings.size(); i++) {
                         upload_icon_image(strings.get(i), true);
@@ -391,13 +394,17 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
         uploadManager.put(image_path, expectKey, uptoken, new UpCompletionHandler() {
             public void complete(String k, ResponseInfo rinfo, JSONObject response) {
                 if (rinfo.isOK()) {
-                    Log.e("qiniu", "Upload Success");
+                    Log.e("qiniu", "九宫格上传成功");
 //                                String key = getKey(k, response);
                     // String s = k + ", "+ rinfo + ", " + response;
                     //Log.e("获取到的key", "获取到的key:" + k);
                     jiugongge_iamges.add(k);
+                    Log.e("九分裤收到了", "" + jiugongge_iamges.size());
                     if (jiugongge_iamges.size() == strings.size()) {
+
                         progress_upload.dismissProgressDialog();
+                        progress_upload = null;
+
                         mainActivity.informationEntity = getDates();
                         //跳转下一个页面
                         viewpager_content.setCurrentItem(1);
@@ -407,7 +414,9 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
                         stepView.setCurrentStep((step + 1) % stepView.getStepNum());
                     }
                 } else {
-                    Log.e("qiniu", "Upload Fail");
+                    progress_upload.dismissProgressDialog();
+                    progress_upload = null;
+                    Log.e("qiniu", "上传九宫格失败");
                     //如果失败，这里可以把info信息上报自己的服务器，便于后面分析上传错误原因
                 }
             }
@@ -647,7 +656,6 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
         List<InformationEntity.GymPicBean> gym_pic = new ArrayList<>();
         InformationEntity.GymPicBean icon_pic = new InformationEntity.GymPicBean();
         icon_pic.setOrder_num(1);
-        Log.e("登记反馈说多了", icon_net_path);
         icon_pic.setQiniu_key(icon_net_path);
         gym_pic.add(icon_pic);
         for (int i = 0; i < jiugongge_iamges.size(); i++) {

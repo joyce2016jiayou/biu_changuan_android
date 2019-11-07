@@ -75,7 +75,8 @@
         <activity android:name=".activity.SubmitInformationSelectActivity" />
         <activity android:name=".activity.mine.CgPriceActivity" />
         <activity android:name=".activity.user.Login2Activity"></activity>
-        <activity android:name=".activity.HeTongActivity"
+        <activity
+            android:name=".activity.HeTongActivity"
             android:launchMode="singleTop">
 
         </activity>
@@ -123,8 +124,8 @@
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
             android:name=".activity.AddClassItemActivity"
-            android:windowSoftInputMode="adjustPan|stateHidden"
-            android:hardwareAccelerated="false"/>
+            android:hardwareAccelerated="false"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
             android:name=".activity.AddClassDetailActivity"
             android:windowSoftInputMode="adjustPan|stateHidden" />
@@ -140,7 +141,11 @@
         <activity
             android:name=".activity.InformationCheckActivity"
             android:windowSoftInputMode="adjustPan|stateHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".activity.ShareSDKDEMOActivity"
@@ -160,11 +165,7 @@
         <activity
             android:name=".SplashActivity"
             android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <activity
@@ -351,11 +352,11 @@
             android:exported="true"
             android:launchMode="singleTop">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
+                <action android:name="android.intent.action.VIEW" />
 
-                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.DEFAULT" />
 
-                <data android:scheme="wx5460a045edfffc8c"/>
+                <data android:scheme="wx5460a045edfffc8c" />
             </intent-filter>
         </activity>
         <activity android:name=".activity.mine.TeacherDetailActivity" />
