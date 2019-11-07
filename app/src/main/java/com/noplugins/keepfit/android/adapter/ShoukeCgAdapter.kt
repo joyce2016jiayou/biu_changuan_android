@@ -34,7 +34,7 @@ class ShoukeCgAdapter(data: List<TeacherBean>?) : BaseQuickAdapter<TeacherBean, 
 
         if (item.status == 1) {
             helper.setText(R.id.tv_item, "已绑定")
-        } else if (item.status == 2) {
+        } else if (item.status == 2||item.status == 6) {
             helper.setText(R.id.tv_item, "已拒绝")
         } else if (item.status == 4) {
             helper.setText(R.id.tv_item, "申请中")

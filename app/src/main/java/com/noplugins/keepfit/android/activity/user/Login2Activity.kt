@@ -52,6 +52,12 @@ class Login2Activity : BaseActivity() {
     }
 
     override fun doBusiness(mContext: Context) {
+
+        xieyi_check_btn.setOnClickListener(View.OnClickListener {
+            if (xieyi_check_btn.isChecked){
+                xieyi_pop()
+            }
+        })
         qiehuan_login.setOnClickListener(View.OnClickListener {
 
             when (qiehuan_login.text.toString()) {
@@ -290,7 +296,11 @@ class Login2Activity : BaseActivity() {
             xieyi_check_btn.isChecked = true
         })
         val no_agree_btn = view.findViewById<TextView>(R.id.no_agree_btn)
-        no_agree_btn.setOnClickListener(View.OnClickListener { popupWindow.dismiss() })
+        no_agree_btn.setOnClickListener(View.OnClickListener {
+            is_check_fuwu = false
+            xieyi_check_btn.isChecked = false
+            popupWindow.dismiss()
+        })
     }
 
     private fun save_resource(login: LoginBean) {

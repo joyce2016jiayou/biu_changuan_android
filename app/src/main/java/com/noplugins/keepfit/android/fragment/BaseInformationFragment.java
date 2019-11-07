@@ -268,6 +268,7 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
         next_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                jiugongge_iamges.clear();
                 if (check_value()) {
                     //七牛云
                     progress_upload = new ProgressUtil();
