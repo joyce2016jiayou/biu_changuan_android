@@ -119,6 +119,9 @@ public class ProgressSubscriber<T> extends Subscriber<Bean<T>> implements Dialog
                 Logger.e(Method_Tag + "请求Fail:" + t.getMessage());
                 if (t.getCode() == -1) {
                     mListener.onError(t.getMessage());
+                    if (!TextUtils.isEmpty(t.getMessage())) {
+                        Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
                 } else if (t.getCode() == -2) {
                     //没有授权
                     mListener.onError("-2");
@@ -127,9 +130,7 @@ public class ProgressSubscriber<T> extends Subscriber<Bean<T>> implements Dialog
                     mListener.onError("-3");
                 }
             }
-            if (!TextUtils.isEmpty(t.getMessage())) {
-                Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
-            }
+
 
         }
 
