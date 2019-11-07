@@ -2,6 +2,8 @@ package com.noplugins.keepfit.android.util.net.progress;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.text.TextUtils;
+import android.widget.Toast;
 
 import com.noplugins.keepfit.android.util.net.entity.Bean;
 import com.orhanobut.logger.Logger;
@@ -112,54 +114,21 @@ public class ProgressSubscriber<T> extends Subscriber<Bean<T>> implements Dialog
                 Logger.e(Method_Tag + "请求Success:");
                 if (null != t.getData()) {
                     mListener.onNext(t);
-//                    Object obj = t.getData();
-//                    Gson gson = new GsonBuilder().
-//                            registerTypeAdapter(Double.class, new JsonSerializer<Double>() {
-//                                @Override
-//                                public JsonElement serialize(Double src, Type typeOfSrc, JsonSerializationContext context) {
-//                                    if (src == src.longValue())
-//                                        return new JsonPrimitive(src.longValue());
-//                                    return new JsonPrimitive(src);
-//                                }
-//                            }).create();
-//                    String myJson = gson.toJson(obj);//将gson转化为json
-//                    Logger.e(Method_Tag + "返回的json:" + myJson);
-//                    try {
-//                        Object json = new JSONTokener(myJson).nextValue();
-//                        if (json instanceof JSONObject) {//如果是对象
-//                            Logger.e(Method_Tag + "返回的是对象");
-//
-//                            T jsonObject = gson.fromJson(myJson, entity_class);//把JSON字符串转为对象
-//                            mListener.onNext((Bean<T>) jsonObject);
-//
-//                        } else if (json instanceof JSONArray) {//如果是集合
-//                            Logger.e(Method_Tag + "返回的是集合");
-//
-//                            Type type = new TypeToken<List<T>>() {
-//                            }.getType();
-//                            T list_obj = new Gson().fromJson(myJson, type);
-//                            mListener.onNext((Bean<T>) list_obj);
-//                        }
-//                    } catch (JSONException e) {
-//                        e.printStackTrace();
-//                        mListener.onError(e.getMessage());
-//                        Logger.e(Method_Tag + "请求Fail:" + t.getMessage());
-//
-//                    }
                 }
             } else {
                 Logger.e(Method_Tag + "请求Fail:" + t.getMessage());
-                if (t.getCode() == -1){
+                if (t.getCode() == -1) {
                     mListener.onError(t.getMessage());
-                } else if(t.getCode() == -2){
+                } else if (t.getCode() == -2) {
                     //没有授权
                     mListener.onError("-2");
-                }
-                else if(t.getCode() == -3){
+                } else if (t.getCode() == -3) {
                     //没有授权
                     mListener.onError("-3");
                 }
-
+            }
+            if (!TextUtils.isEmpty(t.getMessage())) {
+                Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
 
         }
