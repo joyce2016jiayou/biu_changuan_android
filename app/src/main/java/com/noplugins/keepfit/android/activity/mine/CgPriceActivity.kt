@@ -17,6 +17,7 @@ import com.noplugins.keepfit.android.bean.HighBean
 import com.noplugins.keepfit.android.bean.HightListBean
 import com.noplugins.keepfit.android.bean.PriceBean
 import com.noplugins.keepfit.android.global.AppConstants
+import com.noplugins.keepfit.android.util.ActivityCollectorUtil
 import com.noplugins.keepfit.android.util.SpUtils
 import com.noplugins.keepfit.android.util.TimeCheckUtil
 import com.noplugins.keepfit.android.util.net.Network
@@ -108,12 +109,16 @@ class CgPriceActivity : BaseActivity() {
 
             hour.setOnDateChooseListener { startHour, startMinute, endHour, endMinute ->
                 //
-//                if (endHour < startHour) {
-//                    return@setOnDateChooseListener
-//                }
-//                if (endHour == startHour && endMinute <= startMinute) {
-//                    return@setOnDateChooseListener
-//                }
+                if (endHour < startHour) {
+                    Toast.makeText(applicationContext,"开始时间不能大于结束时间",
+                            Toast.LENGTH_SHORT).show()
+                    return@setOnDateChooseListener
+                }
+                if (endHour == startHour && endMinute <= startMinute) {
+                    Toast.makeText(applicationContext,"开始时间不能大于结束时间",
+                            Toast.LENGTH_SHORT).show()
+                    return@setOnDateChooseListener
+                }
 
 
                 val startH = if (startHour > 9) {
@@ -267,9 +272,8 @@ class CgPriceActivity : BaseActivity() {
     override fun onBackPressed() {
         Log.d("form", form)
         if (form == "pay") {
-            val intent = Intent(this, KeepFitActivity::class.java)
-            startActivity(intent)
             finish()
+            ActivityCollectorUtil.finishAllActivity()
             return
         }
 //        val intent = Intent(this, KeepFitActivity::class.java)

@@ -404,8 +404,8 @@
                         android:layout_marginLeft="3dp"
                         android:background="@drawable/riqi_bg"
                         android:gravity="center"
-                        android:hint="@string/edit_hint13"
-                        android:text="@string/edit_hint13"
+                        android:hint="10：00"
+                        android:text="10：00"
                         android:textColor="@color/top_heiziti"
                         android:textColorHint="@color/color_9B9B9B"
                         android:textSize="13sp" />

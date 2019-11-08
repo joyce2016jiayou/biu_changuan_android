@@ -161,6 +161,23 @@ public class AddClassItemActivity extends BaseActivity {
         add_class_teacher_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                int startHour = Integer.parseInt(time2_edit.getText().toString().split(":")[0]);
+                int startMin = Integer.parseInt(time2_edit.getText().toString().split(":")[1]);
+
+                int endHour = Integer.parseInt(time1_edit.getText().toString().split(":")[0]);
+                int endMin = Integer.parseInt(time1_edit.getText().toString().split(":")[1]);
+                if (startHour<endHour){
+                    Toast.makeText(AddClassItemActivity.this,
+                            "开始时间不能大于结束时间",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (startHour == endHour && startMin > endMin){
+                    Toast.makeText(AddClassItemActivity.this,
+                            "开始时间不能大于结束时间",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 if (check_value()) {//如果所有参数不为空，请求网络接口
                     add_class();
                 } else {
@@ -442,6 +459,7 @@ public class AddClassItemActivity extends BaseActivity {
         time2_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 time_check(time2_edit);
             }
         });
@@ -482,6 +500,7 @@ public class AddClassItemActivity extends BaseActivity {
         picker.setOnTimeSelectedListener(new OnTimeSelectedListener() {
             @Override
             public void onItemSelected(int hour, int minute, int second) {
+
                 if (minute <= 9) {
                     textView.setText(hour + ":0" + minute);
                 } else {

@@ -19,6 +19,7 @@ import com.noplugins.keepfit.android.activity.HeTongActivity;
 import com.noplugins.keepfit.android.activity.LoginActivity;
 import com.noplugins.keepfit.android.activity.SubmitInformationSelectActivity;
 import com.noplugins.keepfit.android.activity.UserPermissionSelectActivity;
+import com.noplugins.keepfit.android.activity.mine.CgPriceActivity;
 import com.noplugins.keepfit.android.activity.user.Login2Activity;
 import com.noplugins.keepfit.android.activity.user.SetPasswordActivity;
 import com.noplugins.keepfit.android.base.BaseActivity;
@@ -146,26 +147,36 @@ public class SplashActivity extends BaseActivity {
                                 Log.e(TAG, "获取审核状态成功：" + result.getData().getStatus());
                                 if (result.getData().getStatus() == 1) {//成功
                                     //0没买过，1是2999 2是3999 3是6999
-                                    if (result.getData().getHaveMember().equals("0")) {
-                                        Intent intent = new Intent(SplashActivity.this, HeTongActivity.class);
-                                        startActivity(intent);
-                                        finish();
-                                    } else if (result.getData().getHaveMember().equals("1")) {
-                                        SpUtils.putString(getApplicationContext(), AppConstants.USER_DENGJI, "2999");
+                                    switch (result.getData().getHaveMember()){
+                                        case "0":
+                                            Intent intent = new Intent(SplashActivity.this, HeTongActivity.class);
+                                            startActivity(intent);
+                                            finish();
+                                            return;
+                                        case "1":
+                                            SpUtils.putString(getApplicationContext(), AppConstants.USER_DENGJI, "2999");
+                                            break;
+                                        case "2":
+                                            SpUtils.putString(getApplicationContext(), AppConstants.USER_DENGJI, "3999");
+                                            break;
+                                        case "3":
+                                            SpUtils.putString(getApplicationContext(), AppConstants.USER_DENGJI, "6999");
+                                            break;
+                                    }
+                                    if (result.getData().getHighTime() == 1){
                                         Intent intent = new Intent(SplashActivity.this, KeepFitActivity.class);
                                         startActivity(intent);
                                         finish();
-                                    } else if (result.getData().getHaveMember().equals("2")) {
-                                        SpUtils.putString(getApplicationContext(), AppConstants.USER_DENGJI, "3999");
-                                        Intent intent = new Intent(SplashActivity.this, KeepFitActivity.class);
-                                        startActivity(intent);
-                                        finish();
-                                    } else if (result.getData().getHaveMember().equals("3")) {
-                                        SpUtils.putString(getApplicationContext(), AppConstants.USER_DENGJI, "6999");
-                                        Intent intent = new Intent(SplashActivity.this, KeepFitActivity.class);
+                                    } else {
+                                        Intent intent = new Intent(SplashActivity.this, CgPriceActivity.class);
+                                        Bundle bundle = new Bundle();
+                                        bundle.putString("form","pay");
+                                        intent.putExtras(bundle);
                                         startActivity(intent);
                                         finish();
                                     }
+
+
                                 } else if (result.getData().getStatus() == 0) {//失败
                                     Intent intent = new Intent(SplashActivity.this, CheckStatusFailActivity.class);
                                     startActivity(intent);

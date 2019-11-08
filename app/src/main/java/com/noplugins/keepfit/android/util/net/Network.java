@@ -78,7 +78,7 @@ public class Network {
     private static Network mInstance;
     public MyService service;
     //测试服
-    public static String test_main_url = "http://192.168.1.45:8888/api";
+    public static String test_main_url = "http://testapi.noplugins.com/api";
     public static String main_url = "http://kft.ahcomg.com/api";
     public static String token = "";
     public static String login_token = "login_token";
@@ -179,7 +179,7 @@ public class Network {
 
         retrofit = new Retrofit.Builder()
                 .client(client)
-                .baseUrl(get_main_url("main"))//设置请求网址根部
+                .baseUrl(get_main_url("test"))//设置请求网址根部
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();

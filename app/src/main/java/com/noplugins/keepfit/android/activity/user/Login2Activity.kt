@@ -19,6 +19,7 @@ import com.noplugins.keepfit.android.R
 import com.noplugins.keepfit.android.activity.CheckStatusFailActivity
 import com.noplugins.keepfit.android.activity.HeTongActivity
 import com.noplugins.keepfit.android.activity.SubmitInformationSelectActivity
+import com.noplugins.keepfit.android.activity.mine.CgPriceActivity
 import com.noplugins.keepfit.android.base.BaseActivity
 import com.noplugins.keepfit.android.bean.LoginBean
 import com.noplugins.keepfit.android.entity.CheckEntity
@@ -322,28 +323,32 @@ class Login2Activity : BaseActivity() {
                                 //成功1,失败0,没有提交过资料-2,2没有银行卡,3审核中
                                 if (result.data.status == 1) {//成功
                                     //0没买过，1是2999 2是3999 3是6999
-                                    if (result.data.haveMember == "0") {
-                                        //判断有没有提交过审核资料
-                                        val intent = Intent(this@Login2Activity, HeTongActivity::class.java)
-                                        startActivity(intent)
-                                        finish()
-                                    } else if (result.data.haveMember == "1") {
-                                        SpUtils.putString(applicationContext, AppConstants.USER_DENGJI, "2999")
-                                        val intent = Intent(this@Login2Activity, KeepFitActivity::class.java)
-                                        startActivity(intent)
-                                        finish()
 
-                                    } else if (result.data.haveMember == "2") {
-                                        SpUtils.putString(applicationContext, AppConstants.USER_DENGJI, "3999")
+                                    when(result.data.haveMember){
+                                        "0" ->{
+                                            val intent = Intent(this@Login2Activity, HeTongActivity::class.java)
+                                            startActivity(intent)
+                                            finish()
+                                            return
+                                        }
+                                        "1" ->{ SpUtils.putString(applicationContext, AppConstants.USER_DENGJI, "2999")}
+                                        "2" ->{ SpUtils.putString(applicationContext, AppConstants.USER_DENGJI, "3999")}
+                                        "3" ->{SpUtils.putString(applicationContext, AppConstants.USER_DENGJI, "6999")}
+                                    }
+                                    if (result.data.highTime == 1){
                                         val intent = Intent(this@Login2Activity, KeepFitActivity::class.java)
                                         startActivity(intent)
                                         finish()
-                                    } else if (result.data.haveMember == "3") {
-                                        SpUtils.putString(applicationContext, AppConstants.USER_DENGJI, "6999")
-                                        val intent = Intent(this@Login2Activity, KeepFitActivity::class.java)
+                                    } else {
+                                        val intent = Intent(this@Login2Activity, CgPriceActivity::class.java)
+                                        val bundle = Bundle()
+                                        bundle.putString("form", "pay")
+                                        intent.putExtras(bundle)
                                         startActivity(intent)
                                         finish()
                                     }
+
+
                                 } else if (result.data.status == 0) {//失败
                                     val intent = Intent(this@Login2Activity, CheckStatusFailActivity::class.java)
                                     startActivity(intent)
