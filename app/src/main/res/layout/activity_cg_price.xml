@@ -15,7 +15,7 @@
             android:layout_gravity="left|center_vertical"
             android:layout_marginLeft="@dimen/m20"
             android:src="@drawable/icon_back"
-            android:visibility="gone"
+            android:visibility="visible"
             android:layout_marginTop="@dimen/m20"/>
 
         <TextView

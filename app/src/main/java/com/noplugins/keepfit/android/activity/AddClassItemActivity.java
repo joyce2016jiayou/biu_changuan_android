@@ -193,7 +193,9 @@ public class AddClassItemActivity extends BaseActivity {
             public boolean onTouch(View v, MotionEvent event) {
                 InputMethodManager inputMethodManager =
                         (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+                inputMethodManager.hideSoftInputFromWindow(edit_class_jieshao.getWindowToken(), 0);
+                inputMethodManager.hideSoftInputFromWindow(edit_zhuyi_shixiang.getWindowToken(), 0);
+                inputMethodManager.hideSoftInputFromWindow(edit_shihe_renqun.getWindowToken(), 0);
                 edit_class_jieshao.clearFocus();
                 edit_class_name.clearFocus();
                 edit_price_number.clearFocus();

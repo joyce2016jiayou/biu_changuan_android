@@ -63,7 +63,7 @@ class MyFragment : BaseFragment(), EasyPermissions.PermissionCallbacks {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        requestArea()
+//        requestArea()
         setting()
         ll_info.setOnClickListener {
             if (BaseUtils.isFastClick()){
@@ -74,6 +74,10 @@ class MyFragment : BaseFragment(), EasyPermissions.PermissionCallbacks {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        requestArea()
+    }
     private fun setting() {
         val fuctionBean: MutableList<MineFunctionBean> = ArrayList()
 

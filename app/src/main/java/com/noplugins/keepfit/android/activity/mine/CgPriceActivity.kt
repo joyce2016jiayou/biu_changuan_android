@@ -86,6 +86,10 @@ class CgPriceActivity : BaseActivity() {
 
     @SuppressLint("SetTextI18n")
     override fun doBusiness(mContext: Context?) {
+
+        back_btn.setOnClickListener {
+            back()
+        }
         iv_tips.setOnClickListener {
             viewPop()
         }
@@ -270,6 +274,10 @@ class CgPriceActivity : BaseActivity() {
     }
 
     override fun onBackPressed() {
+        back()
+    }
+
+    private fun back(){
         Log.d("form", form)
         if (form == "pay") {
             finish()
