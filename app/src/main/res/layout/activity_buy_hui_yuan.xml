@@ -29,8 +29,9 @@
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="@dimen/m50"
-                android:visibility="invisible"
-                android:src="@drawable/icon_back" />
+                android:src="@drawable/icon_back"
+                android:visibility="invisible" />
+
             <TextView
                 android:id="@+id/tv1"
                 android:layout_width="wrap_content"
