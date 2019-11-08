@@ -18,6 +18,7 @@ import com.noplugins.keepfit.android.KeepFitActivity
 import com.noplugins.keepfit.android.R
 import com.noplugins.keepfit.android.activity.CheckStatusFailActivity
 import com.noplugins.keepfit.android.activity.HeTongActivity
+import com.noplugins.keepfit.android.activity.InformationCheckActivity
 import com.noplugins.keepfit.android.activity.SubmitInformationSelectActivity
 import com.noplugins.keepfit.android.activity.mine.CgPriceActivity
 import com.noplugins.keepfit.android.base.BaseActivity
@@ -55,7 +56,7 @@ class Login2Activity : BaseActivity() {
     override fun doBusiness(mContext: Context) {
 
         xieyi_check_btn.setOnClickListener(View.OnClickListener {
-            if (xieyi_check_btn.isChecked){
+            if (xieyi_check_btn.isChecked) {
                 xieyi_pop()
             }
         })
@@ -237,8 +238,7 @@ class Login2Activity : BaseActivity() {
                                     startActivity(intent)
                                 } else if (result.data.type == 1) {
                                     get_check_status()
-                                }
-                                else {
+                                } else {
                                     val intent = Intent(this@Login2Activity, KeepFitActivity::class.java)
                                     startActivity(intent)
                                 }
@@ -324,18 +324,24 @@ class Login2Activity : BaseActivity() {
                                 if (result.data.status == 1) {//成功
                                     //0没买过，1是2999 2是3999 3是6999
 
-                                    when(result.data.haveMember){
-                                        "0" ->{
+                                    when (result.data.haveMember) {
+                                        "0" -> {
                                             val intent = Intent(this@Login2Activity, HeTongActivity::class.java)
                                             startActivity(intent)
                                             finish()
                                             return
                                         }
-                                        "1" ->{ SpUtils.putString(applicationContext, AppConstants.USER_DENGJI, "2999")}
-                                        "2" ->{ SpUtils.putString(applicationContext, AppConstants.USER_DENGJI, "3999")}
-                                        "3" ->{SpUtils.putString(applicationContext, AppConstants.USER_DENGJI, "6999")}
+                                        "1" -> {
+                                            SpUtils.putString(applicationContext, AppConstants.USER_DENGJI, "2999")
+                                        }
+                                        "2" -> {
+                                            SpUtils.putString(applicationContext, AppConstants.USER_DENGJI, "3999")
+                                        }
+                                        "3" -> {
+                                            SpUtils.putString(applicationContext, AppConstants.USER_DENGJI, "6999")
+                                        }
                                     }
-                                    if (result.data.highTime == 1){
+                                    if (result.data.highTime == 1) {
                                         val intent = Intent(this@Login2Activity, KeepFitActivity::class.java)
                                         startActivity(intent)
                                         finish()
@@ -347,8 +353,13 @@ class Login2Activity : BaseActivity() {
                                         startActivity(intent)
                                         finish()
                                     }
-
-
+                                } else if (result.data.status == 2) {
+                                    val intent = Intent(this@Login2Activity, InformationCheckActivity::class.java)
+                                    val bundle = Bundle()
+                                    bundle.putInt("is_not_bind", 1)
+                                    intent.putExtras(bundle)
+                                    startActivity(intent)
+                                    finish()
                                 } else if (result.data.status == 0) {//失败
                                     val intent = Intent(this@Login2Activity, CheckStatusFailActivity::class.java)
                                     startActivity(intent)

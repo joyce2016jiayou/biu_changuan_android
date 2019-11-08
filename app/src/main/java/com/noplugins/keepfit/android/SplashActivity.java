@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.noplugins.keepfit.android.activity.BuyActivity;
 import com.noplugins.keepfit.android.activity.CheckStatusFailActivity;
 import com.noplugins.keepfit.android.activity.HeTongActivity;
+import com.noplugins.keepfit.android.activity.InformationCheckActivity;
 import com.noplugins.keepfit.android.activity.LoginActivity;
 import com.noplugins.keepfit.android.activity.SubmitInformationSelectActivity;
 import com.noplugins.keepfit.android.activity.UserPermissionSelectActivity;
@@ -144,10 +145,11 @@ public class SplashActivity extends BaseActivity {
                         new ProgressSubscriber<>("获取审核状态", new SubscriberOnNextListener<Bean<CheckEntity>>() {
                             @Override
                             public void onNext(Bean<CheckEntity> result) {
+                                //成功1,失败0,没有提交过资料-2,2没有银行卡,3审核中
                                 Log.e(TAG, "获取审核状态成功：" + result.getData().getStatus());
                                 if (result.getData().getStatus() == 1) {//成功
                                     //0没买过，1是2999 2是3999 3是6999
-                                    switch (result.getData().getHaveMember()){
+                                    switch (result.getData().getHaveMember()) {
                                         case "0":
                                             Intent intent = new Intent(SplashActivity.this, HeTongActivity.class);
                                             startActivity(intent);
@@ -163,25 +165,30 @@ public class SplashActivity extends BaseActivity {
                                             SpUtils.putString(getApplicationContext(), AppConstants.USER_DENGJI, "6999");
                                             break;
                                     }
-                                    if (result.getData().getHighTime() == 1){
+                                    if (result.getData().getHighTime() == 1) {
                                         Intent intent = new Intent(SplashActivity.this, KeepFitActivity.class);
                                         startActivity(intent);
                                         finish();
                                     } else {
                                         Intent intent = new Intent(SplashActivity.this, CgPriceActivity.class);
                                         Bundle bundle = new Bundle();
-                                        bundle.putString("form","pay");
+                                        bundle.putString("form", "pay");
                                         intent.putExtras(bundle);
                                         startActivity(intent);
                                         finish();
                                     }
-
-
+                                } else if (result.getData().getStatus() == 2) {//没有绑定银行卡
+                                    Intent intent = new Intent(SplashActivity.this, InformationCheckActivity.class);
+                                    Bundle bundle = new Bundle();
+                                    bundle.putInt("is_not_bind", 1);
+                                    intent.putExtras(bundle);
+                                    startActivity(intent);
+                                    finish();
                                 } else if (result.getData().getStatus() == 0) {//失败
                                     Intent intent = new Intent(SplashActivity.this, CheckStatusFailActivity.class);
                                     startActivity(intent);
                                     finish();
-                                } else if (result.getData().getStatus() == -2||result.getData().getStatus() == 4) {//没有提交过
+                                } else if (result.getData().getStatus() == -2 || result.getData().getStatus() == 4) {//没有提交过
                                     Intent intent = new Intent(SplashActivity.this, SubmitInformationSelectActivity.class);
                                     startActivity(intent);
                                     finish();
@@ -220,11 +227,11 @@ public class SplashActivity extends BaseActivity {
      * @return
      */
     private boolean panduan_net() {
-        boolean isAvailable = false ;
+        boolean isAvailable = false;
         ConnectivityManager cm = (ConnectivityManager) getApplicationContext()
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = cm.getActiveNetworkInfo();
-        if(networkInfo!=null && networkInfo.isAvailable()){
+        if (networkInfo != null && networkInfo.isAvailable()) {
             isAvailable = true;
         }
         return isAvailable;

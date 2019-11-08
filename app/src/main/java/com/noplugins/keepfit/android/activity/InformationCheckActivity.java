@@ -42,10 +42,13 @@ public class InformationCheckActivity extends BaseActivity {
     public int select_index = 0;
     private List<Fragment> tabFragments = new ArrayList<>();
     public InformationEntity informationEntity;
+    public int is_not_bind;
 
     @Override
     public void initBundle(Bundle parms) {
-
+        if (null != parms) {
+            is_not_bind = parms.getInt("is_not_bind");
+        }
     }
 
     @Override
@@ -53,7 +56,6 @@ public class InformationCheckActivity extends BaseActivity {
         setContentLayout(R.layout.activity_information_check);
         ButterKnife.bind(this);
         isShowTitle(false);
-
         back_btn_img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -91,7 +93,14 @@ public class InformationCheckActivity extends BaseActivity {
         tabFragments.add(InformationResultFragement.homeInstance("第三页"));
         ContentPagerAdapterMy contentAdapter = new ContentPagerAdapterMy(getSupportFragmentManager(), tabFragments);
         viewpager_content.setAdapter(contentAdapter);
-        viewpager_content.setCurrentItem(0);
+        if (is_not_bind == 1) {
+            int step = stepView.getCurrentStep();//设置进度条
+            stepView.setCurrentStep((step + 1) % stepView.getStepNum());
+            select_index = 1;
+            viewpager_content.setCurrentItem(1);
+        } else {
+            viewpager_content.setCurrentItem(0);
+        }
     }
 
     @Override

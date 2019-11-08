@@ -131,7 +131,9 @@ public class BusinessInformationFragment extends ViewPagerFragment {
     }
 
     private void initView() {
-
+        if (mainActivity.select_index == 1) {//未绑定银行卡
+            get_compny_resource(SpUtils.getString(getActivity(), AppConstants.CHANGGUAN_NUM));
+        }
 
         submit_btn.setOnClickListener(new View.OnClickListener() {
             @Override
