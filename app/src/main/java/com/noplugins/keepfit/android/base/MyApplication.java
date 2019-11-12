@@ -59,6 +59,7 @@ import java.util.concurrent.TimeUnit;
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLSession;
 
+import cn.jiguang.analytics.android.api.JAnalyticsInterface;
 import cn.jpush.android.api.JPushInterface;
 import cn.jpush.android.api.TagAliasCallback;
 import cn.qqtheme.framework.logger.CqrLog;
@@ -186,6 +187,12 @@ public class MyApplication extends MultiDexApplication {
         } else {
             Log.e("极光报错", "Get registration fail, JPush init failed!");
         }
+        //极光统计
+        JAnalyticsInterface.init(this);
+        JAnalyticsInterface.setDebugMode(true);
+        JAnalyticsInterface.initCrashHandler(this);//开启crashlog日志上报
+        JAnalyticsInterface.setChannel(this, null);
+
 
         /**方法负载过多解决*/
         MultiDex.install(this);
