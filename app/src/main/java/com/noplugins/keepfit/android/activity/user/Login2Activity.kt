@@ -26,6 +26,7 @@ import com.noplugins.keepfit.android.bean.LoginBean
 import com.noplugins.keepfit.android.entity.CheckEntity
 import com.noplugins.keepfit.android.entity.LoginEntity
 import com.noplugins.keepfit.android.global.AppConstants
+import com.noplugins.keepfit.android.util.MD5Utils
 import com.noplugins.keepfit.android.util.SpUtils
 import com.noplugins.keepfit.android.util.data.SharedPreferencesHelper
 import com.noplugins.keepfit.android.util.data.StringsHelper
@@ -257,8 +258,10 @@ class Login2Activity : BaseActivity() {
     }
 
     private fun Get_YanZhengMa() {
-        val params = HashMap<String, String>()
+        val params = HashMap<String, Any>()
         params["phone"] = edit_phone_number.text.toString()
+        params["sign"] = "MES${MD5Utils.stringToMD5(edit_phone_number.text.toString())}"
+        params["time"] = System.currentTimeMillis()
         val subscription = Network.getInstance("获取验证码", this)
                 .get_yanzhengma(params,
                         ProgressSubscriber("获取验证码", object : SubscriberOnNextListener<Bean<String>> {
@@ -290,7 +293,7 @@ class Login2Activity : BaseActivity() {
         val webSettings = webView.settings
         webSettings.useWideViewPort = true//设置此属性，可任意比例缩放
         webSettings.loadWithOverviewMode = true
-        webView.loadUrl("file:///android_asset/hetong.html")
+        webView.loadUrl("file:///android_asset/jiaolian_xieyi.html")
         agree_btn.setOnClickListener(View.OnClickListener {
             popupWindow.dismiss()
             is_check_fuwu = true

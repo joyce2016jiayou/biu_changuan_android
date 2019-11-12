@@ -16,6 +16,7 @@ import com.noplugins.keepfit.android.base.BaseActivity
 import com.noplugins.keepfit.android.bean.LoginBean
 import com.noplugins.keepfit.android.global.AppConstants
 import com.noplugins.keepfit.android.util.ActivityCollectorUtil
+import com.noplugins.keepfit.android.util.MD5Utils
 import com.noplugins.keepfit.android.util.SpUtils
 import com.noplugins.keepfit.android.util.net.Network
 import com.noplugins.keepfit.android.util.net.entity.Bean
@@ -72,8 +73,10 @@ class VerificationPhoneActivity : BaseActivity() {
     }
 
     private fun send() {
-        val params = HashMap<String, String>()
+        val params = HashMap<String, Any>()
         params["phone"] = tv_phone.text.toString()
+        params["sign"] = "MES${MD5Utils.stringToMD5(tv_phone.text.toString())}"
+        params["time"] = System.currentTimeMillis()
         subscription = Network.getInstance("获取验证码", this)
                 .get_yanzhengma(
                         params,
