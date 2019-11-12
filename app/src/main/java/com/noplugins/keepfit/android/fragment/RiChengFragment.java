@@ -35,6 +35,7 @@ import com.noplugins.keepfit.android.bean.RiChengBean;
 import com.noplugins.keepfit.android.global.AppConstants;
 import com.noplugins.keepfit.android.util.SpUtils;
 import com.noplugins.keepfit.android.util.data.DateHelper;
+import com.noplugins.keepfit.android.util.eventbus.MessageEvent;
 import com.noplugins.keepfit.android.util.net.Network;
 import com.noplugins.keepfit.android.util.net.entity.Bean;
 import com.noplugins.keepfit.android.util.net.progress.GsonSubscriberOnNextListener;
@@ -58,6 +59,10 @@ import com.umeng.socialize.UMShareAPI;
 import com.yanzhenjie.permission.Action;
 import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.Permission;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -141,11 +146,26 @@ public class RiChengFragment extends ViewPagerFragment {
             view = inflater.inflate(R.layout.fragment_ri_cheng, container, false);
             ButterKnife.bind(this, view);//绑定黄牛刀
             cDate = CalendarUtil.getCurrentDate();
+            EventBus.getDefault().register(this);
+
             initview();
         }
         return view;
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
+    public void refresh(MessageEvent messageEvent) {
+        if (messageEvent.getMessage().equals("refresh_resource")) {
+            refreshLayout.autoRefresh();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+
+    }
 
     private void initview() {
         select_date_str = DateHelper.get_date(cDate[0], cDate[1], cDate[2]);
@@ -360,6 +380,7 @@ public class RiChengFragment extends ViewPagerFragment {
                         new ProgressSubscriber<>("获取课程数据", new SubscriberOnNextListener<Bean<RiChengBean>>() {
                             @Override
                             public void onNext(Bean<RiChengBean> result) {
+                                Log.e("获取课程数据数量", result.getData().getResult().size() + "");
                                 if (class_list.size() > 0) {
                                     class_list.clear();
                                 }

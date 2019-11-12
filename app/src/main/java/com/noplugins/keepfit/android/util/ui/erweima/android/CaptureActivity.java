@@ -33,6 +33,7 @@ import com.noplugins.keepfit.android.entity.TeacherBean;
 import com.noplugins.keepfit.android.global.AppConstants;
 import com.noplugins.keepfit.android.util.SpUtils;
 import com.noplugins.keepfit.android.util.data.SharedPreferencesHelper;
+import com.noplugins.keepfit.android.util.eventbus.MessageEvent;
 import com.noplugins.keepfit.android.util.net.Network;
 import com.noplugins.keepfit.android.util.net.entity.Bean;
 import com.noplugins.keepfit.android.util.net.progress.GsonSubscriberOnNextListener;
@@ -46,6 +47,8 @@ import com.noplugins.keepfit.android.util.ui.erweima.common.Constant;
 import com.noplugins.keepfit.android.util.ui.erweima.decode.DecodeImgCallback;
 import com.noplugins.keepfit.android.util.ui.erweima.decode.DecodeImgThread;
 import com.noplugins.keepfit.android.util.ui.erweima.decode.ImageUtil;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -238,6 +241,9 @@ public class CaptureActivity extends AppCompatActivity implements SurfaceHolder.
                     public void onNext(Bean<Object> objectBean) {
                         Log.e("发送订单成功", "发送订单成功");
                         if (objectBean.getCode() == 0){
+                            MessageEvent messageEvent = new MessageEvent("refresh_resource");
+                            EventBus.getDefault().postSticky(messageEvent);
+
                             Intent intent = getIntent();
                             intent.putExtra(Constant.CODED_CONTENT, rawResult.getText());
                             setResult(RESULT_OK, intent);
