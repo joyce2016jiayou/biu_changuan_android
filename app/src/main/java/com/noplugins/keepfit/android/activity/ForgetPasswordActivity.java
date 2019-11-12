@@ -28,6 +28,7 @@ import android.widget.Toast;
 import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.activity.user.Login2Activity;
 import com.noplugins.keepfit.android.base.BaseActivity;
+import com.noplugins.keepfit.android.util.MD5Utils;
 import com.noplugins.keepfit.android.util.data.StringsHelper;
 import com.noplugins.keepfit.android.util.net.Network;
 import com.noplugins.keepfit.android.util.net.entity.Bean;
@@ -210,8 +211,10 @@ public class ForgetPasswordActivity extends BaseActivity {
     }
 
     private void Get_YanZhengMa() {
-        Map<String, String> params = new HashMap<>();
+        Map<String, Object> params = new HashMap<>();
         params.put("phone", edit_phone_number.getText().toString());
+        params.put("sign", "MES"+ MD5Utils.stringToMD5(edit_phone_number.getText().toString()));
+        params.put("time", System.currentTimeMillis());
         subscription = Network.getInstance("接收验证码", getApplicationContext())
                 .get_yanzhengma(params,
                         new ProgressSubscriber<>("接收验证码", new SubscriberOnNextListener<Bean<String>>() {

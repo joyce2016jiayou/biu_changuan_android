@@ -9,6 +9,7 @@ import android.widget.Toast
 import com.google.gson.Gson
 import com.noplugins.keepfit.android.R
 import com.noplugins.keepfit.android.base.BaseActivity
+import com.noplugins.keepfit.android.util.MD5Utils
 import com.noplugins.keepfit.android.util.data.PwdCheckUtil
 import com.noplugins.keepfit.android.util.data.StringsHelper
 import com.noplugins.keepfit.android.util.net.Network
@@ -105,8 +106,10 @@ class SettingPwdActivity : BaseActivity() {
     }
 
     private fun send() {
-        val params = HashMap<String, String>()
+        val params = HashMap<String, Any>()
         params["phone"] = edit_phone.text.toString()
+        params["sign"] = "MES${MD5Utils.stringToMD5(edit_phone.text.toString())}"
+        params["time"] = System.currentTimeMillis()
         subscription = Network.getInstance("获取验证码", this)
             .get_yanzhengma(params,
                 ProgressSubscriber("获取验证码", object : SubscriberOnNextListener<Bean<String>> {

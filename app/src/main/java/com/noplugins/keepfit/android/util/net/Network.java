@@ -216,8 +216,8 @@ public class Network {
      * @param subscriber
      * @return
      */
-    public Subscription get_yanzhengma(Map<String, String> params, Subscriber<Bean<String>> subscriber) {
-        return service.get_yanzhengma(params)
+    public Subscription get_yanzhengma(Map<String, Object> params, Subscriber<Bean<String>> subscriber) {
+        return service.get_yanzhengma(retuen_json_params(params))
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

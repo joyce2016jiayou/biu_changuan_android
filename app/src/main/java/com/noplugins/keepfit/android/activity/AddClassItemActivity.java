@@ -162,12 +162,12 @@ public class AddClassItemActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
 
-                int startHour = Integer.parseInt(time2_edit.getText().toString().split(":")[0]);
-                int startMin = Integer.parseInt(time2_edit.getText().toString().split(":")[1]);
+                int startHour = Integer.parseInt(time1_edit.getText().toString().split(":")[0]);
+                int startMin = Integer.parseInt(time1_edit.getText().toString().split(":")[1]);
 
-                int endHour = Integer.parseInt(time1_edit.getText().toString().split(":")[0]);
-                int endMin = Integer.parseInt(time1_edit.getText().toString().split(":")[1]);
-                if (startHour<endHour){
+                int endHour = Integer.parseInt(time2_edit.getText().toString().split(":")[0]);
+                int endMin = Integer.parseInt(time2_edit.getText().toString().split(":")[1]);
+                if (startHour>endHour){
                     Toast.makeText(AddClassItemActivity.this,
                             "开始时间不能大于结束时间",Toast.LENGTH_SHORT).show();
                     return;
