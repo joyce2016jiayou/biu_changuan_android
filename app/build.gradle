@@ -208,8 +208,6 @@ dependencies {
     //图表控件
     implementation 'com.openxu.viewlib:OXViewLib:1.0.2'
 
-    //极光集成
-    implementation files('libs/jpush-android-3.3.4.jar')
 
     //bugly
     implementation 'com.tencent.bugly:crashreport:3.1.0'
@@ -249,7 +247,8 @@ dependencies {
     implementation project(':datepicker')
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 
-    //极光埋点
+    //极光集成
+    implementation files('libs/jpush-android-3.3.4.jar')
     implementation files('libs/jcore-android-2.1.6.jar')
     implementation files('libs/janalytics-android-2.1.0.jar')
 
