@@ -26,9 +26,8 @@ import com.noplugins.keepfit.android.bean.LoginBean
 import com.noplugins.keepfit.android.entity.CheckEntity
 import com.noplugins.keepfit.android.entity.LoginEntity
 import com.noplugins.keepfit.android.global.AppConstants
-import com.noplugins.keepfit.android.util.MD5Utils
+import com.noplugins.keepfit.android.util.MD5
 import com.noplugins.keepfit.android.util.SpUtils
-import com.noplugins.keepfit.android.util.data.SharedPreferencesHelper
 import com.noplugins.keepfit.android.util.data.StringsHelper
 import com.noplugins.keepfit.android.util.net.Network
 import com.noplugins.keepfit.android.util.net.entity.Bean
@@ -260,7 +259,7 @@ class Login2Activity : BaseActivity() {
     private fun Get_YanZhengMa() {
         val params = HashMap<String, Any>()
         params["phone"] = edit_phone_number.text.toString()
-        params["sign"] = "MES${MD5Utils.stringToMD5(edit_phone_number.text.toString())}"
+        params["sign"] = "${MD5.stringToMD5("MES"+edit_phone_number.text.toString())}"
         params["time"] = System.currentTimeMillis()
         val subscription = Network.getInstance("获取验证码", this)
                 .get_yanzhengma(params,
