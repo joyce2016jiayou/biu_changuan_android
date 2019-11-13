@@ -1,24 +1,16 @@
 package com.noplugins.keepfit.android.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.Editable;
-import android.text.Selection;
-import android.text.SpannableString;
-import android.text.Spanned;
-import android.text.SpannedString;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.method.DigitsKeyListener;
-import android.text.style.AbsoluteSizeSpan;
 import android.util.Log;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -28,13 +20,11 @@ import android.widget.Toast;
 import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.activity.user.Login2Activity;
 import com.noplugins.keepfit.android.base.BaseActivity;
-import com.noplugins.keepfit.android.util.MD5Utils;
+import com.noplugins.keepfit.android.util.MD5;
 import com.noplugins.keepfit.android.util.data.StringsHelper;
 import com.noplugins.keepfit.android.util.net.Network;
 import com.noplugins.keepfit.android.util.net.entity.Bean;
-import com.noplugins.keepfit.android.util.net.progress.GsonSubscriberOnNextListener;
 import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriber;
-import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriberNew;
 import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener;
 import com.orhanobut.logger.Logger;
 
@@ -213,7 +203,7 @@ public class ForgetPasswordActivity extends BaseActivity {
     private void Get_YanZhengMa() {
         Map<String, Object> params = new HashMap<>();
         params.put("phone", edit_phone_number.getText().toString());
-        params.put("sign", "MES"+ MD5Utils.stringToMD5(edit_phone_number.getText().toString()));
+        params.put("sign",  MD5.stringToMD5("MES"+edit_phone_number.getText().toString()));
         params.put("time", System.currentTimeMillis());
         subscription = Network.getInstance("接收验证码", getApplicationContext())
                 .get_yanzhengma(params,

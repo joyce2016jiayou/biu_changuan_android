@@ -6,21 +6,16 @@ import android.graphics.Color
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.widget.Toast
-import com.google.gson.Gson
 import com.noplugins.keepfit.android.R
 import com.noplugins.keepfit.android.base.BaseActivity
-import com.noplugins.keepfit.android.util.MD5Utils
+import com.noplugins.keepfit.android.util.MD5
 import com.noplugins.keepfit.android.util.data.PwdCheckUtil
 import com.noplugins.keepfit.android.util.data.StringsHelper
 import com.noplugins.keepfit.android.util.net.Network
 import com.noplugins.keepfit.android.util.net.entity.Bean
-import com.noplugins.keepfit.android.util.net.progress.GsonSubscriberOnNextListener
 import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriber
-import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriberNew
 import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener
-import com.orhanobut.logger.Logger
 import kotlinx.android.synthetic.main.activity_setting_pwd.*
-import okhttp3.RequestBody
 import java.util.*
 
 class SettingPwdActivity : BaseActivity() {
@@ -108,7 +103,7 @@ class SettingPwdActivity : BaseActivity() {
     private fun send() {
         val params = HashMap<String, Any>()
         params["phone"] = edit_phone.text.toString()
-        params["sign"] = "MES${MD5Utils.stringToMD5(edit_phone.text.toString())}"
+        params["sign"] = "${MD5.stringToMD5("MES"+edit_phone.text.toString())}"
         params["time"] = System.currentTimeMillis()
         subscription = Network.getInstance("获取验证码", this)
             .get_yanzhengma(params,
