@@ -155,8 +155,10 @@ dependencies {
 
     //友盟
     implementation files('libs/umeng-shareboard-widget-6.9.6.jar')
-//    implementation files('libs/utdid4all-1.1.5.3_proguard.jar')
-//    implementation files('libs/wechat-sdk-android-without-mta-5.1.4.jar')
+
+    //    implementation files('libs/utdid4all-1.1.5.3_proguard.jar')
+
+    //    implementation files('libs/wechat-sdk-android-without-mta-5.1.4.jar')
     implementation files('libs/umeng-common-2.1.0.jar')
     implementation files('libs/umeng-share-core-6.9.6.jar')
     implementation files('libs/umeng-sharetool-6.9.6.jar')
@@ -207,7 +209,6 @@ dependencies {
     implementation 'com.openxu.viewlib:OXViewLib:1.0.2'
 
     //极光集成
-    implementation files('libs/jcore-android-2.1.2.jar')
     implementation files('libs/jpush-android-3.3.4.jar')
 
     //bugly
@@ -239,15 +240,17 @@ dependencies {
 
     //高德定位
     implementation 'com.amap.api:location:latest.integration'
+
     //高德搜索
     implementation 'com.amap.api:search:latest.integration'
 
     //pickview
     implementation project(':pickerview1')
-
     implementation project(':datepicker')
-
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 
+    //极光埋点
+    implementation files('libs/jcore-android-2.1.6.jar')
+    implementation files('libs/janalytics-android-2.1.0.jar')
 
 }
