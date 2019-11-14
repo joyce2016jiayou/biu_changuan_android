@@ -9,6 +9,7 @@ import android.text.*
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
 import android.webkit.WebView
 import android.widget.CompoundButton
 import android.widget.TextView
@@ -148,6 +149,22 @@ class Login2Activity : BaseActivity() {
         })
         xieyi_check_btn.setOnCheckedChangeListener(onCheckedChangeListener)
 
+        tv_user_protocol.setOnTouchListener(View.OnTouchListener { v, event ->
+            val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            val v = window.peekDecorView()
+            val isBoolean = inputMethodManager.hideSoftInputFromWindow(v.getWindowToken(), 0)
+            edit_password.clearFocus()
+            edit_phone_number.clearFocus()
+            isBoolean
+        })
+        xieyi_check_btn.setOnTouchListener(View.OnTouchListener { v, event ->
+            val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            val v = window.peekDecorView()
+            val isBoolean=inputMethodManager.hideSoftInputFromWindow(v.getWindowToken(), 0)
+            edit_password.clearFocus()
+            edit_phone_number.clearFocus()
+            isBoolean
+        })
         //忘记密码
         forget_password_btn.setOnClickListener(View.OnClickListener {
             val intent = Intent(this@Login2Activity, SettingPwdActivity::class.java)

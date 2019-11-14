@@ -14,6 +14,7 @@ import com.noplugins.keepfit.android.base.BaseActivity
 import com.noplugins.keepfit.android.bean.LoginBean
 import com.noplugins.keepfit.android.global.AppConstants
 import com.noplugins.keepfit.android.util.ActivityCollectorUtil
+import com.noplugins.keepfit.android.util.BaseUtils
 import com.noplugins.keepfit.android.util.MD5
 import com.noplugins.keepfit.android.util.SpUtils
 import com.noplugins.keepfit.android.util.net.Network
@@ -57,7 +58,9 @@ class VerificationPhoneActivity : BaseActivity() {
 //
 //            }
 
-            verficationCode()
+           if (BaseUtils.isFastClick()){
+               verficationCode()
+           }
 
 
         }
