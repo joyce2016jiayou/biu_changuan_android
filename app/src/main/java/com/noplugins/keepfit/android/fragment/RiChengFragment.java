@@ -347,12 +347,15 @@ public class RiChengFragment extends ViewPagerFragment {
 
     private void get_status() {
         Map<String, Object> params = new HashMap<>();
-        params.put("object", "8");
+        params.put("object", "99");
         Subscription subscription = Network.getInstance("获取状态", getActivity())
                 .get_types(params,
                         new ProgressSubscriber<>("获取状态", new SubscriberOnNextListener<Bean<List<DictionaryeBean>>>() {
                             @Override
                             public void onNext(Bean<List<DictionaryeBean>> result) {
+                                if(select_status.size()>0){
+                                    select_status.clear();
+                                }
                                 select_status.addAll(result.getData());
                                 //首次进来默认选择全部
 
@@ -484,6 +487,7 @@ public class RiChengFragment extends ViewPagerFragment {
                     select_courcestatus_str = "";
                 } else {
                     select_courcestatus_str = select_status.get(i - 1).getValue();
+                    Log.e("选择的状态",select_courcestatus_str);
                 }
                 popupWindow.dismiss();
                 init_class_date_resource();//重新请求课程
