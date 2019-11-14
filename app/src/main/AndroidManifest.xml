@@ -131,6 +131,7 @@
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
             android:name=".activity.AddClassActivity"
+            android:hardwareAccelerated="false"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
             android:name=".activity.CheckStatusFailActivity"
