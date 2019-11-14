@@ -5,6 +5,15 @@ public class LoginEntity {
 private int memberService;
     private int havePayPassWord;
     private String gymUserNum;
+private String MasterName;
+
+    public String getMasterName() {
+        return MasterName;
+    }
+
+    public void setMasterName(String masterName) {
+        MasterName = masterName;
+    }
 
     public int getMemberService() {
         return memberService;

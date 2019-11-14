@@ -11,6 +11,8 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.noplugins.keepfit.android.R
 import com.noplugins.keepfit.android.base.BaseFragment
+import com.noplugins.keepfit.android.global.AppConstants
+import com.noplugins.keepfit.android.util.SpUtils
 import com.noplugins.keepfit.android.util.ui.ViewPagerFragment
 import kotlinx.android.synthetic.main.fragment_statistics.*
 
@@ -43,7 +45,7 @@ class StatisticsFragment: ViewPagerFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
+        store_type_tv.text = SpUtils.getString(activity!!, AppConstants.CG_NAME)
         if (fragments == null){
             fragments = ArrayList()
             fragments!!.add(ToUserFragment.newInstance("用户"))

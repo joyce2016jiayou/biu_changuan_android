@@ -217,6 +217,7 @@ class Login2Activity : BaseActivity() {
                                 SpUtils.putString(applicationContext, AppConstants.TOKEN, result.data.token)
                                 SpUtils.putString(applicationContext, AppConstants.PHONE, edit_phone_number.text.toString())
                                 SpUtils.putString(applicationContext, AppConstants.CHANGGUAN_NUM, result.data.gymAreaNum)
+//                                SpUtils.putString(applicationContext, AppConstants.CG_NAME, result.data.getMasterName())
 //                                SpUtils.putString(applicationContext, AppConstants.CHANGGUAN_NUM, "GYM19091236750176")
                                 SpUtils.putString(applicationContext, AppConstants.USER_NAME, result.data.gymUserNum)
                                 SpUtils.putInt(applicationContext, AppConstants.USER_TYPE, result.data.type)
@@ -313,6 +314,7 @@ class Login2Activity : BaseActivity() {
         SpUtils.putString(applicationContext, AppConstants.PHONE, edit_phone_number.text.toString())
         SpUtils.putInt(applicationContext, AppConstants.IS_TX, login.havePayPassWord)
         SpUtils.putString(applicationContext, AppConstants.CHANGGUAN_NUM, login.gymAreaNum)
+//        SpUtils.putString(applicationContext, AppConstants.CG_NAME, login.getMasterName())
     }
 
     private fun get_check_status() {

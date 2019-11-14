@@ -6,6 +6,7 @@ public class RiChengBean {
 
     private List<ResultBean> result;
     private List<MonthBean> month;
+    private String areaName;
 
     public List<ResultBean> getResult() {
         return result;
@@ -21,6 +22,14 @@ public class RiChengBean {
 
     public void setMonth(List<MonthBean> month) {
         this.month = month;
+    }
+
+    public String getAreaName() {
+        return areaName;
+    }
+
+    public void setAreaName(String areaName) {
+        this.areaName = areaName;
     }
 
     public static class ResultBean {

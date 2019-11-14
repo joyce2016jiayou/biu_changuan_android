@@ -1,54 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_marginLeft="@dimen/m6"
-                android:layout_marginRight="@dimen/m6"
-                android:layout_marginTop="@dimen/m62"
-                android:layout_marginBottom="@dimen/m51"
-                android:background="@drawable/xieyi_bg"
-                android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="@dimen/m6"
+    android:layout_marginTop="@dimen/m62"
+    android:layout_marginRight="@dimen/m6"
+    android:layout_marginBottom="@dimen/m51"
+    android:background="@drawable/xieyi_bg"
+    android:orientation="vertical">
+
     <TextView
-            android:layout_width="wrap_content"
-            android:text="用户协议及隐私政策"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/m39"
-            android:textSize="15sp"
-            android:textColor="@color/top_heiziti"
-            android:layout_height="wrap_content"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/m39"
+        android:text="用户协议及隐私政策"
+        android:textColor="@color/top_heiziti"
+        android:textSize="15sp"
+        android:visibility="gone" />
 
 
     <WebView
         android:id="@+id/content_layout"
         android:layout_width="match_parent"
-        android:layout_marginTop="@dimen/m65"
-        android:layout_marginBottom="@dimen/m61"
-        android:layout_height="match_parent">
-    </WebView>
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/m35"
+        android:layout_marginBottom="@dimen/m61"></WebView>
 
     <RelativeLayout
-            android:layout_marginLeft="@dimen/m88"
-            android:layout_marginRight="@dimen/m88"
-            android:layout_width="match_parent"
-            android:layout_marginBottom="@dimen/m23"
-            android:layout_alignParentBottom="true"
-            android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="@dimen/m88"
+        android:layout_marginRight="@dimen/m88"
+        android:layout_marginBottom="@dimen/m23">
+
         <TextView
-                android:id="@+id/no_agree_btn"
-                android:text="不同意"
-                android:textSize="20sp"
-                android:textColor="@color/btn_text_gray"
-                android:layout_width="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_height="wrap_content"/>
+            android:id="@+id/no_agree_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="不同意"
+            android:textColor="@color/btn_text_gray"
+            android:textSize="20sp" />
+
         <TextView
-                android:id="@+id/agree_btn"
-                android:text="同意"
-                android:textSize="20sp"
-                android:textColor="@color/top_heiziti"
-                android:layout_width="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_height="wrap_content"/>
+            android:id="@+id/agree_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="同意"
+            android:textColor="@color/top_heiziti"
+            android:textSize="20sp" />
     </RelativeLayout>
 
 </RelativeLayout>

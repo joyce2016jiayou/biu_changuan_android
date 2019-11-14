@@ -43,12 +43,10 @@ public class YaoQingZhongDetailActivity extends BaseActivity {
     RecyclerView recycler_view;
     @BindView(R.id.yaoqing_number_tv)
     TextView yaoqing_number_tv;
-    @BindView(R.id.xianzhi_number_tv)
-    TextView xianzhi_number_tv;
+    @BindView(R.id.xunlian_mubiao)
+    TextView xunlian_mubiao;
     @BindView(R.id.class_name)
     TextView class_name;
-    @BindView(R.id.teacher_name)
-    TextView teacher_name;
     @BindView(R.id.class_name1)
     TextView class_name1;
     @BindView(R.id.teacher_name_tv)
@@ -149,16 +147,17 @@ public class YaoQingZhongDetailActivity extends BaseActivity {
     }
 
     private void set_information(ClassDetailEntity entity) {
-        xianzhi_number_tv.setText("("+entity.getCourse().getComeNum() + "/" + entity.getCourse().getMaxNum()+")");
+//        xianzhi_number_tv.setText("("+entity.getCourse().getComeNum() + "/" + entity.getCourse().getMaxNum()+")");
         class_name.setText(entity.getCourse().getCourseName());
 //        teacher_name.setText(entity.getCourse().getCourseName());
         class_name1.setText(entity.getCourse().getCourseName());
 //        teacher_name_tv.setText(entity.getCourse().getCourseName());
-        if(entity.getCourse().getClassType()==1){
+        xunlian_mubiao.setText(type2String(entity.getCourse().getType()));
+        if(entity.getCourse().getType().equals("1")){
             class_room.setText("有氧操房");
-        }else if(entity.getCourse().getClassType()==2){
+        }else if(entity.getCourse().getType().equals("2")){
             class_room.setText("瑜伽房");
-        }else if(entity.getCourse().getClassType()==3){
+        }else if(entity.getCourse().getType().equals("3")){
             class_room.setText("动感单车");
         }
 
@@ -184,7 +183,6 @@ public class YaoQingZhongDetailActivity extends BaseActivity {
         switch (entity.getCourse().getStatus()){
             case 1:
                 status = "邀请成功";
-                teacher_name.setText(entity.getTeacherList().get(0).getTeacherName());
                 teacher_name_tv.setText(entity.getTeacherList().get(0).getTeacherName());
                 break;
             case 2:
@@ -235,5 +233,11 @@ public class YaoQingZhongDetailActivity extends BaseActivity {
         recycler_view.setAdapter(yaoQingZhongDetailAdapter);
     }
 
-
+    private String type2String(String type){
+        if (!type.equals("")){
+            String [] array = getResources().getStringArray(R.array.team_xlmb);
+            return array[Integer.parseInt(type)-1];
+        }
+        return "";
+    }
 }

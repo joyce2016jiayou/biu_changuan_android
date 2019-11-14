@@ -235,7 +235,7 @@
 
                 <RelativeLayout
                     android:id="@+id/select_status_btn"
-                    android:layout_width="@dimen/m103"
+                    android:layout_width="@dimen/m90"
                     android:layout_height="@dimen/m29"
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
@@ -262,14 +262,14 @@
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_gravity="right|center_vertical"
-                        android:layout_marginRight="@dimen/m20"
+                        android:layout_marginRight="@dimen/m2"
                         android:src="@drawable/xiala" />
 
                 </RelativeLayout>
 
                 <RelativeLayout
                     android:id="@+id/select_types_btn"
-                    android:layout_width="@dimen/m103"
+                    android:layout_width="@dimen/m90"
                     android:layout_height="@dimen/m29"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/m10"
@@ -296,7 +296,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_gravity="right|center_vertical"
-                        android:layout_marginRight="@dimen/m20"
+                        android:layout_marginRight="@dimen/m2"
                         android:src="@drawable/xiala" />
 
                 </RelativeLayout>

@@ -57,7 +57,7 @@
                     android:id="@+id/status1_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="22dp"
-                    android:layout_marginLeft="@dimen/m84"
+                    android:layout_marginLeft="@dimen/m44"
                     android:text="已签"
                     android:textColor="#ff929292"
                     android:textSize="13sp" />

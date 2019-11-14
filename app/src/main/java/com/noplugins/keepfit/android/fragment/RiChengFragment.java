@@ -380,6 +380,8 @@ public class RiChengFragment extends ViewPagerFragment {
                         new ProgressSubscriber<>("获取课程数据", new SubscriberOnNextListener<Bean<RiChengBean>>() {
                             @Override
                             public void onNext(Bean<RiChengBean> result) {
+                                store_type_tv.setText(result.getData().getAreaName());
+                                SpUtils.putString(getActivity(),AppConstants.CG_NAME,result.getData().getAreaName());
                                 Log.e("获取课程数据数量", result.getData().getResult().size() + "");
                                 if (class_list.size() > 0) {
                                     class_list.clear();
@@ -537,8 +539,8 @@ public class RiChengFragment extends ViewPagerFragment {
         /**设置逻辑*/
         View view = popupWindow.getContentView();
         List<String> strings = new ArrayList<>();
-        strings.add("威尔士");
-        strings.add("龙湖天街");
+        strings.add(SpUtils.getString(getActivity(),AppConstants.CG_NAME));
+//        strings.add("龙湖天街");
         TypeAdapter typeAdapter = new TypeAdapter(strings, getActivity());
         ListView listView = view.findViewById(R.id.listview);
         listView.setAdapter(typeAdapter);

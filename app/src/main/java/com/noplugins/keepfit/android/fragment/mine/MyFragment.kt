@@ -83,13 +83,15 @@ class MyFragment : BaseFragment(), EasyPermissions.PermissionCallbacks {
 
         if (SpUtils.getInt(activity, AppConstants.USER_TYPE) != 3) {
             val min1 = MineFunctionBean("钱包", R.drawable.icon_wallet)
-            val min2 = MineFunctionBean("权限管理", R.drawable.icon_quanxian)
             val min3 = MineFunctionBean("场馆价格", R.drawable.icon_price)
 
             val min4 = MineFunctionBean("成本核算", R.drawable.icon_count)
             val min5 = MineFunctionBean("教练管理", R.drawable.icon_trainer)
             fuctionBean.add(min1)
-            fuctionBean.add(min2)
+            if (SpUtils.getInt(activity,AppConstants.USER_TYPE)==1){
+                val min2 = MineFunctionBean("权限管理", R.drawable.icon_quanxian)
+                fuctionBean.add(min2)
+            }
             fuctionBean.add(min3)
             fuctionBean.add(min4)
             fuctionBean.add(min5)
