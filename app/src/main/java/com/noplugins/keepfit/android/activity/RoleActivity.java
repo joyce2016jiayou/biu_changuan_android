@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.google.gson.Gson;
 import com.noplugins.keepfit.android.R;
+import com.noplugins.keepfit.android.adapter.Role2Adapter;
 import com.noplugins.keepfit.android.adapter.RoleAdapter;
 import com.noplugins.keepfit.android.base.BaseActivity;
 import com.noplugins.keepfit.android.entity.RoleBean;
@@ -63,9 +64,10 @@ public class RoleActivity extends BaseActivity {
     private LinearLayoutManager linearLayoutManager;
     private LinearLayoutManager linearLayoutManager1;
     private ArrayList<RoleBean.RoleEntity> datas;
-    private RoleAdapter roleAdapter;
+    private Role2Adapter roleAdapter;
     private RoleAdapter roleAdapter_add;
     private ArrayList<RoleBean.RoleEntity> completeDatas;
+    private ArrayList<RoleBean.RoleEntity> addDatas;
 
     private List<Object> posts;
 
@@ -127,10 +129,12 @@ public class RoleActivity extends BaseActivity {
         rc_view_add.setNestedScrollingEnabled(false);//禁止滑动
         datas = new ArrayList<>();
         completeDatas = new ArrayList<>();
+        addDatas = new ArrayList<>();
         roleAdapter_add = new RoleAdapter(completeDatas);
         rc_view_add.setAdapter(roleAdapter_add);
 
-        roleAdapter = new RoleAdapter(datas);
+        roleAdapter = new Role2Adapter(datas);
+
         rc_view.setAdapter(roleAdapter);
         roleAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
@@ -243,7 +247,7 @@ public class RoleActivity extends BaseActivity {
     private void toComplete() {
         Log.d("data", "---" + rc_view_add.getChildCount());
 
-        completeDatas.clear();
+//        completeDatas.clear();
         for (int i = 0; i < rc_view_add.getChildCount(); i++) {
             LinearLayout layout = (LinearLayout) rc_view_add.getChildAt(i);
             EditText et_name = layout.findViewById(R.id.edit_name);
@@ -276,16 +280,17 @@ public class RoleActivity extends BaseActivity {
             roleBean.setUserName(et_name.getText().toString());
             roleBean.setPhone(edit_phone.getText().toString());
             roleBean.setGymAreaNum(SpUtils.getString(getApplicationContext(), AppConstants.CHANGGUAN_NUM));
-            completeDatas.add(roleBean);
+            addDatas.add(roleBean);
         }
 
         RoleBean roleBean = new RoleBean();
-        roleBean.setUserList(completeDatas);
+        roleBean.setUserList(addDatas);
         subscription = Network.getInstance("绑定用户", getApplicationContext())
                 .binding_role(roleBean, new ProgressSubscriber<>("绑定用户", new SubscriberOnNextListener<Bean<Object>>() {
                     @Override
                     public void onNext(Bean<Object> objectBean) {
                         completeDatas.clear();
+                        addDatas.clear();
                         roleAdapter_add.notifyDataSetChanged();
                         getBindingUserList();
                         Toast.makeText(getApplicationContext(),objectBean.getMessage(),

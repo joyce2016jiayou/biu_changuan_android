@@ -8,21 +8,24 @@ import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.entity.RoleBean;
 import com.noplugins.keepfit.android.global.AppConstants;
 import com.noplugins.keepfit.android.util.SpUtils;
-;
+
 import java.util.List;
 
 import lib.demo.spinner.MaterialSpinner;
 
+;
 
-public class RoleAdapter extends BaseQuickAdapter<RoleBean.RoleEntity, BaseViewHolder>{
 
-    public RoleAdapter(@Nullable List<RoleBean.RoleEntity> data) {
+public class Role2Adapter extends BaseQuickAdapter<RoleBean.RoleEntity, BaseViewHolder>{
+
+    public Role2Adapter(@Nullable List<RoleBean.RoleEntity> data) {
         super(R.layout.role_item,data);
     }
 
@@ -34,6 +37,7 @@ public class RoleAdapter extends BaseQuickAdapter<RoleBean.RoleEntity, BaseViewH
 
         MaterialSpinner materialSpinner = helper.getView(R.id.post_type_spinner);
         String[] typeArrays = mContext.getResources().getStringArray(R.array.zhiwei_types);
+        materialSpinner.setEnabled(false);
         materialSpinner.setItems(typeArrays);
         materialSpinner.setSelectedIndex(0);
         materialSpinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {

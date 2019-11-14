@@ -533,7 +533,7 @@ public class DateHelper {
         }
 
         String end_hour = "";
-        if (create_date.getHours() <= 9) {
+        if (end_date.getHours() <= 9) {
             end_hour = "0" + end_date.getHours();
         } else {
             end_hour = "" + end_date.getHours();
