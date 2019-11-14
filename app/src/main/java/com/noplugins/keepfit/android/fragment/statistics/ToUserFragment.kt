@@ -236,12 +236,13 @@ class ToUserFragment : BaseFragment() {
         picAgeChart.data = pieData
         picAgeChart.setEntryLabelColor(Color.BLACK)
         picAgeChart.invalidate()
+
+        picAgeChart.isRotationEnabled = false
+        picAgeChart.setDrawEntryLabels(true)
         // 不显示图例
         val legend = picAgeChart.legend
         legend.isEnabled = false
 //
-        picAgeChart.isRotationEnabled = false
-        picAgeChart.setDrawEntryLabels(true)
 
 
         val description = Description()
@@ -278,7 +279,7 @@ class ToUserFragment : BaseFragment() {
 
 //        legend.setEnabled(false)
         picSexChart.isRotationEnabled = false
-        picSexChart.setDrawEntryLabels(true)
+        picSexChart.setDrawEntryLabels(false)
         picSexChart.setEntryLabelColor(Color.BLACK)
         val description = Description()
         description.text = ""
@@ -308,8 +309,8 @@ class ToUserFragment : BaseFragment() {
             entries.add(LegendEntry(
                     strings[i].label + ":" + strings[i].value.toInt(),
                     Legend.LegendForm.CIRCLE,
-                    10f,
-                    9f,
+                    15f,
+                    15f,
                     null,
                     colors[i]))
         }

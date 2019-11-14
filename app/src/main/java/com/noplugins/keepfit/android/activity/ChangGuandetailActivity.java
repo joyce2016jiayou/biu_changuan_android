@@ -692,7 +692,7 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
     int i = 0;
     @SuppressLint("CheckResult")
     private void withListLs() {
-
+        i= 0;
         if (jiugongge_iamges.size() == 0){
             upListToQiniu();
             return;

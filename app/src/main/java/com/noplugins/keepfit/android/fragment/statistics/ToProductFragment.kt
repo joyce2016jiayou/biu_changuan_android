@@ -191,12 +191,16 @@ class ToProductFragment : BaseFragment() {
         dataSet.colors = colors
         val pieData = PieData(dataSet)
 //        pieData.setDrawValues(true)
-        pieData.setDrawValues(true)
+//        pieData.setDrawValues(true)
         picChart.setUsePercentValues(true)
         pieData.setValueFormatter(com.noplugins.keepfit.android.chart.PercentFormatter(picChart))
-        pieData.setValueTextSize(9f)
+        pieData.setValueTextSize(12f)
         picChart.data = pieData
+        picChart.setEntryLabelColor(Color.BLACK)
         picChart.invalidate()
+
+        picChart.isRotationEnabled = false
+        picChart.setDrawEntryLabels(false)//显示lable
         // 不显示图例
         val legend = picChart.legend
         legend.yOffset = 5f
@@ -206,9 +210,9 @@ class ToProductFragment : BaseFragment() {
         legend.form = Legend.LegendForm.CIRCLE
 
 //        legend.setEnabled(false)
-        picChart.isRotationEnabled = false
+//        picChart.isRotationEnabled = false
         picChart.setEntryLabelColor(Color.BLACK)
-        picChart.setDrawEntryLabels(isLabel)
+//        picChart.setDrawEntryLabels(isLabel)
         val description = Description()
         description.text = ""
         picChart.description = description
