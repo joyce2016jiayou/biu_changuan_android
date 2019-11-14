@@ -179,7 +179,7 @@ public class Network {
 
         retrofit = new Retrofit.Builder()
                 .client(client)
-                .baseUrl(get_main_url("test"))//设置请求网址根部
+                .baseUrl(get_main_url("main"))//设置请求网址根部
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
@@ -587,7 +587,7 @@ public class Network {
      * @param subscriber
      * @return
      */
-    public Subscription update_my_password(Map<String,Object> params, Subscriber<Bean<Object>> subscriber) {
+    public Subscription update_my_password(Map<String, Object> params, Subscriber<Bean<Object>> subscriber) {
         return service.update_my_password(retuen_json_object(params))
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
@@ -699,7 +699,7 @@ public class Network {
      * @param subscriber
      * @return
      */
-    public Subscription feedback(Map<String,Object> params, Subscriber<Bean<Object>> subscriber) {
+    public Subscription feedback(Map<String, Object> params, Subscriber<Bean<Object>> subscriber) {
         return service.feedback(retuen_json_params(params))
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
@@ -741,7 +741,7 @@ public class Network {
      * @param subscriber
      * @return
      */
-    public Subscription sen_order(Map<String,Object> params, Subscriber<Bean<Object>> subscriber) {
+    public Subscription sen_order(Map<String, Object> params, Subscriber<Bean<Object>> subscriber) {
         return service.sen_order(retuen_json_object(params))
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
@@ -1111,8 +1111,6 @@ public class Network {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
     }
-
-
 
 
 }
