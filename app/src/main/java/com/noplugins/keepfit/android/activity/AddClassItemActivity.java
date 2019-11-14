@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.base.BaseActivity;
+import com.noplugins.keepfit.android.bean.ChangguanBean;
 import com.noplugins.keepfit.android.bean.DictionaryeBean;
 import com.noplugins.keepfit.android.callback.DialogCallBack;
 import com.noplugins.keepfit.android.entity.AddClassEntity;
@@ -26,6 +27,7 @@ import com.noplugins.keepfit.android.entity.ClassTypeEntity;
 import com.noplugins.keepfit.android.entity.MaxPeopleEntity;
 import com.noplugins.keepfit.android.global.AppConstants;
 import com.noplugins.keepfit.android.util.SpUtils;
+import com.noplugins.keepfit.android.util.TimeCheckUtil;
 import com.noplugins.keepfit.android.util.data.SharedPreferencesHelper;
 import com.noplugins.keepfit.android.util.net.Network;
 import com.noplugins.keepfit.android.util.net.entity.Bean;
@@ -132,6 +134,7 @@ public class AddClassItemActivity extends BaseActivity {
         isShowTitle(false);
         cDate = CalendarUtil.getCurrent3Date();
         //获取房间类型
+        getYinyeTime();
         get_class_type();
         select_tuanke_type();
 
@@ -175,6 +178,34 @@ public class AddClassItemActivity extends BaseActivity {
                 if (startHour == endHour && startMin > endMin){
                     Toast.makeText(AddClassItemActivity.this,
                             "开始时间不能大于结束时间",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                int yinyeStartH = Integer.parseInt(start.split(":")[0]);
+                int yinyeStartM = Integer.parseInt(start.split(":")[1]);
+
+                int yinyeEndH = Integer.parseInt(end.split(":")[0]);
+                int yinyeEndM = Integer.parseInt(end.split(":")[1]);
+
+                if (startHour<yinyeStartH){
+                    Toast.makeText(AddClassItemActivity.this,
+                            "该时间段场馆未营业",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (startHour == yinyeStartH && startMin< yinyeStartM){
+                    Toast.makeText(AddClassItemActivity.this,
+                            "该时间段场馆未营业",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (endHour>yinyeEndH){
+                    Toast.makeText(AddClassItemActivity.this,
+                            "该时间段场馆未营业",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (endHour == yinyeEndH && endMin> yinyeEndM){
+                    Toast.makeText(AddClassItemActivity.this,
+                            "该时间段场馆未营业",Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -649,6 +680,30 @@ public class AddClassItemActivity extends BaseActivity {
         });
     }
 
+    String start = "";
+    String end = "";
+    private void getYinyeTime() {
+//        params["userNum"] = SpUtils.getString(this, AppConstants.USER_NAME)
+        Map<String, Object> params = new HashMap<>();
+        params.put("areaNum", SpUtils.getString(getApplicationContext(), AppConstants.CHANGGUAN_NUM));
+        subscription = Network.getInstance("我的", this)
+                .myArea(params,
+                        new ProgressSubscriber<>("我的", new SubscriberOnNextListener<Bean<ChangguanBean>>() {
+                            @Override
+                            public void onNext(Bean<ChangguanBean> addClassEntityBean) {
+                                start = TimeCheckUtil.removeSecond( addClassEntityBean.getData()
+                                        .getArea().getBusinessStart());
+                                end = TimeCheckUtil.removeSecond( addClassEntityBean.getData()
+                                        .getArea().getBusinessEnd());
+                            }
 
+                            @Override
+                            public void onError(String error) {
+
+                            }
+                        }, this, false));
+
+
+    }
 
 }

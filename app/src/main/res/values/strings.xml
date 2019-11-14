@@ -169,7 +169,7 @@
     <string name="tv110">产品建议 (功能建议/新的想法)</string>
     <string name="tv111">故障反馈 (功能不可用)</string>
     <string name="tv112">其他问题</string>
-    <string name="tv113">请输入问题描述 (比填，10个字以上)</string>
+    <string name="tv113">请输入问题描述 (必填，10个字以上)</string>
     <string name="tv114">账号安全</string>
     <string name="tv115">手机号</string>
     <string name="tv116">修改密码</string>

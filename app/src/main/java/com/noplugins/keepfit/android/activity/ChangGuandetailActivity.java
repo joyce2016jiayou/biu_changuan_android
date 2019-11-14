@@ -494,19 +494,20 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
             public void onClick(View view) {
 
 
-                time_check(time1_edit);
+                time_check(time1_edit,1);
             }
         });
 
         time2_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                time_check(time2_edit);
+                time_check(time2_edit,2);
             }
         });
     }
 
-    private void time_check(TextView textView) {
+    int startH,startM;
+    private void time_check(TextView textView,int type) {
         picker = new TimePicker(this, TimeMode.HOUR_24);
         Calendar calendar = Calendar.getInstance();
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
@@ -516,6 +517,22 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
         picker.setOnTimeSelectedListener(new OnTimeSelectedListener() {
             @Override
             public void onItemSelected(int hour, int minute, int second) {
+                if (type == 1){
+                    startH = hour;
+                    startM = minute;
+                }
+                if (type == 2){
+                    if (hour<startH){
+                        Toast.makeText(getApplicationContext(),"开始时间不能大于结束时间",
+                                Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    if (hour==startH && minute < startM){
+                        Toast.makeText(getApplicationContext(),"开始时间不能大于结束时间",
+                                Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                }
                 if (minute <= 9) {
                     textView.setText(hour + ":0" + minute);
                 } else {

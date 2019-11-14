@@ -122,6 +122,11 @@ public class ProductAdviceActivity extends BaseActivity {
 
     private void submit() {
         //
+        if (edit_content.getText().toString().length()<10){
+            Toast.makeText(getApplicationContext(),"请输入10个字以上的问题描述",Toast.LENGTH_SHORT)
+                    .show();
+            return;
+        }
         Map<String, Object> params = new HashMap<>();
         params.put("gymAreaNum", SpUtils.getString(getApplicationContext(), AppConstants.CHANGGUAN_NUM));
         params.put("gymUserNum", SpUtils.getString(getApplicationContext(),AppConstants.USER_NAME));

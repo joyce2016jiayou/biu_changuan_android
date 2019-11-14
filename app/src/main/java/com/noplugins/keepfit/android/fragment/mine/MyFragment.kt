@@ -176,7 +176,6 @@ class MyFragment : BaseFragment(), EasyPermissions.PermissionCallbacks {
             popupWindow.dismiss()
         }
 
-
     }
 
     //@AfterPermissionGranted(PERMISSION_STORAGE_CODE)

@@ -36,7 +36,7 @@
                     android:orientation="vertical"
                     android:layout_alignParentLeft="true"
                     android:gravity="center"
-                    android:background="@drawable/cancel_bg"
+                    android:background="@drawable/shape_btn_bg_gray"
                     android:layout_height="@dimen/m30">
 
                 <TextView
@@ -55,7 +55,7 @@
                     android:orientation="vertical"
                     android:layout_alignParentRight="true"
                     android:gravity="center"
-                    android:background="@drawable/sure_bg"
+                    android:background="@drawable/shape_btn_bg_yellow"
                     android:layout_height="@dimen/m30">
 
                 <TextView
@@ -64,7 +64,7 @@
                         android:textStyle="normal"
                         android:text="@string/tv148"
                         android:textSize="15sp"
-                        android:textColor="@color/white"
+                        android:textColor="@color/contents_text"
                         />
             </LinearLayout>
         </RelativeLayout>
