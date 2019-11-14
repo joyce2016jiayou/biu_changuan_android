@@ -83,7 +83,7 @@ public class ClassAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder> i
         if (view_holder instanceof WeiJieShuViewHolder) {
             WeiJieShuViewHolder holder = (WeiJieShuViewHolder) view_holder;
             RiChengBean.ResultBean resultBean = classDateBeans.get(position);
-            holder.status_tv.setText(resultBean.getUserCheckIn());
+
             if (resultBean.getCourseStatus() == 1) {//已结束
                 holder.status_img.setImageResource(R.drawable.over);
             } else if (resultBean.getCourseStatus() == 2) {//未开始
@@ -109,6 +109,8 @@ public class ClassAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder> i
                 holder.phone_or_name_tv.setVisibility(View.VISIBLE);
                 holder.coach_name.setText(resultBean.getTeacherName());
                 holder.phone_img.setVisibility(View.GONE);
+                holder.status_tv.setVisibility(View.GONE);
+                holder.status1_tv.setText(resultBean.getTeacherCheckIn());
 
             } else if (resultBean.getCourseType() == 2) {//私教
                 holder.type_icon_bg.setBackgroundResource(R.drawable.trainer);
@@ -116,6 +118,9 @@ public class ClassAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder> i
                 holder.phone_or_name_tv.setText(resultBean.getUserName());
                 holder.phone_or_name_tv.setVisibility(View.VISIBLE);
                 holder.phone_img.setVisibility(View.VISIBLE);
+                holder.status_tv.setVisibility(View.VISIBLE);
+                holder.status_tv.setText(resultBean.getUserCheckIn());
+                holder.status1_tv.setText(resultBean.getTeacherCheckIn());
 
             } else {//健身
                 holder.type_icon_bg.setBackgroundResource(R.drawable.venue);
@@ -123,6 +128,8 @@ public class ClassAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder> i
                 holder.phone_or_name_tv.setVisibility(View.INVISIBLE);
                 //holder.phone_or_name_tv.setText(resultBean.getUserName());
                 holder.phone_img.setVisibility(View.GONE);
+                holder.status1_tv.setText(resultBean.getUserCheckIn());
+                holder.status_tv.setVisibility(View.GONE);
             }
 
 
@@ -282,7 +289,8 @@ public class ClassAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder> i
 
     public class WeiJieShuViewHolder extends RecyclerView.ViewHolder {
         public View view;
-        public TextView coach_name, status_tv, type_icon_tv, phone_or_name_tv, time_tv, class_type, money_tv;
+        public TextView coach_name, status_tv, type_icon_tv, phone_or_name_tv,
+                time_tv, class_type, money_tv,status1_tv;
         public ImageView phone_btn, status_img, phone_img;
         public LinearLayout type_icon_bg;
 
@@ -293,6 +301,7 @@ public class ClassAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder> i
                 coach_name = view.findViewById(R.id.coach_name);
                 phone_btn = view.findViewById(R.id.phone_btn);
                 status_tv = view.findViewById(R.id.status_tv);
+                status1_tv = view.findViewById(R.id.status1_tv);
                 type_icon_tv = view.findViewById(R.id.type_icon_tv);
                 type_icon_bg = view.findViewById(R.id.type_icon_bg);
                 phone_or_name_tv = view.findViewById(R.id.phone_or_name_tv);

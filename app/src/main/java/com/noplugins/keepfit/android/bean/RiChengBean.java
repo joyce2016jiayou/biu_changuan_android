@@ -52,6 +52,15 @@ public class RiChengBean {
         private String userName;
         private String courseTime;
         private String applayNum;
+        private String teacherCheckIn;
+
+        public String getTeacherCheckIn() {
+            return teacherCheckIn;
+        }
+
+        public void setTeacherCheckIn(String teacherCheckIn) {
+            this.teacherCheckIn = teacherCheckIn;
+        }
 
         public String getApplayNum() {
             return applayNum;
