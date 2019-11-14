@@ -68,6 +68,7 @@ class WXPayEntryActivity : BaseActivity(), IWXAPIEventHandler {
             price = intent.getStringExtra("money")
             cgName = intent.getStringExtra("changguan_name")
             privcetType = intent.getStringExtra("type")
+            Log.d("price","privcetType:"+privcetType)
             logo = intent.getStringExtra("img_url")
 
         }
@@ -370,15 +371,18 @@ class WXPayEntryActivity : BaseActivity(), IWXAPIEventHandler {
                                 when(privcetType){
                                     "1"-> {
                                         sf = "2999"
+                                        SpUtils.putString(applicationContext,AppConstants.USER_DENGJI,"2999")
                                     }
                                     "2"-> {
                                         sf = "3999"
+                                        SpUtils.putString(applicationContext,AppConstants.USER_DENGJI,"3999")
                                     }
                                     "3"-> {
                                         sf = "6999"
+                                        SpUtils.putString(applicationContext,AppConstants.USER_DENGJI,"6999")
                                     }
                                 }
-                                SpUtils.putString(applicationContext,AppConstants.USER_DENGJI,sf)
+
                                 Toast.makeText(applicationContext,"支付成功",Toast.LENGTH_SHORT).show()
                                 val intent = Intent(this@WXPayEntryActivity, CgPriceActivity::class.java)
                                 val bundle = Bundle()

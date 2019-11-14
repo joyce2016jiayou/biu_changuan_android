@@ -221,15 +221,17 @@ public class RoleActivity extends BaseActivity {
                 .binding_role(roleBean, new ProgressSubscriber<>("", new SubscriberOnNextListener<Bean<Object>>() {
                     @Override
                     public void onNext(Bean<Object> objectBean) {
-                        if (objectBean.getMessage().equals("success")){
-                            Toast.makeText(getApplicationContext(), "解除绑定用户成功！", Toast.LENGTH_SHORT).show();
-                            datas.remove(position);
-                            roleAdapter.notifyItemRemoved(position);
-                            roleAdapter.notifyDataSetChanged();
-                        } else {
-                            Toast.makeText(getApplicationContext(), objectBean.getMessage(), Toast.LENGTH_SHORT).show();
+                        datas.remove(position);
+                        roleAdapter.notifyItemRemoved(position);
+                        roleAdapter.notifyDataSetChanged();
+                        Toast.makeText(getApplicationContext(), objectBean.getMessage(), Toast.LENGTH_SHORT).show();
 
-                        }
+//                        if (objectBean.getMessage().equals("success")){
+//                            Toast.makeText(getApplicationContext(), "解除绑定用户成功！", Toast.LENGTH_SHORT).show();
+//
+//                        } else {
+//
+//                        }
 
                     }
 
