@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.google.gson.Gson;
 import com.noplugins.keepfit.android.R;
+import com.noplugins.keepfit.android.adapter.Role2Adapter;
 import com.noplugins.keepfit.android.adapter.RoleAdapter;
 import com.noplugins.keepfit.android.base.BaseActivity;
 import com.noplugins.keepfit.android.entity.RoleBean;
@@ -63,7 +64,7 @@ public class RoleActivity extends BaseActivity {
     private LinearLayoutManager linearLayoutManager;
     private LinearLayoutManager linearLayoutManager1;
     private ArrayList<RoleBean.RoleEntity> datas;
-    private RoleAdapter roleAdapter;
+    private Role2Adapter roleAdapter;
     private RoleAdapter roleAdapter_add;
     private ArrayList<RoleBean.RoleEntity> completeDatas;
     private ArrayList<RoleBean.RoleEntity> addDatas;
@@ -132,7 +133,8 @@ public class RoleActivity extends BaseActivity {
         roleAdapter_add = new RoleAdapter(completeDatas);
         rc_view_add.setAdapter(roleAdapter_add);
 
-        roleAdapter = new RoleAdapter(datas);
+        roleAdapter = new Role2Adapter(datas);
+
         rc_view.setAdapter(roleAdapter);
         roleAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
