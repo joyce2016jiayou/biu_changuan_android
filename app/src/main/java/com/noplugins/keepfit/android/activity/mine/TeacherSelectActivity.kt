@@ -61,6 +61,8 @@ class TeacherSelectActivity : BaseActivity() {
         }
         queren_btn.setOnClickListener {
             if (submitList.size <1){
+                Toast.makeText(applicationContext,"选择教练不可为空哦",Toast.LENGTH_SHORT)
+                        .show()
                 return@setOnClickListener
             }
             binding()
