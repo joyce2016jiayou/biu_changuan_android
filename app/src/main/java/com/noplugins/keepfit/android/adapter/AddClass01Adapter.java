@@ -33,7 +33,7 @@ public class AddClass01Adapter extends BaseQuickAdapter<ClassEntity.DataBean, Ba
         //课程名称+课程类型+教练名字
         helper.setText(R.id.class_title_tv,item.getCourse_name()+"·"+getString(Integer.parseInt(item.getType())));
         helper.setText(R.id.class_changdi,getRoomString(item.getType()));
-        helper.setText(R.id.class_people_number,item.getMax_num()+"");
+        helper.setText(R.id.class_people_number,item.getMax_num()+"人");
         helper.setText(R.id.class_minute,toMin(item.getStart_time(),item.getEnd_time()));
         if (!item.isLoop()){
             helper.setText(R.id.class_xunhuan,"单次");

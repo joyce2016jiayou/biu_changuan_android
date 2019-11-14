@@ -49,8 +49,6 @@ public class YaoQingZhongDetailActivity extends BaseActivity {
     TextView class_name;
     @BindView(R.id.teacher_name)
     TextView teacher_name;
-    @BindView(R.id.price_tv)
-    TextView price_tv;
     @BindView(R.id.class_name1)
     TextView class_name1;
     @BindView(R.id.teacher_name_tv)
@@ -153,10 +151,9 @@ public class YaoQingZhongDetailActivity extends BaseActivity {
     private void set_information(ClassDetailEntity entity) {
         xianzhi_number_tv.setText("("+entity.getCourse().getComeNum() + "/" + entity.getCourse().getMaxNum()+")");
         class_name.setText(entity.getCourse().getCourseName());
-        teacher_name.setText(entity.getCourse().getGenTeacherNum());
-        price_tv.setText("￥"+entity.getCourse().getFinalPrice()+"/人");
+//        teacher_name.setText(entity.getCourse().getCourseName());
         class_name1.setText(entity.getCourse().getCourseName());
-        teacher_name_tv.setText(entity.getCourse().getGenTeacherNum());
+//        teacher_name_tv.setText(entity.getCourse().getCourseName());
         if(entity.getCourse().getClassType()==1){
             class_room.setText("有氧操房");
         }else if(entity.getCourse().getClassType()==2){
@@ -187,6 +184,8 @@ public class YaoQingZhongDetailActivity extends BaseActivity {
         switch (entity.getCourse().getStatus()){
             case 1:
                 status = "邀请成功";
+                teacher_name.setText(entity.getTeacherList().get(0).getTeacherName());
+                teacher_name_tv.setText(entity.getTeacherList().get(0).getTeacherName());
                 break;
             case 2:
                 status = "邀请失败";

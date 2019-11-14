@@ -98,6 +98,7 @@
                         android:background="@null"
                         android:hint="@string/edit_hint8"
                         android:singleLine="true"
+                        android:enabled="false"
                         android:textColor="@color/top_heiziti"
                         android:textColorHint="@color/color_9B9B9B"
                         android:textSize="13sp" />

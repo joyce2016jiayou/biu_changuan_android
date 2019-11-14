@@ -144,7 +144,7 @@ class MyFragment : BaseFragment(), EasyPermissions.PermissionCallbacks {
                         activity!!.startActivityForResult(intent, 1)
                     }
                     "客服帮助" -> {
-                        call_pop("10010")
+                        call_pop("4006-836-895")
 
                     }
                 }
@@ -170,7 +170,7 @@ class MyFragment : BaseFragment(), EasyPermissions.PermissionCallbacks {
         content_tv.text = "确认拨打 $phone_number?"
         cancel_layout.setOnClickListener { popupWindow.dismiss() }
         sure_layout.setOnClickListener {
-            initSimple(phone_number)
+            initSimple("4006836895")
             popupWindow.dismiss()
         }
 

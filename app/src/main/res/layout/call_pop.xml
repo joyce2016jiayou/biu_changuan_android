@@ -45,7 +45,7 @@
                         android:textStyle="normal"
                         android:text="@string/cancel"
                         android:textSize="15sp"
-                        android:textColor="@color/color_75CEE1"
+                        android:textColor="@color/color_4A4A4A"
                         />
             </LinearLayout>
 

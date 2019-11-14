@@ -470,7 +470,7 @@ public class AddClassItemActivity extends BaseActivity {
     private void select_date() {
         DateEntity today = DateEntity.to3day();
         datePicker = new DatePicker(this, DateMode.YEAR_MONTH_DAY);
-        datePicker.setRange(today, new DateEntity(2022, 12, 31));
+        datePicker.setRange(today, DateEntity.to30day());
         datePicker.setDefaultValue(today);
         datePicker.showAtBottom();
         datePicker.setOnDateSelectedListener(new OnDateSelectedListener() {

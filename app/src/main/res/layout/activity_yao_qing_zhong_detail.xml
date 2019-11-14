@@ -73,7 +73,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
-                    android:text="普拉提"
+                    tools:text="普拉提"
                     android:textColor="@color/top_heiziti"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -107,31 +107,10 @@
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="2dp"
-                    android:text="老高"
+                    tools:text="老高"
                     android:textColor="@color/top_heiziti"
                     android:textSize="13sp" />
 
-                <TextView
-                    android:id="@+id/class_minute"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="2dp"
-                    android:text="-----"
-                    android:textColor="@color/color_4A4A4A"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/price_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="2dp"
-                    android:text="￥40/人"
-                    android:textColor="@color/top_heiziti"
-                    android:textSize="16sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -156,7 +135,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
-                    android:text="普拉提"
+                    tools:text="普拉提"
                     android:textColor="@color/color_4A4A4A"
                     android:textSize="14sp" />
 
@@ -185,7 +164,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
-                    android:text="普拉提"
+                    tools:text="普拉提"
                     android:textColor="@color/color_4A4A4A"
                     android:textSize="14sp" />
 
@@ -214,7 +193,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
-                    android:text="普拉提"
+                    tools:text="普拉提"
                     android:textColor="@color/color_4A4A4A"
                     android:textSize="14sp" />
 
@@ -243,7 +222,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
-                    android:text="普拉提"
+                    tools:text="普拉提"
                     android:textColor="@color/color_4A4A4A"
                     android:textSize="14sp" />
 
@@ -272,7 +251,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
-                    android:text="普拉提"
+                    tools:text="普拉提"
                     android:textColor="@color/color_4A4A4A"
                     android:textSize="14sp" />
 
@@ -301,7 +280,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
-                    android:text="普拉提"
+                    tools:text="普拉提"
                     android:textColor="@color/color_4A4A4A"
                     android:textSize="14sp" />
 
