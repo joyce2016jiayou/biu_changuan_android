@@ -78,14 +78,17 @@ class WXPayEntryActivity : BaseActivity(), IWXAPIEventHandler {
             "1" -> {
                 //2999
                 tv_vip.text = "终身会员"
+                SpUtils.putString(applicationContext,AppConstants.USER_DENGJI,"2999")
             }
             "2" -> {
                 //3999
                 tv_vip.text = "超值终身会员"
+                SpUtils.putString(applicationContext,AppConstants.USER_DENGJI,"3999")
             }
             "3" -> {
                 //6999
                 tv_vip.text = "豪华终身会员"
+                SpUtils.putString(applicationContext,AppConstants.USER_DENGJI,"6999")
             }
         }
         Glide.with(this)
@@ -366,23 +369,7 @@ class WXPayEntryActivity : BaseActivity(), IWXAPIEventHandler {
                         override fun onNext(result: Bean<OrderResultBean>) {
                             progress_upload.dismissProgressDialog()
                             if (result.data.payResult == 1) {
-//                                toPayOK()
-                                var sf = ""
-                                when(privcetType){
-                                    "1"-> {
-                                        sf = "2999"
-                                        SpUtils.putString(applicationContext,AppConstants.USER_DENGJI,"2999")
-                                    }
-                                    "2"-> {
-                                        sf = "3999"
-                                        SpUtils.putString(applicationContext,AppConstants.USER_DENGJI,"3999")
-                                    }
-                                    "3"-> {
-                                        sf = "6999"
-                                        SpUtils.putString(applicationContext,AppConstants.USER_DENGJI,"6999")
-                                    }
-                                }
-
+                                SpUtils.putInt(applicationContext,AppConstants.USER_TYPE,1)
                                 Toast.makeText(applicationContext,"支付成功",Toast.LENGTH_SHORT).show()
                                 val intent = Intent(this@WXPayEntryActivity, CgPriceActivity::class.java)
                                 val bundle = Bundle()
