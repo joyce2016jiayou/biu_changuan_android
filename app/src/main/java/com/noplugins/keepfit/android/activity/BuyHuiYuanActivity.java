@@ -60,6 +60,10 @@ public class BuyHuiYuanActivity extends BaseActivity {
     private String select_order_money = "";
     private String select_order_type = "";
 
+    private double priceOne;
+    private double priceTwo;
+    private double priceThree;
+
     private String logo;
 
 
@@ -77,13 +81,12 @@ public class BuyHuiYuanActivity extends BaseActivity {
 
     @Override
     public void doBusiness(Context mContext) {
-        select_order_money = "3999";
         select_order_type = "2";
         get_huiyuan_information();
         lin1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                select_order_money = "2999";
+                select_order_money = ""+priceOne;
                 select_order_type = "1";
                 set_one_view();
             }
@@ -91,7 +94,7 @@ public class BuyHuiYuanActivity extends BaseActivity {
         lin2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                select_order_money = "3999";
+                select_order_money = ""+priceTwo;
                 select_order_type = "2";
                 set_two_view();
             }
@@ -99,7 +102,7 @@ public class BuyHuiYuanActivity extends BaseActivity {
         lin3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                select_order_money = "6999";
+                select_order_money = ""+priceThree;
                 select_order_type = "3";
                 set_three_view();
             }
@@ -144,6 +147,11 @@ public class BuyHuiYuanActivity extends BaseActivity {
                 .into(touxiang_image);
         logo = data.getLogo();
         changuan_name_tv.setText(data.getAreaName());
+        priceOne = data.getPriceOne();
+        priceTwo = data.getPriceTwo();
+        priceThree = data.getPriceThree();
+        select_order_money = ""+priceTwo;
+
     }
 
     private void get_order_number() {
