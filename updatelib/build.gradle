@@ -1,0 +1,31 @@
+apply plugin: 'com.android.library'
+android {
+    compileSdkVersion 28
+    buildToolsVersion "28.0.3"
+    resourcePrefix "versionchecklib"
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 28
+        versionCode 1
+        versionName version
+    }
+    lintOptions {
+        abortOnError false
+    }
+
+    buildTypes {
+
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.14.2'
+    implementation 'org.greenrobot:eventbus:3.1.1'
+
+}
