@@ -93,7 +93,8 @@
                     <EditText
                         android:id="@+id/changguan_name"
                         android:layout_width="264dp"
-                        android:layout_height="36dp"
+                        android:layout_height="wrap_content"
+                        android:minHeight="36dp"
                         android:layout_marginLeft="4dp"
                         android:background="@null"
                         android:hint="@string/edit_hint8"

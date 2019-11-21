@@ -117,4 +117,9 @@
         <item name="android:windowEnterAnimation">@anim/push_scale_left_in</item>
         <item name="android:windowExitAnimation">@anim/push_scale_left_out</item>
     </style>
+    
+    <style name="tv_subtitle">
+        <item name="android:textColor">@color/contents_text</item>
+        <item name="android:textSize">15sp</item>
+    </style>
 </resources>
