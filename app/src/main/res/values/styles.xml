@@ -125,4 +125,9 @@
         <item name="android:windowContentOverlay">@null</item>
 
     </style>
+
+    <style name="tv_subtitle">
+        <item name="android:textColor">@color/contents_text</item>
+        <item name="android:textSize">15sp</item>
+    </style>
 </resources>

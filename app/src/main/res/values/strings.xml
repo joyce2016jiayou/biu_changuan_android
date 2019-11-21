@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">哔呦-场馆端</string>
+    <string name="app_name">哔呦场馆</string>
     <string name="setting">设置</string>
     <string name="perm_tip">
         当前应用缺少必要权限。\n请点击"设置"-"权限"-打开所需权限。\n最后点击两次后退按钮，即可返回。
@@ -54,7 +54,6 @@
     <string name="edit_hint44">区</string>
     <string name="edit_hint45">详细地址</string>
     <string name="edit_hint46">如：光大银行通化分行</string>
-
 
 
     <string name="tv1">登录</string>
@@ -310,5 +309,12 @@
 
     <string name="pay_result_callback_msg" formatted="false">微信支付结果：%s</string>
 
+    
+    <!--1.1-->
+    <string name="tv_username">用户名</string>
+    <string name="tv_phone">手机号</string>
+    <string name="tv_roles_select">角色选择</string>
+    <string name="authority_management">权限管理</string>
+    <string name="tv_add">添加</string>
 
 </resources>
