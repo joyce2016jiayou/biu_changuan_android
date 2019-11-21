@@ -247,6 +247,10 @@
     <string name="alert_dialog_tishi28">企业账号不能为空！</string>
     <string name="alert_dialog_tishi29">省市区不能为空！</string>
     <string name="alert_dialog_tishi30">邮箱格式不正确！</string>
+    <string name="update_title">1.1版震撼来袭</string>
+    <string name="updatecontent">1.VersionCheckLib V2版震撼来袭\n2.链式编程，调用简单\n3.强大的自定义功能，一行代码轻松搞定\n4.欢迎Star和Issue\n5.github:<a href='http://github.com/alexliusheng'>http://github.com/alexliusheng</a></string>
+
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

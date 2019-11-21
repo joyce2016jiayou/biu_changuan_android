@@ -252,4 +252,8 @@ dependencies {
     implementation files('libs/jcore-android-2.1.6.jar')
     implementation files('libs/janalytics-android-2.1.0.jar')
 
+    //更新app
+    implementation project(':updatelib')
+
+
 }

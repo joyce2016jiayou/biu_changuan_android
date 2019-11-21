@@ -1,21 +1,31 @@
 package com.noplugins.keepfit.android;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import com.allenliu.versionchecklib.v2.AllenVersionChecker;
+import com.allenliu.versionchecklib.v2.builder.DownloadBuilder;
+import com.allenliu.versionchecklib.v2.builder.UIData;
+import com.allenliu.versionchecklib.v2.callback.CustomDownloadingDialogListener;
+import com.allenliu.versionchecklib.v2.callback.CustomVersionDialogListener;
+import com.allenliu.versionchecklib.v2.callback.RequestVersionListener;
 import com.google.gson.Gson;
 import com.huantansheng.easyphotos.models.puzzle.Line;
 import com.noplugins.keepfit.android.activity.BuyActivity;
@@ -43,6 +53,7 @@ import com.noplugins.keepfit.android.util.net.entity.Bean;
 import com.noplugins.keepfit.android.util.net.progress.GsonSubscriberOnNextListener;
 import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriberNew;
 import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener;
+import com.noplugins.keepfit.android.util.ui.BaseDialog;
 import com.noplugins.keepfit.android.util.ui.NoScrollViewPager;
 import com.orhanobut.logger.Logger;
 
@@ -94,6 +105,7 @@ public class KeepFitActivity extends BaseActivity {
     private int music;//定义一个整型用load（）；来设置suondID
     private List<Fragment> tabFragments = new ArrayList<>();
     ContentPagerAdapterMy contentAdapter;
+    private DownloadBuilder builder;
 
     @Override
     public void initBundle(Bundle bundle) {
@@ -145,6 +157,79 @@ public class KeepFitActivity extends BaseActivity {
         //设置alias
         loginSuccess();
 
+        //更新app
+        //update_app();
+
+    }
+
+    private void update_app() {
+        builder = AllenVersionChecker
+                .getInstance()
+                .downloadOnly(crateUIData());
+        builder.setCustomVersionDialogListener(createCustomDialogTwo());//设置更新弹窗样式
+        builder.setCustomDownloadingDialogListener(createCustomDownloadingDialog());//设置下载样式
+        builder.setForceRedownload(true);//强制重新下载apk（无论本地是否缓存）
+        builder.setShowNotification(true);//显示下载通知栏
+        builder.setShowDownloadingDialog(true);//显示下载中对话框
+        builder.setShowDownloadFailDialog(true);//显示下载失败对话框
+        builder.setDownloadAPKPath(Environment.getExternalStorageDirectory() + "/noplugins/apkpath/");//自定义下载路径
+        builder.setOnCancelListener(() -> {
+            Toast.makeText(KeepFitActivity.this, "已关闭更新", Toast.LENGTH_SHORT).show();
+        });
+        builder.executeMission(this);
+    }
+
+    /**
+     * 自定义下载中对话框，下载中会连续回调此方法 updateUI
+     * 务必用库传回来的context 实例化你的dialog
+     *
+     * @return
+     */
+    private CustomDownloadingDialogListener createCustomDownloadingDialog() {
+        return new CustomDownloadingDialogListener() {
+            @Override
+            public Dialog getCustomDownloadingDialog(Context context, int progress, UIData versionBundle) {
+                BaseDialog baseDialog = new BaseDialog(context, R.style.BaseDialog, R.layout.custom_download_layout);
+                return baseDialog;
+            }
+
+            @Override
+            public void updateUI(Dialog dialog, int progress, UIData versionBundle) {
+                TextView tvProgress = dialog.findViewById(R.id.tv_progress);
+                ProgressBar progressBar = dialog.findViewById(R.id.pb);
+                progressBar.setProgress(progress);
+                tvProgress.setText(getString(R.string.versionchecklib_progress, progress));
+            }
+        };
+    }
+
+    /**
+     * 更新弹窗样式
+     *
+     * @return
+     */
+    private CustomVersionDialogListener createCustomDialogTwo() {
+        return (context, versionBundle) -> {
+            BaseDialog baseDialog = new BaseDialog(context, R.style.BaseDialog, R.layout.custom_dialog_two_layout);
+            TextView textView = baseDialog.findViewById(R.id.tv_msg);
+            textView.setText(versionBundle.getContent());
+            baseDialog.setCanceledOnTouchOutside(true);
+            return baseDialog;
+        };
+    }
+
+    /**
+     * @return
+     * @important 使用请求版本功能，可以在这里设置downloadUrl
+     * 这里可以构造UI需要显示的数据
+     * UIData 内部是一个Bundle
+     */
+    private UIData crateUIData() {
+        UIData uiData = UIData.create();
+        uiData.setTitle(getString(R.string.update_title));
+        uiData.setDownloadUrl("http://test-1251233192.coscd.myqcloud.com/1_1.apk");
+        uiData.setContent(getString(R.string.updatecontent));
+        return uiData;
     }
 
     private void loginSuccess() {
@@ -177,6 +262,8 @@ public class KeepFitActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         //EventBus.getDefault().unregister(this);
+        AllenVersionChecker.getInstance().cancelAllMission();
+
 
     }
 
@@ -389,6 +476,7 @@ public class KeepFitActivity extends BaseActivity {
 
     private static final int TIME_EXIT = 2000;
     private long mBackPressed;
+
     @Override
     public void onBackPressed() {
         if (mBackPressed + TIME_EXIT > System.currentTimeMillis()) {
