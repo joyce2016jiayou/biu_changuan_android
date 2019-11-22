@@ -8,7 +8,6 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/Jpush" />
             <option value="$PROJECT_DIR$/LoadManager" />
             <option value="$PROJECT_DIR$/Logger" />
             <option value="$PROJECT_DIR$/Popup" />
@@ -23,11 +22,13 @@
             <option value="$PROJECT_DIR$/pickerview1" />
             <option value="$PROJECT_DIR$/spinner_lib" />
             <option value="$PROJECT_DIR$/timelinelibrary" />
+            <option value="$PROJECT_DIR$/updatelib" />
             <option value="$PROJECT_DIR$/viewpagerindicator" />
             <option value="$PROJECT_DIR$/wheelview1" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
+        <option name="testRunner" value="PLATFORM" />
       </GradleProjectSettings>
     </option>
   </component>
