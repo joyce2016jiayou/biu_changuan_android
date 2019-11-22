@@ -1,1 +1,1 @@
-include ':app', ':okhttputils', ':LoadManager', ':spinner_lib', ':WheelPicker', ':Logger', ':Popup', ':WheelView', ':easyPhotos', ':XrefreshLibrary', ':viewpagerindicator', ':timelinelibrary', ':calendarview', ':Jpush', ':wheelview1', ':pickerview1',':datepicker'
+include ':app', ':okhttputils', ':LoadManager', ':spinner_lib', ':WheelPicker', ':Logger', ':Popup', ':WheelView', ':easyPhotos', ':XrefreshLibrary', ':viewpagerindicator', ':timelinelibrary', ':calendarview', ':wheelview1', ':pickerview1', ':datepicker', ':updatelib'
