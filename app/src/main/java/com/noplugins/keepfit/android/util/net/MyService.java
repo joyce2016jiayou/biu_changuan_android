@@ -29,6 +29,7 @@ import com.noplugins.keepfit.android.entity.InformationEntity;
 import com.noplugins.keepfit.android.entity.LoginEntity;
 import com.noplugins.keepfit.android.entity.RoleBean;
 import com.noplugins.keepfit.android.entity.TeacherEntity;
+import com.noplugins.keepfit.android.entity.VersionEntity;
 import com.noplugins.keepfit.android.util.net.entity.Bean;
 import com.noplugins.keepfit.android.util.net.entity.Token;
 
@@ -37,6 +38,7 @@ import java.util.Map;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import okhttp3.internal.Version;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
@@ -66,8 +68,10 @@ public interface MyService {
      * @return
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
-    @POST("getVerifyCodeNew")//
+    @POST("getVerifyCodeNew")
+//
     Observable<Bean<String>> get_yanzhengma(@Body RequestBody json);
+
     /**
      * 验证验证码
      *
@@ -158,6 +162,7 @@ public interface MyService {
     @FormUrlEncoded
     @POST("getAuditResult")
     Observable<Bean<CheckEntity>> get_check_status(@FieldMap Map<String, Object> json);
+
     /**
      * 获取公司信息
      *
@@ -175,6 +180,7 @@ public interface MyService {
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
     @POST("bindingBank")
     Observable<Bean<Object>> bind_card(@Body RequestBody map);
+
     /**
      * 生成订单
      *
@@ -183,6 +189,9 @@ public interface MyService {
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
     @POST("memberOrder")
     Observable<Bean<String>> get_order(@Body RequestBody map);
+
+
+
     /**
      * 获取购买信息
      *
@@ -491,8 +500,8 @@ public interface MyService {
     Observable<Bean<BalanceListBean.ListBean>> myBalanceListDetail(@Body RequestBody json);
 
     /**
-     *
      * 修改手机号
+     *
      * @return
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
@@ -500,8 +509,8 @@ public interface MyService {
     Observable<Bean<Object>> updatePhone(@Body RequestBody json);
 
     /**
-     *
      * 设置密码
+     *
      * @return
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})
@@ -509,8 +518,8 @@ public interface MyService {
     Observable<Bean<String>> setPassword(@Body RequestBody params);
 
     /**
-     *
      * 修改密码
+     *
      * @return
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
@@ -527,7 +536,7 @@ public interface MyService {
     Observable<Bean<Object>> settingPayPassword(@Body RequestBody json);
 
     /**
-     *提现
+     * 提现
      *
      * @return
      */
@@ -537,7 +546,7 @@ public interface MyService {
 
 
     /**
-     *教练管理列表
+     * 教练管理列表
      *
      * @return
      */
@@ -546,7 +555,7 @@ public interface MyService {
     Observable<Bean<List<TeacherBean>>> teacherManner(@Body RequestBody json);
 
     /**
-     *教练类型管理列表
+     * 教练类型管理列表
      *
      * @return
      */
@@ -556,7 +565,7 @@ public interface MyService {
 
 
     /**
-     *教练详情
+     * 教练详情
      *
      * @return
      */
@@ -566,7 +575,7 @@ public interface MyService {
 
 
     /**
-     *同意你拒绝
+     * 同意你拒绝
      *
      * @return
      */
@@ -591,6 +600,7 @@ public interface MyService {
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
     @POST("updateCost")
     Observable<Bean<Object>> updateCost(@Body RequestBody json);
+
     /**
      * 获取日历
      */

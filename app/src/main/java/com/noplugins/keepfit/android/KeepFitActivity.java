@@ -29,6 +29,7 @@ import com.allenliu.versionchecklib.v2.callback.RequestVersionListener;
 import com.google.gson.Gson;
 import com.huantansheng.easyphotos.models.puzzle.Line;
 import com.noplugins.keepfit.android.activity.BuyActivity;
+import com.noplugins.keepfit.android.activity.BuyHuiYuanActivity;
 import com.noplugins.keepfit.android.activity.CheckStatusFailActivity;
 import com.noplugins.keepfit.android.activity.UserPermissionSelectActivity;
 import com.noplugins.keepfit.android.adapter.ContentPagerAdapterMy;
@@ -36,6 +37,7 @@ import com.noplugins.keepfit.android.base.BaseActivity;
 import com.noplugins.keepfit.android.base.MyApplication;
 import com.noplugins.keepfit.android.entity.CheckEntity;
 import com.noplugins.keepfit.android.entity.MaxMessageEntity;
+import com.noplugins.keepfit.android.entity.VersionEntity;
 import com.noplugins.keepfit.android.fragment.RiChengFragment;
 import com.noplugins.keepfit.android.fragment.ViewFragment;
 import com.noplugins.keepfit.android.fragment.MineFragment;
@@ -46,15 +48,18 @@ import com.noplugins.keepfit.android.fragment.teacher.Is2999Fragment;
 import com.noplugins.keepfit.android.global.AppConstants;
 import com.noplugins.keepfit.android.jpush.TagAliasOperatorHelper;
 import com.noplugins.keepfit.android.util.SpUtils;
+import com.noplugins.keepfit.android.util.VersionUtils;
 import com.noplugins.keepfit.android.util.data.SharedPreferencesHelper;
 import com.noplugins.keepfit.android.util.eventbus.MessageEvent;
 import com.noplugins.keepfit.android.util.net.Network;
 import com.noplugins.keepfit.android.util.net.entity.Bean;
 import com.noplugins.keepfit.android.util.net.progress.GsonSubscriberOnNextListener;
+import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriber;
 import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriberNew;
 import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener;
 import com.noplugins.keepfit.android.util.ui.BaseDialog;
 import com.noplugins.keepfit.android.util.ui.NoScrollViewPager;
+import com.noplugins.keepfit.android.wxapi.WXPayEntryActivity;
 import com.orhanobut.logger.Logger;
 
 import org.greenrobot.eventbus.EventBus;
@@ -71,6 +76,7 @@ import butterknife.BindViews;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import okhttp3.RequestBody;
+import rx.Subscription;
 
 import static com.tencent.bugly.Bugly.applicationContext;
 
@@ -106,6 +112,8 @@ public class KeepFitActivity extends BaseActivity {
     private List<Fragment> tabFragments = new ArrayList<>();
     ContentPagerAdapterMy contentAdapter;
     private DownloadBuilder builder;
+    private boolean is_qiangzhi_update;
+    private String update_url = "";
 
     @Override
     public void initBundle(Bundle bundle) {
@@ -158,11 +166,40 @@ public class KeepFitActivity extends BaseActivity {
         loginSuccess();
 
         //更新app
-        //update_app();
+        update_app();
 
     }
 
     private void update_app() {
+        Map<String, Object> params = new HashMap<>();
+        params.put("type", "gym");
+        params.put("code", VersionUtils.getAppVersionCode(getApplicationContext()));
+        params.put("phoneType", "2");
+        Subscription subscription = Network.getInstance("升级版本", this)
+                .update_version(params,
+                        new ProgressSubscriber<>("升级版本", new SubscriberOnNextListener<Bean<VersionEntity>>() {
+                            @Override
+                            public void onNext(Bean<VersionEntity> result) {
+                                update_url = result.getData().getUrl();
+                                //是否需要强制升级1强制升级 2不升级 3可升级可不升级
+                                if (result.getData().getUp() == 1) {
+                                    is_qiangzhi_update = true;
+                                    update_app_pop();
+                                } else {
+                                    update_app_pop();
+                                    is_qiangzhi_update = false;
+                                }
+
+                            }
+
+                            @Override
+                            public void onError(String error) {
+
+                            }
+                        }, this, false));
+    }
+
+    private void update_app_pop() {
         builder = AllenVersionChecker
                 .getInstance()
                 .downloadOnly(crateUIData());
@@ -174,7 +211,15 @@ public class KeepFitActivity extends BaseActivity {
         builder.setShowDownloadFailDialog(true);//显示下载失败对话框
         builder.setDownloadAPKPath(Environment.getExternalStorageDirectory() + "/noplugins/apkpath/");//自定义下载路径
         builder.setOnCancelListener(() -> {
-            Toast.makeText(KeepFitActivity.this, "已关闭更新", Toast.LENGTH_SHORT).show();
+            if (is_qiangzhi_update) {
+                Intent intent = new Intent();
+                intent.setAction("android.intent.action.MAIN");
+                intent.addCategory("android.intent.category.HOME");
+                startActivity(intent);
+                finish();
+            } else {
+                Toast.makeText(KeepFitActivity.this, "已关闭更新", Toast.LENGTH_SHORT).show();
+            }
         });
         builder.executeMission(this);
     }
@@ -227,8 +272,12 @@ public class KeepFitActivity extends BaseActivity {
     private UIData crateUIData() {
         UIData uiData = UIData.create();
         uiData.setTitle(getString(R.string.update_title));
-        uiData.setDownloadUrl("http://test-1251233192.coscd.myqcloud.com/1_1.apk");
-        uiData.setContent(getString(R.string.updatecontent));
+        uiData.setDownloadUrl(update_url);
+        if(is_qiangzhi_update){
+            uiData.setContent(getString(R.string.updatecontent2));
+        }else{
+            uiData.setContent(getString(R.string.updatecontent));
+        }
         return uiData;
     }
 

@@ -35,8 +35,10 @@ import com.noplugins.keepfit.android.entity.InformationEntity;
 import com.noplugins.keepfit.android.entity.LoginEntity;
 import com.noplugins.keepfit.android.entity.RoleBean;
 import com.noplugins.keepfit.android.entity.TeacherEntity;
+import com.noplugins.keepfit.android.entity.VersionEntity;
 import com.noplugins.keepfit.android.global.AppConstants;
 import com.noplugins.keepfit.android.util.SpUtils;
+import com.noplugins.keepfit.android.util.VersionUtils;
 import com.noplugins.keepfit.android.util.data.SharedPreferencesHelper;
 import com.noplugins.keepfit.android.util.net.entity.Bean;
 import com.noplugins.keepfit.android.util.net.entity.Token;
@@ -77,9 +79,11 @@ public class Network {
     public static final int DEFAULT_TIMEOUT = 15;
     private static Network mInstance;
     public MyService service;
-    //测试服
-    public static String test_main_url = "http://testapi.noplugins.com/api";
-    public static String main_url = "http://kft.ahcomg.com/api";
+    public CoachService coach_service;
+    public static String changguan_test_url = "http://testapi.noplugins.com/api";
+    public static String changguan_main_url = "http://kft.ahcomg.com/api";
+    private String coach_main_url = "http://kft.ahcomg.com/api/coach-service";
+    private String coach_test_url = "http://testapi.noplugins.com/api/coach-service";
     public static String token = "";
     public static String login_token = "login_token";
     public static String phone_number = "phone_number";
@@ -90,13 +94,21 @@ public class Network {
     public static String phone = "phone";
     public static String is_set_alias = "is_set_alias";
     private static String MRTHOD_NAME = "";
-    Retrofit retrofit;
+    Retrofit retrofit, coach_retrofit;
 
-    public String get_main_url(String str) {
+    public String get_changguan_url(String str) {
         if (str.equals("test")) {
-            return test_main_url + "/gym-service/";
+            return changguan_test_url + "/gym-service/";
         } else {
-            return main_url + "/gym-service/";
+            return changguan_main_url + "/gym-service/";
+        }
+    }
+
+    public String get_coach_url(String str) {
+        if (str.equals("test")) {
+            return coach_test_url + "/coachuser/";
+        } else {
+            return coach_main_url + "/coachuser/";
         }
     }
 
@@ -179,15 +191,21 @@ public class Network {
 
         retrofit = new Retrofit.Builder()
                 .client(client)
-                .baseUrl(get_main_url("test"))//设置请求网址根部
+                .baseUrl(get_changguan_url("test"))//设置请求网址根部
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .build();
+
+        coach_retrofit = new Retrofit.Builder()
+                .client(client)
+                .baseUrl(get_coach_url("test"))//设置请求网址根部
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
 
 
         service = retrofit.create(MyService.class);
-
-
+        coach_service = coach_retrofit.create(CoachService.class);
     }
 
     private RequestBody retuen_json_params(Map<String, Object> params) {
@@ -390,6 +408,14 @@ public class Network {
      */
     public Subscription get_order(Map<String, Object> params, Subscriber<Bean<String>> subscriber) {
         return service.get_order(retuen_json_params(params))
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    public Subscription update_version(Map<String, Object> params, Subscriber<Bean<VersionEntity>> subscriber) {
+        return coach_service.update_version(retuen_json_params(params))
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

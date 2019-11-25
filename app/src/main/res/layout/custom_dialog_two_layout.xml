@@ -11,8 +11,8 @@
         android:orientation="vertical">
 
         <ImageView
-            android:layout_width="300dp"
-            android:layout_height="150dp"
+            android:layout_width="@dimen/m300"
+            android:layout_height="@dimen/m150"
             android:scaleType="centerCrop"
             android:background="@drawable/custom_bg" />
 
@@ -21,14 +21,13 @@
             android:layout_height="wrap_content"
             android:background="@android:color/white"
             android:orientation="vertical"
-            android:padding="15dp">
+            android:padding="@dimen/m10">
 
             <TextView
                 android:id="@+id/tv_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
                 android:text="@string/update_title"
                 android:textColor="@android:color/black"
                 android:textSize="13sp" />
@@ -37,16 +36,17 @@
                 android:id="@+id/tv_msg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/m10"
+                android:layout_gravity="center_horizontal"
                 android:text="@string/updatecontent"
                 android:textColor="#666"
                 android:textSize="12sp" />
 
             <Button
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/m10"
                 android:id="@id/versionchecklib_version_dialog_commit"
                 android:layout_width="match_parent"
-                android:layout_height="35dp"
+                android:layout_height="@dimen/m35"
                 android:background="@drawable/shape_corner"
                 android:text="升级"
                 android:textColor="@android:color/white" />
