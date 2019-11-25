@@ -73,6 +73,7 @@ class Login2Activity : BaseActivity() {
 
                     val s = SpannableString("请输入验证码")//这里输入自己想要的提示文字
                     edit_password.hint = s
+                    edit_password.setText("")
                     img_password.setImageResource(R.drawable.yanzhengma_icon)
                     tv_send.visibility = View.VISIBLE
                     edit_password.inputType = InputType.TYPE_CLASS_NUMBER
@@ -91,7 +92,7 @@ class Login2Activity : BaseActivity() {
                     edit_password.hint = s
                     img_password.setImageResource(R.drawable.password_icon)
                     tv_send.visibility = View.GONE
-
+                    edit_password.setText("")
                     forget_password_btn.visibility = View.VISIBLE
                     edit_password.inputType = 0x00000081
                 }

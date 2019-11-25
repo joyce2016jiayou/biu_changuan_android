@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <string name="app_name">哔呦场馆</string>
     <string name="setting">设置</string>
     <string name="perm_tip">
@@ -30,9 +30,9 @@
     <string name="edit_hint20">以上信息提交后不可更改!</string>
     <string name="edit_hint21">请输入课程名称</string>
     <string name="edit_hint22">请输入限制人数</string>
-    <string name="edit_hint23">请输入课程详情</string>
-    <string name="edit_hint24">请输入适合人群</string>
-    <string name="edit_hint25">请输入注意事项</string>
+    <string name="edit_hint23">请输入课程详情(最多140个字)</string>
+    <string name="edit_hint24">请输入适合人群(最多140个字)</string>
+    <string name="edit_hint25">请输入注意事项(最多140个字)</string>
     <string name="edit_hint26">请提交您的拒绝原因:</string>
     <string name="edit_hint27">姓名</string>
     <string name="edit_hint28">手机号</string>
