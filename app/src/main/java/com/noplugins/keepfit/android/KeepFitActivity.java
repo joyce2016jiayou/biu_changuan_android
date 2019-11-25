@@ -166,7 +166,7 @@ public class KeepFitActivity extends BaseActivity {
         loginSuccess();
 
         //更新app
-        update_app();
+//        update_app();
 
     }
 

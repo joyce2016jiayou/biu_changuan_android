@@ -81,6 +81,7 @@ public class BalanceListBean {
         private int deleted;
         private String remark;
         private double finalMoney;
+        private String cardName;
         /**
          * courseNum :
          * courseName : 课程名称
@@ -91,6 +92,14 @@ public class BalanceListBean {
         private String courseNum;
         private String courseName;
         private String areaName;
+
+        public String getCardName() {
+            return cardName;
+        }
+
+        public void setCardName(String cardName) {
+            this.cardName = cardName;
+        }
 
         public double getFinalMoney() {
             return finalMoney;
