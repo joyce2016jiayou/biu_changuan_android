@@ -223,7 +223,6 @@ public class KeepFitActivity extends BaseActivity {
         });
         builder.executeMission(this);
     }
-
     /**
      * 自定义下载中对话框，下载中会连续回调此方法 updateUI
      * 务必用库传回来的context 实例化你的dialog
@@ -247,7 +246,6 @@ public class KeepFitActivity extends BaseActivity {
             }
         };
     }
-
     /**
      * 更新弹窗样式
      *
@@ -262,7 +260,6 @@ public class KeepFitActivity extends BaseActivity {
             return baseDialog;
         };
     }
-
     /**
      * @return
      * @important 使用请求版本功能，可以在这里设置downloadUrl

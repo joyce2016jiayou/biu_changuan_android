@@ -80,10 +80,6 @@ public class Network {
     private static Network mInstance;
     public MyService service;
     public CoachService coach_service;
-    public static String changguan_test_url = "http://testapi.noplugins.com/api";
-    public static String changguan_main_url = "http://kft.ahcomg.com/api";
-    private String coach_main_url = "http://kft.ahcomg.com/api/coach-service";
-    private String coach_test_url = "http://testapi.noplugins.com/api/coach-service";
     public static String token = "";
     public static String login_token = "login_token";
     public static String phone_number = "phone_number";
@@ -98,17 +94,17 @@ public class Network {
 
     public String get_changguan_url(String str) {
         if (str.equals("test")) {
-            return changguan_test_url + "/gym-service/";
+            return "http://testapi.noplugins.com/api/gym-service/";
         } else {
-            return changguan_main_url + "/gym-service/";
+            return "http://kft.ahcomg.com/api/gym-service/";
         }
     }
 
     public String get_coach_url(String str) {
         if (str.equals("test")) {
-            return coach_test_url + "/coachuser/";
+            return "http://testapi.noplugins.com/api/coach-service/coachuser/";
         } else {
-            return coach_main_url + "/coachuser/";
+            return "http://kft.ahcomg.com/api/coach-service/coachuser/";
         }
     }
 
