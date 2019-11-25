@@ -91,7 +91,6 @@ public class Network {
     public static String is_set_alias = "is_set_alias";
     private static String MRTHOD_NAME = "";
     Retrofit retrofit, coach_retrofit;
-
     public String get_changguan_url(String str) {
         if (str.equals("test")) {
             return "http://testapi.noplugins.com/api/gym-service/";
