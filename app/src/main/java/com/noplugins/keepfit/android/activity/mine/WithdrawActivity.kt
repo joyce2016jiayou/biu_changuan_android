@@ -82,6 +82,10 @@ class WithdrawActivity : BaseActivity() {
         }
 
         tv_withdraw_ok.setOnClickListener {
+            if (et_withdraw_money.text.toString().isEmpty()){
+                Toast.makeText(applicationContext,"提现金额不能小于1000",Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
             //提现操作
             if (et_withdraw_money.text.toString().toDouble() < 1000){
                Toast.makeText(applicationContext,"提现金额不能小于1000",Toast.LENGTH_SHORT).show()
