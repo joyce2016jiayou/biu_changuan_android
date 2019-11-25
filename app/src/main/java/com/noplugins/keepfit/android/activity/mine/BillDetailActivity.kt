@@ -157,8 +157,8 @@ class BillDetailActivity : BaseActivity() {
                 params,
                 ProgressSubscriber("我的钱包", object : SubscriberOnNextListener<Bean<BalanceListBean>> {
                     override fun onNext(result: Bean<BalanceListBean>) {
-//                        tv_income.text = "收入：0"
-//                        tv_withdraw.text = "提现：0"
+                        tv_income.text = "收入：${result.data.monthIncome}"
+                        tv_withdraw.text = "提现：${result.data.monthWithDraw}"
                         maxPage = result.data.maxPage
                         if (page == 1){
                             data.clear()

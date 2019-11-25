@@ -980,7 +980,9 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
                 }, getActivity(), true));
     }
 
-    int startH,startM;
+    int startH = 9,startM = 0;
+    int endH = 23,endM = 59;
+
     private void time_check(TextView textView,int type) {
         picker = new TimePicker(getActivity(), TimeMode.HOUR_24);
         Calendar calendar = Calendar.getInstance();
@@ -994,6 +996,16 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
                 if (type == 1){
                     startH = hour;
                     startM = minute;
+                    if (hour>endH){
+                        Toast.makeText(getActivity(),"开始时间不能大于结束时间",
+                                Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    if (hour==endH && minute > endM){
+                        Toast.makeText(getActivity(),"开始时间不能大于结束时间",
+                                Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                 }
                 if (type == 2){
                     if (hour<startH){
@@ -1006,6 +1018,8 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
                                 Toast.LENGTH_SHORT).show();
                         return;
                     }
+                    endH = hour;
+                    endM = minute;
                 }
                 if (minute <= 9) {
                     textView.setText(hour + ":0" + minute);

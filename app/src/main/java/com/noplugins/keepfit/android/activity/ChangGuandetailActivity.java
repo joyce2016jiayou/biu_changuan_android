@@ -260,7 +260,11 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
         spinner_type.setSelectedIndex(cg.getArea().getType()-1);
         spinner_type.setClickable(false);
         time1_edit.setText(TimeCheckUtil.removeSecond(cg.getArea().getBusinessStart()));
+        startH = Integer.parseInt(time1_edit.getText().toString().split(":")[0]);
+        startM = Integer.parseInt(time1_edit.getText().toString().split(":")[1]);
         time2_edit.setText(TimeCheckUtil.removeSecond(cg.getArea().getBusinessEnd()));
+        endH = Integer.parseInt(time2_edit.getText().toString().split(":")[0]);
+        endM = Integer.parseInt(time2_edit.getText().toString().split(":")[1]);
 
         datas.clear();
         for (int i = 0; i < cg.getPlace().size(); i++) {
@@ -506,7 +510,8 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
         });
     }
 
-    int startH,startM;
+    int startH ,startM;
+    int endH,endM;
     private void time_check(TextView textView,int type) {
         picker = new TimePicker(this, TimeMode.HOUR_24);
         Calendar calendar = Calendar.getInstance();
@@ -518,6 +523,16 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
             @Override
             public void onItemSelected(int hour, int minute, int second) {
                 if (type == 1){
+                    if (hour>endH){
+                        Toast.makeText(getApplicationContext(),"开始时间不能大于结束时间",
+                                Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    if (hour==endH && minute > endM){
+                        Toast.makeText(getApplicationContext(),"开始时间不能大于结束时间",
+                                Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                     startH = hour;
                     startM = minute;
                 }
@@ -532,6 +547,8 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
                                 Toast.LENGTH_SHORT).show();
                         return;
                     }
+                    endH = hour;
+                    endM = minute;
                 }
                 if (minute <= 9) {
                     textView.setText(hour + ":0" + minute);

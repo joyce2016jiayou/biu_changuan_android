@@ -43,6 +43,8 @@ class ShoukeCgAdapter(data: List<TeacherBean>?) : BaseQuickAdapter<TeacherBean, 
             helper.setText(R.id.tv_item, "邀请中")
         }
 
+        helper.setText(R.id.tv_cg_ar,"累计服务时长:"+item.serviceDur)
+
         val skill = (helper.getView<ZFlowLayout>(R.id.fl_private_skill))
 
 //        val arr =

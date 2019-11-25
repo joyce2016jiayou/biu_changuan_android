@@ -41,9 +41,12 @@ class BillDetailInfoActivity : BaseActivity() {
             lv_2.visibility = View.GONE
             tv_zcje.text ="¥${bean.finalMoney}"
             tv_sqsj.text= bean.createDate
-            tv_txyh.text= ""
+            if (null != bean.cardName){
+                tv_txyh.text= bean.cardName
+            }
             tv_operate.text = "收入-银行"
             tv_dqzt.text= statusToString(bean.status)
+            tv_zclb.text = typeToString(bean.type)
         } else {
             lv_1.visibility = View.GONE
             lv_2.visibility = View.VISIBLE
@@ -53,19 +56,19 @@ class BillDetailInfoActivity : BaseActivity() {
             tv_cgmc.text = bean.areaName
             tv_sksj.text = ""
             if (bean.type == 3){
-                tv_srlb.text = "私教服务"
                 tv_operate.text = "收入-私教服务"
             } else {
-                tv_srlb.text = "团课服务"
                 tv_operate.text = "收入-团课服务"
             }
+
+            tv_srlb.text = typeToString(bean.type)
         }
         Glide.with(this)
             .load(typeToDrawble(bean.type))
                 .placeholder(R.drawable.logo_gray)
             .into(iv_logo)
 
-        tv_money.text = "-${bean.money}"
+        tv_money.text = "-${bean.finalMoney}"
     }
 
     private fun requestData() {
