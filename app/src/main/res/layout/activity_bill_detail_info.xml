@@ -155,7 +155,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/m31"
                         android:layout_marginLeft="@dimen/m30"
-                        android:text="招商银行"
+                    tools:text="招商银行"
                         android:gravity="center_vertical"
                         android:textColor="@color/color_4A4A4A"
                         android:textSize="15sp"/>
@@ -178,7 +178,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/m31"
                         android:layout_marginLeft="@dimen/m30"
-                        android:text="提现成功"
+                    tools:text="提现成功"
                         android:gravity="center_vertical"
                         android:textColor="@color/color_4A4A4A"
                         android:textSize="15sp"/>
@@ -284,7 +284,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/m31"
                         android:layout_marginLeft="@dimen/m30"
-                        android:text="大象场馆"
+                        tools:text="大象场馆"
                         android:gravity="center_vertical"
                         android:textColor="@color/color_4A4A4A"
                         android:textSize="15sp"/>
@@ -307,7 +307,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/m31"
                         android:layout_marginLeft="@dimen/m30"
-                        android:text="2019-09-21 12:09:12"
+                        tools:text="2019-09-21 12:09:12"
                         android:gravity="center_vertical"
                         android:textColor="@color/color_4A4A4A"
                         android:textSize="15sp"/>
