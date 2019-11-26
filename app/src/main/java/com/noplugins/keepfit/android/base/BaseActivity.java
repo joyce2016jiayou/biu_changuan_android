@@ -322,7 +322,7 @@ public abstract class BaseActivity extends AppCompatActivity implements EasyPerm
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
         //拦截返回键
-        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK){
+        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
             //判断触摸UP事件才会进行返回事件处理
             if (event.getAction() == KeyEvent.ACTION_UP) {
                 onBackPressed();

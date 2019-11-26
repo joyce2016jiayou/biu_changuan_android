@@ -161,7 +161,7 @@ class Login2Activity : BaseActivity() {
         xieyi_check_btn.setOnTouchListener(View.OnTouchListener { v, event ->
             val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             val v = window.peekDecorView()
-            val isBoolean=inputMethodManager.hideSoftInputFromWindow(v.getWindowToken(), 0)
+            val isBoolean = inputMethodManager.hideSoftInputFromWindow(v.getWindowToken(), 0)
             edit_password.clearFocus()
             edit_phone_number.clearFocus()
             isBoolean
@@ -278,7 +278,7 @@ class Login2Activity : BaseActivity() {
     private fun Get_YanZhengMa() {
         val params = HashMap<String, Any>()
         params["phone"] = edit_phone_number.text.toString()
-        params["sign"] = "${MD5.stringToMD5("MES"+edit_phone_number.text.toString())}"
+        params["sign"] = "${MD5.stringToMD5("MES" + edit_phone_number.text.toString())}"
         params["time"] = System.currentTimeMillis()
         val subscription = Network.getInstance("获取验证码", this)
                 .get_yanzhengma(params,
@@ -440,6 +440,17 @@ class Login2Activity : BaseActivity() {
         } else {
             Log.e(TAG, "没选中")
             is_check_fuwu = false
+        }
+    }
+
+    private var exitTime: Long = 0 //必须是long型
+    override fun onBackPressed() {
+        println(System.currentTimeMillis())
+        if (System.currentTimeMillis() - exitTime < 2000) {
+            finish()
+        } else {
+            Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_LONG).show()
+            exitTime = System.currentTimeMillis()
         }
     }
 }

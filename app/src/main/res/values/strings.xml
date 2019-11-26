@@ -207,6 +207,7 @@
     <string name="tv149">开户银行</string>
     <string name="tv150">场馆名称</string>
     <string name="tv151">平台场馆名称</string>
+    <string name="tv152">身份证格式不正确</string>
 
     <string name="tv_select">请选择</string>
     <string name="tv_qianbao">钱包</string>

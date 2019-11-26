@@ -34,6 +34,7 @@ import com.noplugins.keepfit.android.entity.InformationEntity;
 import com.noplugins.keepfit.android.entity.UrlEntity;
 import com.noplugins.keepfit.android.global.AppConstants;
 import com.noplugins.keepfit.android.util.SpUtils;
+import com.noplugins.keepfit.android.util.data.IDCardValidate;
 import com.noplugins.keepfit.android.util.data.SharedPreferencesHelper;
 import com.noplugins.keepfit.android.util.net.Network;
 import com.noplugins.keepfit.android.util.net.entity.Bean;
@@ -241,6 +242,9 @@ public class BusinessInformationFragment extends ViewPagerFragment {
         } else if (TextUtils.isEmpty(edit_shenhe_idcard.getText())) {
             Toast.makeText(getActivity(), R.string.alert_dialog_tishi25, Toast.LENGTH_SHORT).show();
             return false;
+        } else if (!IDCardValidate.validate_effective(edit_shenhe_idcard.getText().toString())) {
+            Toast.makeText(getActivity(), R.string.tv152, Toast.LENGTH_SHORT).show();
+            return false;
         } else if (TextUtils.isEmpty(edit_shenhe_bankcard_number.getText())) {
             Toast.makeText(getActivity(), R.string.alert_dialog_tishi26, Toast.LENGTH_SHORT).show();
             return false;
@@ -262,6 +266,9 @@ public class BusinessInformationFragment extends ViewPagerFragment {
             return false;
         } else if (TextUtils.isEmpty(icon_id_card.getText())) {
             Toast.makeText(getActivity(), R.string.alert_dialog_tishi15, Toast.LENGTH_SHORT).show();
+            return false;
+        } else if (!IDCardValidate.validate_effective(icon_id_card.getText().toString())) {
+            Toast.makeText(getActivity(), R.string.tv152, Toast.LENGTH_SHORT).show();
             return false;
         } else if (TextUtils.isEmpty(qiye_zhanghao.getText())) {
             Toast.makeText(getActivity(), R.string.alert_dialog_tishi28, Toast.LENGTH_SHORT).show();

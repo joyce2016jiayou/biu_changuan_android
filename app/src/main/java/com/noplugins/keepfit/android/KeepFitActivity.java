@@ -107,8 +107,8 @@ public class KeepFitActivity extends BaseActivity {
     @BindViews({R.id.home_img, R.id.shipu_img, R.id.movie_img, R.id.mine_img})
 
     List<ImageView> bottom_iamge_views;
-    private SoundPool sp;//声明一个SoundPool
-    private int music;//定义一个整型用load（）；来设置suondID
+    //private SoundPool sp;//声明一个SoundPool
+    //private int music;//定义一个整型用load（）；来设置suondID
     private List<Fragment> tabFragments = new ArrayList<>();
     ContentPagerAdapterMy contentAdapter;
     private DownloadBuilder builder;
@@ -155,8 +155,8 @@ public class KeepFitActivity extends BaseActivity {
 
 
         //初始化音效
-        sp = new SoundPool(10, AudioManager.STREAM_SYSTEM, 5);//第一个参数为同时播放数据流的最大个数，第二数据流类型，第三为声音质量
-        music = sp.load(this, R.raw.button, 1); //把你的声音素材放到res/raw里，第2个参数即为资源文件，第3个为音乐的优先级
+        //sp = new SoundPool(10, AudioManager.STREAM_SYSTEM, 5);//第一个参数为同时播放数据流的最大个数，第二数据流类型，第三为声音质量
+        //music = sp.load(this, R.raw.button, 1); //把你的声音素材放到res/raw里，第2个参数即为资源文件，第3个为音乐的优先级
 
 
         //获取消息总数，设置消息总数
@@ -420,23 +420,23 @@ public class KeepFitActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.btn_home:
                 //按钮提示音
-                sp.play(music, 0.2f, 0.2f, 0, 0, 1);
+                //sp.play(music, 0.2f, 0.2f, 0, 0, 1);
                 viewpager_content.setCurrentItem(0);
                 xianshi_one();
                 break;
             case R.id.btn_shipu:
                 //按钮提示音
-                sp.play(music, 0.2f, 0.2f, 0, 0, 1);
+                //sp.play(music, 0.2f, 0.2f, 0, 0, 1);
                 viewpager_content.setCurrentItem(1);
                 xianshi_two();
                 break;
             case R.id.btn_movie:
-                sp.play(music, 0.2f, 0.2f, 0, 0, 1);
+                //sp.play(music, 0.2f, 0.2f, 0, 0, 1);
                 viewpager_content.setCurrentItem(2);
                 xianshi_three();
                 break;
             case R.id.btn_mine:
-                sp.play(music, 0.2f, 0.2f, 0, 0, 1);
+                //sp.play(music, 0.2f, 0.2f, 0, 0, 1);
                 viewpager_content.setCurrentItem(3);
                 xianshi_four();
                 break;
@@ -522,11 +522,10 @@ public class KeepFitActivity extends BaseActivity {
 
     private static final int TIME_EXIT = 2000;
     private long mBackPressed;
-
     @Override
     public void onBackPressed() {
         if (mBackPressed + TIME_EXIT > System.currentTimeMillis()) {
-            //super.onBackPressed();
+            super.onBackPressed();
             Intent intent = new Intent();
             intent.setAction("android.intent.action.MAIN");
             intent.addCategory("android.intent.category.HOME");
