@@ -52,7 +52,7 @@ public class HeTongActivity extends BaseActivity {
         WebSettings webSettings = webView.getSettings();
         webSettings.setUseWideViewPort(true);//设置此属性，可任意比例缩放
         webSettings.setLoadWithOverviewMode(true);
-        webView.loadUrl("file:///android_asset/hetong.html");
+        webView.loadUrl("file:///android_asset/changguan_qianyue.html");
 
         xieyi_check_btn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
