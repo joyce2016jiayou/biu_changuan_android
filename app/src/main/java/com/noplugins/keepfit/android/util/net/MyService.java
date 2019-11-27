@@ -10,6 +10,7 @@ import com.noplugins.keepfit.android.bean.ChangguanBean;
 import com.noplugins.keepfit.android.bean.CheckBean;
 import com.noplugins.keepfit.android.bean.CompnyBean;
 import com.noplugins.keepfit.android.bean.DictionaryeBean;
+import com.noplugins.keepfit.android.bean.HightList11Bean;
 import com.noplugins.keepfit.android.bean.HightListBean;
 import com.noplugins.keepfit.android.bean.LoginBean;
 import com.noplugins.keepfit.android.bean.OrderResultBean;
@@ -679,7 +680,7 @@ public interface MyService {
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
     @POST("findAreaPrice")
-    Observable<Bean<List<HightListBean>>> findAreaPrice(@Body RequestBody json);
+    Observable<Bean<HightList11Bean>> findAreaPrice(@Body RequestBody json);
 
     /**
      * 统计

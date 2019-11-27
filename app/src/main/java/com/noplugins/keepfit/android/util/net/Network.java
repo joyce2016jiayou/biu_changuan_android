@@ -16,6 +16,7 @@ import com.noplugins.keepfit.android.bean.ChangguanBean;
 import com.noplugins.keepfit.android.bean.CheckBean;
 import com.noplugins.keepfit.android.bean.CompnyBean;
 import com.noplugins.keepfit.android.bean.DictionaryeBean;
+import com.noplugins.keepfit.android.bean.HightList11Bean;
 import com.noplugins.keepfit.android.bean.HightListBean;
 import com.noplugins.keepfit.android.bean.LoginBean;
 import com.noplugins.keepfit.android.bean.OrderResultBean;
@@ -1101,7 +1102,7 @@ public class Network {
     /**
      * 获取高峰时间价格
      */
-    public Subscription findAreaPrice(Map<String, Object> params, Subscriber<Bean<List<HightListBean>>> subscriber) {
+    public Subscription findAreaPrice(Map<String, Object> params, Subscriber<Bean<HightList11Bean>> subscriber) {
         return service.findAreaPrice(retuen_json_object(params))
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())

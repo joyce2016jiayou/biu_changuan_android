@@ -252,8 +252,6 @@
     <string name="updatecontent2">检测到有新版本，请更新到最新版本，否则无法使用。</string>
 
 
-
-
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <!--zxing-->
@@ -312,7 +310,7 @@
 
     <string name="pay_result_callback_msg" formatted="false">微信支付结果：%s</string>
 
-    
+
     <!--1.1-->
     <string name="tv_username">用户名</string>
     <string name="tv_phone">手机号</string>

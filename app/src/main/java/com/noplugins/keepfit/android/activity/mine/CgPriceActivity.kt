@@ -14,6 +14,7 @@ import com.noplugins.keepfit.android.adapter.DatePriceTestAdapter
 import com.noplugins.keepfit.android.adapter.HighAdapter
 import com.noplugins.keepfit.android.base.BaseActivity
 import com.noplugins.keepfit.android.bean.HighBean
+import com.noplugins.keepfit.android.bean.HightList11Bean
 import com.noplugins.keepfit.android.bean.HightListBean
 import com.noplugins.keepfit.android.bean.PriceBean
 import com.noplugins.keepfit.android.global.AppConstants
@@ -206,7 +207,11 @@ class CgPriceActivity : BaseActivity() {
 
     private fun request() {
         val params = HashMap<String, Any>()
-        params["time"] = list
+        if (list.size > 0){
+            params["time"] = list
+        }
+        params["normalPrice"] = et_price.text.toString()
+        params["areaNum"] = SpUtils.getString(applicationContext, AppConstants.CHANGGUAN_NUM)
         subscription = Network.getInstance("精准化时间", this)
                 .setHighTime(
                         params,
@@ -234,26 +239,25 @@ class CgPriceActivity : BaseActivity() {
         subscription = Network.getInstance("获取精准化时间", this)
                 .findAreaPrice(
                         params,
-                        ProgressSubscriber("获取精准化时间", object : SubscriberOnNextListener<Bean<List<HightListBean>>> {
-                            override fun onNext(result: Bean<List<HightListBean>>) {
+                        ProgressSubscriber("获取精准化时间", object : SubscriberOnNextListener<Bean<HightList11Bean>> {
+                            override fun onNext(result: Bean<HightList11Bean>) {
                                 //
                                 //HighBean
-                                if (result.data.isNotEmpty()) {
-                                    for (i in 0 until result.data.size) {
+                                if (result.data.gymTimes.isNotEmpty()) {
+                                    for (i in 0 until result.data.gymTimes.size) {
                                         val highBean = HighBean()
-                                        highBean.gym_area_num = result.data[i].gymAreaNum
-                                        highBean.high_time_start = TimeCheckUtil.removeSecond(result.data[i].highTimeStart)
-                                        highBean.high_time_end = TimeCheckUtil.removeSecond(result.data[i].highTimeEnd)
-                                        highBean.high_time_price = result.data[i].finalHighPrice.toString()
-                                        highBean.normal_price = result.data[i].finalNormalPrice.toString()
+                                        highBean.gym_area_num = result.data.gymTimes[i].gymAreaNum
+                                        highBean.high_time_start = TimeCheckUtil.removeSecond(result.data.gymTimes[i].highTimeStart)
+                                        highBean.high_time_end = TimeCheckUtil.removeSecond(result.data.gymTimes[i].highTimeEnd)
+                                        highBean.high_time_price = result.data.gymTimes[i].finalHighPrice.toString()
+                                        highBean.normal_price = result.data.gymTimes[i].finalNormalPrice.toString()
                                         list.add(highBean)
                                     }
-
-                                    et_price.setText("${result.data[0].finalNormalPrice}")
-                                    tv_price.text = "场馆全天时段价格：¥${result.data[0].finalNormalPrice}元/时"
-
                                     adapter!!.notifyDataSetChanged()
                                 }
+
+                                et_price.setText("${result.data.normalPrice}")
+                                tv_price.text = "场馆全天时段价格：¥${result.data.normalPrice}元/时"
                             }
 
                             override fun onError(error: String) {
