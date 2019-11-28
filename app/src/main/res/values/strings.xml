@@ -323,5 +323,19 @@
     <string name="tv_coach_notes">教练须知</string>
     <string name="tv_account_info">账户信息</string>
     <string name="tv_business_info">营业信息</string>
+    <string name="tv_save">保存</string>
+    <string name="tv_venue_name">场馆名称</string>
+    <string name="tv_venue_type">场馆类型</string>
+    <string name="tv_venue_area">场馆面积</string>
+    <string name="tv_venue_address">场馆地址</string>
+    <string name="tv_business_hours">营业时间</string>
+    <string name="tv_contact_phone">联系电话</string>
+    <string name="tv_contact_email">联系邮箱</string>
+    <string name="tv_legal_name">法人姓名</string>
+    <string name="tv_id_card">身份证号</string>
+    <string name="tv_company_name">企业名称</string>
+    <string name="tv_business_license">营业执照/统一社会信用代码</string>
+    <string name="tv_company_bank_number">企业银行账号</string>
+    <string name="tv_company_bank">开户银行</string>
 
 </resources>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?><!-- 动态添加布局时一定要在外层加RelativeLayout，否则layout属性无效-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        
+        <TextView
+            android:id="@+id/tv_save_2"
+            android:layout_width="@dimen/m66"
+            android:layout_height="@dimen/m27"
+            style="@style/tv_subtitle"
+            android:gravity="center"
+            android:layout_gravity="right"
+            android:layout_margin="@dimen/m10"
+            android:background="@drawable/shape_venue_save"
+            android:text="@string/tv_save"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_venue_facilities"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/m10"
+            android:layout_marginRight="@dimen/m10"/>
+    </LinearLayout>
+</RelativeLayout>
