@@ -209,6 +209,12 @@ public class AddClassItemActivity extends BaseActivity {
                     return;
                 }
 
+                if (edit_price_number.getText().toString().equals("")){
+                    Toast.makeText(AddClassItemActivity.this,
+                            "价格不能为空",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 if (check_value()) {//如果所有参数不为空，请求网络接口
                     add_class();
                 } else {

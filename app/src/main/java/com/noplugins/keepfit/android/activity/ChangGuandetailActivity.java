@@ -48,6 +48,7 @@ import com.noplugins.keepfit.android.util.ui.StepView;
 import com.noplugins.keepfit.android.util.ui.jiugongge.CCRSortableNinePhotoLayout;
 import com.qiniu.android.http.ResponseInfo;
 import com.qiniu.android.storage.UpCompletionHandler;
+import com.qiniu.android.storage.UpProgressHandler;
 import com.qiniu.android.storage.UploadManager;
 import com.qiniu.android.storage.UploadOptions;
 
@@ -61,6 +62,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -257,7 +260,7 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
         qiye_zhucehao.setText(cg.getArea().getCompanyCode());
 
         edittext_area.setText(cg.getArea().getArea() + "");
-        spinner_type.setSelectedIndex(cg.getArea().getType()-1);
+        spinner_type.setSelectedIndex(cg.getArea().getType() - 1);
         spinner_type.setClickable(false);
         time1_edit.setText(TimeCheckUtil.removeSecond(cg.getArea().getBusinessStart()));
         startH = Integer.parseInt(time1_edit.getText().toString().split(":")[0]);
@@ -287,7 +290,7 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
             strings.add(cg.getPic().get(i).getUrl());
             InformationEntity.GymPicBean bean = new InformationEntity.GymPicBean();
             bean.setQiniu_key(cg.getPic().get(i).getQiniuKey());
-            bean.setOrder_num(i+2);
+            bean.setOrder_num(i + 2);
             upList_iamges.add(bean);
         }
         mPhotosSnpl.setData(strings);
@@ -498,21 +501,22 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
             public void onClick(View view) {
 
 
-                time_check(time1_edit,1);
+                time_check(time1_edit, 1);
             }
         });
 
         time2_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                time_check(time2_edit,2);
+                time_check(time2_edit, 2);
             }
         });
     }
 
-    int startH ,startM;
-    int endH,endM;
-    private void time_check(TextView textView,int type) {
+    int startH, startM;
+    int endH, endM;
+
+    private void time_check(TextView textView, int type) {
         picker = new TimePicker(this, TimeMode.HOUR_24);
         Calendar calendar = Calendar.getInstance();
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
@@ -522,28 +526,28 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
         picker.setOnTimeSelectedListener(new OnTimeSelectedListener() {
             @Override
             public void onItemSelected(int hour, int minute, int second) {
-                if (type == 1){
-                    if (hour>endH){
-                        Toast.makeText(getApplicationContext(),"开始时间不能大于结束时间",
+                if (type == 1) {
+                    if (hour > endH) {
+                        Toast.makeText(getApplicationContext(), "开始时间不能大于结束时间",
                                 Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    if (hour==endH && minute > endM){
-                        Toast.makeText(getApplicationContext(),"开始时间不能大于结束时间",
+                    if (hour == endH && minute > endM) {
+                        Toast.makeText(getApplicationContext(), "开始时间不能大于结束时间",
                                 Toast.LENGTH_SHORT).show();
                         return;
                     }
                     startH = hour;
                     startM = minute;
                 }
-                if (type == 2){
-                    if (hour<startH){
-                        Toast.makeText(getApplicationContext(),"开始时间不能大于结束时间",
+                if (type == 2) {
+                    if (hour < startH) {
+                        Toast.makeText(getApplicationContext(), "开始时间不能大于结束时间",
                                 Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    if (hour==startH && minute < startM){
-                        Toast.makeText(getApplicationContext(),"开始时间不能大于结束时间",
+                    if (hour == startH && minute < startM) {
+                        Toast.makeText(getApplicationContext(), "开始时间不能大于结束时间",
                                 Toast.LENGTH_SHORT).show();
                         return;
                     }
@@ -624,11 +628,11 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
     public void onClickDeleteNinePhotoItem(CCRSortableNinePhotoLayout sortableNinePhotoLayout, View view, int position, String model, ArrayList<String> models) {
 //        strings.remove(position);
         mPhotosSnpl.removeItem(position);
-        Log.d("remove","strings.size():"+strings.size());
-        if (position <= upList_iamges.size()-1 && upList_iamges.size() !=0){
+        Log.d("remove", "strings.size():" + strings.size());
+        if (position <= upList_iamges.size() - 1 && upList_iamges.size() != 0) {
             upList_iamges.remove(position);
         } else {
-            jiugongge_iamges.remove(position+upList_iamges.size());
+            jiugongge_iamges.remove(position + upList_iamges.size());
         }
 
 
@@ -707,15 +711,16 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
 
 
     int i = 0;
+
     @SuppressLint("CheckResult")
     private void withListLs() {
-        i= 0;
-        if (jiugongge_iamges.size() == 0){
+        i = 0;
+        if (jiugongge_iamges.size() == 0) {
             upListToQiniu();
             return;
         }
 
-        if (upList_iamges.size() == strings.size()){
+        if (upList_iamges.size() == strings.size()) {
             upListToQiniu();
             return;
         }
@@ -732,13 +737,13 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
                                     .setCompressListener(new OnCompressListener() {
                                         @Override
                                         public void onStart() {
-                                            Log.d("luban","开始："+path);
+                                            Log.d("luban", "开始：" + path);
                                         }
 
                                         @Override
                                         public void onSuccess(File file) {
                                             emitter.onNext(file);
-                                            Log.d("luban","压缩成功:"+file.getPath());
+                                            Log.d("luban", "压缩成功:" + file.getPath());
                                             emitter.onComplete();
                                         }
 
@@ -752,7 +757,7 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(response -> {
                     //todo
-                    Log.d("luban","发射成功:"+response.getPath());
+                    Log.d("luban", "发射成功:" + response.getPath());
                     jiugongge_iamges.set(i, response.getPath());
                     i++;
                     // 如果全部完成，调用成功接口
@@ -760,7 +765,7 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
                         upListToQiniu();
                     }
                 }, throwable -> {
-                    Log.d("luban","异常了");
+                    Log.d("luban", "异常了");
                 });
 
 
@@ -771,18 +776,55 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
      */
     @SuppressLint("CheckResult")
     private void upListToQiniu() {
-        if (upList_iamges.size() == strings.size()){
+        if (upList_iamges.size() == strings.size()) {
             requestUpdate();
             return;
         }
         progress_upload = new ProgressUtil();
         progress_upload.showProgressDialog(this, "载入中...");
+//        for (int i=0;i<jiugongge_iamges.size();i++){
+//            int finalI = i;
+//            Log.d("qiniu","上传参数 "+ jiugongge_iamges.get(i));
+//            try {
+//                Thread.sleep(1000);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//            uploadManager.put(jiugongge_iamges.get(i), qiniu_key, uptoken,
+//                    (key, info, response) -> {
+//                        if (info.isOK()) {
+//                            // 上传成功，发送这张图片的文件名
+//                            InformationEntity.GymPicBean bean = new InformationEntity.GymPicBean();
+//                            bean.setQiniu_key(key);
+//                            bean.setOrder_num(upList_iamges.size()+2);
+//                            upList_iamges.add(bean);
+//                            if (upList_iamges.size() == strings.size()) {
+//                                requestUpdate();
+//                                Log.d("qiniu","全部上传完成");
+//                                progress_upload.dismissProgressDialog();
+//                            }
+//                        } else {
+//                            // 上传失败，告辞
+//                            Log.d("qiniu","上传失败 "+ finalI);
+//                            requestUpdate();
+//                            progress_upload.dismissProgressDialog();
+//                        }
+//                    },  new UploadOptions(null, "test-type", true,
+//                            new UpProgressHandler() {
+//                                @Override
+//                                public void progress(String key, double percent) {
+//
+//                                }
+//                            }, null));
+//        }
         Observable
                 .fromIterable(jiugongge_iamges)
                 .concatMap((Function<String, ObservableSource<String>>) path ->
+
                         Observable.create((ObservableOnSubscribe<String>) emitter -> {
-                            Log.d("qiniu",path);
-                           uploadManager.put(path, qiniu_key, uptoken,
+                            Log.d("qiniu", path);
+                            String expectKey = UUID.randomUUID().toString();
+                            uploadManager.put(path, expectKey, uptoken,
                                     (key, info, response) -> {
                                         if (info.isOK()) {
                                             // 上传成功，发送这张图片的文件名
@@ -792,8 +834,8 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
                                             // 上传失败，告辞
                                             emitter.onError(new IOException(info.error));
                                         }
-                                    },  new UploadOptions(null, "test-type", true,
-                                           null, null));
+                                    }, new UploadOptions(null, "test-type", true,
+                                            null, null));
 
 
                         }).subscribeOn(Schedulers.io())
@@ -802,21 +844,20 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
                 .subscribe(response -> {
                     InformationEntity.GymPicBean bean = new InformationEntity.GymPicBean();
                     bean.setQiniu_key(response);
-                    bean.setOrder_num(upList_iamges.size()+2);
+                    bean.setOrder_num(upList_iamges.size() + 2);
                     upList_iamges.add(bean);
-                    Log.d("qiniu","上传发射成功:"+response);
+                    Log.d("qiniu", "上传发射成功:" + response);
                     // 如果全部完成，调用成功接口
                     if (upList_iamges.size() == strings.size()) {
                         requestUpdate();
-                        Log.d("qiniu","全部上传完成");
+                        Log.d("qiniu", "全部上传完成");
                         progress_upload.dismissProgressDialog();
                     }
                 }, throwable -> {
-                    //
+                    Log.d("qiniu", "上传失败 " + throwable);
+                    requestUpdate();
                     progress_upload.dismissProgressDialog();
                 });
-
-
 
 
     }
@@ -825,12 +866,14 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
      * logo上传到七牛云
      */
     InformationEntity.GymPicBean logoBean;
+
     private void upLogoToQiniu() {
-        if (!"".equals(icon_image_path)){
+        if (!"".equals(icon_image_path)) {
             progress_upload = new ProgressUtil();
             progress_upload.showProgressDialog(this, "载入中...");
             //上传icon
-            uploadManager.put(icon_image_path, qiniu_key, uptoken,
+            String expectKey = UUID.randomUUID().toString();
+            uploadManager.put(icon_image_path, expectKey, uptoken,
                     (key, info, response) -> {
                         //res包含hash、key等信息，具体字段取决于上传策略的设置
                         if (info.isOK()) {
@@ -858,7 +901,7 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
     }
 
     private void withLs() {
-        if (!"".equals(icon_image_path)){
+        if (!"".equals(icon_image_path)) {
             File file = new File(icon_image_path);
             Luban.with(this)
                     .load(file)
@@ -905,31 +948,31 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
      */
     private void requestUpdate() {
 
-        if ("".equals(changguan_name.getText().toString())){
+        if ("".equals(changguan_name.getText().toString())) {
             //
             Toast.makeText(getApplicationContext(), "场馆名称不可为空", Toast.LENGTH_SHORT).show();
             return;
         }
-        if ("".equals(tell_edit.getText().toString())){
+        if ("".equals(tell_edit.getText().toString())) {
             //
             Toast.makeText(getApplicationContext(), "电话不可为空", Toast.LENGTH_SHORT).show();
             return;
         }
-        if ("".equals(edit_email.getText().toString())){
+        if ("".equals(edit_email.getText().toString())) {
             //
             Toast.makeText(getApplicationContext(), "邮箱不可为空", Toast.LENGTH_SHORT).show();
             return;
         }
-        if ("".equals(old_logo) && "".equals(icon_image_path)){
+        if ("".equals(old_logo) && "".equals(icon_image_path)) {
             Toast.makeText(getApplicationContext(), "场馆Logo不可为空", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        if (logoBean!= null){
+        if (logoBean != null) {
             upList_iamges.add(logoBean);
         }
         InformationEntity informationEntity = new InformationEntity();
-        informationEntity.setArea_num(SpUtils.getString(getApplicationContext(),AppConstants.CHANGGUAN_NUM));
+        informationEntity.setArea_num(SpUtils.getString(getApplicationContext(), AppConstants.CHANGGUAN_NUM));
         informationEntity.setArea_name(changguan_name.getText().toString());//场馆名称
         if (changguan_type.equals("综合会所")) {//场馆类型
             informationEntity.setType(1);
@@ -983,11 +1026,14 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
                             public void onNext(Bean<Object> changguanBeanBean) {
                                 Toast.makeText(ChangGuandetailActivity.this, "当前场馆信息修改成功",
                                         Toast.LENGTH_SHORT).show();
+                                upList_iamges.clear();
                             }
 
                             @Override
                             public void onError(String error) {
-
+                                Toast.makeText(ChangGuandetailActivity.this, error,
+                                        Toast.LENGTH_SHORT).show();
+                                upList_iamges.clear();
                             }
                         }, this, false));
 
