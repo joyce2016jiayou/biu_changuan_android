@@ -3,8 +3,6 @@ package com.noplugins.keepfit.android;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.media.AudioManager;
-import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
@@ -16,31 +14,23 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.ViewPager;
 
 import com.allenliu.versionchecklib.v2.AllenVersionChecker;
 import com.allenliu.versionchecklib.v2.builder.DownloadBuilder;
 import com.allenliu.versionchecklib.v2.builder.UIData;
 import com.allenliu.versionchecklib.v2.callback.CustomDownloadingDialogListener;
 import com.allenliu.versionchecklib.v2.callback.CustomVersionDialogListener;
-import com.allenliu.versionchecklib.v2.callback.RequestVersionListener;
 import com.google.gson.Gson;
-import com.huantansheng.easyphotos.models.puzzle.Line;
-import com.noplugins.keepfit.android.activity.BuyActivity;
-import com.noplugins.keepfit.android.activity.BuyHuiYuanActivity;
-import com.noplugins.keepfit.android.activity.CheckStatusFailActivity;
-import com.noplugins.keepfit.android.activity.UserPermissionSelectActivity;
+import com.lxj.xpopup.XPopup;
+import com.lxj.xpopup.core.BasePopupView;
+import com.lxj.xpopup.enums.PopupAnimation;
 import com.noplugins.keepfit.android.adapter.ContentPagerAdapterMy;
 import com.noplugins.keepfit.android.base.BaseActivity;
 import com.noplugins.keepfit.android.base.MyApplication;
-import com.noplugins.keepfit.android.entity.CheckEntity;
 import com.noplugins.keepfit.android.entity.MaxMessageEntity;
 import com.noplugins.keepfit.android.entity.VersionEntity;
 import com.noplugins.keepfit.android.fragment.RiChengFragment;
-import com.noplugins.keepfit.android.fragment.ViewFragment;
-import com.noplugins.keepfit.android.fragment.MineFragment;
 import com.noplugins.keepfit.android.fragment.MessageFragment;
 import com.noplugins.keepfit.android.fragment.mine.MyFragment;
 import com.noplugins.keepfit.android.fragment.statistics.StatisticsFragment;
@@ -49,7 +39,6 @@ import com.noplugins.keepfit.android.global.AppConstants;
 import com.noplugins.keepfit.android.jpush.TagAliasOperatorHelper;
 import com.noplugins.keepfit.android.util.SpUtils;
 import com.noplugins.keepfit.android.util.VersionUtils;
-import com.noplugins.keepfit.android.util.data.SharedPreferencesHelper;
 import com.noplugins.keepfit.android.util.eventbus.MessageEvent;
 import com.noplugins.keepfit.android.util.net.Network;
 import com.noplugins.keepfit.android.util.net.entity.Bean;
@@ -59,7 +48,8 @@ import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriberNew;
 import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener;
 import com.noplugins.keepfit.android.util.ui.BaseDialog;
 import com.noplugins.keepfit.android.util.ui.NoScrollViewPager;
-import com.noplugins.keepfit.android.wxapi.WXPayEntryActivity;
+import com.noplugins.keepfit.android.util.ui.pop.base.CenterPopupView;
+import com.noplugins.keepfit.android.util.ui.pop.inteface.ViewCallBack;
 import com.orhanobut.logger.Logger;
 
 import org.greenrobot.eventbus.EventBus;
@@ -77,8 +67,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import okhttp3.RequestBody;
 import rx.Subscription;
-
-import static com.tencent.bugly.Bugly.applicationContext;
 
 public class KeepFitActivity extends BaseActivity {
     @BindView(R.id.viewpager_content)
@@ -168,7 +156,28 @@ public class KeepFitActivity extends BaseActivity {
         //更新app
 //        update_app();
 
+        //pop();
     }
+
+
+//    private void pop() {
+//        new XPopup.Builder(this)
+//                .autoOpenSoftInput(true)
+//                .popupAnimation(PopupAnimation.ScaleAlphaFromCenter)
+//                .asCustom(new CenterPopupView(this, R.layout.call_pop, new ViewCallBack() {
+//                    @Override
+//                    public void onReturnView(View view, BasePopupView popup) {
+//                        view.findViewById(R.id.cancel_layout).setOnClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v) {
+//                                popup.dismiss();
+//                            }
+//                        });
+//                    }
+//
+//                })).show();
+//    }
+
 
     private void update_app() {
         Map<String, Object> params = new HashMap<>();
@@ -223,6 +232,7 @@ public class KeepFitActivity extends BaseActivity {
         });
         builder.executeMission(this);
     }
+
     /**
      * 自定义下载中对话框，下载中会连续回调此方法 updateUI
      * 务必用库传回来的context 实例化你的dialog
@@ -246,6 +256,7 @@ public class KeepFitActivity extends BaseActivity {
             }
         };
     }
+
     /**
      * 更新弹窗样式
      *
@@ -260,6 +271,7 @@ public class KeepFitActivity extends BaseActivity {
             return baseDialog;
         };
     }
+
     /**
      * @return
      * @important 使用请求版本功能，可以在这里设置downloadUrl
@@ -270,9 +282,9 @@ public class KeepFitActivity extends BaseActivity {
         UIData uiData = UIData.create();
         uiData.setTitle(getString(R.string.update_title));
         uiData.setDownloadUrl(update_url);
-        if(is_qiangzhi_update){
+        if (is_qiangzhi_update) {
             uiData.setContent(getString(R.string.updatecontent2));
-        }else{
+        } else {
             uiData.setContent(getString(R.string.updatecontent));
         }
         return uiData;
@@ -522,6 +534,7 @@ public class KeepFitActivity extends BaseActivity {
 
     private static final int TIME_EXIT = 2000;
     private long mBackPressed;
+
     @Override
     public void onBackPressed() {
         if (mBackPressed + TIME_EXIT > System.currentTimeMillis()) {
