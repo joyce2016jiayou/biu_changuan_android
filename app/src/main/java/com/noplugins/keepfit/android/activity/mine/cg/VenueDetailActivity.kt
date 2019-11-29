@@ -37,10 +37,7 @@ class VenueDetailActivity : BaseActivity() {
     override fun initView() {
         setContentView(R.layout.activity_venue_detail)
         docList = ArrayList()
-        layout2Adapter = VenueLayout2Adapter(docList)
-        layout2Adapter!!.setOnItemChildClickListener { adapter, view, position ->
-            //checkbox 逻辑处理
-        }
+
         requestDoc()
         //todo 请求到数据之后再进行 addView的操作，否则页面无数据
         changeLayout1(0)
@@ -122,6 +119,13 @@ class VenueDetailActivity : BaseActivity() {
     @SuppressLint("WrongConstant")
     private fun changeLayout2() {
         nowSelect = 2
+
+        if (layout2Adapter==null){
+            layout2Adapter = VenueLayout2Adapter(docList)
+            layout2Adapter!!.setOnItemChildClickListener { adapter, view, position ->
+                //checkbox 逻辑处理
+            }
+        }
         rec_right.removeViewAt(0)
         val view = layoutInflater.inflate(R.layout.venue_item_2, null, false)
         rec_right.addView(view, 0)
@@ -129,8 +133,6 @@ class VenueDetailActivity : BaseActivity() {
         val save2 = view.findViewById<TextView>(R.id.tv_save_2)
         rvFacilities.layoutManager = GridLayoutManager(this,3,GridLayoutManager.VERTICAL,false)
         rvFacilities.adapter = layout2Adapter
-
-
 
         save2.setOnClickListener {
             Toast.makeText(applicationContext,"sava 2 info",Toast.LENGTH_SHORT).show()
@@ -147,7 +149,7 @@ class VenueDetailActivity : BaseActivity() {
 
     }
 
-    //layout_3
+    //layout_4
     private fun changeLayout4() {
         nowSelect = 4
         rec_right.removeViewAt(0)
