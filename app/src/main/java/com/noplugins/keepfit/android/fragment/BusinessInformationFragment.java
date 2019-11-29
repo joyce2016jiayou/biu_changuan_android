@@ -26,6 +26,8 @@ import com.noplugins.keepfit.android.activity.CheckStatusFailActivity;
 import com.noplugins.keepfit.android.activity.HeTongActivity;
 import com.noplugins.keepfit.android.activity.InformationCheckActivity;
 import com.noplugins.keepfit.android.activity.SubmitInformationSelectActivity;
+import com.noplugins.keepfit.android.activity.mine.CgPriceActivity;
+import com.noplugins.keepfit.android.activity.user.Login2Activity;
 import com.noplugins.keepfit.android.bean.BindCardBean;
 import com.noplugins.keepfit.android.bean.CheckBean;
 import com.noplugins.keepfit.android.bean.CompnyBean;
@@ -278,6 +280,7 @@ public class BusinessInformationFragment extends ViewPagerFragment {
         }
     }
 
+    private String area_num;
 
     private void submit_information() {
         Map<String, Object> params = new HashMap<>();
@@ -309,8 +312,10 @@ public class BusinessInformationFragment extends ViewPagerFragment {
                             public void onNext(Bean<CheckBean> result) {
                                 //缓存场馆ID
                                 SpUtils.putString(getActivity(), AppConstants.CHANGGUAN_NUM, result.getData().getAreaNum());
-                                //获取公司账户的数据
-                                get_compny_resource(result.getData().getAreaNum());
+                                //获取审核状态
+                                get_check_status();
+                                area_num = result.getData().getAreaNum();
+
                             }
 
                             @Override
@@ -319,6 +324,32 @@ public class BusinessInformationFragment extends ViewPagerFragment {
                             }
                         }, getActivity(), false));
     }
+
+    private void get_check_status() {
+        Map<String, Object> params = new HashMap<>();
+        params.put("token", SpUtils.getString(getActivity(), AppConstants.TOKEN));
+        Log.e("获取审核状态参数", params.toString());
+        Subscription subscription = Network.getInstance("获取审核状态", getActivity())
+                .get_check_status(params,
+                        new ProgressSubscriber<>("获取审核状态", new SubscriberOnNextListener<Bean<CheckEntity>>() {
+                            @Override
+                            public void onNext(Bean<CheckEntity> result) {
+                                //获取公司账户的数据
+                                get_compny_resource(area_num);
+                            }
+
+                            @Override
+                            public void onError(String error) {
+                                //跳转审核失败的页面
+                                Intent intent = new Intent(getActivity(), CheckStatusFailActivity.class);
+                                startActivity(intent);
+                                getActivity().finish();
+
+
+                            }
+                        }, getActivity(), false));
+    }
+
 
     private void get_compny_resource(String changguan_number) {
         Map<String, Object> params = new HashMap<>();
