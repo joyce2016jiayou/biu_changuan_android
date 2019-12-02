@@ -337,5 +337,7 @@
     <string name="tv_business_license">营业执照/统一社会信用代码</string>
     <string name="tv_company_bank_number">企业银行账号</string>
     <string name="tv_company_bank">开户银行</string>
+    <string name="tv_logo">封面图</string>
+    <string name="tv_pic_tips">建议上传卫生间、更衣室、器械区、操房等位置的图片。</string>
 
 </resources>

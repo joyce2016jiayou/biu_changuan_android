@@ -140,4 +140,8 @@
         <item name="android:textColor">@color/color_6D7278</item>
         <item name="android:textSize">13sp</item>
     </style>
+    <style name="tv_label_15">
+        <item name="android:textColor">@color/color_6D7278</item>
+        <item name="android:textSize">15sp</item>
+    </style>
 </resources>

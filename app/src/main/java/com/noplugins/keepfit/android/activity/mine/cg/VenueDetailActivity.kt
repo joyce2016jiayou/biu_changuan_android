@@ -2,6 +2,7 @@ package com.noplugins.keepfit.android.activity.mine.cg
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,11 +11,14 @@ import android.widget.*
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.google.android.material.textfield.TextInputEditText
+import com.huantansheng.easyphotos.EasyPhotos
 import com.noplugins.keepfit.android.R
 import com.noplugins.keepfit.android.adapter.mine.cg.VenueLayout2Adapter
 import com.noplugins.keepfit.android.base.BaseActivity
 import com.noplugins.keepfit.android.bean.DictionaryeBean
+import com.noplugins.keepfit.android.util.GlideEngine
 import com.noplugins.keepfit.android.util.net.Network
 import com.noplugins.keepfit.android.util.net.entity.Bean
 import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriber
@@ -23,6 +27,7 @@ import kotlinx.android.synthetic.main.activity_venue_detail.*
 import kotlinx.android.synthetic.main.venue_item_1.*
 import kotlinx.android.synthetic.main.venue_item_2.*
 import kotlinx.android.synthetic.main.venue_item_6.*
+import java.io.File
 import java.util.HashMap
 
 class VenueDetailActivity : BaseActivity() {
@@ -88,10 +93,9 @@ class VenueDetailActivity : BaseActivity() {
             }
         }
         rb_album_manager.setOnClickListener {
-            nowSelect = 5
-            rec_right.removeViewAt(0)
-            val view = layoutInflater.inflate(R.layout.venue_item_6, null, false)
-            rec_right.addView(view, 0)
+            if (nowSelect != 5) {
+                changeLayout5()
+            }
         }
         rb_coach_notes.setOnClickListener {
             if (nowSelect != 6) {
@@ -158,6 +162,27 @@ class VenueDetailActivity : BaseActivity() {
 
     }
 
+    //layout_5
+    private var ivLogo:ImageView ?= null
+    private var ivLogoPath = ""
+    private fun changeLayout5() {
+        nowSelect = 5
+        rec_right.removeViewAt(0)
+        val view = layoutInflater.inflate(R.layout.venue_item_5, null, false)
+        rec_right.addView(view, 0)
+
+        ivLogo = view.findViewById<ImageView>(R.id.logo_image)
+        ivLogo!!.setOnClickListener {
+            EasyPhotos.createAlbum(this, true, GlideEngine.getInstance())
+                    .setFileProviderAuthority("com.noplugins.keepfit.android.fileprovider")
+                    .setPuzzleMenu(false)
+                    .setCount(1)
+                    .setOriginalMenu(false, true, null)
+                    .start(102)
+        }
+
+    }
+
     //layout_6 教练须知
     private fun changeLayout6() {
         nowSelect = 6
@@ -176,5 +201,25 @@ class VenueDetailActivity : BaseActivity() {
         }
 
 
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (RESULT_OK == resultCode) {
+            if (nowSelect == 5){
+                if (requestCode == 1001){
+
+                }
+                else{
+                    val resultPaths = data!!.getStringArrayListExtra(EasyPhotos.RESULT_PATHS)
+                    if (resultPaths.size > 0) {
+                        ivLogoPath = resultPaths[0]
+                        val ivLogoFile = File(ivLogoPath)
+                        Glide.with(applicationContext).load(ivLogoFile).into(ivLogo)
+//                        delete_icon_btn.setVisibility(View.VISIBLE)
+                    }
+                }
+            }
+        }
     }
 }

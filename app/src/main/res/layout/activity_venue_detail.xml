@@ -19,7 +19,7 @@
             android:id="@+id/rec_left"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:background="@color/color_F9CE0F"
+            android:background="@color/color_cg_bg"
             app:layout_constraintWidth_percent="0.3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintRight_toLeftOf="@+id/rec_right" >

@@ -3,26 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:layout_width="54dp"
-    android:layout_height="54dp">
+    android:layout_width="@dimen/m72"
+    android:layout_height="@dimen/m72">
 
 
         <com.noplugins.keepfit.android.util.ui.jiugongge.CCRImageView
             android:id="@+id/iv_item_nine_photo_photo"
-            android:layout_width="44dp"
+            android:layout_width="@dimen/m70"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
-            android:layout_height="44dp"
+            android:layout_height="@dimen/m70"
             app:bga_iv_square="true"
             android:scaleType="centerCrop"
             android:src="@drawable/jia_image" />
 
         <ImageView
             android:id="@+id/iv_item_nine_photo_flag"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
-            android:layout_marginRight="3dp"
-            android:layout_marginTop="3dp"
+            android:layout_width="@dimen/m16"
+            android:layout_height="@dimen/m16"
             android:clickable="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
