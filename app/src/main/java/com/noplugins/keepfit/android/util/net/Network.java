@@ -14,8 +14,11 @@ import com.noplugins.keepfit.android.bean.CalenderEntity;
 import com.noplugins.keepfit.android.bean.CgBindingBean;
 import com.noplugins.keepfit.android.bean.ChangguanBean;
 import com.noplugins.keepfit.android.bean.CheckBean;
+import com.noplugins.keepfit.android.bean.CityCode;
 import com.noplugins.keepfit.android.bean.CompnyBean;
 import com.noplugins.keepfit.android.bean.DictionaryeBean;
+import com.noplugins.keepfit.android.bean.GetCityCode;
+import com.noplugins.keepfit.android.bean.GetQuCode;
 import com.noplugins.keepfit.android.bean.HightList11Bean;
 import com.noplugins.keepfit.android.bean.HightListBean;
 import com.noplugins.keepfit.android.bean.LoginBean;
@@ -81,6 +84,8 @@ public class Network {
     private static Network mInstance;
     public MyService service;
     public CoachService coach_service;
+    public UserService userService;
+
     public static String token = "";
     public static String login_token = "login_token";
     public static String phone_number = "phone_number";
@@ -91,7 +96,8 @@ public class Network {
     public static String phone = "phone";
     public static String is_set_alias = "is_set_alias";
     private static String MRTHOD_NAME = "";
-    Retrofit retrofit, coach_retrofit;
+    Retrofit retrofit, coach_retrofit,get_user_retrofit;
+
     public String get_changguan_url(String str) {
         if (str.equals("test")) {
             return "http://testapi.noplugins.com/api/gym-service/";
@@ -105,6 +111,13 @@ public class Network {
             return "http://testapi.noplugins.com/api/coach-service/coachuser/";
         } else {
             return "http://kft.ahcomg.com/api/coach-service/coachuser/";
+        }
+    }
+    public String user_url(String str) {
+        if (str.equals("test")) {
+            return "http://testapi.noplugins.com/api/cust-service/custuser/";
+        } else {
+            return "http://kft.ahcomg.com/api/cust-service/custuser/";
         }
     }
 
@@ -198,10 +211,17 @@ public class Network {
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
-
+        get_user_retrofit = new Retrofit.Builder()
+                .client(client)
+                .baseUrl(user_url("test"))//设置请求网址根部
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .build();
 
         service = retrofit.create(MyService.class);
         coach_service = coach_retrofit.create(CoachService.class);
+        userService = get_user_retrofit.create(UserService.class);
+
     }
 
     private RequestBody retuen_json_params(Map<String, Object> params) {
@@ -352,6 +372,50 @@ public class Network {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
     }
+
+    /**
+     * 获取省
+     *
+     * @param subscriber
+     * @return
+     */
+    public Subscription get_province(Map<String, Object> params, Subscriber<Bean<CityCode>> subscriber) {
+        return userService.get_province(retuen_json_params(params))
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 获取市
+     *
+     * @param subscriber
+     * @return
+     */
+    public Subscription get_city(Map<String, Object> params, Subscriber<Bean<GetCityCode>> subscriber) {
+        return userService.get_city(retuen_json_params(params))
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 获取区
+     *
+     * @param subscriber
+     * @return
+     */
+    public Subscription get_qu(Map<String, Object> params, Subscriber<Bean<GetQuCode>> subscriber) {
+        return userService.get_qu(retuen_json_params(params))
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+
 
     /**
      * 获取审核状态

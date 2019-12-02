@@ -21,6 +21,16 @@ public class JsonBean implements IPickerViewData {
      */
 
     private String name;
+
+    public String getName_code() {
+        return name_code;
+    }
+
+    public void setName_code(String name_code) {
+        this.name_code = name_code;
+    }
+
+    private String name_code;
     private List<CityBean> city;
 
     public String getName() {
@@ -55,7 +65,16 @@ public class JsonBean implements IPickerViewData {
          */
 
         private String name;
-        private List<String> area;
+        private String name_code;
+
+        public String getName_code() {
+            return name_code;
+        }
+
+        public void setName_code(String name_code) {
+            this.name_code = name_code;
+        }
+
 
         public String getName() {
             return name;
@@ -65,12 +84,36 @@ public class JsonBean implements IPickerViewData {
             this.name = name;
         }
 
-        public List<String> getArea() {
+        private List<QuBean> area;
+
+        public List<QuBean> getArea() {
             return area;
         }
 
-        public void setArea(List<String> area) {
+        public void setArea(List<QuBean> area) {
             this.area = area;
         }
+    }
+
+    public static class QuBean{
+        private String name;
+
+        public String getName() {
+            return name;
+        }
+
+        public String getName_code() {
+            return name_code;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public void setName_code(String name_code) {
+            this.name_code = name_code;
+        }
+
+        private String name_code;
     }
 }
