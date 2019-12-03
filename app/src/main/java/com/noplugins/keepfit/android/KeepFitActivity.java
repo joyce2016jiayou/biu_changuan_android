@@ -166,7 +166,6 @@ public class KeepFitActivity extends BaseActivity {
         loginSuccess();
 
 
-
     }
 
     private void update_app() {
@@ -184,7 +183,7 @@ public class KeepFitActivity extends BaseActivity {
                                 if (result.getData().getUp() == 1) {
                                     is_qiangzhi_update = true;
                                     update_app_pop();
-                                } else {
+                                } else if (result.getData().getUp() == 3) {
                                     update_app_pop();
                                     is_qiangzhi_update = false;
                                 }
@@ -222,6 +221,7 @@ public class KeepFitActivity extends BaseActivity {
         });
         builder.executeMission(this);
     }
+
     /**
      * 自定义下载中对话框，下载中会连续回调此方法 updateUI
      * 务必用库传回来的context 实例化你的dialog
@@ -245,6 +245,7 @@ public class KeepFitActivity extends BaseActivity {
             }
         };
     }
+
     /**
      * 更新弹窗样式
      *
@@ -259,6 +260,7 @@ public class KeepFitActivity extends BaseActivity {
             return baseDialog;
         };
     }
+
     /**
      * @return
      * @important 使用请求版本功能，可以在这里设置downloadUrl
@@ -269,9 +271,9 @@ public class KeepFitActivity extends BaseActivity {
         UIData uiData = UIData.create();
         uiData.setTitle(getString(R.string.update_title));
         uiData.setDownloadUrl(update_url);
-        if(is_qiangzhi_update){
+        if (is_qiangzhi_update) {
             uiData.setContent(getString(R.string.updatecontent2));
-        }else{
+        } else {
             uiData.setContent(getString(R.string.updatecontent));
         }
         return uiData;
@@ -523,6 +525,7 @@ public class KeepFitActivity extends BaseActivity {
 
     private static final int TIME_EXIT = 2000;
     private long mBackPressed;
+
     @Override
     public void onBackPressed() {
         if (mBackPressed + TIME_EXIT > System.currentTimeMillis()) {
