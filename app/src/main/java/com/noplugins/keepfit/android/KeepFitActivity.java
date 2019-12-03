@@ -165,6 +165,8 @@ public class KeepFitActivity extends BaseActivity {
         //设置alias
         loginSuccess();
 
+        //更新app
+        update_app();
 
     }
 
@@ -317,8 +319,6 @@ public class KeepFitActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        //更新app
-        update_app();
         if (null != getIntent().getExtras()) {
             Bundle parms = getIntent().getExtras();
             if (parms.getString("jpush_enter", "").equals("")) {
