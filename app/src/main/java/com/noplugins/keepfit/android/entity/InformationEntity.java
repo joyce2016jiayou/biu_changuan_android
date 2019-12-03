@@ -53,6 +53,34 @@ public class InformationEntity {
     private String district;
     private String bankName;
     private String bank_card_num;
+    private String provinceCode;
+    private String cityCode;
+
+    public String getProvinceCode() {
+        return provinceCode;
+    }
+
+    public void setProvinceCode(String provinceCode) {
+        this.provinceCode = provinceCode;
+    }
+
+    public String getCityCode() {
+        return cityCode;
+    }
+
+    public void setCityCode(String cityCode) {
+        this.cityCode = cityCode;
+    }
+
+    public String getDistrictCode() {
+        return districtCode;
+    }
+
+    public void setDistrictCode(String districtCode) {
+        this.districtCode = districtCode;
+    }
+
+    private String districtCode;
 
     public String getBankName() {
         return bankName;

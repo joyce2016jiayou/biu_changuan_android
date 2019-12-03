@@ -8,6 +8,7 @@ import com.noplugins.keepfit.android.bean.BuyInformationBean;
 import com.noplugins.keepfit.android.bean.CalenderEntity;
 import com.noplugins.keepfit.android.bean.ChangguanBean;
 import com.noplugins.keepfit.android.bean.CheckBean;
+import com.noplugins.keepfit.android.bean.CityCode;
 import com.noplugins.keepfit.android.bean.CompnyBean;
 import com.noplugins.keepfit.android.bean.DictionaryeBean;
 import com.noplugins.keepfit.android.bean.HightList11Bean;
@@ -154,6 +155,8 @@ public interface MyService {
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
     @POST("submitAudit")
     Observable<Bean<CheckBean>> submit_information(@Body RequestBody json);
+
+
 
     /**
      * 获取审核状态

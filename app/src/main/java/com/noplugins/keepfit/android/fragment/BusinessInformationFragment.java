@@ -305,46 +305,27 @@ public class BusinessInformationFragment extends ViewPagerFragment {
         params.put("bank_card_num", informationEntity.getBank_card_num());
         params.put("bank_name", informationEntity.getBankName());
         params.put("gym_user_num", SpUtils.getString(getActivity(), AppConstants.USER_NAME));
+        params.put("provinceCode",informationEntity.getProvinceCode());
+        params.put("cityCode",informationEntity.getCityCode());
+        params.put("districtCode",informationEntity.getDistrictCode());
         Subscription subscription = Network.getInstance("提交审核资料", getActivity())
                 .submit_information(params,
                         new ProgressSubscriber<>("提交审核资料", new SubscriberOnNextListener<Bean<CheckBean>>() {
                             @Override
                             public void onNext(Bean<CheckBean> result) {
-                                //缓存场馆ID
-                                SpUtils.putString(getActivity(), AppConstants.CHANGGUAN_NUM, result.getData().getAreaNum());
-                                //获取审核状态
-                                get_check_status();
-                                area_num = result.getData().getAreaNum();
+                                if(result.getData().getCheckResult()==1){//通过
+                                    //缓存场馆ID
+                                    SpUtils.putString(getActivity(), AppConstants.CHANGGUAN_NUM, result.getData().getAreaNum());
+                                    area_num = result.getData().getAreaNum();
+                                    get_compny_resource(area_num);
+                                }else{
+                                    Toast.makeText(getActivity(),result.getData().getCheckReason(),Toast.LENGTH_SHORT).show();
+                                }
 
                             }
 
                             @Override
                             public void onError(String error) {
-
-                            }
-                        }, getActivity(), false));
-    }
-
-    private void get_check_status() {
-        Map<String, Object> params = new HashMap<>();
-        params.put("token", SpUtils.getString(getActivity(), AppConstants.TOKEN));
-        Log.e("获取审核状态参数", params.toString());
-        Subscription subscription = Network.getInstance("获取审核状态", getActivity())
-                .get_check_status(params,
-                        new ProgressSubscriber<>("获取审核状态", new SubscriberOnNextListener<Bean<CheckEntity>>() {
-                            @Override
-                            public void onNext(Bean<CheckEntity> result) {
-                                //获取公司账户的数据
-                                get_compny_resource(area_num);
-                            }
-
-                            @Override
-                            public void onError(String error) {
-                                //跳转审核失败的页面
-                                Intent intent = new Intent(getActivity(), CheckStatusFailActivity.class);
-                                startActivity(intent);
-                                getActivity().finish();
-
 
                             }
                         }, getActivity(), false));
