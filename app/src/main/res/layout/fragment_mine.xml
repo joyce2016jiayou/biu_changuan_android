@@ -41,21 +41,23 @@
 
                         <TextView
                             android:id="@+id/tv_user_Name"
-                            android:layout_width="@dimen/m150"
+                            android:layout_width="@dimen/m130"
                             android:layout_height="wrap_content"
                             tools:text="PONY"
                             android:textSize="18sp"
                             android:layout_marginRight="@dimen/m10"
                             android:layout_marginLeft="@dimen/m10"
                             android:textStyle="bold"
+                            android:layout_alignParentLeft="true"
+                            android:layout_toLeftOf="@+id/tv_score"
                             android:textColor="@color/contents_text"/>
 
                         <TextView
                             android:id="@+id/tv_score"
-                            android:layout_width="@dimen/m40"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:layout_toRightOf="@+id/tv_user_Name"
+                            android:layout_alignParentRight="true"
                             tools:text="9.0分"/>
                     </RelativeLayout>
 
