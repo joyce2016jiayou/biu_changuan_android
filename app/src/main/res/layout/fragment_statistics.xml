@@ -43,7 +43,7 @@
                 android:gravity="center_vertical"
                 android:hint="@string/tv38"
                 android:paddingLeft="@dimen/m20"
-                android:text="威尔士"
+                android:text=""
                 android:textColor="@color/top_heiziti"
                 android:textColorHint="@color/color_929292"
                 android:textSize="13sp" />

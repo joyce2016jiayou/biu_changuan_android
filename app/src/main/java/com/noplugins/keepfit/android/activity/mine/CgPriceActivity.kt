@@ -186,8 +186,12 @@ class CgPriceActivity : BaseActivity() {
         }
 
         tv_shangjia.setOnClickListener {
-            if (list.size < 1) {
-                Toast.makeText(applicationContext, "提交数据不可为空", Toast.LENGTH_SHORT).show()
+//            if (list.size < 1) {
+//                Toast.makeText(applicationContext, "提交数据不可为空", Toast.LENGTH_SHORT).show()
+//                return@setOnClickListener
+//            }
+            if (et_price.text.toString().isEmpty()){
+                Toast.makeText(applicationContext, "价格不能为空", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             request()

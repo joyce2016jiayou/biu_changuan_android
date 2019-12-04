@@ -311,7 +311,7 @@ class Login2Activity : BaseActivity() {
         val webSettings = webView.settings
         webSettings.useWideViewPort = true//设置此属性，可任意比例缩放
         webSettings.loadWithOverviewMode = true
-        webView.loadUrl("file:///android_asset/changguan_xieyi.html")
+        webView.loadUrl("http://www.noplugins.com/doc/changguan_xieyi.html")
         agree_btn.setOnClickListener(View.OnClickListener {
             popupWindow.dismiss()
             is_check_fuwu = true

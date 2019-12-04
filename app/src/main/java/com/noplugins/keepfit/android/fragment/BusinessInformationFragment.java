@@ -26,6 +26,8 @@ import com.noplugins.keepfit.android.activity.CheckStatusFailActivity;
 import com.noplugins.keepfit.android.activity.HeTongActivity;
 import com.noplugins.keepfit.android.activity.InformationCheckActivity;
 import com.noplugins.keepfit.android.activity.SubmitInformationSelectActivity;
+import com.noplugins.keepfit.android.activity.mine.CgPriceActivity;
+import com.noplugins.keepfit.android.activity.user.Login2Activity;
 import com.noplugins.keepfit.android.bean.BindCardBean;
 import com.noplugins.keepfit.android.bean.CheckBean;
 import com.noplugins.keepfit.android.bean.CompnyBean;
@@ -278,6 +280,7 @@ public class BusinessInformationFragment extends ViewPagerFragment {
         }
     }
 
+    private String area_num;
 
     private void submit_information() {
         Map<String, Object> params = new HashMap<>();
@@ -302,15 +305,23 @@ public class BusinessInformationFragment extends ViewPagerFragment {
         params.put("bank_card_num", informationEntity.getBank_card_num());
         params.put("bank_name", informationEntity.getBankName());
         params.put("gym_user_num", SpUtils.getString(getActivity(), AppConstants.USER_NAME));
+        params.put("provinceCode",informationEntity.getProvinceCode());
+        params.put("cityCode",informationEntity.getCityCode());
+        params.put("districtCode",informationEntity.getDistrictCode());
         Subscription subscription = Network.getInstance("提交审核资料", getActivity())
                 .submit_information(params,
                         new ProgressSubscriber<>("提交审核资料", new SubscriberOnNextListener<Bean<CheckBean>>() {
                             @Override
                             public void onNext(Bean<CheckBean> result) {
-                                //缓存场馆ID
-                                SpUtils.putString(getActivity(), AppConstants.CHANGGUAN_NUM, result.getData().getAreaNum());
-                                //获取公司账户的数据
-                                get_compny_resource(result.getData().getAreaNum());
+                                if(result.getData().getCheckResult()==1){//通过
+                                    //缓存场馆ID
+                                    SpUtils.putString(getActivity(), AppConstants.CHANGGUAN_NUM, result.getData().getAreaNum());
+                                    area_num = result.getData().getAreaNum();
+                                    get_compny_resource(area_num);
+                                }else{
+                                    Toast.makeText(getActivity(),result.getData().getCheckReason(),Toast.LENGTH_SHORT).show();
+                                }
+
                             }
 
                             @Override
@@ -319,6 +330,7 @@ public class BusinessInformationFragment extends ViewPagerFragment {
                             }
                         }, getActivity(), false));
     }
+
 
     private void get_compny_resource(String changguan_number) {
         Map<String, Object> params = new HashMap<>();

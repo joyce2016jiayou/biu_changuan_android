@@ -154,7 +154,7 @@ public class KeepFitActivity extends BaseActivity {
         loginSuccess();
 
         //更新app
-//        update_app();
+        update_app();
 
         //pop();
     }
@@ -194,7 +194,7 @@ public class KeepFitActivity extends BaseActivity {
                                 if (result.getData().getUp() == 1) {
                                     is_qiangzhi_update = true;
                                     update_app_pop();
-                                } else {
+                                } else if (result.getData().getUp() == 3) {
                                     update_app_pop();
                                     is_qiangzhi_update = false;
                                 }

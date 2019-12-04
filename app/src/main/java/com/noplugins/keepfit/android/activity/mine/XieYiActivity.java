@@ -3,6 +3,8 @@ package com.noplugins.keepfit.android.activity.mine;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,9 +16,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-public class XieYiActivity extends BaseActivity {
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
-    TextView textView;
+public class XieYiActivity extends BaseActivity {
+    @BindView(R.id.content_layout)
+    WebView webView;
+
     @Override
     public void initBundle(Bundle parms) {
 
@@ -25,6 +31,8 @@ public class XieYiActivity extends BaseActivity {
     @Override
     public void initView() {
         setContentLayout(R.layout.activity_xie_yi);
+        ButterKnife.bind(this);
+
         ImageView imageView = findViewById(R.id.back_btn);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,26 +45,12 @@ public class XieYiActivity extends BaseActivity {
 
     @Override
     public void doBusiness(Context mContext) {
-        textView = findViewById(R.id.tv_content);
-
-        getFromAssets();
+        //自适应屏幕
+        WebSettings webSettings = webView.getSettings();
+        webSettings.setUseWideViewPort(true);//设置此属性，可任意比例缩放
+        webSettings.setLoadWithOverviewMode(true);
+        webView.loadUrl("http://www.noplugins.com/doc/changguan_xieyi.html");
     }
-
-    public void getFromAssets(){
-        try {
-            InputStream is = getResources().getAssets().open("xieyi.txt");
-            InputStreamReader isr = new InputStreamReader(is,"UTF-8");
-            BufferedReader br = new BufferedReader(isr);
-            String str = "";
-            while((str = br.readLine()) != null){
-                textView.append(str+"\n");  //把test文档中的内容显示在tv中
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-
 
 
 }

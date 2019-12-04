@@ -1,4 +1,5 @@
 package com.noplugins.keepfit.android.activity;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -51,6 +52,7 @@ public class CheckStatusFailActivity extends BaseActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(CheckStatusFailActivity.this, InformationCheckActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
     }

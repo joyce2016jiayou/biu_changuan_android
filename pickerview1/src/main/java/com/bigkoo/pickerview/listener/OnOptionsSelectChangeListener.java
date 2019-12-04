@@ -6,6 +6,10 @@ package com.bigkoo.pickerview.listener;
 
 public interface OnOptionsSelectChangeListener {
 
-    void onOptionsSelectChanged(int options1, int options2, int options3);
+    void onOptionsSelectChanged(int options1);
+    void onOptionsSelectChanged2(int options2);
+    void onOptionsSelectChanged3(int options3);
+    void onOptionsSelectChanged3(int options1,int options2,int options3);
+
 
 }
