@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <www.linwg.org.lib.LCardView
+        android:id="@+id/clander_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/m10"
+        android:layout_marginTop="@dimen/m6"
+        android:layout_marginRight="@dimen/m10"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:cornerRadius="@dimen/m8"
+        app:shadowSize="@dimen/m2"
+        app:shadowStartAlpha="10">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/m113"
+            android:gravity="center_vertical"
+            android:background="@drawable/select_changguan_bg"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/m20"
+                    android:textColor="@color/top_heiziti"
+                    android:textSize="15sp"
+                    android:text="@string/tv2" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/m20"
+                    android:layout_marginTop="@dimen/m13"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/m12"
+                        android:layout_height="@dimen/m12"
+                        android:src="@drawable/icon_time" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/m8"
+                        android:textColor="@color/color_4A4A4A"
+                        android:textSize="12sp"
+                        android:text="07:00-21:00" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/m20"
+                    android:layout_marginTop="@dimen/m13"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/m12"
+                        android:layout_height="@dimen/m12"
+                        android:src="@drawable/icon_locale" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/m8"
+                        android:textColor="@color/color_4A4A4A"
+                        android:textSize="12sp"
+                        android:text="闵行区甬虹路78弄1号晋城中心" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </www.linwg.org.lib.LCardView>
+
+</LinearLayout>
