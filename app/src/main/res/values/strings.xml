@@ -317,5 +317,27 @@
     <string name="tv_roles_select">角色选择</string>
     <string name="authority_management">权限管理</string>
     <string name="tv_add">添加</string>
+    <string name="tv_cg_base_info">基础信息</string>
+    <string name="tv_venue_facilities">场馆设施</string>
+    <string name="tv_album_manager">相册管理</string>
+    <string name="tv_coach_notes">教练须知</string>
+    <string name="tv_account_info">账户信息</string>
+    <string name="tv_business_info">营业信息</string>
+    <string name="tv_save">保存</string>
+    <string name="tv_venue_name">场馆名称</string>
+    <string name="tv_venue_type">场馆类型</string>
+    <string name="tv_venue_area">场馆面积</string>
+    <string name="tv_venue_address">场馆地址</string>
+    <string name="tv_business_hours">营业时间</string>
+    <string name="tv_contact_phone">联系电话</string>
+    <string name="tv_contact_email">联系邮箱</string>
+    <string name="tv_legal_name">法人姓名</string>
+    <string name="tv_id_card">身份证号</string>
+    <string name="tv_company_name">企业名称</string>
+    <string name="tv_business_license">营业执照/统一社会信用代码</string>
+    <string name="tv_company_bank_number">企业银行账号</string>
+    <string name="tv_company_bank">开户银行</string>
+    <string name="tv_logo">封面图</string>
+    <string name="tv_pic_tips">建议上传卫生间、更衣室、器械区、操房等位置的图片。</string>
 
 </resources>

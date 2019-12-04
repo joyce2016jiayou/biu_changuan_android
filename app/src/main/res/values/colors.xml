@@ -39,7 +39,9 @@
     <color name="result_text">#ffffff</color>
     <color name="result_view">#000000</color>
     <color name="status_text">#ffffff</color>
+    <color name="color_cg_bg">#0a000000</color>
     <color name="viewfinder_mask">#50000000</color>
+    <color name="color_1A000000">#1A000000</color>
     <color name="react">#ffffff</color>
     <color name="scanLineColor">#ffffff</color>
     <color name="defaultColor">#ffffff</color>
