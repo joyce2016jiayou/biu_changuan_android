@@ -26,6 +26,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.gson.Gson;
 import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.activity.AddClassActivity;
+import com.noplugins.keepfit.android.activity.SelectChangGuanActivity;
 import com.noplugins.keepfit.android.adapter.ClassAdapter;
 import com.noplugins.keepfit.android.adapter.TypeAdapter;
 import com.noplugins.keepfit.android.bean.CalenderEntity;
@@ -82,7 +83,7 @@ import static com.umeng.socialize.utils.ContextUtil.getPackageName;
 
 public class RiChengFragment extends ViewPagerFragment {
     @BindView(R.id.select_store_type)
-    RelativeLayout select_store_type;
+    LinearLayout select_store_type;
     @BindView(R.id.store_type_tv)
     TextView store_type_tv;
     @BindView(R.id.clander_layout)
@@ -178,13 +179,15 @@ public class RiChengFragment extends ViewPagerFragment {
         //获取课程数据
         init_class_date_resource();
 
-
         select_store_type.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                select_store_pop();
+                Intent intent = new Intent(getActivity(), SelectChangGuanActivity.class);
+                startActivity(intent);
+
             }
         });
+
 
         title_layout.setOnClickListener(new View.OnClickListener() {
             @Override

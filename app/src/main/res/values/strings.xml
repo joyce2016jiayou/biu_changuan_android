@@ -208,6 +208,7 @@
     <string name="tv150">场馆名称</string>
     <string name="tv151">平台场馆名称</string>
     <string name="tv152">身份证格式不正确</string>
+    <string name="tv153">请选择需要管理的场馆</string>
 
     <string name="tv_select">请选择</string>
     <string name="tv_qianbao">钱包</string>
