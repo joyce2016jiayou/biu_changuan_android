@@ -469,6 +469,8 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
         @Override
         public void onFailure(String msg) {
             Log.e("压缩失败的", msg);
+            progress_upload.dismissProgressDialog();
+            progress_upload = null;
         }
     };
 
@@ -521,6 +523,8 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
                             Log.e("上传icon成功：", icon_net_path);
                         } else {
                             Log.e("qiniu", "Upload Fail");
+                            progress_upload.dismissProgressDialog();
+                            progress_upload = null;
                             //如果失败，这里可以把info信息上报自己的服务器，便于后面分析上传错误原因
                         }
                         //Log.e("qiniu", key + ",\r\n " + info.path + ",\r\n " + response);
