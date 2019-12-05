@@ -105,7 +105,7 @@
             app:bga_snpl_deleteDrawableOverlapQuarter="false"
             app:bga_snpl_editable="true"
             app:bga_snpl_itemCornerRadius="0dp"
-            app:bga_snpl_itemSpanCount="4"
+            app:bga_snpl_itemSpanCount="3"
             app:bga_snpl_itemWhiteSpacing="5dp"
             app:bga_snpl_itemWidth="0dp"
             app:bga_snpl_maxItemCount="9"
