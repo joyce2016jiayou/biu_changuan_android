@@ -18,19 +18,23 @@ import com.noplugins.keepfit.android.R
 import com.noplugins.keepfit.android.adapter.mine.cg.VenueLayout2Adapter
 import com.noplugins.keepfit.android.base.BaseActivity
 import com.noplugins.keepfit.android.bean.DictionaryeBean
+import com.noplugins.keepfit.android.entity.InformationEntity
+import com.noplugins.keepfit.android.resource.ValueResources
 import com.noplugins.keepfit.android.util.GlideEngine
 import com.noplugins.keepfit.android.util.net.Network
 import com.noplugins.keepfit.android.util.net.entity.Bean
 import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriber
 import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener
+import com.noplugins.keepfit.android.util.ui.jiugongge.CCRSortableNinePhotoLayout
 import kotlinx.android.synthetic.main.activity_venue_detail.*
 import kotlinx.android.synthetic.main.venue_item_1.*
 import kotlinx.android.synthetic.main.venue_item_2.*
 import kotlinx.android.synthetic.main.venue_item_6.*
+import org.w3c.dom.Text
 import java.io.File
 import java.util.HashMap
 
-class VenueDetailActivity : BaseActivity() {
+class VenueDetailActivity : BaseActivity(),CCRSortableNinePhotoLayout.Delegate  {
 
     private var nowSelect = 1
     private lateinit var docList:MutableList<DictionaryeBean>
@@ -165,6 +169,28 @@ class VenueDetailActivity : BaseActivity() {
     //layout_5
     private var ivLogo:ImageView ?= null
     private var ivLogoPath = ""
+    private var photos: CCRSortableNinePhotoLayout ? = null
+    private var tvPhotoNum: TextView ? = null
+
+    //当前列表上的图片 新增了图片或删除了图片后 该列表会随之改变
+    private var strings:MutableList<String> = ArrayList()
+    /*
+        当前列表上的图片(需要提交的对象)
+        初始化为该场馆当前的所有场馆介绍图。
+        当删除(原本存在)之前的图片时:该list会改变
+        当删除新选择的图片时:该list不会改变
+        图片上传后该list需要增加
+     */
+    private var upList:MutableList<InformationEntity.GymPicBean> = ArrayList()
+
+    /*
+        当前列表为 人为选择的list
+        已选择(未上架)的图片会增加该list
+        删除已选择(未上架)的图片会减少该list
+        当该list!=0 时，必然存在需要上传的图片
+     */
+    private var selectPhotos:MutableList<String> = ArrayList()
+
     private fun changeLayout5() {
         nowSelect = 5
         rec_right.removeViewAt(0)
@@ -172,6 +198,15 @@ class VenueDetailActivity : BaseActivity() {
         rec_right.addView(view, 0)
 
         ivLogo = view.findViewById<ImageView>(R.id.logo_image)
+        photos = view.findViewById<CCRSortableNinePhotoLayout>(R.id.snpl_moment_add_photos)
+        tvPhotoNum = view.findViewById<TextView>(R.id.tv_pic_num)
+
+        photos!!.setData(strings)
+        photos!!.setDelegate(this)
+        ValueResources.select_iamges_size = strings.size//已选择的数量
+        tvPhotoNum!!.text = "(${ValueResources.select_iamges_size}/9)"
+
+        //logo
         ivLogo!!.setOnClickListener {
             EasyPhotos.createAlbum(this, true, GlideEngine.getInstance())
                     .setFileProviderAuthority("com.noplugins.keepfit.android.fileprovider")
@@ -203,11 +238,51 @@ class VenueDetailActivity : BaseActivity() {
 
     }
 
+
+    private var maxNum = 0
+    override fun onClickAddNinePhotoItem(sortableNinePhotoLayout: CCRSortableNinePhotoLayout?, view: View?, position: Int, models: java.util.ArrayList<String>?) {
+        //设置最多只能上传9张图片
+        if (ValueResources.select_iamges_size >= 9) {
+            Toast.makeText(this, "只能上传9张图片哦～", Toast.LENGTH_SHORT).show()
+        } else if (ValueResources.select_iamges_size < 9) {
+            //选择新的图片
+            maxNum = 9 - ValueResources.select_iamges_size
+            EasyPhotos.createAlbum(this, true, GlideEngine.getInstance())
+                    .setFileProviderAuthority("com.noplugins.keepfit.android.fileprovider")
+                    .setPuzzleMenu(false)
+                    .setCount(maxNum)
+                    .setOriginalMenu(false, true, null)
+                    .start(101)
+        }
+    }
+
+    override fun onClickDeleteNinePhotoItem(sortableNinePhotoLayout: CCRSortableNinePhotoLayout?, view: View?, position: Int, model: String?, models: java.util.ArrayList<String>?) {
+
+        photos!!.removeItem(position)//控件中删除该图片
+        if (position < upList.size && upList.size != 0) {
+            upList.removeAt(position)
+        } else {
+            selectPhotos.removeAt(position - upList.size)
+        }
+
+        ValueResources.select_iamges_size = ValueResources.select_iamges_size - 1
+        tvPhotoNum!!.text ="(${ValueResources.select_iamges_size}/9)"
+    }
+
+    override fun onClickNinePhotoItem(sortableNinePhotoLayout: CCRSortableNinePhotoLayout?, view: View?, position: Int, model: String?, models: java.util.ArrayList<String>?) {
+    }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (RESULT_OK == resultCode) {
             if (nowSelect == 5){
-                if (requestCode == 1001){
+                if (requestCode == 101){
+                    //不支持AndroidQ
+                    val resultPaths = data!!.getStringArrayListExtra(EasyPhotos.RESULT_PATHS)
+                    strings.addAll(resultPaths)
+                    selectPhotos.addAll(resultPaths)
+                    photos!!.setData(strings)//设置九宫格
+                    ValueResources.select_iamges_size = strings.size
+                    tvPhotoNum!!.text ="(${ValueResources.select_iamges_size}/9)"
 
                 }
                 else{
@@ -222,4 +297,5 @@ class VenueDetailActivity : BaseActivity() {
             }
         }
     }
+
 }
