@@ -259,5 +259,8 @@ dependencies {
     //popwindow集成
     implementation 'com.lxj:xpopup:1.8.10-x'
 
+    //图片选择
+    implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.3.8'
+
 
 }
