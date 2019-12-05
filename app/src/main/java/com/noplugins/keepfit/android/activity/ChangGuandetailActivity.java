@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 import com.huantansheng.easyphotos.EasyPhotos;
 import com.huantansheng.easyphotos.models.album.entity.Photo;
 import com.noplugins.keepfit.android.R;
@@ -224,6 +225,7 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
         tv_complete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                upList_iamges.clear();
                 withLs();
             }
         });
@@ -776,6 +778,9 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
      */
     @SuppressLint("CheckResult")
     private void upListToQiniu() {
+
+        Log.d("LIST_SIZE","size1:"+upList_iamges.size());
+        Log.d("LIST_SIZE","size2:"+strings.size());
         if (upList_iamges.size() == strings.size()) {
             requestUpdate();
             return;
@@ -994,6 +999,9 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
         informationEntity.setFacility(get_selete_biaoqian());
         //获取选择的功能性场所类型
         ArrayList<ItemBean> itemBeans = exRecyclerAdapter.getData();
+        Log.d("itemBeans","itemBeans:"+itemBeans.size());
+        Log.d("itemBeans","itemBeans:"+ new Gson().toJson(itemBeans));
+
         List<InformationEntity.GymPlacesBean> gymPlacesBeans = new ArrayList<>();
         for (int i = 0; i < itemBeans.size(); i++) {
             InformationEntity.GymPlacesBean gymPlacesBean = new InformationEntity.GymPlacesBean();
@@ -1002,11 +1010,11 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
             } else {
                 gymPlacesBean.setMax_num(Integer.valueOf(itemBeans.get(i).getPlace()));
             }
-            if (itemBeans.get(i).getType_name().equals("有氧")) {
+            if (itemBeans.get(i).getType() ==1) {
                 gymPlacesBean.setPlace_type("1");
-            } else if (itemBeans.get(i).getType_name().equals("瑜伽")) {
+            } else if (itemBeans.get(i).getType() ==2) {
                 gymPlacesBean.setPlace_type("2");
-            } else {
+            } else if (itemBeans.get(i).getType() ==3){
                 gymPlacesBean.setPlace_type("3");
 
             }
@@ -1026,14 +1034,18 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
                             public void onNext(Bean<Object> changguanBeanBean) {
                                 Toast.makeText(ChangGuandetailActivity.this, "当前场馆信息修改成功",
                                         Toast.LENGTH_SHORT).show();
+                                finish();
                                 upList_iamges.clear();
+                                logoBean = null;
                             }
 
                             @Override
                             public void onError(String error) {
                                 Toast.makeText(ChangGuandetailActivity.this, error,
                                         Toast.LENGTH_SHORT).show();
-                                upList_iamges.clear();
+//                                upList_iamges.clear();
+                                logoBean = null;
+
                             }
                         }, this, false));
 
