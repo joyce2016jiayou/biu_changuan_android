@@ -24,6 +24,7 @@ import com.noplugins.keepfit.android.bean.HightListBean;
 import com.noplugins.keepfit.android.bean.LoginBean;
 import com.noplugins.keepfit.android.bean.OrderResultBean;
 import com.noplugins.keepfit.android.bean.PrivateDetailBean;
+import com.noplugins.keepfit.android.bean.SelectChangGuanBean;
 import com.noplugins.keepfit.android.bean.TeacherBean;
 import com.noplugins.keepfit.android.bean.TeacherDetailBean;
 import com.noplugins.keepfit.android.bean.RiChengBean;
@@ -1109,6 +1110,23 @@ public class Network {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
     }
+
+    public Subscription get_changguans(Map<String, Object> params, Subscriber<Bean<List<SelectChangGuanBean>>> subscriber) {
+        return service.get_changguans(retuen_json_params(params))
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    public Subscription qiehuan_changguans(Map<String, Object> params, Subscriber<Bean<Object>> subscriber) {
+        return service.qiehuan_changguans(retuen_json_params(params))
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
 
     /**
      * 我的场馆信息

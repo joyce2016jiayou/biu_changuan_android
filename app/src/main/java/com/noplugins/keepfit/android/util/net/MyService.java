@@ -16,6 +16,7 @@ import com.noplugins.keepfit.android.bean.HightListBean;
 import com.noplugins.keepfit.android.bean.LoginBean;
 import com.noplugins.keepfit.android.bean.OrderResultBean;
 import com.noplugins.keepfit.android.bean.PrivateDetailBean;
+import com.noplugins.keepfit.android.bean.SelectChangGuanBean;
 import com.noplugins.keepfit.android.bean.TeacherBean;
 import com.noplugins.keepfit.android.bean.TeacherDetailBean;
 import com.noplugins.keepfit.android.bean.RiChengBean;
@@ -157,7 +158,6 @@ public interface MyService {
     Observable<Bean<CheckBean>> submit_information(@Body RequestBody json);
 
 
-
     /**
      * 获取审核状态
      *
@@ -193,7 +193,6 @@ public interface MyService {
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
     @POST("memberOrder")
     Observable<Bean<String>> get_order(@Body RequestBody map);
-
 
 
     /**
@@ -629,6 +628,24 @@ public interface MyService {
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
     @POST("searchDict")
     Observable<Bean<List<DictionaryeBean>>> get_types(@Body RequestBody json);
+
+    /**
+     * 获取场馆列表
+     *
+     * @return
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("findAllArea")
+    Observable<Bean<List<SelectChangGuanBean>>> get_changguans(@Body RequestBody json);
+
+    /**
+     * 切换场馆
+     *
+     * @return
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("chooseArea")
+    Observable<Bean<Object>> qiehuan_changguans(@Body RequestBody json);
 
 
     /**

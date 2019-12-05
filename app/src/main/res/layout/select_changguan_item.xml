@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <www.linwg.org.lib.LCardView
@@ -20,6 +20,7 @@
         app:shadowStartAlpha="10">
 
         <LinearLayout
+            android:id="@+id/select_bg"
             android:layout_width="match_parent"
             android:layout_height="@dimen/m113"
             android:gravity="center_vertical"
@@ -32,12 +33,13 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/changguan_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/m20"
                     android:textColor="@color/top_heiziti"
                     android:textSize="15sp"
-                    android:text="@string/tv2" />
+                    android:text="注册即代表您同意哔哟注册即代表您同意哔哟" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -53,6 +55,7 @@
                         android:src="@drawable/icon_time" />
 
                     <TextView
+                        android:id="@+id/time_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/m8"
@@ -75,6 +78,7 @@
                         android:src="@drawable/icon_locale" />
 
                     <TextView
+                        android:id="@+id/address_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/m8"

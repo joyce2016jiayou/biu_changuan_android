@@ -7,6 +7,15 @@ public class RiChengBean {
     private List<ResultBean> result;
     private List<MonthBean> month;
     private String areaName;
+    private boolean haveMoreArea;
+
+    public boolean isHaveMoreArea() {
+        return haveMoreArea;
+    }
+
+    public void setHaveMoreArea(boolean haveMoreArea) {
+        this.haveMoreArea = haveMoreArea;
+    }
 
     public List<ResultBean> getResult() {
         return result;

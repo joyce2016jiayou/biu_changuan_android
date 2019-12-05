@@ -14,6 +14,9 @@ import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.adapter.SelectChangguanAdapter;
 import com.noplugins.keepfit.android.base.BaseActivity;
 import com.noplugins.keepfit.android.bean.DictionaryeBean;
+import com.noplugins.keepfit.android.bean.SelectChangGuanBean;
+import com.noplugins.keepfit.android.global.AppConstants;
+import com.noplugins.keepfit.android.util.SpUtils;
 import com.noplugins.keepfit.android.util.net.Network;
 import com.noplugins.keepfit.android.util.net.entity.Bean;
 import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriber;
@@ -38,8 +41,9 @@ public class SelectChangGuanActivity extends BaseActivity {
     ImageView back_btn;
     @BindView(R.id.refreshLayout)
     SmartRefreshLayout refreshLayout;
-    List<DictionaryeBean> select_types = new ArrayList<>();
+    List<SelectChangGuanBean> changguans = new ArrayList<>();
     SelectChangguanAdapter selectChangguanAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,7 +58,6 @@ public class SelectChangGuanActivity extends BaseActivity {
     public void initView() {
         setContentLayout(R.layout.activity_select_chang_guan);
         ButterKnife.bind(this);
-
     }
 
     @Override
@@ -80,19 +83,19 @@ public class SelectChangGuanActivity extends BaseActivity {
 
     private void get_changguan_list() {
         Map<String, Object> params = new HashMap<>();
-        params.put("object", "9");
-        Subscription subscription = Network.getInstance("获取类型", this)
-                .get_types(params,
-                        new ProgressSubscriber<>("获取类型", new SubscriberOnNextListener<Bean<List<DictionaryeBean>>>() {
+        params.put("userNum", SpUtils.getString(getApplicationContext(), AppConstants.USER_NAME));
+        Subscription subscription = Network.getInstance("获取多家场馆", this)
+                .get_changguans(params,
+                        new ProgressSubscriber<>("获取多家场馆", new SubscriberOnNextListener<Bean<List<SelectChangGuanBean>>>() {
                             @Override
-                            public void onNext(Bean<List<DictionaryeBean>> result) {
-                                if (select_types.size() > 0) {
-                                    select_types.clear();
+                            public void onNext(Bean<List<SelectChangGuanBean>> result) {
+                                if (changguans.size() > 0) {
+                                    changguans.clear();
                                 }
-                                select_types.addAll(result.getData());
+                                changguans.addAll(result.getData());
                                 LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
                                 recycler_view.setLayoutManager(layoutManager);
-                                selectChangguanAdapter = new SelectChangguanAdapter(select_types, getApplicationContext());
+                                selectChangguanAdapter = new SelectChangguanAdapter(changguans, getApplicationContext(), SelectChangGuanActivity.this);
                                 recycler_view.setAdapter(selectChangguanAdapter);
                                 refreshLayout.finishRefresh(true);
                             }
