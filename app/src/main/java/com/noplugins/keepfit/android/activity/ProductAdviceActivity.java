@@ -102,7 +102,7 @@ public class ProductAdviceActivity extends BaseActivity {
         back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setResult(3);
+                setResult(SpUtils.getInt(getApplicationContext(), AppConstants.FRAGMENT_SIZE)-1);
                 finish();
             }
         });
@@ -139,7 +139,7 @@ public class ProductAdviceActivity extends BaseActivity {
                     @Override
                     public void onNext(Bean<Object> objectBean) {
                         Toast.makeText(getApplicationContext(), "提交成功", Toast.LENGTH_SHORT).show();
-                        setResult(3);
+                        setResult(SpUtils.getInt(getApplicationContext(), AppConstants.FRAGMENT_SIZE)-1);
                         finish();
                     }
 
@@ -152,7 +152,7 @@ public class ProductAdviceActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        setResult(3);
+        setResult(SpUtils.getInt(getApplicationContext(), AppConstants.FRAGMENT_SIZE)-1);
         finish();
     }
 }

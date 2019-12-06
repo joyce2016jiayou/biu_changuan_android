@@ -14,6 +14,7 @@ import com.noplugins.keepfit.android.bean.CalenderEntity;
 import com.noplugins.keepfit.android.bean.CgBindingBean;
 import com.noplugins.keepfit.android.bean.ChangguanBean;
 import com.noplugins.keepfit.android.bean.CheckBean;
+import com.noplugins.keepfit.android.bean.ChooseBean;
 import com.noplugins.keepfit.android.bean.CityCode;
 import com.noplugins.keepfit.android.bean.CompnyBean;
 import com.noplugins.keepfit.android.bean.DictionaryeBean;
@@ -1119,7 +1120,7 @@ public class Network {
                 .subscribe(subscriber);
     }
 
-    public Subscription qiehuan_changguans(Map<String, Object> params, Subscriber<Bean<Object>> subscriber) {
+    public Subscription qiehuan_changguans(Map<String, Object> params, Subscriber<Bean<ChooseBean>> subscriber) {
         return service.qiehuan_changguans(retuen_json_params(params))
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())

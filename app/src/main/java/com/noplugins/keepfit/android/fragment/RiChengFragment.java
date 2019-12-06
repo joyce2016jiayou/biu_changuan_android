@@ -179,7 +179,11 @@ public class RiChengFragment extends ViewPagerFragment {
         get_types();
         //获取课程数据
         init_class_date_resource();
-
+        if(SpUtils.getInt(getActivity(),AppConstants.USER_TYPE)==2||SpUtils.getInt(getActivity(),AppConstants.USER_TYPE)==3){
+            select_store_type.setVisibility(View.INVISIBLE);
+        }else{
+            select_store_type.setVisibility(View.VISIBLE);
+        }
         select_store_type.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

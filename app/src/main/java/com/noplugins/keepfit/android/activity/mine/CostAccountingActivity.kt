@@ -61,7 +61,7 @@ class CostAccountingActivity : BaseActivity() {
                 setResult(RESULT_OK, mIntent)
                 Log.d("tag__BBB",form)
             } else {
-                setResult(3)
+                setResult(SpUtils.getInt(applicationContext,AppConstants.FRAGMENT_SIZE)-1)
             }
 
 
@@ -115,7 +115,7 @@ class CostAccountingActivity : BaseActivity() {
             mIntent.putExtra("cost", ""+cost)
             setResult(RESULT_OK, mIntent)
         } else {
-            setResult(3)
+            setResult(SpUtils.getInt(applicationContext,AppConstants.FRAGMENT_SIZE)-1)
         }
 
 

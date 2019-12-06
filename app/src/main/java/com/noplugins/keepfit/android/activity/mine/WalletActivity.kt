@@ -54,7 +54,7 @@ class WalletActivity : BaseActivity() {
             startActivity(intent)
         }
         back_btn.setOnClickListener {
-            setResult(3)
+            setResult(SpUtils.getInt(applicationContext,AppConstants.FRAGMENT_SIZE)-1)
             finish()
         }
         btn_tixian.setOnClickListener {
@@ -155,7 +155,7 @@ class WalletActivity : BaseActivity() {
     }
 
     override fun onBackPressed() {
-        setResult(3)
+        setResult(SpUtils.getInt(applicationContext,AppConstants.FRAGMENT_SIZE)-1)
         finish()
     }
 

@@ -18,6 +18,7 @@ import com.noplugins.keepfit.android.KeepFitActivity;
 import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.activity.SelectChangGuanActivity;
 import com.noplugins.keepfit.android.base.MyApplication;
+import com.noplugins.keepfit.android.bean.ChooseBean;
 import com.noplugins.keepfit.android.bean.DictionaryeBean;
 import com.noplugins.keepfit.android.bean.SelectChangGuanBean;
 import com.noplugins.keepfit.android.global.AppConstants;
@@ -117,12 +118,21 @@ public class SelectChangguanAdapter extends BaseRecyclerAdapter<RecyclerView.Vie
         params.put("areaNum", areaNum);
         Subscription subscription = Network.getInstance("切换场馆", context)
                 .qiehuan_changguans(params,
-                        new ProgressSubscriber<>("切换场馆", new SubscriberOnNextListener<Bean<Object>>() {
+                        new ProgressSubscriber<>("切换场馆", new SubscriberOnNextListener<Bean<ChooseBean>>() {
                             @Override
-                            public void onNext(Bean<Object> result) {
+                            public void onNext(Bean<ChooseBean> result) {
                                 MyApplication.destoryActivity("KeepFitActivity");
                                 Intent intent = new Intent(context, KeepFitActivity.class);
                                 SpUtils.putString(context, AppConstants.CHANGGUAN_NUM, areaNum);
+                                //1终身会员2超值终身会员3豪华终身会员0默认
+                                if (result.getData().getServiceType() == 1) {
+                                    SpUtils.putString(context, AppConstants.USER_DENGJI, "2999");
+                                } else if (result.getData().getServiceType() == 2) {
+                                    SpUtils.putString(context, AppConstants.USER_DENGJI, "3999");
+                                } else if (result.getData().getServiceType() == 3) {
+                                    SpUtils.putString(context, AppConstants.USER_DENGJI, "6999");
+                                }
+
                                 selectChangGuanActivity.startActivity(intent);
                                 selectChangGuanActivity.finish();
                             }

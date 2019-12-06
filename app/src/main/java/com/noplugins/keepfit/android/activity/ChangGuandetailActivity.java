@@ -217,7 +217,7 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
         back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setResult(3);
+                setResult(SpUtils.getInt(getApplicationContext(), AppConstants.FRAGMENT_SIZE)-1);
                 finish();
             }
         });
@@ -1053,7 +1053,7 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
 
     @Override
     public void onBackPressed() {
-        setResult(3);
+        setResult(SpUtils.getInt(getApplicationContext(), AppConstants.FRAGMENT_SIZE)-1);
         finish();
     }
 }

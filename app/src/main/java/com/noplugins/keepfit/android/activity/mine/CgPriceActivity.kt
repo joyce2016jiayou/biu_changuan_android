@@ -294,7 +294,8 @@ class CgPriceActivity : BaseActivity() {
         }
 //        val intent = Intent(this, KeepFitActivity::class.java)
 //        startActivity(intent,3)
-        setResult(3)
+
+        setResult(SpUtils.getInt(applicationContext,AppConstants.FRAGMENT_SIZE)-1)
 //        startActivity(intent)
         finish()
     }
