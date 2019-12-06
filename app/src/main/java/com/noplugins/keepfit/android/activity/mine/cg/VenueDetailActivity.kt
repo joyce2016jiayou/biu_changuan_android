@@ -5,8 +5,10 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewTreeObserver
 import android.widget.*
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -26,6 +28,7 @@ import com.noplugins.keepfit.android.util.net.entity.Bean
 import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriber
 import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener
 import com.noplugins.keepfit.android.util.ui.jiugongge.CCRSortableNinePhotoLayout
+import com.ycuwq.datepicker.time.HourAndMinDialogFragment
 import kotlinx.android.synthetic.main.activity_venue_detail.*
 import kotlinx.android.synthetic.main.venue_item_1.*
 import kotlinx.android.synthetic.main.venue_item_2.*
@@ -117,6 +120,56 @@ class VenueDetailActivity : BaseActivity(),CCRSortableNinePhotoLayout.Delegate  
         val view = layoutInflater.inflate(R.layout.venue_item_1, null, false)
         rec_right.addView(view, 0)
         val save1 = view.findViewById<TextView>(R.id.tv_save_1)
+        val tvSelectTime = view.findViewById<TextView>(R.id.tv_business_hours)
+
+
+
+        //点击修改时间
+        tvSelectTime.setOnClickListener {
+            //?
+            Log.d("tag","why?")
+            val time = HourAndMinDialogFragment()
+            time.setSelectedDate(9, 0, 23, 0)
+            time.setOnDateChooseListener { startHour, startMinute, endHour, endMinute ->
+
+                if (endHour < startHour) {
+                    Toast.makeText(applicationContext,"开始时间不能大于结束时间",
+                            Toast.LENGTH_SHORT).show()
+                    return@setOnDateChooseListener
+                }
+                if (endHour == startHour && endMinute <= startMinute) {
+                    Toast.makeText(applicationContext,"开始时间不能大于结束时间",
+                            Toast.LENGTH_SHORT).show()
+                    return@setOnDateChooseListener
+                }
+
+                val startH = if (startHour > 9) {
+                    "$startHour"
+                } else {
+                    "0$startHour"
+                }
+                val startM = if (startMinute > 9) {
+                    "$startMinute"
+                } else {
+                    "0$startMinute"
+                }
+                val endH = if (endHour > 9) {
+                    "$endHour"
+                } else {
+                    "0$endHour"
+                }
+                val endM = if (endMinute > 9) {
+                    "$endMinute"
+                } else {
+                    "0$endMinute"
+                }
+
+                tvSelectTime.text = "$startH:$startM - $endH:$endM"
+
+            }
+            time.show(supportFragmentManager, "HourAndMinDialogFragment")
+        }
+
         save1.setOnClickListener {
 
         }
@@ -139,8 +192,36 @@ class VenueDetailActivity : BaseActivity(),CCRSortableNinePhotoLayout.Delegate  
         rec_right.addView(view, 0)
         val rvFacilities = view.findViewById<RecyclerView>(R.id.rv_venue_facilities)
         val save2 = view.findViewById<TextView>(R.id.tv_save_2)
-        rvFacilities.layoutManager = GridLayoutManager(this,3,GridLayoutManager.VERTICAL,false)
+        val layoutManager = GridLayoutManager(this,3,GridLayoutManager.VERTICAL,false)
+        rvFacilities.layoutManager = layoutManager
         rvFacilities.adapter = layout2Adapter
+
+        layout2Adapter!!.setOnItemChildClickListener { adapter, view, position ->
+            when (view.id){
+                R.id.cb_facilities -> {
+                    if ((view as CheckBox).isChecked){
+                        Log.d("tag","添加了该box")
+                    } else {
+                        Log.d("tag","移除了该box")
+                    }
+                }
+            }
+        }
+
+        //View加载完成时回调
+        rvFacilities.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
+            override fun onGlobalLayout() {
+                val itemView = layoutManager.findViewByPosition(3)
+                if (itemView != null) {
+                    val chabox = itemView.findViewById<CheckBox>(R.id.cb_facilities)
+                    chabox.isChecked = true
+                }
+
+                //OnGlobalLayoutListener可能会被多次触发
+                //所以完成了需求后需要移除OnGlobalLayoutListener
+                rvFacilities.viewTreeObserver.removeOnGlobalLayoutListener(this)
+            }
+        })
 
         save2.setOnClickListener {
             Toast.makeText(applicationContext,"sava 2 info",Toast.LENGTH_SHORT).show()

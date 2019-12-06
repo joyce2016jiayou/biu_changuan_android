@@ -1,5 +1,7 @@
 package com.noplugins.keepfit.android.adapter.mine.cg;
 
+import android.view.View;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -18,7 +20,9 @@ public class VenueLayout2Adapter extends BaseQuickAdapter<DictionaryeBean, BaseV
 
     @Override
     protected void convert(@NonNull BaseViewHolder helper, DictionaryeBean item) {
-        helper.addOnClickListener(R.id.cb_facilities);
+        helper.addOnClickListener(R.id.cb_facilities)
+        .addOnClickListener(R.id.ll_item_2);
         helper.setText(R.id.cb_facilities,item.getName());
     }
+
 }
