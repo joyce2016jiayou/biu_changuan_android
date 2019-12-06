@@ -19,7 +19,10 @@ import com.noplugins.keepfit.android.activity.mine.CgPriceActivity
 import com.noplugins.keepfit.android.activity.mine.CostAccountingActivity
 import com.noplugins.keepfit.android.activity.mine.TeacherManagerActivity
 import com.noplugins.keepfit.android.activity.mine.WalletActivity
+import com.noplugins.keepfit.android.activity.mine.cg.VenueDetailActivity
+import com.noplugins.keepfit.android.activity.mine.setting.SettingActivity
 import com.noplugins.keepfit.android.adapter.mine.FunctionAdapter
+import com.noplugins.keepfit.android.adapter.mine.cg.FunctionV11Adapter
 import com.noplugins.keepfit.android.base.BaseFragment
 import com.noplugins.keepfit.android.bean.ChangguanBean
 import com.noplugins.keepfit.android.bean.mine.MineFunctionBean
@@ -65,47 +68,36 @@ class MyFragment : BaseFragment(), EasyPermissions.PermissionCallbacks {
         super.onActivityCreated(savedInstanceState)
 //        requestArea()
         setting()
-        ll_info.setOnClickListener {
-            if (BaseUtils.isFastClick()){
-                val intent = Intent(activity, ChangGuandetailActivity::class.java)
-                activity!!.startActivityForResult(intent, 1)
-            }
-
-        }
     }
 
     override fun onResume() {
         super.onResume()
         requestArea()
     }
+
     private fun setting() {
         val fuctionBean: MutableList<MineFunctionBean> = ArrayList()
-
+        val fuctionV11Bean: MutableList<MineFunctionBean> = ArrayList()
         if (SpUtils.getInt(activity, AppConstants.USER_TYPE) != 3) {
-            val min1 = MineFunctionBean("钱包", R.drawable.icon_wallet)
-            val min3 = MineFunctionBean("场馆价格", R.drawable.icon_price)
+            val min1 = MineFunctionBean("场馆信息", R.drawable.tab_data)
+            val min2 = MineFunctionBean("成本核算", R.drawable.tab_account)
+            val min3 = MineFunctionBean("场馆价格", R.drawable.tab_price)
+            val min4 = MineFunctionBean("合作信息", R.drawable.tab_cooperation)
+            fuctionV11Bean.add(min1)
+            fuctionV11Bean.add(min2)
+            fuctionV11Bean.add(min3)
+            fuctionV11Bean.add(min4)
 
-            val min4 = MineFunctionBean("成本核算", R.drawable.icon_count)
-            val min5 = MineFunctionBean("教练管理", R.drawable.icon_trainer)
-            fuctionBean.add(min1)
-            if (SpUtils.getInt(activity,AppConstants.USER_TYPE)==1){
-                val min2 = MineFunctionBean("权限管理", R.drawable.icon_quanxian)
-                fuctionBean.add(min2)
+            if (SpUtils.getInt(activity, AppConstants.USER_TYPE) == 1) {
+                val min5 = MineFunctionBean("权限管理", R.drawable.icon_quanxian)
+                fuctionBean.add(min5)
             }
-            fuctionBean.add(min3)
-            fuctionBean.add(min4)
-            fuctionBean.add(min5)
         }
 
-        val min6 = MineFunctionBean("问题反馈", R.drawable.iconfeedback)
-        val min7 = MineFunctionBean("账号安全", R.drawable.icon_account_number)
-        val min8 = MineFunctionBean("关于", R.drawable.icon_about)
-        val min9 = MineFunctionBean("客服帮助", R.drawable.icon_customer_service)
-
+        val min6 = MineFunctionBean("设置", R.drawable.icon_about)
+        val min7 = MineFunctionBean("联系客服", R.drawable.icon_customer_service)
         fuctionBean.add(min6)
         fuctionBean.add(min7)
-        fuctionBean.add(min8)
-        fuctionBean.add(min9)
         val functionAdapter = FunctionAdapter(activity, fuctionBean)
         gv_function.adapter = functionAdapter
 
@@ -121,18 +113,6 @@ class MyFragment : BaseFragment(), EasyPermissions.PermissionCallbacks {
                         val intent = Intent(activity, RoleActivity::class.java)
                         activity!!.startActivityForResult(intent, 1)
                     }
-                    "场馆价格" -> {
-                        val intent = Intent(activity, CgPriceActivity::class.java)
-                        activity!!.startActivityForResult(intent, 1)
-                    }
-                    "成本核算" -> {
-                        val intent = Intent(activity, CostAccountingActivity::class.java)
-                        activity!!.startActivityForResult(intent, 1)
-                    }
-                    "教练管理" -> {
-                        val intent = Intent(activity, TeacherManagerActivity::class.java)
-                        activity!!.startActivityForResult(intent, 1)
-                    }
                     "问题反馈" -> {
                         val intent = Intent(activity, ProductAdviceActivity::class.java)
                         activity!!.startActivityForResult(intent, 1)
@@ -141,13 +121,43 @@ class MyFragment : BaseFragment(), EasyPermissions.PermissionCallbacks {
                         val intent = Intent(activity, ZhangHaoSafeActivity::class.java)
                         activity!!.startActivityForResult(intent, 1)
                     }
-                    "关于" -> {
-                        val intent = Intent(activity, AboutActivity::class.java)
+                    "设置" -> {
+                        val intent = Intent(activity, SettingActivity::class.java)
                         activity!!.startActivityForResult(intent, 1)
                     }
-                    "客服帮助" -> {
+                    "联系客服" -> {
                         call_pop("4006-836-895")
 
+                    }
+                }
+            }
+        }
+
+
+        //======================
+        // 1.1 FunctionV11Adapter
+        //======================
+
+        val functionV11Adapter = FunctionV11Adapter(activity, fuctionV11Bean)
+        gv_function_v11.adapter = functionV11Adapter
+        gv_function_v11.setOnItemClickListener { parent, view, position, id ->
+            if (BaseUtils.isFastClick()) {
+                when (fuctionV11Bean[position].name) {
+                    "场馆价格" -> {
+                        val intent = Intent(activity, CgPriceActivity::class.java)
+                        activity!!.startActivityForResult(intent, 1)
+                    }
+                    "成本核算" -> {
+                        val intent = Intent(activity, CostAccountingActivity::class.java)
+                        activity!!.startActivityForResult(intent, 1)
+                    }
+                    "场馆信息" -> {
+                        val intent = Intent(activity, VenueDetailActivity::class.java)
+                        activity!!.startActivityForResult(intent, 1)
+                    }
+                    "合作信息" -> {
+//                        val intent = Intent(activity, VenueDetailActivity::class.java)
+//                        activity!!.startActivityForResult(intent, 1)
                     }
                 }
             }
@@ -247,6 +257,18 @@ class MyFragment : BaseFragment(), EasyPermissions.PermissionCallbacks {
     }
 
     private fun setting(cg: ChangguanBean) {
+
+        when (SpUtils.getInt(activity, AppConstants.USER_TYPE)) {
+            1 -> {
+                tv_type_name.text = "场馆主登陆:${SpUtils.getString(activity,AppConstants.NAME)}"
+            }
+            2 -> {
+                tv_type_name.text = "经理登陆:${SpUtils.getString(activity,AppConstants.NAME)}"
+            }
+            3 -> {
+                tv_type_name.text = "前台登陆:${SpUtils.getString(activity,AppConstants.NAME)}"
+            }
+        }
         Glide.with(activity)
                 .load(cg.area.logo)
                 .into(iv_logo)

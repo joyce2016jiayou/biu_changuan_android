@@ -340,5 +340,15 @@
     <string name="tv_company_bank">开户银行</string>
     <string name="tv_logo">封面图</string>
     <string name="tv_pic_tips">建议上传卫生间、更衣室、器械区、操房等位置的图片。</string>
+    <string name="tv_mine">我的</string>
+    <string name="tv_anquan">安全管理</string>
+    <string name="tv_about">关于</string>
+    <string name="tv_wenti">问题反馈</string>
+    <string name="tv_quit">登出账户</string>
+    <string name="tv_setting_pwd">设置登陆密码</string>
+    <string name="tv_update_tixian">修改提现密码</string>
+    <string name="tv_update_phone_tips">为了保证您的账号安全，请验证身份。验证成功后进行下一步操作。</string>
+    <string name="tv_send_yzm">发送验证码</string>
+    <string name="tv_next">下一步</string>
 
 </resources>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/title_activity"></include>
+
+    <www.linwg.org.lib.LCardView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/m51"
+        app:cornerRadius="@dimen/m8">
+
+        <RelativeLayout
+            android:id="@+id/rl_update_phone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/m20"
+                android:text="@string/edit_hint28"
+                android:textColor="@color/color_4A4A4A"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_now_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/m10"
+                android:layout_toLeftOf="@+id/iv_right"
+                android:textColor="@color/contents_text"
+                android:textSize="16sp"
+                tools:text="18380583083" />
+
+            <ImageView
+                android:id="@+id/iv_right"
+                android:layout_width="@dimen/m16"
+                android:layout_height="@dimen/m16"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/m20"
+                android:src="@drawable/icon_right" />
+        </RelativeLayout>
+    </www.linwg.org.lib.LCardView>
+
+    <www.linwg.org.lib.LCardView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/m51"
+        app:cornerRadius="@dimen/m8">
+
+        <RelativeLayout
+            android:id="@+id/rl_setting_pwd"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/m20"
+                android:text="@string/tv_setting_pwd"
+                android:textColor="@color/color_4A4A4A"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:layout_width="@dimen/m16"
+                android:layout_height="@dimen/m16"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/m20"
+                android:src="@drawable/icon_right" />
+        </RelativeLayout>
+    </www.linwg.org.lib.LCardView>
+
+    <www.linwg.org.lib.LCardView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/m51"
+        app:cornerRadius="@dimen/m8">
+
+        <RelativeLayout
+            android:id="@+id/rl_update_pwd"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/m20"
+                android:text="@string/tv_update_tixian"
+                android:textColor="@color/color_4A4A4A"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:layout_width="@dimen/m16"
+                android:layout_height="@dimen/m16"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/m20"
+                android:src="@drawable/icon_right" />
+        </RelativeLayout>
+    </www.linwg.org.lib.LCardView>
+</LinearLayout>

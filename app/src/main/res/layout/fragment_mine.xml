@@ -12,18 +12,36 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <FrameLayout
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/contents_text"
+            android:text="@string/tv_mine"
+            android:layout_marginTop="@dimen/m50"
+            android:textStyle="bold"
+            android:layout_marginLeft="@dimen/m20"
+            android:textSize="26sp"/>
+
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/m30">
-
+            android:layout_marginTop="@dimen/m20">
+            <TextView
+                android:id="@+id/tv_type_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="管理员登陆:岳云鹏"
+                android:layout_marginTop="@dimen/m15"
+                android:textSize="12sp"
+                android:textColor="@color/color_4A4A4A"
+                android:layout_marginLeft="@dimen/m23"/>
             <www.linwg.org.lib.LCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cornerRadius="@dimen/m8"
-                android:layout_marginTop="@dimen/m50"
-                android:layout_marginLeft="@dimen/m15"
-                android:layout_marginRight="@dimen/m15">
+                android:layout_marginTop="@dimen/m35"
+                android:layout_marginLeft="@dimen/m5"
+                android:layout_marginRight="@dimen/m5">
 
                 <LinearLayout
                     android:id="@+id/ll_info"
@@ -83,36 +101,32 @@
                             android:textColor="@color/color_101010"
                             android:textSize="12sp"
                             android:text="上海市国权路111号"/>
-                        <ImageView
-                            android:layout_width="@dimen/m7"
-                            android:layout_height="@dimen/m14"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:src="@drawable/youjiantou"/>
-                    </RelativeLayout>
 
+                    </RelativeLayout>
+                    <!--1.1新增-->
+                    <GridView
+                        android:id="@+id/gv_function_v11"
+                        android:layout_width="match_parent"
+                        android:layout_gravity="clip_horizontal"
+                        android:layout_height="@dimen/m80"
+                        android:gravity="center"
+                        android:numColumns="4"
+                        android:stretchMode="columnWidth"
+                        android:verticalSpacing="@dimen/m11"/>
 
                 </LinearLayout>
             </www.linwg.org.lib.LCardView>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/contents_text"
-                android:text="我的"
-                android:layout_marginTop="@dimen/m5"
-                android:textStyle="bold"
-                android:layout_marginLeft="@dimen/m20"
-                android:textSize="26sp"/>
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/iv_logo"
-                android:layout_width="@dimen/m100"
-                android:layout_height="@dimen/m100"
+                android:layout_width="@dimen/m70"
+                android:layout_height="@dimen/m70"
                 android:layout_gravity="right|top"
+                android:layout_alignParentRight="true"
                 android:layout_marginRight="@dimen/m14"
                 android:src="@drawable/logo"/>
-        </FrameLayout>
+        </RelativeLayout>
 
 
         <GridView

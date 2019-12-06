@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/title_activity"/>
+
+    <TextView
+        android:id="@+id/tv_now_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="您目前的手机号为：19325265053，您想要变更为？"
+        android:layout_marginTop="@dimen/m50"
+        android:layout_marginLeft="@dimen/m50"
+        android:textColor="@color/color_6D7278"
+        android:textSize="13sp"
+        android:layout_marginRight="@dimen/m50"/>
+
+    <EditText
+        android:id="@+id/et_new_phone"
+        android:layout_width="@dimen/m177"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"
+        tools:text="17717418869"
+        android:layout_marginTop="@dimen/m30"
+        android:textColor="@color/color_000000"
+        android:textSize="18sp"/>
+
+    <TextView
+        android:id="@+id/tv_send_code"
+        android:layout_width="@dimen/m209"
+        android:layout_height="@dimen/m50"
+        android:gravity="center"
+        android:background="@drawable/shape_btn_bg_40"
+        android:layout_gravity="center_horizontal"
+        tools:text="@string/tv_send_yzm"
+        android:layout_marginTop="@dimen/m30"
+        android:textColor="@color/color_22243D"
+        android:textSize="20sp"/>
+</LinearLayout>

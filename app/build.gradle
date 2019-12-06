@@ -10,8 +10,8 @@ android {
         applicationId "com.noplugins.keepfit.android"
         minSdkVersion 23
         targetSdkVersion 29
-        versionCode 4
-        versionName "1.0.3"
+        versionCode 7
+        versionName "1.1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
         manifestPlaceholders = [
@@ -262,5 +262,6 @@ dependencies {
     //图片选择
     implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.3.8'
 
-
+    //验证码输入
+    implementation project(':codelibrary')
 }

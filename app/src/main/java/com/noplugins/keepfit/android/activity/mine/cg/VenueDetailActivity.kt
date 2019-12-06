@@ -30,6 +30,7 @@ import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener
 import com.noplugins.keepfit.android.util.ui.jiugongge.CCRSortableNinePhotoLayout
 import com.ycuwq.datepicker.time.HourAndMinDialogFragment
 import kotlinx.android.synthetic.main.activity_venue_detail.*
+import kotlinx.android.synthetic.main.title_activity_yellow.*
 import kotlinx.android.synthetic.main.venue_item_1.*
 import kotlinx.android.synthetic.main.venue_item_2.*
 import kotlinx.android.synthetic.main.venue_item_6.*
@@ -75,8 +76,18 @@ class VenueDetailActivity : BaseActivity(),CCRSortableNinePhotoLayout.Delegate  
                                 }, this, false))
     }
 
+    override fun onBackPressed() {
+        back()
+    }
+    private fun back(){
+        setResult(3)
+        finish()
+    }
     override fun doBusiness(mContext: Context?) {
 //        val layoutInflater = LayoutInflater.from(this)
+        back_btn.setOnClickListener {
+            back()
+        }
         rb_base_info.setOnClickListener {
             if (nowSelect != 1) {
                 nowSelect = 1
