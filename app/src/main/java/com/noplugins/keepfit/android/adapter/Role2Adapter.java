@@ -4,6 +4,7 @@ package com.noplugins.keepfit.android.adapter;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
@@ -23,10 +24,10 @@ import lib.demo.spinner.MaterialSpinner;
 ;
 
 
-public class Role2Adapter extends BaseQuickAdapter<RoleBean.RoleEntity, BaseViewHolder>{
+public class Role2Adapter extends BaseQuickAdapter<RoleBean.RoleEntity, BaseViewHolder> {
 
     public Role2Adapter(@Nullable List<RoleBean.RoleEntity> data) {
-        super(R.layout.role_item,data);
+        super(R.layout.role_item, data);
     }
 
 
@@ -55,19 +56,23 @@ public class Role2Adapter extends BaseQuickAdapter<RoleBean.RoleEntity, BaseView
             }
         });
 
-        if (item_editText.getTag() instanceof TextWatcher){
+        if (item_editText.getTag() instanceof TextWatcher) {
             item_editText.removeTextChangedListener((TextWatcher) item_editText.getTag());
         }
 
-        if (et_phone.getTag() instanceof TextWatcher){
+        if (et_phone.getTag() instanceof TextWatcher) {
             et_phone.removeTextChangedListener((TextWatcher) et_phone.getTag());
         }
 
         //必须在判断tag后给editText赋值，否则会数据错乱
         item_editText.setText(item.getName());
         et_phone.setText(item.getPhone());
-        if (item.getUserType()!=0){
-            materialSpinner.setSelectedIndex(item.getUserType()-2);
+        if (item.getUserType() != 0) {
+            if (item.getUserType() == 1) {
+                materialSpinner.setSelectedIndex(1);
+            } else if (item.getUserType() >= 2) {
+                materialSpinner.setSelectedIndex(item.getUserType() - 2);
+            }
             item_editText.setEnabled(false);
             et_phone.setEnabled(false);
             materialSpinner.setClickable(false);
@@ -120,7 +125,6 @@ public class Role2Adapter extends BaseQuickAdapter<RoleBean.RoleEntity, BaseView
         et_phone.addTextChangedListener(watcher1);
 //        给editText设置tag，以便于判断当前editText是否已经设置监听
         et_phone.setTag(watcher1);
-
 
 
         helper.addOnClickListener(R.id.post_type_spinner)

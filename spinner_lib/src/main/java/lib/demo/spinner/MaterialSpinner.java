@@ -382,6 +382,7 @@ public class MaterialSpinner extends AppCompatTextView {
                 selectedIndex = position;
                 setText(adapter.get(position).toString());
             } else {
+
                 throw new IllegalArgumentException("Position must be lower than adapter count!");
             }
         }
