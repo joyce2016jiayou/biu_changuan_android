@@ -236,6 +236,7 @@ public class KeepFitActivity extends BaseActivity {
         builder.setDownloadAPKPath(Environment.getExternalStorageDirectory() + "/noplugins/apkpath/");//自定义下载路径
         builder.setOnCancelListener(() -> {
             if (is_qiangzhi_update) {
+                Toast.makeText(KeepFitActivity.this, "已关闭更新", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent();
                 intent.setAction("android.intent.action.MAIN");
                 intent.addCategory("android.intent.category.HOME");
@@ -279,10 +280,17 @@ public class KeepFitActivity extends BaseActivity {
      */
     private CustomVersionDialogListener createCustomDialogTwo() {
         return (context, versionBundle) -> {
-            BaseDialog baseDialog = new BaseDialog(context, R.style.BaseDialog, R.layout.custom_dialog_two_layout);
-            TextView textView = baseDialog.findViewById(R.id.tv_msg);
-            textView.setText(versionBundle.getContent());
-            baseDialog.setCanceledOnTouchOutside(true);
+            BaseDialog baseDialog = new BaseDialog(context, R.style.BaseDialog, R.layout.shengji_pop_layout);
+            baseDialog.setCanceledOnTouchOutside(false);
+//            LinearLayout cancel_layout = baseDialog.findViewById(R.id.versionchecklib_version_dialog_cancel);
+//            cancel_layout.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    baseDialog.dismiss();
+//                }
+//            });
+            TextView tv_msg = baseDialog.findViewById(R.id.tv_msg);
+            tv_msg.setText(versionBundle.getContent());
             return baseDialog;
         };
     }
@@ -334,6 +342,7 @@ public class KeepFitActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        //更新弹出框销毁
         AllenVersionChecker.getInstance().cancelAllMission();
 
 
@@ -348,9 +357,9 @@ public class KeepFitActivity extends BaseActivity {
                 return;
             }
             if (parms.getString("jpush_enter", "").equals("jpush_enter1")) {
-                if(tabFragments.size()==3){
+                if (tabFragments.size() == 3) {
                     viewpager_content.setCurrentItem(1);
-                }else{
+                } else {
                     viewpager_content.setCurrentItem(2);
                 }
                 //设置跳转到消息tab1
@@ -358,27 +367,27 @@ public class KeepFitActivity extends BaseActivity {
                 EventBus.getDefault().postSticky(messageEvent);
 
             } else if (parms.getString("jpush_enter").equals("jpush_enter2")) {
-                if(tabFragments.size()==3){
+                if (tabFragments.size() == 3) {
                     viewpager_content.setCurrentItem(1);
-                }else{
+                } else {
                     viewpager_content.setCurrentItem(2);
                 }                //设置跳转到消息tab2
                 MessageEvent messageEvent = new MessageEvent("jpush_main_enter2");
                 EventBus.getDefault().postSticky(messageEvent);
 
             } else if (parms.getString("jpush_enter").equals("jpush_enter3")) {
-                if(tabFragments.size()==3){
+                if (tabFragments.size() == 3) {
                     viewpager_content.setCurrentItem(1);
-                }else{
+                } else {
                     viewpager_content.setCurrentItem(2);
                 }                //设置跳转到消息tab3
                 MessageEvent messageEvent = new MessageEvent("jpush_main_enter3");
                 EventBus.getDefault().postSticky(messageEvent);
 
             } else if (parms.getString("jpush_enter").equals("jpush_enter4")) {
-                if(tabFragments.size()==3){
+                if (tabFragments.size() == 3) {
                     viewpager_content.setCurrentItem(1);
-                }else{
+                } else {
                     viewpager_content.setCurrentItem(2);
                 }                //设置跳转到消息tab4
                 MessageEvent messageEvent = new MessageEvent("jpush_main_enter4");
