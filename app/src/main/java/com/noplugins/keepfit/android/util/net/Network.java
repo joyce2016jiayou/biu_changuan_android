@@ -54,6 +54,7 @@ import com.orhanobut.logger.Logger;
 import java.io.IOException;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.util.List;
@@ -62,6 +63,7 @@ import java.util.concurrent.TimeUnit;
 
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
@@ -98,7 +100,7 @@ public class Network {
     public static String phone = "phone";
     public static String is_set_alias = "is_set_alias";
     private static String MRTHOD_NAME = "";
-    Retrofit retrofit, coach_retrofit,get_user_retrofit;
+    Retrofit retrofit, coach_retrofit, get_user_retrofit;
 
     public String get_changguan_url(String str) {
         if (str.equals("test")) {
@@ -115,6 +117,7 @@ public class Network {
             return "http://kft.ahcomg.com/api/coach-service/coachuser/";
         }
     }
+
     public String user_url(String str) {
         if (str.equals("test")) {
             return "http://testapi.noplugins.com/api/cust-service/custuser/";
@@ -177,7 +180,7 @@ public class Network {
         }
 
         OkHttpClient client = new OkHttpClient.Builder()
-                .sslSocketFactory(sslContext.getSocketFactory())//去掉okhttp https证书验证
+                .sslSocketFactory(createSSLSocketFactory())//去掉okhttp https证书验证
                 .addInterceptor(new LogInterceptor(method))//添加日志拦截器
                 .addInterceptor(new Interceptor() {//添加token
                     @Override
@@ -224,6 +227,20 @@ public class Network {
         coach_service = coach_retrofit.create(CoachService.class);
         userService = get_user_retrofit.create(UserService.class);
 
+    }
+
+    private static SSLSocketFactory createSSLSocketFactory() {
+        SSLSocketFactory ssfFactory = null;
+
+        try {
+            SSLContext sc = SSLContext.getInstance("TLS");
+            sc.init(null, new TrustManager[]{new TrustAllCerts()}, new SecureRandom());
+
+            ssfFactory = sc.getSocketFactory();
+        } catch (Exception e) {
+        }
+
+        return ssfFactory;
     }
 
     private RequestBody retuen_json_params(Map<String, Object> params) {
@@ -416,7 +433,6 @@ public class Network {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
     }
-
 
 
     /**

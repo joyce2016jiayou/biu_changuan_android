@@ -1079,7 +1079,7 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
         //设置最多只能上传9张图片
         if (ValueResources.select_iamges_size >= 9) {
             Toast.makeText(getActivity(), "只能上传9张图片哦～", Toast.LENGTH_SHORT).show();
-        } else if (ValueResources.select_iamges_size < 9) {
+        } else {
             max_num = 9 - ValueResources.select_iamges_size;
             EasyPhotos.createAlbum(this, true, GlideEngine.getInstance())
                     .setFileProviderAuthority("com.noplugins.keepfit.android.fileprovider")

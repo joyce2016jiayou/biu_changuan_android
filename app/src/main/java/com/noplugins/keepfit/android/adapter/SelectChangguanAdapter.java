@@ -14,6 +14,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.andview.refreshview.recyclerview.BaseRecyclerAdapter;
 import com.bumptech.glide.load.resource.file.StreamFileDataLoadProvider;
+import com.lxj.xpopup.XPopup;
+import com.lxj.xpopup.core.BasePopupView;
+import com.lxj.xpopup.enums.PopupAnimation;
 import com.noplugins.keepfit.android.KeepFitActivity;
 import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.activity.SelectChangGuanActivity;
@@ -29,6 +32,8 @@ import com.noplugins.keepfit.android.util.net.Network;
 import com.noplugins.keepfit.android.util.net.entity.Bean;
 import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriber;
 import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener;
+import com.noplugins.keepfit.android.util.ui.pop.base.CenterPopupView;
+import com.noplugins.keepfit.android.util.ui.pop.inteface.ViewCallBack;
 
 import java.util.HashMap;
 import java.util.List;
@@ -101,15 +106,41 @@ public class SelectChangguanAdapter extends BaseRecyclerAdapter<RecyclerView.Vie
                 @Override
                 public void onClick(View view) {
                     if (BaseUtils.isFastClick()) {
+                        //弹出框提示
+                        sure_select_pop(selectChangGuanBean);
 
-                        //切换场馆
-                        qiehuan_changguan(selectChangGuanBean.getAreaNum());
                     }
 
                 }
 
             });
         }
+    }
+
+    private void sure_select_pop(SelectChangGuanBean selectChangGuanBean) {
+        new XPopup.Builder(selectChangGuanActivity)
+                .autoOpenSoftInput(true)
+                .popupAnimation(PopupAnimation.ScaleAlphaFromCenter)
+                .asCustom(new CenterPopupView(selectChangGuanActivity, R.layout.sure_select_changguan_layout, new ViewCallBack() {
+                    @Override
+                    public void onReturnView(View view, BasePopupView popup) {
+                        view.findViewById(R.id.cancel_btn).setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                popup.dismiss();
+                            }
+                        });
+                        view.findViewById(R.id.sure_btn).setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                popup.dismiss();
+                                //切换场馆
+                                qiehuan_changguan(selectChangGuanBean.getAreaNum());
+                            }
+                        });
+                    }
+
+                })).show();
     }
 
     private void qiehuan_changguan(String areaNum) {
