@@ -27,9 +27,9 @@ public class StepView extends View {
     private int currentStep = 0;    //当前步骤(从0开始)
     private int lineDoneColor = Color.parseColor("#FFB90F");
     private int lineDefaultColor = Color.parseColor("#FFE4E1");
-    private int circleSelectColor = Color.parseColor("#f5bb41");
+    private int circleSelectColor = Color.parseColor("#F9CE0F");
     private int circleDefaultColor = Color.parseColor("#FFE4E1");
-    private int textSelectColor = Color.parseColor("#f5bb41");
+    private int textSelectColor = Color.parseColor("#F9CE0F");
     private int textDefaultColor = Color.parseColor("#FFE4E1");
     private String[] titles;
 

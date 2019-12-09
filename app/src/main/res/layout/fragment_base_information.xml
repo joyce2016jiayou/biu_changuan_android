@@ -160,7 +160,6 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/m10"
-                        android:layout_marginRight="@dimen/m20"
                         android:orientation="vertical">
 
                         <LinearLayout
@@ -182,7 +181,7 @@
                                 android:textSize="15sp" />
 
                             <LinearLayout
-                                android:layout_width="@dimen/m24"
+                                android:layout_width="@dimen/m15"
                                 android:layout_height="@dimen/m0.5"
                                 android:background="@color/color_929292" />
 
@@ -199,7 +198,7 @@
                                 android:textSize="15sp" />
 
                             <LinearLayout
-                                android:layout_width="@dimen/m24"
+                                android:layout_width="@dimen/m15"
                                 android:layout_height="@dimen/m0.5"
                                 android:background="@color/color_929292" />
 
