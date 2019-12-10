@@ -48,6 +48,7 @@ import com.noplugins.keepfit.android.util.ui.BaseDialog;
 import com.noplugins.keepfit.android.util.ui.NoScrollViewPager;
 import com.noplugins.keepfit.android.util.ui.pop.base.CenterPopupView;
 import com.noplugins.keepfit.android.util.ui.pop.inteface.ViewCallBack;
+import com.noplugins.keepfit.android.util.ui.progress.CustomHorizontalProgresWithNum;
 import com.orhanobut.logger.Logger;
 
 import org.greenrobot.eventbus.EventBus;
@@ -260,15 +261,15 @@ public class KeepFitActivity extends BaseActivity {
             @Override
             public Dialog getCustomDownloadingDialog(Context context, int progress, UIData versionBundle) {
                 BaseDialog baseDialog = new BaseDialog(context, R.style.BaseDialog, R.layout.custom_download_layout);
+                baseDialog.setCanceledOnTouchOutside(false);
                 return baseDialog;
             }
 
             @Override
             public void updateUI(Dialog dialog, int progress, UIData versionBundle) {
-                TextView tvProgress = dialog.findViewById(R.id.tv_progress);
-                ProgressBar progressBar = dialog.findViewById(R.id.pb);
-                progressBar.setProgress(progress);
-                tvProgress.setText(getString(R.string.versionchecklib_progress, progress));
+                CustomHorizontalProgresWithNum pb = dialog.findViewById(R.id.pb);
+                pb.setProgress(progress);
+                pb.setMax(100);
             }
         };
     }
@@ -282,13 +283,6 @@ public class KeepFitActivity extends BaseActivity {
         return (context, versionBundle) -> {
             BaseDialog baseDialog = new BaseDialog(context, R.style.BaseDialog, R.layout.shengji_pop_layout);
             baseDialog.setCanceledOnTouchOutside(false);
-//            LinearLayout cancel_layout = baseDialog.findViewById(R.id.versionchecklib_version_dialog_cancel);
-//            cancel_layout.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    baseDialog.dismiss();
-//                }
-//            });
             TextView tv_msg = baseDialog.findViewById(R.id.tv_msg);
             tv_msg.setText(versionBundle.getContent());
             return baseDialog;

@@ -212,6 +212,7 @@
     <string name="tv154">确认切换</string>
     <string name="tv155">确定切换至该场馆吗？</string>
     <string name="tv156">检测到有更新，请立即升级至最新版本。</string>
+    <string name="tv160"> 新版本正在努力的更新中，请稍等</string>
 
     <string name="tv_select">请选择</string>
     <string name="tv_qianbao">钱包</string>
