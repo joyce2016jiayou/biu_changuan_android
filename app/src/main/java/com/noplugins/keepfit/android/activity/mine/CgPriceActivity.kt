@@ -63,7 +63,10 @@ class CgPriceActivity : BaseActivity() {
 
         grid_view.adapter = adapter
 
-        tv_hesuan.text = SpUtils.getString(applicationContext, AppConstants.COST)
+        if (SpUtils.getString(applicationContext, AppConstants.COST)!=""){
+            tv_hesuan.text = SpUtils.getString(applicationContext, AppConstants.COST)+"/人/次"
+        }
+
         initAdapter()
         if (form == "main") {
             requestHightTime()
@@ -96,7 +99,7 @@ class CgPriceActivity : BaseActivity() {
         }
         tv_add_price.setOnClickListener {
             if (et_price.text.toString() != "") {
-                tv_price.text = "场馆全天时段价格：¥${et_price.text.toString()}元/时"
+                tv_price.text = "场馆门市价格：¥${et_price.text.toString()}元/时"
                 list.forEach {
                     it.normal_price = et_price.text.toString()
                 }

@@ -85,7 +85,6 @@ class CostAccountingActivity : BaseActivity() {
         cost = (fangzu.add(nengyuan).add(renyuan).add(yunying)).divide(sum, 2, RoundingMode.HALF_UP).toDouble()
         tv_result.text = "当前经营成本： $cost/人/次"
 
-        SpUtils.putString(applicationContext,AppConstants.COST,"$cost/人/次")
         request()
     }
 
@@ -98,6 +97,7 @@ class CostAccountingActivity : BaseActivity() {
                         params,
                         ProgressSubscriber("成本核算", object : SubscriberOnNextListener<Bean<Any>> {
                             override fun onNext(result: Bean<Any>) {
+                                SpUtils.putString(applicationContext,AppConstants.COST,"$cost")
                                 Toast.makeText(applicationContext, "上传成功", Toast.LENGTH_SHORT).show()
                             }
 
