@@ -3,16 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:layout_width="@dimen/m72"
-    android:layout_height="@dimen/m72">
+    android:layout_width="@dimen/m45"
+    android:layout_height="@dimen/m45">
 
 
         <com.noplugins.keepfit.android.util.ui.jiugongge.CCRImageView
             android:id="@+id/iv_item_nine_photo_photo"
-            android:layout_width="@dimen/m70"
+            android:layout_width="@dimen/m42"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
-            android:layout_height="@dimen/m70"
+            android:layout_height="@dimen/m42"
             app:bga_iv_square="true"
             android:scaleType="centerCrop"
             android:src="@drawable/jia_image" />

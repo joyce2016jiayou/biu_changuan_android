@@ -155,6 +155,7 @@ public class SelectChangguanAdapter extends BaseRecyclerAdapter<RecyclerView.Vie
                                 MyApplication.destoryActivity("KeepFitActivity");
                                 Intent intent = new Intent(context, KeepFitActivity.class);
                                 SpUtils.putString(context, AppConstants.CHANGGUAN_NUM, areaNum);
+                                SpUtils.putString(context,AppConstants.COST,"");
                                 //1终身会员2超值终身会员3豪华终身会员0默认
                                 if (result.getData().getServiceType() == 1) {
                                     SpUtils.putString(context, AppConstants.USER_DENGJI, "2999");

@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.fragment_statistics.*
 
 class StatisticsFragment: ViewPagerFragment() {
     override fun fetchData() {
-
+        store_type_tv.text = SpUtils.getString(activity!!, AppConstants.CG_NAME)
     }
 
     companion object {
@@ -45,7 +45,7 @@ class StatisticsFragment: ViewPagerFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        store_type_tv.text = SpUtils.getString(activity!!, AppConstants.CG_NAME)
+
         if (fragments == null){
             fragments = ArrayList()
             fragments!!.add(ToUserFragment.newInstance("用户"))

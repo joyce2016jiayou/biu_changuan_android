@@ -63,7 +63,11 @@ public class RoleAdapter extends BaseQuickAdapter<RoleBean.RoleEntity, BaseViewH
         item_editText.setText(item.getName());
         et_phone.setText(item.getPhone());
         if (item.getUserType()!=0){
-            materialSpinner.setSelectedIndex(item.getUserType()-2);
+            if (item.getUserType() == 1) {
+                materialSpinner.setSelectedIndex(1);
+            } else if (item.getUserType() >= 2) {
+                materialSpinner.setSelectedIndex(item.getUserType() - 2);
+            }
             item_editText.setEnabled(false);
             et_phone.setEnabled(false);
             materialSpinner.setClickable(false);
