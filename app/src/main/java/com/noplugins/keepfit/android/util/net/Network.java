@@ -105,6 +105,8 @@ public class Network {
     public String get_changguan_url(String str) {
         if (str.equals("test")) {
             return "http://testapi.noplugins.com/api/gym-service/";
+        } else if (str.equals("api2")) {
+            return "http://api2.noplugins.com/api/gym-service/";
         } else {
             return "http://kft.ahcomg.com/api/gym-service/";
         }
@@ -113,6 +115,8 @@ public class Network {
     public String get_coach_url(String str) {
         if (str.equals("test")) {
             return "http://testapi.noplugins.com/api/coach-service/coachuser/";
+        } else if (str.equals("api2")) {
+            return "http://api2.noplugins.com/api/coach-service/coachuser/";
         } else {
             return "http://kft.ahcomg.com/api/coach-service/coachuser/";
         }
@@ -121,6 +125,8 @@ public class Network {
     public String user_url(String str) {
         if (str.equals("test")) {
             return "http://testapi.noplugins.com/api/cust-service/custuser/";
+        } else if (str.equals("api2")) {
+            return "http://api2.noplugins.com/api/cust-service/custuser/";
         } else {
             return "http://kft.ahcomg.com/api/cust-service/custuser/";
         }
@@ -205,20 +211,20 @@ public class Network {
 
         retrofit = new Retrofit.Builder()
                 .client(client)
-                .baseUrl(get_changguan_url("test"))//设置请求网址根部
+                .baseUrl(get_changguan_url("api2"))//设置请求网址根部
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
 
         coach_retrofit = new Retrofit.Builder()
                 .client(client)
-                .baseUrl(get_coach_url("test"))//设置请求网址根部
+                .baseUrl(get_coach_url("api2"))//设置请求网址根部
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
         get_user_retrofit = new Retrofit.Builder()
                 .client(client)
-                .baseUrl(user_url("test"))//设置请求网址根部
+                .baseUrl(user_url("api2"))//设置请求网址根部
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
