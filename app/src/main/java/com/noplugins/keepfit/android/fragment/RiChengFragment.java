@@ -179,9 +179,9 @@ public class RiChengFragment extends ViewPagerFragment {
         get_types();
         //获取课程数据
         init_class_date_resource();
-        if(SpUtils.getInt(getActivity(),AppConstants.USER_TYPE)==2||SpUtils.getInt(getActivity(),AppConstants.USER_TYPE)==3){
+        if (SpUtils.getInt(getActivity(), AppConstants.USER_TYPE) == 2 || SpUtils.getInt(getActivity(), AppConstants.USER_TYPE) == 3) {
             select_store_type.setVisibility(View.INVISIBLE);
-        }else{
+        } else {
             select_store_type.setVisibility(View.VISIBLE);
         }
         select_store_type.setOnClickListener(new View.OnClickListener() {
@@ -396,7 +396,6 @@ public class RiChengFragment extends ViewPagerFragment {
                             public void onNext(Bean<RiChengBean> result) {
                                 store_type_tv.setText(result.getData().getAreaName());
                                 haveMoreArea = result.getData().isHaveMoreArea();
-                                haveMoreArea = true;
                                 SpUtils.putString(getActivity(), AppConstants.CG_NAME, result.getData().getAreaName());
                                 Log.e("获取课程数据数量", result.getData().getResult().size() + "");
                                 if (class_list.size() > 0) {
@@ -415,8 +414,6 @@ public class RiChengFragment extends ViewPagerFragment {
                                     }
                                 });
                                 refreshLayout.finishRefresh(true);
-
-
                             }
 
                             @Override
