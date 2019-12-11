@@ -3,6 +3,7 @@ package com.noplugins.keepfit.android.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import com.lxj.xpopup.enums.PopupAnimation;
 import com.noplugins.keepfit.android.KeepFitActivity;
 import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.activity.SelectChangGuanActivity;
+import com.noplugins.keepfit.android.activity.mine.CgPriceActivity;
 import com.noplugins.keepfit.android.base.MyApplication;
 import com.noplugins.keepfit.android.bean.ChooseBean;
 import com.noplugins.keepfit.android.bean.DictionaryeBean;
@@ -153,7 +155,16 @@ public class SelectChangguanAdapter extends BaseRecyclerAdapter<RecyclerView.Vie
                             @Override
                             public void onNext(Bean<ChooseBean> result) {
                                 MyApplication.destoryActivity("KeepFitActivity");
-                                Intent intent = new Intent(context, KeepFitActivity.class);
+
+                                Intent intent;
+                                if (result.getData().isHaveHighTime()){
+                                    intent = new Intent(context, KeepFitActivity.class);
+                                } else {
+                                    intent = new Intent(context, CgPriceActivity.class);
+                                    Bundle bundle = new Bundle();
+                                    bundle.putString("form", "pay");
+                                    intent.putExtras(bundle);
+                                }
                                 SpUtils.putString(context, AppConstants.CHANGGUAN_NUM, areaNum);
                                 SpUtils.putString(context,AppConstants.COST,"");
                                 //1终身会员2超值终身会员3豪华终身会员0默认

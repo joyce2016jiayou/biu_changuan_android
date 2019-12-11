@@ -5,6 +5,15 @@ import java.util.List;
 public class HightList11Bean {
     private List<HightListBean> gymTimes;
     private double normalPrice;
+    private double cost;
+
+    public double getCost() {
+        return cost;
+    }
+
+    public void setCost(double cost) {
+        this.cost = cost;
+    }
 
     public List<HightListBean> getGymTimes() {
         return gymTimes;
