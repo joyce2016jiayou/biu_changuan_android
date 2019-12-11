@@ -10,4 +10,13 @@ public class ChooseBean {
     }
 
     private int serviceType;
+    private boolean haveHighTime;
+
+    public boolean isHaveHighTime() {
+        return haveHighTime;
+    }
+
+    public void setHaveHighTime(boolean haveHighTime) {
+        this.haveHighTime = haveHighTime;
+    }
 }
