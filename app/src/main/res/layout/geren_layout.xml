@@ -61,9 +61,9 @@
             android:layout_marginLeft="@dimen/m4"
             android:background="@drawable/edit_bg"
             android:hint="@string/edit_hint38"
+            android:maxLength="18"
             android:paddingLeft="@dimen/m20"
             android:singleLine="true"
-            android:maxLength="18"
             android:textColor="@color/top_heiziti"
             android:textColorHint="@color/color_9B9B9B"
             android:textSize="13sp" />
@@ -92,12 +92,15 @@
             android:layout_marginLeft="@dimen/m4"
             android:background="@drawable/edit_bg"
             android:hint="@string/edit_hint39"
+            android:inputType="number"
+            android:maxLength="30"
             android:paddingLeft="@dimen/m20"
             android:singleLine="true"
             android:textColor="@color/top_heiziti"
             android:textColorHint="@color/color_9B9B9B"
             android:textSize="13sp" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -123,6 +126,7 @@
             android:background="@drawable/edit_bg"
             android:enabled="true"
             android:hint="@string/edit_hint46"
+            android:maxLength="30"
             android:paddingLeft="@dimen/m20"
             android:singleLine="true"
             android:textColor="@color/top_heiziti"

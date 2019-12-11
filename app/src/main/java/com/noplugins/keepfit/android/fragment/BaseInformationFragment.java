@@ -729,8 +729,32 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
             Toast.makeText(getActivity(), R.string.alert_dialog_tishi11, Toast.LENGTH_SHORT).show();
             return false;
         } else {
-            return true;
+            boolean is_go = false;
+            //判断功能性场所
+            ArrayList<ItemBean> itemBeans = exRecyclerAdapter.getData();
+            if (itemBeans.size() > 0) {
+                for (int i = 0; i < itemBeans.size(); i++) {
+                    ItemBean itemBean = itemBeans.get(i);
+                    if (null != itemBean.getPlace()) {
+                        Log.e("山东矿机发多少", itemBean.getPlace());
+                        if (itemBean.getPlace().length() == 0) {
+                            Toast.makeText(getActivity(), R.string.alert_dialog_tishi31, Toast.LENGTH_SHORT).show();
+                            is_go = false;
+                        } else {
+                            is_go = true;
+                        }
+                    } else {
+                        Toast.makeText(getActivity(), R.string.alert_dialog_tishi31, Toast.LENGTH_SHORT).show();
+                        is_go = false;
+                    }
+                }
+            } else {
+                Toast.makeText(getActivity(), R.string.alert_dialog_tishi31, Toast.LENGTH_SHORT).show();
+                is_go = false;
+            }
+            return is_go;
         }
+
 
     }
 

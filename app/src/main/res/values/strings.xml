@@ -252,6 +252,8 @@
     <string name="alert_dialog_tishi28">企业账号不能为空！</string>
     <string name="alert_dialog_tishi29">省市区不能为空！</string>
     <string name="alert_dialog_tishi30">邮箱格式不正确！</string>
+    <string name="alert_dialog_tishi31">功能性场所人数不能为空！</string>
+
     <string name="update_title">更新提示</string>
     <string name="updatecontent">检测到有新版本，是否更新到最新版本。</string>
     <string name="updatecontent2">检测到有新版本，请更新到最新版本，否则无法使用。</string>
