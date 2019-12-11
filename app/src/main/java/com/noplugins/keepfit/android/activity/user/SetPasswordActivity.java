@@ -17,6 +17,7 @@ import com.noplugins.keepfit.android.activity.CheckStatusFailActivity;
 import com.noplugins.keepfit.android.activity.HeTongActivity;
 import com.noplugins.keepfit.android.activity.InformationCheckActivity;
 import com.noplugins.keepfit.android.activity.SubmitInformationSelectActivity;
+import com.noplugins.keepfit.android.activity.mine.CgPriceActivity;
 import com.noplugins.keepfit.android.base.BaseActivity;
 import com.noplugins.keepfit.android.entity.CheckEntity;
 import com.noplugins.keepfit.android.global.AppConstants;
@@ -158,19 +159,26 @@ public class SetPasswordActivity extends BaseActivity {
                                         Intent intent = new Intent(SetPasswordActivity.this, HeTongActivity.class);
                                         startActivity(intent);
                                         finish();
+                                        return;
                                     } else if (result.getData().getHaveMember().equals("1")) {
                                         SpUtils.putString(getApplicationContext(), AppConstants.USER_DENGJI, "2999");
-                                        Intent intent = new Intent(SetPasswordActivity.this, KeepFitActivity.class);
-                                        startActivity(intent);
-                                        finish();
                                     } else if (result.getData().getHaveMember().equals("2")) {
                                         SpUtils.putString(getApplicationContext(), AppConstants.USER_DENGJI, "3999");
+
+                                    } else if (result.getData().getHaveMember().equals("3")) {
+                                        SpUtils.putString(getApplicationContext(), AppConstants.USER_DENGJI, "6999");
+
+                                    }
+
+                                    if (result.getData().getHighTime() == 1) {
                                         Intent intent = new Intent(SetPasswordActivity.this, KeepFitActivity.class);
                                         startActivity(intent);
                                         finish();
-                                    } else if (result.getData().getHaveMember().equals("3")) {
-                                        SpUtils.putString(getApplicationContext(), AppConstants.USER_DENGJI, "6999");
-                                        Intent intent = new Intent(SetPasswordActivity.this, KeepFitActivity.class);
+                                    } else {
+                                        Intent intent =  new Intent(SetPasswordActivity.this, CgPriceActivity.class);
+                                        Bundle bundle = new Bundle();
+                                        bundle.putString("form", "pay");
+                                        intent.putExtras(bundle);
                                         startActivity(intent);
                                         finish();
                                     }
