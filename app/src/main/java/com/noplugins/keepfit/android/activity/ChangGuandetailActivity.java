@@ -634,7 +634,7 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
         if (position <= upList_iamges.size() - 1 && upList_iamges.size() != 0) {
             upList_iamges.remove(position);
         } else {
-            jiugongge_iamges.remove(position + upList_iamges.size());
+            jiugongge_iamges.remove(position - upList_iamges.size());
         }
 
 
@@ -1034,6 +1034,7 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
                             public void onNext(Bean<Object> changguanBeanBean) {
                                 Toast.makeText(ChangGuandetailActivity.this, "当前场馆信息修改成功",
                                         Toast.LENGTH_SHORT).show();
+                                setResult(SpUtils.getInt(getApplicationContext(), AppConstants.FRAGMENT_SIZE)-1);
                                 finish();
                                 upList_iamges.clear();
                                 logoBean = null;
