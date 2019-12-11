@@ -125,7 +125,6 @@
                         android:id="@+id/tv_hesuan"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="￥13/人/次"
                         android:textColor="@color/color_22243D"
                         android:textSize="15sp" />
 
