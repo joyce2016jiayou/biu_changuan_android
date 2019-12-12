@@ -211,20 +211,20 @@ public class Network {
 
         retrofit = new Retrofit.Builder()
                 .client(client)
-                .baseUrl(get_changguan_url("api2"))//设置请求网址根部
+                .baseUrl(get_changguan_url("test"))//设置请求网址根部
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
 
         coach_retrofit = new Retrofit.Builder()
                 .client(client)
-                .baseUrl(get_coach_url("api2"))//设置请求网址根部
+                .baseUrl(get_coach_url("test"))//设置请求网址根部
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
         get_user_retrofit = new Retrofit.Builder()
                 .client(client)
-                .baseUrl(user_url("api2"))//设置请求网址根部
+                .baseUrl(user_url("test"))//设置请求网址根部
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();

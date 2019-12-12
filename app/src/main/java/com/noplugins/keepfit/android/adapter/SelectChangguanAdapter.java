@@ -107,11 +107,16 @@ public class SelectChangguanAdapter extends BaseRecyclerAdapter<RecyclerView.Vie
             holder.select_bg.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (BaseUtils.isFastClick()) {
-                        //弹出框提示
-                        sure_select_pop(selectChangGuanBean);
+                    if (selectChangGuanBean.isIsFront()) {
+                        return;
+                    } else {
+                        if (BaseUtils.isFastClick()) {
+                            //弹出框提示
+                            sure_select_pop(selectChangGuanBean);
 
+                        }
                     }
+
 
                 }
 
@@ -157,7 +162,7 @@ public class SelectChangguanAdapter extends BaseRecyclerAdapter<RecyclerView.Vie
                                 MyApplication.destoryActivity("KeepFitActivity");
 
                                 Intent intent;
-                                if (result.getData().isHaveHighTime()){
+                                if (result.getData().isHaveHighTime()) {
                                     intent = new Intent(context, KeepFitActivity.class);
                                 } else {
                                     intent = new Intent(context, CgPriceActivity.class);
@@ -166,7 +171,7 @@ public class SelectChangguanAdapter extends BaseRecyclerAdapter<RecyclerView.Vie
                                     intent.putExtras(bundle);
                                 }
                                 SpUtils.putString(context, AppConstants.CHANGGUAN_NUM, areaNum);
-                                SpUtils.putString(context,AppConstants.COST,"");
+                                SpUtils.putString(context, AppConstants.COST, "");
                                 //1终身会员2超值终身会员3豪华终身会员0默认
                                 if (result.getData().getServiceType() == 1) {
                                     SpUtils.putString(context, AppConstants.USER_DENGJI, "2999");

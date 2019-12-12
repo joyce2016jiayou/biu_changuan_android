@@ -43,6 +43,7 @@ import com.noplugins.keepfit.android.entity.ItemBean;
 import com.noplugins.keepfit.android.entity.QiNiuToken;
 import com.noplugins.keepfit.android.entity.UrlEntity;
 import com.noplugins.keepfit.android.resource.ValueResources;
+import com.noplugins.keepfit.android.util.BaseUtils;
 import com.noplugins.keepfit.android.util.GlideEngine;
 import com.noplugins.keepfit.android.util.data.StringsHelper;
 import com.noplugins.keepfit.android.util.net.Network;
@@ -375,19 +376,25 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
         sheng_tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                initCityDate(true);
+                if (BaseUtils.isFastClick()) {
+                    initCityDate(true);
+                }
             }
         });
         shi_tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                initCityDate(true);
+                if (BaseUtils.isFastClick()) {
+                    initCityDate(true);
+                }
             }
         });
         qu_tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                initCityDate(true);
+                if (BaseUtils.isFastClick()) {
+                    initCityDate(true);
+                }
             }
         });
     }
