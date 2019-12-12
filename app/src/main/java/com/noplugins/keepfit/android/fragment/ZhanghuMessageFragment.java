@@ -26,6 +26,8 @@ import com.noplugins.keepfit.android.adapter.ZhanghuMessageAdapter;
 import com.noplugins.keepfit.android.entity.ClassEntity;
 import com.noplugins.keepfit.android.entity.DateViewEntity;
 import com.noplugins.keepfit.android.entity.MessageEntity;
+import com.noplugins.keepfit.android.global.AppConstants;
+import com.noplugins.keepfit.android.util.SpUtils;
 import com.noplugins.keepfit.android.util.net.Network;
 import com.noplugins.keepfit.android.util.net.entity.Bean;
 import com.noplugins.keepfit.android.util.net.progress.GsonSubscriberOnNextListener;
@@ -74,7 +76,7 @@ public class ZhanghuMessageFragment extends Fragment {
         if (view == null) {
             view = inflater.inflate(R.layout.fragment_zhanghu, container, false);
             ButterKnife.bind(this, view);//绑定黄牛刀
-            initView();
+//            initView();
         }
         return view;
 
@@ -82,7 +84,7 @@ public class ZhanghuMessageFragment extends Fragment {
 
     private void initMessageDate() {
         Map<String, Object> params = new HashMap<>();
-        params.put("gymAreaNum", "GYM19072138381319");//场馆编号
+        params.put("gymAreaNum", SpUtils.getString(getActivity(), AppConstants.CHANGGUAN_NUM));//场馆编号
         params.put("page", page);//场馆编号
         params.put("type", "1");//场馆编号
         Gson gson = new Gson();

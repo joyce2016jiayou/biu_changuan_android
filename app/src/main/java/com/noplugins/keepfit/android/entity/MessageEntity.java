@@ -92,6 +92,25 @@ public class MessageEntity {
             private int type;
             private Object withdrawBalance;
             private Object withdrawMoney;
+            private double finalWithdrawBalance;
+            private double finalWithdrawMoney;
+
+            public double getFinalWithdrawBalance() {
+                return finalWithdrawBalance;
+            }
+
+            public void setFinalWithdrawBalance(double finalWithdrawBalance) {
+                this.finalWithdrawBalance = finalWithdrawBalance;
+            }
+
+            public double getFinalWithdrawMoney() {
+                return finalWithdrawMoney;
+            }
+
+            public void setFinalWithdrawMoney(double finalWithdrawMoney) {
+                this.finalWithdrawMoney = finalWithdrawMoney;
+            }
+
             private long withdrawTime;
             private int messageType;
             private long messageTime;
