@@ -1,5 +1,6 @@
 package com.noplugins.keepfit.android.activity.mine.setting
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -14,11 +15,16 @@ import kotlinx.android.synthetic.main.activity_input_new_phone.*
 import kotlinx.android.synthetic.main.title_activity.*
 
 class InputNewPhoneActivity : BaseActivity() {
+    companion object {
+        @SuppressLint("StaticFieldLeak")
+        lateinit var inputNewPhoneActivity: InputNewPhoneActivity
+    }
     override fun initBundle(parms: Bundle?) {
     }
 
     override fun initView() {
         setContentView(R.layout.activity_input_new_phone)
+        inputNewPhoneActivity = this
         title_tv.text = "输入新手机号"
         val phone = SpUtils.getString(applicationContext,AppConstants.PHONE)
         tv_now_phone.text = "您目前的手机号为：$phone，您想要变更为？"
@@ -38,7 +44,7 @@ class InputNewPhoneActivity : BaseActivity() {
                 }
                 val intent = Intent(this, SMSCodeActivity::class.java)
                 val bundle = Bundle()
-                bundle.putBoolean("newPhone",true)
+                bundle.putString("newPhone",et_new_phone.text.toString())
                 intent.putExtras(bundle)
                 startActivity(intent)
             }

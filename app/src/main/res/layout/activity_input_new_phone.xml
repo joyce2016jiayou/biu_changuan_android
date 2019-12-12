@@ -27,6 +27,8 @@
         android:layout_gravity="center_horizontal"
         tools:text="17717418869"
         android:layout_marginTop="@dimen/m30"
+        android:inputType="phone"
+        android:digits="1234567890"
         android:textColor="@color/color_000000"
         android:textSize="18sp"/>
 
@@ -37,7 +39,7 @@
         android:gravity="center"
         android:background="@drawable/shape_btn_bg_40"
         android:layout_gravity="center_horizontal"
-        tools:text="@string/tv_send_yzm"
+        android:text="@string/tv_send_yzm"
         android:layout_marginTop="@dimen/m30"
         android:textColor="@color/color_22243D"
         android:textSize="20sp"/>

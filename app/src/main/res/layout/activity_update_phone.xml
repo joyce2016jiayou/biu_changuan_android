@@ -36,7 +36,7 @@
         android:gravity="center"
         android:background="@drawable/shape_btn_bg_40"
         android:layout_gravity="center_horizontal"
-        tools:text="@string/tv_send_yzm"
+        android:text="@string/tv_send_yzm"
         android:layout_marginTop="@dimen/m30"
         android:textColor="@color/color_22243D"
         android:textSize="20sp"/>

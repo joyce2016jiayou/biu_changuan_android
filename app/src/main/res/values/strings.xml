@@ -344,7 +344,7 @@
     <string name="tv_company_bank">开户银行</string>
     <string name="tv_logo">封面图</string>
     <string name="tv_pic_tips">建议上传卫生间、更衣室、器械区、操房等位置的图片。</string>
-    <string name="tv_mine">我的</string>
+    <string name="tv_mine" tools:ignore="ExtraTranslation">我的</string>
     <string name="tv_anquan">安全管理</string>
     <string name="tv_about">关于</string>
     <string name="tv_wenti">问题反馈</string>

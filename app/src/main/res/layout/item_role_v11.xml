@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginTop="@dimen/m10"
+    android:layout_marginBottom="@dimen/m10"
+    android:orientation="horizontal">
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="@dimen/m55"
+        android:layout_weight="9"
+        android:background="@drawable/shape_btn_bg_22243d_40"
+        android:layout_marginLeft="@dimen/m16">
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:layout_marginLeft="@dimen/m27"
+            android:layout_marginTop="@dimen/m7"
+            tools:text="张三"
+            android:textColor="@color/color_F9CE0F" />
+        <TextView
+            android:id="@+id/tv_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            android:layout_marginTop="@dimen/m3"
+            android:layout_marginLeft="@dimen/m27"
+            android:layout_below="@+id/tv_name"
+            tools:text="17712341234"
+            android:textColor="@color/color_F9CE0F" />
+        <TextView
+            android:id="@+id/tv_role"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            android:layout_marginRight="@dimen/m33"
+            android:layout_below="@+id/tv_name"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            tools:text="前台"
+            android:textColor="@color/color_F9CE0F" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/iv_delete"
+        android:layout_width="@dimen/m20"
+        android:layout_height="@dimen/m20"
+        android:src="@drawable/deleted_edit"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="@dimen/m8"
+        android:layout_marginRight="@dimen/m16"/>
+</LinearLayout>
