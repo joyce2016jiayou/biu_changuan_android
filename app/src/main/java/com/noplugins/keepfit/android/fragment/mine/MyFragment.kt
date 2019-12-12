@@ -20,6 +20,7 @@ import com.noplugins.keepfit.android.activity.mine.CostAccountingActivity
 import com.noplugins.keepfit.android.activity.mine.TeacherManagerActivity
 import com.noplugins.keepfit.android.activity.mine.WalletActivity
 import com.noplugins.keepfit.android.activity.mine.cg.VenueDetailActivity
+import com.noplugins.keepfit.android.activity.mine.roles.RolesManageActivity
 import com.noplugins.keepfit.android.activity.mine.setting.SettingActivity
 import com.noplugins.keepfit.android.adapter.mine.FunctionAdapter
 import com.noplugins.keepfit.android.adapter.mine.cg.FunctionV11Adapter
@@ -110,7 +111,7 @@ class MyFragment : BaseFragment(), EasyPermissions.PermissionCallbacks {
                         activity!!.startActivityForResult(intent, 1)
                     }
                     "权限管理" -> {
-                        val intent = Intent(activity, RoleActivity::class.java)
+                        val intent = Intent(activity, RolesManageActivity::class.java)
                         activity!!.startActivityForResult(intent, 1)
                     }
                     "问题反馈" -> {
