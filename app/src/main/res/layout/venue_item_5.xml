@@ -12,6 +12,7 @@
         android:gravity="center"
         android:layout_alignParentRight="true"
         android:layout_margin="@dimen/m10"
+        android:textStyle="bold"
         android:background="@drawable/shape_venue_save"
         android:text="@string/tv_save"/>
 
@@ -36,7 +37,7 @@
             android:layout_width="@dimen/m72"
             android:layout_height="@dimen/m72"
             app:layout_constraintLeft_toLeftOf="parent"
-            android:layout_marginLeft="@dimen/m30"
+            android:layout_marginLeft="@dimen/m10"
             app:layout_constraintTop_toBottomOf="@+id/label_logo"
             android:layout_marginTop="@dimen/m10">
             <ImageView
@@ -99,13 +100,13 @@
             android:id="@+id/snpl_moment_add_photos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/m30"
+            android:layout_marginLeft="@dimen/m10"
             android:layout_marginRight="@dimen/m10"
             app:bga_snpl_deleteDrawable="@drawable/delete_image"
             app:bga_snpl_deleteDrawableOverlapQuarter="false"
             app:bga_snpl_editable="true"
             app:bga_snpl_itemCornerRadius="0dp"
-            app:bga_snpl_itemSpanCount="4"
+            app:bga_snpl_itemSpanCount="3"
             app:bga_snpl_itemWhiteSpacing="5dp"
             app:bga_snpl_itemWidth="0dp"
             app:bga_snpl_maxItemCount="9"

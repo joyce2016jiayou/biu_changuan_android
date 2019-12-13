@@ -14,53 +14,60 @@
         android:orientation="vertical">
 
         <!--第一块-->
-        <LinearLayout
+        <www.linwg.org.lib.LCardView
+            android:id="@+id/clander_layout"
             android:layout_width="match_parent"
-            android:layout_height="255dp"
-            android:background="@drawable/kapian_bg"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:cornerRadius="@dimen/m8"
+            app:shadowSize="@dimen/m2"
+            app:shadowStartAlpha="10">
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="28dp"
-                android:layout_marginTop="22dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/tv151"
-                    android:textColor="@color/top_heiziti"
-                    android:textSize="16sp" />
-
-                <EditText
-                    android:id="@+id/changguan_name"
-                    android:layout_width="264dp"
-                    android:layout_height="36dp"
-                    android:layout_marginLeft="4dp"
-                    android:background="@null"
-                    android:hint="@string/edit_hint8"
-                    android:maxLength="30"
-                    android:singleLine="true"
-                    android:textColor="@color/top_heiziti"
-                    android:textColorHint="@color/color_9B9B9B"
-                    android:textSize="13sp" />
-            </LinearLayout>
-
-            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="28dp"
-                android:layout_marginTop="22dp"
-                android:layout_marginRight="44dp">
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/m20"
+                    android:layout_marginTop="@dimen/m15"
+                    android:layout_marginRight="@dimen/m20"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tv151"
+                        android:textColor="@color/top_heiziti"
+                        android:textSize="15sp" />
+
+                    <EditText
+                        android:id="@+id/changguan_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/m31"
+                        android:layout_marginLeft="@dimen/m10"
+                        android:background="@drawable/edit_bg1"
+                        android:hint="@string/edit_hint8"
+                        android:maxLength="20"
+                        android:paddingLeft="@dimen/m20"
+                        android:singleLine="true"
+                        android:textColor="@color/top_heiziti"
+                        android:textColorHint="@color/color_929292"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/m20"
+                    android:layout_marginTop="@dimen/m20"
+                    android:layout_marginRight="@dimen/m20"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
@@ -69,71 +76,240 @@
                         android:layout_height="wrap_content"
                         android:text="@string/tv20"
                         android:textColor="@color/top_heiziti"
-                        android:textSize="16sp" />
+                        android:textSize="15sp" />
 
                     <lib.demo.spinner.MaterialSpinner
                         android:id="@+id/spinner_type"
-                        android:layout_width="93dp"
-                        android:layout_height="36dp"
-                        android:layout_marginLeft="4dp"
-                        android:background="@drawable/et_login_bg"
+                        android:layout_width="@dimen/m265"
+                        android:layout_height="@dimen/m31"
+                        android:layout_marginLeft="@dimen/m10"
+                        android:background="@drawable/edit_bg1"
                         android:gravity="center"
-                        android:textSize="13sp"
+                        android:textSize="15sp"
                         spinner:ms_background_color="@android:color/white"
                         spinner:ms_popupwindow_height="wrap_content"
-                        spinner:ms_popupwindow_maxheight="200dp"
+                        spinner:ms_popupwindow_maxheight="@dimen/m200"
                         spinner:ms_text_color="@color/color_9B9B9B" />
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                    android:layout_marginLeft="@dimen/m20"
+                    android:layout_marginTop="@dimen/m20"
+                    android:layout_marginRight="@dimen/m20"
+                    android:gravity="center_vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/tv21"
                         android:textColor="@color/top_heiziti"
-                        android:textSize="16sp" />
+                        android:textSize="15sp" />
 
-                    <EditText
-                        android:id="@+id/edittext_area"
-                        android:layout_width="98dp"
-                        android:layout_height="36dp"
-                        android:layout_marginLeft="4dp"
-                        android:background="@null"
-                        android:hint="@string/edit_hint9"
-                        android:inputType="number"
-                        android:maxLength="5"
-                        android:singleLine="true"
-                        android:textColor="@color/top_heiziti"
-                        android:textColorHint="@color/color_9B9B9B"
-                        android:textSize="13sp" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/m31"
+                        android:layout_marginLeft="@dimen/m10"
+                        android:background="@drawable/edit_bg1"
+                        android:orientation="horizontal">
 
-                    <ImageView
-                        android:layout_width="9dp"
-                        android:layout_height="12dp"
-                        android:src="@drawable/pingfang" />
+                        <EditText
+                            android:id="@+id/edittext_area"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:hint="@string/edit_hint9"
+                            android:inputType="number"
+                            android:maxLength="11"
+                            android:paddingLeft="@dimen/m20"
+                            android:singleLine="true"
+                            android:textColor="@color/top_heiziti"
+                            android:textColorHint="@color/color_9B9B9B"
+                            android:textSize="15sp" />
+
+                        <ImageView
+                            android:layout_width="@dimen/m15"
+                            android:layout_height="@dimen/m21"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginRight="@dimen/m20"
+                            android:src="@drawable/pingfang" />
+                    </LinearLayout>
+
                 </LinearLayout>
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="28dp"
-                android:layout_marginTop="23dp"
-                android:layout_marginRight="58dp">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/m20"
+                    android:layout_marginTop="@dimen/m20"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/m5"
+                        android:text="@string/tv27"
+                        android:textColor="@color/top_heiziti"
+                        android:textSize="15sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/m10"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/sheng_tv"
+                                android:layout_width="@dimen/m70"
+                                android:layout_height="@dimen/m31"
+                                android:background="@drawable/edit_bg1"
+                                android:gravity="center"
+                                android:hint="@string/edit_hint42"
+                                android:singleLine="true"
+                                android:textColor="@color/top_heiziti"
+                                android:textColorHint="@color/color_9B9B9B"
+                                android:textSize="15sp" />
+
+                            <LinearLayout
+                                android:layout_width="@dimen/m15"
+                                android:layout_height="@dimen/m0.5"
+                                android:background="@color/color_929292" />
+
+                            <TextView
+                                android:id="@+id/shi_tv"
+                                android:layout_width="@dimen/m70"
+                                android:layout_height="@dimen/m31"
+                                android:background="@drawable/edit_bg1"
+                                android:gravity="center"
+                                android:hint="@string/edit_hint43"
+                                android:singleLine="true"
+                                android:textColor="@color/top_heiziti"
+                                android:textColorHint="@color/color_9B9B9B"
+                                android:textSize="15sp" />
+
+                            <LinearLayout
+                                android:layout_width="@dimen/m15"
+                                android:layout_height="@dimen/m0.5"
+                                android:background="@color/color_929292" />
+
+                            <TextView
+                                android:id="@+id/qu_tv"
+                                android:layout_width="@dimen/m70"
+                                android:layout_height="@dimen/m31"
+                                android:background="@drawable/edit_bg1"
+                                android:gravity="center"
+                                android:hint="@string/edit_hint44"
+                                android:singleLine="true"
+                                android:textColor="@color/top_heiziti"
+                                android:textColorHint="@color/color_9B9B9B"
+                                android:textSize="15sp" />
+                        </LinearLayout>
+
+                        <EditText
+                            android:id="@+id/edit_address"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/m31"
+                            android:layout_marginTop="@dimen/m12"
+                            android:layout_marginRight="@dimen/m20"
+                            android:background="@drawable/edit_bg1"
+                            android:hint="@string/edit_hint45"
+                            android:paddingLeft="@dimen/m20"
+                            android:singleLine="true"
+                            android:textColor="@color/top_heiziti"
+                            android:textColorHint="@color/color_9B9B9B"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/m20"
+                    android:layout_marginTop="@dimen/m20"
                     android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tv24"
+                        android:textColor="@color/top_heiziti"
+                        android:textSize="15sp" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/m31"
+                        android:layout_marginLeft="@dimen/m10"
+                        android:layout_marginRight="@dimen/m20"
+                        android:background="@drawable/edit_bg1"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/time1_edit"
+                                android:layout_width="63dp"
+                                android:layout_height="36dp"
+                                android:layout_marginLeft="3dp"
+                                android:background="@null"
+                                android:gravity="right|center_vertical"
+                                android:hint="时间"
+                                android:textColor="@color/top_heiziti"
+                                android:textColorHint="@color/color_929292"
+                                android:textSize="15sp" />
+
+                            <LinearLayout
+                                android:layout_width="@dimen/m40"
+                                android:layout_height="@dimen/m1"
+                                android:background="@color/color_929292"
+                                android:orientation="horizontal" />
+
+                            <TextView
+                                android:id="@+id/time2_edit"
+                                android:layout_width="63dp"
+                                android:layout_height="36dp"
+                                android:background="@null"
+                                android:gravity="left|center_vertical"
+                                android:hint="时间"
+                                android:textColor="@color/top_heiziti"
+                                android:textColorHint="@color/color_929292"
+                                android:textSize="15sp" />
+                        </LinearLayout>
+
+                        <ImageView
+                            android:layout_width="@dimen/m20"
+                            android:layout_height="@dimen/m20"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="@dimen/m20"
+                            android:src="@drawable/icon_drop" />
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/m20"
+                    android:layout_marginTop="@dimen/m20"
                     android:orientation="horizontal">
 
                     <TextView
@@ -141,103 +317,150 @@
                         android:layout_height="wrap_content"
                         android:text="@string/tv22"
                         android:textColor="@color/top_heiziti"
-                        android:textSize="16sp" />
+                        android:textSize="15sp" />
 
                     <EditText
                         android:id="@+id/tell_edit"
-                        android:layout_width="93dp"
-                        android:layout_height="36dp"
-                        android:background="@null"
-                        android:gravity="center"
-                        android:inputType="number"
-                        android:maxLength="12"
-                        android:singleLine="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/m31"
+                        android:layout_marginLeft="@dimen/m10"
+                        android:layout_marginRight="@dimen/m20"
+                        android:background="@drawable/edit_bg1"
+                        android:gravity="left|center_vertical"
                         android:hint="@string/edit_hint10"
+                        android:paddingLeft="@dimen/m20"
+                        android:singleLine="true"
                         android:textColor="@color/top_heiziti"
-                        android:textColorHint="@color/color_9B9B9B"
-                        android:textSize="13sp" />
+                        android:textColorHint="@color/color_929292"
+                        android:textSize="15sp" />
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="28dp"
+                    android:layout_marginLeft="@dimen/m20"
+                    android:layout_marginTop="@dimen/m20"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_width="@dimen/m55"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:text="邮"
+                            android:textColor="@color/top_heiziti"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:text="箱"
+                            android:textColor="@color/top_heiziti"
+                            android:textSize="15sp" />
+                    </RelativeLayout>
+
+
+                    <EditText
+                        android:id="@+id/edit_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/m31"
+                        android:layout_marginLeft="@dimen/m10"
+                        android:layout_marginRight="@dimen/m20"
+                        android:background="@drawable/edit_bg1"
+                        android:hint="@string/edit_hint11"
+                        android:paddingLeft="@dimen/m20"
+                        android:singleLine="true"
+                        android:textColor="@color/top_heiziti"
+                        android:textColorHint="@color/color_9B9B9B"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/m20"
+                    android:layout_marginTop="@dimen/m20"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/tv23"
+                        android:layout_alignParentLeft="true"
+                        android:text="@string/tv156"
                         android:textColor="@color/top_heiziti"
-                        android:textSize="16sp" />
+                        android:textSize="15sp" />
 
-                    <EditText
-                        android:id="@+id/edit_email"
-                        android:layout_width="93dp"
-                        android:layout_height="36dp"
-                        android:layout_marginStart="4dp"
-                        android:layout_marginLeft="4dp"
-                        android:background="@null"
-                        android:hint="@string/edit_hint11"
-                        android:singleLine="true"
-                        android:textColor="@color/top_heiziti"
-                        android:textColorHint="@color/color_9B9B9B"
-                        android:textSize="13sp" />
+
+                    <LinearLayout
+                        android:layout_width="@dimen/m125"
+                        android:layout_height="@dimen/m31"
+                        android:layout_marginLeft="@dimen/m10"
+                        android:background="@drawable/icon_input"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/tv_add"
+                            android:textColor="@color/color_181818"
+                            android:textSize="13sp" />
+                    </LinearLayout>
                 </LinearLayout>
-            </RelativeLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="28dp"
-                android:layout_marginTop="22dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/tv24"
-                    android:textColor="@color/top_heiziti"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/time1_edit"
-                    android:layout_width="63dp"
-                    android:layout_height="36dp"
-                    android:layout_marginLeft="3dp"
-                    android:background="@null"
-                    android:gravity="center"
-                    android:hint="@string/edit_hint12"
-                    android:text="@string/edit_hint12"
-                    android:textColor="@color/top_heiziti"
-                    android:textColorHint="@color/color_9B9B9B"
-                    android:textSize="13sp" />
 
                 <LinearLayout
-                    android:layout_width="42dp"
-                    android:layout_height="8dp"
-                    android:layout_marginLeft="11dp"
-                    android:background="@drawable/hengang"
-                    android:orientation="horizontal" />
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/m31"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/m20"
+                    android:layout_marginRight="@dimen/m20"
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/m20">
 
-                <TextView
-                    android:id="@+id/time2_edit"
-                    android:layout_width="63dp"
-                    android:layout_height="36dp"
-                    android:layout_marginLeft="10dp"
-                    android:background="@null"
-                    android:gravity="center"
-                    android:hint="@string/edit_hint13"
-                    android:text="@string/edit_hint13"
-                    android:textColor="@color/top_heiziti"
-                    android:textColorHint="@color/color_9B9B9B"
-                    android:textSize="13sp" />
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/edit_bg2"
+                        android:layout_marginRight="@dimen/m20"
+                        android:layout_height="@dimen/m31">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:text="单车房-双子座"
+                            android:layout_marginLeft="@dimen/m20"
+                            android:textColor="@color/color_584903"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:text="50人"
+                            android:layout_marginRight="@dimen/m22"
+                            android:textColor="@color/color_584903"
+                            android:textSize="15sp" />
+                    </RelativeLayout>
+
+                    <ImageView
+                        android:layout_width="@dimen/m15"
+                        android:layout_height="@dimen/m15"
+                        android:src="@drawable/deleted_edit" />
+
+                </LinearLayout>
+
+
             </LinearLayout>
-        </LinearLayout>
+        </www.linwg.org.lib.LCardView>
         <!--第二块-->
         <LinearLayout
             android:layout_width="match_parent"
@@ -245,95 +468,6 @@
             android:background="@drawable/kapian_bg"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="28dp"
-                android:layout_marginTop="22dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/tv27"
-                    android:textColor="@color/top_heiziti"
-                    android:textSize="16sp" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/m10"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/sheng_tv"
-                            android:layout_width="73dp"
-                            android:layout_height="36dp"
-                            android:background="@null"
-                            android:gravity="center"
-                            android:hint="@string/edit_hint42"
-                            android:singleLine="true"
-                            android:textColor="@color/top_heiziti"
-                            android:textColorHint="@color/color_9B9B9B"
-                            android:textSize="13sp" />
-
-                        <LinearLayout
-                            android:layout_width="@dimen/m24"
-                            android:layout_height="wrap_content"
-                            android:background="#fff4f4f4" />
-
-                        <TextView
-                            android:id="@+id/shi_tv"
-                            android:layout_width="73dp"
-                            android:layout_height="36dp"
-                            android:background="@null"
-                            android:gravity="center"
-                            android:hint="@string/edit_hint43"
-                            android:singleLine="true"
-                            android:textColor="@color/top_heiziti"
-                            android:textColorHint="@color/color_9B9B9B"
-                            android:textSize="13sp" />
-
-                        <LinearLayout
-                            android:layout_width="@dimen/m24"
-                            android:layout_height="wrap_content"
-                            android:background="#fff4f4f4" />
-
-                        <TextView
-                            android:id="@+id/qu_tv"
-                            android:layout_width="73dp"
-                            android:layout_height="36dp"
-                            android:background="@null"
-                            android:gravity="center"
-                            android:hint="@string/edit_hint44"
-                            android:singleLine="true"
-                            android:textColor="@color/top_heiziti"
-                            android:textColorHint="@color/color_9B9B9B"
-                            android:textSize="13sp" />
-                    </LinearLayout>
-
-                    <EditText
-                        android:id="@+id/edit_address"
-                        android:layout_width="264dp"
-                        android:layout_height="36dp"
-                        android:layout_marginTop="@dimen/m10"
-                        android:background="@null"
-                        android:hint="@string/edit_hint45"
-                        android:paddingLeft="@dimen/m10"
-                        android:singleLine="true"
-                        android:textColor="@color/top_heiziti"
-                        android:textColorHint="@color/color_9B9B9B"
-                        android:textSize="13sp" />
-                </LinearLayout>
-
-            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"

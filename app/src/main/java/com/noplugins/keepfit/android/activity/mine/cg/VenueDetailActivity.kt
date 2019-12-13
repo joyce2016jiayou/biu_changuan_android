@@ -5,8 +5,10 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewTreeObserver
 import android.widget.*
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,19 +20,25 @@ import com.noplugins.keepfit.android.R
 import com.noplugins.keepfit.android.adapter.mine.cg.VenueLayout2Adapter
 import com.noplugins.keepfit.android.base.BaseActivity
 import com.noplugins.keepfit.android.bean.DictionaryeBean
+import com.noplugins.keepfit.android.entity.InformationEntity
+import com.noplugins.keepfit.android.resource.ValueResources
 import com.noplugins.keepfit.android.util.GlideEngine
 import com.noplugins.keepfit.android.util.net.Network
 import com.noplugins.keepfit.android.util.net.entity.Bean
 import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriber
 import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener
+import com.noplugins.keepfit.android.util.ui.jiugongge.CCRSortableNinePhotoLayout
+import com.ycuwq.datepicker.time.HourAndMinDialogFragment
 import kotlinx.android.synthetic.main.activity_venue_detail.*
+import kotlinx.android.synthetic.main.title_activity_yellow.*
 import kotlinx.android.synthetic.main.venue_item_1.*
 import kotlinx.android.synthetic.main.venue_item_2.*
 import kotlinx.android.synthetic.main.venue_item_6.*
+import org.w3c.dom.Text
 import java.io.File
 import java.util.HashMap
 
-class VenueDetailActivity : BaseActivity() {
+class VenueDetailActivity : BaseActivity(),CCRSortableNinePhotoLayout.Delegate  {
 
     private var nowSelect = 1
     private lateinit var docList:MutableList<DictionaryeBean>
@@ -68,8 +76,18 @@ class VenueDetailActivity : BaseActivity() {
                                 }, this, false))
     }
 
+    override fun onBackPressed() {
+        back()
+    }
+    private fun back(){
+        setResult(3)
+        finish()
+    }
     override fun doBusiness(mContext: Context?) {
 //        val layoutInflater = LayoutInflater.from(this)
+        back_btn.setOnClickListener {
+            back()
+        }
         rb_base_info.setOnClickListener {
             if (nowSelect != 1) {
                 nowSelect = 1
@@ -113,6 +131,56 @@ class VenueDetailActivity : BaseActivity() {
         val view = layoutInflater.inflate(R.layout.venue_item_1, null, false)
         rec_right.addView(view, 0)
         val save1 = view.findViewById<TextView>(R.id.tv_save_1)
+        val tvSelectTime = view.findViewById<TextView>(R.id.tv_business_hours)
+
+
+
+        //点击修改时间
+        tvSelectTime.setOnClickListener {
+            //?
+            Log.d("tag","why?")
+            val time = HourAndMinDialogFragment()
+            time.setSelectedDate(9, 0, 23, 0)
+            time.setOnDateChooseListener { startHour, startMinute, endHour, endMinute ->
+
+                if (endHour < startHour) {
+                    Toast.makeText(applicationContext,"开始时间不能大于结束时间",
+                            Toast.LENGTH_SHORT).show()
+                    return@setOnDateChooseListener
+                }
+                if (endHour == startHour && endMinute <= startMinute) {
+                    Toast.makeText(applicationContext,"开始时间不能大于结束时间",
+                            Toast.LENGTH_SHORT).show()
+                    return@setOnDateChooseListener
+                }
+
+                val startH = if (startHour > 9) {
+                    "$startHour"
+                } else {
+                    "0$startHour"
+                }
+                val startM = if (startMinute > 9) {
+                    "$startMinute"
+                } else {
+                    "0$startMinute"
+                }
+                val endH = if (endHour > 9) {
+                    "$endHour"
+                } else {
+                    "0$endHour"
+                }
+                val endM = if (endMinute > 9) {
+                    "$endMinute"
+                } else {
+                    "0$endMinute"
+                }
+
+                tvSelectTime.text = "$startH:$startM - $endH:$endM"
+
+            }
+            time.show(supportFragmentManager, "HourAndMinDialogFragment")
+        }
+
         save1.setOnClickListener {
 
         }
@@ -135,8 +203,36 @@ class VenueDetailActivity : BaseActivity() {
         rec_right.addView(view, 0)
         val rvFacilities = view.findViewById<RecyclerView>(R.id.rv_venue_facilities)
         val save2 = view.findViewById<TextView>(R.id.tv_save_2)
-        rvFacilities.layoutManager = GridLayoutManager(this,3,GridLayoutManager.VERTICAL,false)
+        val layoutManager = GridLayoutManager(this,3,GridLayoutManager.VERTICAL,false)
+        rvFacilities.layoutManager = layoutManager
         rvFacilities.adapter = layout2Adapter
+
+        layout2Adapter!!.setOnItemChildClickListener { adapter, view, position ->
+            when (view.id){
+                R.id.cb_facilities -> {
+                    if ((view as CheckBox).isChecked){
+                        Log.d("tag","添加了该box")
+                    } else {
+                        Log.d("tag","移除了该box")
+                    }
+                }
+            }
+        }
+
+        //View加载完成时回调
+        rvFacilities.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
+            override fun onGlobalLayout() {
+                val itemView = layoutManager.findViewByPosition(3)
+                if (itemView != null) {
+                    val chabox = itemView.findViewById<CheckBox>(R.id.cb_facilities)
+                    chabox.isChecked = true
+                }
+
+                //OnGlobalLayoutListener可能会被多次触发
+                //所以完成了需求后需要移除OnGlobalLayoutListener
+                rvFacilities.viewTreeObserver.removeOnGlobalLayoutListener(this)
+            }
+        })
 
         save2.setOnClickListener {
             Toast.makeText(applicationContext,"sava 2 info",Toast.LENGTH_SHORT).show()
@@ -165,6 +261,28 @@ class VenueDetailActivity : BaseActivity() {
     //layout_5
     private var ivLogo:ImageView ?= null
     private var ivLogoPath = ""
+    private var photos: CCRSortableNinePhotoLayout ? = null
+    private var tvPhotoNum: TextView ? = null
+
+    //当前列表上的图片 新增了图片或删除了图片后 该列表会随之改变
+    private var strings:MutableList<String> = ArrayList()
+    /*
+        当前列表上的图片(需要提交的对象)
+        初始化为该场馆当前的所有场馆介绍图。
+        当删除(原本存在)之前的图片时:该list会改变
+        当删除新选择的图片时:该list不会改变
+        图片上传后该list需要增加
+     */
+    private var upList:MutableList<InformationEntity.GymPicBean> = ArrayList()
+
+    /*
+        当前列表为 人为选择的list
+        已选择(未上架)的图片会增加该list
+        删除已选择(未上架)的图片会减少该list
+        当该list!=0 时，必然存在需要上传的图片
+     */
+    private var selectPhotos:MutableList<String> = ArrayList()
+
     private fun changeLayout5() {
         nowSelect = 5
         rec_right.removeViewAt(0)
@@ -172,6 +290,15 @@ class VenueDetailActivity : BaseActivity() {
         rec_right.addView(view, 0)
 
         ivLogo = view.findViewById<ImageView>(R.id.logo_image)
+        photos = view.findViewById<CCRSortableNinePhotoLayout>(R.id.snpl_moment_add_photos)
+        tvPhotoNum = view.findViewById<TextView>(R.id.tv_pic_num)
+
+        photos!!.setData(strings)
+        photos!!.setDelegate(this)
+        ValueResources.select_iamges_size = strings.size//已选择的数量
+        tvPhotoNum!!.text = "(${ValueResources.select_iamges_size}/9)"
+
+        //logo
         ivLogo!!.setOnClickListener {
             EasyPhotos.createAlbum(this, true, GlideEngine.getInstance())
                     .setFileProviderAuthority("com.noplugins.keepfit.android.fileprovider")
@@ -203,11 +330,51 @@ class VenueDetailActivity : BaseActivity() {
 
     }
 
+
+    private var maxNum = 0
+    override fun onClickAddNinePhotoItem(sortableNinePhotoLayout: CCRSortableNinePhotoLayout?, view: View?, position: Int, models: java.util.ArrayList<String>?) {
+        //设置最多只能上传9张图片
+        if (ValueResources.select_iamges_size >= 9) {
+            Toast.makeText(this, "只能上传9张图片哦～", Toast.LENGTH_SHORT).show()
+        } else if (ValueResources.select_iamges_size < 9) {
+            //选择新的图片
+            maxNum = 9 - ValueResources.select_iamges_size
+            EasyPhotos.createAlbum(this, true, GlideEngine.getInstance())
+                    .setFileProviderAuthority("com.noplugins.keepfit.android.fileprovider")
+                    .setPuzzleMenu(false)
+                    .setCount(maxNum)
+                    .setOriginalMenu(false, true, null)
+                    .start(101)
+        }
+    }
+
+    override fun onClickDeleteNinePhotoItem(sortableNinePhotoLayout: CCRSortableNinePhotoLayout?, view: View?, position: Int, model: String?, models: java.util.ArrayList<String>?) {
+
+        photos!!.removeItem(position)//控件中删除该图片
+        if (position < upList.size && upList.size != 0) {
+            upList.removeAt(position)
+        } else {
+            selectPhotos.removeAt(position - upList.size)
+        }
+
+        ValueResources.select_iamges_size = ValueResources.select_iamges_size - 1
+        tvPhotoNum!!.text ="(${ValueResources.select_iamges_size}/9)"
+    }
+
+    override fun onClickNinePhotoItem(sortableNinePhotoLayout: CCRSortableNinePhotoLayout?, view: View?, position: Int, model: String?, models: java.util.ArrayList<String>?) {
+    }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (RESULT_OK == resultCode) {
             if (nowSelect == 5){
-                if (requestCode == 1001){
+                if (requestCode == 101){
+                    //不支持AndroidQ
+                    val resultPaths = data!!.getStringArrayListExtra(EasyPhotos.RESULT_PATHS)
+                    strings.addAll(resultPaths)
+                    selectPhotos.addAll(resultPaths)
+                    photos!!.setData(strings)//设置九宫格
+                    ValueResources.select_iamges_size = strings.size
+                    tvPhotoNum!!.text ="(${ValueResources.select_iamges_size}/9)"
 
                 }
                 else{
@@ -222,4 +389,5 @@ class VenueDetailActivity : BaseActivity() {
             }
         }
     }
+
 }

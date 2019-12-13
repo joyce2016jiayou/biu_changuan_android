@@ -15,10 +15,10 @@
     <string name="edit_hint5">请输入验证码</string>
     <string name="edit_hint6">请输入新密码</string>
     <string name="edit_hint7">请再次确认密码</string>
-    <string name="edit_hint8">请输入场馆名称</string>
+    <string name="edit_hint8">请输入场馆平台名称</string>
     <string name="edit_hint9">请输入场馆面积</string>
-    <string name="edit_hint10">场馆电话</string>
-    <string name="edit_hint11">场馆邮箱</string>
+    <string name="edit_hint10">联系电话</string>
+    <string name="edit_hint11">联系邮箱</string>
     <string name="edit_hint12">09:00</string>
     <string name="edit_hint13">23:59</string>
     <string name="edit_hint14">限制人数</string>
@@ -75,9 +75,9 @@
     <string name="tv17">请联系您所在场馆并及时为您开通权限。</string>
     <string name="tv18">基础资料</string>
     <string name="tv19">名称</string>
-    <string name="tv20">类型</string>
-    <string name="tv21">面积</string>
-    <string name="tv22">电话</string>
+    <string name="tv20">场馆类型</string>
+    <string name="tv21">场馆面积</string>
+    <string name="tv22">联系电话</string>
     <string name="tv23">邮箱</string>
     <string name="tv24">营业时间</string>
     <string name="tv25">人</string>
@@ -206,7 +206,7 @@
     <string name="tv148">拨打</string>
     <string name="tv149">开户银行</string>
     <string name="tv150">场馆名称</string>
-    <string name="tv151">平台场馆名称</string>
+    <string name="tv151">场馆名称</string>
     <string name="tv152">身份证格式不正确</string>
     <string name="tv153">请选择需要管理的场馆</string>
     <string name="tv154">确认切换</string>
@@ -346,5 +346,14 @@
     <string name="tv_company_bank">开户银行</string>
     <string name="tv_logo">封面图</string>
     <string name="tv_pic_tips">建议上传卫生间、更衣室、器械区、操房等位置的图片。</string>
-
+    <string name="tv_mine" tools:ignore="ExtraTranslation">我的</string>
+    <string name="tv_anquan" tools:ignore="ExtraTranslation">安全管理</string>
+    <string name="tv_about">关于</string>
+    <string name="tv_wenti">问题反馈</string>
+    <string name="tv_quit">登出账户</string>
+    <string name="tv_setting_pwd">设置登陆密码</string>
+    <string name="tv_update_tixian">修改提现密码</string>
+    <string name="tv_update_phone_tips">为了保证您的账号安全，请验证身份。验证成功后进行下一步操作。</string>
+    <string name="tv_send_yzm">发送验证码</string>
+    <string name="tv_next">下一步</string>
 </resources>

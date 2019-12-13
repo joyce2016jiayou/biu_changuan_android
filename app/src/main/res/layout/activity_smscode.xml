@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.mine.setting.UpdatePhoneActivity">
+
+    <include layout="@layout/title_activity"/>
+
+    <TextView
+        android:id="@+id/tv_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="短信已发送至193****5035"
+        android:layout_marginTop="@dimen/m50"
+        android:layout_marginLeft="@dimen/m50"
+        android:textColor="@color/color_6D7278"
+        android:textSize="13sp"
+        android:layout_marginRight="@dimen/m50"/>
+
+
+    <com.lwjfork.code.CodeEditText
+        android:id="@+id/et_input"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:layout_marginTop="@dimen/m30"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:inputType="number"
+        app:blockShape="underline"
+        app:maxCodeLength="6"
+        app:blockSpace="10dp"
+        app:blockNormalColor="@color/color_F6C82A"
+        app:codeTextColor="@color/color_181818"
+        app:blockFocusColor="@color/color_F6C82A"
+        app:codeInputType="text"
+        app:codeTextSize="24sp"
+        android:layout_marginStart="60dp"
+        android:layout_marginEnd="60dp"/>
+
+    <TextView
+        android:id="@+id/tv_send_code"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        tools:text="发送验证码"
+        android:layout_marginTop="@dimen/m20"
+        android:textColor="@color/color_181818"
+        android:textSize="13sp"/>
+
+    <TextView
+        android:id="@+id/tv_next"
+        android:layout_width="@dimen/m209"
+        android:layout_height="@dimen/m50"
+        android:gravity="center"
+        android:background="@drawable/shape_btn_bg_40"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/tv_next"
+        android:layout_marginTop="@dimen/m80"
+        android:textColor="@color/color_22243D"
+        android:textSize="20sp"/>
+</LinearLayout>
