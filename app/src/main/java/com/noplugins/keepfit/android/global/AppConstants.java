@@ -18,6 +18,7 @@ public class AppConstants {
     public static final String COST = "cost";
     public static final String CG_NAME = "changguan_name";
     public static String IS_SET_ALIAS = "is_set_alias";
+    public static final String FRAGMENT_SIZE = "fragment_size";
 
 
     //团课同意

@@ -81,7 +81,7 @@ class TeacherManagerActivity : BaseActivity(){
             startActivity(intent)
         }
         back_btn.setOnClickListener {
-            setResult(3)
+            setResult(SpUtils.getInt(applicationContext,AppConstants.FRAGMENT_SIZE)-1)
             finish()
         }
     }
@@ -194,7 +194,7 @@ class TeacherManagerActivity : BaseActivity(){
     }
 
     override fun onBackPressed() {
-        setResult(3)
+        setResult(SpUtils.getInt(applicationContext,AppConstants.FRAGMENT_SIZE)-1)
         finish()
     }
 

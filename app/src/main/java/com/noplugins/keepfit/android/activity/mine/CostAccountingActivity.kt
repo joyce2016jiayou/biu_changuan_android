@@ -61,7 +61,7 @@ class CostAccountingActivity : BaseActivity() {
                 setResult(RESULT_OK, mIntent)
                 Log.d("tag__BBB",form)
             } else {
-                setResult(3)
+                setResult(SpUtils.getInt(applicationContext,AppConstants.FRAGMENT_SIZE)-1)
             }
 
 
@@ -85,7 +85,6 @@ class CostAccountingActivity : BaseActivity() {
         cost = (fangzu.add(nengyuan).add(renyuan).add(yunying)).divide(sum, 2, RoundingMode.HALF_UP).toDouble()
         tv_result.text = "当前经营成本： $cost/人/次"
 
-        SpUtils.putString(applicationContext,AppConstants.COST,"$cost/人/次")
         request()
     }
 
@@ -98,6 +97,7 @@ class CostAccountingActivity : BaseActivity() {
                         params,
                         ProgressSubscriber("成本核算", object : SubscriberOnNextListener<Bean<Any>> {
                             override fun onNext(result: Bean<Any>) {
+                                SpUtils.putString(applicationContext,AppConstants.COST,"$cost")
                                 Toast.makeText(applicationContext, "上传成功", Toast.LENGTH_SHORT).show()
                             }
 
@@ -115,7 +115,7 @@ class CostAccountingActivity : BaseActivity() {
             mIntent.putExtra("cost", ""+cost)
             setResult(RESULT_OK, mIntent)
         } else {
-            setResult(3)
+            setResult(SpUtils.getInt(applicationContext,AppConstants.FRAGMENT_SIZE)-1)
         }
 
 

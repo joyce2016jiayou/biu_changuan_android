@@ -53,7 +53,7 @@ public class ZhangHaoSafeActivity extends BaseActivity {
         back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setResult(3);
+                setResult(SpUtils.getInt(getApplicationContext(), AppConstants.FRAGMENT_SIZE)-1);
                 finish();
             }
         });
@@ -93,6 +93,7 @@ public class ZhangHaoSafeActivity extends BaseActivity {
         SpUtils.putString(getApplicationContext(), AppConstants.TOKEN, "");
         SpUtils.putString(getApplicationContext(), AppConstants.PHONE, "");
         SpUtils.putString(getApplicationContext(), AppConstants.CHANGGUAN_NUM, "");
+        SpUtils.putString(getApplicationContext(),AppConstants.COST,"");
 //                                SpUtils.putString(applicationContext, AppConstants.CHANGGUAN_NUM, "GYM19091236750176")
         SpUtils.putString(getApplicationContext(), AppConstants.USER_NAME, "");
         SpUtils.putInt(getApplicationContext(), AppConstants.USER_TYPE, -1);
@@ -104,7 +105,7 @@ public class ZhangHaoSafeActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        setResult(3);
+        setResult(SpUtils.getInt(getApplicationContext(), AppConstants.FRAGMENT_SIZE)-1);
         finish();
     }
 }

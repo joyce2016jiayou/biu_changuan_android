@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
 import com.allenliu.versionchecklib.v2.AllenVersionChecker;
 import com.allenliu.versionchecklib.v2.builder.DownloadBuilder;
@@ -47,6 +48,7 @@ import com.noplugins.keepfit.android.util.ui.BaseDialog;
 import com.noplugins.keepfit.android.util.ui.NoScrollViewPager;
 import com.noplugins.keepfit.android.util.ui.pop.base.CenterPopupView;
 import com.noplugins.keepfit.android.util.ui.pop.inteface.ViewCallBack;
+import com.noplugins.keepfit.android.util.ui.progress.CustomHorizontalProgresWithNum;
 import com.orhanobut.logger.Logger;
 
 import org.greenrobot.eventbus.EventBus;
@@ -92,13 +94,12 @@ public class KeepFitActivity extends BaseActivity {
     @BindViews({R.id.home_img, R.id.shipu_img, R.id.movie_img, R.id.mine_img})
 
     List<ImageView> bottom_iamge_views;
-    //private SoundPool sp;//声明一个SoundPool
-    //private int music;//定义一个整型用load（）；来设置suondID
     private List<Fragment> tabFragments = new ArrayList<>();
     ContentPagerAdapterMy contentAdapter;
     private DownloadBuilder builder;
     private boolean is_qiangzhi_update;
     private String update_url = "";
+    private int current_index;
 
     @Override
     public void initBundle(Bundle bundle) {
@@ -118,25 +119,43 @@ public class KeepFitActivity extends BaseActivity {
                 btn_shipu.setVisibility(View.VISIBLE);
             }
         }
-
         isShowTitle(false);
         MyApplication.addDestoryActivity(this, "KeepFitActivity");
-        //注册eventbus
-        //EventBus.getDefault().register(this);
-        //初始化页面
-        tabFragments.add(RiChengFragment.homeInstance("第一页"));
-        if (SpUtils.getString(getApplicationContext(), AppConstants.USER_DENGJI).equals("2999")) {
-            tabFragments.add(Is2999Fragment.Companion.newInstance("第二页"));
-        } else {
-            tabFragments.add(StatisticsFragment.Companion.newInstance("第二页"));
-        }
 
-        tabFragments.add(MessageFragment.newInstance("第三页"));
-        tabFragments.add(MyFragment.Companion.newInstance("第四页"));
+        //初始化页面
+        if (SpUtils.getString(getApplicationContext(), AppConstants.USER_DENGJI).equals("2999")) {
+            tabFragments.add(RiChengFragment.homeInstance("第一页"));
+            //tabFragments.add(Is2999Fragment.Companion.newInstance("第二页"));
+            tabFragments.add(MessageFragment.newInstance("第三页"));
+            tabFragments.add(MyFragment.Companion.newInstance("第四页"));
+        } else {
+            tabFragments.add(RiChengFragment.homeInstance("第一页"));
+            tabFragments.add(StatisticsFragment.Companion.newInstance("第二页"));
+            tabFragments.add(MessageFragment.newInstance("第三页"));
+            tabFragments.add(MyFragment.Companion.newInstance("第四页"));
+        }
+        SpUtils.putInt(getApplicationContext(), AppConstants.FRAGMENT_SIZE, tabFragments.size());
+
         //初始化viewpager
         contentAdapter = new ContentPagerAdapterMy(getSupportFragmentManager(), tabFragments);
         viewpager_content.setScroll(false);
         viewpager_content.setAdapter(contentAdapter);
+        viewpager_content.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                bottom_xianshi(current_index);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
 
 
         //初始化音效
@@ -218,6 +237,7 @@ public class KeepFitActivity extends BaseActivity {
         builder.setDownloadAPKPath(Environment.getExternalStorageDirectory() + "/noplugins/apkpath/");//自定义下载路径
         builder.setOnCancelListener(() -> {
             if (is_qiangzhi_update) {
+                Toast.makeText(KeepFitActivity.this, "已关闭更新", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent();
                 intent.setAction("android.intent.action.MAIN");
                 intent.addCategory("android.intent.category.HOME");
@@ -241,15 +261,15 @@ public class KeepFitActivity extends BaseActivity {
             @Override
             public Dialog getCustomDownloadingDialog(Context context, int progress, UIData versionBundle) {
                 BaseDialog baseDialog = new BaseDialog(context, R.style.BaseDialog, R.layout.custom_download_layout);
+                baseDialog.setCanceledOnTouchOutside(false);
                 return baseDialog;
             }
 
             @Override
             public void updateUI(Dialog dialog, int progress, UIData versionBundle) {
-                TextView tvProgress = dialog.findViewById(R.id.tv_progress);
-                ProgressBar progressBar = dialog.findViewById(R.id.pb);
-                progressBar.setProgress(progress);
-                tvProgress.setText(getString(R.string.versionchecklib_progress, progress));
+                CustomHorizontalProgresWithNum pb = dialog.findViewById(R.id.pb);
+                pb.setProgress(progress);
+                pb.setMax(100);
             }
         };
     }
@@ -261,10 +281,10 @@ public class KeepFitActivity extends BaseActivity {
      */
     private CustomVersionDialogListener createCustomDialogTwo() {
         return (context, versionBundle) -> {
-            BaseDialog baseDialog = new BaseDialog(context, R.style.BaseDialog, R.layout.custom_dialog_two_layout);
-            TextView textView = baseDialog.findViewById(R.id.tv_msg);
-            textView.setText(versionBundle.getContent());
-            baseDialog.setCanceledOnTouchOutside(true);
+            BaseDialog baseDialog = new BaseDialog(context, R.style.BaseDialog, R.layout.shengji_pop_layout);
+            baseDialog.setCanceledOnTouchOutside(false);
+            TextView tv_msg = baseDialog.findViewById(R.id.tv_msg);
+            tv_msg.setText(versionBundle.getContent());
             return baseDialog;
         };
     }
@@ -316,7 +336,7 @@ public class KeepFitActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        //EventBus.getDefault().unregister(this);
+        //更新弹出框销毁
         AllenVersionChecker.getInstance().cancelAllMission();
 
 
@@ -331,42 +351,42 @@ public class KeepFitActivity extends BaseActivity {
                 return;
             }
             if (parms.getString("jpush_enter", "").equals("jpush_enter1")) {
-
-                viewpager_content.setCurrentItem(2);
-                xianshi_three();
+                if (tabFragments.size() == 3) {
+                    viewpager_content.setCurrentItem(1);
+                } else {
+                    viewpager_content.setCurrentItem(2);
+                }
                 //设置跳转到消息tab1
                 MessageEvent messageEvent = new MessageEvent("jpush_main_enter1");
                 EventBus.getDefault().postSticky(messageEvent);
 
             } else if (parms.getString("jpush_enter").equals("jpush_enter2")) {
-                viewpager_content.setCurrentItem(2);
-
-                xianshi_three();
-                //设置跳转到消息tab2
+                if (tabFragments.size() == 3) {
+                    viewpager_content.setCurrentItem(1);
+                } else {
+                    viewpager_content.setCurrentItem(2);
+                }                //设置跳转到消息tab2
                 MessageEvent messageEvent = new MessageEvent("jpush_main_enter2");
                 EventBus.getDefault().postSticky(messageEvent);
 
             } else if (parms.getString("jpush_enter").equals("jpush_enter3")) {
-
-                viewpager_content.setCurrentItem(2);
-                xianshi_three();
-
-                //设置跳转到消息tab3
+                if (tabFragments.size() == 3) {
+                    viewpager_content.setCurrentItem(1);
+                } else {
+                    viewpager_content.setCurrentItem(2);
+                }                //设置跳转到消息tab3
                 MessageEvent messageEvent = new MessageEvent("jpush_main_enter3");
                 EventBus.getDefault().postSticky(messageEvent);
 
             } else if (parms.getString("jpush_enter").equals("jpush_enter4")) {
-
-                viewpager_content.setCurrentItem(2);
-                xianshi_three();
-                //设置跳转到消息tab4
+                if (tabFragments.size() == 3) {
+                    viewpager_content.setCurrentItem(1);
+                } else {
+                    viewpager_content.setCurrentItem(2);
+                }                //设置跳转到消息tab4
                 MessageEvent messageEvent = new MessageEvent("jpush_main_enter4");
                 EventBus.getDefault().postSticky(messageEvent);
             }
-        } else {
-            //初始化首页
-//            viewpager_content.setCurrentItem(0);
-
         }
     }
 
@@ -428,38 +448,63 @@ public class KeepFitActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_home:
-                //按钮提示音
-                //sp.play(music, 0.2f, 0.2f, 0, 0, 1);
+                current_index = 0;
                 viewpager_content.setCurrentItem(0);
-                xianshi_one();
                 break;
             case R.id.btn_shipu:
-                //按钮提示音
-                //sp.play(music, 0.2f, 0.2f, 0, 0, 1);
-                viewpager_content.setCurrentItem(1);
-                xianshi_two();
+                if (tabFragments.size() > 3) {
+                    current_index = tabFragments.size() - 3;
+                    viewpager_content.setCurrentItem(tabFragments.size() - 3);
+                }
                 break;
             case R.id.btn_movie:
-                //sp.play(music, 0.2f, 0.2f, 0, 0, 1);
-                viewpager_content.setCurrentItem(2);
-                xianshi_three();
+                current_index = tabFragments.size() - 2;
+                viewpager_content.setCurrentItem(tabFragments.size() - 2);
+
                 break;
             case R.id.btn_mine:
-                //sp.play(music, 0.2f, 0.2f, 0, 0, 1);
-                viewpager_content.setCurrentItem(3);
-                xianshi_four();
+                current_index = tabFragments.size() - 1;
+                viewpager_content.setCurrentItem(tabFragments.size() - 1);
                 break;
-
-
         }
     }
 
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        Log.d("这是什么？", "这是我的锅吧");
-        viewpager_content.setCurrentItem(3);
-        xianshi_four();
+        viewpager_content.setCurrentItem(tabFragments.size() - 1);
+    }
+
+    private void bottom_xianshi(int index) {
+        if (tabFragments.size() == 3) {
+            switch (index) {
+                case 0:
+                    xianshi_one();
+                    break;
+                case 1:
+                    xianshi_three();
+                    break;
+                case 2:
+                    xianshi_four();
+                    break;
+            }
+        } else {
+            switch (index) {
+                case 0:
+                    xianshi_one();
+                    break;
+                case 1:
+                    xianshi_two();
+                    break;
+                case 2:
+                    xianshi_three();
+                    break;
+                case 3:
+                    xianshi_four();
+                    break;
+            }
+        }
+
     }
 
     private void xianshi_one() {
@@ -513,19 +558,26 @@ public class KeepFitActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1) {
             // 在这设置选中你要显示的fragment
-            if (resultCode == 0) {
-                viewpager_content.setCurrentItem(0);
-                xianshi_one();
-            } else if (resultCode == 1) {
-                viewpager_content.setCurrentItem(1);
-                xianshi_two();
-            } else if (resultCode == 2) {
-                viewpager_content.setCurrentItem(2);
-                xianshi_three();
-            } else if (resultCode == 3) {
-                viewpager_content.setCurrentItem(3);
-                xianshi_four();
+            if (tabFragments.size() == 3) {
+                if (resultCode == 0) {
+                    viewpager_content.setCurrentItem(0);
+                } else if (resultCode == 1) {
+                    viewpager_content.setCurrentItem(2);
+                } else if (resultCode == 2) {
+                    viewpager_content.setCurrentItem(3);
+                }
+            } else {
+                if (resultCode == 0) {
+                    viewpager_content.setCurrentItem(0);
+                } else if (resultCode == 1) {
+                    viewpager_content.setCurrentItem(1);
+                } else if (resultCode == 2) {
+                    viewpager_content.setCurrentItem(2);
+                } else if (resultCode == 3) {
+                    viewpager_content.setCurrentItem(3);
+                }
             }
+
         }
     }
 

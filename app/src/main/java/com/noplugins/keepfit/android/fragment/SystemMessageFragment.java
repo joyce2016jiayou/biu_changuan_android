@@ -20,6 +20,8 @@ import com.google.gson.Gson;
 import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.adapter.SystemMessageAdapter;
 import com.noplugins.keepfit.android.entity.MessageEntity;
+import com.noplugins.keepfit.android.global.AppConstants;
+import com.noplugins.keepfit.android.util.SpUtils;
 import com.noplugins.keepfit.android.util.eventbus.MessageEvent;
 import com.noplugins.keepfit.android.util.net.Network;
 import com.noplugins.keepfit.android.util.net.entity.Bean;
@@ -92,7 +94,7 @@ public class SystemMessageFragment extends Fragment {
 
     private void initMessageDate() {
         Map<String, Object> params = new HashMap<>();
-        params.put("gymAreaNum", "GYM19072138381319");//场馆编号
+        params.put("gymAreaNum", SpUtils.getString(getActivity(), AppConstants.CHANGGUAN_NUM));//场馆编号
         params.put("page", page);//场馆编号
         params.put("type", "2");//场馆编号
         Gson gson = new Gson();

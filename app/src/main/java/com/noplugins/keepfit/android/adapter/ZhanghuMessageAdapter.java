@@ -94,11 +94,11 @@ public class ZhanghuMessageAdapter extends BaseRecyclerAdapter<RecyclerView.View
 
             }
 
-            holder.shouzhi_money_tv.setText("+" + messageBean.getWithdrawMoney());//提现金额
+            holder.shouzhi_money_tv.setText("+" + messageBean.getFinalWithdrawMoney());//提现金额
             long time = messageBean.getWithdrawTime();
             Date date = DateHelper.transForDate(time);
             holder.tv_date_time.setText((date.getYear() + 1900) + "." + (date.getMonth() + 1) + "." + date.getDate() + " " + date.getHours() + ":" + date.getMinutes());
-            holder.money_tv.setText("余额" + messageBean.getWithdrawBalance());
+            holder.money_tv.setText("余额 " + messageBean.getFinalWithdrawBalance());
 
 
         }

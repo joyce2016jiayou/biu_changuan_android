@@ -1,5 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-    <string name="app_name">哔呦运动健身场馆管理系统</string>
+    <string name="app_name">哔呦场馆</string>
     <string name="setting">设置</string>
     <string name="perm_tip">
         当前应用缺少必要权限。\n请点击"设置"-"权限"-打开所需权限。\n最后点击两次后退按钮，即可返回。
@@ -211,8 +211,8 @@
     <string name="tv153">请选择需要管理的场馆</string>
     <string name="tv154">确认切换</string>
     <string name="tv155">确定切换至该场馆吗？</string>
-    <string name="tv156">场馆房间</string>
-
+    <string name="tv156">检测到有更新，请立即升级至最新版本。</string>
+    <string name="tv160"> 新版本正在努力的更新中，请稍等</string>
 
     <string name="tv_select">请选择</string>
     <string name="tv_qianbao">钱包</string>
@@ -252,6 +252,8 @@
     <string name="alert_dialog_tishi28">企业账号不能为空！</string>
     <string name="alert_dialog_tishi29">省市区不能为空！</string>
     <string name="alert_dialog_tishi30">邮箱格式不正确！</string>
+    <string name="alert_dialog_tishi31">功能性场所人数不能为空！</string>
+
     <string name="update_title">更新提示</string>
     <string name="updatecontent">检测到有新版本，是否更新到最新版本。</string>
     <string name="updatecontent2">检测到有新版本，请更新到最新版本，否则无法使用。</string>

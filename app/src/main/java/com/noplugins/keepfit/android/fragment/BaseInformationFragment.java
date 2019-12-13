@@ -43,6 +43,7 @@ import com.noplugins.keepfit.android.entity.ItemBean;
 import com.noplugins.keepfit.android.entity.QiNiuToken;
 import com.noplugins.keepfit.android.entity.UrlEntity;
 import com.noplugins.keepfit.android.resource.ValueResources;
+import com.noplugins.keepfit.android.util.BaseUtils;
 import com.noplugins.keepfit.android.util.GlideEngine;
 import com.noplugins.keepfit.android.util.data.StringsHelper;
 import com.noplugins.keepfit.android.util.net.Network;
@@ -375,19 +376,25 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
         sheng_tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                initCityDate(true);
+                if (BaseUtils.isFastClick()) {
+                    initCityDate(true);
+                }
             }
         });
         shi_tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                initCityDate(true);
+                if (BaseUtils.isFastClick()) {
+                    initCityDate(true);
+                }
             }
         });
         qu_tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                initCityDate(true);
+                if (BaseUtils.isFastClick()) {
+                    initCityDate(true);
+                }
             }
         });
     }
@@ -729,8 +736,32 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
             Toast.makeText(getActivity(), R.string.alert_dialog_tishi11, Toast.LENGTH_SHORT).show();
             return false;
         } else {
-            return true;
+            boolean is_go = false;
+            //判断功能性场所
+            ArrayList<ItemBean> itemBeans = exRecyclerAdapter.getData();
+            if (itemBeans.size() > 0) {
+                for (int i = 0; i < itemBeans.size(); i++) {
+                    ItemBean itemBean = itemBeans.get(i);
+                    if (null != itemBean.getPlace()) {
+                        Log.e("山东矿机发多少", itemBean.getPlace());
+                        if (itemBean.getPlace().length() == 0) {
+                            Toast.makeText(getActivity(), R.string.alert_dialog_tishi31, Toast.LENGTH_SHORT).show();
+                            is_go = false;
+                        } else {
+                            is_go = true;
+                        }
+                    } else {
+                        Toast.makeText(getActivity(), R.string.alert_dialog_tishi31, Toast.LENGTH_SHORT).show();
+                        is_go = false;
+                    }
+                }
+            } else {
+                Toast.makeText(getActivity(), R.string.alert_dialog_tishi31, Toast.LENGTH_SHORT).show();
+                is_go = false;
+            }
+            return is_go;
         }
+
 
     }
 
@@ -1079,7 +1110,7 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
         //设置最多只能上传9张图片
         if (ValueResources.select_iamges_size >= 9) {
             Toast.makeText(getActivity(), "只能上传9张图片哦～", Toast.LENGTH_SHORT).show();
-        } else if (ValueResources.select_iamges_size < 9) {
+        } else {
             max_num = 9 - ValueResources.select_iamges_size;
             EasyPhotos.createAlbum(this, true, GlideEngine.getInstance())
                     .setFileProviderAuthority("com.noplugins.keepfit.android.fileprovider")

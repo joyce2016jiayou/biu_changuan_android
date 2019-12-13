@@ -127,6 +127,7 @@ public class RiChengFragment extends ViewPagerFragment {
     private int[] cDate;
     private int REQUEST_CODE_SCAN = 111;
     List<String> dates = new ArrayList<>();
+    private boolean haveMoreArea;
 
     List<DictionaryeBean> select_types = new ArrayList<>();
     List<DictionaryeBean> select_status = new ArrayList<>();
@@ -178,12 +179,18 @@ public class RiChengFragment extends ViewPagerFragment {
         get_types();
         //获取课程数据
         init_class_date_resource();
-
+        if (SpUtils.getInt(getActivity(), AppConstants.USER_TYPE) == 2 || SpUtils.getInt(getActivity(), AppConstants.USER_TYPE) == 3) {
+            select_store_type.setVisibility(View.INVISIBLE);
+        } else {
+            select_store_type.setVisibility(View.VISIBLE);
+        }
         select_store_type.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), SelectChangGuanActivity.class);
-                startActivity(intent);
+                if (haveMoreArea) {//如果有更多场馆
+                    Intent intent = new Intent(getActivity(), SelectChangGuanActivity.class);
+                    startActivity(intent);
+                }
 
             }
         });
@@ -356,7 +363,7 @@ public class RiChengFragment extends ViewPagerFragment {
                         new ProgressSubscriber<>("获取状态", new SubscriberOnNextListener<Bean<List<DictionaryeBean>>>() {
                             @Override
                             public void onNext(Bean<List<DictionaryeBean>> result) {
-                                if(select_status.size()>0){
+                                if (select_status.size() > 0) {
                                     select_status.clear();
                                 }
                                 select_status.addAll(result.getData());
@@ -381,13 +388,15 @@ public class RiChengFragment extends ViewPagerFragment {
         if (select_courcestatus_str.length() > 0) {
             params1.put("courseStatus", select_courcestatus_str);
         }
+        params1.put("userNum", SpUtils.getString(getActivity(), AppConstants.USER_NAME));
         Subscription subscription = Network.getInstance("获取课程数据", getActivity())
                 .get_shouye_date(params1,
                         new ProgressSubscriber<>("获取课程数据", new SubscriberOnNextListener<Bean<RiChengBean>>() {
                             @Override
                             public void onNext(Bean<RiChengBean> result) {
                                 store_type_tv.setText(result.getData().getAreaName());
-                                SpUtils.putString(getActivity(),AppConstants.CG_NAME,result.getData().getAreaName());
+                                haveMoreArea = result.getData().isHaveMoreArea();
+                                SpUtils.putString(getActivity(), AppConstants.CG_NAME, result.getData().getAreaName());
                                 Log.e("获取课程数据数量", result.getData().getResult().size() + "");
                                 if (class_list.size() > 0) {
                                     class_list.clear();
@@ -405,8 +414,6 @@ public class RiChengFragment extends ViewPagerFragment {
                                     }
                                 });
                                 refreshLayout.finishRefresh(true);
-
-
                             }
 
                             @Override
@@ -490,7 +497,7 @@ public class RiChengFragment extends ViewPagerFragment {
                     select_courcestatus_str = "";
                 } else {
                     select_courcestatus_str = select_status.get(i - 1).getValue();
-                    Log.e("选择的状态",select_courcestatus_str);
+                    Log.e("选择的状态", select_courcestatus_str);
                 }
                 popupWindow.dismiss();
                 init_class_date_resource();//重新请求课程
@@ -546,7 +553,7 @@ public class RiChengFragment extends ViewPagerFragment {
         /**设置逻辑*/
         View view = popupWindow.getContentView();
         List<String> strings = new ArrayList<>();
-        strings.add(SpUtils.getString(getActivity(),AppConstants.CG_NAME));
+        strings.add(SpUtils.getString(getActivity(), AppConstants.CG_NAME));
 //        strings.add("龙湖天街");
         TypeAdapter typeAdapter = new TypeAdapter(strings, getActivity());
         ListView listView = view.findViewById(R.id.listview);

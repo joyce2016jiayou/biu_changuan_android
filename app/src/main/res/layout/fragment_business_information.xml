@@ -28,8 +28,8 @@
             android:id="@+id/business_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
             android:layout_marginTop="@dimen/m10"
+            android:background="@color/white"
             android:orientation="vertical"
             android:visibility="visible">
 
@@ -37,8 +37,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/m20"
-                android:layout_marginRight="@dimen/m20"
                 android:layout_marginTop="@dimen/m10"
+                android:layout_marginRight="@dimen/m20"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -56,6 +56,7 @@
                     android:layout_marginLeft="@dimen/m5"
                     android:background="@drawable/edit_bg"
                     android:hint="@string/edit_hint18"
+                    android:maxLength="30"
                     android:paddingLeft="@dimen/m20"
                     android:singleLine="true"
                     android:textColor="@color/top_heiziti"
@@ -100,6 +101,7 @@
                     android:layout_marginLeft="@dimen/m4"
                     android:background="@drawable/edit_bg"
                     android:hint="@string/edit_hint34"
+                    android:maxLength="18"
                     android:paddingLeft="@dimen/m20"
                     android:singleLine="true"
                     android:textColor="@color/top_heiziti"
@@ -161,9 +163,9 @@
                     android:layout_marginLeft="@dimen/m4"
                     android:background="@drawable/edit_bg"
                     android:hint="@string/edit_hint17"
+                    android:maxLength="18"
                     android:paddingLeft="@dimen/m20"
                     android:singleLine="true"
-                    android:maxLength="18"
                     android:textColor="@color/top_heiziti"
                     android:textColorHint="@color/color_9B9B9B"
                     android:textSize="13sp" />
@@ -192,6 +194,8 @@
                     android:layout_marginLeft="@dimen/m4"
                     android:background="@drawable/edit_bg"
                     android:hint="@string/edit_hint36"
+                    android:inputType="number"
+                    android:maxLength="30"
                     android:paddingLeft="@dimen/m20"
                     android:singleLine="true"
                     android:textColor="@color/top_heiziti"
@@ -224,6 +228,7 @@
                     android:background="@drawable/edit_bg"
                     android:enabled="true"
                     android:hint="@string/edit_hint46"
+                    android:maxLength="30"
                     android:paddingLeft="@dimen/m20"
                     android:singleLine="true"
                     android:textColor="@color/top_heiziti"

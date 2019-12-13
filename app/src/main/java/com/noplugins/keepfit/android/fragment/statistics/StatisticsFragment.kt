@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
@@ -18,6 +19,9 @@ import kotlinx.android.synthetic.main.fragment_statistics.*
 
 class StatisticsFragment: ViewPagerFragment() {
     override fun fetchData() {
+        if (tvCGName!=null){
+            tvCGName!!.text = SpUtils.getString(activity!!, AppConstants.CG_NAME)
+        }
 
     }
 
@@ -36,16 +40,18 @@ class StatisticsFragment: ViewPagerFragment() {
     private var fragments: MutableList<Fragment>?=null
     private var currentFragment = Fragment()
     private var currentIndex = 0
+    private var tvCGName:TextView ?= null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         if (newView == null) {
             newView = inflater.inflate(R.layout.fragment_statistics, container, false)
+            tvCGName = newView!!.findViewById(R.id.store_type_tv)
         }
         return newView
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        store_type_tv.text = SpUtils.getString(activity!!, AppConstants.CG_NAME)
+
         if (fragments == null){
             fragments = ArrayList()
             fragments!!.add(ToUserFragment.newInstance("用户"))

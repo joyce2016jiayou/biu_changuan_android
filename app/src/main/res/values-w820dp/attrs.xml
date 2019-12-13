@@ -26,5 +26,14 @@
         <attr name="textSize" format="dimension" />
         <attr name="textColor" format="color" />
     </declare-styleable>
+    <declare-styleable name="CustomHorizontalProgresStyle">
+        <attr name="HorizontalProgresUnReachColor" ></attr>
+        <attr name="HorizontalProgresUnReachHeight" ></attr>
+        <attr name="HorizontalProgresReachColor" ></attr>
+        <attr name="HorizontalProgresReachHeight" ></attr>
+        <attr name="HorizontalProgresTextColor" ></attr>
+        <attr name="HorizontalProgresTextSize" ></attr>
+        <attr name="HorizontalProgresTextOffset"></attr>
 
+    </declare-styleable>
 </resources>

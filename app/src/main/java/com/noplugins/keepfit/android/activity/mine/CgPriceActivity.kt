@@ -63,7 +63,6 @@ class CgPriceActivity : BaseActivity() {
 
         grid_view.adapter = adapter
 
-        tv_hesuan.text = SpUtils.getString(applicationContext, AppConstants.COST)
         initAdapter()
         if (form == "main") {
             requestHightTime()
@@ -96,7 +95,7 @@ class CgPriceActivity : BaseActivity() {
         }
         tv_add_price.setOnClickListener {
             if (et_price.text.toString() != "") {
-                tv_price.text = "场馆全天时段价格：¥${et_price.text.toString()}元/时"
+                tv_price.text = "场馆门市价格：¥${et_price.text.toString()}元/时"
                 list.forEach {
                     it.normal_price = et_price.text.toString()
                 }
@@ -259,7 +258,10 @@ class CgPriceActivity : BaseActivity() {
                                     }
                                     adapter!!.notifyDataSetChanged()
                                 }
-
+                                if (result.data.cost!=null){
+                                    tv_hesuan.text = "${result.data.cost}/人/次"
+                                }
+                                tv_hesuan.text = "${result.data.cost}/人/次"
                                 et_price.setText("${result.data.normalPrice}")
                                 tv_price.text = "场馆全天时段价格：¥${result.data.normalPrice}元/时"
                             }
@@ -294,7 +296,8 @@ class CgPriceActivity : BaseActivity() {
         }
 //        val intent = Intent(this, KeepFitActivity::class.java)
 //        startActivity(intent,3)
-        setResult(3)
+
+        setResult(SpUtils.getInt(applicationContext,AppConstants.FRAGMENT_SIZE)-1)
 //        startActivity(intent)
         finish()
     }

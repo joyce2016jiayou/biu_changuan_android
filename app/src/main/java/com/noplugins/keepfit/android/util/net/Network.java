@@ -14,6 +14,7 @@ import com.noplugins.keepfit.android.bean.CalenderEntity;
 import com.noplugins.keepfit.android.bean.CgBindingBean;
 import com.noplugins.keepfit.android.bean.ChangguanBean;
 import com.noplugins.keepfit.android.bean.CheckBean;
+import com.noplugins.keepfit.android.bean.ChooseBean;
 import com.noplugins.keepfit.android.bean.CityCode;
 import com.noplugins.keepfit.android.bean.CompnyBean;
 import com.noplugins.keepfit.android.bean.DictionaryeBean;
@@ -24,6 +25,7 @@ import com.noplugins.keepfit.android.bean.HightListBean;
 import com.noplugins.keepfit.android.bean.LoginBean;
 import com.noplugins.keepfit.android.bean.OrderResultBean;
 import com.noplugins.keepfit.android.bean.PrivateDetailBean;
+import com.noplugins.keepfit.android.bean.SelectChangGuanBean;
 import com.noplugins.keepfit.android.bean.TeacherBean;
 import com.noplugins.keepfit.android.bean.TeacherDetailBean;
 import com.noplugins.keepfit.android.bean.RiChengBean;
@@ -52,6 +54,7 @@ import com.orhanobut.logger.Logger;
 import java.io.IOException;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.util.List;
@@ -60,6 +63,7 @@ import java.util.concurrent.TimeUnit;
 
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
@@ -96,11 +100,13 @@ public class Network {
     public static String phone = "phone";
     public static String is_set_alias = "is_set_alias";
     private static String MRTHOD_NAME = "";
-    Retrofit retrofit, coach_retrofit,get_user_retrofit;
+    Retrofit retrofit, coach_retrofit, get_user_retrofit;
 
     public String get_changguan_url(String str) {
         if (str.equals("test")) {
             return "http://testapi.noplugins.com/api/gym-service/";
+        } else if (str.equals("api2")) {
+            return "http://api2.noplugins.com/api/gym-service/";
         } else {
             return "http://kft.ahcomg.com/api/gym-service/";
         }
@@ -109,13 +115,18 @@ public class Network {
     public String get_coach_url(String str) {
         if (str.equals("test")) {
             return "http://testapi.noplugins.com/api/coach-service/coachuser/";
+        } else if (str.equals("api2")) {
+            return "http://api2.noplugins.com/api/coach-service/coachuser/";
         } else {
             return "http://kft.ahcomg.com/api/coach-service/coachuser/";
         }
     }
+
     public String user_url(String str) {
         if (str.equals("test")) {
             return "http://testapi.noplugins.com/api/cust-service/custuser/";
+        } else if (str.equals("api2")) {
+            return "http://api2.noplugins.com/api/cust-service/custuser/";
         } else {
             return "http://kft.ahcomg.com/api/cust-service/custuser/";
         }
@@ -175,7 +186,7 @@ public class Network {
         }
 
         OkHttpClient client = new OkHttpClient.Builder()
-                .sslSocketFactory(sslContext.getSocketFactory())//去掉okhttp https证书验证
+                .sslSocketFactory(createSSLSocketFactory())//去掉okhttp https证书验证
                 .addInterceptor(new LogInterceptor(method))//添加日志拦截器
                 .addInterceptor(new Interceptor() {//添加token
                     @Override
@@ -200,20 +211,20 @@ public class Network {
 
         retrofit = new Retrofit.Builder()
                 .client(client)
-                .baseUrl(get_changguan_url("test"))//设置请求网址根部
+                .baseUrl(get_changguan_url("api2"))//设置请求网址根部
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
 
         coach_retrofit = new Retrofit.Builder()
                 .client(client)
-                .baseUrl(get_coach_url("test"))//设置请求网址根部
+                .baseUrl(get_coach_url("api2"))//设置请求网址根部
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
         get_user_retrofit = new Retrofit.Builder()
                 .client(client)
-                .baseUrl(user_url("test"))//设置请求网址根部
+                .baseUrl(user_url("api2"))//设置请求网址根部
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
@@ -222,6 +233,20 @@ public class Network {
         coach_service = coach_retrofit.create(CoachService.class);
         userService = get_user_retrofit.create(UserService.class);
 
+    }
+
+    private static SSLSocketFactory createSSLSocketFactory() {
+        SSLSocketFactory ssfFactory = null;
+
+        try {
+            SSLContext sc = SSLContext.getInstance("TLS");
+            sc.init(null, new TrustManager[]{new TrustAllCerts()}, new SecureRandom());
+
+            ssfFactory = sc.getSocketFactory();
+        } catch (Exception e) {
+        }
+
+        return ssfFactory;
     }
 
     private RequestBody retuen_json_params(Map<String, Object> params) {
@@ -414,7 +439,6 @@ public class Network {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
     }
-
 
 
     /**
@@ -1109,6 +1133,23 @@ public class Network {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
     }
+
+    public Subscription get_changguans(Map<String, Object> params, Subscriber<Bean<List<SelectChangGuanBean>>> subscriber) {
+        return service.get_changguans(retuen_json_params(params))
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    public Subscription qiehuan_changguans(Map<String, Object> params, Subscriber<Bean<ChooseBean>> subscriber) {
+        return service.qiehuan_changguans(retuen_json_params(params))
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
 
     /**
      * 我的场馆信息

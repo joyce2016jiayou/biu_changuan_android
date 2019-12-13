@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="@dimen/m314"
+        android:layout_height="@dimen/m320">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/m291"
+            android:background="@drawable/card_update"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_msg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="@dimen/m20"
+                android:layout_marginRight="@dimen/m20"
+                android:layout_marginBottom="@dimen/m81"
+                android:gravity="center"
+                android:text="@string/tv156"
+                android:textColor="@color/top_heiziti"
+                android:textSize="13sp" />
+
+            <Button
+                android:id="@+id/versionchecklib_version_dialog_commit"
+                android:layout_width="@dimen/m103"
+                android:layout_height="@dimen/m31"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="@dimen/m20"
+                android:background="@drawable/icon_shengji_btn" />
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="@dimen/m25"
+            android:layout_height="@dimen/m25"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/icon_cancel" />
+
+        <LinearLayout
+            android:id="@+id/versionchecklib_version_dialog_cancel"
+            android:layout_width="@dimen/m50"
+            android:layout_height="@dimen/m50"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:background="@color/transparent"
+            android:gravity="center"
+            android:orientation="horizontal" />
+    </RelativeLayout>
+
+
+</RelativeLayout>

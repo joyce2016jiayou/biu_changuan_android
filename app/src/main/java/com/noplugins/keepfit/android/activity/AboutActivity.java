@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.base.BaseActivity;
+import com.noplugins.keepfit.android.global.AppConstants;
+import com.noplugins.keepfit.android.util.SpUtils;
 import com.umeng.socialize.media.Base;
 
 import butterknife.BindView;
@@ -41,7 +43,7 @@ public class AboutActivity extends BaseActivity {
         back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setResult(3);
+                setResult(SpUtils.getInt(getApplicationContext(), AppConstants.FRAGMENT_SIZE)-1);
                 finish();
             }
         });
@@ -50,7 +52,7 @@ public class AboutActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        setResult(3);
+        setResult(SpUtils.getInt(getApplicationContext(),AppConstants.FRAGMENT_SIZE)-1);
         finish();
     }
 

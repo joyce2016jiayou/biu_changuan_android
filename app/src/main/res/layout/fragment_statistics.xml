@@ -48,14 +48,7 @@
                 android:textColorHint="@color/color_929292"
                 android:textSize="13sp" />
 
-            <ImageView
-                android:layout_width="@dimen/m14"
-                android:layout_height="@dimen/m8"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_gravity="right|center_vertical"
-                android:layout_marginRight="@dimen/m20"
-                android:src="@drawable/xiala" />
+
 
         </RelativeLayout>
 
