@@ -19,10 +19,13 @@ import com.huantansheng.easyphotos.EasyPhotos
 import com.noplugins.keepfit.android.R
 import com.noplugins.keepfit.android.adapter.mine.cg.VenueLayout2Adapter
 import com.noplugins.keepfit.android.base.BaseActivity
+import com.noplugins.keepfit.android.bean.ChangguanBean
 import com.noplugins.keepfit.android.bean.DictionaryeBean
 import com.noplugins.keepfit.android.entity.InformationEntity
+import com.noplugins.keepfit.android.global.AppConstants
 import com.noplugins.keepfit.android.resource.ValueResources
 import com.noplugins.keepfit.android.util.GlideEngine
+import com.noplugins.keepfit.android.util.SpUtils
 import com.noplugins.keepfit.android.util.net.Network
 import com.noplugins.keepfit.android.util.net.entity.Bean
 import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriber
@@ -44,6 +47,8 @@ class VenueDetailActivity : BaseActivity(),CCRSortableNinePhotoLayout.Delegate  
     private lateinit var docList:MutableList<DictionaryeBean>
     //2设备
     private var layout2Adapter:VenueLayout2Adapter?=null
+
+    private var cgBean:ChangguanBean ?=  null
     override fun initBundle(parms: Bundle?) {
     }
 
@@ -52,8 +57,9 @@ class VenueDetailActivity : BaseActivity(),CCRSortableNinePhotoLayout.Delegate  
         docList = ArrayList()
 
         requestDoc()
+        requestData()
         //todo 请求到数据之后再进行 addView的操作，否则页面无数据
-        changeLayout1(0)
+
 
         //获取场馆设施 doc
 
@@ -74,6 +80,24 @@ class VenueDetailActivity : BaseActivity(),CCRSortableNinePhotoLayout.Delegate  
 
                                     }
                                 }, this, false))
+    }
+
+    private fun requestData() {
+        val params = HashMap<String, Any>()
+        params["areaNum"] = SpUtils.getString(applicationContext, AppConstants.CHANGGUAN_NUM)
+        subscription = Network.getInstance("场馆信息", this)
+                .myArea(params, ProgressSubscriber("场馆信息",
+                        object : SubscriberOnNextListener<Bean<ChangguanBean>> {
+                            override fun onNext(changguanBeanBean: Bean<ChangguanBean>) {
+//                                setting(changguanBeanBean.data)
+                                cgBean = changguanBeanBean.data
+                                changeLayout1(0)
+                            }
+
+                            override fun onError(error: String) {
+
+                            }
+                        }, this, false))
     }
 
     override fun onBackPressed() {
@@ -133,7 +157,17 @@ class VenueDetailActivity : BaseActivity(),CCRSortableNinePhotoLayout.Delegate  
         val save1 = view.findViewById<TextView>(R.id.tv_save_1)
         val tvSelectTime = view.findViewById<TextView>(R.id.tv_business_hours)
 
+        val cgName = view.findViewById<TextView>(R.id.tv_cg_name)
+        val cgType = view.findViewById<TextView>(R.id.tv_cg_type)
+        val cgArea = view.findViewById<TextView>(R.id.tv_cg_area)
+        val cgAddress = view.findViewById<TextView>(R.id.tv_cg_address)
 
+        val typeArrays =
+                resources.getStringArray(R.array.identify_types).toList()
+        cgName.text = cgBean!!.area.areaName
+        cgType.text = typeArrays[cgBean!!.area.type-1]
+        cgArea.text = "${cgBean!!.area.area} m²"
+        cgAddress.text = cgBean!!.area.address
 
         //点击修改时间
         tvSelectTime.setOnClickListener {
@@ -198,6 +232,7 @@ class VenueDetailActivity : BaseActivity(),CCRSortableNinePhotoLayout.Delegate  
                 //checkbox 逻辑处理
             }
         }
+
         rec_right.removeViewAt(0)
         val view = layoutInflater.inflate(R.layout.venue_item_2, null, false)
         rec_right.addView(view, 0)
@@ -222,10 +257,12 @@ class VenueDetailActivity : BaseActivity(),CCRSortableNinePhotoLayout.Delegate  
         //View加载完成时回调
         rvFacilities.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
             override fun onGlobalLayout() {
-                val itemView = layoutManager.findViewByPosition(3)
-                if (itemView != null) {
-                    val chabox = itemView.findViewById<CheckBox>(R.id.cb_facilities)
-                    chabox.isChecked = true
+                cgBean!!.area.facility.split(",").forEach {
+                    val itemView = layoutManager.findViewByPosition(it.toInt()-1)
+                    if (itemView != null) {
+                        val chabox = itemView.findViewById<CheckBox>(R.id.cb_facilities)
+                        chabox.isChecked = true
+                    }
                 }
 
                 //OnGlobalLayoutListener可能会被多次触发
@@ -247,6 +284,18 @@ class VenueDetailActivity : BaseActivity(),CCRSortableNinePhotoLayout.Delegate  
         val view = layoutInflater.inflate(R.layout.venue_item_3, null, false)
         rec_right.addView(view, 0)
 
+        val legalName = view.findViewById<TextView>(R.id.tv_legal_name)
+        val card = view.findViewById<TextView>(R.id.tv_id_card)
+        val companyName = view.findViewById<TextView>(R.id.tv_company_name)
+        val business = view.findViewById<TextView>(R.id.tv_business_license)
+
+        if (cgBean!=null){
+            legalName.text = cgBean!!.area.legalPerson
+            card.text = cgBean!!.area.cardNum
+            companyName.text = cgBean!!.area.companyName
+            business.text = cgBean!!.area.companyCode
+        }
+
     }
 
     //layout_4
@@ -255,6 +304,11 @@ class VenueDetailActivity : BaseActivity(),CCRSortableNinePhotoLayout.Delegate  
         rec_right.removeViewAt(0)
         val view = layoutInflater.inflate(R.layout.venue_item_4, null, false)
         rec_right.addView(view, 0)
+
+        val bankNumber = view.findViewById<TextView>(R.id.tv_company_bank_number)
+        val bank = view.findViewById<TextView>(R.id.tv_company_bank)
+
+//        bank.text = cgBean!!.area
 
     }
 

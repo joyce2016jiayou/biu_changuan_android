@@ -18,8 +18,8 @@ public class RoleV11Adapter extends BaseQuickAdapter<RoleBean.RoleEntity, BaseVi
     @Override
     protected void convert(@NonNull BaseViewHolder helper, RoleBean.RoleEntity item) {
         helper.addOnClickListener(R.id.iv_delete);
-        helper.setText(R.id.tv_name,"张三");
-        helper.setText(R.id.tv_phone,"1777777777");
-        helper.setText(R.id.tv_role,"前台");
+        helper.setText(R.id.tv_name,item.getUserName());
+        helper.setText(R.id.tv_phone,item.getPhone());
+        helper.setText(R.id.tv_role,""+item.getUserType());
     }
 }

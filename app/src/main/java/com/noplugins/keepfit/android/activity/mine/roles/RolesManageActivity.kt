@@ -24,6 +24,7 @@ import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriber
 import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener
 import com.noplugins.keepfit.android.util.ui.pop.base.CenterPopupView
 import com.noplugins.keepfit.android.util.ui.pop.inteface.ViewCallBack
+import com.noplugins.keepfit.android.util.ui.toast.SuperCustomToast
 import kotlinx.android.synthetic.main.activity_roles_manage.*
 import kotlinx.android.synthetic.main.title_activity.*
 import lib.demo.spinner.MaterialSpinner
@@ -45,9 +46,7 @@ class RolesManageActivity : BaseActivity() {
         title_tv.text = getString(R.string.authority_management)
         add_btn.visibility = View.VISIBLE
         initAdapter()
-
         getBindingUserList()
-
     }
 
 
@@ -70,7 +69,9 @@ class RolesManageActivity : BaseActivity() {
         rv_roles.layoutManager = LinearLayoutManager(this)
         rv_roles.adapter = adapter
         adapter!!.setOnItemChildClickListener { adapter, view, position ->
-
+            SuperCustomToast.getInstance(this)
+                    .show("删除")
+            deletePop()
         }
     }
 
@@ -113,6 +114,27 @@ class RolesManageActivity : BaseActivity() {
                         })).show()
     }
 
+
+    private fun deletePop(){
+        XPopup.Builder(this)
+                .autoOpenSoftInput(false)
+                .autoFocusEditText(false)
+                .popupAnimation(PopupAnimation.ScaleAlphaFromCenter)
+                .asCustom(CenterPopupView(this,R.layout.dialog_to_roles_delete,
+                        ViewCallBack { view, popup ->
+
+                            view.findViewById<TextView>(R.id.tv_cancel)
+                                    .setOnClickListener {
+                                        popup.dismiss()
+                                    }
+
+                            view.findViewById<TextView>(R.id.tv_add)
+                                    .setOnClickListener {
+                                        popup.dismiss()
+                                    }
+
+                        })).show()
+    }
     /**
      * 获取当前已绑定的用户
      */
@@ -179,6 +201,8 @@ class RolesManageActivity : BaseActivity() {
         roleBean.type = 1
         roleBean.gymAreaNum = SpUtils.getString(applicationContext,AppConstants.CHANGGUAN_NUM)
 
+        data.add(roleBean)
+        adapter!!.notifyDataSetChanged()
 
         popup.dismiss()
 

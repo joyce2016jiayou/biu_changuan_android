@@ -356,4 +356,6 @@
     <string name="tv_update_phone_tips">为了保证您的账号安全，请验证身份。验证成功后进行下一步操作。</string>
     <string name="tv_send_yzm">发送验证码</string>
     <string name="tv_next">下一步</string>
+    <string name="label_role_del">是否确认删除该账号？ \n删除后该账号将无平台权限。</string>
+    <string name="tv_ok">确定</string>
 </resources>

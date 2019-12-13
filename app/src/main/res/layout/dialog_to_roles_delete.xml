@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:spinner="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:gravity="center"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:layout_height="match_parent">
+
+    <com.noplugins.keepfit.android.customize.ShadowLayout
+        android:id="@+id/sl_add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:sl_borderColor="#CCEDEFF3"
+        app:sl_borderWidth="1dp"
+        app:sl_dy="2dp"
+        app:sl_shadowColor="#143A4E73"
+        app:sl_shadowRadius="8dp"
+        android:layout_marginLeft="@dimen/m10"
+        android:layout_marginRight="@dimen/m10"
+        app:layout_constraintTop_toBottomOf="@+id/in_title"
+        app:layout_constraintRight_toRightOf="parent"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        app:layout_constraintLeft_toLeftOf="parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/m15"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:paddingBottom="@dimen/m15">
+            <TextView
+                android:id="@+id/label_add_role"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="确认删除"
+                android:gravity="center"
+                android:textColor="@color/color_4A4A4A"
+                android:textSize="18sp"
+                android:layout_marginTop="@dimen/m10"
+                android:layout_marginBottom="@dimen/m15"/>
+            <TextView
+                android:id="@+id/tv_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/label_role_del"
+                android:gravity="center_vertical"
+                android:textSize="15sp"
+                android:textColor="@color/color_4A4A4A"
+                android:layout_below="@+id/label_add_role"
+                android:layout_marginLeft="@dimen/m50"
+                android:layout_marginRight="@dimen/m50"/>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@+id/tv_username">
+
+                <TextView
+                    android:id="@+id/tv_cancel"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="@dimen/m31"
+                    android:layout_marginTop="@dimen/m20"
+                    android:gravity="center"
+                    android:text="@string/cancel"
+                    android:textSize="13sp"
+                    android:textColor="@color/contents_text"
+                    android:background="@drawable/shape_btn_bg_gray"
+                    android:layout_marginRight="@dimen/m15"
+                    android:layout_marginLeft="@dimen/m15"/>
+
+                <TextView
+                    android:id="@+id/tv_add"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="@dimen/m31"
+                    android:layout_marginTop="@dimen/m20"
+                    android:gravity="center"
+                    android:text="@string/tv_ok"
+                    android:textSize="13sp"
+                    android:textColor="@color/contents_text"
+                    android:background="@drawable/shape_btn_bg_yellow"
+                    android:layout_marginRight="@dimen/m15"
+                    android:layout_marginLeft="@dimen/m15"/>
+            </LinearLayout>
+
+        </RelativeLayout>
+    </com.noplugins.keepfit.android.customize.ShadowLayout>
+
+</RelativeLayout>
