@@ -179,7 +179,7 @@ public class RoleActivity extends BaseActivity {
         RequestBody requestBody = RequestBody.create(null, json);
 
         subscription = Network.getInstance("获取已绑定用户", getApplicationContext())
-                .findBindingRoles(requestBody, new ProgressSubscriber<>("获取已绑定用户",
+                .findBindingRoles(params, new ProgressSubscriber<>("获取已绑定用户",
                         new SubscriberOnNextListener<Bean<RoleBean>>() {
                     @Override
                     public void onNext(Bean<RoleBean> roleBeanBean) {

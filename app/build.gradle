@@ -10,8 +10,8 @@ android {
         applicationId "com.noplugins.keepfit.android"
         minSdkVersion 23
         targetSdkVersion 29
-        versionCode 7
-        versionName "1.0.4"
+        versionCode 8
+        versionName "1.1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
         manifestPlaceholders = [
@@ -53,6 +53,8 @@ android {
             jniDebuggable true
 //            minifyEnabled true /*发布版一定要混淆，下面是混淆文件*/
             //proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+
         }
 
     }
@@ -256,7 +258,6 @@ dependencies {
 
     //popwindow集成
     implementation 'com.lxj:xpopup:1.8.10-x'
-    implementation 'com.lxj:xpopup:1.8.10'
 
     //图片选择
     implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.3.8'

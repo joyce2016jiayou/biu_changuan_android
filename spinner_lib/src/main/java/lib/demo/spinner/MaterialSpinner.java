@@ -62,6 +62,8 @@ public class MaterialSpinner extends AppCompatTextView {
     private PopupWindow popupWindow; //使用popupWindow控件 样式
     private ListView listView; //布局
     private Drawable arrowDrawable; //箭头布局 视图
+
+    private int shape;//背景颜色及形状
     private boolean hideArrow;//xml中arrow是否隐藏，默认不隐藏false
     private boolean nothingSelected;
     private int popupWindowMaxHeight;//spinner下拉框整体高度 最大高度
@@ -118,6 +120,7 @@ public class MaterialSpinner extends AppCompatTextView {
             popupWindowMaxHeight = typedArray.getDimensionPixelSize(R.styleable.MaterialSpinner_ms_popupwindow_maxheight, 0);
             popupWindowHeight = typedArray.getLayoutDimension(R.styleable.MaterialSpinner_ms_popupwindow_height, WindowManager.LayoutParams.WRAP_CONTENT);
             arrowColorDisabled = Utils.lighter(arrowColor, 0.8f);
+            shape = typedArray.getResourceId(R.styleable.MaterialSpinner_ms_background_drawable,R.drawable.ms_selector_style);
         } finally {
             typedArray.recycle();
         }
@@ -137,7 +140,7 @@ public class MaterialSpinner extends AppCompatTextView {
         setPadding(left, 0, right, 0);
 
         //设置 在界面中的显示样式，以及点击样式
-        setBackgroundResource(R.drawable.ms_selector_style);
+        setBackgroundResource(shape);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1 && rtl) {
             setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
@@ -191,9 +194,9 @@ public class MaterialSpinner extends AppCompatTextView {
         //设置背景色
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             popupWindow.setElevation(16);//设置阴影
-            popupWindow.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.ms_popwindow_bg));// R.drawable.ms__drawable
+            popupWindow.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.ms_popwindow_bg_v11));// R.drawable.ms__drawable
         } else {
-            popupWindow.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.ms_popwindow_bg));
+            popupWindow.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.ms_popwindow_bg_v11));
         }
 
         //设置背景
