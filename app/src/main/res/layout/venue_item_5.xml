@@ -108,7 +108,7 @@
             app:bga_snpl_itemCornerRadius="0dp"
             app:bga_snpl_itemSpanCount="3"
             app:bga_snpl_itemWhiteSpacing="5dp"
-            app:bga_snpl_itemWidth="0dp"
+            app:bga_snpl_itemWidth="@dimen/m90"
             app:bga_snpl_maxItemCount="9"
             app:bga_snpl_placeholderDrawable="@mipmap/bga_pp_ic_holder_dark"
             app:bga_snpl_plusDrawable="@drawable/add_image_moren"

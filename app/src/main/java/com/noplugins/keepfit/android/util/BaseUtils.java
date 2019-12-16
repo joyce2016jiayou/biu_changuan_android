@@ -59,4 +59,10 @@ public class BaseUtils {
         activity.startActivity(intent);
     }
 
+    public static String strSubEnd3(String str){
+
+        String string = str.substring(0, str.length()-3);
+        return string;
+    }
+
 }

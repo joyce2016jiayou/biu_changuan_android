@@ -359,4 +359,9 @@
     <string name="tv_next">下一步</string>
     <string name="label_role_del">是否确认删除该账号？ \n删除后该账号将无平台权限。</string>
     <string name="tv_ok">确定</string>
+    <string name="tv_use">运营</string>
+    <string name="label_product_cons">产品消费占比</string>
+    <string name="tv_team_class">团课</string>
+    <string name="tv_teacher">教练</string>
+    <string name="tv_room">房间</string>
 </resources>

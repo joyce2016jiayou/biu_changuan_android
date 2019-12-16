@@ -24,6 +24,7 @@ import com.noplugins.keepfit.android.bean.DictionaryeBean
 import com.noplugins.keepfit.android.entity.InformationEntity
 import com.noplugins.keepfit.android.global.AppConstants
 import com.noplugins.keepfit.android.resource.ValueResources
+import com.noplugins.keepfit.android.util.BaseUtils
 import com.noplugins.keepfit.android.util.GlideEngine
 import com.noplugins.keepfit.android.util.SpUtils
 import com.noplugins.keepfit.android.util.net.Network
@@ -161,6 +162,10 @@ class VenueDetailActivity : BaseActivity(),CCRSortableNinePhotoLayout.Delegate  
         val cgType = view.findViewById<TextView>(R.id.tv_cg_type)
         val cgArea = view.findViewById<TextView>(R.id.tv_cg_area)
         val cgAddress = view.findViewById<TextView>(R.id.tv_cg_address)
+        //可修改的
+        val cgHours = view.findViewById<TextView>(R.id.tv_business_hours)
+        val cgPhone = view.findViewById<TextView>(R.id.tv_contact_phone)
+        val cgEmail = view.findViewById<TextView>(R.id.tv_contact_email)
 
         val typeArrays =
                 resources.getStringArray(R.array.identify_types).toList()
@@ -168,6 +173,13 @@ class VenueDetailActivity : BaseActivity(),CCRSortableNinePhotoLayout.Delegate  
         cgType.text = typeArrays[cgBean!!.area.type-1]
         cgArea.text = "${cgBean!!.area.area} m²"
         cgAddress.text = cgBean!!.area.address
+
+
+
+        cgHours.text = "${BaseUtils.strSubEnd3(cgBean!!.area.businessStart)}-${BaseUtils.strSubEnd3(cgBean!!.area.businessEnd)}"
+
+        cgPhone.text = cgBean!!.area.phone
+        cgEmail.text = cgBean!!.area.email
 
         //点击修改时间
         tvSelectTime.setOnClickListener {
@@ -308,7 +320,8 @@ class VenueDetailActivity : BaseActivity(),CCRSortableNinePhotoLayout.Delegate  
         val bankNumber = view.findViewById<TextView>(R.id.tv_company_bank_number)
         val bank = view.findViewById<TextView>(R.id.tv_company_bank)
 
-//        bank.text = cgBean!!.area
+        bank.text = cgBean!!.area.bankName
+        bankNumber.text = cgBean!!.area.bankCardNum
 
     }
 
@@ -339,6 +352,7 @@ class VenueDetailActivity : BaseActivity(),CCRSortableNinePhotoLayout.Delegate  
 
     private fun changeLayout5() {
         nowSelect = 5
+        strings.clear()//每次加载需要将此数组清空
         rec_right.removeViewAt(0)
         val view = layoutInflater.inflate(R.layout.venue_item_5, null, false)
         rec_right.addView(view, 0)
@@ -346,6 +360,16 @@ class VenueDetailActivity : BaseActivity(),CCRSortableNinePhotoLayout.Delegate  
         ivLogo = view.findViewById<ImageView>(R.id.logo_image)
         photos = view.findViewById<CCRSortableNinePhotoLayout>(R.id.snpl_moment_add_photos)
         tvPhotoNum = view.findViewById<TextView>(R.id.tv_pic_num)
+
+        //赋值操作
+        Glide.with(this)
+                .load(cgBean!!.area.logo)
+                .into(ivLogo)
+
+        for (i in 0 until cgBean!!.pic.size) {
+            strings.add(cgBean!!.pic[i].url)
+        }
+
 
         photos!!.setData(strings)
         photos!!.setDelegate(this)
