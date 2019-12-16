@@ -84,11 +84,11 @@
     <string name="tv26">最多选择三项</string>
     <string name="tv27">场馆地址</string>
     <string name="tv28">功能性场所</string>
-    <string name="tv29">LOGO</string>
-    <string name="tv30">更多照片</string>
+    <string name="tv29">场馆logo</string>
+    <string name="tv30">场馆照片</string>
     <string name="tv31">0/9</string>
-    <string name="tv32">添加更多精彩照片，让用户更加了解你哦~</string>
-    <string name="tv33">营业设施</string>
+    <string name="tv32">建议上传卫生间、更衣室、器械区、操房等位置的照片。</string>
+    <string name="tv33">场馆设施</string>
     <string name="tv34">下一步</string>
     <string name="tv35">法人姓名</string>
     <string name="tv36">身份证号</string>
@@ -213,6 +213,7 @@
     <string name="tv155">确定切换至该场馆吗？</string>
     <string name="tv156">检测到有更新，请立即升级至最新版本。</string>
     <string name="tv160"> 新版本正在努力的更新中，请稍等</string>
+    <string name="tv161">场馆房间</string>
 
     <string name="tv_select">请选择</string>
     <string name="tv_qianbao">钱包</string>

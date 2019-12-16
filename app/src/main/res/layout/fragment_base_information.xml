@@ -53,7 +53,7 @@
                         android:layout_marginLeft="@dimen/m10"
                         android:background="@drawable/edit_bg1"
                         android:hint="@string/edit_hint8"
-                        android:maxLength="20"
+                        android:maxLength="30"
                         android:paddingLeft="@dimen/m20"
                         android:singleLine="true"
                         android:textColor="@color/top_heiziti"
@@ -78,18 +78,39 @@
                         android:textColor="@color/top_heiziti"
                         android:textSize="15sp" />
 
-                    <lib.demo.spinner.MaterialSpinner
-                        android:id="@+id/spinner_type"
-                        android:layout_width="@dimen/m265"
+
+                    <RelativeLayout
+                        android:id="@+id/select_changguan_type_btn"
+                        android:layout_width="match_parent"
                         android:layout_height="@dimen/m31"
                         android:layout_marginLeft="@dimen/m10"
                         android:background="@drawable/edit_bg1"
-                        android:gravity="center"
-                        android:textSize="15sp"
-                        spinner:ms_background_color="@android:color/white"
-                        spinner:ms_popupwindow_height="wrap_content"
-                        spinner:ms_popupwindow_maxheight="@dimen/m200"
-                        spinner:ms_text_color="@color/color_9B9B9B" />
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/select_type_tv"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/m31"
+                            android:background="@drawable/edit_bg1"
+                            android:gravity="center_vertical"
+                            android:hint="综合会所"
+                            android:paddingLeft="@dimen/m20"
+                            android:singleLine="true"
+                            android:textColor="@color/top_heiziti"
+                            android:textColorHint="@color/color_9B9B9B"
+                            android:textSize="15sp" />
+
+                        <ImageView
+                            android:layout_width="@dimen/m20"
+                            android:layout_height="@dimen/m20"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="@dimen/m20"
+                            android:src="@drawable/icon_drop" />
+
+                    </RelativeLayout>
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -123,7 +144,7 @@
                             android:background="@null"
                             android:hint="@string/edit_hint9"
                             android:inputType="number"
-                            android:maxLength="11"
+                            android:maxLength="5"
                             android:paddingLeft="@dimen/m20"
                             android:singleLine="true"
                             android:textColor="@color/top_heiziti"
@@ -328,6 +349,8 @@
                         android:background="@drawable/edit_bg1"
                         android:gravity="left|center_vertical"
                         android:hint="@string/edit_hint10"
+                        android:inputType="number"
+                        android:maxLength="12"
                         android:paddingLeft="@dimen/m20"
                         android:singleLine="true"
                         android:textColor="@color/top_heiziti"
@@ -392,16 +415,17 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
-                        android:text="@string/tv156"
+                        android:text="@string/tv161"
                         android:textColor="@color/top_heiziti"
                         android:textSize="15sp" />
 
 
                     <LinearLayout
+                        android:id="@+id/add_room_btn"
                         android:layout_width="@dimen/m125"
                         android:layout_height="@dimen/m31"
                         android:layout_marginLeft="@dimen/m10"
-                        android:background="@drawable/icon_input"
+                        android:background="@drawable/next_btn_bg"
                         android:gravity="center"
                         android:orientation="horizontal">
 
@@ -417,26 +441,26 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/m31"
-                    android:orientation="horizontal"
+                    android:layout_marginLeft="@dimen/m20"
                     android:layout_marginTop="@dimen/m20"
                     android:layout_marginRight="@dimen/m20"
                     android:gravity="center_vertical"
-                    android:layout_marginLeft="@dimen/m20">
+                    android:orientation="horizontal">
 
                     <RelativeLayout
                         android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/edit_bg2"
+                        android:layout_height="@dimen/m31"
                         android:layout_marginRight="@dimen/m20"
-                        android:layout_height="@dimen/m31">
+                        android:layout_weight="1"
+                        android:background="@drawable/edit_bg2">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentLeft="true"
                             android:layout_centerVertical="true"
-                            android:text="单车房-双子座"
                             android:layout_marginLeft="@dimen/m20"
+                            android:text="单车房-双子座"
                             android:textColor="@color/color_584903"
                             android:textSize="15sp" />
 
@@ -445,8 +469,8 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
-                            android:text="50人"
                             android:layout_marginRight="@dimen/m22"
+                            android:text="50人"
                             android:textColor="@color/color_584903"
                             android:textSize="15sp" />
                     </RelativeLayout>
@@ -465,7 +489,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/kapian_bg"
             android:orientation="vertical">
 
 
@@ -492,33 +515,52 @@
                 </androidx.recyclerview.widget.RecyclerView>
             </LinearLayout>
 
-            <LinearLayout
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="28dp"
-                android:layout_marginTop="3dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:layout_marginLeft="@dimen/m20"
+                android:layout_marginTop="@dimen/m20"
+                android:text="@string/tv33"
+                android:textColor="@color/top_heiziti"
+                android:textSize="15sp" />
+
+            <com.noplugins.keepfit.android.util.ui.MyGridView
+                android:id="@+id/tag_grid_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/m40"
+                android:layout_marginTop="@dimen/m10"
+                android:layout_marginRight="@dimen/m40"
+                android:gravity="center"
+                android:numColumns="4"
+                android:stretchMode="columnWidth"
+                android:verticalSpacing="@dimen/m15" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/m20"
+                android:layout_marginTop="@dimen/m10"
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginTop="3dp"
                     android:text="@string/tv29"
                     android:textColor="@color/top_heiziti"
-                    android:textSize="16sp" />
+                    android:textSize="15sp" />
 
                 <RelativeLayout
-                    android:layout_width="54dp"
-                    android:layout_height="54dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="50dp">
+                    android:layout_width="@dimen/m90"
+                    android:layout_height="@dimen/m90"
+                    android:layout_marginLeft="@dimen/m20"
+                    android:layout_marginTop="@dimen/m10">
 
                     <ImageView
                         android:id="@+id/logo_image"
-                        android:layout_width="44dp"
-                        android:layout_height="44dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentBottom="true"
                         android:scaleType="centerCrop"
@@ -526,12 +568,10 @@
 
                     <ImageView
                         android:id="@+id/delete_icon_btn"
-                        android:layout_width="16dp"
-                        android:layout_height="16dp"
+                        android:layout_width="@dimen/m16"
+                        android:layout_height="@dimen/m16"
                         android:layout_alignParentTop="true"
                         android:layout_alignParentRight="true"
-                        android:layout_marginTop="3dp"
-                        android:layout_marginRight="3dp"
                         android:clickable="true"
                         android:src="@drawable/delete_image"
                         android:visibility="invisible" />
@@ -542,14 +582,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="28dp"
-                android:layout_marginTop="11dp"
-                android:orientation="horizontal">
+                android:layout_marginLeft="@dimen/m20"
+                android:layout_marginTop="@dimen/m30"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="horizontal">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -565,37 +605,52 @@
                             android:textSize="15sp" />
 
                         <TextView
-                            android:id="@+id/select_numbers_tv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
+                            android:text="("
+                            android:textColor="@color/color_9B9B9B"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:id="@+id/select_numbers_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:text="@string/tv31"
                             android:textColor="@color/color_9B9B9B"
-                            android:textSize="8sp" />
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=")"
+                            android:textColor="@color/color_9B9B9B"
+                            android:textSize="13sp" />
+
                     </LinearLayout>
 
                     <TextView
-                        android:layout_width="77dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="3dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/m5"
+                        android:gravity="bottom"
                         android:text="@string/tv32"
                         android:textColor="@color/color_9B9B9B"
-                        android:textSize="11sp" />
+                        android:textSize="10sp" />
                 </LinearLayout>
 
                 <com.noplugins.keepfit.android.util.ui.jiugongge.CCRSortableNinePhotoLayout
                     android:id="@+id/snpl_moment_add_photos"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="@dimen/m10"
                     app:bga_snpl_deleteDrawable="@drawable/delete_image"
                     app:bga_snpl_deleteDrawableOverlapQuarter="false"
                     app:bga_snpl_editable="true"
                     app:bga_snpl_itemCornerRadius="0dp"
-                    app:bga_snpl_itemSpanCount="4"
-                    app:bga_snpl_itemWhiteSpacing="5dp"
-                    app:bga_snpl_itemWidth="0dp"
+                    app:bga_snpl_itemSpanCount="3"
+                    app:bga_snpl_itemWhiteSpacing="@dimen/m5"
+                    app:bga_snpl_itemWidth="@dimen/m90"
                     app:bga_snpl_maxItemCount="9"
                     app:bga_snpl_placeholderDrawable="@mipmap/bga_pp_ic_holder_dark"
                     app:bga_snpl_plusDrawable="@drawable/add_image_moren"
@@ -605,139 +660,25 @@
 
         </LinearLayout>
 
-        <!--第三块-->
+
+        <!--下一步-->
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="138dp"
-            android:background="@drawable/yingye_bg"
-            android:orientation="vertical">
+            android:id="@+id/next_btn"
+            android:layout_width="@dimen/m209"
+            android:layout_height="@dimen/m50"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/m20"
+            android:layout_marginBottom="@dimen/m30"
+            android:background="@drawable/next_btn_bg"
+            android:gravity="center">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="28dp"
-                android:layout_marginTop="19dp"
-                android:text="@string/tv33"
-                android:textColor="@color/top_heiziti"
-                android:textSize="16sp" />
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="11dp"
-                android:orientation="horizontal">
-
-                <CheckBox
-                    android:id="@+id/checkbox_youyang"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_gravity="center_vertical"
-                    android:background="@drawable/selector_btn_youyang"
-                    android:button="@null"
-                    android:checked="false" />
-
-                <CheckBox
-                    android:id="@+id/checkbox_wuyang"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="23dp"
-                    android:background="@drawable/selector_btn_wuyang"
-                    android:button="@null"
-                    android:checked="false" />
-
-                <CheckBox
-                    android:id="@+id/checkbox_tuancao"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="23dp"
-                    android:background="@drawable/selector_btn_tuancao"
-                    android:button="@null"
-                    android:checked="false" />
-
-                <CheckBox
-                    android:id="@+id/checkbox_danche"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="23dp"
-                    android:background="@drawable/selector_btn_danche"
-                    android:button="@null"
-                    android:checked="false" />
-
-                <CheckBox
-                    android:id="@+id/checkbox_youyong"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="23dp"
-                    android:background="@drawable/selector_btn_youyong"
-                    android:button="@null"
-                    android:checked="false" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="5dp"
-                android:orientation="horizontal">
-
-                <CheckBox
-                    android:id="@+id/checkbox_wifi"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_gravity="center_vertical"
-                    android:background="@drawable/selector_btn_wifi"
-                    android:button="@null"
-                    android:checked="false" />
-
-                <CheckBox
-                    android:id="@+id/checkbox_genyi"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="23dp"
-                    android:background="@drawable/selector_btn_genyi"
-                    android:button="@null"
-                    android:checked="false" />
-
-                <CheckBox
-                    android:id="@+id/checkbox_linyu"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="23dp"
-                    android:background="@drawable/selector_btn_linyu"
-                    android:button="@null"
-                    android:checked="false" />
-
-                <CheckBox
-                    android:id="@+id/checkbox_cesuo"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="23dp"
-                    android:background="@drawable/selector_btn_cesuo"
-                    android:button="@null"
-                    android:checked="false" />
-            </LinearLayout>
-
+                android:text="@string/tv34"
+                android:textColor="@color/color_4A4A4A"
+                android:textSize="20sp" />
         </LinearLayout>
-
-        <!--下一步-->
-        <TextView
-            android:id="@+id/next_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="1dp"
-            android:layout_marginBottom="13dp"
-            android:text="@string/tv34"
-            android:textColor="@color/color_4A4A4A"
-            android:textSize="20sp" />
 
 
     </LinearLayout>
