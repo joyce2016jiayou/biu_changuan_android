@@ -10,10 +10,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,11 +34,17 @@ import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.bumptech.glide.Glide;
 import com.huantansheng.easyphotos.EasyPhotos;
 import com.huantansheng.easyphotos.models.album.entity.Photo;
+import com.lxj.xpopup.XPopup;
+import com.lxj.xpopup.core.BasePopupView;
+import com.lxj.xpopup.enums.PopupAnimation;
 import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.activity.InformationCheckActivity;
+import com.noplugins.keepfit.android.adapter.BaseInformationTagAdapter;
 import com.noplugins.keepfit.android.adapter.ExRecyclerAdapter;
+import com.noplugins.keepfit.android.adapter.TypeAdapter;
 import com.noplugins.keepfit.android.base.MyApplication;
 import com.noplugins.keepfit.android.bean.CityCode;
+import com.noplugins.keepfit.android.bean.DictionaryeBean;
 import com.noplugins.keepfit.android.bean.GetCityCode;
 import com.noplugins.keepfit.android.bean.GetQuCode;
 import com.noplugins.keepfit.android.bean.JsonBean;
@@ -53,11 +65,15 @@ import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriber;
 import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriberNew;
 import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener;
 import com.noplugins.keepfit.android.util.screen.KeyboardUtils;
+import com.noplugins.keepfit.android.util.ui.MyGridView;
 import com.noplugins.keepfit.android.util.ui.NoScrollViewPager;
 import com.noplugins.keepfit.android.util.ui.ProgressUtil;
 import com.noplugins.keepfit.android.util.ui.StepView;
 import com.noplugins.keepfit.android.util.ui.ViewPagerFragment;
 import com.noplugins.keepfit.android.util.ui.jiugongge.CCRSortableNinePhotoLayout;
+import com.noplugins.keepfit.android.util.ui.pop.CommonPopupWindow;
+import com.noplugins.keepfit.android.util.ui.pop.base.CenterPopupView;
+import com.noplugins.keepfit.android.util.ui.pop.inteface.ViewCallBack;
 import com.qiniu.android.http.ResponseInfo;
 import com.qiniu.android.storage.UpCompletionHandler;
 import com.qiniu.android.storage.UploadManager;
@@ -97,8 +113,6 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
      */
     @BindView(R.id.snpl_moment_add_photos)
     CCRSortableNinePhotoLayout mPhotosSnpl;
-    @BindView(R.id.spinner_type)
-    MaterialSpinner spinner_type;
     @BindView(R.id.time1_edit)
     TextView time1_edit;
     @BindView(R.id.time2_edit)
@@ -112,7 +126,7 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
     @BindView(R.id.logo_image)
     ImageView logo_image;
     @BindView(R.id.next_btn)
-    TextView next_btn;
+    LinearLayout next_btn;
     @BindView(R.id.changguan_name)
     EditText changguan_name;
     @BindView(R.id.edittext_area)
@@ -123,30 +137,20 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
     EditText edit_email;
     @BindView(R.id.edit_address)
     EditText edit_address;
-    @BindView(R.id.checkbox_youyang)
-    CheckBox checkbox_youyang;
-    @BindView(R.id.checkbox_wuyang)
-    CheckBox checkbox_wuyang;
-    @BindView(R.id.checkbox_tuancao)
-    CheckBox checkbox_tuancao;
-    @BindView(R.id.checkbox_danche)
-    CheckBox checkbox_danche;
-    @BindView(R.id.checkbox_youyong)
-    CheckBox checkbox_youyong;
-    @BindView(R.id.checkbox_wifi)
-    CheckBox checkbox_wifi;
-    @BindView(R.id.checkbox_genyi)
-    CheckBox checkbox_genyi;
-    @BindView(R.id.checkbox_linyu)
-    CheckBox checkbox_linyu;
-    @BindView(R.id.checkbox_cesuo)
-    CheckBox checkbox_cesuo;
     @BindView(R.id.sheng_tv)
     TextView sheng_tv;
     @BindView(R.id.shi_tv)
     TextView shi_tv;
     @BindView(R.id.qu_tv)
     TextView qu_tv;
+    @BindView(R.id.select_changguan_type_btn)
+    RelativeLayout select_changguan_type_btn;
+    @BindView(R.id.select_type_tv)
+    TextView select_type_tv;
+    @BindView(R.id.tag_grid_view)
+    MyGridView tag_grid_view;
+    @BindView(R.id.add_room_btn)
+    LinearLayout add_room_btn;
 
     private View view;
     private StepView stepView;
@@ -158,7 +162,7 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
     private String icon_image_path = "";
     private List<String> strings = new ArrayList<>();
     private NoScrollViewPager viewpager_content;
-    private String changguan_type = "";
+    private int changguan_type;
     private Subscription subscription;//Rxjava
     private static String icon_net_path = "";
     private List<BiaoqianEntity> biaoqianEntities = new ArrayList<>();
@@ -180,10 +184,11 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
     private String select_sheng_code = "";
     private String select_shi_code = "";
     private String select_qu_code = "";
-
     private int select_province_position = 0;
     private int select_city_position = 0;
-
+    private List<DictionaryeBean> changguan_types = new ArrayList<>();
+    private List<DictionaryeBean> information_tags = new ArrayList<>();
+    private BaseInformationTagAdapter tagAdapter;
     /**
      * 七牛云
      **/
@@ -217,7 +222,6 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
             sdf = new SimpleDateFormat("yyyyMMddHHmmss");
             qiniu_key = "icon_" + sdf.format(new Date());
             initView();
-            select_biaoqian();//设置标签监听
             getToken();//获取七牛云token
         }
         return view;
@@ -335,8 +339,14 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
     }
 
     private void initView() {
-        //设置下拉选择框
-        set_xiala_select();
+        //选择场馆类型
+        get_changguan_types();
+        select_changguan_type_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                select_changguan_types_pop();
+            }
+        });
 
         //设置时间选择器
         set_time_select();
@@ -346,6 +356,21 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
 
         //添加场馆icon
         set_icon_image();
+
+        //获取标签
+        get_tags();
+        tag_grid_view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                if (information_tags.get(i).isCheck()) {
+                    information_tags.get(i).setCheck(false);
+                } else {
+                    information_tags.get(i).setCheck(true);
+                }
+                tagAdapter.notifyDataSetChanged();
+            }
+        });
+
 
         //点击下一步
         next_btn.setOnClickListener(new View.OnClickListener() {
@@ -397,6 +422,58 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
                 }
             }
         });
+
+        //添加房间类型
+        add_room_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                add_room_pop();
+            }
+        });
+    }
+
+    private void add_room_pop() {
+        new XPopup.Builder(getActivity())
+                .autoOpenSoftInput(true)
+                .popupAnimation(PopupAnimation.ScaleAlphaFromCenter)
+                .asCustom(new CenterPopupView(getActivity(), R.layout.add_room_pop_layout, new ViewCallBack() {
+                    @Override
+                    public void onReturnView(View view, BasePopupView popup) {
+//                        view.findViewById(R.id.cancel_layout).setOnClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v) {
+//                                popup.dismiss();
+//                            }
+//                        });
+
+
+                    }
+
+                })).show();
+    }
+
+
+    private void get_tags() {
+        Map<String, Object> params = new HashMap<>();
+        params.put("object", "1");
+        Subscription subscription = Network.getInstance("获取标签类型", getActivity())
+                .get_types(params,
+                        new ProgressSubscriber<>("获取标签类型", new SubscriberOnNextListener<Bean<List<DictionaryeBean>>>() {
+                            @Override
+                            public void onNext(Bean<List<DictionaryeBean>> result) {
+                                if (information_tags.size() > 0) {
+                                    information_tags.clear();
+                                }
+                                information_tags.addAll(result.getData());
+                                tagAdapter = new BaseInformationTagAdapter(getActivity(), information_tags);
+                                tag_grid_view.setAdapter(tagAdapter);
+                            }
+
+                            @Override
+                            public void onError(String error) {
+
+                            }
+                        }, getActivity(), false));
     }
 
     /**
@@ -637,13 +714,7 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
     public InformationEntity getDates() {
         InformationEntity informationEntity = new InformationEntity();
         informationEntity.setArea_name(changguan_name.getText().toString());//场馆名称
-        if (changguan_type.equals("综合会所")) {//场馆类型
-            informationEntity.setType(1);
-        } else if (changguan_type.equals("工作室")) {//工作室
-            informationEntity.setType(2);
-        } else {
-            informationEntity.setType(3);
-        }
+        informationEntity.setType(changguan_type);//场馆类型
         informationEntity.setArea(Integer.valueOf(edittext_area.getText().toString()));//场馆面积
         informationEntity.setPhone(tell_edit.getText().toString());//电话号码
         informationEntity.setEmail(edit_email.getText().toString());//邮箱
@@ -670,10 +741,9 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
             gymPlacesBeans.add(gymPlacesBean);
 //            Log.e("获取到的人数", "获取到的人数: " + itemBeans.get(i).getPlace());
 //            Log.e("获取到的type", "获取到的type: " + itemBeans.get(i).getType_name());
-
         }
         informationEntity.setGymPlaces(gymPlacesBeans);//功能性场所
-        informationEntity.setFacility(get_selete_biaoqian());//标签
+        informationEntity.setFacility(get_selete_biaoqian());//营业标签
         //设置icon和九宫格图片
         List<InformationEntity.GymPicBean> gym_pic = new ArrayList<>();
         InformationEntity.GymPicBean icon_pic = new InformationEntity.GymPicBean();
@@ -729,7 +799,7 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
         } else if (strings.size() == 0) {//场馆照片
             Toast.makeText(getActivity(), R.string.alert_dialog_tishi9, Toast.LENGTH_SHORT).show();
             return false;
-        } else if (biaoqianEntities.size() == 0) {//标签
+        } else if (get_selete_biaoqian().length() == 0) {//标签
             Toast.makeText(getActivity(), R.string.alert_dialog_tishi10, Toast.LENGTH_SHORT).show();
             return false;
         } else if (exRecyclerAdapter.getData().size() == 0) {//功能性场所
@@ -743,7 +813,7 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
                 for (int i = 0; i < itemBeans.size(); i++) {
                     ItemBean itemBean = itemBeans.get(i);
                     if (null != itemBean.getPlace()) {
-                        Log.e("山东矿机发多少", itemBean.getPlace());
+                        //Log.e("山东矿机发多少", itemBean.getPlace());
                         if (itemBean.getPlace().length() == 0) {
                             Toast.makeText(getActivity(), R.string.alert_dialog_tishi31, Toast.LENGTH_SHORT).show();
                             is_go = false;
@@ -818,165 +888,66 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
         });
     }
 
-    private void set_xiala_select() {
-        String[] typeArrays = getResources().getStringArray(R.array.identify_types);
-        spinner_type.setItems(typeArrays);
-        spinner_type.setSelectedIndex(0);
-        spinner_type.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
+    private void get_changguan_types() {
+        Map<String, Object> params = new HashMap<>();
+        params.put("object", "gymtype");
+        Subscription subscription = Network.getInstance("获取场馆类型", getActivity())
+                .get_types(params,
+                        new ProgressSubscriber<>("获取场馆类型", new SubscriberOnNextListener<Bean<List<DictionaryeBean>>>() {
+                            @Override
+                            public void onNext(Bean<List<DictionaryeBean>> result) {
+                                if (changguan_types.size() > 0) {
+                                    changguan_types.clear();
+                                }
+                                changguan_types.addAll(result.getData());
+                                //首次进来默认选择综合场馆
 
-            @Override
-            public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
-                changguan_type = item + 1;
-            }
-        });
-        spinner_type.setOnNothingSelectedListener(new MaterialSpinner.OnNothingSelectedListener() {
+                            }
 
-            @Override
-            public void onNothingSelected(MaterialSpinner spinner) {
-                spinner.getSelectedIndex();
-            }
+                            @Override
+                            public void onError(String error) {
+
+                            }
+                        }, getActivity(), false));
+    }
+
+
+    private void select_changguan_types_pop() {
+        CommonPopupWindow popupWindow = new CommonPopupWindow.Builder(getActivity())
+                .setView(R.layout.select_type_layout)
+                .setBackGroundLevel(1f)//0.5f
+                .setAnimationStyle(R.style.top_to_bottom)
+                .setWidthAndHeight(select_changguan_type_btn.getWidth(),
+                        WindowManager.LayoutParams.WRAP_CONTENT)
+                .setOutSideTouchable(true).create();
+        popupWindow.showAsDropDown(select_changguan_type_btn);
+        /**设置逻辑*/
+        View view = popupWindow.getContentView();
+        List<String> strings = new ArrayList<>();
+        for (int i = 0; i < changguan_types.size(); i++) {
+            strings.add(changguan_types.get(i).getName());
+        }
+        TypeAdapter typeAdapter = new TypeAdapter(strings, getActivity());
+        ListView listView = view.findViewById(R.id.listview);
+        listView.setAdapter(typeAdapter);
+        listView.setOnItemClickListener((adapterView, view1, i, l) -> {
+            select_type_tv.setText(strings.get(i));
+            changguan_type = changguan_types.get(i).getId();
+            Log.e("选择的场馆类型ID", changguan_type + "");
+            popupWindow.dismiss();
         });
     }
 
     private String get_selete_biaoqian() {
         StringBuffer type_buffer = new StringBuffer();
-        for (int i = 0; i < biaoqianEntities.size(); i++) {
-            if (i == biaoqianEntities.size() - 1) {
-                type_buffer.append(biaoqianEntities.get(i).getNumber());
-            } else {
-                type_buffer.append(biaoqianEntities.get(i).getNumber()).append(",");
+        for (int i = 0; i < information_tags.size(); i++) {
+            if (information_tags.get(i).isCheck()) {
+                type_buffer.append(information_tags.get(i).getValue()).append(",");
             }
         }
-        //Log.e("选择的标签编号", image_buffer.toString() + "");
-        return type_buffer.toString();
+        Log.e("选择的标签编号", type_buffer.substring(0, type_buffer.length() - 1) + "");
+        return type_buffer.substring(0, type_buffer.length() - 1);
     }
-
-    private BiaoqianEntity biaoqianEntity = new BiaoqianEntity();
-    private BiaoqianEntity biaoqianEntity1 = new BiaoqianEntity();
-    private BiaoqianEntity biaoqianEntity2 = new BiaoqianEntity();
-    private BiaoqianEntity biaoqianEntity3 = new BiaoqianEntity();
-    private BiaoqianEntity biaoqianEntity4 = new BiaoqianEntity();
-    private BiaoqianEntity biaoqianEntity5 = new BiaoqianEntity();
-    private BiaoqianEntity biaoqianEntity6 = new BiaoqianEntity();
-    private BiaoqianEntity biaoqianEntity7 = new BiaoqianEntity();
-    private BiaoqianEntity biaoqianEntity8 = new BiaoqianEntity();
-
-    private void select_biaoqian() {
-        checkbox_youyang.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b) {
-                    biaoqianEntity.setIndex(1);
-                    biaoqianEntity.setNumber(1);
-                    biaoqianEntities.add(biaoqianEntity);
-                } else {
-
-                    biaoqianEntities.remove(biaoqianEntity);
-
-                }
-            }
-        });
-        checkbox_wuyang.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b) {
-                    biaoqianEntity1.setIndex(2);
-                    biaoqianEntity1.setNumber(2);
-                    biaoqianEntities.add(biaoqianEntity1);
-                } else {
-                    biaoqianEntities.remove(biaoqianEntity1);
-                }
-            }
-        });
-        checkbox_tuancao.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b) {
-                    biaoqianEntity2.setIndex(3);
-                    biaoqianEntity2.setNumber(3);
-                    biaoqianEntities.add(biaoqianEntity2);
-                } else {
-                    biaoqianEntities.remove(biaoqianEntity2);
-                }
-            }
-        });
-        checkbox_danche.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b) {
-                    biaoqianEntity3.setIndex(4);
-                    biaoqianEntity3.setNumber(4);
-                    biaoqianEntities.add(biaoqianEntity3);
-                } else {
-                    biaoqianEntities.remove(biaoqianEntity3);
-                }
-            }
-        });
-        checkbox_youyong.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b) {
-                    biaoqianEntity4.setIndex(5);
-                    biaoqianEntity4.setNumber(5);
-                    biaoqianEntities.add(biaoqianEntity4);
-                } else {
-                    biaoqianEntities.remove(biaoqianEntity4);
-                }
-            }
-        });
-        checkbox_wifi.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b) {
-                    biaoqianEntity5.setIndex(6);
-                    biaoqianEntity5.setNumber(6);
-                    biaoqianEntities.add(biaoqianEntity5);
-                } else {
-                    biaoqianEntities.remove(biaoqianEntity5);
-                }
-            }
-        });
-        checkbox_genyi.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b) {
-                    biaoqianEntity6.setIndex(7);
-                    biaoqianEntity6.setNumber(7);
-                    biaoqianEntities.add(biaoqianEntity6);
-                } else {
-                    biaoqianEntities.remove(biaoqianEntity6);
-                }
-            }
-        });
-        checkbox_linyu.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b) {
-                    biaoqianEntity7.setIndex(8);
-                    biaoqianEntity7.setNumber(8);
-                    biaoqianEntities.add(biaoqianEntity7);
-                } else {
-                    biaoqianEntities.remove(biaoqianEntity7);
-                }
-            }
-        });
-        checkbox_cesuo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-
-                if (b) {
-                    biaoqianEntity8.setIndex(9);
-                    biaoqianEntity8.setNumber(9);
-                    biaoqianEntities.add(biaoqianEntity8);
-                } else {
-                    biaoqianEntities.remove(biaoqianEntity8);
-                }
-            }
-        });
-
-
-    }
-
 
     private void getToken() {
         subscription = Network.getInstance("登录", getActivity())
@@ -1125,7 +1096,7 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
     public void onClickDeleteNinePhotoItem(CCRSortableNinePhotoLayout sortableNinePhotoLayout, View view, int position, String model, ArrayList<String> models) {
         mPhotosSnpl.removeItem(position);
         ValueResources.select_iamges_size = ValueResources.select_iamges_size - 1;
-
+        select_numbers_tv.setText(ValueResources.select_iamges_size + "/9");
     }
 
     @Override

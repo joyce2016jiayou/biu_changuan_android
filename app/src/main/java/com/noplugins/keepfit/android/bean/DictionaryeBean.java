@@ -17,6 +17,16 @@ public class DictionaryeBean {
     private String properties;
     private String object;
 
+    public boolean isCheck() {
+        return check;
+    }
+
+    public void setCheck(boolean check) {
+        this.check = check;
+    }
+
+    private boolean check;
+
     public String getA() {
         return a;
     }
