@@ -371,7 +371,8 @@
         <activity android:name=".activity.mine.BillDetailInfoActivity" />
         <activity android:name=".activity.user.SettingPwdActivity" />
         <activity android:name=".activity.mine.XieYiActivity" />
-        <activity android:name=".activity.mine.setting.AccountSecurityActivity" /> <!-- Required  . Enable it you can get statistics data with channel -->
+        <activity android:name=".activity.mine.setting.AccountSecurityActivity" />
+        <activity android:name=".activity.use.StatisticsActivity" /> <!-- Required  . Enable it you can get statistics data with channel -->
         <meta-data
             android:name="JPUSH_CHANNEL"
             android:value="default_developer" />

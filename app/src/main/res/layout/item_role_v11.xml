@@ -11,7 +11,7 @@
         android:layout_height="@dimen/m55"
         android:layout_weight="9"
         android:background="@drawable/shape_btn_bg_22243d_40"
-        android:layout_marginLeft="@dimen/m16">
+        android:layout_marginLeft="@dimen/m20">
         <TextView
             android:id="@+id/tv_name"
             android:layout_width="wrap_content"
