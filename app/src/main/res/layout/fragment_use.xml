@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/rl_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_F6C82A"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/m20"
+                android:layout_marginTop="@dimen/m58"
+                android:text="@string/tv_use"
+                android:textColor="#181818"
+                android:textSize="26sp"
+                android:textStyle="bold" />
+
+
+            <LinearLayout
+                android:id="@+id/select_store_type"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/m75"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="@dimen/m58"
+                android:layout_marginRight="@dimen/m80">
+
+
+                <TextView
+                    android:id="@+id/store_type_tv"
+                    android:layout_width="@dimen/m150"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="right"
+                    android:textColor="@color/color_181818"
+                    android:textSize="15sp"
+                    tools:text="场馆地址" />
+
+                <ImageView
+                    android:layout_width="@dimen/m16"
+                    android:layout_height="@dimen/m16"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/m10"
+                    android:src="@drawable/icon_switch" />
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+        <Space
+            android:id="@+id/marginSpacer"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/m40"
+            app:layout_constraintBottom_toBottomOf="@+id/rl_title"
+            app:layout_constraintLeft_toLeftOf="@id/rl_title"
+            app:layout_constraintRight_toRightOf="@id/rl_title" />
+        <LinearLayout
+            android:id="@+id/ll_function"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/marginSpacer"
+            android:layout_marginTop="-40dp"
+            android:layout_below="@+id/rl_title"
+            android:layout_marginLeft="@dimen/m10"
+            android:layout_marginRight="@dimen/m10">
+            <www.linwg.org.lib.LCardView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="@dimen/m90"
+                app:cornerRadius="@dimen/m10"
+                android:layout_margin="@dimen/m4">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/m90"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                    <ImageView
+                        android:layout_width="@dimen/m30"
+                        android:layout_height="@dimen/m30"
+                        android:src="@drawable/icon_class"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/tv_subtitle"
+                        android:text="@string/tv_team_class"/>
+                </LinearLayout>
+            </www.linwg.org.lib.LCardView>
+
+            <www.linwg.org.lib.LCardView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="@dimen/m90"
+                app:cornerRadius="@dimen/m10"
+                android:layout_margin="@dimen/m4">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/m90"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                    <ImageView
+                        android:layout_width="@dimen/m30"
+                        android:layout_height="@dimen/m30"
+                        android:src="@drawable/icon_coach"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/tv_subtitle"
+                        android:text="@string/tv_teacher"/>
+                </LinearLayout>
+            </www.linwg.org.lib.LCardView>
+            <www.linwg.org.lib.LCardView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="@dimen/m90"
+                app:cornerRadius="@dimen/m10"
+                android:layout_margin="@dimen/m4">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/m90"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                    <ImageView
+                        android:layout_width="@dimen/m30"
+                        android:layout_height="@dimen/m30"
+                        android:src="@drawable/icon_room"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/tv_subtitle"
+                        android:text="@string/tv_room"/>
+                </LinearLayout>
+            </www.linwg.org.lib.LCardView>
+            <www.linwg.org.lib.LCardView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="@dimen/m90"
+                app:cornerRadius="@dimen/m10"
+                android:layout_margin="@dimen/m4">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/m90"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                    <ImageView
+                        android:layout_width="@dimen/m30"
+                        android:layout_height="@dimen/m30"
+                        android:src="@drawable/icon_wallet"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/tv_subtitle"
+                        android:text="@string/tv_qianbao"/>
+                </LinearLayout>
+            </www.linwg.org.lib.LCardView>
+        </LinearLayout>
+        <View
+            android:id="@+id/view"
+            android:layout_below="@+id/rl_use_data"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/m185"
+            app:layout_constraintTop_toBottomOf="@+id/margin2Spacer"
+            android:background="@color/color_393b52">
+
+        </View>
+        <www.linwg.org.lib.LCardView
+            android:id="@+id/rl_use_data"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            app:layout_constraintTop_toBottomOf="@+id/ll_function"
+            app:cornerRadius="@dimen/m10"
+            android:layout_marginLeft="@dimen/m10"
+            android:layout_marginRight="@dimen/m10">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </RelativeLayout>
+        </www.linwg.org.lib.LCardView>
+
+
+        <Space
+            android:id="@+id/margin2Spacer"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/m40"
+            app:layout_constraintBottom_toBottomOf="@+id/rl_use_data"
+            app:layout_constraintLeft_toLeftOf="@id/rl_use_data"
+            app:layout_constraintRight_toRightOf="@id/rl_use_data" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/shape_btn_bg_white"
+            android:layout_marginLeft="@dimen/m15"
+            android:layout_marginRight="@dimen/m15"
+            app:layout_constraintTop_toBottomOf="@+id/view">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/color_22243D"
+                android:textSize="15sp"
+                android:layout_margin="@dimen/m10"
+                android:text="@string/label_product_cons"/>
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/picChart"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/m190"
+                android:layout_gravity="center" />
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

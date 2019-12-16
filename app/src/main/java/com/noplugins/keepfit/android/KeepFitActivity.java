@@ -33,6 +33,7 @@ import com.noplugins.keepfit.android.fragment.MessageFragment;
 import com.noplugins.keepfit.android.fragment.mine.MyFragment;
 import com.noplugins.keepfit.android.fragment.statistics.StatisticsFragment;
 import com.noplugins.keepfit.android.fragment.teacher.Is2999Fragment;
+import com.noplugins.keepfit.android.fragment.use.UseFragment;
 import com.noplugins.keepfit.android.global.AppConstants;
 import com.noplugins.keepfit.android.jpush.TagAliasOperatorHelper;
 import com.noplugins.keepfit.android.util.SpUtils;
@@ -130,7 +131,7 @@ public class KeepFitActivity extends BaseActivity {
             tabFragments.add(MyFragment.Companion.newInstance("第四页"));
         } else {
             tabFragments.add(RiChengFragment.homeInstance("第一页"));
-            tabFragments.add(StatisticsFragment.Companion.newInstance("第二页"));
+            tabFragments.add(UseFragment.Companion.newInstance("第二页"));
             tabFragments.add(MessageFragment.newInstance("第三页"));
             tabFragments.add(MyFragment.Companion.newInstance("第四页"));
         }

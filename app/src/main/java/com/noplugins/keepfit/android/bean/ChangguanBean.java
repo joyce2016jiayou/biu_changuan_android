@@ -121,6 +121,26 @@ public class ChangguanBean {
         private String edxtendVar05;
         private double finalGradle;
 
+        private String bankName;
+
+        private String bankCardNum;
+
+        public String getBankName() {
+            return bankName;
+        }
+
+        public void setBankName(String bankName) {
+            this.bankName = bankName;
+        }
+
+        public String getBankCardNum() {
+            return bankCardNum;
+        }
+
+        public void setBankCardNum(String bankCardNum) {
+            this.bankCardNum = bankCardNum;
+        }
+
         public String getPkname() {
             return pkname;
         }
