@@ -119,19 +119,67 @@ class ToUserFragment : BaseFragment() {
         ageStrings.clear()
         sexStrings.clear()
 
-        bean.time.forEach {
-            timeStrings.add(PieEntry(it.num.toFloat(), it.value))
-        }
 
-        bean.age.forEach {
-            if (it.num!=0){
-                ageStrings.add(PieEntry(it.num.toFloat(), it.value))
+        if (bean.time== null){
+            bean.time.forEach {
+                timeStrings.add(PieEntry(it.num.toFloat(), it.value))
             }
+            val dataSet = PieDataSet(timeStrings, "")
+            dataSet.colors = colors
+            val pieData = PieData(dataSet)
+            pieData.setDrawValues(true)
+            pieData.setValueFormatter(com.noplugins.keepfit.android.chart.PercentFormatter(picChart))
+            pieData.setValueTextSize(9f)
+            picChart.data = pieData
+            picChart.invalidate()
+        } else {
+            picChart.visibility = View.INVISIBLE
         }
 
-        bean.sex.forEach {
-            sexStrings.add(PieEntry(it.num.toFloat(), it.value))
+        if (bean.age!=null){
+            bean.age.forEach {
+                if (it.num!=0){
+                    ageStrings.add(PieEntry(it.num.toFloat(), it.value))
+                }
+            }
+
+            val dataSet1 = PieDataSet(ageStrings, "")
+            dataSet1.colors = colors
+            dataSet1.valueLineWidth = 1f
+            dataSet1.valueLinePart1OffsetPercentage = 100f
+            dataSet1.valueLinePart1Length = 0.5f
+            dataSet1.valueLinePart2Length = 0.6f
+            dataSet1.yValuePosition = PieDataSet.ValuePosition.OUTSIDE_SLICE
+            dataSet1.xValuePosition = PieDataSet.ValuePosition.OUTSIDE_SLICE
+            val pieData1 = PieData(dataSet1)
+            pieData1.setDrawValues(true)
+            pieData1.setValueFormatter(com.noplugins.keepfit.android.chart.PercentFormatter(picChart))
+            pieData1.setValueTextSize(9f)
+            picAgeChart.data = pieData1
+            picAgeChart.invalidate()
+
+        } else {
+            picAgeChart.visibility = View.INVISIBLE
         }
+
+        if (bean.sex != null){
+            bean.sex.forEach {
+                sexStrings.add(PieEntry(it.num.toFloat(), it.value))
+            }
+            val dataSet2 = PieDataSet(sexStrings, "")
+            dataSet2.colors = colors
+            val pieData2 = PieData(dataSet2)
+            pieData2.setDrawValues(true)
+            pieData2.setValueFormatter(com.noplugins.keepfit.android.chart.PercentFormatter(picSexChart))
+            pieData2.setValueTextSize(9f)
+            picSexChart.data = pieData2
+            picSexChart.invalidate()
+            val legend2 = picSexChart.legend
+            legend2.setCustom(getEntries(sexStrings, colors))
+        } else {
+            picSexChart.visibility = View.INVISIBLE
+        }
+
 
         colors.add(parseColor("#707BCC"))
         colors.add(parseColor("#5CCEFF"))
@@ -143,42 +191,6 @@ class ToUserFragment : BaseFragment() {
         colors.add(parseColor("#9B9791"))
 
 
-        val dataSet = PieDataSet(timeStrings, "")
-        dataSet.colors = colors
-        val pieData = PieData(dataSet)
-        pieData.setDrawValues(true)
-        pieData.setValueFormatter(com.noplugins.keepfit.android.chart.PercentFormatter(picChart))
-        pieData.setValueTextSize(9f)
-        picChart.data = pieData
-        picChart.invalidate()
-//        val legend = picChart.legend
-//        legend.setCustom(getEntries(timeStrings, colors))
-
-        val dataSet1 = PieDataSet(ageStrings, "")
-        dataSet1.colors = colors
-        dataSet1.valueLineWidth = 1f
-        dataSet1.valueLinePart1OffsetPercentage = 100f
-        dataSet1.valueLinePart1Length = 0.5f
-        dataSet1.valueLinePart2Length = 0.6f
-        dataSet1.yValuePosition = PieDataSet.ValuePosition.OUTSIDE_SLICE
-        dataSet1.xValuePosition = PieDataSet.ValuePosition.OUTSIDE_SLICE
-        val pieData1 = PieData(dataSet1)
-        pieData1.setDrawValues(true)
-        pieData1.setValueFormatter(com.noplugins.keepfit.android.chart.PercentFormatter(picChart))
-        pieData1.setValueTextSize(9f)
-        picAgeChart.data = pieData1
-        picAgeChart.invalidate()
-
-        val dataSet2 = PieDataSet(sexStrings, "")
-        dataSet2.colors = colors
-        val pieData2 = PieData(dataSet2)
-        pieData2.setDrawValues(true)
-        pieData2.setValueFormatter(com.noplugins.keepfit.android.chart.PercentFormatter(picSexChart))
-        pieData2.setValueTextSize(9f)
-        picSexChart.data = pieData2
-        picSexChart.invalidate()
-        val legend2 = picSexChart.legend
-        legend2.setCustom(getEntries(sexStrings, colors))
     }
 
     private fun initAllPieChart(isLabel: Boolean) {

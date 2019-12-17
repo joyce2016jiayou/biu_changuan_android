@@ -101,44 +101,57 @@ class ToProductFragment : BaseFragment() {
     val entries1 = ArrayList<Entry>()
     val values = ArrayList<BarEntry>()
     val functionList = ArrayList<UserStatisticsBean.FunctionBean>()
-    val string:MutableList<String> = ArrayList()
+    val string: MutableList<String> = ArrayList()
     private fun setting(user: UserStatisticsBean) {
         xiaoshouStrings.clear()
         entries.clear()
         entries1.clear()
         values.clear()
         functionList.clear()
-        functionList.addAll(user.function)
-        functionList.forEach {
-            string.add(it.value)
-        }
-        user.sales.product.forEach {
-            xiaoshouStrings.add(PieEntry(it.percent.toFloat(), it.type))
-        }
-//
-        user.sales.y2y.forEachIndexed { index, y2yBean ->
-            entries.add(Entry(index.toFloat(), y2yBean.percent.toFloat()))
-        }
-        user.sales.m2m.forEachIndexed { index, m2mBean ->
-            entries1.add(Entry(index.toFloat(), m2mBean.percent.toFloat()))
+        if (user.function != null && user.function.size > 0) {
+            functionList.addAll(user.function)
+            functionList.forEach {
+                string.add(it.value)
+            }
+            user.function.forEachIndexed { index, functionBean ->
+                values.add(BarEntry(index.toFloat(),
+                        floatArrayOf(functionBean.prices[0].price.toFloat(),
+                                functionBean.prices[1].price.toFloat(),
+                                functionBean.prices[2].price.toFloat())))
+            }
+
+        } else {
+
         }
 
-        user.function.forEachIndexed { index, functionBean ->
-            values.add(BarEntry(index.toFloat(),
-                    floatArrayOf(functionBean.prices[0].price.toFloat(),
-                            functionBean.prices[1].price.toFloat(),
-                            functionBean.prices[2].price.toFloat())))
+        if (user.sales.product != null && user.sales.product.size > 0) {
+            user.sales.product.forEach {
+                xiaoshouStrings.add(PieEntry(it.percent.toFloat(), it.type))
+            }
+
+            val dataSet = PieDataSet(xiaoshouStrings, "")
+            dataSet.colors = colors
+            val pieData = PieData(dataSet)
+            pieData.setDrawValues(true)
+            pieData.setValueFormatter(com.noplugins.keepfit.android.chart.PercentFormatter(picChart))
+            pieData.setValueTextSize(9f)
+            picChart.data = pieData
+            picChart.invalidate()
+        } else {
+            picChart.visibility = View.INVISIBLE
         }
 
-
-        val dataSet = PieDataSet(xiaoshouStrings, "")
-        dataSet.colors = colors
-        val pieData = PieData(dataSet)
-        pieData.setDrawValues(true)
-        pieData.setValueFormatter(com.noplugins.keepfit.android.chart.PercentFormatter(picChart))
-        pieData.setValueTextSize(9f)
-        picChart.data = pieData
-        picChart.invalidate()
+        //折线图不可能为空
+        if (user.sales.y2y != null && user.sales.y2y.size > 0) {
+            user.sales.y2y.forEachIndexed { index, y2yBean ->
+                entries.add(Entry(index.toFloat(), y2yBean.percent.toFloat()))
+            }
+        }
+        if (user.sales.m2m != null && user.sales.m2m.size > 0) {
+            user.sales.m2m.forEachIndexed { index, m2mBean ->
+                entries1.add(Entry(index.toFloat(), m2mBean.percent.toFloat()))
+            }
+        }
 
 
         val dataSet2 = LineDataSet(entries, "Label") // add entries to dataset
@@ -160,6 +173,7 @@ class ToProductFragment : BaseFragment() {
         lineChart.data = lineData
         lineChart.invalidate()
 
+        ///柱状图
         val set1 = BarDataSet(values, "")
         set1.setDrawIcons(false)
         set1.colors = getColors().asList()
@@ -167,7 +181,6 @@ class ToProductFragment : BaseFragment() {
         set1.setStackLabels(string.toTypedArray())
         val dataBarSets: MutableList<IBarDataSet> = ArrayList()
         dataBarSets.add(set1)
-
         val data = BarData(dataBarSets)
         data.setValueFormatter(StackedValueFormatter(false, "", 1))
         data.setValueTextColor(Color.WHITE)
@@ -175,7 +188,6 @@ class ToProductFragment : BaseFragment() {
         barChart.setFitBars(true)
         barChart.invalidate()
         val xLabels = barChart.xAxis
-//        xLabels.labelCount = 12
         xLabels.setValueFormatter(MyXFormatter(string))
         val l = barChart.legend
         l.xEntrySpace = 20f

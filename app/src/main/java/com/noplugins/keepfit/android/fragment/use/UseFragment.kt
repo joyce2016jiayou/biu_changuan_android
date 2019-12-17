@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import android.widget.Toast
 import com.github.mikephil.charting.components.Description
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.data.PieData
@@ -14,12 +16,36 @@ import com.github.mikephil.charting.data.PieEntry
 import com.noplugins.keepfit.android.R
 import com.noplugins.keepfit.android.activity.mine.TeacherManagerActivity
 import com.noplugins.keepfit.android.activity.mine.WalletActivity
+import com.noplugins.keepfit.android.activity.use.RoomManagerActivity
 import com.noplugins.keepfit.android.activity.use.StatisticsActivity
 import com.noplugins.keepfit.android.base.BaseFragment
+import com.noplugins.keepfit.android.bean.use.UseBean
+import com.noplugins.keepfit.android.global.AppConstants
 import com.noplugins.keepfit.android.util.BaseUtils
+import com.noplugins.keepfit.android.util.SpUtils
+import com.noplugins.keepfit.android.util.net.Network
+import com.noplugins.keepfit.android.util.net.entity.Bean
+import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriber
+import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener
+import com.noplugins.keepfit.android.util.ui.ViewPagerFragment
 import kotlinx.android.synthetic.main.fragment_use.*
+import java.util.HashMap
 
-class UseFragment: BaseFragment() {
+class UseFragment: ViewPagerFragment() {
+
+    override fun fetchData() {
+        if (tvCGName!=null){
+            tvCGName!!.text = SpUtils.getString(activity!!, AppConstants.CG_NAME)
+        }
+
+        if (newView != null){
+            colors.add(Color.parseColor("#707BCC"))
+            colors.add(Color.parseColor("#5CCEFF"))
+            colors.add(Color.parseColor("#828AD3"))
+            requestUse(1)
+        }
+    }
+
     companion object {
         fun newInstance(title: String): UseFragment {
             val fragment = UseFragment()
@@ -31,10 +57,13 @@ class UseFragment: BaseFragment() {
     }
 
     var newView: View? = null
+    var type  = 1
 
+    private var tvCGName: TextView?= null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         if (newView == null) {
             newView = inflater.inflate(R.layout.fragment_use, container, false)
+            tvCGName = newView!!.findViewById(R.id.store_type_tv)
         }
         return newView
     }
@@ -43,17 +72,21 @@ class UseFragment: BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        setting()
+//        setting()
         onClick()
+        initAllPieChart()
+
     }
 
     private fun initView(){
 
     }
+
 
     private fun onClick(){
         ll_team_manager.setOnClickListener {
@@ -69,7 +102,7 @@ class UseFragment: BaseFragment() {
         }
         ll_room_manager.setOnClickListener {
             if (BaseUtils.isFastClick()){
-                val intent = Intent(activity,TeacherManagerActivity::class.java)
+                val intent = Intent(activity, RoomManagerActivity::class.java)
                 startActivityForResult(intent, 2)
             }
         }
@@ -82,28 +115,87 @@ class UseFragment: BaseFragment() {
 
         tv_statistics.setOnClickListener {
             if (BaseUtils.isFastClick()){
+
+                if (SpUtils.getString(activity, AppConstants.USER_DENGJI) == "2999"){
+                    Toast.makeText(activity,"会员等级不够～",Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
                 val intent = Intent(activity, StatisticsActivity::class.java)
                 startActivityForResult(intent, 2)
             }
         }
 
+        //****************
+        rb_today.setOnClickListener {
+            if (type == 1){
+                return@setOnClickListener
+            }
+            type = 1
+            requestUse(type)
+        }
+        rb_yesterday.setOnClickListener {
+            if (type == 2){
+                return@setOnClickListener
+            }
+            type = 2
+            requestUse(type)
+        }
+        rb_week.setOnClickListener {
+            if (type == 3){
+                return@setOnClickListener
+            }
+            type = 3
+            requestUse(type)
+        }
+        rb_1month.setOnClickListener {
+            if (type == 4){
+                return@setOnClickListener
+            }
+            type = 4
+            requestUse(type)
+        }
+        //**************
+
 
     }
 
-    private fun setting(){
-        tv_team_price.text = "¥1000.00"
-        tv_team_order.text = "30"
-        tv_teacher_price.text = "¥1000.00"
-        tv_teacher_order.text = "30"
-        tv_venue_price.text = "¥1000.00"
-        tv_venue_order.text = "30"
+    private fun setting(bean: UseBean){
+        tv_team_price.text = "¥${bean.roll.price}"
+        tv_team_order.text = "${bean.roll.count}"
+        tv_teacher_price.text = "¥${bean.privateX.price}"
+        tv_teacher_order.text = "${bean.privateX.count}"
+        tv_venue_price.text = "¥${bean.area.price}"
+        tv_venue_order.text = "${bean.area.count}"
+
+        tv_sum_income.text = "¥${bean.total.price}"
+        tv_sum_order.text = "${bean.total.count}"
+
+        xiaoshouStrings.clear()
+
+        if (bean.product!=null){
+            bean.product.forEach {
+                xiaoshouStrings.add(PieEntry(it.percent.toFloat(), it.type))
+            }
+
+            val dataSet = PieDataSet(xiaoshouStrings, "")
+            dataSet.colors = colors
+            val pieData = PieData(dataSet)
+            pieData.setDrawValues(true)
+            pieData.setValueFormatter(com.noplugins.keepfit.android.chart.PercentFormatter(picChart))
+            pieData.setValueTextSize(9f)
+            picChart.data = pieData
+            picChart.invalidate()
+        } else{
+            picChart.visibility = View.INVISIBLE
+        }
+
     }
 
 
 
     private val xiaoshouStrings = ArrayList<PieEntry>()
     private val colors = ArrayList<Int>()
-    private fun initAllPieChart(isLabel: Boolean) {
+    private fun initAllPieChart() {
         val dataSet = PieDataSet(xiaoshouStrings, "")
         dataSet.colors = colors
         val pieData = PieData(dataSet)
@@ -140,6 +232,28 @@ class UseFragment: BaseFragment() {
         picChart.extraBottomOffset = 20f
 
 
+    }
+
+
+    private fun requestUse(type:Int) {
+
+        val params = HashMap<String, Any>()
+
+        params["searchType"] = type//1当天 2昨天 3七天 4一个月
+        params["areaNum"] = SpUtils.getString(activity, AppConstants.CHANGGUAN_NUM)
+        val subscription = Network.getInstance("运营首页", activity)
+                .operationData(
+                        params,
+                        ProgressSubscriber("运营首页", object : SubscriberOnNextListener<Bean<UseBean>> {
+                            override fun onNext(result: Bean<UseBean>) {
+                                setting(result.data)
+                            }
+
+                            override fun onError(error: String) {
+                                Toast.makeText(activity, error, Toast.LENGTH_SHORT).show()
+                            }
+                        }, activity, false)
+                )
     }
 
 }
