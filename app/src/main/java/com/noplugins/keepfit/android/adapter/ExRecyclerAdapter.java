@@ -40,10 +40,11 @@ public class ExRecyclerAdapter extends RecyclerView.Adapter<ExRecyclerAdapter.Vi
     private LayoutInflater mInflater;
     private int mLayoutId;
     private Context mcontext;
-    private List<TypeItemEntity> typeItemEntities=new ArrayList<>();
+    private List<TypeItemEntity> typeItemEntities = new ArrayList<>();
     private String[] typeArrays;
     //定义一个HashMap，用来存放EditText的值，Key是position
     HashMap<Integer, Integer> hashMap = new HashMap<Integer, Integer>();
+
     public ExRecyclerAdapter(Context context, ArrayList<ItemBean> data, int layoutId) {
         this.datas = data;
         mInflater = LayoutInflater.from(context);
@@ -73,14 +74,14 @@ public class ExRecyclerAdapter extends RecyclerView.Adapter<ExRecyclerAdapter.Vi
             holder.xianzhi_number.removeTextChangedListener(((TextWatcher) holder.xianzhi_number.getTag(R.id.xianzhi_number)));
         }
         //移除了TextWatcher事件后设置item对应的文本
-        holder.xianzhi_number.setText(datas.get(position).getPlace());
+        holder.xianzhi_number.setText(datas.get(position).getPlace()+"");
 
         //设置焦点
         if (datas.get(position).isFocus()) {
             if (!holder.xianzhi_number.isFocused()) {
                 holder.xianzhi_number.requestFocus();
             }
-            CharSequence text = datas.get(position).getPlace();
+            CharSequence text = datas.get(position).getPlace()+"";
             holder.xianzhi_number.setSelection(TextUtils.isEmpty(text) ? 0 : text.length());
         } else {
             if (holder.xianzhi_number.isFocused()) {
@@ -114,10 +115,10 @@ public class ExRecyclerAdapter extends RecyclerView.Adapter<ExRecyclerAdapter.Vi
             @Override
             public void afterTextChanged(Editable s) {
                 if (TextUtils.isEmpty(s)) {
-                    datas.get(position).setPlace(null);
+                    datas.get(position).setPlace(0);
                 } else {
                     //监听edit 值
-                    datas.get(position).setPlace(s.toString());
+                    datas.get(position).setPlace(Integer.valueOf(s.toString()));
                     //将editText中改变的值设置的HashMap中
                     //hashMap.put(position, s.toString());
                 }
@@ -131,9 +132,9 @@ public class ExRecyclerAdapter extends RecyclerView.Adapter<ExRecyclerAdapter.Vi
         holder.Add_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(position==0){//表示添加
+                if (position == 0) {//表示添加
                     addData(new ItemBean());
-                }else{//表示删除
+                } else {//表示删除
                     if (position != 0) {
                         datas.remove(position);
                         notifyItemRemoved(position);
@@ -155,7 +156,7 @@ public class ExRecyclerAdapter extends RecyclerView.Adapter<ExRecyclerAdapter.Vi
             @Override
             public void onItemSelected(MaterialSpinner view, int select_position, long id, String item) {
                 //将editText中改变的值设置的HashMap中
-                Log.e("简单快乐就是的",""+select_position);
+                Log.e("简单快乐就是的", "" + select_position);
                 hashMap.put(position, select_position);
             }
         });
@@ -166,29 +167,28 @@ public class ExRecyclerAdapter extends RecyclerView.Adapter<ExRecyclerAdapter.Vi
             }
         });
         //如果hashMap不为空，就设置的editText
-        if(hashMap.get(position) != null){
+        if (hashMap.get(position) != null) {
             holder.spinner_changsuo_type.setSelectedIndex(hashMap.get(position));
         }
 
-        if (datas.size() > 0){
-            Log.d("type","datas.get(position).getType():"+datas.get(position).getType());
+        if (datas.size() > 0) {
+            Log.d("type", "datas.get(position).getType():" + datas.get(position).getType());
             holder.xianzhi_number.setText(datas.get(position).getPlace());
-            if (datas.get(position).getType()> 0){
-                int index = datas.get(position).getType() -1;
+            if (datas.get(position).getType() > 0) {
+                int index = datas.get(position).getType() - 1;
                 holder.spinner_changsuo_type.setSelectedIndex(index);
             }
 
         }
 
 
-
     }
 
     //  添加数据
     public void addData(ItemBean itemBean) {
-        if(datas.size()==3){
-            Toast.makeText(mcontext,R.string.tv26,Toast.LENGTH_SHORT).show();
-        }else{
+        if (datas.size() == 3) {
+            Toast.makeText(mcontext, R.string.tv26, Toast.LENGTH_SHORT).show();
+        } else {
             itemBean.setFocus(true);
 //      在list中添加数据，并通知条目加入一条
             datas.add(datas.size(), itemBean);
@@ -201,9 +201,9 @@ public class ExRecyclerAdapter extends RecyclerView.Adapter<ExRecyclerAdapter.Vi
 
     }
 
-    public ArrayList<ItemBean>  getData(){
-        for(int i=0;i<datas.size();i++){
-            ItemBean itemBean= datas.get(i);
+    public ArrayList<ItemBean> getData() {
+        for (int i = 0; i < datas.size(); i++) {
+            ItemBean itemBean = datas.get(i);
             itemBean.setType_name(typeArrays[hashMap.get(i)]);
         }
         return datas;
@@ -230,7 +230,7 @@ public class ExRecyclerAdapter extends RecyclerView.Adapter<ExRecyclerAdapter.Vi
 
         public ViewHolder(View itemView) {
             super(itemView);
-            xianzhi_number= itemView.findViewById(R.id.xianzhi_number);
+            xianzhi_number = itemView.findViewById(R.id.xianzhi_number);
             Add_btn = itemView.findViewById(R.id.Add_btn);
             spinner_changsuo_type = itemView.findViewById(R.id.spinner_changsuo_type);
         }

@@ -7,20 +7,19 @@ import android.graphics.Rect;
 import android.os.Build;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 public class KeyboardUtils {
     /**
-
      * 隐藏或显示软键盘
-
+     * <p>
      * 如果现在是显示调用后则隐藏 反之则显示
-
+     *
      * @param activity
-
      */
 
-    public static void showORhideSoftKeyboard(Activity activity){
+    public static void showORhideSoftKeyboard(Activity activity) {
 
         InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
 
@@ -29,30 +28,26 @@ public class KeyboardUtils {
     }
 
     /**
-
      * 强制显示软键盘
-
+     *
      * @param activity
-
      */
 
-    public static void showSoftKeyboard(Activity activity){
+    public static void showSoftKeyboard(Activity activity) {
 
         InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
 
-        imm.showSoftInput(activity.getWindow().getDecorView(),InputMethodManager.SHOW_FORCED);
+        imm.showSoftInput(activity.getWindow().getDecorView(), InputMethodManager.SHOW_FORCED);
 
     }
 
     /**
-
      * 强制隐藏软键盘
-
+     *
      * @param activity
-
      */
 
-    public static void hideSoftKeyboard(Activity activity){
+    public static void hideSoftKeyboard(Activity activity) {
 
         InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
 
@@ -63,16 +58,14 @@ public class KeyboardUtils {
     }
 
     /**
-
      * 调用系统方法 强制隐藏软键盘
-
+     *
      * @param activity
-
      */
 
-    public static void hideSystemSoftKeyboard(Activity activity){
+    public static void hideSystemSoftKeyboard(Activity activity) {
 
-        ((InputMethodManager)activity.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+        ((InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
 
     }
 
@@ -85,19 +78,16 @@ public class KeyboardUtils {
         activity.getWindow().getDecorView().getWindowVisibleDisplayFrame(rect);
         //考虑到虚拟导航栏的情况（虚拟导航栏情况下：screenHeight = rect.bottom + 虚拟导航栏高度）
         //选取screenHeight*2/3进行判断
-        Log.i("","screenHigh: " + screenHeight + " rectViewBom : " + rect.bottom );
+        Log.i("", "screenHigh: " + screenHeight + " rectViewBom : " + rect.bottom);
         return screenHeight * 2 / 3 > rect.bottom;
     }
 
 
     /**
-
      * 判断软键盘是否显示方法
-
+     *
      * @param activity
-
      * @return
-
      */
 
     public static boolean isSoftShowing(Activity activity) {
@@ -108,7 +98,7 @@ public class KeyboardUtils {
 
         //获取View可见区域的bottom
 
-        Rect rect =new Rect();
+        Rect rect = new Rect();
 
         //DecorView即为activity的顶级view
 
@@ -118,23 +108,21 @@ public class KeyboardUtils {
 
 //选取screenHeight*2/3进行判断
 
-        return screenHeight*2/3 > rect.bottom+getSoftButtonsBarHeight(activity);
+        return screenHeight * 2 / 3 > rect.bottom + getSoftButtonsBarHeight(activity);
 
     }
 
     /**
-
      * 底部虚拟按键栏的高度
-
+     *
      * @return
-
      */
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
 
     private static int getSoftButtonsBarHeight(Activity activity) {
 
-        DisplayMetrics metrics =new DisplayMetrics();
+        DisplayMetrics metrics = new DisplayMetrics();
 
         //这个方法获取可能不是真实屏幕的高度
 
@@ -152,13 +140,10 @@ public class KeyboardUtils {
 
             return realHeight - usableHeight;
 
-        }else {
-
+        } else {
             return 0;
-
         }
 
     }
-
 
 }

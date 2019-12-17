@@ -438,50 +438,19 @@
                     </LinearLayout>
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/m31"
-                    android:layout_marginLeft="@dimen/m20"
-                    android:layout_marginTop="@dimen/m20"
-                    android:layout_marginRight="@dimen/m20"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:descendantFocusability="blocksDescendants"
+                    android:layout_height="wrap_content">
 
-                    <RelativeLayout
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/m31"
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/room_recyclerview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/m20"
                         android:layout_marginRight="@dimen/m20"
-                        android:layout_weight="1"
-                        android:background="@drawable/edit_bg2">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentLeft="true"
-                            android:layout_centerVertical="true"
-                            android:layout_marginLeft="@dimen/m20"
-                            android:text="单车房-双子座"
-                            android:textColor="@color/color_584903"
-                            android:textSize="15sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:layout_marginRight="@dimen/m22"
-                            android:text="50人"
-                            android:textColor="@color/color_584903"
-                            android:textSize="15sp" />
-                    </RelativeLayout>
-
-                    <ImageView
-                        android:layout_width="@dimen/m15"
-                        android:layout_height="@dimen/m15"
-                        android:src="@drawable/deleted_edit" />
-
-                </LinearLayout>
-
+                        android:layout_marginBottom="@dimen/m20" />
+                </RelativeLayout>
 
             </LinearLayout>
         </www.linwg.org.lib.LCardView>
@@ -491,29 +460,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="28dp"
-                android:layout_marginTop="6dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/tv28"
-                    android:textColor="@color/top_heiziti"
-                    android:textSize="16sp" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rc_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                </androidx.recyclerview.widget.RecyclerView>
-            </LinearLayout>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -643,6 +589,7 @@
                     android:id="@+id/snpl_moment_add_photos"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/m20"
                     android:layout_marginTop="@dimen/m10"
                     app:bga_snpl_deleteDrawable="@drawable/delete_image"
                     app:bga_snpl_deleteDrawableOverlapQuarter="false"

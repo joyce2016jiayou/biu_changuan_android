@@ -11,7 +11,7 @@ package com.noplugins.keepfit.android.entity;
  */
 public class ItemBean {
 
-    private String place;//限制人数
+    private int place;//限制人数
     private boolean focus;
     private String type_name;//类型
     private String place_num="";
@@ -43,11 +43,11 @@ public class ItemBean {
 
 
 
-    public String getPlace() {
+    public int getPlace() {
         return place;
     }
 
-    public void setPlace(String place) {
+    public void setPlace(int place) {
         this.place = place;
     }
 

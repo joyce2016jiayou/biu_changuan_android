@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -41,6 +42,7 @@ import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.activity.InformationCheckActivity;
 import com.noplugins.keepfit.android.adapter.BaseInformationTagAdapter;
 import com.noplugins.keepfit.android.adapter.ExRecyclerAdapter;
+import com.noplugins.keepfit.android.adapter.SelectRoomAdapter;
 import com.noplugins.keepfit.android.adapter.TypeAdapter;
 import com.noplugins.keepfit.android.base.MyApplication;
 import com.noplugins.keepfit.android.bean.CityCode;
@@ -117,8 +119,6 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
     TextView time1_edit;
     @BindView(R.id.time2_edit)
     TextView time2_edit;
-    @BindView(R.id.rc_view)
-    RecyclerView rc_view;
     @BindView(R.id.select_numbers_tv)
     TextView select_numbers_tv;
     @BindView(R.id.delete_icon_btn)
@@ -151,6 +151,8 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
     MyGridView tag_grid_view;
     @BindView(R.id.add_room_btn)
     LinearLayout add_room_btn;
+    @BindView(R.id.room_recyclerview)
+    RecyclerView room_recyclerview;
 
     private View view;
     private StepView stepView;
@@ -162,17 +164,13 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
     private String icon_image_path = "";
     private List<String> strings = new ArrayList<>();
     private NoScrollViewPager viewpager_content;
-    private int changguan_type;
+    private String changguan_type = "";
     private Subscription subscription;//Rxjava
     private static String icon_net_path = "";
     private List<BiaoqianEntity> biaoqianEntities = new ArrayList<>();
     private List<String> jiugongge_iamges = new ArrayList<>();
     private ProgressUtil progress_upload;
     private InformationCheckActivity mainActivity;
-    private static final int MSG_LOAD_DATA = 0x0001;
-    private static final int MSG_LOAD_SUCCESS = 0x0002;
-    private static final int MSG_LOAD_FAILED = 0x0003;
-    private static boolean isLoaded = false;
     OptionsPickerView select_city_pop;
     private List<JsonBean> options1Items = new ArrayList<>();
     private ArrayList<String> options2Items = new ArrayList<>();
@@ -188,7 +186,13 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
     private int select_city_position = 0;
     private List<DictionaryeBean> changguan_types = new ArrayList<>();
     private List<DictionaryeBean> information_tags = new ArrayList<>();
+    private List<DictionaryeBean> room_types = new ArrayList<>();
+    private List<InformationEntity.GymPlacesBean> select_rooms = new ArrayList<>();
     private BaseInformationTagAdapter tagAdapter;
+    private String select_room_type_code = "";
+    private SelectRoomAdapter selectRoomAdapter;
+    private int startH = 9, startM = 0;
+    private int endH = 23, endM = 59;
     /**
      * 七牛云
      **/
@@ -339,6 +343,8 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
     }
 
     private void initView() {
+        //设置九宫格控件
+        mPhotosSnpl.setDelegate(this);
         //选择场馆类型
         get_changguan_types();
         select_changguan_type_btn.setOnClickListener(new View.OnClickListener() {
@@ -350,9 +356,6 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
 
         //设置时间选择器
         set_time_select();
-
-        //设置九宫格控件
-        set_jiugongge_view();
 
         //添加场馆icon
         set_icon_image();
@@ -423,33 +426,130 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
             }
         });
 
+
         //添加房间类型
+        get_room_type();
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        room_recyclerview.setLayoutManager(linearLayoutManager);
+        selectRoomAdapter = new SelectRoomAdapter(getActivity());
+        room_recyclerview.setAdapter(selectRoomAdapter);
+        selectRoomAdapter.setData(select_rooms);
         add_room_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                add_room_pop();
+                if (BaseUtils.isFastClick()) {
+                    if (select_rooms.size() < 10) {
+                        add_room_pop();
+                    } else {
+                        Toast.makeText(getActivity(), R.string.alert_dialog_tishi35, Toast.LENGTH_SHORT).show();
+                    }
+                }
             }
         });
     }
 
+    private void get_room_type() {
+        Map<String, Object> params = new HashMap<>();
+        params.put("object", "room_type");
+        Subscription subscription = Network.getInstance("获取房间类型", getActivity())
+                .get_types(params,
+                        new ProgressSubscriber<>("获取房间类型", new SubscriberOnNextListener<Bean<List<DictionaryeBean>>>() {
+                            @Override
+                            public void onNext(Bean<List<DictionaryeBean>> result) {
+                                if (room_types.size() > 0) {
+                                    room_types.clear();
+                                }
+                                room_types.addAll(result.getData());
+
+                            }
+
+                            @Override
+                            public void onError(String error) {
+
+                            }
+                        }, getActivity(), false));
+    }
+
     private void add_room_pop() {
         new XPopup.Builder(getActivity())
-                .autoOpenSoftInput(true)
                 .popupAnimation(PopupAnimation.ScaleAlphaFromCenter)
+                .autoOpenSoftInput(false)
+                .dismissOnTouchOutside(true)
                 .asCustom(new CenterPopupView(getActivity(), R.layout.add_room_pop_layout, new ViewCallBack() {
                     @Override
                     public void onReturnView(View view, BasePopupView popup) {
-//                        view.findViewById(R.id.cancel_layout).setOnClickListener(new View.OnClickListener() {
-//                            @Override
-//                            public void onClick(View v) {
-//                                popup.dismiss();
-//                            }
-//                        });
+                        RelativeLayout select_room_type_btn = view.findViewById(R.id.select_room_type_btn);
+                        TextView select_room_type_tv = view.findViewById(R.id.select_room_type_tv);
+                        EditText room_name = view.findViewById(R.id.room_name);
+                        EditText room_people_number = view.findViewById(R.id.room_people_number);
 
+                        view.findViewById(R.id.cancel_layout).setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                popup.dismiss();
+                            }
+                        });
 
+                        InformationEntity.GymPlacesBean itemBean = new InformationEntity.GymPlacesBean();
+                        view.findViewById(R.id.sure_layout).setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                if (select_room_type_tv.getText().length() == 0) {
+                                    Toast.makeText(getActivity(), R.string.alert_dialog_tishi32, Toast.LENGTH_SHORT).show();
+                                    return;
+                                } else if (TextUtils.isEmpty(room_name.getText())) {
+                                    Toast.makeText(getActivity(), R.string.alert_dialog_tishi33, Toast.LENGTH_SHORT).show();
+                                    return;
+                                } else if (TextUtils.isEmpty(room_people_number.getText())) {
+                                    Toast.makeText(getActivity(), R.string.alert_dialog_tishi34, Toast.LENGTH_SHORT).show();
+                                    return;
+                                } else {
+                                    itemBean.setMax_num(Integer.valueOf(room_people_number.getText().toString()));
+                                    itemBean.setPlace_type(select_room_type_code);//设置房间类型
+                                    itemBean.setPlace_num(room_name.getText().toString());
+                                    select_rooms.add(itemBean);
+                                    selectRoomAdapter.notifyDataSetChanged();
+                                    popup.dismiss();
+                                }
+
+                            }
+                        });
+                        select_room_type_btn.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                select_room_type_pop(select_room_type_btn, select_room_type_tv);
+                            }
+                        });
                     }
 
                 })).show();
+
+    }
+
+
+    private void select_room_type_pop(RelativeLayout select_room_type_btn, TextView select_room_type_tv) {
+        CommonPopupWindow popupWindow = new CommonPopupWindow.Builder(getActivity())
+                .setView(R.layout.select_type_layout)
+                .setBackGroundLevel(1f)//0.5f
+                .setAnimationStyle(R.style.top_to_bottom)
+                .setWidthAndHeight(select_room_type_btn.getWidth(),
+                        WindowManager.LayoutParams.WRAP_CONTENT)
+                .setOutSideTouchable(true).create();
+        popupWindow.showAsDropDown(select_room_type_btn);
+        /**设置逻辑*/
+        View view = popupWindow.getContentView();
+        List<String> strings = new ArrayList<>();
+        for (int i = 0; i < room_types.size(); i++) {
+            strings.add(room_types.get(i).getName());
+        }
+        TypeAdapter typeAdapter = new TypeAdapter(strings, getActivity());
+        ListView listView = view.findViewById(R.id.listview);
+        listView.setAdapter(typeAdapter);
+        listView.setOnItemClickListener((adapterView, view1, i, l) -> {
+            select_room_type_tv.setText(strings.get(i));
+            select_room_type_code = room_types.get(i).getValue();
+            popupWindow.dismiss();
+        });
     }
 
 
@@ -541,6 +641,7 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
             Log.e("压缩失败的", msg);
         }
     };
+
     ImageCompressCallBack jiugonggeCallBack = new ImageCompressCallBack() {
         @Override
         public void onSucceed(String data) {
@@ -564,8 +665,8 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
             public void complete(String k, ResponseInfo rinfo, JSONObject response) {
                 if (rinfo.isOK()) {
                     Log.e("qiniu", "九宫格上传成功");
-//                                String key = getKey(k, response);
-                    // String s = k + ", "+ rinfo + ", " + response;
+                    //String key = getKey(k, response);
+                    //String s = k + ", "+ rinfo + ", " + response;
                     //Log.e("获取到的key", "获取到的key:" + k);
                     jiugongge_iamges.add(k);
                     if (jiugongge_iamges.size() == strings.size()) {
@@ -714,35 +815,13 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
     public InformationEntity getDates() {
         InformationEntity informationEntity = new InformationEntity();
         informationEntity.setArea_name(changguan_name.getText().toString());//场馆名称
-        informationEntity.setType(changguan_type);//场馆类型
+        informationEntity.setType(Integer.valueOf(changguan_type));//场馆类型
         informationEntity.setArea(Integer.valueOf(edittext_area.getText().toString()));//场馆面积
         informationEntity.setPhone(tell_edit.getText().toString());//电话号码
         informationEntity.setEmail(edit_email.getText().toString());//邮箱
         informationEntity.setBusiness_start(time1_edit.getText().toString());//营业开始时间
         informationEntity.setBusiness_end(time2_edit.getText().toString());//营业结束时间
-        //获取选择的功能性场所类型
-        ArrayList<ItemBean> itemBeans = exRecyclerAdapter.getData();
-        List<InformationEntity.GymPlacesBean> gymPlacesBeans = new ArrayList<>();
-        for (int i = 0; i < itemBeans.size(); i++) {
-            InformationEntity.GymPlacesBean gymPlacesBean = new InformationEntity.GymPlacesBean();
-            if (null == itemBeans.get(i).getPlace()) {
-                gymPlacesBean.setMax_num(0);
-            } else {
-                gymPlacesBean.setMax_num(Integer.valueOf(itemBeans.get(i).getPlace()));
-            }
-            if (itemBeans.get(i).getType_name().equals("有氧")) {
-                gymPlacesBean.setPlace_type("1");
-            } else if (itemBeans.get(i).getType_name().equals("瑜伽")) {
-                gymPlacesBean.setPlace_type("2");
-            } else {
-                gymPlacesBean.setPlace_type("3");
-
-            }
-            gymPlacesBeans.add(gymPlacesBean);
-//            Log.e("获取到的人数", "获取到的人数: " + itemBeans.get(i).getPlace());
-//            Log.e("获取到的type", "获取到的type: " + itemBeans.get(i).getType_name());
-        }
-        informationEntity.setGymPlaces(gymPlacesBeans);//功能性场所
+        informationEntity.setGymPlaces(select_rooms);//功能性场所
         informationEntity.setFacility(get_selete_biaoqian());//营业标签
         //设置icon和九宫格图片
         List<InformationEntity.GymPicBean> gym_pic = new ArrayList<>();
@@ -802,34 +881,11 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
         } else if (get_selete_biaoqian().length() == 0) {//标签
             Toast.makeText(getActivity(), R.string.alert_dialog_tishi10, Toast.LENGTH_SHORT).show();
             return false;
-        } else if (exRecyclerAdapter.getData().size() == 0) {//功能性场所
+        } else if (select_rooms.size() == 0) {//功能性场所
             Toast.makeText(getActivity(), R.string.alert_dialog_tishi11, Toast.LENGTH_SHORT).show();
             return false;
         } else {
-            boolean is_go = false;
-            //判断功能性场所
-            ArrayList<ItemBean> itemBeans = exRecyclerAdapter.getData();
-            if (itemBeans.size() > 0) {
-                for (int i = 0; i < itemBeans.size(); i++) {
-                    ItemBean itemBean = itemBeans.get(i);
-                    if (null != itemBean.getPlace()) {
-                        //Log.e("山东矿机发多少", itemBean.getPlace());
-                        if (itemBean.getPlace().length() == 0) {
-                            Toast.makeText(getActivity(), R.string.alert_dialog_tishi31, Toast.LENGTH_SHORT).show();
-                            is_go = false;
-                        } else {
-                            is_go = true;
-                        }
-                    } else {
-                        Toast.makeText(getActivity(), R.string.alert_dialog_tishi31, Toast.LENGTH_SHORT).show();
-                        is_go = false;
-                    }
-                }
-            } else {
-                Toast.makeText(getActivity(), R.string.alert_dialog_tishi31, Toast.LENGTH_SHORT).show();
-                is_go = false;
-            }
-            return is_go;
+            return true;
         }
 
 
@@ -856,20 +912,6 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
                 Glide.with(getActivity()).load(R.drawable.jia_image).into(logo_image);
             }
         });
-    }
-
-
-    private void set_jiugongge_view() {
-        //设置视图添加
-        linearLayoutManager = new LinearLayoutManager(getActivity());
-        rc_view.setLayoutManager(linearLayoutManager);
-        rc_view.setNestedScrollingEnabled(false);//禁止滑动
-        datas = new ArrayList<>();
-        exRecyclerAdapter = new ExRecyclerAdapter(getActivity(), datas, R.layout.item);
-        exRecyclerAdapter.addData(new ItemBean());
-        rc_view.setAdapter(exRecyclerAdapter);
-        //设置拖拽排序控件的代理
-        mPhotosSnpl.setDelegate(this);
     }
 
     private void set_time_select() {
@@ -932,7 +974,7 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
         listView.setAdapter(typeAdapter);
         listView.setOnItemClickListener((adapterView, view1, i, l) -> {
             select_type_tv.setText(strings.get(i));
-            changguan_type = changguan_types.get(i).getId();
+            changguan_type = changguan_types.get(i).getValue();
             Log.e("选择的场馆类型ID", changguan_type + "");
             popupWindow.dismiss();
         });
@@ -971,38 +1013,9 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
 
     }
 
-    /**
-     * 测试key能不能获取URL
-     *
-     * @param key_value
-     */
-    private void getUrlTest(String key_value) {
-        Map<String, String> params = new HashMap<>();
-        params.put("key", key_value);
-        subscription = Network.getInstance("获取url", getActivity())
-                .get_qiniu_url(params, new ProgressSubscriberNew<>(UrlEntity.class, new GsonSubscriberOnNextListener<UrlEntity>() {
-                    @Override
-                    public void on_post_entity(UrlEntity urlEntity, String s) {
-                        Log.e("获取到的url", "获取到的url" + urlEntity.getUrl());
-                        uptoken = urlEntity.getUrl();
-
-                    }
-                }, new SubscriberOnNextListener<Bean<Object>>() {
-                    @Override
-                    public void onNext(Bean<Object> result) {
-                    }
-
-                    @Override
-                    public void onError(String error) {
-                        Log.e("获取到的url失败", error);
-                    }
-                }, getActivity(), true));
-    }
-
-    int startH = 9, startM = 0;
-    int endH = 23, endM = 59;
 
     private void time_check(TextView textView, int type) {
+
         picker = new TimePicker(getActivity(), TimeMode.HOUR_24);
         Calendar calendar = Calendar.getInstance();
         int hour = calendar.get(Calendar.HOUR_OF_DAY);

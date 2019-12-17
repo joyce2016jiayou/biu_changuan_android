@@ -274,7 +274,7 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
         datas.clear();
         for (int i = 0; i < cg.getPlace().size(); i++) {
             ItemBean itemBean = new ItemBean();
-            itemBean.setPlace(cg.getPlace().get(i).getMaxNum() + "");
+            itemBean.setPlace(cg.getPlace().get(i).getMaxNum());
             itemBean.setType(cg.getPlace().get(i).getPlaceType());
             itemBean.setPlace_num(cg.getPlace().get(i).getPlaceNum());
             datas.add(itemBean);
@@ -1005,11 +1005,7 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
         List<InformationEntity.GymPlacesBean> gymPlacesBeans = new ArrayList<>();
         for (int i = 0; i < itemBeans.size(); i++) {
             InformationEntity.GymPlacesBean gymPlacesBean = new InformationEntity.GymPlacesBean();
-            if (null == itemBeans.get(i).getPlace()) {
-                gymPlacesBean.setMax_num(0);
-            } else {
-                gymPlacesBean.setMax_num(Integer.valueOf(itemBeans.get(i).getPlace()));
-            }
+            gymPlacesBean.setMax_num(itemBeans.get(i).getPlace());
             if (itemBeans.get(i).getType() ==1) {
                 gymPlacesBean.setPlace_type("1");
             } else if (itemBeans.get(i).getType() ==2) {

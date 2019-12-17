@@ -54,6 +54,8 @@
     <string name="edit_hint44">区</string>
     <string name="edit_hint45">详细地址</string>
     <string name="edit_hint46">如：光大银行通化分行</string>
+    <string name="edit_hint47">房间名称</string>
+    <string name="edit_hint48">容纳人数</string>
 
 
     <string name="tv1">登录</string>
@@ -254,6 +256,10 @@
     <string name="alert_dialog_tishi29">省市区不能为空！</string>
     <string name="alert_dialog_tishi30">邮箱格式不正确！</string>
     <string name="alert_dialog_tishi31">功能性场所人数不能为空！</string>
+    <string name="alert_dialog_tishi32">房间类型不能为空！</string>
+    <string name="alert_dialog_tishi33">房间名称不能为空！</string>
+    <string name="alert_dialog_tishi34">容纳人数不能为空！</string>
+    <string name="alert_dialog_tishi35">场馆房间不能超过10个！</string>
 
     <string name="update_title">更新提示</string>
     <string name="updatecontent">检测到有新版本，是否更新到最新版本。</string>
