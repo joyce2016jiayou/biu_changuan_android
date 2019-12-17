@@ -370,4 +370,10 @@
     <string name="tv_team_class">团课</string>
     <string name="tv_teacher">教练</string>
     <string name="tv_room">房间</string>
+    <string name="tv_today">今天</string>
+    <string name="tv_yesterday">昨天</string>
+    <string name="tv_week">近7天</string>
+    <string name="tv_1month">近1个月</string>
+    <string name="tv_1teacher">私教</string>
+    <string name="tv_venue">场馆</string>
 </resources>

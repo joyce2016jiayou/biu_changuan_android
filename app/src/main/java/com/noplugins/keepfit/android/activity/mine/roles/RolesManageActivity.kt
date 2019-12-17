@@ -52,6 +52,7 @@ class RolesManageActivity : BaseActivity() {
 
     override fun doBusiness(mContext: Context?) {
         back_btn.setOnClickListener {
+            setResult(SpUtils.getInt(applicationContext,AppConstants.FRAGMENT_SIZE)-1)
             finish()
         }
 
@@ -75,6 +76,10 @@ class RolesManageActivity : BaseActivity() {
         }
     }
 
+    override fun onBackPressed() {
+        setResult(SpUtils.getInt(applicationContext,AppConstants.FRAGMENT_SIZE)-1)
+        finish()
+    }
 
     /**
      * 添加的popWindow

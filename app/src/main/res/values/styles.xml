@@ -138,6 +138,10 @@
         <item name="android:textColor">@color/contents_text</item>
         <item name="android:textSize">15sp</item>
     </style>
+    <style name="tv_subtitle_18">
+        <item name="android:textColor">@color/contents_text</item>
+        <item name="android:textSize">18sp</item>
+    </style>
 
     <style name="tv_subtitle_13">
         <item name="android:textColor">@color/contents_text</item>
@@ -151,6 +155,16 @@
 
     <style name="tv_label_15">
         <item name="android:textColor">@color/color_6D7278</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="tv_22243d_13">
+        <item name="android:textColor">@color/color_22243D</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <style name="tv_white">
+        <item name="android:textColor">@color/white</item>
         <item name="android:textSize">15sp</item>
     </style>
 </resources>

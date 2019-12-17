@@ -87,6 +87,7 @@
                 app:cornerRadius="@dimen/m10"
                 android:layout_margin="@dimen/m4">
                 <LinearLayout
+                    android:id="@+id/ll_team_manager"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/m90"
                     android:orientation="vertical"
@@ -110,6 +111,7 @@
                 app:cornerRadius="@dimen/m10"
                 android:layout_margin="@dimen/m4">
                 <LinearLayout
+                    android:id="@+id/ll_teacher_manager"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/m90"
                     android:orientation="vertical"
@@ -132,6 +134,7 @@
                 app:cornerRadius="@dimen/m10"
                 android:layout_margin="@dimen/m4">
                 <LinearLayout
+                    android:id="@+id/ll_room_manager"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/m90"
                     android:orientation="vertical"
@@ -154,6 +157,7 @@
                 app:cornerRadius="@dimen/m10"
                 android:layout_margin="@dimen/m4">
                 <LinearLayout
+                    android:id="@+id/ll_wallet_manager"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/m90"
                     android:orientation="vertical"
@@ -170,15 +174,111 @@
                 </LinearLayout>
             </www.linwg.org.lib.LCardView>
         </LinearLayout>
-        <View
+        <LinearLayout
             android:id="@+id/view"
             android:layout_below="@+id/rl_use_data"
             android:layout_width="match_parent"
             android:layout_height="@dimen/m185"
+            android:orientation="vertical"
             app:layout_constraintTop_toBottomOf="@+id/margin2Spacer"
             android:background="@color/color_393b52">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/m50">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    style="@style/tv_white"
+                    android:text="@string/tv_team_class"/>
 
-        </View>
+                <com.noplugins.keepfit.android.util.ui.DrawableCenterTextView
+                    android:id="@+id/tv_team_price"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="@dimen/m10"
+                    style="@style/tv_white"
+                    android:drawableLeft="@drawable/icon_money"
+                    tools:text="¥100"/>
+                <com.noplugins.keepfit.android.util.ui.DrawableCenterTextView
+                    android:id="@+id/tv_team_order"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:drawablePadding="@dimen/m10"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/icon_order"
+                    style="@style/tv_white"
+                    tools:text="10"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/m30">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    style="@style/tv_white"
+                    android:text="@string/tv_1teacher"/>
+
+                <com.noplugins.keepfit.android.util.ui.DrawableCenterTextView
+                    android:id="@+id/tv_teacher_price"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="@dimen/m10"
+                    android:drawableLeft="@drawable/icon_money"
+                    style="@style/tv_white"
+                    tools:text="¥100"/>
+                <com.noplugins.keepfit.android.util.ui.DrawableCenterTextView
+                    android:id="@+id/tv_teacher_order"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="@dimen/m10"
+                    android:drawableLeft="@drawable/icon_order"
+                    style="@style/tv_white"
+                    tools:text="10"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/m30">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    style="@style/tv_white"
+                    android:text="@string/tv_venue"/>
+
+                <com.noplugins.keepfit.android.util.ui.DrawableCenterTextView
+                    android:id="@+id/tv_venue_price"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    style="@style/tv_white"
+                    android:drawablePadding="@dimen/m10"
+                    android:drawableLeft="@drawable/icon_money"
+                    tools:text="¥100"/>
+                <com.noplugins.keepfit.android.util.ui.DrawableCenterTextView
+                    android:id="@+id/tv_venue_order"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="@dimen/m10"
+                    android:drawableLeft="@drawable/icon_order"
+                    style="@style/tv_white"
+                    tools:text="10"/>
+            </LinearLayout>
+        </LinearLayout>
         <www.linwg.org.lib.LCardView
             android:id="@+id/rl_use_data"
             android:layout_width="match_parent"
@@ -190,6 +290,127 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="运营数据"
+                    style="@style/tv_subtitle"
+                    android:layout_marginTop="@dimen/m14"
+                    android:layout_marginLeft="@dimen/m24"/>
+                <TextView
+                    android:id="@+id/tv_statistics"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="统计"
+                    style="@style/tv_subtitle"
+                    android:layout_marginRight="@dimen/m25"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="@dimen/m14"/>
+                
+                <RadioGroup
+                    android:id="@+id/rg_use"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/m28"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="@dimen/m24"
+                    android:layout_marginRight="@dimen/m24"
+                    android:layout_marginTop="@dimen/m12"
+                    android:background="@drawable/shape_btn_bg_yellow"
+                    android:layout_below="@+id/tv_statistics">
+                    <RadioButton
+                        android:id="@+id/rb_today"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/radio_use_btn"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:textSize="13sp"
+                        android:checked="true"
+                        android:textColor="@drawable/radio_use_btn_text"
+                        android:text="@string/tv_today"/>
+                    <RadioButton
+                        android:id="@+id/rb_yesterday"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/radio_use_btn"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:textSize="13sp"
+                        android:textColor="@drawable/radio_use_btn_text"
+                        android:text="@string/tv_yesterday"/>
+                    <RadioButton
+                        android:id="@+id/rb_week"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:text="@string/tv_week"
+                        android:background="@drawable/radio_use_btn"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:textSize="13sp"
+                        android:textColor="@drawable/radio_use_btn_text"/>
+                    <RadioButton
+                        android:id="@+id/rb_1month"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:text="@string/tv_1month"
+                        android:background="@drawable/radio_use_btn"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:textSize="13sp"
+                        android:textColor="@drawable/radio_use_btn_text"/>
+                </RadioGroup>
+                <LinearLayout
+                    android:id="@+id/ll_use_1"
+                    android:layout_marginTop="@dimen/m30"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/rg_use"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/tv_sum_income"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        tools:text="¥20000.00"
+                        style="@style/tv_subtitle_18"/>
+
+                    <TextView
+                        android:id="@+id/tv_sum_order"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        tools:text="333"
+                        style="@style/tv_subtitle_18"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_use_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/ll_use_1"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        style="@style/tv_22243d_13"
+                        android:text="总收入"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        style="@style/tv_22243d_13"
+                        android:text="总订单量"/>
+                </LinearLayout>
             </RelativeLayout>
         </www.linwg.org.lib.LCardView>
 

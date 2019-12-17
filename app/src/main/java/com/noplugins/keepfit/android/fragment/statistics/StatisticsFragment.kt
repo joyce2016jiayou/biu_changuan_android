@@ -98,10 +98,6 @@ class StatisticsFragment: ViewPagerFragment() {
 
     }
 
-    private fun onClick(){
-
-
-    }
 
     private fun changeBtn(select:Int){
         when(select){
