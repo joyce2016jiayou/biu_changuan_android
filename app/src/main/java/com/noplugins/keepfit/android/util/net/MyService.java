@@ -25,6 +25,9 @@ import com.noplugins.keepfit.android.bean.UserStatisticsBean;
 import com.noplugins.keepfit.android.bean.WxPayBean;
 import com.noplugins.keepfit.android.bean.mine.BalanceListBean;
 import com.noplugins.keepfit.android.bean.mine.WalletBean;
+import com.noplugins.keepfit.android.bean.use.RoomBean;
+import com.noplugins.keepfit.android.bean.use.RoomDelBean;
+import com.noplugins.keepfit.android.bean.use.UseBean;
 import com.noplugins.keepfit.android.entity.AddClassEntity;
 import com.noplugins.keepfit.android.entity.CheckEntity;
 import com.noplugins.keepfit.android.entity.ClassEntity;
@@ -730,4 +733,39 @@ public interface MyService {
     @POST("deleteTeacherBinding")
     Observable<Bean<Object>> deleteTeacherBinding(@Body RequestBody json);
 
+    /**
+     * 统计首页
+     *
+     * @return
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("operationData")
+    Observable<Bean<UseBean>> operationData(@Body RequestBody json);
+
+    /**
+     * 添加房间
+     *
+     * @return
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("addAreaPlace")
+    Observable<Bean<String>> addAreaPlace(@Body RequestBody json);
+
+    /**
+     * 删除房间
+     *
+     * @return
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("deleteAreaPlace")
+    Observable<Bean<RoomDelBean>> deleteAreaPlace(@Body RequestBody json);
+
+    /**
+     * 房间信息
+     *
+     * @return
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("getAreaPlace")
+    Observable<Bean<List<RoomBean>>> getAreaPlace(@Body RequestBody json);
 }

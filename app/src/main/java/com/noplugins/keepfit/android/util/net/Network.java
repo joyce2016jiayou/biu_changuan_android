@@ -33,6 +33,9 @@ import com.noplugins.keepfit.android.bean.UserStatisticsBean;
 import com.noplugins.keepfit.android.bean.WxPayBean;
 import com.noplugins.keepfit.android.bean.mine.BalanceListBean;
 import com.noplugins.keepfit.android.bean.mine.WalletBean;
+import com.noplugins.keepfit.android.bean.use.RoomBean;
+import com.noplugins.keepfit.android.bean.use.RoomDelBean;
+import com.noplugins.keepfit.android.bean.use.UseBean;
 import com.noplugins.keepfit.android.entity.AddClassEntity;
 import com.noplugins.keepfit.android.entity.CheckEntity;
 import com.noplugins.keepfit.android.entity.ClassEntity;
@@ -1238,6 +1241,65 @@ public class Network {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
     }
+
+    /**
+     * 运营主页
+     * @param params
+     * @param subscriber
+     * @return
+     */
+    public Subscription operationData(Map<String, Object> params, Subscriber<Bean<UseBean>> subscriber) {
+        return service.operationData(retuen_json_object(params))
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 添加房间
+     * @param params
+     * @param subscriber
+     * @return
+     */
+    public Subscription addAreaPlace(Map<String, Object> params, Subscriber<Bean<String>> subscriber) {
+        return service.addAreaPlace(retuen_json_object(params))
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 删除房间
+     * @param params
+     * @param subscriber
+     * @return
+     */
+    public Subscription deleteAreaPlace(Map<String, Object> params, Subscriber<Bean<RoomDelBean>> subscriber) {
+        return service.deleteAreaPlace(retuen_json_object(params))
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+
+    /**
+     * 获取类型下的房间信息
+     * @param params
+     * @param subscriber
+     * @return
+     */
+    public Subscription getAreaPlace(Map<String, Object> params, Subscriber<Bean<List<RoomBean>>> subscriber) {
+        return service.getAreaPlace(retuen_json_object(params))
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+
 
 
 }

@@ -377,4 +377,12 @@
     <string name="tv_1month">近1个月</string>
     <string name="tv_1teacher">私教</string>
     <string name="tv_venue">场馆</string>
+    <string name="room_manager">房间管理</string>
+    <string name="tv_room_type">房间类型</string>
+    <string name="tv_room_name">房间名称</string>
+    <string name="room_add">添加房间</string>
+    <string name="tv_delete_room">删除房间</string>
+    <string name="tv_delete_info">确定删除该房间信息吗？</string>
+    <string name="tv_room_delete_tips">该房间还有未完成的课程，无法删除</string>
+    <string name="tv_know">我知道了</string>
 </resources>

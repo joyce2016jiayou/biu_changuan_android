@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:spinner="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/title_activity" />
+
+    <www.linwg.org.lib.LCardView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/m51"
+        app:cornerRadius="@dimen/m8">
+
+        <RelativeLayout
+            android:id="@+id/rl_update_phone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/label_room_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/m20"
+                android:text="@string/tv_room_type"
+                android:textColor="@color/color_4A4A4A"
+                android:textSize="16sp" />
+
+            <lib.demo.spinner.MaterialSpinner
+                android:id="@+id/ms_room_type"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/m31"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:textSize="13sp"
+                android:text="@string/tv_select"
+                android:layout_toRightOf="@+id/label_room_type"
+                spinner:ms_background_color="@color/edit_bg_color"
+                spinner:ms_background_drawable="@drawable/ms_selector_style_v11"
+                spinner:ms_popupwindow_height="wrap_content"
+                spinner:ms_popupwindow_maxheight="200dp"
+                spinner:ms_text_color="@color/color_181818"
+                android:layout_marginRight="@dimen/m20"
+                android:layout_marginLeft="@dimen/m5"/>
+        </RelativeLayout>
+    </www.linwg.org.lib.LCardView>
+
+    <www.linwg.org.lib.LCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cornerRadius="@dimen/m8">
+
+        <RelativeLayout
+            android:id="@+id/rl_setting_pwd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/label_room_name"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/m31"
+                android:layout_marginLeft="@dimen/m20"
+                android:layout_marginTop="@dimen/m20"
+                android:gravity="center_vertical"
+                android:text="@string/tv_room_name"
+                android:textColor="@color/color_4A4A4A"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/et_room_name"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/m31"
+                android:layout_marginLeft="@dimen/m5"
+                android:layout_marginTop="@dimen/m20"
+                android:layout_marginRight="@dimen/m20"
+                android:layout_toRightOf="@+id/label_room_name"
+                android:background="@drawable/shape_edit_bg"
+                android:gravity="center_vertical" />
+
+            <TextView
+                android:id="@+id/label_people_number"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/m31"
+                android:layout_below="@+id/et_room_name"
+                android:layout_marginLeft="@dimen/m20"
+                android:layout_marginTop="@dimen/m20"
+                android:gravity="center_vertical"
+                android:text="@string/tv_room_name"
+                android:textColor="@color/color_4A4A4A"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/et_people_number"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/m31"
+                android:layout_below="@+id/et_room_name"
+                android:layout_marginLeft="@dimen/m5"
+                android:layout_marginTop="@dimen/m20"
+                android:layout_marginRight="@dimen/m20"
+                android:inputType="number"
+                android:maxLength="4"
+                android:layout_marginBottom="@dimen/m20"
+                android:layout_toRightOf="@+id/label_people_number"
+                android:background="@drawable/shape_edit_bg"
+                android:gravity="center_vertical" />
+        </RelativeLayout>
+
+    </www.linwg.org.lib.LCardView>
+
+    <TextView
+        android:id="@+id/tv_complete"
+        android:layout_width="@dimen/m209"
+        android:layout_height="@dimen/m50"
+        android:gravity="center"
+        android:background="@drawable/shape_btn_bg_40"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/tv_ok"
+        android:layout_marginTop="@dimen/m60"
+        android:textColor="@color/color_22243D"
+        android:textSize="20sp"/>
+</LinearLayout>

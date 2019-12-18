@@ -163,6 +163,11 @@
         <item name="android:textSize">13sp</item>
     </style>
 
+    <style name="tv_22243d_15">
+        <item name="android:textColor">@color/color_22243D</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
     <style name="tv_white">
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">15sp</item>

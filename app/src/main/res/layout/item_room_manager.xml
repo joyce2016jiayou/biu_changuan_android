@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:background="@drawable/shape_btn_bg_gray_40"
+    android:id="@+id/fl_room"
+    android:layout_height="@dimen/m127"
+    android:layout_marginLeft="@dimen/m20"
+    android:layout_marginRight="@dimen/m20"
+    android:layout_marginBottom="@dimen/m10">
+    <TextView
+        android:id="@+id/tv_room_type"
+        android:layout_width="@dimen/m116"
+        android:layout_height="@dimen/m35"
+        android:gravity="center"
+        android:layout_gravity="bottom|right"
+        android:layout_margin="@dimen/m10"
+        android:textColor="@color/color_22243D"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:background="@drawable/shape_btn_bg_ffcc7d"/>
+</FrameLayout>
