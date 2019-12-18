@@ -2,9 +2,13 @@ package com.noplugins.keepfit.android.fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -72,6 +76,8 @@ import com.noplugins.keepfit.android.util.ui.NoScrollViewPager;
 import com.noplugins.keepfit.android.util.ui.ProgressUtil;
 import com.noplugins.keepfit.android.util.ui.StepView;
 import com.noplugins.keepfit.android.util.ui.ViewPagerFragment;
+import com.noplugins.keepfit.android.util.ui.cropimg.ClipImageActivity;
+import com.noplugins.keepfit.android.util.ui.cropimg.FileUtil;
 import com.noplugins.keepfit.android.util.ui.jiugongge.CCRSortableNinePhotoLayout;
 import com.noplugins.keepfit.android.util.ui.pop.CommonPopupWindow;
 import com.noplugins.keepfit.android.util.ui.pop.base.CenterPopupView;
@@ -84,6 +90,7 @@ import com.qiniu.android.storage.UploadOptions;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.net.URI;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -193,6 +200,7 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
     private SelectRoomAdapter selectRoomAdapter;
     private int startH = 9, startM = 0;
     private int endH = 23, endM = 59;
+    private String crop_icon_path;
     /**
      * 七牛云
      **/
@@ -1137,22 +1145,40 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
                 mPhotosSnpl.setData(strings);//设置九宫格
                 ValueResources.select_iamges_size = strings.size();
                 select_numbers_tv.setText(ValueResources.select_iamges_size + "/9");
-
                 return;
-            } else {//添加icon,上传icon
+            } else if (requestCode == 102) {//添加icon,上传icon
                 ArrayList<String> resultPaths = data.getStringArrayListExtra(EasyPhotos.RESULT_PATHS);
                 if (resultPaths.size() > 0) {
                     icon_image_path = resultPaths.get(0);
-                    File icon_iamge_file = new File(icon_image_path);
-                    Glide.with(getActivity()).load(icon_iamge_file).into(logo_image);
-                    delete_icon_btn.setVisibility(View.VISIBLE);
+                    gotoClipActivity(Uri.fromFile(new File(icon_image_path)));
                 }
-
+            } else if (requestCode == 103) {
+                final Uri uri = data.getData();
+                if (uri == null) {
+                    return;
+                }
+                String cropImagePath = FileUtil.getRealFilePathFromUri(getActivity(), uri);
+                //Bitmap bitMap = BitmapFactory.decodeFile(cropImagePath);
+                File icon_iamge_file = new File(cropImagePath);
+                Glide.with(getActivity()).load(icon_iamge_file).into(logo_image);
+                delete_icon_btn.setVisibility(View.VISIBLE);
             }
-
-
         } else if (RESULT_CANCELED == resultCode) {
             //Toast.makeText(this, "cancel", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    /**
+     * 打开截图界面
+     */
+    public void gotoClipActivity(Uri uri) {
+        if (uri == null) {
+            return;
+        }
+        Intent intent = new Intent();
+        intent.setClass(getActivity(), ClipImageActivity.class);
+        intent.putExtra("type", 2);//1:圆形 2:方形
+        intent.setData(uri);
+        startActivityForResult(intent, 103);
     }
 }
