@@ -26,11 +26,11 @@ class SMSCodeActivity : BaseActivity() {
     private var bool = ""
     private var messageId = ""
     private var phone = ""
-    private var txPwd = false
+    private var setPwd = -1
     override fun initBundle(parms: Bundle?) {
         if (parms!=null){
             bool = parms.getString("newPhone","")
-            txPwd = parms.getBoolean("txPwd",false)
+            setPwd = parms.getInt("setPwd",-1)
         }
     }
 
@@ -41,13 +41,14 @@ class SMSCodeActivity : BaseActivity() {
         title_tv.text = "短信验证码"
         phone = SpUtils.getString(applicationContext,AppConstants.PHONE)
         tv_send_code.isEnabled = false//设置不可点击，等待60秒过后可以点击
-        timer.start()
 
         if (bool.isNotEmpty()){
             tv_phone.text = "短信已发送至$bool"
             phone = bool
             tv_next.text = "完成"
         }
+
+        send()
     }
 
     override fun doBusiness(mContext: Context?) {
@@ -58,17 +59,21 @@ class SMSCodeActivity : BaseActivity() {
         tv_next.setOnClickListener {
             if (BaseUtils.isFastClick()){
 
-                if (txPwd){
+                if (setPwd !=-1){
                     val intent = Intent(this, UpdatePasswordActivity::class.java)
+                    if (setPwd == 1){
+                        intent.putExtra("form","loginPwd")
+                    }
                     startActivity(intent)
                     finish()
                     return@setOnClickListener
                 }
 
                 if(bool.isNotEmpty()){
-                    //todo  验证新手机号
-                    InputNewPhoneActivity.inputNewPhoneActivity.finish()
-                    finish()
+                    //验证新手机号
+
+                    updateUserPhone()
+
                     return@setOnClickListener
                 }
 
@@ -84,6 +89,7 @@ class SMSCodeActivity : BaseActivity() {
      * 获取验证码
      */
     private fun send() {
+        timer.start()
         val params = HashMap<String, Any>()
         params["phone"] = phone
         params["sign"] = "${MD5.stringToMD5("MES$phone")}"
@@ -104,6 +110,34 @@ class SMSCodeActivity : BaseActivity() {
                 )
     }
 
+    /**
+     * 修改手机号
+     */
+    private fun updateUserPhone() {
+        val params = HashMap<String, Any>()
+        params["newPhone"] = phone
+        params["userNum"] = SpUtils.getString(applicationContext,AppConstants.USER_NAME)
+        params["messageId"] =messageId
+        params["code"] =et_input.text.toString()
+        subscription = Network.getInstance("获取验证码", this)
+                .updateUserPhone(
+                        params,
+                        ProgressSubscriber("获取验证码", object : SubscriberOnNextListener<Bean<Any>> {
+                            override fun onNext(result: Bean<Any>) {
+                                Toast.makeText(applicationContext,result.message,Toast.LENGTH_SHORT)
+                                        .show()
+                                SpUtils.putString(applicationContext,AppConstants.PHONE,phone)
+                                InputNewPhoneActivity.inputNewPhoneActivity.finish()
+                                finish()
+                            }
+
+                            override fun onError(error: String) {
+                                Toast.makeText(applicationContext,error,Toast.LENGTH_SHORT)
+                                        .show()
+                            }
+                        }, this, false)
+                )
+    }
     internal var timer: CountDownTimer = object : CountDownTimer(60000, 1000) {
         @SuppressLint("SetTextI18n")
         override fun onTick(millisUntilFinished: Long) {

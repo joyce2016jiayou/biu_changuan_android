@@ -385,4 +385,6 @@
     <string name="tv_delete_info">确定删除该房间信息吗？</string>
     <string name="tv_room_delete_tips">该房间还有未完成的课程，无法删除</string>
     <string name="tv_know">我知道了</string>
+    <string name="vunue_info">场馆信息</string>
+    <string name="tv_Capacity">容纳人数</string>
 </resources>

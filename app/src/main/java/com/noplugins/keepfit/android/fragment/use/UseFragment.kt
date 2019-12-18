@@ -18,6 +18,7 @@ import com.noplugins.keepfit.android.activity.mine.TeacherManagerActivity
 import com.noplugins.keepfit.android.activity.mine.WalletActivity
 import com.noplugins.keepfit.android.activity.use.RoomManagerActivity
 import com.noplugins.keepfit.android.activity.use.StatisticsActivity
+import com.noplugins.keepfit.android.activity.use.TeamClassManagerActivity
 import com.noplugins.keepfit.android.base.BaseFragment
 import com.noplugins.keepfit.android.bean.use.UseBean
 import com.noplugins.keepfit.android.global.AppConstants
@@ -91,7 +92,8 @@ class UseFragment: ViewPagerFragment() {
     private fun onClick(){
         ll_team_manager.setOnClickListener {
             if (BaseUtils.isFastClick()){
-
+                val intent = Intent(activity, TeamClassManagerActivity::class.java)
+                startActivityForResult(intent, 2)
             }
         }
         ll_teacher_manager.setOnClickListener {

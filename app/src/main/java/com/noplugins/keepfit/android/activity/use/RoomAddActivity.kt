@@ -6,7 +6,9 @@ import android.widget.Toast
 import com.noplugins.keepfit.android.R
 import com.noplugins.keepfit.android.base.BaseActivity
 import com.noplugins.keepfit.android.bean.DictionaryeBean
+import com.noplugins.keepfit.android.global.AppConstants
 import com.noplugins.keepfit.android.util.BaseUtils
+import com.noplugins.keepfit.android.util.SpUtils
 import com.noplugins.keepfit.android.util.net.Network
 import com.noplugins.keepfit.android.util.net.entity.Bean
 import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriber
@@ -98,13 +100,14 @@ class RoomAddActivity : BaseActivity() {
         }
         val params = HashMap<String, Any>()
         params["place_name"] = et_room_name.text.toString()
+        params["gym_area_num"] = SpUtils.getString(applicationContext,AppConstants.CHANGGUAN_NUM)
         params["place_type"] = selectType
         params["max_num"] = et_people_number.text.toString().toInt()
 
         subscription = Network.getInstance("新增房间", applicationContext)
                 .addAreaPlace(params, ProgressSubscriber("新增房间",
-                        object : SubscriberOnNextListener<Bean<String>> {
-                            override fun onNext(bean: Bean<String>) {
+                        object : SubscriberOnNextListener<Bean<Any>> {
+                            override fun onNext(bean: Bean<Any>) {
                                 finish()
                             }
 

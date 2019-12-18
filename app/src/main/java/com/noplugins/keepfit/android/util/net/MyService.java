@@ -749,7 +749,7 @@ public interface MyService {
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
     @POST("addAreaPlace")
-    Observable<Bean<String>> addAreaPlace(@Body RequestBody json);
+    Observable<Bean<Object>> addAreaPlace(@Body RequestBody json);
 
     /**
      * 删除房间
@@ -768,4 +768,22 @@ public interface MyService {
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
     @POST("getAreaPlace")
     Observable<Bean<List<RoomBean>>> getAreaPlace(@Body RequestBody json);
+
+    /**
+     * 修改手机号
+     *
+     * @return
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("updateUserPhone")
+    Observable<Bean<Object>> updateUserPhone(@Body RequestBody json);
+
+    /**
+     * 修改密码
+     *
+     * @return
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("setLoginPassword")
+    Observable<Bean<Object>> setLoginPassword(@Body RequestBody json);
 }

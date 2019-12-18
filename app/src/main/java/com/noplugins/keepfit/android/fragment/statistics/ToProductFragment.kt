@@ -392,7 +392,7 @@ class ToProductFragment : BaseFragment() {
 
     private fun getEntries(): List<LegendEntry> {
         val entries = ArrayList<LegendEntry>()
-        for (i in 0 until values.size) {
+        for (i in 0 until values.size-1) {
             entries.add(LegendEntry(
                     "${functionList[0].prices[i].room}",
                     Legend.LegendForm.CIRCLE,

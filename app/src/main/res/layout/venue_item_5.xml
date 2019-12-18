@@ -18,7 +18,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginRight="@dimen/m20"
         android:layout_below="@+id/tv_save_5">
         <TextView
@@ -100,6 +100,7 @@
             android:id="@+id/snpl_moment_add_photos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:minHeight="@dimen/m90"
             android:layout_marginLeft="@dimen/m10"
             android:layout_marginRight="@dimen/m10"
             app:bga_snpl_deleteDrawable="@drawable/delete_image"

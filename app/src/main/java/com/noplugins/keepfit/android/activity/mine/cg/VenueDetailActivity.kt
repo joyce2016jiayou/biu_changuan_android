@@ -34,7 +34,10 @@ import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener
 import com.noplugins.keepfit.android.util.ui.jiugongge.CCRSortableNinePhotoLayout
 import com.ycuwq.datepicker.time.HourAndMinDialogFragment
 import kotlinx.android.synthetic.main.activity_venue_detail.*
+import kotlinx.android.synthetic.main.title_activity.*
 import kotlinx.android.synthetic.main.title_activity_yellow.*
+import kotlinx.android.synthetic.main.title_activity_yellow.back_btn
+import kotlinx.android.synthetic.main.title_activity_yellow.title_tv
 import kotlinx.android.synthetic.main.venue_item_1.*
 import kotlinx.android.synthetic.main.venue_item_2.*
 import kotlinx.android.synthetic.main.venue_item_6.*
@@ -56,12 +59,9 @@ class VenueDetailActivity : BaseActivity(),CCRSortableNinePhotoLayout.Delegate  
     override fun initView() {
         setContentView(R.layout.activity_venue_detail)
         docList = ArrayList()
-
+        title_tv.text = getString(R.string.vunue_info)
         requestDoc()
         requestData()
-        //todo 请求到数据之后再进行 addView的操作，否则页面无数据
-
-
         //获取场馆设施 doc
 
     }

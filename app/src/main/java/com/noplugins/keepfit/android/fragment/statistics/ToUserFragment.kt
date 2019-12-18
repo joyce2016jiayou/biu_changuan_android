@@ -119,8 +119,15 @@ class ToUserFragment : BaseFragment() {
         ageStrings.clear()
         sexStrings.clear()
 
-
-        if (bean.time== null){
+        colors.add(parseColor("#707BCC"))
+        colors.add(parseColor("#5CCEFF"))
+        colors.add(parseColor("#828AD3"))
+        colors.add(parseColor("#FFB963"))
+        colors.add(parseColor("#EE7C61"))
+        colors.add(parseColor("#588B4C"))
+        colors.add(parseColor("#8ED06D"))
+        colors.add(parseColor("#9B9791"))
+        if (bean.time!= null && bean.time.size>0){
             bean.time.forEach {
                 timeStrings.add(PieEntry(it.num.toFloat(), it.value))
             }
@@ -136,7 +143,7 @@ class ToUserFragment : BaseFragment() {
             picChart.visibility = View.INVISIBLE
         }
 
-        if (bean.age!=null){
+        if (bean.age!=null && bean.age.size>0){
             bean.age.forEach {
                 if (it.num!=0){
                     ageStrings.add(PieEntry(it.num.toFloat(), it.value))
@@ -162,7 +169,7 @@ class ToUserFragment : BaseFragment() {
             picAgeChart.visibility = View.INVISIBLE
         }
 
-        if (bean.sex != null){
+        if (bean.sex != null && bean.sex.size>0){
             bean.sex.forEach {
                 sexStrings.add(PieEntry(it.num.toFloat(), it.value))
             }
@@ -181,14 +188,7 @@ class ToUserFragment : BaseFragment() {
         }
 
 
-        colors.add(parseColor("#707BCC"))
-        colors.add(parseColor("#5CCEFF"))
-        colors.add(parseColor("#828AD3"))
-        colors.add(parseColor("#FFB963"))
-        colors.add(parseColor("#EE7C61"))
-        colors.add(parseColor("#588B4C"))
-        colors.add(parseColor("#8ED06D"))
-        colors.add(parseColor("#9B9791"))
+
 
 
     }

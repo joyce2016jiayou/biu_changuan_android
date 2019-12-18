@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import com.noplugins.keepfit.android.R
+import com.noplugins.keepfit.android.activity.mine.UpdatePasswordActivity
 import com.noplugins.keepfit.android.activity.mine.VerificationPhoneActivity
 import com.noplugins.keepfit.android.activity.user.SettingPwdActivity
 import com.noplugins.keepfit.android.base.BaseActivity
@@ -31,14 +32,24 @@ class AccountSecurityActivity : BaseActivity() {
             startActivity(intent)
         }
         rl_setting_pwd.setOnClickListener {
-            val intent = Intent(this, SettingPwdActivity::class.java)
+            val intent = Intent(this, SMSCodeActivity::class.java)
+            val bundle = Bundle()
+            bundle.putInt("setPwd",1)
+            intent.putExtras(bundle)
             startActivity(intent)
         }
         rl_update_pwd.setOnClickListener {
-            val intent = Intent(this, VerificationPhoneActivity::class.java)
-            intent.putExtra("update", true)
+            val intent = Intent(this, SMSCodeActivity::class.java)
+            val bundle = Bundle()
+            bundle.putInt("setPwd",2)
+            intent.putExtras(bundle)
             startActivity(intent)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        tv_now_phone.text = SpUtils.getString(applicationContext, AppConstants.PHONE)
     }
 
 }

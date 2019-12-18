@@ -88,7 +88,7 @@
                 android:layout_marginLeft="@dimen/m20"
                 android:layout_marginTop="@dimen/m20"
                 android:gravity="center_vertical"
-                android:text="@string/tv_room_name"
+                android:text="@string/tv_Capacity"
                 android:textColor="@color/color_4A4A4A"
                 android:textSize="16sp" />
 

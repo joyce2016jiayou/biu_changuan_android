@@ -35,6 +35,11 @@ class UpdatePhoneActivity : BaseActivity() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        tv_phone.text = SpUtils.getString(applicationContext,AppConstants.PHONE)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

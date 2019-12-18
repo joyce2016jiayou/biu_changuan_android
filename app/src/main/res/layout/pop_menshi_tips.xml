@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<www.linwg.org.lib.LCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/m93"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginLeft="@dimen/m3"
+    android:layout_marginRight="@dimen/m3"
+    app:cornerRadius="@dimen/m10"
+    android:orientation="vertical"
+    android:layout_gravity="center">
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/m20"
+    android:text="门市价格：指营业时间内场馆统一价格，如果设置了分时段价格，则除了分时段价格外，其余时间价格均为门市价格。"/>
+</www.linwg.org.lib.LCardView>

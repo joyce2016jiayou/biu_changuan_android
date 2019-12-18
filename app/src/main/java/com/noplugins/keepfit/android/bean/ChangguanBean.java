@@ -125,6 +125,16 @@ public class ChangguanBean {
 
         private String bankCardNum;
 
+        private String coachNotify;
+
+        public String getCoachNotify() {
+            return coachNotify;
+        }
+
+        public void setCoachNotify(String coachNotify) {
+            this.coachNotify = coachNotify;
+        }
+
         public String getBankName() {
             return bankName;
         }

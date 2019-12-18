@@ -118,6 +118,7 @@
        </www.linwg.org.lib.LCardView>
 
        <TextView
+           android:id="@+id/tv_tips"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:text="请输入6位包含数字的密码"

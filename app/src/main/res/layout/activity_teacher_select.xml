@@ -109,22 +109,23 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginRight="@dimen/m20"
-        android:layout_marginTop="@dimen/m15"
+        android:layout_marginTop="@dimen/m10"
+        android:layout_marginBottom="@dimen/m5"
         android:layout_marginLeft="@dimen/m20">
         <FrameLayout
             android:id="@+id/ll_location"
-            android:layout_width="wrap_content"
-            android:minWidth="@dimen/m70"
+            android:layout_width="0dp"
+            android:layout_weight="1.5"
             android:layout_height="@dimen/m22"
-            android:visibility="gone"
+            android:visibility="visible"
             android:background="@drawable/shape_btn_bg_gray">
 
             <TextView
                 android:id="@+id/tv_location"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/m22"
+                android:layout_height="wrap_content"
                 android:text="闵行区"
-                android:gravity="center"
+                android:gravity="center_vertical"
                 android:layout_marginLeft="@dimen/m5"
                 android:textColor="@color/color_6D7278"
                 android:textSize="13sp"/>
@@ -139,19 +140,19 @@
 
         <FrameLayout
             android:id="@+id/class_eat"
-            android:layout_width="wrap_content"
-            android:minWidth="@dimen/m85"
+            android:layout_width="0dp"
+            android:layout_weight="1.6"
             android:layout_height="@dimen/m22"
             android:layout_marginLeft="@dimen/m5"
-            android:visibility="gone"
+            android:visibility="visible"
             android:background="@drawable/shape_btn_bg_gray">
 
             <TextView
                 android:id="@+id/tv_class_select"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/m22"
+                android:layout_height="wrap_content"
                 android:text="课程类型"
-                android:gravity="center"
+                android:gravity="center_vertical"
                 android:layout_marginLeft="@dimen/m5"
                 android:textColor="@color/color_6D7278"
                 android:textSize="13sp"/>
@@ -166,8 +167,8 @@
 
         <FrameLayout
             android:id="@+id/teacher_year"
-            android:layout_width="wrap_content"
-            android:minWidth="@dimen/m85"
+            android:layout_width="0dp"
+            android:layout_weight="1.5"
             android:layout_height="@dimen/m22"
             android:layout_marginLeft="@dimen/m5"
             android:background="@drawable/shape_btn_bg_gray">
@@ -175,9 +176,9 @@
             <TextView
                 android:id="@+id/tv_year_select"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/m22"
+                android:layout_height="wrap_content"
                 android:text="从业年限"
-                android:gravity="center"
+                android:gravity="center_vertical"
                 android:layout_marginLeft="@dimen/m5"
                 android:textColor="@color/color_6D7278"
                 android:textSize="13sp"/>
@@ -192,8 +193,8 @@
 
         <FrameLayout
             android:id="@+id/teacher_sex"
-            android:layout_width="wrap_content"
-            android:minWidth="@dimen/m57"
+            android:layout_width="0dp"
+            android:layout_weight="1.2"
             android:layout_height="@dimen/m22"
             android:layout_marginLeft="@dimen/m5"
             android:background="@drawable/shape_btn_bg_gray">
@@ -201,9 +202,9 @@
             <TextView
                 android:id="@+id/tv_sex_select"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/m22"
+                android:layout_height="wrap_content"
                 android:text="性别"
-                android:gravity="center"
+                android:gravity="center_vertical"
                 android:layout_marginLeft="@dimen/m5"
                 android:textColor="@color/color_6D7278"
                 android:textSize="13sp"/>

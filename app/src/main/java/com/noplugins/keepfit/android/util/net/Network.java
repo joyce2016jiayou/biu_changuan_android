@@ -770,7 +770,7 @@ public class Network {
      * @param subscriber
      * @return
      */
-    public Subscription findBindingRoles(Map<String,Object> params, Subscriber<Bean<RoleBean>> subscriber) {
+    public Subscription findBindingRoles(Map<String, Object> params, Subscriber<Bean<RoleBean>> subscriber) {
         return service.findBindingRoles(retuen_json_params(params))
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
@@ -1244,6 +1244,7 @@ public class Network {
 
     /**
      * 运营主页
+     *
      * @param params
      * @param subscriber
      * @return
@@ -1258,11 +1259,12 @@ public class Network {
 
     /**
      * 添加房间
+     *
      * @param params
      * @param subscriber
      * @return
      */
-    public Subscription addAreaPlace(Map<String, Object> params, Subscriber<Bean<String>> subscriber) {
+    public Subscription addAreaPlace(Map<String, Object> params, Subscriber<Bean<Object>> subscriber) {
         return service.addAreaPlace(retuen_json_object(params))
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
@@ -1272,6 +1274,7 @@ public class Network {
 
     /**
      * 删除房间
+     *
      * @param params
      * @param subscriber
      * @return
@@ -1287,6 +1290,7 @@ public class Network {
 
     /**
      * 获取类型下的房间信息
+     *
      * @param params
      * @param subscriber
      * @return
@@ -1300,6 +1304,34 @@ public class Network {
     }
 
 
+    /**
+     * 修改手机号
+     *
+     * @param params
+     * @param subscriber
+     * @return
+     */
+    public Subscription updateUserPhone(Map<String, Object> params, Subscriber<Bean<Object>> subscriber) {
+        return service.updateUserPhone(retuen_json_object(params))
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 修改密码
+     *
+     * @param params
+     * @param subscriber
+     * @return
+     */
+    public Subscription setLoginPassword(Map<String, Object> params, Subscriber<Bean<Object>> subscriber) {
+        return service.setLoginPassword(retuen_json_object(params))
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread()).subscribe(subscriber);
+    }
 
 
 }

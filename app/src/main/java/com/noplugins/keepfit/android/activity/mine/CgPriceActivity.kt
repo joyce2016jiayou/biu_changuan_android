@@ -4,10 +4,17 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
+import android.view.View
 import android.view.WindowManager
+import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.lxj.xpopup.XPopup
+import com.lxj.xpopup.enums.PopupAnimation
 import com.noplugins.keepfit.android.KeepFitActivity
 import com.noplugins.keepfit.android.R
 import com.noplugins.keepfit.android.adapter.DatePriceTestAdapter
@@ -19,6 +26,7 @@ import com.noplugins.keepfit.android.bean.HightListBean
 import com.noplugins.keepfit.android.bean.PriceBean
 import com.noplugins.keepfit.android.global.AppConstants
 import com.noplugins.keepfit.android.util.ActivityCollectorUtil
+import com.noplugins.keepfit.android.util.BaseUtils
 import com.noplugins.keepfit.android.util.SpUtils
 import com.noplugins.keepfit.android.util.TimeCheckUtil
 import com.noplugins.keepfit.android.util.net.Network
@@ -26,6 +34,8 @@ import com.noplugins.keepfit.android.util.net.entity.Bean
 import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriber
 import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener
 import com.noplugins.keepfit.android.util.ui.pop.CommonPopupWindow
+import com.noplugins.keepfit.android.util.ui.pop.base.CenterPopupView
+import com.noplugins.keepfit.android.util.ui.pop.inteface.ViewCallBack
 import com.ycuwq.datepicker.time.HourAndMinDialogFragment
 import kotlinx.android.synthetic.main.activity_cg_price.*
 import java.util.*
@@ -93,24 +103,117 @@ class CgPriceActivity : BaseActivity() {
         iv_tips.setOnClickListener {
             viewPop()
         }
-        tv_add_price.setOnClickListener {
-            if (et_price.text.toString() != "") {
-                tv_price.text = "场馆门市价格：¥${et_price.text.toString()}元/时"
-                list.forEach {
-                    it.normal_price = et_price.text.toString()
+
+        ll_tips.setOnClickListener {
+            viewMenshiPop()
+        }
+        et_price.addTextChangedListener(object : TextWatcher{
+            override fun afterTextChanged(s: Editable?) {
+                if (et_price.text.toString() != "") {
+                    tv_price.text = "场馆门市价格：¥${et_price.text.toString()}元/时"
+                    list.forEach {
+                        it.normal_price = et_price.text.toString()
+                    }
                 }
             }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+        })
+
+        tv_add_price.setOnClickListener {
+            if (BaseUtils.isFastClick()){
+                addPricePop()
+            }
         }
-        tv_select_time.setOnClickListener {
 
+
+        fl_hesuan.setOnClickListener {
+            val intent = Intent(this, CostAccountingActivity::class.java)
+            val bundle = Bundle()
+            bundle.putString("form", "pay")
+            intent.putExtras(bundle)
+            startActivityForResult(intent, 1)
+        }
+
+        tv_shangjia.setOnClickListener {
+            if (et_price.text.toString().isEmpty()){
+                Toast.makeText(applicationContext, "价格不能为空", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            request()
+        }
+
+    }
+
+    private fun viewPop() {
+        val popupWindow = CommonPopupWindow.Builder(this)
+                .setView(R.layout.pop_price_tips)
+                .setBackGroundLevel(1f)//0.5f
+                .setWidthAndHeight(WindowManager.LayoutParams.MATCH_PARENT,
+                        WindowManager.LayoutParams.WRAP_CONTENT)
+                .setOutSideTouchable(true).create()
+        popupWindow.showAsDropDown(iv_tips, 0, -15)
+    }
+
+    private fun viewMenshiPop() {
+        val popupWindow = CommonPopupWindow.Builder(this)
+                .setView(R.layout.pop_menshi_tips)
+                .setBackGroundLevel(1f)//0.5f
+                .setWidthAndHeight(WindowManager.LayoutParams.MATCH_PARENT,
+                        WindowManager.LayoutParams.WRAP_CONTENT)
+                .setOutSideTouchable(true).create()
+        popupWindow.showAsDropDown(ll_tips, 0, -15)
+    }
+
+    private fun addPricePop(){
+        XPopup.Builder(this)
+                .autoOpenSoftInput(false)
+                .autoFocusEditText(false)
+                .popupAnimation(PopupAnimation.ScaleAlphaFromCenter)
+                .asCustom(CenterPopupView(this,R.layout.dialog_to_prices,
+                        ViewCallBack { view, popup ->
+
+                            val time = view.findViewById<TextView>(R.id.tv_select_time)
+                            val price = view.findViewById<EditText>(R.id.et_high_price)
+                            selectOnClick(time)
+
+                            view.findViewById<TextView>(R.id.tv_cancel)
+                                    .setOnClickListener {
+                                        popup.dismiss()
+                                    }
+
+                            view.findViewById<TextView>(R.id.tv_add)
+                                    .setOnClickListener {
+                                        if (time.text == "选择时间"){
+                                            Toast.makeText(applicationContext, "请选择时间段", Toast.LENGTH_SHORT).show()
+                                            return@setOnClickListener
+                                        }
+
+                                        if (price.text.isEmpty()){
+                                            Toast.makeText(applicationContext, "请输入价格", Toast.LENGTH_SHORT).show()
+                                            return@setOnClickListener
+                                        }
+                                        val highBean = HighBean()
+                                        highBean.high_time_start = startTime
+                                        highBean.high_time_end = endTime
+                                        highBean.high_time_price = price.text.toString()
+                                        highBean.normal_price = et_price.text.toString()
+                                        highBean.gym_area_num = SpUtils.getString(applicationContext, AppConstants.CHANGGUAN_NUM)
+                                        list.add(highBean)
+                                        adapter!!.notifyDataSetChanged()
+                                        popup.dismiss()
+                                    }
+
+                        })).show()
+    }
+
+    private fun selectOnClick(view:TextView){
+        view.setOnClickListener {
             val hour = HourAndMinDialogFragment()
-
-//            if (startH != "") {
-//                hour.setSelectedDate(startH.toInt(), startM.toInt(), endH.toInt(), endM.toInt())
-//            } else {
-//
-//            }
-
             hour.setOnDateChooseListener { startHour, startMinute, endHour, endMinute ->
                 //
                 if (endHour < startHour) {
@@ -123,7 +226,6 @@ class CgPriceActivity : BaseActivity() {
                             Toast.LENGTH_SHORT).show()
                     return@setOnDateChooseListener
                 }
-
 
                 val startH = if (startHour > 9) {
                     "$startHour"
@@ -145,67 +247,13 @@ class CgPriceActivity : BaseActivity() {
                 } else {
                     "0$endMinute"
                 }
-                tv_select_time.text = "$startH:$startM - $endH:$endM"
+                view.text = "$startH:$startM - $endH:$endM"
                 startTime = "$startH:$startM"
                 endTime = "$endH:$endM"
             }
 
             hour.show(supportFragmentManager, "HourAndMinDialogFragment")
         }
-
-        fl_hesuan.setOnClickListener {
-            val intent = Intent(this, CostAccountingActivity::class.java)
-            val bundle = Bundle()
-            bundle.putString("form", "pay")
-            intent.putExtras(bundle)
-            startActivityForResult(intent, 1)
-        }
-
-        tv_high_add.setOnClickListener {
-            if (tv_select_time.text == "选择时间"){
-                Toast.makeText(applicationContext, "请选择时间段", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-
-            if (et_high_price.text.isEmpty()){
-                Toast.makeText(applicationContext, "请输入价格", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-            //add high data
-            val highBean = HighBean()
-            highBean.high_time_start = startTime
-            highBean.high_time_end = endTime
-            highBean.high_time_price = et_high_price.text.toString()
-            highBean.normal_price = et_price.text.toString()
-            highBean.gym_area_num = SpUtils.getString(applicationContext, AppConstants.CHANGGUAN_NUM)
-            list.add(highBean)
-            adapter!!.notifyDataSetChanged()
-            tv_select_time.text = "选择时间"
-            et_high_price.setText("")
-        }
-
-        tv_shangjia.setOnClickListener {
-//            if (list.size < 1) {
-//                Toast.makeText(applicationContext, "提交数据不可为空", Toast.LENGTH_SHORT).show()
-//                return@setOnClickListener
-//            }
-            if (et_price.text.toString().isEmpty()){
-                Toast.makeText(applicationContext, "价格不能为空", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-            request()
-        }
-
-    }
-
-    private fun viewPop() {
-        val popupWindow = CommonPopupWindow.Builder(this)
-                .setView(R.layout.pop_price_tips)
-                .setBackGroundLevel(1f)//0.5f
-                .setWidthAndHeight(WindowManager.LayoutParams.MATCH_PARENT,
-                        WindowManager.LayoutParams.WRAP_CONTENT)
-                .setOutSideTouchable(true).create()
-        popupWindow.showAsDropDown(iv_tips, 0, -15)
     }
 
     private fun request() {

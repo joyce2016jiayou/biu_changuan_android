@@ -4,11 +4,20 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.TextView
+import com.lxj.xpopup.XPopup
+import com.lxj.xpopup.enums.PopupAnimation
 import com.noplugins.keepfit.android.R
 import com.noplugins.keepfit.android.activity.AboutActivity
 import com.noplugins.keepfit.android.activity.ProductAdviceActivity
+import com.noplugins.keepfit.android.activity.user.Login2Activity
 import com.noplugins.keepfit.android.base.BaseActivity
+import com.noplugins.keepfit.android.global.AppConstants
+import com.noplugins.keepfit.android.util.ActivityCollectorUtil
 import com.noplugins.keepfit.android.util.BaseUtils
+import com.noplugins.keepfit.android.util.SpUtils
+import com.noplugins.keepfit.android.util.ui.pop.base.CenterPopupView
+import com.noplugins.keepfit.android.util.ui.pop.inteface.ViewCallBack
 import kotlinx.android.synthetic.main.title_activity.*
 import kotlinx.android.synthetic.main.activity_setting.*
 
@@ -54,12 +63,43 @@ class SettingActivity : BaseActivity() {
         }
         rl_quit.setOnClickListener {
             if(BaseUtils.isFastClick()){
-
+                checkOut()
             }
         }
     }
 
+    private fun checkOut() {
+        XPopup.Builder(this)
+                .autoOpenSoftInput(false)
+                .autoFocusEditText(false)
+                .popupAnimation(PopupAnimation.ScaleAlphaFromCenter)
+                .asCustom(CenterPopupView(this,R.layout.dialog_to_room_delete,
+                        ViewCallBack { view, popup ->
+
+                            view.findViewById<TextView>(R.id.tv_cancel)
+                                    .setOnClickListener {
+                                        popup.dismiss()
+                                    }
+
+                            view.findViewById<TextView>(R.id.tv_add)
+                                    .setOnClickListener {
+                                        popup.dismiss()
+                                        toLogin()
+                                    }
+
+                        })).show()
+    }
 
 
+    private fun toLogin() {
+        val intent = Intent(this, Login2Activity::class.java)
+        //退出
+        SpUtils.putString(applicationContext, AppConstants.TOKEN, "")
+        SpUtils.putString(applicationContext, AppConstants.PHONE, "")
+        SpUtils.putString(applicationContext, AppConstants.USER_NAME, "")
+        startActivity(intent)
+        ActivityCollectorUtil.finishAllActivity()
 
+    }
 }
+

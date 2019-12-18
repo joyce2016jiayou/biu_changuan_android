@@ -1,7 +1,9 @@
 package com.noplugins.keepfit.android.activity.mine
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -14,14 +16,16 @@ import android.widget.CheckBox
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.amap.api.location.AMapLocation
+import com.amap.api.location.AMapLocationClient
+import com.amap.api.location.AMapLocationClientOption
+import com.amap.api.location.AMapLocationListener
 import com.google.gson.Gson
 import com.noplugins.keepfit.android.R
 import com.noplugins.keepfit.android.adapter.CgTeacherSelectAdapter
 import com.noplugins.keepfit.android.adapter.PopUpAdapter
 import com.noplugins.keepfit.android.base.BaseActivity
-import com.noplugins.keepfit.android.bean.BindingCgBean
-import com.noplugins.keepfit.android.bean.CgBindingBean
-import com.noplugins.keepfit.android.bean.TeacherBean
+import com.noplugins.keepfit.android.bean.*
 import com.noplugins.keepfit.android.global.AppConstants
 import com.noplugins.keepfit.android.util.SpUtils
 import com.noplugins.keepfit.android.util.net.Network
@@ -32,14 +36,56 @@ import com.noplugins.keepfit.android.util.ui.pop.SpinnerPopWindow
 import com.umeng.socialize.utils.DeviceConfigInternal.context
 import kotlinx.android.synthetic.main.activity_teacher_select.*
 import org.greenrobot.eventbus.EventBus
+import pub.devrel.easypermissions.AfterPermissionGranted
+import pub.devrel.easypermissions.EasyPermissions
 import java.util.HashMap
 
-class TeacherSelectActivity : BaseActivity() {
+class TeacherSelectActivity : BaseActivity(), AMapLocationListener {
+
+    var areaLIst:MutableList<GetQuCode.AreaBean> = ArrayList()
+
+    var teamTypeList:MutableList<DictionaryeBean> = ArrayList()
+
+    override fun onLocationChanged(amapLocation: AMapLocation?) {
+        if (amapLocation != null) {
+            if (amapLocation.errorCode == 0) {
+                //定位成功回调信息，设置相关消息
+                amapLocation.locationType//获取当前定位结果来源，如网络定位结果，详见定位类型表
+                //                        latLonPoint = new LatLonPoint(currentLat, currentLon);  // latlng形式的
+                /*currentLatLng = new LatLng(currentLat, currentLon);*/   //latlng形式的
+//                amapLocation.accuracy//获取精度信息
+
+                Log.d("LogInfo","getCity():"+amapLocation.city)
+                Log.d("LogInfo","district():"+amapLocation.district)
+                tv_location.text = amapLocation.district
+                val code = amapLocation.adCode.toString().substring(0,4)+"00"
+//                province = amapLocation.adCode.toString().substring(0,2)+"0000"
+//                city = code
+//                district = amapLocation.adCode
+                initAdapter()
+                getCity2Dis(code)
+                agreeCourse()
+
+            } else {
+                //显示错误信息ErrCode是错误码，errInfo是错误信息，详见错误码表。
+                Log.e(
+                        "AmapError", "location Error, ErrCode:"
+                        + amapLocation.errorCode + ", errInfo:"
+                        + amapLocation.errorInfo
+                )
+                initAdapter()
+                getCity2Dis("310100")
+                agreeCourse()
+
+            }
+        }
+    }
 
     private var page = 1
     var yaerSelect = -1
     var sexSelect = -1
-
+    var areaSelect = -1
+    var typeSelect = -1
     lateinit var adapter: CgTeacherSelectAdapter
     lateinit var layoutManager:LinearLayoutManager
     private var data: MutableList<TeacherBean> = ArrayList()
@@ -51,8 +97,10 @@ class TeacherSelectActivity : BaseActivity() {
     override fun initView() {
         setContentView(R.layout.activity_teacher_select)
         init()
+        requestPermission()
+        requestTeamType()
         initAdapter()
-        agreeCourse()
+//        agreeCourse()
     }
 
     override fun doBusiness(mContext: Context?) {
@@ -65,6 +113,7 @@ class TeacherSelectActivity : BaseActivity() {
                         .show()
                 return@setOnClickListener
             }
+            //todo 除了绑定教练 ， 场馆的团课还可以选择教练来上课
             binding()
         }
         iv_delete_edit.setOnClickListener {
@@ -129,6 +178,8 @@ class TeacherSelectActivity : BaseActivity() {
 
     private var popWindow2: SpinnerPopWindow<String>? = null
     private var popWindow3: SpinnerPopWindow<String>? = null
+    private var popWindow1: SpinnerPopWindow<String>? = null
+    private var popWindow4: SpinnerPopWindow<String>? = null
 
     private fun init(){
         val listYear = resources.getStringArray(R.array.private_year_types).toMutableList()
@@ -220,16 +271,19 @@ class TeacherSelectActivity : BaseActivity() {
             }
         }
 
-        refresh_layout.setEnableRefresh(false)
-        refresh_layout.setEnableLoadMore(false)
-//        refresh_layout.setOnRefreshListener {
-//            //下拉刷新
-//            refresh_layout.finishRefresh(2000/*,false*/)
-//        }
+        refresh_layout.setEnableRefresh(true)
+        refresh_layout.setEnableLoadMore(true)
+        refresh_layout.setOnRefreshListener {
+            //下拉刷新
+            page = 1
+            agreeCourse()
+            refresh_layout.finishRefresh(1500/*,false*/)
+        }
         refresh_layout.setOnLoadMoreListener {
             //上拉加载
-
-            refresh_layout.finishLoadMore(2000/*,false*/)
+            page++
+            agreeCourse()
+            refresh_layout.finishLoadMore(1500/*,false*/)
         }
     }
 
@@ -245,6 +299,13 @@ class TeacherSelectActivity : BaseActivity() {
         }
         if (edit_search.text.toString().isNotEmpty()){
             params["data"] = edit_search.text.toString().trim()
+        }
+        if (areaSelect != -1){
+            params["districtcode"] = areaLIst[areaSelect].distcd
+        }
+
+        if (typeSelect != -1){
+
         }
         val subscription = Network.getInstance("场馆列表", this)
                 .teacherMannerList(
@@ -293,6 +354,9 @@ class TeacherSelectActivity : BaseActivity() {
     }
 
 
+    /**
+     * 场馆添加教练～
+     */
     private fun binding(){
 //        val params = HashMap<String, Any>()
         val cgBinding = CgBindingBean()
@@ -314,4 +378,169 @@ class TeacherSelectActivity : BaseActivity() {
                         }, this, false)
                 )
     }
+
+    /**
+     * 获取课程类型
+     */
+    private fun requestTeamType() {
+        val params = HashMap<String, Any>()
+        params["object"] = "6"
+
+        subscription = Network.getInstance("获取课程类型", applicationContext)
+                .get_types(params, ProgressSubscriber("获取课程类型",
+                        object : SubscriberOnNextListener<Bean<List<DictionaryeBean>>> {
+                            override fun onNext(bean: Bean<List<DictionaryeBean>>) {
+                                if (bean.data != null) {
+                                    teamTypeList.addAll(bean.data)
+                                    initTeamType(bean.data)
+                                }
+                            }
+                            override fun onError(error: String) {
+                                Toast.makeText(applicationContext, error, Toast.LENGTH_SHORT).show()
+                            }
+                        }, this, true))
+
+    }
+
+    private fun initTeamType(list:List<DictionaryeBean>){
+        val listString  = ArrayList<String>()
+        listString.add("全部")
+        list.forEach {
+            listString.add(it.name)
+        }
+
+        popWindow4 = SpinnerPopWindow(applicationContext,
+                listString,
+                PopUpAdapter.OnItemClickListener { _, _, position ->
+                    tv_class_select.text = listString[position]
+
+                    popWindow4!!.dismiss()
+                    typeSelect= if (position == 0){
+                        -1
+                    } else {
+                        list[position-1].value.toInt()
+                    }
+                    data.clear()
+                    page = 1
+                    agreeCourse()
+                    popWindow4!!.dismiss()
+                })
+        class_eat.setOnClickListener {
+            showPopwindow(popWindow4!!,class_eat)
+
+        }
+    }
+    /**
+     * 地区选择
+     */
+    private fun getCity2Dis(citycd:String){
+        val params = HashMap<String, Any>()
+        params["citycd"] = citycd
+        val subscription = Network.getInstance("获取区", this)
+                .get_qu(
+                        params,
+                        ProgressSubscriber("获取区", object : SubscriberOnNextListener<Bean<GetQuCode>> {
+                            override fun onNext(result: Bean<GetQuCode>) {
+                                val list:MutableList<String> = ArrayList()
+                                areaLIst = result.data.area
+                                list.add("全部")
+                                for (i in 0 until result.data.area.size){
+                                    list.add(result.data.area[i].distnm)
+                                }
+                                //申请成功
+                                initArea(list)
+                            }
+
+                            override fun onError(error: String) {
+                                Toast.makeText(applicationContext,error,Toast.LENGTH_SHORT).show()
+                            }
+                        }, this, false)
+                )
+    }
+
+    private fun initArea(list: MutableList<String>) {
+        popWindow1 = SpinnerPopWindow(applicationContext,
+                list,
+                PopUpAdapter.OnItemClickListener { _, _, position ->
+                    tv_location.text = list[position]
+
+                    popWindow1!!.dismiss()
+                    areaSelect = if (position == 0){
+                        -1
+                    } else {
+                        position-1
+                    }
+                    data.clear()
+                    page = 1
+                    agreeCourse()
+                    popWindow1!!.dismiss()
+                })
+        ll_location.setOnClickListener {
+            showPopwindow(popWindow1!!,ll_location)
+
+        }
+    }
+
+
+    //声明AMapLocationClient类对象
+    internal var mLocationClient: AMapLocationClient? = null
+    //声明AMapLocationClientOption对象
+    var mLocationOption: AMapLocationClientOption? = null
+
+    private val mPerms = arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION)
+    private fun initGaode() {
+        //初始化定位
+        mLocationClient = AMapLocationClient(this)
+        //设置定位回调监听
+        mLocationClient!!.setLocationListener(this)
+        //初始化AMapLocationClientOption对象
+        mLocationOption = AMapLocationClientOption()
+
+        mLocationOption!!.isOnceLocation = true
+        //        mLocationOption.setOnceLocationLatest(true);
+        // 同时使用网络定位和GPS定位,优先返回最高精度的定位结果,以及对应的地址描述信息
+        mLocationOption!!.locationMode = AMapLocationClientOption.AMapLocationMode.Hight_Accuracy
+        //设置定位间隔,单位毫秒,默认为2000ms，最低1000ms。默认连续定位 切最低时间间隔为1000ms
+        //        mLocationOption.setInterval(3500);
+        //给定位客户端对象设置定位参数
+        mLocationClient!!.setLocationOption(mLocationOption)
+        //启动定位
+        mLocationClient!!.startLocation()
+    }
+
+
+    @AfterPermissionGranted(PERMISSIONS)
+    private fun requestPermission() {
+        if (EasyPermissions.hasPermissions(this, *mPerms)) {
+            //Log.d(TAG, "onClick: 获取读写内存权限,Camera权限和wifi权限");
+            initGaode()
+
+        } else {
+            EasyPermissions.requestPermissions(this, "获取读写内存权限,Camera权限和wifi权限", PERMISSIONS, *mPerms)
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when (requestCode) {
+            // requestCode即所声明的权限获取码，在checkSelfPermission时传入
+            PERMISSIONS -> if (grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults.size > 0) {  //有权限
+                // 获取到权限，作相应处理
+                initGaode()
+            } else {
+                //                    showGPSContacts();
+            }
+            else -> {
+                agreeCourse()
+            }
+        }
+        Log.i("permission", "quan xian fan kui")
+        //如果用户取消，permissions可能为null.
+
+    }
+
+    companion object {
+        private const val PERMISSIONS = 100//请求码
+    }
+
 }
