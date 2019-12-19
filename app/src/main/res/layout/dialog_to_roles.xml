@@ -53,7 +53,7 @@
                 android:layout_marginLeft="@dimen/m20"
                 style="@style/tv_subtitle"/>
             <EditText
-                android:id="@+id/et_username"
+                android:id="@+id/ms_room_type"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/m31"
                 android:background="@drawable/shape_btn_bg_gray"
@@ -73,7 +73,7 @@
                 android:layout_marginTop="@dimen/m20"
                 android:layout_below="@+id/tv_username"/>
             <EditText
-                android:id="@+id/et_phone"
+                android:id="@+id/ms_room_name"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/m31"
                 android:layout_marginTop="@dimen/m20"

@@ -143,8 +143,8 @@ class InviteFragment : BaseFragment() {
 
         /**设置逻辑 */
         val view = popupWindow.contentView
-        val cancel = view.findViewById<LinearLayout>(R.id.tv_cancel)
-        val sure = view.findViewById<LinearLayout>(R.id.tv_add)
+        val cancel = view.findViewById<TextView>(R.id.tv_cancel)
+        val sure = view.findViewById<TextView>(R.id.tv_add)
         val tvInfo = view.findViewById<TextView>(R.id.tv_username)
         val title = view.findViewById<TextView>(R.id.label_delete_room)
         tvInfo.text = "确定取消邀请?"
