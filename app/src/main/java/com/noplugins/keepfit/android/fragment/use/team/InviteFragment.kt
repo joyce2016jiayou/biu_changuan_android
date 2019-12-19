@@ -1,42 +1,35 @@
-package com.noplugins.keepfit.coachplatform.fragment.classmanager.team
+package com.noplugins.keepfit.android.fragment.use.team
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
-import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.PagerSnapHelper
-import com.noplugins.keepfit.coachplatform.R
-import com.noplugins.keepfit.coachplatform.activity.manager.TeamInfoActivity
-import com.noplugins.keepfit.coachplatform.adapter.ManagerTeacherAdapter
-import com.noplugins.keepfit.coachplatform.adapter.ManagerTeamClassAdapter
-import com.noplugins.keepfit.coachplatform.base.BaseFragment
-import com.noplugins.keepfit.coachplatform.bean.manager.ManagerBean
-import com.noplugins.keepfit.coachplatform.bean.manager.ManagerTeamBean
-import com.noplugins.keepfit.coachplatform.global.AppConstants
-import com.noplugins.keepfit.coachplatform.util.SpUtils
-import com.noplugins.keepfit.coachplatform.util.net.Network
-import com.noplugins.keepfit.coachplatform.util.net.entity.Bean
-import com.noplugins.keepfit.coachplatform.util.net.progress.ProgressSubscriber
-import com.noplugins.keepfit.coachplatform.util.net.progress.SubscriberOnNextListener
-import com.noplugins.keepfit.coachplatform.util.ui.pop.CommonPopupWindow
-import com.noplugins.keepfit.coachplatform.util.ui.toast.SuperCustomToast
+import com.noplugins.keepfit.android.R
+import com.noplugins.keepfit.android.adapter.ManagerTeamClassAdapter
+import com.noplugins.keepfit.android.base.BaseFragment
+import com.noplugins.keepfit.android.bean.use.ManagerBean
+import com.noplugins.keepfit.android.global.AppConstants
+import com.noplugins.keepfit.android.util.SpUtils
+import com.noplugins.keepfit.android.util.net.Network
+import com.noplugins.keepfit.android.util.net.entity.Bean
+import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriber
+import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener
+import com.noplugins.keepfit.android.util.ui.pop.CommonPopupWindow
+import com.noplugins.keepfit.android.util.ui.toast.SuperCustomToast
 import kotlinx.android.synthetic.main.fragment_manager_teacher_1.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import java.util.HashMap
 
-class YaoqinFragment : BaseFragment() {
+class InviteFragment : BaseFragment() {
     companion object {
-        fun newInstance(title: String): YaoqinFragment {
-            val fragment = YaoqinFragment()
+        fun newInstance(title: String): InviteFragment {
+            val fragment = InviteFragment()
             val args = Bundle()
             args.putString("home_fragment_title", title)
             fragment.arguments = args
@@ -87,20 +80,16 @@ class YaoqinFragment : BaseFragment() {
             when (view.id) {
                 R.id.rl_jump -> {
                     //跳转到详情 需要携带状态
-                    val toInfo = Intent(activity, TeamInfoActivity::class.java)
-                    val bundle = Bundle()
-                    bundle.putInt("type", 2)
-                    bundle.putString("courseNum", datas[position].courseNum)
-                    bundle.putInt("status",datas[position].status)
-                    toInfo.putExtras(bundle)
-                    startActivity(toInfo)
+//                    val toInfo = Intent(activity, TeamInfoActivity::class.java)
+//                    val bundle = Bundle()
+//                    bundle.putInt("type", 2)
+//                    bundle.putString("courseNum", datas[position].courseNum)
+//                    bundle.putInt("status",datas[position].status)
+//                    toInfo.putExtras(bundle)
+//                    startActivity(toInfo)
                 }
-                R.id.tv_jujue -> {
+                R.id.tv_yaoqin_edit -> {
                     toJujue(view as TextView, position)
-                }
-                R.id.tv_jieshou -> {
-                    //接受
-                    agreeCourse(position, 1, "")
                 }
             }
         }
@@ -119,33 +108,30 @@ class YaoqinFragment : BaseFragment() {
 
     private fun requestData() {
         val params = HashMap<String, Any>()
-//        params["teacherNum"] = SpUtils.getString(activity, AppConstants.USER_NAME)
-        params["teacherNum"] = SpUtils.getString(activity, AppConstants.USER_NAME)
-        params["courseType"] = 1
+        params["areaNum"] = SpUtils.getString(activity, AppConstants.CHANGGUAN_NUM)
         params["type"] = 2
-        val subscription = Network.getInstance("课程管理", activity)
-            .courseManager(
-                params,
-                ProgressSubscriber("课程管理", object : SubscriberOnNextListener<Bean<ManagerBean>> {
-                    override fun onNext(result: Bean<ManagerBean>) {
-                        datas.clear()
-                        datas.addAll(result.data.courseList)
-                        adapterManager.notifyDataSetChanged()
-                    }
+        val subscription = Network.getInstance("课程管理邀请", activity)
+                .courseManagerByArea(params,
+                        ProgressSubscriber("课程管理邀请", object : SubscriberOnNextListener<Bean<ManagerBean>> {
+                            override fun onNext(result: Bean<ManagerBean>) {
+                                datas.clear()
+                                datas.addAll(result.data.courseList)
+                                adapterManager.notifyDataSetChanged()
+                            }
 
-                    override fun onError(error: String) {
-                        SuperCustomToast.getInstance(activity)
-                            .show(error)
+                            override fun onError(error: String) {
+                                SuperCustomToast.getInstance(activity)
+                                        .show(error)
 
-                    }
-                }, activity, false)
-            )
+                            }
+                        }, activity, false)
+                )
 
     }
 
     private fun toJujue(view1: TextView, position: Int) {
         val popupWindow = CommonPopupWindow.Builder(activity)
-            .setView(R.layout.dialog_to_jujue)
+            .setView(R.layout.dialog_to_room_delete)
             .setBackGroundLevel(0.5f)//0.5f
             .setAnimationStyle(R.style.main_menu_animstyle)
             .setWidthAndHeight(
@@ -157,31 +143,29 @@ class YaoqinFragment : BaseFragment() {
 
         /**设置逻辑 */
         val view = popupWindow.contentView
-        val cancel = view.findViewById<LinearLayout>(R.id.cancel_layout)
-        val sure = view.findViewById<LinearLayout>(R.id.sure_layout)
-        val edit = view.findViewById<EditText>(R.id.et_content)
+        val cancel = view.findViewById<LinearLayout>(R.id.tv_cancel)
+        val sure = view.findViewById<LinearLayout>(R.id.tv_add)
+        val tvInfo = view.findViewById<TextView>(R.id.tv_username)
+        val title = view.findViewById<TextView>(R.id.label_delete_room)
+        tvInfo.text = "确定取消邀请?"
+        title.text = "取消邀请"
         cancel.setOnClickListener {
             popupWindow.dismiss()
         }
         sure.setOnClickListener {
             popupWindow.dismiss()
             //去申请
-            agreeCourse(position, 0, edit.text.toString())
-
+            agreeCourse(position)
+//
         }
     }
 
-    private fun agreeCourse(position: Int, type: Int, str: String) {
+
+    private fun agreeCourse(position: Int) {
         val params = HashMap<String, Any>()
-        params["teacherNum"] = SpUtils.getString(activity, AppConstants.USER_NAME)
-//        params["teacherNum"] = "GEN23456"
         params["courseNum"] = datas[position].courseNum
-        params["agree"] = type
-        if (type == 0) {
-            params["refuse"] = str
-        }
         val subscription = Network.getInstance("团课同意/拒绝", activity)
-            .agreeCourse(
+            .cancelCourseByArea(
                 params,
                 ProgressSubscriber("团课同意/拒绝", object : SubscriberOnNextListener<Bean<Any>> {
                     override fun onNext(result: Bean<Any>) {
@@ -190,16 +174,7 @@ class YaoqinFragment : BaseFragment() {
                            datas.removeAt(position)//删除数据源,移除集合中当前下标的数据
                            adapterManager.notifyItemRemoved(position)//刷新被删除的地方
                            adapterManager.notifyItemRangeChanged(position, adapterManager.itemCount) //刷新被删除数据，以及其后面的数据
-
-                           when (type) {
-                               1 -> {
-                                   EventBus.getDefault().post(AppConstants.TEAM_YQ_AGREE)
-                               }
-
-                               0 -> {
-                                   EventBus.getDefault().post(AppConstants.TEAM_YQ_REFUSE)
-                               }
-                           }
+                           EventBus.getDefault().post(AppConstants.TEAM_YQ_REFUSE)
                        }
 
                         SuperCustomToast.getInstance(activity)

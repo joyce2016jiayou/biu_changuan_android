@@ -83,7 +83,6 @@
         <activity android:name=".activity.mine.TeacherManagerActivity" />
         <activity android:name=".activity.mine.CostAccountingActivity" />
         <activity android:name=".activity.SubmitInformationSelectActivity" />
-        <activity android:name=".activity.SubmitInformationSelectActivity" />
 
         <activity android:name=".activity.mine.CgPriceActivity" />
         <activity android:name=".activity.user.Login2Activity" />
@@ -150,11 +149,11 @@
         <activity
             android:name=".activity.InformationCheckActivity"
             android:windowSoftInputMode="adjustPan|stateHidden">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
         </activity>
         <activity android:name=".util.ui.cropimg.ClipImageActivity"/>
         <activity
@@ -175,11 +174,11 @@
         <activity
             android:name=".SplashActivity"
             android:screenOrientation="portrait">
-            <!--<intent-filter>-->
-            <!--<action android:name="android.intent.action.MAIN" />-->
+            <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
 
-            <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+            <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".KeepFitActivity"

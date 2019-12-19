@@ -1,6 +1,6 @@
 @file:JvmName("DrawUtil")
 
-package me.erwa.sourceset.view
+package com.noplugins.keepfit.android.customize
 
 import android.content.Context
 import android.graphics.Canvas
@@ -9,6 +9,8 @@ import android.graphics.Paint
 import android.graphics.PointF
 import android.view.View
 import androidx.annotation.ColorInt
+import com.google.android.material.tabs.TabLayout
+import com.noplugins.keepfit.android.R
 import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.sin
@@ -142,4 +144,12 @@ internal fun Float.degreeCos(): Float {
 internal fun PointF.degreePointF(outPointF: PointF, degree: Float) {
     outPointF.x = this.x * degree.degreeCos() - this.y * degree.degreeSin()
     outPointF.y = this.x * degree.degreeSin() + this.y * degree.degreeCos()
+}
+
+
+internal fun TabLayout.indicatorX(stringList: List<String>){
+    (0 until stringList.size).forEach {
+        this.getTabAt(it)?.setCustomView(R.layout.common_tab_item)
+    }
+
 }

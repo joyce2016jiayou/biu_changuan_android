@@ -105,6 +105,26 @@ public class ManagerBean {
         private int min;
         private double finalPrice;
 
+        private String teacherName;
+
+        private int refuseType;
+
+        public int getRefuseType() {
+            return refuseType;
+        }
+
+        public void setRefuseType(int refuseType) {
+            this.refuseType = refuseType;
+        }
+
+        public String getTeacherName() {
+            return teacherName;
+        }
+
+        public void setTeacherName(String teacherName) {
+            this.teacherName = teacherName;
+        }
+
         public double getFinalPrice() {
             return finalPrice;
         }

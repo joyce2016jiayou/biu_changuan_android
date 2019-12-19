@@ -90,8 +90,9 @@ class HistoryFragment : BaseFragment()  {
 //                    toInfo.putExtras(bundle)
 //                    startActivity(toInfo)
                 }
-//                R.id.tv_agin -> {
-//                }
+                R.id.tv_yaoqin_edit -> {
+
+                }
             }
         }
 
@@ -111,26 +112,24 @@ class HistoryFragment : BaseFragment()  {
 
     private fun requestData(){
         val params = HashMap<String, Any>()
-//        params["teacherNum"] = SpUtils.getString(activity, AppConstants.USER_NAME)
-        params["teacherNum"] = SpUtils.getString(activity, AppConstants.USER_NAME)
-        params["courseType"] = 1
+        params["areaNum"] = SpUtils.getString(activity, AppConstants.CHANGGUAN_NUM)
         params["type"] = 3
-//        val subscription = Network.getInstance("课程管理", activity)
-//            .courseManager(params,
-//                ProgressSubscriber("课程管理", object : SubscriberOnNextListener<Bean<ManagerBean>> {
-//                    override fun onNext(result: Bean<ManagerBean>) {
-//                        datas.clear()
-//                        datas.addAll(result.data.courseList)
-//                        adapterManager.notifyDataSetChanged()
-//                    }
-//
-//                    override fun onError(error: String) {
-//                        SuperCustomToast.getInstance(activity)
-//                            .show(error)
-//
-//                    }
-//                }, activity, false)
-//            )
+        val subscription = Network.getInstance("课程管理历史", activity)
+                .courseManagerByArea(params,
+                        ProgressSubscriber("课程管理历史", object : SubscriberOnNextListener<Bean<ManagerBean>> {
+                            override fun onNext(result: Bean<ManagerBean>) {
+                                datas.clear()
+                                datas.addAll(result.data.courseList)
+                                adapterManager.notifyDataSetChanged()
+                            }
+
+                            override fun onError(error: String) {
+                                SuperCustomToast.getInstance(activity)
+                                        .show(error)
+
+                            }
+                        }, activity, false)
+                )
     }
 
 

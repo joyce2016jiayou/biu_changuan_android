@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:gravity="center"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:background="@drawable/rizhi_pop_bg"
+            android:layout_marginLeft="@dimen/m32"
+            android:layout_marginRight="@dimen/m32"
+            android:layout_height="@dimen/m280">
+        <TextView
+                android:id="@+id/tv1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_4A4A4A"
+                android:textSize="18sp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/m15"
+                android:layout_gravity="center_horizontal"
+                android:text="拒绝申请"
+                />
+
+        <FrameLayout
+                android:id="@+id/tv_content"
+                android:layout_width="match_parent"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/tv1"
+                android:layout_marginLeft="@dimen/m20"
+                android:layout_marginRight="@dimen/m20"
+                android:layout_height="wrap_content">
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                app:counterEnabled="true"
+                android:background="@drawable/button_shape"
+                app:counterMaxLength="30">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/m125"
+                    style="@style/tv_subtitle"
+                    android:maxLength="30"
+                    android:background="@null"
+                    android:layout_marginLeft="@dimen/m5"
+                    android:layout_marginRight="@dimen/m5"
+                    android:hint="请填写拒绝原因"
+                    android:gravity="top|start"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@+id/tv_content">
+
+            <TextView
+                android:id="@+id/tv_cancel"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="@dimen/m31"
+                android:layout_marginTop="@dimen/m20"
+                android:gravity="center"
+                android:text="@string/cancel"
+                android:textSize="13sp"
+                android:textColor="@color/contents_text"
+                android:background="@drawable/shape_btn_bg_gray"
+                android:layout_marginRight="@dimen/m15"
+                android:layout_marginLeft="@dimen/m15"/>
+
+            <TextView
+                android:id="@+id/tv_add"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="@dimen/m31"
+                android:layout_marginTop="@dimen/m20"
+                android:gravity="center"
+                android:text="@string/tv_ok"
+                android:textSize="13sp"
+                android:textColor="@color/contents_text"
+                android:background="@drawable/shape_btn_bg_yellow"
+                android:layout_marginRight="@dimen/m15"
+                android:layout_marginLeft="@dimen/m15"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

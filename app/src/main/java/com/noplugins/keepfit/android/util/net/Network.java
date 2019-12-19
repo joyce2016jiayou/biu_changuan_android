@@ -33,6 +33,7 @@ import com.noplugins.keepfit.android.bean.UserStatisticsBean;
 import com.noplugins.keepfit.android.bean.WxPayBean;
 import com.noplugins.keepfit.android.bean.mine.BalanceListBean;
 import com.noplugins.keepfit.android.bean.mine.WalletBean;
+import com.noplugins.keepfit.android.bean.use.ManagerBean;
 import com.noplugins.keepfit.android.bean.use.RoomBean;
 import com.noplugins.keepfit.android.bean.use.RoomDelBean;
 import com.noplugins.keepfit.android.bean.use.UseBean;
@@ -1328,6 +1329,48 @@ public class Network {
      */
     public Subscription setLoginPassword(Map<String, Object> params, Subscriber<Bean<Object>> subscriber) {
         return service.setLoginPassword(retuen_json_object(params))
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread()).subscribe(subscriber);
+    }
+
+    /**
+     * 团课管理
+     *
+     * @param params
+     * @param subscriber
+     * @return
+     */
+    public Subscription courseManagerByArea(Map<String, Object> params, Subscriber<Bean<ManagerBean>> subscriber) {
+        return service.courseManagerByArea(retuen_json_object(params))
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread()).subscribe(subscriber);
+    }
+
+    /**
+     * 团课取消邀请
+     *
+     * @param params
+     * @param subscriber
+     * @return
+     */
+    public Subscription cancelCourseByArea(Map<String, Object> params, Subscriber<Bean<Object>> subscriber) {
+        return service.cancelCourseByArea(retuen_json_object(params))
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread()).subscribe(subscriber);
+    }
+
+    /**
+     * 团课申请 同意/拒绝
+     *
+     * @param params
+     * @param subscriber
+     * @return
+     */
+    public Subscription agreeCourseByArea(Map<String, Object> params, Subscriber<Bean<Object>> subscriber) {
+        return service.agreeCourseByArea(retuen_json_object(params))
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(subscriber);

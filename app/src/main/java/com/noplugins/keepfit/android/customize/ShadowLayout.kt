@@ -7,7 +7,7 @@ import android.view.View
 import android.widget.FrameLayout
 import androidx.annotation.ColorInt
 import com.noplugins.keepfit.android.R
-import me.erwa.sourceset.view.*
+import com.noplugins.keepfit.android.customize.*
 import kotlin.math.absoluteValue
 import kotlin.properties.Delegates
 

@@ -47,32 +47,39 @@ public class ManagerTeamClassAdapter extends BaseQuickAdapter<ManagerBean.Course
         }
         switch (item.getSearchType()) {
             case 1: //已上架
-                helper.setText(R.id.tv_cg_name, item.getAreaName());
-
-                helper.getView(R.id.tv_team_date_history).setVisibility(View.GONE);
+                helper.setText(R.id.tv_cg_name, item.getTeacherName());
                 helper.getView(R.id.tv_team_price).setVisibility(View.VISIBLE);
                 helper.getView(R.id.tv_cg_name).setVisibility(View.VISIBLE);
-                helper.getView(R.id.ll_yaoqin).setVisibility(View.GONE);
+                helper.getView(R.id.ll_yaoqin_edit).setVisibility(View.GONE);
                 helper.getView(R.id.tv_agin).setVisibility(View.GONE);
+                helper.getView(R.id.ll_shenqin).setVisibility(View.GONE);
                 break;
             case 2: //邀请中
-                helper.getView(R.id.tv_team_time).setVisibility(View.GONE);
                 helper.setText(R.id.tv_item, "邀请中");
-                helper.getView(R.id.ll_yaoqin).setVisibility(View.VISIBLE);
+                helper.getView(R.id.ll_yaoqin_edit).setVisibility(View.VISIBLE);
                 helper.getView(R.id.tv_cg_name).setVisibility(View.GONE);
-                helper.getView(R.id.tv_team_date_history).setVisibility(View.GONE);
-//                helper.getView(R.id.tv_team_price).setVisibility(View.GONE);
+                helper.getView(R.id.ll_shenqin).setVisibility(View.GONE);
+                helper.setText(R.id.tv_yaoqin_edit,"取消");
                 break;
             case 3: //历史
-                helper.getView(R.id.tv_team_time).setVisibility(View.GONE);
+                if (item.getTeacherName() != null){
+                    helper.getView(R.id.tv_cg_name).setVisibility(View.VISIBLE);
+                    helper.setText(R.id.tv_cg_name, item.getTeacherName());
+                }
                 helper.setText(R.id.tv_item, statusType(item.getStatus()));
-                helper.setText(R.id.tv_team_date_history, item.getMin()+"min");
-                helper.getView(R.id.tv_team_date_history).setVisibility(View.VISIBLE);
-//                helper.getView(R.id.tv_team_price).setVisibility(View.GONE);
-//                helper.getView(R.id.tv_agin).setVisibility(View.VISIBLE);//重新申请功能 已取消
-                helper.getView(R.id.tv_team_date).setVisibility(View.GONE);
-                helper.getView(R.id.tv_cg_name).setVisibility(View.GONE);
-                helper.getView(R.id.ll_yaoqin).setVisibility(View.GONE);
+                helper.getView(R.id.tv_team_date).setVisibility(View.VISIBLE);
+                helper.getView(R.id.ll_yaoqin_edit).setVisibility(View.VISIBLE);
+                helper.getView(R.id.ll_shenqin).setVisibility(View.GONE);
+                helper.setText(R.id.tv_yaoqin_edit,"编辑");
+                break;
+            case 4: //申请中
+                helper.getView(R.id.tv_cg_name).setVisibility(View.VISIBLE);
+                helper.setText(R.id.tv_cg_name, item.getTeacherName());
+                helper.getView(R.id.tv_team_price).setVisibility(View.VISIBLE);
+                helper.getView(R.id.tv_cg_name).setVisibility(View.VISIBLE);
+                helper.getView(R.id.ll_yaoqin_edit).setVisibility(View.GONE);
+                helper.getView(R.id.tv_agin).setVisibility(View.GONE);
+                helper.getView(R.id.ll_shenqin).setVisibility(View.VISIBLE);
                 break;
         }
 

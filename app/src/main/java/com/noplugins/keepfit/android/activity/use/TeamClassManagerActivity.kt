@@ -3,32 +3,34 @@ package com.noplugins.keepfit.android.activity.use
 
 import android.Manifest
 import android.content.Context
-import android.content.Intent
 import android.content.pm.PackageManager
-import androidx.appcompat.app.AppCompatActivity
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.viewpager.widget.ViewPager
-import cn.jpush.android.cache.Sp
-import com.amap.api.location.AMapLocation
 import com.amap.api.location.AMapLocationClient
 import com.amap.api.location.AMapLocationClientOption
-import com.amap.api.location.AMapLocationListener
+import com.google.android.material.tabs.TabLayout
 import com.noplugins.keepfit.android.R
 //import com.noplugins.keepfit.android.activity.ClassShouquanActivity
 import com.noplugins.keepfit.android.adapter.TabItemAdapter
 import com.noplugins.keepfit.android.base.BaseActivity
-import com.noplugins.keepfit.android.fragment.teacher.BindingFragment
+import com.noplugins.keepfit.android.customize.indicatorX
 import com.noplugins.keepfit.android.fragment.teacher.JujueFragment
-import com.noplugins.keepfit.android.fragment.teacher.SqAndYaoqinFragment
 import com.noplugins.keepfit.android.fragment.teacher.YaoqinFragment
+import com.noplugins.keepfit.android.fragment.use.team.ApplyFragment
+import com.noplugins.keepfit.android.fragment.use.team.HistoryFragment
+import com.noplugins.keepfit.android.fragment.use.team.InviteFragment
+import com.noplugins.keepfit.android.fragment.use.team.ShelvesFragment
 import com.noplugins.keepfit.android.global.AppConstants
 import com.noplugins.keepfit.android.util.SpUtils
-import kotlinx.android.synthetic.main.activity_teacher_manager.*
 import kotlinx.android.synthetic.main.activity_teacher_manager.back_btn
 import kotlinx.android.synthetic.main.activity_teacher_manager.title_tv
+import kotlinx.android.synthetic.main.activity_teacher_manager.view_pager
+import kotlinx.android.synthetic.main.activity_team_class_manager.*
+import kotlinx.android.synthetic.main.discovers_fragment.*
 import kotlinx.android.synthetic.main.title_activity.*
 import pub.devrel.easypermissions.AfterPermissionGranted
 import pub.devrel.easypermissions.EasyPermissions
@@ -36,32 +38,8 @@ import java.util.ArrayList
 
 class TeamClassManagerActivity : BaseActivity(){
 
-//    override fun onLocationChanged(amapLocation: AMapLocation?) {
-//        if (amapLocation != null) {
-//            if (amapLocation.errorCode == 0) {
-//                //定位成功回调信息，设置相关消息
-//                amapLocation.locationType//获取当前定位结果来源，如网络定位结果，详见定位类型表
-//                val latitude = amapLocation.latitude//获取纬度
-//                val longitude = amapLocation.longitude//获取经度
-//                //                        latLonPoint = new LatLonPoint(currentLat, currentLon);  // latlng形式的
-//                /*currentLatLng = new LatLng(currentLat, currentLon);*/   //latlng形式的
-//                SpUtils.putString(applicationContext, AppConstants.LON, "" + longitude)
-//                SpUtils.putString(applicationContext, AppConstants.LAT, "" + latitude)
-//
-//            } else {
-//                //显示错误信息ErrCode是错误码，errInfo是错误信息，详见错误码表。
-//                Log.e(
-//                        "AmapError", "location Error, ErrCode:"
-//                        + amapLocation.errorCode + ", errInfo:"
-//                        + amapLocation.errorInfo
-//                )
-//            }
-//
-//            initFragment()
-//        }
-//    }
-
     private val mFragments = ArrayList<Fragment>()
+    private val titleList = ArrayList<String>()
     //声明AMapLocationClient类对象
     internal var mLocationClient: AMapLocationClient? = null
     //声明AMapLocationClientOption对象
@@ -81,8 +59,7 @@ class TeamClassManagerActivity : BaseActivity(){
     }
 
     override fun doBusiness(mContext: Context?) {
-        rbOnClick()
-        tv_complete.setOnClickListener {
+        add_btn.setOnClickListener {
 //            val intent = Intent(this, TeacherSelectActivity::class.java)
 //            startActivity(intent)
         }
@@ -92,77 +69,28 @@ class TeamClassManagerActivity : BaseActivity(){
         }
     }
 
-    private fun rbOnClick() {
-//        rb_1.setOnClickListener {
-//            Log.d("单选", "点击了1")
-//            view_pager.currentItem = 0
-//        }
-//        rb_2.setOnClickListener {
-//            Log.d("单选", "点击了2")
-//            view_pager.currentItem = 1
-//        }
-//        rb_3.setOnClickListener {
-//            Log.d("单选", "点击了3")
-//            view_pager.currentItem = 2
-//        }
-//        rb_4.setOnClickListener {
-//            Log.d("单选", "点击了3")
-//            view_pager.currentItem = 3
-//        }
-    }
-
     private fun initFragment() {
-        mFragments.add(BindingFragment.newInstance("已绑定"))
-        mFragments.add(SqAndYaoqinFragment.newInstance("申请中"))
-        mFragments.add(YaoqinFragment.newInstance("邀请中"))
-        mFragments.add(JujueFragment.newInstance("已拒绝"))
+        mFragments.add(ShelvesFragment.newInstance("已上架"))
+        mFragments.add(ApplyFragment.newInstance("申请中"))
+        mFragments.add(InviteFragment.newInstance("邀请中"))
+        mFragments.add(HistoryFragment.newInstance("历史"))
 
-        val myAdapter = TabItemAdapter(supportFragmentManager, mFragments)// 初始化adapter
+        titleList.add("已上架")
+        titleList.add("申请中")
+        titleList.add("邀请中")
+        titleList.add("历史")
+
+        titleList.forEach {
+            enhance_tab_layout.addTab(it)
+        }
+        val myAdapter = TabItemAdapter(supportFragmentManager,titleList, mFragments)// 初始化adapter
         view_pager.adapter = myAdapter // 设置adapter
         view_pager.currentItem = 0
-        setTabTextColorAndImageView(0)// 更改text的颜色还有图片
+//        setTabTextColorAndImageView(0)// 更改text的颜色还有图片
         view_pager.offscreenPageLimit = 2
-        view_pager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPs: Int) {}
-
-            override fun onPageSelected(position: Int) {
-                setTabTextColorAndImageView(position)// 更改text的颜色还有图片
-            }
-
-            override fun onPageScrollStateChanged(state: Int) {
-
-            }
-        })
+        view_pager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(enhance_tab_layout.tabLayout))
+        enhance_tab_layout.setupWithViewPager(view_pager)
     }
-
-    private fun setTabTextColorAndImageView(position: Int) {
-        when (position) {
-//            0 -> rb_1.isChecked = true
-//            1 -> rb_2.isChecked = true
-//            2 -> rb_3.isChecked = true
-//            3 -> rb_4.isChecked = true
-        }
-    }
-
-//    private fun initGaode() {
-//        //初始化定位
-//        mLocationClient = AMapLocationClient(this)
-//        //设置定位回调监听
-//        mLocationClient!!.setLocationListener(this)
-//        //初始化AMapLocationClientOption对象
-//        mLocationOption = AMapLocationClientOption()
-//
-//        mLocationOption!!.isOnceLocation = true
-//        //        mLocationOption.setOnceLocationLatest(true);
-//        // 同时使用网络定位和GPS定位,优先返回最高精度的定位结果,以及对应的地址描述信息
-//        mLocationOption!!.locationMode = AMapLocationClientOption.AMapLocationMode.Hight_Accuracy
-//        //设置定位间隔,单位毫秒,默认为2000ms，最低1000ms。默认连续定位 切最低时间间隔为1000ms
-//        //        mLocationOption.setInterval(3500);
-//        //给定位客户端对象设置定位参数
-//        mLocationClient!!.setLocationOption(mLocationOption)
-//        //启动定位
-//        mLocationClient!!.startLocation()
-//    }
 
     @AfterPermissionGranted(PERMISSIONS)
     private fun requestPermission() {

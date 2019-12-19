@@ -207,13 +207,34 @@
 
         </LinearLayout>
 
+        <FrameLayout
+            android:id="@+id/ll_yaoqin_edit"
+            android:layout_below="@+id/ll_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/m46"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            android:gravity="center"
+            android:background="@drawable/btn_shape_stroke">
+            <TextView
+                android:id="@+id/tv_yaoqin_edit"
+                android:layout_gravity="center"
+                android:layout_width="@dimen/m86"
+                android:layout_height="@dimen/m28"
+                android:textSize="13sp"
+                android:gravity="center"
+                android:textColor="@color/color_6D7278"
+                android:background="@drawable/shape_btn_bg_yellow"
+                android:text="@string/cancel"/>
+        </FrameLayout>
         <LinearLayout
-                android:id="@+id/ll_yaoqin"
+                android:id="@+id/ll_shenqin"
                 android:layout_below="@+id/ll_bottom"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/m46"
                 android:orientation="horizontal"
                 android:visibility="visible"
+            android:gravity="center"
                 android:background="@drawable/btn_shape_stroke">
             <TextView
                     android:id="@+id/tv_jujue"

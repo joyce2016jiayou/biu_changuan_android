@@ -25,6 +25,7 @@ import com.noplugins.keepfit.android.bean.UserStatisticsBean;
 import com.noplugins.keepfit.android.bean.WxPayBean;
 import com.noplugins.keepfit.android.bean.mine.BalanceListBean;
 import com.noplugins.keepfit.android.bean.mine.WalletBean;
+import com.noplugins.keepfit.android.bean.use.ManagerBean;
 import com.noplugins.keepfit.android.bean.use.RoomBean;
 import com.noplugins.keepfit.android.bean.use.RoomDelBean;
 import com.noplugins.keepfit.android.bean.use.UseBean;
@@ -786,4 +787,31 @@ public interface MyService {
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
     @POST("setLoginPassword")
     Observable<Bean<Object>> setLoginPassword(@Body RequestBody json);
+
+    /**
+     * 团课管理
+     *
+     * @return
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("courseManagerByArea")
+    Observable<Bean<ManagerBean>> courseManagerByArea(@Body RequestBody json);
+
+    /**
+     * 取消邀请
+     *
+     * @return
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("cancelCourseByArea")
+    Observable<Bean<Object>> cancelCourseByArea(@Body RequestBody json);
+
+    /**
+     * 团课申请 同意/拒绝
+     *
+     * @return
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("agreeCourseByArea")
+    Observable<Bean<Object>> agreeCourseByArea(@Body RequestBody json);
 }

@@ -3,38 +3,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
 
     <include layout="@layout/title_activity" />
-    <com.google.android.material.tabs.TabLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/m40"
-        android:layout_marginLeft="@dimen/m15"
-        android:layout_marginRight="@dimen/m15"
-        app:tabIndicatorColor="@color/color_ffcc7d"
-        app:tabIndicatorHeight="@dimen/m4"
-        >
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="已上架"
-            style="@style/tv_subtitle"/>
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="申请中"
-            style="@style/tv_subtitle"/>
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="邀请中"
-            style="@style/tv_subtitle"/>
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="历史"
-            style="@style/tv_subtitle"/>
-    </com.google.android.material.tabs.TabLayout>
+    <com.noplugins.keepfit.android.customize.EnhanceTabLayout
+        android:id="@+id/enhance_tab_layout"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="40dp"
+        app:tabIndicatorHeight="2dp"
+        app:tabIndicatorWidth="30dp"
+        app:tabTextColor="#999999"
+        app:tab_Mode="mode_scrollable"
+        app:tabSelectTextColor="@color/colorPrimary"
+        app:tabIndicatorColor="@color/color_yellow"
+        app:tabTextSize="6sp"
+/>
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/view_pager"
