@@ -69,7 +69,8 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.use.RoomInfoActivity"></activity>
+        <activity android:name=".activity.use.TeamDetailActivity"></activity>
+        <activity android:name=".activity.use.RoomInfoActivity" />
         <activity android:name=".activity.use.RoomAddActivity" />
         <activity android:name=".activity.use.RoomManagerActivity" />
         <activity android:name=".activity.mine.setting.InputNewPhoneActivity" />
@@ -83,7 +84,6 @@
         <activity android:name=".activity.mine.TeacherManagerActivity" />
         <activity android:name=".activity.mine.CostAccountingActivity" />
         <activity android:name=".activity.SubmitInformationSelectActivity" />
-
         <activity android:name=".activity.mine.CgPriceActivity" />
         <activity android:name=".activity.user.Login2Activity" />
         <activity
@@ -149,13 +149,15 @@
         <activity
             android:name=".activity.InformationCheckActivity"
             android:windowSoftInputMode="adjustPan|stateHidden">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
-        <activity android:name=".util.ui.cropimg.ClipImageActivity"/>
+        <activity android:name=".util.ui.cropimg.ClipImageActivity" />
         <activity
             android:name=".activity.ShareSDKDEMOActivity"
             android:windowSoftInputMode="adjustPan|stateHidden" />
@@ -175,9 +177,9 @@
             android:name=".SplashActivity"
             android:screenOrientation="portrait">
             <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
@@ -381,7 +383,8 @@
         <activity android:name=".activity.mine.XieYiActivity" />
         <activity android:name=".activity.mine.setting.AccountSecurityActivity" />
         <activity android:name=".activity.use.StatisticsActivity" />
-        <activity android:name=".activity.use.TeamClassManagerActivity" /> <!-- Required  . Enable it you can get statistics data with channel -->
+        <activity android:name=".activity.use.TeamClassManagerActivity" />
+        <activity android:name=".activity.use.TeamInfoActivity" /> <!-- Required  . Enable it you can get statistics data with channel -->
         <meta-data
             android:name="JPUSH_CHANNEL"
             android:value="default_developer" />

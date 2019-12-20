@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    <include
+        android:id="@+id/title"
+        layout="@layout/title_activity"/>
+
+
+
+
+    <LinearLayout
+        android:id="@+id/ll_caozuo"
+        android:visibility="visible"
+        android:layout_marginTop="@dimen/m15"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/m59"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/jujue"
+                android:layout_width="@dimen/m130"
+                android:layout_height="@dimen/m39"
+                android:textSize="15sp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/jujue"
+                android:textColor="@color/color_181818"
+                android:background="@drawable/shape_btn_bg_yellow"/>
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/jieshou"
+                android:layout_width="@dimen/m130"
+                android:layout_height="@dimen/m39"
+                android:textSize="15sp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/jieshou"
+                android:textColor="@color/color_181818"
+                android:background="@drawable/shape_btn_bg_yellow"/>
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/fl_cancel_edit"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/m59"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/tv_cancel"
+            android:layout_width="@dimen/m168"
+            android:layout_height="@dimen/m39"
+            android:textSize="15sp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/cancel"
+            android:textColor="@color/color_181818"
+            android:background="@drawable/shape_btn_bg_yellow"/>
+    </FrameLayout>
+    <LinearLayout
+        android:id="@+id/ll_cg"
+        android:layout_below="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/m20"
+            android:layout_marginLeft="@dimen/m20"
+            android:layout_marginTop="@dimen/m10"
+            android:orientation="vertical"
+            android:layout_marginBottom="@dimen/m5">
+        <TextView
+            android:id="@+id/tv_class_type"
+            android:layout_width="@dimen/m59"
+            android:layout_height="@dimen/m24"
+            android:textColor="@color/color_F9CE0F"
+            android:textSize="13sp"
+            android:background="@drawable/shape_btn_bg_22243d_40"/>
+        <!--场馆信息-->
+        <FrameLayout
+            android:id="@+id/jump_team_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/m13"
+            android:paddingBottom="@dimen/m5">
+            <TextView
+                    android:id="@+id/tv_cg_name"
+                    android:layout_width="wrap_content"
+                    tools:text="太阳的后裔场馆"
+                    android:textColor="@color/color_181818"
+                    android:textSize="15sp"
+                    android:layout_gravity="left"
+                android:textStyle="bold"
+                    android:layout_height="wrap_content"/>
+
+            <TextView
+
+                    android:layout_width="wrap_content"
+                    tools:text="查看课程详情 >"
+                    android:textColor="@color/color_181818"
+                    android:textSize="15sp"
+                    android:layout_gravity="right"
+                    android:layout_height="wrap_content"/>
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_below="@+id/ll_cg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="@dimen/m20">
+            <!--1-->
+           <www.linwg.org.lib.LCardView
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   app:leftShadowWidth="0dp"
+                   app:rightShadowWidth="0dp">
+               <LinearLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+
+                       android:orientation="vertical">
+
+                   <LinearLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:orientation="horizontal"
+                       android:layout_marginTop="@dimen/m10"
+                       android:layout_marginLeft="@dimen/m20"
+                       android:layout_marginRight="@dimen/m20">
+
+                       <TextView
+                           android:layout_width="wrap_content"
+                           android:text="@string/team_teacher"
+                           android:textColor="@color/color_181818"
+                           android:textSize="15sp"
+                           android:layout_height="wrap_content"/>
+
+                       <TextView
+                           android:id="@+id/edit_team_teacher"
+                           android:layout_width="match_parent"
+                           android:layout_height="@dimen/m31"
+                           android:layout_marginLeft="@dimen/m30"
+                           tools:text="云鹏"
+                           android:drawableRight="@drawable/ic_chevron_right_black_32dp"
+                           android:gravity="center_vertical"
+                           android:textColor="@color/color_4A4A4A"
+                           android:textSize="15sp"/>
+                   </LinearLayout>
+
+                   <LinearLayout
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:orientation="horizontal"
+                           android:layout_marginTop="@dimen/m10"
+                           android:layout_marginLeft="@dimen/m20"
+                           android:layout_marginRight="@dimen/m20">
+
+                       <TextView
+                               android:layout_width="wrap_content"
+                               android:text="@string/team_room"
+                               android:textColor="@color/color_181818"
+                               android:textSize="15sp"
+                               android:layout_height="wrap_content"/>
+
+                       <TextView
+                               android:id="@+id/edit_class_room"
+                               android:layout_width="match_parent"
+                               android:layout_height="@dimen/m31"
+                               android:layout_marginLeft="@dimen/m30"
+                               tools:text="动感单车房|15人"
+                               android:gravity="center_vertical"
+                               android:textColor="@color/color_4A4A4A"
+                               android:textSize="15sp"/>
+                   </LinearLayout>
+
+                   <LinearLayout
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:orientation="horizontal"
+                           android:layout_marginTop="@dimen/m10"
+                           android:layout_marginLeft="@dimen/m20"
+                           android:layout_marginRight="@dimen/m20">
+
+                       <TextView
+                               android:layout_width="wrap_content"
+                               android:text="@string/team_name"
+                               android:textColor="@color/color_181818"
+                               android:textSize="15sp"
+                               android:layout_height="wrap_content"/>
+
+                       <TextView
+                               android:id="@+id/edit_class_name"
+                               android:layout_width="match_parent"
+                               android:layout_height="@dimen/m31"
+                               android:layout_marginLeft="@dimen/m30"
+                               tools:text="动感单车"
+                               android:gravity="center_vertical"
+                               android:textColor="@color/color_4A4A4A"
+                               android:textSize="15sp"/>
+                   </LinearLayout>
+
+                   <LinearLayout
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:orientation="horizontal"
+                           android:layout_marginTop="@dimen/m10"
+                           android:layout_marginLeft="@dimen/m20"
+                           android:layout_marginRight="@dimen/m20">
+
+                       <TextView
+                               android:layout_width="wrap_content"
+                               android:text="@string/team_type"
+                               android:textColor="@color/color_181818"
+                               android:textSize="15sp"
+                               android:layout_height="wrap_content"/>
+
+                       <TextView
+                               android:id="@+id/tv_select_type"
+                               android:layout_width="match_parent"
+                               android:layout_height="@dimen/m31"
+                               android:layout_marginLeft="@dimen/m30"
+
+                               tools:text="动感单车"
+                               android:gravity="center_vertical"
+                               android:textColor="@color/color_4A4A4A"
+                               android:textSize="15sp"/>
+                   </LinearLayout>
+
+                   <LinearLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:orientation="horizontal"
+                       android:layout_marginTop="@dimen/m10"
+                       android:layout_marginLeft="@dimen/m20"
+                       android:layout_marginRight="@dimen/m20">
+
+                       <TextView
+                           android:layout_width="wrap_content"
+                           android:text="@string/team_goal"
+                           android:textColor="@color/color_181818"
+                           android:textSize="15sp"
+                           android:layout_height="wrap_content"/>
+
+                       <TextView
+                           android:id="@+id/tv_xunlian_goal"
+                           android:layout_width="match_parent"
+                           android:layout_height="@dimen/m31"
+                           android:layout_marginLeft="@dimen/m30"
+
+                           tools:text="训练目标"
+                           android:gravity="center_vertical"
+                           android:textColor="@color/color_4A4A4A"
+                           android:textSize="15sp"/>
+                   </LinearLayout>
+
+                   <LinearLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:orientation="horizontal"
+                       android:layout_marginTop="@dimen/m10"
+                       android:layout_marginLeft="@dimen/m20"
+                       android:layout_marginRight="@dimen/m20">
+
+                       <TextView
+                           android:layout_width="wrap_content"
+                           android:text="@string/team_difficulty"
+                           android:textColor="@color/color_181818"
+                           android:textSize="15sp"
+                           android:layout_height="wrap_content"/>
+
+                       <TextView
+                           android:id="@+id/tv_xunlian_difficulty"
+                           android:layout_width="match_parent"
+                           android:layout_height="@dimen/m31"
+                           android:layout_marginLeft="@dimen/m30"
+
+                           tools:text="训练难度"
+                           android:gravity="center_vertical"
+                           android:textColor="@color/color_4A4A4A"
+                           android:textSize="15sp"/>
+                   </LinearLayout>
+
+                   <LinearLayout
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:orientation="horizontal"
+                           android:layout_marginTop="@dimen/m10"
+                           android:layout_marginLeft="@dimen/m20"
+                           android:layout_marginRight="@dimen/m20">
+
+                       <TextView
+                               android:layout_width="wrap_content"
+                               android:text="@string/class_time"
+                               android:textColor="@color/color_181818"
+                               android:textSize="15sp"
+                               android:layout_height="wrap_content"/>
+
+                       <TextView
+                               android:id="@+id/tv_team_length"
+                               android:layout_width="match_parent"
+                               android:layout_height="@dimen/m31"
+                               android:layout_marginLeft="@dimen/m30"
+                               tools:text="45min"
+                               android:gravity="center_vertical"
+                               android:textColor="@color/color_4A4A4A"
+                               android:textSize="15sp"/>
+                   </LinearLayout>
+
+                   <LinearLayout
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:orientation="horizontal"
+                           android:layout_marginTop="@dimen/m10"
+                           android:layout_marginLeft="@dimen/m20"
+                           android:layout_marginRight="@dimen/m20">
+
+                       <TextView
+                               android:layout_width="wrap_content"
+                               android:text="@string/class_price"
+                               android:textColor="@color/color_181818"
+                               android:textSize="15sp"
+                               android:layout_height="wrap_content"/>
+
+                       <TextView
+                               android:id="@+id/edit_price"
+                               android:layout_width="@dimen/m158"
+                               android:layout_height="@dimen/m31"
+                               android:layout_marginLeft="@dimen/m30"
+
+                               tools:text="¥300"
+                               android:gravity="center_vertical"
+                               android:textColor="@color/color_4A4A4A"
+                               android:textSize="15sp"/>
+                   </LinearLayout>
+
+                   <LinearLayout
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:orientation="horizontal"
+                           android:layout_marginTop="@dimen/m10"
+                           android:layout_marginLeft="@dimen/m20"
+                           android:layout_marginRight="@dimen/m20">
+
+                       <TextView
+                               android:layout_width="wrap_content"
+                               android:text="@string/team_cycle"
+                               android:textColor="@color/color_181818"
+                               android:textSize="15sp"
+                               android:layout_height="wrap_content"/>
+
+                       <TextView
+                               android:id="@+id/edit_cycle"
+                               android:layout_width="@dimen/m158"
+                               android:layout_height="@dimen/m31"
+                               android:layout_marginLeft="@dimen/m30"
+                               tools:text="四周"
+                               android:gravity="center_vertical"
+                               android:textColor="@color/color_4A4A4A"
+                               android:textSize="15sp"/>
+                   </LinearLayout>
+
+                   <LinearLayout
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:orientation="horizontal"
+                           android:layout_marginTop="@dimen/m10"
+                           android:layout_marginLeft="@dimen/m20"
+                           android:layout_marginRight="@dimen/m20">
+
+                       <TextView
+                               android:layout_width="wrap_content"
+                               android:text="@string/team_date"
+                               android:textColor="@color/color_181818"
+                               android:textSize="15sp"
+                               android:layout_height="wrap_content"/>
+
+                       <TextView
+                               android:id="@+id/edit_date"
+                               android:layout_width="@dimen/m158"
+                               android:layout_height="@dimen/m31"
+                               android:layout_marginLeft="@dimen/m30"
+                               tools:text="2019-07-11  11:30-12:30"
+                               android:gravity="center_vertical"
+                               android:textColor="@color/color_4A4A4A"
+                               android:textSize="15sp"/>
+                   </LinearLayout>
+
+               </LinearLayout>
+           </www.linwg.org.lib.LCardView>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</>

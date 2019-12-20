@@ -1,5 +1,6 @@
 package com.noplugins.keepfit.android.activity.mine
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
@@ -19,19 +20,27 @@ import com.noplugins.keepfit.android.base.BaseActivity
 import com.noplugins.keepfit.android.bean.PrivateDetailBean
 import com.noplugins.keepfit.android.bean.TeacherDetailBean
 import com.noplugins.keepfit.android.global.AppConstants
+import com.noplugins.keepfit.android.util.BaseUtils
 import com.noplugins.keepfit.android.util.SpUtils
 import com.noplugins.keepfit.android.util.net.Network
 import com.noplugins.keepfit.android.util.net.entity.Bean
 import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriber
 import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener
+import com.noplugins.keepfit.android.util.ui.pop.CommonPopupWindow
 import kotlinx.android.synthetic.main.activity_private_detail.*
 import org.greenrobot.eventbus.EventBus
+import pub.devrel.easypermissions.AppSettingsDialog
+import pub.devrel.easypermissions.EasyPermissions
 import java.util.HashMap
 
 class TeacherDetailActivity : BaseActivity() {
     private var type = -1
     private var listItem = -1
     private var cgNum = ""
+    private var phone = ""
+    val PERMISSION_STORAGE_CODE = 10001
+    val PERMISSION_STORAGE_MSG = "需要电话权限才能联系客服哦"
+    val PERMISSION_STORAGE = arrayOf(Manifest.permission.CALL_PHONE)
     override fun initBundle(parms: Bundle?) {
         if (parms != null) {
             listItem = parms.getInt("listItem")
@@ -46,6 +55,7 @@ class TeacherDetailActivity : BaseActivity() {
         setContentView(R.layout.activity_private_detail)
         if (type == 1) {
             tv_yaoqing.text = "解 绑"
+            iv_teacher_call.visibility = View.VISIBLE
         } else if (type != -1){
             tv_yaoqing.visibility = View.GONE
         }
@@ -68,6 +78,36 @@ class TeacherDetailActivity : BaseActivity() {
         back_btn.setOnClickListener {
             finish()
         }
+
+        iv_teacher_call.setOnClickListener {
+            if(BaseUtils.isFastClick()){
+                call_pop()
+            }
+        }
+    }
+
+    private fun call_pop() {
+        val popupWindow = CommonPopupWindow.Builder(this)
+                .setView(R.layout.call_pop)
+                .setBackGroundLevel(0.5f)//0.5f
+                .setAnimationStyle(R.style.main_menu_animstyle)
+                .setWidthAndHeight(WindowManager.LayoutParams.MATCH_PARENT,
+                        WindowManager.LayoutParams.MATCH_PARENT)
+                .setOutSideTouchable(true).create()
+        popupWindow.showAsDropDown(iv_teacher_call)
+
+        /**设置逻辑 */
+        val view = popupWindow.contentView
+        val cancel_layout = view.findViewById<LinearLayout>(R.id.cancel_layout)
+        val sure_layout = view.findViewById<LinearLayout>(R.id.sure_layout)
+        val content_tv = view.findViewById<TextView>(R.id.content_tv)
+        content_tv.text = "确认拨打 $phone?"
+        cancel_layout.setOnClickListener { popupWindow.dismiss() }
+        sure_layout.setOnClickListener {
+            initSimple(phone)
+            popupWindow.dismiss()
+        }
+
     }
 
     private fun unBinding(){
@@ -111,6 +151,7 @@ class TeacherDetailActivity : BaseActivity() {
     }
 
     private fun setting(code: TeacherDetailBean) {
+        phone = code.phone
         tips.text = code.tips
         val layoutParams =
                 ViewGroup.MarginLayoutParams(
@@ -151,6 +192,52 @@ class TeacherDetailActivity : BaseActivity() {
         } else {
             iv_sex.setImageResource(R.drawable.women_icon)
         }
+
+    }
+
+
+    private fun initSimple(phone_number: String) {
+        if (hasStoragePermission(this)) {
+            //有权限
+            callPhone(phone_number)
+        } else {
+            //申请权限
+            EasyPermissions.requestPermissions(this, PERMISSION_STORAGE_MSG, PERMISSION_STORAGE_CODE, *PERMISSION_STORAGE)
+        }
+    }
+
+    @SuppressLint("MissingPermission")
+    fun callPhone(phoneNum: String) {
+        val intent1 = Intent(Intent.ACTION_CALL)
+        val data = Uri.parse("tel:$phoneNum")
+        intent1.data = data
+        startActivity(intent1)
+    }
+
+    fun hasPermissions(context: Context?, vararg permissions: String): Boolean {
+        return EasyPermissions.hasPermissions(context, *permissions)
+    }
+
+    fun hasStoragePermission(context: Context?): Boolean {
+        return hasPermissions(context, *PERMISSION_STORAGE)
+    }
+
+    override fun onPermissionsGranted(requestCode: Int, perms: List<String>) {
+
+    }
+
+    override fun onPermissionsDenied(requestCode: Int, perms: List<String>) {
+        if (EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
+            AppSettingsDialog.Builder(this)
+                    .setTitle("提醒")
+                    .setRationale("需要电话权限才能联系客服哦")
+                    .build()
+                    .show()
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
 
     }
 

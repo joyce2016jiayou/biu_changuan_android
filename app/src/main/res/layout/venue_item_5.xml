@@ -17,8 +17,9 @@
         android:text="@string/tv_save"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginRight="@dimen/m20"
         android:layout_below="@+id/tv_save_5">
         <TextView
@@ -96,28 +97,27 @@
             app:layout_constraintRight_toRightOf="parent"
             android:layout_marginTop="@dimen/m23"/>
 
-        <com.noplugins.keepfit.android.util.ui.jiugongge.CCRSortableNinePhotoLayout
-            android:id="@+id/snpl_moment_add_photos"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="@dimen/m90"
-            android:layout_marginLeft="@dimen/m10"
-            android:layout_marginRight="@dimen/m10"
-            app:bga_snpl_deleteDrawable="@drawable/delete_image"
-            app:bga_snpl_deleteDrawableOverlapQuarter="false"
-            app:bga_snpl_editable="true"
-            app:bga_snpl_itemCornerRadius="0dp"
-            app:bga_snpl_itemSpanCount="3"
-            app:bga_snpl_itemWhiteSpacing="5dp"
-            app:bga_snpl_itemWidth="@dimen/m90"
-            app:bga_snpl_maxItemCount="9"
-            app:bga_snpl_placeholderDrawable="@mipmap/bga_pp_ic_holder_dark"
-            app:bga_snpl_plusDrawable="@drawable/add_image_moren"
-            app:bga_snpl_plusEnable="true"
-            app:bga_snpl_sortable="true"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_pic_tips"
-            android:layout_marginTop="@dimen/m10"/>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
+    <com.noplugins.keepfit.android.util.ui.jiugongge.CCRSortableNinePhotoLayout
+        android:id="@+id/snpl_moment_add_photos"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/cl_content"
+        android:minHeight="@dimen/m90"
+        android:layout_marginLeft="@dimen/m10"
+        android:layout_marginRight="@dimen/m10"
+        app:bga_snpl_deleteDrawable="@drawable/delete_image"
+        app:bga_snpl_deleteDrawableOverlapQuarter="false"
+        app:bga_snpl_editable="true"
+        app:bga_snpl_itemCornerRadius="0dp"
+        app:bga_snpl_itemSpanCount="3"
+        app:bga_snpl_itemWhiteSpacing="5dp"
+        app:bga_snpl_itemWidth="@dimen/m90"
+        app:bga_snpl_maxItemCount="9"
+        app:bga_snpl_placeholderDrawable="@mipmap/bga_pp_ic_holder_dark"
+        app:bga_snpl_plusDrawable="@drawable/add_image_moren"
+        app:bga_snpl_plusEnable="true"
+        app:bga_snpl_sortable="true"
+        android:layout_marginTop="@dimen/m10"/>
+
 </RelativeLayout>
