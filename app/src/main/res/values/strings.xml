@@ -399,4 +399,26 @@
     <string name="tv_know">我知道了</string>
     <string name="vunue_info">场馆信息</string>
     <string name="tv_Capacity">容纳人数</string>
+
+
+    <string name="class_name">课程名称</string>
+    <string name="class_type">课程类型</string>
+    <string name="class_price">课程价格</string>
+    <string name="class_time">课程时长</string>
+    <string name="class_jieshao">课程简介</string>
+    <string name="class_shihe">适合人群</string>
+    <string name="class_zhuyi">注意事项</string>
+    <string name="tv_loading_tips">您已申请，请耐心等待场馆回应。\n或可至 我的-授权场馆 中继续申请。</string>
+    <string name="team_room">团课房间</string>
+    <string name="team_name">团课名称</string>
+    <string name="team_type">团课类型</string>
+    <string name="team_cycle">课程循环</string>
+    <string name="team_date">课程时间</string>
+    <string name="team_logo">封面图</string>
+    <string name="team_class_img">授课图</string>
+    <string name="jujue">拒绝</string>
+    <string name="jieshou">接受</string>
+    <string name="team_goal">训练目标</string>
+    <string name="team_difficulty">训练难度</string>
+    <string name="team_teacher">团课教练</string>
 </resources>

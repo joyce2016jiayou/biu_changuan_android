@@ -70,9 +70,7 @@ class RolesManageActivity : BaseActivity() {
         rv_roles.layoutManager = LinearLayoutManager(this)
         rv_roles.adapter = adapter
         adapter!!.setOnItemChildClickListener { adapter, view, position ->
-            SuperCustomToast.getInstance(this)
-                    .show("删除")
-            deletePop()
+            deletePop(position)
         }
     }
 
@@ -120,7 +118,7 @@ class RolesManageActivity : BaseActivity() {
     }
 
 
-    private fun deletePop(){
+    private fun deletePop(position: Int){
         XPopup.Builder(this)
                 .autoOpenSoftInput(false)
                 .autoFocusEditText(false)
@@ -135,7 +133,7 @@ class RolesManageActivity : BaseActivity() {
 
                             view.findViewById<TextView>(R.id.tv_add)
                                     .setOnClickListener {
-                                        popup.dismiss()
+                                        deleteRoles(popup,position)
                                     }
 
                         })).show()
@@ -171,6 +169,31 @@ class RolesManageActivity : BaseActivity() {
     /**
      * 删除用户操作
      */
+    private fun deleteRoles(popup: BasePopupView,position:Int){
+        val deleteData:MutableList<RoleBean.RoleEntity> = ArrayList()
+        data[position].type = 0
+        data[position].gymAreaNum = SpUtils.getString(applicationContext,AppConstants.CHANGGUAN_NUM)
+        data[position].userName = data[position].name
+        deleteData.add(data[position])
+        val submit = RoleBean()
+        submit.userList = deleteData
+
+        subscription = Network.getInstance("删除用户", applicationContext)
+                .binding_role(submit, ProgressSubscriber("删除用户",
+                        object : SubscriberOnNextListener<Bean<Any>> {
+                            override fun onNext(roleBeanBean: Bean<Any>) {
+                                data.removeAt(position)
+                                adapter!!.notifyItemRemoved(position)//刷新被删除的地方
+                                adapter!!.notifyItemRangeChanged(position, adapter!!.itemCount) //刷新被删除数据，以及其后面的数据
+                                Toast.makeText(applicationContext,roleBeanBean.message,Toast.LENGTH_SHORT).show()
+                            }
+
+                            override fun onError(error: String) {
+                                Toast.makeText(applicationContext, error, Toast.LENGTH_SHORT).show()
+                            }
+                        }, this, true))
+        popup.dismiss()
+    }
 
     /**
      * 新增用户操作
@@ -189,16 +212,18 @@ class RolesManageActivity : BaseActivity() {
         }
         val role:Int = when(roles){
             "经理"-> {
-                1
+                2
             }
             "前台"-> {
-                2
+                3
             }
             else -> {
                 Toast.makeText(applicationContext, "职位不能为空！", Toast.LENGTH_SHORT).show()
                 return
             }
         }
+
+        val addData:MutableList<RoleBean.RoleEntity> = ArrayList()
         val roleBean = RoleBean.RoleEntity()
         roleBean.userName = name
         roleBean.phone = phone
@@ -206,9 +231,24 @@ class RolesManageActivity : BaseActivity() {
         roleBean.type = 1
         roleBean.gymAreaNum = SpUtils.getString(applicationContext,AppConstants.CHANGGUAN_NUM)
 
-        data.add(roleBean)
-        adapter!!.notifyDataSetChanged()
+        addData.add(roleBean)
+//        adapter!!.notifyDataSetChanged()
 
+        val submit = RoleBean()
+        submit.userList = addData
+
+        subscription = Network.getInstance("新增用户", applicationContext)
+                .binding_role(submit, ProgressSubscriber("新增用户",
+                        object : SubscriberOnNextListener<Bean<Any>> {
+                            override fun onNext(roleBeanBean: Bean<Any>) {
+                                data.add(roleBean)
+                                adapter!!.notifyDataSetChanged()
+                            }
+
+                            override fun onError(error: String) {
+                                Toast.makeText(applicationContext, error, Toast.LENGTH_SHORT).show()
+                            }
+                        }, this, true))
         popup.dismiss()
 
     }

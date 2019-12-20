@@ -1,11 +1,13 @@
 package com.noplugins.keepfit.android.fragment.use.team
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.noplugins.keepfit.android.R
+import com.noplugins.keepfit.android.activity.use.TeamInfoActivity
 import com.noplugins.keepfit.android.adapter.ManagerTeamClassAdapter
 import com.noplugins.keepfit.android.base.BaseFragment
 import com.noplugins.keepfit.android.bean.use.ManagerBean
@@ -75,13 +77,13 @@ class ShelvesFragment : BaseFragment()  {
             when(view.id){
                 R.id.rl_jump -> {
                     //跳转到详情页 需要携带状态
-//                    val toInfo = Intent(activity, TeamInfoActivity::class.java)
-//                    val bundle = Bundle()
-//                    bundle.putInt("type",1)
-//                    bundle.putString("courseNum",datas[position].courseNum)
-//                    bundle.putInt("status",datas[position].status)
-//                    toInfo.putExtras(bundle)
-//                    startActivity(toInfo)
+                    val toInfo = Intent(activity, TeamInfoActivity::class.java)
+                    val bundle = Bundle()
+                    bundle.putInt("type",1)
+                    bundle.putString("courseNum",datas[position].courseNum)
+                    bundle.putInt("status",datas[position].status)
+                    toInfo.putExtras(bundle)
+                    startActivity(toInfo)
                 }
             }
         }

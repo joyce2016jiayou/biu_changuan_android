@@ -671,4 +671,22 @@ public class DateHelper {
         calendar.setTimeInMillis(start_time);
         return simple1.format(calendar.getTimeInMillis());
     }
+
+    /**
+     * 根据long毫秒数，获得时分秒
+     **/
+    public static String getDateByLong(long time) {
+        SimpleDateFormat sdf = new SimpleDateFormat(YYYY_MM_DD_HH_MM);
+        String str = sdf.format(new Date(time));
+        return str.split(" ")[1];
+    }
+
+    /**
+     * 根据long毫秒数，获得时分秒
+     **/
+    public static String getDateDayByLong(long time) {
+        SimpleDateFormat sdf = new SimpleDateFormat(YYYY_MM_DD_HH_MM);
+        String str = sdf.format(new Date(time));
+        return str.split(" ")[0];
+    }
 }

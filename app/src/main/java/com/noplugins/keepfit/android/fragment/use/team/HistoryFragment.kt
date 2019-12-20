@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import com.noplugins.keepfit.android.R
+import com.noplugins.keepfit.android.activity.use.TeamInfoActivity
 import com.noplugins.keepfit.android.adapter.ManagerTeamClassAdapter
 import com.noplugins.keepfit.android.base.BaseFragment
 import com.noplugins.keepfit.android.bean.use.ManagerBean
@@ -82,13 +83,13 @@ class HistoryFragment : BaseFragment()  {
             when(view.id){
                 R.id.rl_jump -> {
                     // 跳转到详情页 需要携带状态
-//                    val toInfo = Intent(activity, TeamInfoActivity::class.java)
-//                    val bundle = Bundle()
-//                    bundle.putInt("type",3)
-//                    bundle.putString("courseNum",datas[position].courseNum)
-//                    bundle.putInt("status",datas[position].status)
-//                    toInfo.putExtras(bundle)
-//                    startActivity(toInfo)
+                    val toInfo = Intent(activity, TeamInfoActivity::class.java)
+                    val bundle = Bundle()
+                    bundle.putInt("type",3)
+                    bundle.putString("courseNum",datas[position].courseNum)
+                    bundle.putInt("status",datas[position].status)
+                    toInfo.putExtras(bundle)
+                    startActivity(toInfo)
                 }
                 R.id.tv_yaoqin_edit -> {
 
