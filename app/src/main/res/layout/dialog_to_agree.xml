@@ -42,7 +42,7 @@
                 android:textColor="@color/color_4A4A4A"
                 android:textSize="18sp"
                 android:layout_marginTop="@dimen/m10"
-                android:layout_marginBottom="@dimen/m15"/>
+                android:layout_marginBottom="@dimen/m10"/>
 
             <TextView
                 android:id="@+id/label_agree_tips"
@@ -52,9 +52,8 @@
                 android:gravity="center"
                 android:textColor="@color/color_4A4A4A"
                 android:textSize="18sp"
-                android:layout_marginTop="@dimen/m10"
-                android:layout_below="@+id/label_add_role"
-                android:layout_marginBottom="@dimen/m15"/>
+                android:layout_marginBottom="@dimen/m15"
+                android:layout_below="@+id/label_add_role"/>
             <TextView
                 android:id="@+id/tv_username"
                 android:layout_width="@dimen/m70"
@@ -64,10 +63,10 @@
                 android:gravity="center_vertical"
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="@dimen/m20"
-                android:layout_toLeftOf="@+id/et_username"
+                android:layout_toLeftOf="@+id/ms_room_type"
                 style="@style/tv_subtitle"/>
             <lib.demo.spinner.MaterialSpinner
-                android:id="@+id/et_username"
+                android:id="@+id/ms_room_type"
                 android:layout_width="@dimen/m132"
                 android:layout_height="@dimen/m31"
                 android:gravity="center"
@@ -80,7 +79,7 @@
                 spinner:ms_text_color="@color/color_181818"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="@dimen/m20"
-                android:layout_below="@+id/label_add_role"/>
+                android:layout_below="@+id/label_agree_tips"/>
 
 
             <TextView
@@ -93,10 +92,10 @@
                 android:layout_marginTop="@dimen/m20"
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="@dimen/m20"
-                android:layout_toLeftOf="@+id/et_phone"
+                android:layout_toLeftOf="@+id/ms_room_name"
                 android:layout_below="@+id/tv_username"/>
             <lib.demo.spinner.MaterialSpinner
-                android:id="@+id/et_phone"
+                android:id="@+id/ms_room_name"
                 android:layout_width="@dimen/m132"
                 android:layout_height="@dimen/m31"
                 android:gravity="center"
@@ -117,22 +116,22 @@
                 android:id="@+id/tv_roles_select"
                 android:layout_width="@dimen/m70"
                 android:layout_height="@dimen/m31"
-                android:text="@string/tv_roles_select"
+                android:text="房间可容纳人数"
                 style="@style/tv_subtitle"
                 android:layout_marginTop="@dimen/m20"
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="@dimen/m20"
-                android:layout_toLeftOf="@+id/et_phone"
+                android:layout_toLeftOf="@+id/ms_room_name"
                 android:gravity="center_vertical"
                 android:layout_below="@+id/tv_phone"/>
 
             <TextView
-                android:id="@+id/et_role"
+                android:id="@+id/tv_max_number"
                 android:layout_width="@dimen/m132"
                 android:layout_height="@dimen/m31"
                 android:gravity="center"
-                style="@style/tv_subtitle_13"
-                android:text="@string/tv_select"
+                style="@style/tv_subtitle"
+                android:text=""
                 android:background="@drawable/shape_btn_bg_gray"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="@dimen/m20"

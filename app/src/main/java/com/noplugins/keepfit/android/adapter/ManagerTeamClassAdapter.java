@@ -87,6 +87,7 @@ public class ManagerTeamClassAdapter extends BaseQuickAdapter<ManagerBean.Course
         helper.addOnClickListener(R.id.tv_agin);
         helper.addOnClickListener(R.id.tv_jujue);
         helper.addOnClickListener(R.id.tv_jieshou);
+        helper.addOnClickListener(R.id.tv_yaoqin_edit);
         helper.addOnClickListener(R.id.rl_jump);
 
     }

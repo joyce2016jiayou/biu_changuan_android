@@ -92,8 +92,8 @@ class RolesManageActivity : BaseActivity() {
                 .asCustom(CenterPopupView(this,R.layout.dialog_to_roles,
                         ViewCallBack { view, popup ->
 
-                            val name = view.findViewById<EditText>(R.id.et_username)
-                            val phone = view.findViewById<EditText>(R.id.et_phone)
+                            val name = view.findViewById<EditText>(R.id.ms_room_type)
+                            val phone = view.findViewById<EditText>(R.id.ms_room_name)
                             val role = view.findViewById<MaterialSpinner>(R.id.et_role)
 
                             val typeArrays =

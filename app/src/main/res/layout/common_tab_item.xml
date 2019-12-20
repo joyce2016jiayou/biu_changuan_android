@@ -10,7 +10,8 @@
 
     <TextView
         android:id="@+id/tab_item_text"
-        style="@style/tv_subtitle"
+        android:textSize="15sp"
+        android:textColor="@color/color_4A4A4A"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="首页" />
