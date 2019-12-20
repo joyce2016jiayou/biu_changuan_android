@@ -100,14 +100,14 @@ public class RiChengFragment extends ViewPagerFragment {
     LinearLayout title_layout;
     @BindView(R.id.xiala_img)
     ImageView xiala_img;
-    @BindView(R.id.date_tv)
-    TextView date_tv;
-    @BindView(R.id.week_tv)
-    TextView week_tv;
+//    @BindView(R.id.date_tv)
+//    TextView date_tv;
+//    @BindView(R.id.week_tv)
+//    TextView week_tv;
     @BindView(R.id.saoma_btn)
     ImageView saoma_btn;
-    @BindView(R.id.more_btn)
-    LinearLayout more_btn;
+//    @BindView(R.id.more_btn)
+//    LinearLayout more_btn;
     @BindView(R.id.status_tv)
     TextView status_tv;
     @BindView(R.id.types_tv)
@@ -171,8 +171,8 @@ public class RiChengFragment extends ViewPagerFragment {
 
     private void initview() {
         select_date_str = DateHelper.get_date(cDate[0], cDate[1], cDate[2]);
-        date_tv.setText(select_date_str);
-        week_tv.setText(DateHelper.getWeek(select_date_str));
+        //date_tv.setText(select_date_str);
+        //week_tv.setText(DateHelper.getWeek(select_date_str));
         //获取日历数据
         get_rili_resouce();
         //获取类型和状态
@@ -254,13 +254,14 @@ public class RiChengFragment extends ViewPagerFragment {
                         }).start();
             }
         });
-        more_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), AddClassActivity.class);
-                getActivity().startActivity(intent);
-            }
-        });
+        //课程管理
+//        more_btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(getActivity(), AddClassActivity.class);
+//                getActivity().startActivity(intent);
+//            }
+//        });
         //选择状态
         select_status_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -441,8 +442,8 @@ public class RiChengFragment extends ViewPagerFragment {
                 //日视角刷新数据
                 select_date_str = DateHelper.get_date(date.getSolar()[0], date.getSolar()[1], date.getSolar()[2]);
                 //Log.e("选择的日期", select_date_str);
-                date_tv.setText(select_date_str);
-                week_tv.setText(DateHelper.getWeek(select_date_str));
+                //date_tv.setText(select_date_str);
+                //week_tv.setText(DateHelper.getWeek(select_date_str));
                 //刷新课程
                 init_class_date_resource();
             }

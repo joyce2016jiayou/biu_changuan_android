@@ -41,17 +41,17 @@
                 android:id="@+id/store_type_tv"
                 android:layout_width="@dimen/m150"
                 android:layout_height="wrap_content"
-                android:text="场馆地址"
-                android:gravity="right"
                 android:layout_gravity="center_vertical"
+                android:gravity="right"
+                android:text="场馆地址"
                 android:textColor="@color/color_181818"
                 android:textSize="15sp" />
 
             <ImageView
                 android:layout_width="@dimen/m16"
                 android:layout_height="@dimen/m16"
-                android:layout_marginLeft="@dimen/m10"
                 android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/m10"
                 android:src="@drawable/icon_switch" />
 
         </LinearLayout>
@@ -81,14 +81,16 @@
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
                     android:layout_marginRight="35dp"
+                    android:layout_alignParentLeft="true"
                     android:layout_toLeftOf="@id/title_layout"
                     android:background="@android:color/transparent"
-                    android:gravity="center">
+                    android:gravity="left|center_vertical">
 
                     <ImageView
                         android:id="@+id/left_img"
-                        android:layout_width="16dp"
-                        android:layout_height="16dp"
+                        android:layout_width="@dimen/m20"
+                        android:layout_height="@dimen/m20"
+                        android:layout_marginLeft="@dimen/m20"
                         android:background="@drawable/last" />
                 </LinearLayout>
 
@@ -123,32 +125,35 @@
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="35dp"
+                    android:layout_alignParentRight="true"
                     android:layout_toRightOf="@+id/title_layout"
                     android:background="@android:color/transparent"
-                    android:gravity="center">
+                    android:gravity="right|center_vertical">
 
                     <ImageView
                         android:id="@+id/right_img"
-                        android:layout_width="16dp"
-                        android:layout_height="16dp"
+                        android:layout_width="@dimen/m20"
+                        android:layout_height="@dimen/m20"
+                        android:layout_marginRight="@dimen/m20"
                         android:background="@drawable/next" />
                 </LinearLayout>
 
 
             </RelativeLayout>
 
-            <www.linwg.org.lib.LCardView xmlns:app="http://schemas.android.com/tools"
+            <www.linwg.org.lib.LCardView
+                xmlns:app="http://schemas.android.com/tools"
                 android:id="@+id/clander_layout"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/m200"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/m10"
                 android:layout_marginTop="@dimen/m5"
                 android:layout_marginRight="@dimen/m10"
                 android:gravity="center"
                 android:orientation="vertical"
-                app:cornerRadius="@dimen/m8"
+                app:cornerRadius="@dimen/m15"
                 app:shadowSize="@dimen/m2"
-                app:shadowStartAlpha="10">
+                app:shadowStartAlpha="15">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -164,6 +169,7 @@
 
                         <com.othershe.calendarview.weiget.WeekView
                             android:layout_width="match_parent"
+                            android:layout_marginTop="@dimen/m10"
                             android:layout_height="@dimen/m20" />
 
                         <com.othershe.calendarview.weiget.CalendarView
@@ -173,7 +179,7 @@
                             android:layout_marginLeft="@dimen/m10"
                             android:layout_marginRight="@dimen/m10"
                             calendarview:choose_type="single"
-                            calendarview:day_bg="@drawable/blue_circle"
+                            calendarview:day_bg="@drawable/yellow_circle"
                             calendarview:show_holiday="false"
                             calendarview:show_lunar="false"
                             calendarview:show_term="false"
@@ -185,42 +191,6 @@
                 </LinearLayout>
             </www.linwg.org.lib.LCardView>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/m20">
-
-                <TextView
-                    android:id="@+id/date_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/m20"
-                    android:text="2019-08-15"
-                    android:textColor="#ff000000"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:id="@+id/week_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/m11"
-                    android:layout_toRightOf="@+id/date_tv"
-                    android:text="星期二"
-                    android:textColor="#ff000000"
-                    android:textSize="16sp" />
-
-                <ImageView
-                    android:id="@+id/saoma_btn"
-                    android:layout_width="@dimen/m25"
-                    android:layout_height="@dimen/m25"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/m46"
-                    android:src="@drawable/saoma_icon" />
-            </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -229,26 +199,27 @@
 
                 <RelativeLayout
                     android:id="@+id/select_status_btn"
-                    android:layout_width="@dimen/m90"
+                    android:layout_width="@dimen/m100"
                     android:layout_height="@dimen/m29"
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/m18"
-                    android:background="@drawable/filter_box1">
+                    android:layout_marginLeft="@dimen/m24"
+                    android:background="@drawable/shape_xiala_bg">
 
                     <TextView
                         android:id="@+id/status_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
                         android:layout_centerVertical="true"
+                        android:layout_marginStart="17dp"
+                        android:layout_marginLeft="@dimen/m15"
                         android:background="@null"
                         android:enabled="false"
-                        android:hint="@string/tv38"
-                        android:paddingLeft="@dimen/m15"
-                        android:text="全部状态"
+                        android:text="@string/tv163"
                         android:textColor="@color/top_heiziti"
                         android:textColorHint="@color/color_929292"
-                        android:textSize="13sp" />
+                        android:textSize="15sp" />
 
                     <ImageView
                         android:layout_width="@dimen/m14"
@@ -256,19 +227,19 @@
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_gravity="right|center_vertical"
-                        android:layout_marginRight="@dimen/m2"
+                        android:layout_marginRight="@dimen/m5"
                         android:src="@drawable/xiala" />
 
                 </RelativeLayout>
 
                 <RelativeLayout
                     android:id="@+id/select_types_btn"
-                    android:layout_width="@dimen/m90"
+                    android:layout_width="@dimen/m100"
                     android:layout_height="@dimen/m29"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/m10"
                     android:layout_toRightOf="@+id/select_status_btn"
-                    android:background="@drawable/filter_box1">
+                    android:background="@drawable/shape_xiala_bg">
 
                     <TextView
                         android:id="@+id/types_tv"
@@ -277,12 +248,11 @@
                         android:layout_centerVertical="true"
                         android:background="@null"
                         android:enabled="false"
-                        android:hint="@string/tv38"
                         android:paddingLeft="@dimen/m15"
-                        android:text="全部类型"
+                        android:text="@string/tv164"
                         android:textColor="@color/top_heiziti"
                         android:textColorHint="@color/color_929292"
-                        android:textSize="13sp" />
+                        android:textSize="15sp" />
 
                     <ImageView
                         android:layout_width="@dimen/m14"
@@ -290,34 +260,19 @@
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_gravity="right|center_vertical"
-                        android:layout_marginRight="@dimen/m2"
+                        android:layout_marginRight="@dimen/m5"
                         android:src="@drawable/xiala" />
 
                 </RelativeLayout>
 
-                <LinearLayout
-                    android:id="@+id/more_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <ImageView
+                    android:id="@+id/saoma_btn"
+                    android:layout_width="@dimen/m40"
+                    android:layout_height="@dimen/m40"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/m20"
-                    android:gravity="center_vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="课程管理"
-                        android:textColor="#ff181818"
-                        android:textSize="15sp" />
-
-                    <ImageView
-                        android:layout_width="@dimen/m15"
-                        android:layout_height="@dimen/m15"
-                        android:layout_marginLeft="@dimen/m8"
-                        android:src="@drawable/icon_more" />
-
-                </LinearLayout>
+                    android:layout_marginRight="@dimen/m24"
+                    android:src="@drawable/saoma_icon" />
 
             </RelativeLayout>
 
@@ -329,6 +284,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/class_recycler_view"
                     android:layout_width="match_parent"
+                    android:layout_marginBottom="@dimen/m20"
                     android:layout_height="match_parent" />
             </RelativeLayout>
         </LinearLayout>

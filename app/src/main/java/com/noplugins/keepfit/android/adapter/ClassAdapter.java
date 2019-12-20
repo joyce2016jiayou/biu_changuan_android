@@ -3,6 +3,7 @@ package com.noplugins.keepfit.android.adapter;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -64,7 +65,7 @@ public class ClassAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder> i
             item_view = LayoutInflater.from(context.getActivity()).inflate(R.layout.select_date_empty_view, parent, false);
             holder = new EmptyViewHolder(item_view, false);
         } else if (viewType == ITEM_VIEW) {
-            item_view = LayoutInflater.from(context.getActivity()).inflate(R.layout.class_date_item, parent, false);
+            item_view = LayoutInflater.from(context.getActivity()).inflate(R.layout.class_date_item_layout, parent, false);
             holder = new WeiJieShuViewHolder(item_view, true);
         }
         return holder;
@@ -85,12 +86,24 @@ public class ClassAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder> i
             RiChengBean.ResultBean resultBean = classDateBeans.get(position);
 
             if (resultBean.getCourseStatus() == 1) {//已结束
-                holder.status_img.setImageResource(R.drawable.over);
+                holder.status_layout.setBackgroundResource(R.drawable.shape_yijieshu_icon);
+                holder.status_tv_right_top.setText("已结束");
+                holder.status_tv_right_top.setTextColor(context.getResources().getColor(R.color.color_F9CE0F));
+
             } else if (resultBean.getCourseStatus() == 2) {//未开始
-                holder.status_img.setImageResource(R.drawable.weikaishi_icon);
+                holder.status_layout.setBackgroundResource(R.drawable.shape_weikaishi_icon);
+                holder.status_tv_right_top.setText("未开始");
+                holder.status_tv_right_top.setTextColor(context.getResources().getColor(R.color.color_F9CE0F));
+
+
             } else {//进行中
-                holder.status_img.setImageResource(R.drawable.ongoing);
+                holder.status_layout.setBackgroundResource(R.drawable.shape_jinxingzhong_icon);
+                holder.status_tv_right_top.setText("进行中");
+                holder.status_tv_right_top.setTextColor(context.getResources().getColor(R.color.color_4A4A4A));
+
             }
+
+
             String daochang_person = "";
             if (resultBean.getApplayNum().length() > 0) {
                 daochang_person = resultBean.getApplayNum();
@@ -139,7 +152,7 @@ public class ClassAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder> i
             holder.phone_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (resultBean.getCourseType() == 1 || resultBean.getCourseType() == 2){
+                    if (resultBean.getCourseType() == 1 || resultBean.getCourseType() == 2) {
                         call_pop(holder, resultBean.getTeacherPhone());
                     } else {
 
@@ -290,9 +303,9 @@ public class ClassAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder> i
     public class WeiJieShuViewHolder extends RecyclerView.ViewHolder {
         public View view;
         public TextView coach_name, status_tv, type_icon_tv, phone_or_name_tv,
-                time_tv, class_type, money_tv,status1_tv;
-        public ImageView phone_btn, status_img, phone_img;
-        public LinearLayout type_icon_bg;
+                time_tv, class_type, money_tv, status1_tv, status_tv_right_top;
+        public ImageView phone_btn, phone_img;
+        public LinearLayout type_icon_bg, status_layout;
 
         public WeiJieShuViewHolder(View itemView, boolean isItem) {
             super(itemView);
@@ -305,11 +318,12 @@ public class ClassAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder> i
                 type_icon_tv = view.findViewById(R.id.type_icon_tv);
                 type_icon_bg = view.findViewById(R.id.type_icon_bg);
                 phone_or_name_tv = view.findViewById(R.id.phone_or_name_tv);
-                status_img = view.findViewById(R.id.status_img);
                 time_tv = view.findViewById(R.id.time_tv);
                 class_type = view.findViewById(R.id.class_type);
                 money_tv = view.findViewById(R.id.money_tv);
                 phone_img = view.findViewById(R.id.phone_img);
+                status_layout = view.findViewById(R.id.status_layout);
+                status_tv_right_top = view.findViewById(R.id.status_tv_right_top);
             }
         }
     }

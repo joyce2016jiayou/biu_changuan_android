@@ -74,7 +74,7 @@
         android:layout_height="match_parent"
         android:layout_marginTop="-5dp"
         calendarview:choose_type="single"
-        calendarview:day_bg="@drawable/blue_circle"
+        calendarview:day_bg="@drawable/yellow_circle"
         calendarview:show_holiday="false"
         calendarview:show_lunar="false"
         calendarview:show_term="false"
