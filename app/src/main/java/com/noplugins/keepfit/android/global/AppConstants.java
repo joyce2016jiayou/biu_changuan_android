@@ -1,8 +1,4 @@
 package com.noplugins.keepfit.android.global;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class AppConstants {
 
     public static final String TOKEN = "login_token";
@@ -19,6 +15,8 @@ public class AppConstants {
     public static final String CG_NAME = "changguan_name";
     public static String IS_SET_ALIAS = "is_set_alias";
     public static final String FRAGMENT_SIZE = "fragment_size";
+    public static int ADD_CLASS_SELECT_IMAGES_SIZE = 0;
+    public static int SELECT_IMAGES_SIZE = 0;
 
 
     //团课同意

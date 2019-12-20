@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.EditClassDetaiActivity">
+
+    <RelativeLayout
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/m70"
+        android:background="@color/white">
+
+        <ImageView
+            android:layout_width="@dimen/m22"
+            android:layout_height="@dimen/m19"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="@dimen/m20"
+            android:layout_marginBottom="@dimen/m10"
+            android:src="@drawable/icon_back" />
+
+        <TextView
+            android:id="@+id/title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/m8"
+            android:text="@string/tv74"
+            android:textColor="@color/top_heiziti"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/done_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginRight="@dimen/m24"
+            android:layout_marginBottom="@dimen/m10"
+            android:text="@string/tv123"
+            android:textColor="@color/top_heiziti"
+            android:textSize="15sp" />
+
+        <LinearLayout
+            android:id="@+id/done_btn"
+            android:layout_width="@dimen/m100"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:background="@color/transparent"
+            android:orientation="vertical" />
+
+        <LinearLayout
+            android:id="@+id/back_btn"
+            android:layout_width="@dimen/m100"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:background="@color/transparent"
+            android:orientation="vertical" />
+    </RelativeLayout>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/m20"
+        android:layout_marginTop="@dimen/m20"
+        android:text="@string/tv171" />
+
+
+    <www.linwg.org.lib.LCardView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/m191"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/m20"
+        android:layout_marginTop="@dimen/m10"
+        android:layout_marginRight="@dimen/m20"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:cornerRadius="@dimen/m8"
+        app:shadowSize="@dimen/m2"
+        app:shadowStartAlpha="10">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/edit_tv"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginLeft="@dimen/m10"
+                android:layout_marginTop="@dimen/m10"
+                android:layout_marginRight="@dimen/m10"
+                android:layout_weight="1"
+                android:background="@null"
+                android:maxLength="300"
+                android:gravity="left|top"
+                android:padding="@dimen/m10"
+                android:textColor="@color/color_4A4A4A"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/number_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="right"
+                android:layout_marginRight="@dimen/m10"
+                android:layout_marginBottom="@dimen/m10"
+                android:text="0/300"
+                android:textColor="@color/color_929292"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </www.linwg.org.lib.LCardView>
+</LinearLayout>

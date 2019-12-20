@@ -33,7 +33,6 @@ import com.noplugins.keepfit.android.entity.InformationEntity;
 import com.noplugins.keepfit.android.entity.ItemBean;
 import com.noplugins.keepfit.android.entity.QiNiuToken;
 import com.noplugins.keepfit.android.global.AppConstants;
-import com.noplugins.keepfit.android.resource.ValueResources;
 import com.noplugins.keepfit.android.util.GlideEngine;
 import com.noplugins.keepfit.android.util.SpUtils;
 import com.noplugins.keepfit.android.util.TimeCheckUtil;
@@ -296,8 +295,8 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
             upList_iamges.add(bean);
         }
         mPhotosSnpl.setData(strings);
-        ValueResources.select_iamges_size = strings.size();
-        select_numbers_tv.setText(ValueResources.select_iamges_size + "/9");
+        AppConstants.SELECT_IMAGES_SIZE = strings.size();
+        select_numbers_tv.setText(AppConstants.SELECT_IMAGES_SIZE + "/9");
 
         String[] biaoqian = cg.getArea().getFacility().split(",");
         for (int i = 0; i < biaoqian.length; i++) {
@@ -613,10 +612,10 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
     @Override
     public void onClickAddNinePhotoItem(CCRSortableNinePhotoLayout sortableNinePhotoLayout, View view, int position, ArrayList<String> models) {
         //设置最多只能上传9张图片
-        if (ValueResources.select_iamges_size >= 9) {
+        if (AppConstants.SELECT_IMAGES_SIZE >= 9) {
             Toast.makeText(this, "只能上传9张图片哦～", Toast.LENGTH_SHORT).show();
-        } else if (ValueResources.select_iamges_size < 9) {
-            max_num = 9 - ValueResources.select_iamges_size;
+        } else if (AppConstants.SELECT_IMAGES_SIZE < 9) {
+            max_num = 9 - AppConstants.SELECT_IMAGES_SIZE;
             EasyPhotos.createAlbum(this, true, GlideEngine.getInstance())
                     .setFileProviderAuthority("com.noplugins.keepfit.android.fileprovider")
                     .setPuzzleMenu(false)
@@ -638,8 +637,8 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
         }
 
 
-        ValueResources.select_iamges_size = ValueResources.select_iamges_size - 1;
-        select_numbers_tv.setText(ValueResources.select_iamges_size + "/9");
+        AppConstants.SELECT_IMAGES_SIZE = AppConstants.SELECT_IMAGES_SIZE - 1;
+        select_numbers_tv.setText(AppConstants.SELECT_IMAGES_SIZE + "/9");
     }
 
     @Override
@@ -665,8 +664,8 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
                 strings.addAll(resultPaths);
                 jiugongge_iamges.addAll(resultPaths);
                 mPhotosSnpl.setData(strings);//设置九宫格
-                ValueResources.select_iamges_size = strings.size();
-                select_numbers_tv.setText(ValueResources.select_iamges_size + "/9");
+                AppConstants.SELECT_IMAGES_SIZE = strings.size();
+                select_numbers_tv.setText(AppConstants.SELECT_IMAGES_SIZE+ "/9");
 
                 return;
             } else {//添加icon,上传icon

@@ -3,6 +3,7 @@ package com.noplugins.keepfit.android.activity.use
 
 import android.Manifest
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Bundle
@@ -14,6 +15,7 @@ import com.amap.api.location.AMapLocationClient
 import com.amap.api.location.AMapLocationClientOption
 import com.google.android.material.tabs.TabLayout
 import com.noplugins.keepfit.android.R
+import com.noplugins.keepfit.android.activity.AddClassItemActivity
 //import com.noplugins.keepfit.android.activity.ClassShouquanActivity
 import com.noplugins.keepfit.android.adapter.TabItemAdapter
 import com.noplugins.keepfit.android.base.BaseActivity
@@ -36,7 +38,7 @@ import pub.devrel.easypermissions.AfterPermissionGranted
 import pub.devrel.easypermissions.EasyPermissions
 import java.util.ArrayList
 
-class TeamClassManagerActivity : BaseActivity(){
+class TeamClassManagerActivity : BaseActivity() {
 
     private val mFragments = ArrayList<Fragment>()
     private val titleList = ArrayList<String>()
@@ -60,11 +62,11 @@ class TeamClassManagerActivity : BaseActivity(){
 
     override fun doBusiness(mContext: Context?) {
         add_btn.setOnClickListener {
-//            val intent = Intent(this, TeacherSelectActivity::class.java)
-//            startActivity(intent)
+            val intent = Intent(this, AddClassItemActivity::class.java)
+            startActivity(intent)
         }
         back_btn.setOnClickListener {
-            setResult(SpUtils.getInt(applicationContext,AppConstants.FRAGMENT_SIZE)-1)
+            setResult(SpUtils.getInt(applicationContext, AppConstants.FRAGMENT_SIZE) - 1)
             finish()
         }
     }
@@ -84,7 +86,7 @@ class TeamClassManagerActivity : BaseActivity(){
             enhance_tab_layout.addTab(it)
         }
         enhance_tab_layout
-        val myAdapter = TabItemAdapter(supportFragmentManager,titleList, mFragments)// 初始化adapter
+        val myAdapter = TabItemAdapter(supportFragmentManager, titleList, mFragments)// 初始化adapter
         view_pager.adapter = myAdapter // 设置adapter
         view_pager.currentItem = 0
 //        setTabTextColorAndImageView(0)// 更改text的颜色还有图片
@@ -129,7 +131,7 @@ class TeamClassManagerActivity : BaseActivity(){
     }
 
     override fun onBackPressed() {
-        setResult(SpUtils.getInt(applicationContext,AppConstants.FRAGMENT_SIZE)-1)
+        setResult(SpUtils.getInt(applicationContext, AppConstants.FRAGMENT_SIZE) - 1)
         finish()
     }
 

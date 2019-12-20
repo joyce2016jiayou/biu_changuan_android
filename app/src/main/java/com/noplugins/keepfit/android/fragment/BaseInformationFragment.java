@@ -60,7 +60,7 @@ import com.noplugins.keepfit.android.entity.InformationEntity;
 import com.noplugins.keepfit.android.entity.ItemBean;
 import com.noplugins.keepfit.android.entity.QiNiuToken;
 import com.noplugins.keepfit.android.entity.UrlEntity;
-import com.noplugins.keepfit.android.resource.ValueResources;
+import com.noplugins.keepfit.android.global.AppConstants;
 import com.noplugins.keepfit.android.util.BaseUtils;
 import com.noplugins.keepfit.android.util.GlideEngine;
 import com.noplugins.keepfit.android.util.data.StringsHelper;
@@ -346,7 +346,7 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
     @Override
     public void onDestroy() {
         super.onDestroy();
-        ValueResources.select_iamges_size = 0;
+        AppConstants.SELECT_IMAGES_SIZE = 0;
 
     }
 
@@ -1023,7 +1023,6 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
 
 
     private void time_check(TextView textView, int type) {
-
         picker = new TimePicker(getActivity(), TimeMode.HOUR_24);
         Calendar calendar = Calendar.getInstance();
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
@@ -1100,10 +1099,10 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
     @Override
     public void onClickAddNinePhotoItem(CCRSortableNinePhotoLayout sortableNinePhotoLayout, View view, int position, ArrayList<String> models) {
         //设置最多只能上传9张图片
-        if (ValueResources.select_iamges_size >= 9) {
+        if (AppConstants.SELECT_IMAGES_SIZE >= 9) {
             Toast.makeText(getActivity(), "只能上传9张图片哦～", Toast.LENGTH_SHORT).show();
         } else {
-            max_num = 9 - ValueResources.select_iamges_size;
+            max_num = 9 - AppConstants.SELECT_IMAGES_SIZE;
             EasyPhotos.createAlbum(this, true, GlideEngine.getInstance())
                     .setFileProviderAuthority("com.noplugins.keepfit.android.fileprovider")
                     .setPuzzleMenu(false)
@@ -1116,8 +1115,8 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
     @Override
     public void onClickDeleteNinePhotoItem(CCRSortableNinePhotoLayout sortableNinePhotoLayout, View view, int position, String model, ArrayList<String> models) {
         mPhotosSnpl.removeItem(position);
-        ValueResources.select_iamges_size = ValueResources.select_iamges_size - 1;
-        select_numbers_tv.setText(ValueResources.select_iamges_size + "/9");
+        AppConstants.SELECT_IMAGES_SIZE = AppConstants.SELECT_IMAGES_SIZE - 1;
+        select_numbers_tv.setText(AppConstants.SELECT_IMAGES_SIZE + "/9");
     }
 
     @Override
@@ -1143,8 +1142,8 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
                 boolean selectedOriginal = data.getBooleanExtra(EasyPhotos.RESULT_SELECTED_ORIGINAL, false);
                 strings.addAll(resultPaths);
                 mPhotosSnpl.setData(strings);//设置九宫格
-                ValueResources.select_iamges_size = strings.size();
-                select_numbers_tv.setText(ValueResources.select_iamges_size + "/9");
+                AppConstants.SELECT_IMAGES_SIZE = strings.size();
+                select_numbers_tv.setText(AppConstants.SELECT_IMAGES_SIZE + "/9");
                 return;
             } else if (requestCode == 102) {//添加icon,上传icon
                 ArrayList<String> resultPaths = data.getStringArrayListExtra(EasyPhotos.RESULT_PATHS);

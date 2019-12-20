@@ -23,7 +23,6 @@ import com.noplugins.keepfit.android.bean.ChangguanBean
 import com.noplugins.keepfit.android.bean.DictionaryeBean
 import com.noplugins.keepfit.android.entity.InformationEntity
 import com.noplugins.keepfit.android.global.AppConstants
-import com.noplugins.keepfit.android.resource.ValueResources
 import com.noplugins.keepfit.android.util.BaseUtils
 import com.noplugins.keepfit.android.util.GlideEngine
 import com.noplugins.keepfit.android.util.SpUtils
@@ -373,8 +372,8 @@ class VenueDetailActivity : BaseActivity(),CCRSortableNinePhotoLayout.Delegate  
 
         photos!!.setData(strings)
         photos!!.setDelegate(this)
-        ValueResources.select_iamges_size = strings.size//已选择的数量
-        tvPhotoNum!!.text = "(${ValueResources.select_iamges_size}/9)"
+        AppConstants.SELECT_IMAGES_SIZE  = strings.size//已选择的数量
+        tvPhotoNum!!.text = "(${AppConstants.SELECT_IMAGES_SIZE }/9)"
 
         //logo
         ivLogo!!.setOnClickListener {
@@ -412,11 +411,11 @@ class VenueDetailActivity : BaseActivity(),CCRSortableNinePhotoLayout.Delegate  
     private var maxNum = 0
     override fun onClickAddNinePhotoItem(sortableNinePhotoLayout: CCRSortableNinePhotoLayout?, view: View?, position: Int, models: java.util.ArrayList<String>?) {
         //设置最多只能上传9张图片
-        if (ValueResources.select_iamges_size >= 9) {
+        if (AppConstants.SELECT_IMAGES_SIZE >= 9) {
             Toast.makeText(this, "只能上传9张图片哦～", Toast.LENGTH_SHORT).show()
-        } else if (ValueResources.select_iamges_size < 9) {
+        } else if (AppConstants.SELECT_IMAGES_SIZE  < 9) {
             //选择新的图片
-            maxNum = 9 - ValueResources.select_iamges_size
+            maxNum = 9 - AppConstants.SELECT_IMAGES_SIZE
             EasyPhotos.createAlbum(this, true, GlideEngine.getInstance())
                     .setFileProviderAuthority("com.noplugins.keepfit.android.fileprovider")
                     .setPuzzleMenu(false)
@@ -435,8 +434,8 @@ class VenueDetailActivity : BaseActivity(),CCRSortableNinePhotoLayout.Delegate  
             selectPhotos.removeAt(position - upList.size)
         }
 
-        ValueResources.select_iamges_size = ValueResources.select_iamges_size - 1
-        tvPhotoNum!!.text ="(${ValueResources.select_iamges_size}/9)"
+        AppConstants.SELECT_IMAGES_SIZE = AppConstants.SELECT_IMAGES_SIZE  - 1
+        tvPhotoNum!!.text ="(${AppConstants.SELECT_IMAGES_SIZE }/9)"
     }
 
     override fun onClickNinePhotoItem(sortableNinePhotoLayout: CCRSortableNinePhotoLayout?, view: View?, position: Int, model: String?, models: java.util.ArrayList<String>?) {
@@ -451,8 +450,8 @@ class VenueDetailActivity : BaseActivity(),CCRSortableNinePhotoLayout.Delegate  
                     strings.addAll(resultPaths)
                     selectPhotos.addAll(resultPaths)
                     photos!!.setData(strings)//设置九宫格
-                    ValueResources.select_iamges_size = strings.size
-                    tvPhotoNum!!.text ="(${ValueResources.select_iamges_size}/9)"
+                    AppConstants.SELECT_IMAGES_SIZE  = strings.size
+                    tvPhotoNum!!.text ="(${AppConstants.SELECT_IMAGES_SIZE }/9)"
 
                 }
                 else{

@@ -30,9 +30,9 @@
     <string name="edit_hint20">以上信息提交后不可更改!</string>
     <string name="edit_hint21">请输入课程名称</string>
     <string name="edit_hint22">请输入限制人数</string>
-    <string name="edit_hint23">请输入课程详情(最多140个字)</string>
-    <string name="edit_hint24">请输入适合人群(最多140个字)</string>
-    <string name="edit_hint25">请输入注意事项(最多140个字)</string>
+    <string name="edit_hint23">详细的课程简介能够吸引更多人来锻炼哦～</string>
+    <string name="edit_hint24">让用户知道他/她是否适合这项运动，能够减轻你的工作量哦～</string>
+    <string name="edit_hint25">锻炼也要保证安全哦～</string>
     <string name="edit_hint26">请提交您的拒绝原因:</string>
     <string name="edit_hint27">姓名</string>
     <string name="edit_hint28">手机号</string>
@@ -122,16 +122,16 @@
     <string name="tv62">添加课程</string>
     <string name="tv63">新增课程</string>
     <string name="tv64">团课详情</string>
-    <string name="tv65">新增团课邀请</string>
+    <string name="tv65">新增团课申请</string>
     <string name="tv66">团课名称</string>
     <string name="tv67">团课类型</string>
     <string name="tv68">训练目标</string>
     <string name="tv69">训练难度</string>
     <string name="tv70">团课房间</string>
-    <string name="tv71">团课人数</string>
-    <string name="tv72">课程时间</string>
-    <string name="tv73">课程循环</string>
-    <string name="tv74">课程介绍</string>
+    <string name="tv71">可容纳人数</string>
+    <string name="tv72">团课时间</string>
+    <string name="tv73">团课循环</string>
+    <string name="tv74">课程简介</string>
     <string name="tv75">适合人群</string>
     <string name="tv76">注意事项</string>
     <string name="tv77">邀请团课老师</string>
@@ -220,7 +220,14 @@
     <string name="tv163">全部状态</string>
     <string name="tv164">全部类型</string>
     <string name="tv165">教练：</string>
-
+    <string name="tv166">课程时长</string>
+    <string name="tv167">选择</string>
+    <string name="tv168">（最低限价¥40）</string>
+    <string name="tv169">房间类型</string>
+    <string name="tv170">房间名称</string>
+    <string name="tv171">详细的课程简介能够吸引更多人来锻炼哦～</string>
+    <string name="tv172">封面图</string>
+    <string name="tv173">授课图</string>
 
 
     <string name="tv_select">请选择</string>
