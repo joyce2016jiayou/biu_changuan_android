@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import com.noplugins.keepfit.android.R
+import com.noplugins.keepfit.android.activity.use.ClassItemEditActivity
 import com.noplugins.keepfit.android.activity.use.TeamInfoActivity
 import com.noplugins.keepfit.android.adapter.ManagerTeamClassAdapter
 import com.noplugins.keepfit.android.base.BaseFragment
@@ -92,7 +93,11 @@ class HistoryFragment : BaseFragment()  {
                     this.startActivity(toInfo)
                 }
                 R.id.tv_yaoqin_edit -> {
-
+                    val intent = Intent(activity, ClassItemEditActivity::class.java)
+                    val bundle = Bundle()
+                    bundle.putString("courseNum",datas[position].courseNum)
+                    intent.putExtras(bundle)
+                    startActivity(intent)
                 }
             }
         }

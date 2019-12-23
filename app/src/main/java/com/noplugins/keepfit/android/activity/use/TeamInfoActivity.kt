@@ -44,6 +44,8 @@ class TeamInfoActivity : BaseActivity() {
     var courseNum = ""
     var status = -1
     var type = -1
+
+    var teacherNum = ""
     override fun initBundle(parms: Bundle?) {
         if (parms != null) {
 
@@ -75,16 +77,23 @@ class TeamInfoActivity : BaseActivity() {
         jump_team_detail.setOnClickListener {
             if (BaseUtils.isFastClick()){
                 val intent = Intent(this,TeamDetailActivity::class.java)
+                val bundle = Bundle()
+                bundle.putString("courseNum",courseNum)
+                intent.putExtras(bundle)
                 startActivity(intent)
             }
         }
+
         edit_team_teacher.setOnClickListener {
             if (BaseUtils.isFastClick()){
                 //已上架 申请中 已下架  有教练姓名
-                if (type == 1 ||type == 4){
+                if (tv_class_type.text.toString() == "已上架" ||
+                        tv_class_type.text.toString() == "申请成功"||
+                        tv_class_type.text.toString() == "申请中" ||
+                        tv_class_type.text.toString() == "申请失败"){
                     val intent = Intent(this,TeacherDetailActivity::class.java)
                     val bundle = Bundle()
-                    bundle.putString("cgNum","")
+                    bundle.putString("cgNum",teacherNum)
                     intent.putExtras(bundle)
                     startActivity(intent)
                 }
@@ -101,7 +110,10 @@ class TeamInfoActivity : BaseActivity() {
                     toCancel(title_tv)
                 } else {
                     //去编辑
-                    val intent = Intent(this,TeacherDetailActivity::class.java)
+                    val intent = Intent(this,ClassItemEditActivity::class.java)
+                    val bundle = Bundle()
+                    bundle.putString("courseNum",courseNum)
+                    intent.putExtras(bundle)
                     startActivity(intent)
                 }
 
@@ -131,17 +143,26 @@ class TeamInfoActivity : BaseActivity() {
     private fun setting(managerTeamBean: ClassDetailEntity) {
         //已上架 申请中 已下架  有教练姓名
         //邀请中 邀请失败 已取消  没有
-
         tv_class_type.text = managerTeamBean.course.courseStatus
-        if (status == 3){
+        if (managerTeamBean.course.courseStatus == "申请中"){
             ll_caozuo.visibility = View.VISIBLE
         }
-
-        if (type == 2){
-
+    //已上架 邀请失败 邀请中 已取消 申请中 申请成功 申请失败
+        if (managerTeamBean.course.courseStatus == "邀请中" ||
+                managerTeamBean.course.courseStatus == "已取消"||
+                managerTeamBean.course.courseStatus == "邀请失败" ){
             edit_team_teacher.text = "邀请中..."
             edit_team_teacher.setTextColor(Color.RED)
         }
+
+        if (managerTeamBean.course.courseStatus == "已上架" ||
+                managerTeamBean.course.courseStatus == "申请成功"||
+                managerTeamBean.course.courseStatus == "申请中" ||
+                managerTeamBean.course.courseStatus == "申请失败"){
+            edit_team_teacher.text = managerTeamBean.teacherList[0].teacherName
+            teacherNum = managerTeamBean.teacherList[0].teacherNum
+        }
+
         if (type == 2){
             fl_cancel_edit.visibility = View.VISIBLE
             tv_team_cancel.text = "取消邀请"
@@ -158,7 +179,10 @@ class TeamInfoActivity : BaseActivity() {
                 "|"+managerTeamBean.course.maxNum+"人"
         edit_class_name.text = managerTeamBean.course.courseName
         tv_select_type.text =classType(managerTeamBean.course.classType)
-//        tv_team_length.text = "${managerTeamBean.course.min}min"
+
+        tv_xunlian_goal.text = goalType(managerTeamBean.course.target)
+        tv_xunlian_difficulty.text = difficultyType(managerTeamBean.course.difficulty)
+        tv_team_length.text = "${(managerTeamBean.course.endTime-managerTeamBean.course.startTime)/1000/60}min"
         edit_price.text = "¥"+managerTeamBean.course.finalPrice
 
         if (managerTeamBean.course.isLoop){
@@ -190,6 +214,15 @@ class TeamInfoActivity : BaseActivity() {
     private fun classType(classType: Int): String {
         val listClass = resources.getStringArray(R.array.tuanke_types)
         return listClass[classType - 1]
+    }
+
+    private fun difficultyType(difficulty: Int): String {
+        val listClass = resources.getStringArray(R.array.nandu_types)
+        return listClass[difficulty - 1]
+    }
+    private fun goalType(goal: Int): String {
+        val listClass = resources.getStringArray(R.array.target_types)
+        return listClass[goal - 1]
     }
 
 

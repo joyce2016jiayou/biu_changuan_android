@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
@@ -20,15 +21,13 @@ import com.amap.api.location.AMapLocation
 import com.amap.api.location.AMapLocationClient
 import com.amap.api.location.AMapLocationClientOption
 import com.amap.api.location.AMapLocationListener
+import com.google.gson.Gson
 import com.noplugins.keepfit.android.R
 import com.noplugins.keepfit.android.activity.AddClassItemActivity
 import com.noplugins.keepfit.android.adapter.CgTeacherSelectAdapter
 import com.noplugins.keepfit.android.adapter.PopUpAdapter
 import com.noplugins.keepfit.android.base.BaseActivity
-import com.noplugins.keepfit.android.bean.CgBindingBean
-import com.noplugins.keepfit.android.bean.DictionaryeBean
-import com.noplugins.keepfit.android.bean.GetQuCode
-import com.noplugins.keepfit.android.bean.TeacherBean
+import com.noplugins.keepfit.android.bean.*
 import com.noplugins.keepfit.android.global.AppConstants
 import com.noplugins.keepfit.android.util.SpUtils
 import com.noplugins.keepfit.android.util.net.Network
@@ -41,19 +40,13 @@ import kotlinx.android.synthetic.main.activity_teacher_select.*
 import org.greenrobot.eventbus.EventBus
 import pub.devrel.easypermissions.AfterPermissionGranted
 import pub.devrel.easypermissions.EasyPermissions
-import java.util.*
-import kotlin.collections.ArrayList
-import kotlin.collections.List
-import kotlin.collections.MutableList
-import kotlin.collections.forEach
-import kotlin.collections.set
-import kotlin.collections.toMutableList
+import java.util.HashMap
 
 class TeacherSelectActivity : BaseActivity(), AMapLocationListener {
 
-    var areaLIst: MutableList<GetQuCode.AreaBean> = ArrayList()
+    var areaLIst:MutableList<GetQuCode.AreaBean> = ArrayList()
 
-    var teamTypeList: MutableList<DictionaryeBean> = ArrayList()
+    var teamTypeList:MutableList<DictionaryeBean> = ArrayList()
 
     override fun onLocationChanged(amapLocation: AMapLocation?) {
         if (amapLocation != null) {
@@ -64,10 +57,10 @@ class TeacherSelectActivity : BaseActivity(), AMapLocationListener {
                 /*currentLatLng = new LatLng(currentLat, currentLon);*/   //latlng形式的
 //                amapLocation.accuracy//获取精度信息
 
-                Log.d("LogInfo", "getCity():" + amapLocation.city)
-                Log.d("LogInfo", "district():" + amapLocation.district)
+                Log.d("LogInfo","getCity():"+amapLocation.city)
+                Log.d("LogInfo","district():"+amapLocation.district)
                 tv_location.text = amapLocation.district
-                val code = amapLocation.adCode.toString().substring(0, 4) + "00"
+                val code = amapLocation.adCode.toString().substring(0,4)+"00"
 //                province = amapLocation.adCode.toString().substring(0,2)+"0000"
 //                city = code
 //                district = amapLocation.adCode
@@ -96,7 +89,7 @@ class TeacherSelectActivity : BaseActivity(), AMapLocationListener {
     var areaSelect = -1
     var typeSelect = -1
     lateinit var adapter: CgTeacherSelectAdapter
-    lateinit var layoutManager: LinearLayoutManager
+    lateinit var layoutManager:LinearLayoutManager
     private var data: MutableList<TeacherBean> = ArrayList()
     private var submitList: MutableList<CgBindingBean.TeacherNumBean> = ArrayList()
     private var bind_teacher_list: MutableList<TeacherBean> = ArrayList()
@@ -123,8 +116,8 @@ class TeacherSelectActivity : BaseActivity(), AMapLocationListener {
             finish()
         }
         queren_btn.setOnClickListener {
-            if (submitList.size < 1) {
-                Toast.makeText(applicationContext, "选择教练不可为空哦", Toast.LENGTH_SHORT)
+            if (submitList.size <1){
+                Toast.makeText(applicationContext,"选择教练不可为空哦",Toast.LENGTH_SHORT)
                         .show()
                 return@setOnClickListener
             }
@@ -141,7 +134,6 @@ class TeacherSelectActivity : BaseActivity(), AMapLocationListener {
                     binding()
                 }
             }
-
         }
         iv_delete_edit.setOnClickListener {
             edit_search.setText("")
@@ -208,7 +200,7 @@ class TeacherSelectActivity : BaseActivity(), AMapLocationListener {
     private var popWindow1: SpinnerPopWindow<String>? = null
     private var popWindow4: SpinnerPopWindow<String>? = null
 
-    private fun init() {
+    private fun init(){
         val listYear = resources.getStringArray(R.array.private_year_types).toMutableList()
         popWindow2 = SpinnerPopWindow(applicationContext,
                 listYear,
@@ -216,7 +208,7 @@ class TeacherSelectActivity : BaseActivity(), AMapLocationListener {
                     tv_year_select.text = listYear[position]
 
                     popWindow2!!.dismiss()
-                    yaerSelect = if (position == listYear.size - 1) {
+                    yaerSelect = if (position == listYear.size -1){
                         -1
                     } else {
                         position + 1
@@ -227,7 +219,7 @@ class TeacherSelectActivity : BaseActivity(), AMapLocationListener {
                     popWindow2!!.dismiss()
                 })
         teacher_year.setOnClickListener {
-            showPopwindow(popWindow2!!, teacher_year)
+            showPopwindow(popWindow2!!,teacher_year)
 
         }
 
@@ -237,7 +229,7 @@ class TeacherSelectActivity : BaseActivity(), AMapLocationListener {
                 PopUpAdapter.OnItemClickListener { _, _, position ->
                     tv_sex_select.text = listSex[position]
                     popWindow3!!.dismiss()
-                    sexSelect = if (position == listSex.size - 1) {
+                    sexSelect = if (position == listSex.size -1){
                         -1
                     } else {
                         position
@@ -248,18 +240,18 @@ class TeacherSelectActivity : BaseActivity(), AMapLocationListener {
                     popWindow3!!.dismiss()
                 })
         teacher_sex.setOnClickListener {
-            showPopwindow(popWindow3!!, teacher_sex)
+            showPopwindow(popWindow3!!,teacher_sex)
 
         }
     }
 
-    private fun showPopwindow(pop: SpinnerPopWindow<String>, view: View) {
+    private fun showPopwindow(pop: SpinnerPopWindow<String>, view:View){
         pop.width = view.width
         pop.showAsDropDown(view)
 
     }
 
-    private fun initAdapter() {
+    private fun initAdapter(){
         adapter = CgTeacherSelectAdapter(data)
         layoutManager = LinearLayoutManager(this)
 //        val view = LayoutInflater.from(context).inflate(R.layout.enpty_view, rv_list, false)
@@ -281,17 +273,18 @@ class TeacherSelectActivity : BaseActivity(), AMapLocationListener {
 
                 R.id.ck_select -> {
                     //选中或者取消选中
-                    if ((view as CheckBox).isChecked) {
-                        Log.d("item", "点击了")
+                    if ((view as CheckBox).isChecked){
+                        Log.d("item","点击了")
                         val bindingCgBean = CgBindingBean.TeacherNumBean()
                         bindingCgBean.num = data[position].teacherNum
                         submitList.add(bindingCgBean)
                         bind_teacher_list.add(data[position])
                     } else {
-                        Log.d("item", "取消了")
-                        for (i in 0 until submitList.size) {
-                            if (submitList[i].num == data[position].teacherNum) {
+                        Log.d("item","取消了")
+                        for (i in 0 until submitList.size){
+                            if (submitList[i].num == data[position].teacherNum){
                                 submitList.removeAt(i)
+                                bind_teacher_list.removeAt(i)
                                 return@setOnItemChildClickListener
                             }
                         }
@@ -321,20 +314,20 @@ class TeacherSelectActivity : BaseActivity(), AMapLocationListener {
         val params = HashMap<String, Any>()
         params["areaNum"] = SpUtils.getString(applicationContext, AppConstants.CHANGGUAN_NUM)
         params["page"] = page
-        if (sexSelect > -1) {
+        if (sexSelect > -1){
             params["sex"] = sexSelect
         }
-        if (yaerSelect > -1) {
+        if(yaerSelect >-1){
             params["year"] = yaerSelect
         }
-        if (edit_search.text.toString().isNotEmpty()) {
+        if (edit_search.text.toString().isNotEmpty()){
             params["data"] = edit_search.text.toString().trim()
         }
-        if (areaSelect != -1) {
+        if (areaSelect != -1){
             params["districtcode"] = areaLIst[areaSelect].distcd
         }
 
-        if (typeSelect != -1) {
+        if (typeSelect != -1){
             params["skill"] = typeSelect
         }
         val subscription = Network.getInstance("场馆列表", this)
@@ -343,10 +336,10 @@ class TeacherSelectActivity : BaseActivity(), AMapLocationListener {
                         ProgressSubscriber("场馆列表", object : SubscriberOnNextListener<Bean<List<TeacherBean>>> {
                             override fun onNext(result: Bean<List<TeacherBean>>) {
                                 submitList.clear()
-                                if (page == 1) {
+                                if (page == 1){
                                     data.clear()
                                     data.addAll(result.data)
-                                } else {
+                                } else{
                                     data.addAll(result.data)
                                 }
                                 adapter.notifyDataSetChanged()
@@ -387,23 +380,22 @@ class TeacherSelectActivity : BaseActivity(), AMapLocationListener {
      * 团课邀请教练
      */
 
-    private fun inviteTeachers() {
-        val params = HashMap<String, Any>()
-        params["gym_area_num"] = SpUtils.getString(this, AppConstants.CHANGGUAN_NUM)
+    private fun inviteTeachers(){
+        val params = HashMap<String,Any>()
+        params["gym_area_num"] = SpUtils.getString(this,AppConstants.CHANGGUAN_NUM)
         params["gen_teacher_num"] = submitList
         params["gym_course_num"] = courseNum
 
-        val subscriber = Network.getInstance("团课邀请教练", this)
+        val subscriber = Network.getInstance("团课邀请教练",this)
                 .inviteTeachers(params,
                         ProgressSubscriber("团课邀请教练", object : SubscriberOnNextListener<Bean<Any>> {
                             override fun onNext(result: Bean<Any>) {
-                                Toast.makeText(applicationContext, result.message, Toast.LENGTH_SHORT).show()
+                                Toast.makeText(applicationContext,result.message,Toast.LENGTH_SHORT).show()
                                 finish()
-
                             }
 
                             override fun onError(error: String) {
-                                Toast.makeText(applicationContext, error, Toast.LENGTH_SHORT).show()
+                                Toast.makeText(applicationContext,error,Toast.LENGTH_SHORT).show()
                             }
                         }, this, false))
     }
@@ -412,23 +404,23 @@ class TeacherSelectActivity : BaseActivity(), AMapLocationListener {
     /**
      * 场馆添加教练～
      */
-    private fun binding() {
+    private fun binding(){
 //        val params = HashMap<String, Any>()
         val cgBinding = CgBindingBean()
-        cgBinding.areaNum = SpUtils.getString(applicationContext, AppConstants.CHANGGUAN_NUM)
+        cgBinding.areaNum = SpUtils.getString(applicationContext,AppConstants.CHANGGUAN_NUM)
         cgBinding.teacherNum = submitList
         val subscription = Network.getInstance("场馆绑定教练", this)
                 .areaInviteTeacher(
                         cgBinding,
                         ProgressSubscriber("场馆绑定教练", object : SubscriberOnNextListener<Bean<Any>> {
                             override fun onNext(result: Bean<Any>) {
-                                Toast.makeText(applicationContext, result.message, Toast.LENGTH_SHORT).show()
+                                Toast.makeText(applicationContext,result.message,Toast.LENGTH_SHORT).show()
                                 EventBus.getDefault().post("选择教练")
                                 finish()
                             }
 
                             override fun onError(error: String) {
-                                Toast.makeText(applicationContext, error, Toast.LENGTH_SHORT).show()
+                                Toast.makeText(applicationContext,error,Toast.LENGTH_SHORT).show()
                             }
                         }, this, false)
                 )
@@ -450,7 +442,6 @@ class TeacherSelectActivity : BaseActivity(), AMapLocationListener {
                                     initTeamType(bean.data)
                                 }
                             }
-
                             override fun onError(error: String) {
                                 Toast.makeText(applicationContext, error, Toast.LENGTH_SHORT).show()
                             }
@@ -458,8 +449,8 @@ class TeacherSelectActivity : BaseActivity(), AMapLocationListener {
 
     }
 
-    private fun initTeamType(list: List<DictionaryeBean>) {
-        val listString = ArrayList<String>()
+    private fun initTeamType(list:List<DictionaryeBean>){
+        val listString  = ArrayList<String>()
         listString.add("全部")
         list.forEach {
             listString.add(it.name)
@@ -471,10 +462,10 @@ class TeacherSelectActivity : BaseActivity(), AMapLocationListener {
                     tv_class_select.text = listString[position]
 
                     popWindow4!!.dismiss()
-                    typeSelect = if (position == 0) {
+                    typeSelect= if (position == 0){
                         -1
                     } else {
-                        list[position - 1].value.toInt()
+                        list[position-1].value.toInt()
                     }
                     data.clear()
                     page = 1
@@ -482,15 +473,14 @@ class TeacherSelectActivity : BaseActivity(), AMapLocationListener {
                     popWindow4!!.dismiss()
                 })
         class_eat.setOnClickListener {
-            showPopwindow(popWindow4!!, class_eat)
+            showPopwindow(popWindow4!!,class_eat)
 
         }
     }
-
     /**
      * 地区选择
      */
-    private fun getCity2Dis(citycd: String) {
+    private fun getCity2Dis(citycd:String){
         val params = HashMap<String, Any>()
         params["citycd"] = citycd
         val subscription = Network.getInstance("获取区", this)
@@ -498,10 +488,10 @@ class TeacherSelectActivity : BaseActivity(), AMapLocationListener {
                         params,
                         ProgressSubscriber("获取区", object : SubscriberOnNextListener<Bean<GetQuCode>> {
                             override fun onNext(result: Bean<GetQuCode>) {
-                                val list: MutableList<String> = ArrayList()
+                                val list:MutableList<String> = ArrayList()
                                 areaLIst = result.data.area
                                 list.add("全部")
-                                for (i in 0 until result.data.area.size) {
+                                for (i in 0 until result.data.area.size){
                                     list.add(result.data.area[i].distnm)
                                 }
                                 //申请成功
@@ -509,7 +499,7 @@ class TeacherSelectActivity : BaseActivity(), AMapLocationListener {
                             }
 
                             override fun onError(error: String) {
-                                Toast.makeText(applicationContext, error, Toast.LENGTH_SHORT).show()
+                                Toast.makeText(applicationContext,error,Toast.LENGTH_SHORT).show()
                             }
                         }, this, false)
                 )
@@ -522,10 +512,10 @@ class TeacherSelectActivity : BaseActivity(), AMapLocationListener {
                     tv_location.text = list[position]
 
                     popWindow1!!.dismiss()
-                    areaSelect = if (position == 0) {
+                    areaSelect = if (position == 0){
                         -1
                     } else {
-                        position - 1
+                        position-1
                     }
                     data.clear()
                     page = 1
@@ -533,7 +523,7 @@ class TeacherSelectActivity : BaseActivity(), AMapLocationListener {
                     popWindow1!!.dismiss()
                 })
         ll_location.setOnClickListener {
-            showPopwindow(popWindow1!!, ll_location)
+            showPopwindow(popWindow1!!,ll_location)
 
         }
     }
