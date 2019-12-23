@@ -245,7 +245,7 @@ class TeacherSelectActivity : BaseActivity(), AMapLocationListener {
     private fun initAdapter(){
         adapter = CgTeacherSelectAdapter(data)
         layoutManager = LinearLayoutManager(this)
-        val view = LayoutInflater.from(context).inflate(R.layout.enpty_view, rv_list, false)
+        val view = LayoutInflater.from(this).inflate(R.layout.enpty_view, rv_list, false)
         adapter.emptyView = view
         rv_list.layoutManager = layoutManager
         rv_list.adapter = adapter

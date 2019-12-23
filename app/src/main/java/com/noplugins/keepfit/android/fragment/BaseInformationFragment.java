@@ -262,7 +262,7 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
                             public void onError(String error) {
 
                             }
-                        }, getActivity(), false));
+                        }, getActivity(), true));
     }
 
     private void initCityDate2(String select_sheng_code, boolean is_refresh_start) {
@@ -299,7 +299,7 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
                             public void onError(String error) {
 
                             }
-                        }, getActivity(), false));
+                        }, getActivity(), true));
     }
 
     private void initCityDate3(String select_shi_code, boolean is_refresh_start) {
@@ -339,7 +339,7 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
                             public void onError(String error) {
 
                             }
-                        }, getActivity(), false));
+                        }, getActivity(), true));
     }
 
 

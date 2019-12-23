@@ -70,6 +70,7 @@
                 android:layout_marginLeft="@dimen/m20"
                 android:layout_marginTop="@dimen/m10"
                 android:layout_marginBottom="@dimen/m10"
+                android:visibility="gone"
                 android:orientation="vertical">
 
                 <LinearLayout
