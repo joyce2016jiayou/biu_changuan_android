@@ -39,6 +39,7 @@ import com.noplugins.keepfit.android.bean.use.RoomDelBean;
 import com.noplugins.keepfit.android.bean.use.UseBean;
 import com.noplugins.keepfit.android.entity.AddClassEntity;
 import com.noplugins.keepfit.android.entity.CheckEntity;
+import com.noplugins.keepfit.android.entity.ClassDetailEntity;
 import com.noplugins.keepfit.android.entity.ClassEntity;
 import com.noplugins.keepfit.android.entity.ClassTypeEntity;
 import com.noplugins.keepfit.android.entity.InformationEntity;
@@ -729,8 +730,8 @@ public class Network {
      * @param subscriber
      * @return
      */
-    public Subscription class_detail(RequestBody params, Subscriber<Bean<Object>> subscriber) {
-        return service.class_detail(params)
+    public Subscription class_detail(Map<String, Object> params, Subscriber<Bean<ClassDetailEntity>> subscriber) {
+        return service.class_detail(retuen_json_params(params))
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -1376,5 +1377,18 @@ public class Network {
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(subscriber);
     }
 
+    /**
+     * 已创建团课 邀请教练
+     *
+     * @param params
+     * @param subscriber
+     * @return
+     */
+    public Subscription inviteTeachers(Map<String, Object> params, Subscriber<Bean<Object>> subscriber) {
+        return service.inviteTeachers(retuen_json_object(params))
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread()).subscribe(subscriber);
+    }
 
 }

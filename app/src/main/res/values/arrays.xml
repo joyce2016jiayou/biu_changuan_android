@@ -9,6 +9,7 @@
         <item>有氧</item>
         <item>瑜伽</item>
         <item>单车房</item>
+        <item>公共区</item>
     </string-array>
     <string-array name="tuanke_types">
         <item>单车</item>

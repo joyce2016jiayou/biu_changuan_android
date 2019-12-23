@@ -92,6 +92,51 @@ public class ClassDetailEntity {
         private int putaway;
         private boolean deleted;
         private double finalPrice;
+        private String courseStatus;
+        private String refuse;
+        private String inviteString;
+        private double finalGrade;
+        private String teacherName;
+
+        public String getRefuse() {
+            return refuse;
+        }
+
+        public void setRefuse(String refuse) {
+            this.refuse = refuse;
+        }
+
+        public String getInviteString() {
+            return inviteString;
+        }
+
+        public void setInviteString(String inviteString) {
+            this.inviteString = inviteString;
+        }
+
+        public double getFinalGrade() {
+            return finalGrade;
+        }
+
+        public void setFinalGrade(double finalGrade) {
+            this.finalGrade = finalGrade;
+        }
+
+        public String getTeacherName() {
+            return teacherName;
+        }
+
+        public void setTeacherName(String teacherName) {
+            this.teacherName = teacherName;
+        }
+
+        public String getCourseStatus() {
+            return courseStatus;
+        }
+
+        public void setCourseStatus(String courseStatus) {
+            this.courseStatus = courseStatus;
+        }
 
         public double getFinalPrice() {
             return finalPrice;

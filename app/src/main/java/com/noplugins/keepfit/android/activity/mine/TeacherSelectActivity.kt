@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
+import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -90,8 +91,12 @@ class TeacherSelectActivity : BaseActivity(), AMapLocationListener {
     lateinit var layoutManager:LinearLayoutManager
     private var data: MutableList<TeacherBean> = ArrayList()
     private var submitList: MutableList<CgBindingBean.TeacherNumBean> = ArrayList()
-    override fun initBundle(parms: Bundle?) {
 
+    var courseNum = ""
+    override fun initBundle(parms: Bundle?) {
+        if (parms!=null){
+            courseNum = parms.getString("courseNum","")
+        }
     }
 
     override fun initView() {
@@ -113,8 +118,13 @@ class TeacherSelectActivity : BaseActivity(), AMapLocationListener {
                         .show()
                 return@setOnClickListener
             }
-            //todo 除了绑定教练 ， 场馆的团课还可以选择教练来上课
-            binding()
+            //除了绑定教练 ， 场馆的团课还可以选择教练来上课
+
+            if (courseNum!=""){
+                inviteTeachers()
+            } else {
+                binding()
+            }
         }
         iv_delete_edit.setOnClickListener {
             edit_search.setText("")
@@ -235,6 +245,8 @@ class TeacherSelectActivity : BaseActivity(), AMapLocationListener {
     private fun initAdapter(){
         adapter = CgTeacherSelectAdapter(data)
         layoutManager = LinearLayoutManager(this)
+        val view = LayoutInflater.from(context).inflate(R.layout.enpty_view, rv_list, false)
+        adapter.emptyView = view
         rv_list.layoutManager = layoutManager
         rv_list.adapter = adapter
 
@@ -305,7 +317,7 @@ class TeacherSelectActivity : BaseActivity(), AMapLocationListener {
         }
 
         if (typeSelect != -1){
-
+            params["skill"] = typeSelect
         }
         val subscription = Network.getInstance("场馆列表", this)
                 .teacherMannerList(
@@ -351,6 +363,30 @@ class TeacherSelectActivity : BaseActivity(), AMapLocationListener {
 
             }
         }
+    }
+
+    /**
+     * 团课邀请教练
+     */
+
+    private fun inviteTeachers(){
+        val params = HashMap<String,Any>()
+        params["gym_area_num"] = SpUtils.getString(this,AppConstants.CHANGGUAN_NUM)
+        params["gen_teacher_num"] = submitList
+        params["gym_course_num"] = courseNum
+
+        val subscriber = Network.getInstance("团课邀请教练",this)
+                .inviteTeachers(params,
+                        ProgressSubscriber("团课邀请教练", object : SubscriberOnNextListener<Bean<Any>> {
+                            override fun onNext(result: Bean<Any>) {
+                                Toast.makeText(applicationContext,result.message,Toast.LENGTH_SHORT).show()
+                                finish()
+                            }
+
+                            override fun onError(error: String) {
+                                Toast.makeText(applicationContext,error,Toast.LENGTH_SHORT).show()
+                            }
+                        }, this, false))
     }
 
 

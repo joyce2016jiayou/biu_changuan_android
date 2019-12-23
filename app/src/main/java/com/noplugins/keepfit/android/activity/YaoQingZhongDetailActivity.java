@@ -23,6 +23,7 @@ import com.noplugins.keepfit.android.util.data.DateHelper;
 import com.noplugins.keepfit.android.util.net.Network;
 import com.noplugins.keepfit.android.util.net.entity.Bean;
 import com.noplugins.keepfit.android.util.net.progress.GsonSubscriberOnNextListener;
+import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriber;
 import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriberNew;
 import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener;
 
@@ -110,17 +111,12 @@ public class YaoQingZhongDetailActivity extends BaseActivity {
     private void init_class_detail() {
         Map<String, Object> params = new HashMap<>();
         params.put("gymCourseNum", gymCourseNum);//场馆编号
-        Gson gson = new Gson();
-        String json_params = gson.toJson(params);
-        String json = new Gson().toJson(params);//要传递的json
-        RequestBody requestBody = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), json);
-        Log.e("课程详情",json_params);
         subscription = Network.getInstance("课程详情", this)
-                .class_detail(requestBody, new ProgressSubscriberNew<>(ClassDetailEntity.class, new GsonSubscriberOnNextListener<ClassDetailEntity>() {
+                .class_detail(params, new ProgressSubscriber("", new SubscriberOnNextListener<Bean<ClassDetailEntity>>() {
                     @Override
-                    public void on_post_entity(ClassDetailEntity entity, String s) {
+                    public void onNext(Bean<ClassDetailEntity> result) {
                         Log.e("课程详情","课程详情");
-                        List<ClassDetailEntity.TeacherListBean> teacherListBeans = entity.getTeacherList();
+                        List<ClassDetailEntity.TeacherListBean> teacherListBeans = result.getData().getTeacherList();
                         if(teacherListBeans.size()>0){
                             recycler_view.setVisibility(View.VISIBLE);
                             init_recycle(teacherListBeans);
@@ -129,13 +125,7 @@ public class YaoQingZhongDetailActivity extends BaseActivity {
                             //设置信息
                         }
 
-                        set_information(entity);
-
-                    }
-                }, new SubscriberOnNextListener<Bean<Object>>() {
-                    @Override
-                    public void onNext(Bean<Object> result) {
-
+                        set_information(result.getData());
                     }
 
                     @Override

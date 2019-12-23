@@ -3,20 +3,26 @@ package com.noplugins.keepfit.android.activity.use
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.noplugins.keepfit.android.R
 import com.noplugins.keepfit.android.activity.mine.TeacherDetailActivity
 import com.noplugins.keepfit.android.base.BaseActivity
+import com.noplugins.keepfit.android.bean.DictionaryeBean
 import com.noplugins.keepfit.android.bean.use.ManagerTeamBean
+import com.noplugins.keepfit.android.bean.use.RoomBean
+import com.noplugins.keepfit.android.entity.ClassDetailEntity
 import com.noplugins.keepfit.android.global.AppConstants
 import com.noplugins.keepfit.android.util.BaseUtils
 import com.noplugins.keepfit.android.util.GlideRoundTransform
@@ -30,17 +36,20 @@ import com.noplugins.keepfit.android.util.ui.pop.CommonPopupWindow
 import com.noplugins.keepfit.android.util.ui.toast.SuperCustomToast
 import kotlinx.android.synthetic.main.activity_team_info.*
 import kotlinx.android.synthetic.main.title_activity.*
+import lib.demo.spinner.MaterialSpinner
 import org.greenrobot.eventbus.EventBus
 import java.util.HashMap
 
 class TeamInfoActivity : BaseActivity() {
     var courseNum = ""
     var status = -1
+    var type = -1
     override fun initBundle(parms: Bundle?) {
         if (parms != null) {
 
             courseNum = parms.getString("courseNum").toString()
             status = parms.getInt("status")
+            type = parms.getInt("type")
             requestData(courseNum)
         }
 
@@ -60,7 +69,7 @@ class TeamInfoActivity : BaseActivity() {
         }
 
         jieshou.setOnClickListener {
-            agreeCourse(1,"")
+            toAgree(title_tv)
         }
 
         jump_team_detail.setOnClickListener {
@@ -71,8 +80,31 @@ class TeamInfoActivity : BaseActivity() {
         }
         edit_team_teacher.setOnClickListener {
             if (BaseUtils.isFastClick()){
-                val intent = Intent(this,TeacherDetailActivity::class.java)
-                startActivity(intent)
+                //已上架 申请中 已下架  有教练姓名
+                if (type == 1 ||type == 4){
+                    val intent = Intent(this,TeacherDetailActivity::class.java)
+                    val bundle = Bundle()
+                    bundle.putString("cgNum","")
+                    intent.putExtras(bundle)
+                    startActivity(intent)
+                }
+
+            }
+        }
+
+        tv_team_cancel.setOnClickListener {
+
+            Log.d("tag","weish ?")
+            if (BaseUtils.isFastClick()){
+                if (type == 2){
+                    //取消邀请
+                    toCancel(title_tv)
+                } else {
+                    //去编辑
+                    val intent = Intent(this,TeacherDetailActivity::class.java)
+                    startActivity(intent)
+                }
+
             }
         }
 
@@ -80,50 +112,65 @@ class TeamInfoActivity : BaseActivity() {
 
     private fun requestData(courseNum:String){
         val params = HashMap<String, Any>()
-        params["courseNum"] = courseNum
-//        subscription = Network.getInstance("课程管理", this)
-//            .courseDetail(params,
-//                ProgressSubscriber("课程管理", object : SubscriberOnNextListener<Bean<ManagerTeamBean>> {
-//                    override fun onNext(result: Bean<ManagerTeamBean>) {
-//                        setting(result.data)
-//                    }
-//                    override fun onError(error: String) {
-//                        SuperCustomToast.getInstance(applicationContext)
-//                            .show(error)
-//                    }
-//                }, this, false)
-//            )
+        params["gymCourseNum"] = courseNum
+        subscription = Network.getInstance("课程详情", this)
+            .class_detail(params,
+                ProgressSubscriber("课程详情", object : SubscriberOnNextListener<Bean<ClassDetailEntity>> {
+                    override fun onNext(result: Bean<ClassDetailEntity>) {
+                        setting(result.data)
+                    }
+                    override fun onError(error: String) {
+                        SuperCustomToast.getInstance(applicationContext)
+                            .show(error)
+                    }
+                }, this, false)
+            )
     }
 
     @SuppressLint("SetTextI18n")
-    private fun setting(managerTeamBean: ManagerTeamBean) {
+    private fun setting(managerTeamBean: ClassDetailEntity) {
+        //已上架 申请中 已下架  有教练姓名
+        //邀请中 邀请失败 已取消  没有
 
-        tv_class_type.text = statusType(status)
+        tv_class_type.text = managerTeamBean.course.courseStatus
         if (status == 3){
             ll_caozuo.visibility = View.VISIBLE
         }
-        if (status == 2){
+
+        if (type == 2){
+
+            edit_team_teacher.text = "邀请中..."
+            edit_team_teacher.setTextColor(Color.RED)
+        }
+        if (type == 2){
+            fl_cancel_edit.visibility = View.VISIBLE
+            tv_team_cancel.text = "取消邀请"
         }
 
-        title_tv.text = managerTeamBean.courseList.courseName
-        tv_cg_name.text = managerTeamBean.courseList.areaName
-        edit_class_room.text = roomType(managerTeamBean.courseList.type.toInt())+
-                "|"+managerTeamBean.courseList.maxNum+"人"
-        edit_class_name.text = managerTeamBean.courseList.courseName
-        tv_select_type.text =classType(managerTeamBean.courseList.classType)
-        tv_team_length.text = "${managerTeamBean.courseList.min}min"
-        edit_price.text = "¥"+managerTeamBean.courseList.finalPrice
+        if (type == 3){
+            fl_cancel_edit.visibility = View.VISIBLE
+            tv_team_cancel.text = "编辑"
+        }
 
-        if (managerTeamBean.courseList.isLoop){
-            edit_cycle.text = ""+managerTeamBean.courseList.loopCycle+"周"
+        title_tv.text = managerTeamBean.course.courseName
+        tv_cg_name.text = SpUtils.getString(this, AppConstants.CG_NAME)
+        edit_class_room.text = roomType(managerTeamBean.course.type.toInt())+
+                "|"+managerTeamBean.course.maxNum+"人"
+        edit_class_name.text = managerTeamBean.course.courseName
+        tv_select_type.text =classType(managerTeamBean.course.classType)
+//        tv_team_length.text = "${managerTeamBean.course.min}min"
+        edit_price.text = "¥"+managerTeamBean.course.finalPrice
+
+        if (managerTeamBean.course.isLoop){
+            edit_cycle.text = ""+managerTeamBean.course.loopCycle+"周"
         } else {
             edit_cycle.text = "单次"
         }
 
 
-        val startHour = DateHelper.getDateByLong(managerTeamBean.courseList.startTime)
-        val startDay  = DateHelper.getDateDayByLong(managerTeamBean.courseList.startTime)
-        val endHour = DateHelper.getDateByLong(managerTeamBean.courseList.endTime)
+        val startHour = DateHelper.getDateByLong(managerTeamBean.course.startTime)
+        val startDay  = DateHelper.getDateDayByLong(managerTeamBean.course.startTime)
+        val endHour = DateHelper.getDateByLong(managerTeamBean.course.endTime)
         edit_date.text = "$startDay $startHour-$endHour"
 //        edit_jieshao.text = ""+managerTeamBean.courseList.courseDes
 //        edit_shihe.text = ""+managerTeamBean.courseList.suitPerson
@@ -145,29 +192,142 @@ class TeamInfoActivity : BaseActivity() {
         return listClass[classType - 1]
     }
 
-    private fun statusType(type: Int): String {
-        val listClass = arrayOf("邀请成功", "邀请失败", "邀请中", "已过期","邀请失败","邀请失败","邀请失败")
-        return listClass[type - 1]
-    }
 
 
-
-    private fun toJujue(view1: TextView) {
+    private var roomType = ""
+    private var roomNumber = ""
+    private var roomName = ""
+    private var maxNum = ""
+    private fun toAgree(view1: TextView){
         val popupWindow = CommonPopupWindow.Builder(this)
-            .setView(R.layout.dialog_to_jujue)
-            .setBackGroundLevel(0.5f)//0.5f
-            .setAnimationStyle(R.style.main_menu_animstyle)
-            .setWidthAndHeight(
-                WindowManager.LayoutParams.MATCH_PARENT,
-                WindowManager.LayoutParams.MATCH_PARENT
-            )
-            .setOutSideTouchable(true).create()
+                .setView(R.layout.dialog_to_agree)
+                .setBackGroundLevel(0.5f)//0.5f
+                .setAnimationStyle(R.style.main_menu_animstyle)
+                .setWidthAndHeight(
+                        WindowManager.LayoutParams.MATCH_PARENT,
+                        WindowManager.LayoutParams.MATCH_PARENT
+                )
+                .setOutSideTouchable(true).create()
         popupWindow.showAsDropDown(view1)
 
         /**设置逻辑 */
         val view = popupWindow.contentView
-        val cancel = view.findViewById<LinearLayout>(R.id.cancel_layout)
-        val sure = view.findViewById<LinearLayout>(R.id.sure_layout)
+        val cancel = view.findViewById<TextView>(R.id.tv_cancel)
+        val sure = view.findViewById<TextView>(R.id.tv_add)
+        val msRoomType = view.findViewById<MaterialSpinner>(R.id.ms_room_type)
+        val msRoomName = view.findViewById<MaterialSpinner>(R.id.ms_room_name)
+        val msRoomMax = view.findViewById<TextView>(R.id.tv_max_number)
+        requestRoomType(msRoomType,msRoomName,msRoomMax)
+        cancel.setOnClickListener {
+            popupWindow.dismiss()
+        }
+        sure.setOnClickListener {
+            popupWindow.dismiss()
+            //去申请
+            roomType = msRoomType.text.toString()
+            roomName = msRoomName.text.toString()
+            maxNum = msRoomMax.text.toString()
+            agreeCourse(1,"")
+
+        }
+    }
+
+    /**
+     * 获取所有的房间类型
+     */
+    private fun requestRoomType(ms: MaterialSpinner, ms2: MaterialSpinner, max:TextView) {
+        val params = HashMap<String, Any>()
+        params["object"] = "room_type"
+
+        val subscription = Network.getInstance("获取所有的房间类型", this)
+                .get_types(params, ProgressSubscriber("获取所有的房间类型",
+                        object : SubscriberOnNextListener<Bean<List<DictionaryeBean>>> {
+                            override fun onNext(bean: Bean<List<DictionaryeBean>>) {
+
+                                if (bean.data != null) {
+                                    val list = bean.data
+                                    val data:MutableList<String> = ArrayList()
+                                    bean.data.forEach {
+                                        data.add(it.name)
+                                    }
+                                    initMs(ms,ms2,max, list, data)
+                                }
+                            }
+
+                            override fun onError(error: String) {
+                                Toast.makeText(this@TeamInfoActivity, error, Toast.LENGTH_SHORT).show()
+                            }
+                        }, this, true))
+
+    }
+
+    private fun initMs(ms: MaterialSpinner, ms2: MaterialSpinner, max: TextView
+                       , list:List<DictionaryeBean>, data:MutableList<String>) {
+        ms.setItems(data)
+        ms.selectedIndex = 0
+        requestRoom(list[0].value,ms2,max)
+        ms.setOnItemSelectedListener { _, position, _, _ ->
+            ms.text = list[position].name
+            requestRoom(list[position].value,ms2,max)
+        }
+        ms.setOnNothingSelectedListener { spinner -> spinner.selectedIndex }
+    }
+
+
+    private fun initMsRoomName(ms: MaterialSpinner, list:List<RoomBean>, data:MutableList<String>, max: TextView) {
+        ms.setItems(data)
+        ms.selectedIndex = 0
+        roomNumber = list[0].placeNum
+        ms.setOnItemSelectedListener { _, position, _, _ ->
+            ms.text = list[position].placeName
+            roomNumber = list[position].placeNum
+            max.setText(list[position].maxNum)
+        }
+        ms.setOnNothingSelectedListener { spinner -> spinner.selectedIndex }
+    }
+
+    /**
+     *根据类型查询所有房间
+     */
+    private fun requestRoom(type:String, ms: MaterialSpinner, max: TextView) {
+        val params = HashMap<String, Any>()
+        params["areaNum"] = SpUtils.getString(this,AppConstants.CHANGGUAN_NUM)
+        params["placeType"] = type
+
+        val subscription = Network.getInstance("获取房间", this)
+                .getAreaPlace(params, ProgressSubscriber("获取房间",
+                        object : SubscriberOnNextListener<Bean<List<RoomBean>>> {
+                            override fun onNext(bean: Bean<List<RoomBean>>) {
+                                if (bean.data != null) {
+                                    val data:MutableList<String> = ArrayList()
+                                    bean.data.forEach {
+                                        data.add(it.placeName)
+                                    }
+                                    initMsRoomName(ms,bean.data,data,max)
+                                }
+                            }
+                            override fun onError(error: String) {
+                                Toast.makeText(this@TeamInfoActivity, error, Toast.LENGTH_SHORT).show()
+                            }
+                        }, this, false))
+    }
+
+    private fun toJujue(view1: TextView) {
+        val popupWindow = CommonPopupWindow.Builder(this)
+                .setView(R.layout.dialog_to_jujue)
+                .setBackGroundLevel(0.5f)//0.5f
+                .setAnimationStyle(R.style.main_menu_animstyle)
+                .setWidthAndHeight(
+                        WindowManager.LayoutParams.MATCH_PARENT,
+                        WindowManager.LayoutParams.MATCH_PARENT
+                )
+                .setOutSideTouchable(true).create()
+        popupWindow.showAsDropDown(view1)
+
+        /**设置逻辑 */
+        val view = popupWindow.contentView
+        val cancel = view.findViewById<TextView>(R.id.tv_cancel)
+        val sure = view.findViewById<TextView>(R.id.tv_add)
         val edit = view.findViewById<EditText>(R.id.et_content)
         cancel.setOnClickListener {
             popupWindow.dismiss()
@@ -175,38 +335,115 @@ class TeamInfoActivity : BaseActivity() {
         sure.setOnClickListener {
             popupWindow.dismiss()
             //去申请
-            agreeCourse(0,edit.text.toString())
+            agreeCourse(0, edit.text.toString())
 
         }
     }
 
-    private fun agreeCourse(type:Int,str:String){
+    private fun agreeCourse(type: Int, str: String) {
         val params = HashMap<String, Any>()
-//        params["teacherNum"] = SpUtils.getString(activity, AppConstants.USER_NAME)
-        params["teacherNum"] = SpUtils.getString(applicationContext, AppConstants.USER_NAME)
+        params["areaNum"] = SpUtils.getString(this, AppConstants.CHANGGUAN_NUM)
         params["courseNum"] = courseNum
         params["agree"] = type
-        if (type == 0){
+        if (type == 0) {
             params["refuse"] = str
+        } else {
+            params["place_num"] = roomNumber
+            params["place_type"] = roomType
+            params["place_name"] = roomName
+            params["max_num"] = maxNum
         }
-//        subscription = Network.getInstance("团课同意/拒绝", this)
-//            .agreeCourse(params,
-//                ProgressSubscriber("团课同意/拒绝", object : SubscriberOnNextListener<Bean<Any>> {
-//                    override fun onNext(result: Bean<Any>) {
-////                        requestData(courseNum)
-//                        if (type == 1){
-//                            EventBus.getDefault().post(AppConstants.TEAM_YQ_AGREE)
-//                        } else {
-//                            EventBus.getDefault().post(AppConstants.TEAM_YQ_REFUSE)
-//                        }
-//                        finish()
-//                    }
-//
-//                    override fun onError(error: String) {
-//                        SuperCustomToast.getInstance(applicationContext)
-//                            .show(error)
-//                    }
-//                }, this, false)
-//            )
+        val subscription = Network.getInstance("团课同意/拒绝", this)
+                .agreeCourseByArea(
+                        params,
+                        ProgressSubscriber("团课同意/拒绝", object : SubscriberOnNextListener<Bean<Any>> {
+                            override fun onNext(result: Bean<Any>) {
+                                //上架成功！
+                                if (result.code == 0){
+                                    when (type) {
+                                        1 -> {
+                                            EventBus.getDefault().post(AppConstants.TEAM_YQ_AGREE)
+                                        }
+
+                                        0 -> {
+                                            EventBus.getDefault().post(AppConstants.TEAM_YQ_REFUSE)
+                                        }
+                                    }
+                                }
+
+                                SuperCustomToast.getInstance(this@TeamInfoActivity)
+                                        .show(result.message)
+                            }
+
+                            override fun onError(error: String) {
+                                SuperCustomToast.getInstance(this@TeamInfoActivity)
+                                        .show(error)
+                            }
+                        }, this, false)
+                )
     }
+
+
+    /**
+     * 取消
+     */
+    private fun toCancel(view1: TextView) {
+        val popupWindow = CommonPopupWindow.Builder(this)
+                .setView(R.layout.dialog_to_room_delete)
+                .setBackGroundLevel(0.5f)//0.5f
+                .setAnimationStyle(R.style.main_menu_animstyle)
+                .setWidthAndHeight(
+                        WindowManager.LayoutParams.MATCH_PARENT,
+                        WindowManager.LayoutParams.MATCH_PARENT
+                )
+                .setOutSideTouchable(true).create()
+        popupWindow.showAsDropDown(view1)
+
+        /**设置逻辑 */
+        val view = popupWindow.contentView
+        val cancel = view.findViewById<TextView>(R.id.tv_cancel)
+        val sure = view.findViewById<TextView>(R.id.tv_add)
+        val tvInfo = view.findViewById<TextView>(R.id.tv_username)
+        val title = view.findViewById<TextView>(R.id.label_delete_room)
+        tvInfo.text = "确定取消邀请?"
+        title.text = "取消邀请"
+        cancel.setOnClickListener {
+            popupWindow.dismiss()
+        }
+        sure.setOnClickListener {
+            popupWindow.dismiss()
+            //去申请
+            cancelCourse()
+//
+        }
+    }
+
+
+    private fun cancelCourse() {
+        val params = HashMap<String, Any>()
+        params["courseNum"] = courseNum
+        val subscription = Network.getInstance("团课取消邀请", this)
+                .cancelCourseByArea(
+                        params,
+                        ProgressSubscriber("团课取消邀请", object : SubscriberOnNextListener<Bean<Any>> {
+                            override fun onNext(result: Bean<Any>) {
+                                //上架成功！
+                                if (result.code == 0){
+                                    EventBus.getDefault().post(AppConstants.TEAM_YQ_REFUSE)
+                                    finish()
+                                }
+
+                                SuperCustomToast.getInstance(this@TeamInfoActivity)
+                                        .show(result.message)
+                            }
+
+                            override fun onError(error: String) {
+                                SuperCustomToast.getInstance(this@TeamInfoActivity)
+                                        .show(error)
+                            }
+                        }, this, false)
+                )
+    }
+
+
 }

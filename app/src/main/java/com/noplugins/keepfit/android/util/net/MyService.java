@@ -31,6 +31,7 @@ import com.noplugins.keepfit.android.bean.use.RoomDelBean;
 import com.noplugins.keepfit.android.bean.use.UseBean;
 import com.noplugins.keepfit.android.entity.AddClassEntity;
 import com.noplugins.keepfit.android.entity.CheckEntity;
+import com.noplugins.keepfit.android.entity.ClassDetailEntity;
 import com.noplugins.keepfit.android.entity.ClassEntity;
 import com.noplugins.keepfit.android.entity.ClassTypeEntity;
 import com.noplugins.keepfit.android.entity.InformationEntity;
@@ -342,7 +343,7 @@ public interface MyService {
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
     @POST("leagueClass")
-    Observable<Bean<Object>> class_detail(@Body RequestBody json);
+    Observable<Bean<ClassDetailEntity>> class_detail(@Body RequestBody json);
 
     /**
      * 修改密码
@@ -814,4 +815,13 @@ public interface MyService {
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
     @POST("agreeCourseByArea")
     Observable<Bean<Object>> agreeCourseByArea(@Body RequestBody json);
+
+    /**
+     * 已创建的团课 邀请教练
+     *
+     * @return
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("inviteTeachers")
+    Observable<Bean<Object>> inviteTeachers(@Body RequestBody json);
 }

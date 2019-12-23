@@ -83,7 +83,7 @@ class ShelvesFragment : BaseFragment()  {
                     bundle.putString("courseNum",datas[position].courseNum)
                     bundle.putInt("status",datas[position].status)
                     toInfo.putExtras(bundle)
-                    startActivity(toInfo)
+                    this.startActivity(toInfo)
                 }
             }
         }

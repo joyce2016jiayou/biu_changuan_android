@@ -16,7 +16,7 @@
 
     <LinearLayout
         android:id="@+id/ll_caozuo"
-        android:visibility="visible"
+        android:visibility="gone"
         android:layout_marginTop="@dimen/m15"
         android:layout_width="match_parent"
         android:layout_height="@dimen/m59"
@@ -65,11 +65,10 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/m59"
         android:layout_alignParentBottom="true"
-        android:visibility="gone"
-        android:gravity="center">
+        android:visibility="gone">
 
         <TextView
-            android:id="@+id/tv_cancel"
+            android:id="@+id/tv_team_cancel"
             android:layout_width="@dimen/m168"
             android:layout_height="@dimen/m39"
             android:textSize="15sp"
@@ -95,6 +94,7 @@
             android:layout_height="@dimen/m24"
             android:textColor="@color/color_F9CE0F"
             android:textSize="13sp"
+            android:gravity="center"
             android:background="@drawable/shape_btn_bg_22243d_40"/>
         <!--场馆信息-->
         <FrameLayout
@@ -116,7 +116,7 @@
             <TextView
 
                     android:layout_width="wrap_content"
-                    tools:text="查看课程详情 >"
+                    android:text="查看课程详情 >"
                     android:textColor="@color/color_181818"
                     android:textSize="15sp"
                     android:layout_gravity="right"
@@ -128,7 +128,8 @@
     <ScrollView
         android:layout_below="@+id/ll_cg"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+        android:layout_above="@+id/fl_cancel_edit">
 
         <LinearLayout
                 android:layout_width="match_parent"
@@ -419,4 +420,4 @@
         </LinearLayout>
     </ScrollView>
 
-</>
+</RelativeLayout>

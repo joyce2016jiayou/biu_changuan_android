@@ -88,7 +88,7 @@ class InviteFragment : BaseFragment() {
                     bundle.putString("courseNum", datas[position].courseNum)
                     bundle.putInt("status",datas[position].status)
                     toInfo.putExtras(bundle)
-                    startActivity(toInfo)
+                    this.startActivity(toInfo)
                 }
                 R.id.tv_yaoqin_edit -> {
                     toJujue(view as TextView, position)
@@ -166,10 +166,10 @@ class InviteFragment : BaseFragment() {
     private fun agreeCourse(position: Int) {
         val params = HashMap<String, Any>()
         params["courseNum"] = datas[position].courseNum
-        val subscription = Network.getInstance("团课同意/拒绝", activity)
+        val subscription = Network.getInstance("团课取消邀请", activity)
             .cancelCourseByArea(
                 params,
-                ProgressSubscriber("团课同意/拒绝", object : SubscriberOnNextListener<Bean<Any>> {
+                ProgressSubscriber("团课取消邀请", object : SubscriberOnNextListener<Bean<Any>> {
                     override fun onNext(result: Bean<Any>) {
                         //上架成功！
                        if (result.code == 0){

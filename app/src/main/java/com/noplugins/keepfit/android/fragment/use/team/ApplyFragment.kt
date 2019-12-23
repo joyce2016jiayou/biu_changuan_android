@@ -91,11 +91,11 @@ class ApplyFragment : BaseFragment() {
                     //跳转到详情 需要携带状态
                     val toInfo = Intent(activity, TeamInfoActivity::class.java)
                     val bundle = Bundle()
-                    bundle.putInt("type", 2)
+                    bundle.putInt("type", 4)
                     bundle.putString("courseNum", datas[position].courseNum)
                     bundle.putInt("status",datas[position].status)
                     toInfo.putExtras(bundle)
-                    startActivity(toInfo)
+                    this.startActivity(toInfo)
                 }
                 R.id.tv_jujue -> {
                     if (datas[position].refuseType == 1){
@@ -106,7 +106,8 @@ class ApplyFragment : BaseFragment() {
                 }
                 R.id.tv_jieshou -> {
                     //接受
-                    agreeCourse(position, 1, "")
+                    toAgree(view as TextView, position)
+//                    agreeCourse(position, 1, "")
                 }
             }
         }
@@ -301,10 +302,10 @@ class ApplyFragment : BaseFragment() {
         if (type == 0) {
             params["refuse"] = str
         } else {
-            params["place_num"] = datas[position].courseNum
-            params["place_type"] = datas[position].courseNum
-            params["place_name"] = datas[position].courseNum
-            params["max_num"] = datas[position].courseNum
+            params["place_num"] = roomNumber
+            params["place_type"] = roomType
+            params["place_name"] = roomName
+            params["max_num"] = maxNum
         }
         val subscription = Network.getInstance("团课同意/拒绝", activity)
             .agreeCourseByArea(
