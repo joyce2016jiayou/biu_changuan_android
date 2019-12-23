@@ -68,10 +68,13 @@ import com.noplugins.keepfit.android.util.GlideRoundTransform
 import com.noplugins.keepfit.android.util.data.DateHelper
 import com.noplugins.keepfit.android.util.ui.toast.SuperCustomToast
 import kotlinx.android.synthetic.main.activity_class_item_edit.*
+import kotlinx.android.synthetic.main.activity_yao_qing_zhong_detail.*
 import kotlinx.android.synthetic.main.add_class_item_baseinformation_layout.*
 import kotlinx.android.synthetic.main.add_class_item_baseinformation_layout2.*
 import kotlinx.android.synthetic.main.add_class_item_baseinformation_layout3.*
 import kotlinx.android.synthetic.main.title_activity.*
+import kotlinx.android.synthetic.main.title_activity.back_btn
+import kotlinx.android.synthetic.main.title_activity.title_tv
 import okhttp3.RequestBody
 
 class ClassItemEditActivity : BaseActivity(), CCRSortableNinePhotoLayout.Delegate {
@@ -113,7 +116,6 @@ class ClassItemEditActivity : BaseActivity(), CCRSortableNinePhotoLayout.Delegat
         cDate = CalendarUtil.getCurrent3Date()
 
         //获取历史数据
-        requestData()
         //设置营业时间
 //        getYinyeTime()
 
@@ -161,6 +163,9 @@ class ClassItemEditActivity : BaseActivity(), CCRSortableNinePhotoLayout.Delegat
         //设置九宫格
         //设置九宫格控件
 //        mPhotosSnpl.setDelegate(this)
+
+
+        requestData()
 
 
     }
@@ -348,16 +353,20 @@ class ClassItemEditActivity : BaseActivity(), CCRSortableNinePhotoLayout.Delegat
 //        select_class_difficulty_tv.text = code.course.difficulty
 
         edit_class_name.setText(code.course.courseName)
-        edit_price_number.setText(code.course.price)
-        year_tv.text = ""
-        month_tv.text = ""
-        date_tv.text = ""
+        if (code.course.price != null){
+            edit_price_number.setText(""+code.course.price)
+        }
+
+        year_tv.text = DateHelper.getDateDayByLong(code.course.startTime).split("-")[0]
+        month_tv.text = DateHelper.getDateDayByLong(code.course.startTime).split("-")[1]
+        date_tv.text = DateHelper.getDateDayByLong(code.course.startTime).split("-")[2]
+
         time1_edit.text = DateHelper.getDateByLong(code.course.startTime)
-        date_tv.text = DateHelper.getDateByLong(code.course.endTime)
+        time2_edit.text = DateHelper.getDateByLong(code.course.endTime)
 
         select_room_tv.text = ""
         select_room_name_tv.text = ""
-        edit_tuanke_renshu_number.text ="${ code.course.maxNum}人"
+        edit_tuanke_renshu_number.text ="${code.course.maxNum}人"
         select_xunhuan_type_tv.text = "单次"
 
         edit_class_jieshao.text = code.course.courseDes

@@ -266,7 +266,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/m20"
-                        android:hint="yy"
+                        android:hint=""
                         android:textColor="@color/top_heiziti"
                         android:textSize="15sp" />
 
@@ -282,7 +282,7 @@
                         android:id="@+id/month_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:hint="mm"
+                        android:hint=""
                         android:textColor="@color/top_heiziti"
                         android:textSize="15sp" />
 
@@ -298,7 +298,7 @@
                         android:id="@+id/date_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:hint="dd"
+                        android:hint=""
                         android:textColor="@color/top_heiziti"
                         android:textSize="15sp" />
 

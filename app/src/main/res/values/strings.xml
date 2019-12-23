@@ -228,7 +228,7 @@
     <string name="tv171">详细的课程简介能够吸引更多人来锻炼哦～</string>
     <string name="tv172">封面图</string>
     <string name="tv173">授课图</string>
-    <string name="tv174">教练</string>
+    <string name="tv174" tools:ignore="ExtraTranslation">教练</string>
     <string name="tv175">去邀请</string>
     <string name="tv176">退出创建</string>
     <string name="tv177">确定退出创建团课吗？信息将不会保留</string>
