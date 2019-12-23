@@ -5,14 +5,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_F8F8F8"
+    android:background="@color/white"
+    android:fillViewport="true"
     android:orientation="vertical"
     tools:context=".activity.AddClassItemActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/color_F8F8F8"
         android:orientation="vertical">
 
         <RelativeLayout
@@ -65,19 +65,20 @@
 
         <LinearLayout
             android:id="@+id/add_class_teacher_btn"
-            android:layout_width="225dp"
-            android:layout_height="70dp"
+            android:layout_width="@dimen/m209"
+            android:layout_height="@dimen/m50"
             android:layout_gravity="center_horizontal"
-            android:background="@drawable/login_btn"
+            android:layout_marginBottom="@dimen/m50"
+            android:background="@drawable/submit_bg"
             android:gravity="center">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="@string/tv77"
-                android:textColor="@color/white"
-                android:textSize="25sp" />
+                android:text="@string/tv39"
+                android:textColor="@color/top_heiziti"
+                android:textSize="20sp" />
 
         </LinearLayout>
     </LinearLayout>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<www.linwg.org.lib.LCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/clander_layout"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/m150"
+    android:layout_gravity="center"
+    android:layout_marginLeft="@dimen/m15"
+    android:layout_marginRight="@dimen/m15"
+    android:gravity="center"
+    android:orientation="vertical"
+    app:cornerRadius="@dimen/m8"
+    app:shadowSize="@dimen/m2"
+    app:shadowStartAlpha="10">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/pop_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/m10"
+            android:text="@string/tv176"
+            android:textColor="@color/color_4A4A4A"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/pop_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/m20"
+            android:layout_marginRight="@dimen/m20"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/m10"
+            android:gravity="center"
+            android:text="@string/tv177"
+            android:textColor="@color/color_4A4A4A"
+            android:textSize="15sp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/m30">
+
+
+            <LinearLayout
+                android:id="@+id/cancel_btn"
+                android:layout_width="@dimen/m110"
+                android:layout_height="@dimen/m39"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="@dimen/m10"
+                android:background="@drawable/button_cancle"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/alert_dialog_cached_cancel"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/sure_btn"
+                android:layout_width="@dimen/m110"
+                android:layout_height="@dimen/m39"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/m10"
+                android:background="@drawable/button_determine"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tv4"
+                    android:textColor="@color/color_181818"
+                    android:textSize="18sp" />
+            </LinearLayout>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+</www.linwg.org.lib.LCardView>

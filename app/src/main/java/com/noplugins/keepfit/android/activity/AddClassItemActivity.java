@@ -19,20 +19,31 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.huantansheng.easyphotos.EasyPhotos;
 import com.huantansheng.easyphotos.models.album.entity.Photo;
+import com.lxj.xpopup.XPopup;
+import com.lxj.xpopup.core.BasePopupView;
+import com.lxj.xpopup.enums.PopupAnimation;
 import com.noplugins.keepfit.android.R;
+import com.noplugins.keepfit.android.activity.mine.TeacherSelectActivity;
+import com.noplugins.keepfit.android.adapter.InviteTeacherAdapter;
 import com.noplugins.keepfit.android.adapter.TypeAdapter;
 import com.noplugins.keepfit.android.base.BaseActivity;
+import com.noplugins.keepfit.android.bean.CgBindingBean;
 import com.noplugins.keepfit.android.bean.ChangguanBean;
 import com.noplugins.keepfit.android.bean.DictionaryeBean;
+import com.noplugins.keepfit.android.bean.TeacherBean;
 import com.noplugins.keepfit.android.callback.DialogCallBack;
 import com.noplugins.keepfit.android.entity.AddClassEntity;
 import com.noplugins.keepfit.android.entity.ClassEntity;
 import com.noplugins.keepfit.android.entity.ClassTypeEntity;
 import com.noplugins.keepfit.android.entity.MaxPeopleEntity;
+import com.noplugins.keepfit.android.entity.TeacherEntity;
 import com.noplugins.keepfit.android.global.AppConstants;
 import com.noplugins.keepfit.android.util.GlideEngine;
 import com.noplugins.keepfit.android.util.SpUtils;
@@ -46,8 +57,15 @@ import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener;
 import com.noplugins.keepfit.android.util.ui.PopWindowHelper;
 import com.noplugins.keepfit.android.util.ui.cropimg.ClipImageActivity;
 import com.noplugins.keepfit.android.util.ui.cropimg.FileUtil;
+import com.noplugins.keepfit.android.util.ui.gallery_recycleview.GalleryLayoutManager;
+import com.noplugins.keepfit.android.util.ui.gallery_recycleview.RecyclerViewAdapter;
+import com.noplugins.keepfit.android.util.ui.gallery_recycleview.Transformer;
 import com.noplugins.keepfit.android.util.ui.jiugongge.CCRSortableNinePhotoLayout;
 import com.noplugins.keepfit.android.util.ui.pop.CommonPopupWindow;
+import com.noplugins.keepfit.android.util.ui.pop.base.CenterPopupView;
+import com.noplugins.keepfit.android.util.ui.pop.inteface.ViewCallBack;
+import com.noplugins.keepfit.android.util.ui.speed_recyclerview.CardScaleHelper;
+import com.noplugins.keepfit.android.util.ui.speed_recyclerview.SpeedRecyclerView;
 import com.othershe.calendarview.utils.CalendarUtil;
 
 import java.io.File;
@@ -137,6 +155,11 @@ public class AddClassItemActivity extends BaseActivity implements CCRSortableNin
     CCRSortableNinePhotoLayout mPhotosSnpl;
     @BindView(R.id.select_numbers_tv)
     TextView select_numbers_tv;
+    @BindView(R.id.invite_teacher_btn)
+    LinearLayout invite_teacher_btn;
+    @BindView(R.id.speed_recyclerview)
+    RecyclerView speed_recyclerview;
+
     private String select_target_type = "1";
     private String select_class_type = "1";
     private String select_nandu_type = "容易";
@@ -161,7 +184,9 @@ public class AddClassItemActivity extends BaseActivity implements CCRSortableNin
     private String icon_image_path = "";
     private int max_num = 0;
     private List<String> strings = new ArrayList<>();
-
+    public static List<TeacherBean> submit_tescher_list = new ArrayList<>();
+    public static boolean is_refresh_teacher_list;
+    RecyclerViewAdapter inviteTeacherAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -178,6 +203,7 @@ public class AddClassItemActivity extends BaseActivity implements CCRSortableNin
         setContentLayout(R.layout.activity_add_class_item);
         ButterKnife.bind(this);
         isShowTitle(false);
+
         cDate = CalendarUtil.getCurrent3Date();
 
         //设置营业时间
@@ -259,11 +285,41 @@ public class AddClassItemActivity extends BaseActivity implements CCRSortableNin
         //添加封面图
         set_icon_image();
         //设置九宫格
-        //设置九宫格控件
         mPhotosSnpl.setDelegate(this);
+
+        //邀请团课老师
+        invite_teacher_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AddClassItemActivity.this, TeacherSelectActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("enter_type", "add_page");
+                intent.putExtras(bundle);
+                startActivity(intent);
+
+
+            }
+        });
+
+        //设置邀请教练视图
+        GalleryLayoutManager manager = new GalleryLayoutManager(GalleryLayoutManager.HORIZONTAL);
+        manager.attach(speed_recyclerview, 1000000);
+        // 设置滑动缩放效果
+        manager.setItemTransformer(new Transformer());
+        inviteTeacherAdapter = new RecyclerViewAdapter(submit_tescher_list, this);
+        speed_recyclerview.setAdapter(inviteTeacherAdapter);
+        manager.setOnItemSelectedListener((recyclerView, item, position) -> {
+
+        });
+        inviteTeacherAdapter.setmOnItemClickListener((view, data) -> {
+            // 支持手动点击滑动切换
+            speed_recyclerview.smoothScrollToPosition(Integer.valueOf(data));
+        });
 
 
     }
+
+
 
     private void set_icon_image() {
         logo_image.setOnClickListener(new View.OnClickListener() {//添加图片
@@ -290,6 +346,12 @@ public class AddClassItemActivity extends BaseActivity implements CCRSortableNin
 
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        submit_tescher_list.clear();
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
         if (class_jianjie_tv.length() == 0) {
@@ -309,6 +371,14 @@ public class AddClassItemActivity extends BaseActivity implements CCRSortableNin
         } else {
             edit_zhuyi_shixiang.setText(zhuyi_shixiang_tv);
         }
+        //判断是否刷新教练邀请列表
+        if (is_refresh_teacher_list) {
+            if (submit_tescher_list.size() > 0) {
+                inviteTeacherAdapter.notifyDataSetChanged();
+            }
+            is_refresh_teacher_list = false;
+        }
+
 
     }
 
@@ -318,7 +388,7 @@ public class AddClassItemActivity extends BaseActivity implements CCRSortableNin
             @Override
             public void onClick(View view) {
                 //弹出是否退出创建的提示
-                back_pop();
+                pop(false);
             }
         });
         add_class_teacher_btn.setOnClickListener(new View.OnClickListener() {
@@ -614,22 +684,40 @@ public class AddClassItemActivity extends BaseActivity implements CCRSortableNin
 
     @Override
     public void onBackPressed() {
-        back_pop();
+        pop(false);
     }
 
-    private void back_pop() {
-        PopWindowHelper.public_tishi_pop(AddClassItemActivity.this, "提示", "是否退出团课创建？", "取消", "确定", new DialogCallBack() {
-            @Override
-            public void save() {
-                finish();
-            }
+    private void pop(boolean is_no_invite_teacher) {
+        new XPopup.Builder(this)
+                .autoOpenSoftInput(true)
+                .popupAnimation(PopupAnimation.ScaleAlphaFromCenter)
+                .asCustom(new CenterPopupView(this, R.layout.back_invite_teacher_pop, new ViewCallBack() {
+                    @Override
+                    public void onReturnView(View view, BasePopupView popup) {
+                        TextView pop_title = view.findViewById(R.id.pop_title);
+                        TextView pop_content = view.findViewById(R.id.pop_content);
+                        if (is_no_invite_teacher) {//弹出"选择教练"提示
+                            pop_title.setText(R.string.tv178);
+                            pop_content.setText(R.string.tv179);
+                        }
+                        view.findViewById(R.id.cancel_btn).setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                popup.dismiss();
+                            }
+                        });
+                        view.findViewById(R.id.sure_btn).setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                finish();
+                                popup.dismiss();
+                            }
+                        });
+                    }
 
-            @Override
-            public void cancel() {
-
-            }
-        });
+                })).show();
     }
+
 
     private void add_class() {
         Map<String, Object> params = new HashMap<>();

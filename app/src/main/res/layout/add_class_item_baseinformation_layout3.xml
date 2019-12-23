@@ -70,6 +70,7 @@
                 android:layout_marginLeft="@dimen/m20"
                 android:layout_marginTop="@dimen/m10"
                 android:layout_marginBottom="@dimen/m10"
+                android:visibility="gone"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -135,7 +136,74 @@
                     app:bga_snpl_plusDrawable="@drawable/add_image_moren"
                     app:bga_snpl_plusEnable="true"
                     app:bga_snpl_sortable="true" />
+
+
             </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/m10"
+                android:layout_marginLeft="@dimen/m20">
+
+                <TextView
+                    android:id="@+id/tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/tv174"
+                    android:textColor="@color/color_181818"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/invite_teacher_number_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/m2"
+                    android:layout_toEndOf="@+id/tv"
+                    android:text="(0/20)"
+                    android:textColor="@color/color_181818"
+                    android:textSize="15sp" />
+
+                <LinearLayout
+                    android:id="@+id/invite_teacher_btn"
+                    android:layout_width="@dimen/m59"
+                    android:layout_height="@dimen/m24"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/m30"
+                    android:background="@drawable/shape_invite_btn"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tv175"
+                        android:textColor="#ff22243d"
+                        android:textSize="13sp" />
+
+                </LinearLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/m20"
+                android:layout_marginTop="@dimen/m10"
+                android:layout_marginRight="@dimen/m20"
+                android:layout_marginBottom="@dimen/m10">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/speed_recyclerview"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/m184"
+                    android:layout_gravity="center"
+                    android:overScrollMode="never"
+                    android:scrollbars="none" />
+            </RelativeLayout>
 
         </LinearLayout>
     </www.linwg.org.lib.LCardView>
