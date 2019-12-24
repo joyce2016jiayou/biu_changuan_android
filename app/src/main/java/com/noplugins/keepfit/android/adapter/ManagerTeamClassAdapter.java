@@ -68,9 +68,14 @@ public class ManagerTeamClassAdapter extends BaseQuickAdapter<ManagerBean.Course
                 }
                 helper.setText(R.id.tv_item, statusType(item.getStatus()));
                 helper.getView(R.id.tv_team_date).setVisibility(View.VISIBLE);
-                helper.getView(R.id.ll_yaoqin_edit).setVisibility(View.VISIBLE);
+
+                if (item.getIsEdit() == 0) {
+                    helper.getView(R.id.ll_yaoqin_edit).setVisibility(View.GONE);
+                } else {
+                    helper.getView(R.id.ll_yaoqin_edit).setVisibility(View.VISIBLE);
+                    helper.setText(R.id.tv_yaoqin_edit,"编辑");
+                }
                 helper.getView(R.id.ll_shenqin).setVisibility(View.GONE);
-                helper.setText(R.id.tv_yaoqin_edit,"编辑");
                 break;
             case 4: //申请中
                 helper.getView(R.id.tv_cg_name).setVisibility(View.VISIBLE);

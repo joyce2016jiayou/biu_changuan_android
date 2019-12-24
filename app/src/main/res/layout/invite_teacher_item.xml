@@ -50,6 +50,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/m10"
             android:text="朱莉"
+            android:layout_toLeftOf="@+id/invite_status_tv"
             android:textColor="@color/white"
             android:textSize="13sp" />
 

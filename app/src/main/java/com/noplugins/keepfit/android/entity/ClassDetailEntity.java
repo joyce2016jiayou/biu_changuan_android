@@ -419,6 +419,15 @@ public class ClassDetailEntity {
         private int deleted;
         private int inviteStatus;
         private String gymInviteNum;
+        private double finalGrade;
+
+        public double getFinalGrade() {
+            return finalGrade;
+        }
+
+        public void setFinalGrade(double finalGrade) {
+            this.finalGrade = finalGrade;
+        }
 
         public String getTeacherNum() {
             return teacherNum;

@@ -86,6 +86,7 @@ class InviteFragment : BaseFragment() {
                     val bundle = Bundle()
                     bundle.putInt("type", 2)
                     bundle.putString("courseNum", datas[position].courseNum)
+                    bundle.putString("statusMsg", datas[position].statusMsg)
                     bundle.putInt("status",datas[position].status)
                     toInfo.putExtras(bundle)
                     this.startActivity(toInfo)

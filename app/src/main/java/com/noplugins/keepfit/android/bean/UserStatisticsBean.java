@@ -15,6 +15,43 @@ public class UserStatisticsBean {
     private SalesBean sales;
     private List<FunctionBean> function;
 
+    private int emptyProduct;//产品消费占比图是否是空 1是0否
+    private int emptyAge;//用户年龄占比图是否是空 1是0否
+    private int emptySex;//用户性别占比图是否是空 1是0否
+    private int emptyTime;//健身时间占比图是否是空 1是0否
+
+    public int getEmptyProduct() {
+        return emptyProduct;
+    }
+
+    public void setEmptyProduct(int emptyProduct) {
+        this.emptyProduct = emptyProduct;
+    }
+
+    public int getEmptyAge() {
+        return emptyAge;
+    }
+
+    public void setEmptyAge(int emptyAge) {
+        this.emptyAge = emptyAge;
+    }
+
+    public int getEmptySex() {
+        return emptySex;
+    }
+
+    public void setEmptySex(int emptySex) {
+        this.emptySex = emptySex;
+    }
+
+    public int getEmptyTime() {
+        return emptyTime;
+    }
+
+    public void setEmptyTime(int emptyTime) {
+        this.emptyTime = emptyTime;
+    }
+
     public int getTotal() {
         return total;
     }

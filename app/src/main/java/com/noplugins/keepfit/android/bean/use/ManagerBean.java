@@ -108,6 +108,34 @@ public class ManagerBean {
         private String teacherName;
 
         private int refuseType;
+        private String statusMsg;
+
+        private int isEdit;//表示是否可以编辑，1是0否
+        private int isFull;//详情是否显示邀请信息，1是0否
+
+        public int getIsEdit() {
+            return isEdit;
+        }
+
+        public void setIsEdit(int isEdit) {
+            this.isEdit = isEdit;
+        }
+
+        public int getIsFull() {
+            return isFull;
+        }
+
+        public void setIsFull(int isFull) {
+            this.isFull = isFull;
+        }
+
+        public String getStatusMsg() {
+            return statusMsg;
+        }
+
+        public void setStatusMsg(String statusMsg) {
+            this.statusMsg = statusMsg;
+        }
 
         public int getRefuseType() {
             return refuseType;

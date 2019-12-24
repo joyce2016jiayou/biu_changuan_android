@@ -124,7 +124,7 @@ class ToProductFragment : BaseFragment() {
 
         }
 
-        if (user.sales.product != null && user.sales.product.size > 0) {
+        if (user.emptyProduct == 0) {
             user.sales.product.forEach {
                 xiaoshouStrings.add(PieEntry(it.percent.toFloat(), it.type))
             }

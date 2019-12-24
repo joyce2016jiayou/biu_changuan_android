@@ -12,12 +12,11 @@
         android:layout_width="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_height="40dp"
-        app:tabIndicatorHeight="2dp"
-        app:tabIndicatorWidth="30dp"
+        app:tabIndicatorHeight="4dp"
+        app:tabIndicatorWidth="13dp"
         app:tabTextColor="#4a4a4a"
         app:tab_Mode="mode_scrollable"
         app:tabSelectTextColor="@color/color_181818"
-        app:tabIndicatorColor="@color/color_yellow"
         app:tabTextSize="5sp"
 />
 

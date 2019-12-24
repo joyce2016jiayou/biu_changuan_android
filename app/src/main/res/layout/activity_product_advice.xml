@@ -8,46 +8,7 @@
     android:orientation="vertical"
     tools:context=".activity.ProductAdviceActivity">
 
-    <RelativeLayout
-        android:id="@+id/rel1"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="@drawable/daohanglan">
-
-        <ImageView
-            android:id="@+id/back_btn"
-            android:layout_width="28dp"
-            android:layout_height="18dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginLeft="20dp"
-            android:layout_marginBottom="30dp"
-            android:src="@drawable/icon_back" />
-
-        <TextView
-            android:id="@+id/title_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="19dp"
-            android:text="@string/tv108"
-            android:textColor="@color/top_heiziti"
-            android:textSize="25sp"
-            android:textStyle="bold" />
-
-        <ImageView
-            android:id="@+id/question_btn"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginRight="20dp"
-            android:visibility="gone"
-            android:layout_marginBottom="15dp"
-            android:src="@drawable/kefu" />
-    </RelativeLayout>
-
+    <include layout="@layout/title_activity"/>
     <TextView
         android:id="@+id/tv1"
         android:layout_width="wrap_content"
@@ -57,7 +18,7 @@
         android:layout_marginTop="15dp"
         android:text="@string/tv109"
         android:textColor="@color/top_heiziti"
-        android:textSize="25sp"
+        android:textSize="15sp"
         android:textStyle="bold" />
 
     <LinearLayout
@@ -176,24 +137,16 @@
     </LinearLayout>
 
 
-    <LinearLayout
+    <TextView
         android:id="@+id/add_class_teacher_btn"
-        android:layout_width="209dp"
-        android:layout_height="54dp"
+        android:layout_width="@dimen/m209"
+        android:layout_height="@dimen/m50"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="20dp"
         android:layout_marginTop="@dimen/m30"
-        android:background="@drawable/login_btn"
-        android:gravity="center">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/tv39"
-            android:textColor="@color/white"
-            android:textSize="25sp"
-            android:textStyle="bold" />
-
-    </LinearLayout>
+        android:background="@drawable/shape_btn_bg_yellow_40"
+        android:text="@string/tv39"
+        android:textColor="@color/color_181818"
+        android:textSize="20sp"
+        android:gravity="center"/>
 </LinearLayout>

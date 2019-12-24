@@ -75,7 +75,8 @@ class SettingActivity : BaseActivity() {
                 .popupAnimation(PopupAnimation.ScaleAlphaFromCenter)
                 .asCustom(CenterPopupView(this,R.layout.dialog_to_room_delete,
                         ViewCallBack { view, popup ->
-
+                            view.findViewById<TextView>(R.id.label_delete_room).text = "登出账户"
+                            view.findViewById<TextView>(R.id.tv_username).text = "确定登出哔呦账户吗？"
                             view.findViewById<TextView>(R.id.tv_cancel)
                                     .setOnClickListener {
                                         popup.dismiss()

@@ -338,7 +338,7 @@ public interface MyService {
     Observable<Bean<Object>> get_statistics(@Body RequestBody json);
 
     /**
-     * 取消邀请
+     * 团课详情
      *
      * @return
      */

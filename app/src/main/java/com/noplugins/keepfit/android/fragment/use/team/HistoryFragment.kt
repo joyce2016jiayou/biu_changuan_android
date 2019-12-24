@@ -88,6 +88,8 @@ class HistoryFragment : BaseFragment()  {
                     val bundle = Bundle()
                     bundle.putInt("type",3)
                     bundle.putString("courseNum",datas[position].courseNum)
+                    bundle.putString("statusMsg", datas[position].statusMsg)
+                    bundle.putInt("isEdit", datas[position].isEdit)
                     bundle.putInt("status",datas[position].status)
                     toInfo.putExtras(bundle)
                     this.startActivity(toInfo)

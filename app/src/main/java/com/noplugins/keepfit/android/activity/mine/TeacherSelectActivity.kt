@@ -24,6 +24,7 @@ import com.amap.api.location.AMapLocationListener
 import com.google.gson.Gson
 import com.noplugins.keepfit.android.R
 import com.noplugins.keepfit.android.activity.AddClassItemActivity
+import com.noplugins.keepfit.android.activity.use.ClassItemEditActivity
 import com.noplugins.keepfit.android.adapter.CgTeacherSelectAdapter
 import com.noplugins.keepfit.android.adapter.PopUpAdapter
 import com.noplugins.keepfit.android.base.BaseActivity
@@ -126,7 +127,13 @@ class TeacherSelectActivity : BaseActivity(), AMapLocationListener {
 
                 AddClassItemActivity.is_refresh_teacher_list = true
                 finish()
-            } else {
+            } else if (enter_type.equals("edit_page")){
+                ClassItemEditActivity.submit_tescher_list_edit.addAll(bind_teacher_list)
+
+                ClassItemEditActivity.is_refresh_teacher_list_edit = true
+                finish()
+            }
+            else {
                 //除了绑定教练 ， 场馆的团课还可以选择教练来上课
                 if (courseNum != "") {
                     inviteTeachers()
@@ -391,6 +398,8 @@ class TeacherSelectActivity : BaseActivity(), AMapLocationListener {
                         ProgressSubscriber("团课邀请教练", object : SubscriberOnNextListener<Bean<Any>> {
                             override fun onNext(result: Bean<Any>) {
                                 Toast.makeText(applicationContext,result.message,Toast.LENGTH_SHORT).show()
+                                val mIntent = Intent()
+                                setResult(RESULT_OK, mIntent)
                                 finish()
                             }
 

@@ -56,6 +56,35 @@ public class InformationEntity {
     private String provinceCode;
     private String cityCode;
 
+    private double longitude;
+    private double latitude;
+
+    private String coach_notify;
+
+    public String getCoach_notify() {
+        return coach_notify;
+    }
+
+    public void setCoach_notify(String coach_notify) {
+        this.coach_notify = coach_notify;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
     public String getProvinceCode() {
         return provinceCode;
     }

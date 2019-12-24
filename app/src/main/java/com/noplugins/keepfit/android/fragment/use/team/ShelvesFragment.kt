@@ -81,6 +81,7 @@ class ShelvesFragment : BaseFragment()  {
                     val bundle = Bundle()
                     bundle.putInt("type",1)
                     bundle.putString("courseNum",datas[position].courseNum)
+                    bundle.putString("statusMsg", datas[position].statusMsg)
                     bundle.putInt("status",datas[position].status)
                     toInfo.putExtras(bundle)
                     this.startActivity(toInfo)

@@ -64,11 +64,11 @@ public class EnhanceTabLayout extends FrameLayout {
 
     private void readAttr(Context context, AttributeSet attrs) {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.EnhanceTabLayout);
-        mSelectIndicatorColor = typedArray.getColor(R.styleable.EnhanceTabLayout_tabIndicatorColor, context.getResources().getColor(R.color.colorAccent));
+        mSelectIndicatorColor = typedArray.getResourceId(R.styleable.EnhanceTabLayout_tabIndicatorColor,R.drawable.shape_btn_bg_yellow);
         mUnSelectTextColor = typedArray.getColor(R.styleable.EnhanceTabLayout_tabTextColor, Color.parseColor("#666666"));
         mSelectTextColor = typedArray.getColor(R.styleable.EnhanceTabLayout_tabSelectTextColor, context.getResources().getColor(R.color.colorAccent));
         mIndicatorHeight = typedArray.getDimensionPixelSize(R.styleable.EnhanceTabLayout_tabIndicatorHeight, 1);
-        mIndicatorWidth = typedArray.getDimensionPixelSize(R.styleable.EnhanceTabLayout_tabIndicatorWidth, 0);
+        mIndicatorWidth = typedArray.getDimensionPixelSize(R.styleable.EnhanceTabLayout_tabIndicatorWidth, 3);
         mTabTextSize = typedArray.getDimensionPixelSize(R.styleable.EnhanceTabLayout_tabTextSize, 13);
         mTabMode = typedArray.getInt(R.styleable.EnhanceTabLayout_tab_Mode, 2);
         typedArray.recycle();
@@ -98,7 +98,7 @@ public class EnhanceTabLayout extends FrameLayout {
                     View indicator = view.findViewById(R.id.tab_item_indicator);
                     if (i == tab.getPosition()) { // 选中状态
                         text.setTextColor(mSelectTextColor);
-                        indicator.setBackgroundColor(mSelectIndicatorColor);
+                        indicator.setBackgroundResource(mSelectIndicatorColor);
                         indicator.setVisibility(View.VISIBLE);
                     } else {// 未选中状态
                         text.setTextColor(mUnSelectTextColor);
@@ -187,7 +187,8 @@ public class EnhanceTabLayout extends FrameLayout {
                     View indicator = view.findViewById(R.id.tab_item_indicator);
                     if (i == tab.getPosition()) { // 选中状态
                         text.setTextColor(mTabLayout.mSelectTextColor);
-                        indicator.setBackgroundColor(mTabLayout.mSelectIndicatorColor);
+//                        indicator.setBackgroundColor(mTabLayout.mSelectIndicatorColor);
+                        indicator.setBackgroundResource(mTabLayout.mSelectIndicatorColor);
                         indicator.setVisibility(View.VISIBLE);
                     } else {// 未选中状态
                         text.setTextColor(mTabLayout.mUnSelectTextColor);

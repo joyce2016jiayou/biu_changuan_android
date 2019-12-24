@@ -720,11 +720,11 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
             upListToQiniu();
             return;
         }
-
         if (upList_iamges.size() == strings.size()) {
             upListToQiniu();
             return;
         }
+
         Observable
                 .fromIterable(jiugongge_iamges)
                 .flatMap((Function<String, ObservableSource<File>>)
@@ -757,7 +757,6 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
                 )
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(response -> {
-                    //todo
                     Log.d("luban", "发射成功:" + response.getPath());
                     jiugongge_iamges.set(i, response.getPath());
                     i++;
@@ -768,8 +767,6 @@ public class ChangGuandetailActivity extends BaseActivity implements CCRSortable
                 }, throwable -> {
                     Log.d("luban", "异常了");
                 });
-
-
     }
 
     /**

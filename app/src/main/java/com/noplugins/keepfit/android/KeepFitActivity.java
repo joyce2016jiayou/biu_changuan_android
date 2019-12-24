@@ -31,8 +31,6 @@ import com.noplugins.keepfit.android.entity.VersionEntity;
 import com.noplugins.keepfit.android.fragment.RiChengFragment;
 import com.noplugins.keepfit.android.fragment.MessageFragment;
 import com.noplugins.keepfit.android.fragment.mine.MyFragment;
-import com.noplugins.keepfit.android.fragment.statistics.StatisticsFragment;
-import com.noplugins.keepfit.android.fragment.teacher.Is2999Fragment;
 import com.noplugins.keepfit.android.fragment.use.UseFragment;
 import com.noplugins.keepfit.android.global.AppConstants;
 import com.noplugins.keepfit.android.jpush.TagAliasOperatorHelper;
