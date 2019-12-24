@@ -279,6 +279,11 @@
     <string name="alert_dialog_tishi33">房间名称不能为空！</string>
     <string name="alert_dialog_tishi34">容纳人数不能为空！</string>
     <string name="alert_dialog_tishi35">场馆房间不能超过10个！</string>
+    <string name="alert_dialog_tishi36">logo不能为空！</string>
+    <string name="alert_dialog_tishi37">房间名称为空！</string>
+    <string name="alert_dialog_tishi38">价格不能为空！</string>
+    <string name="alert_dialog_tishi39">开始时间不能为空！</string>
+    <string name="alert_dialog_tishi40">结束时间不能为空！</string>
 
     <string name="update_title">更新提示</string>
     <string name="updatecontent">检测到有新版本，是否更新到最新版本。</string>

@@ -7,10 +7,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -19,7 +17,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -31,19 +28,19 @@ import com.lxj.xpopup.core.BasePopupView;
 import com.lxj.xpopup.enums.PopupAnimation;
 import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.activity.mine.TeacherSelectActivity;
-import com.noplugins.keepfit.android.adapter.InviteTeacherAdapter;
 import com.noplugins.keepfit.android.adapter.TypeAdapter;
 import com.noplugins.keepfit.android.base.BaseActivity;
+import com.noplugins.keepfit.android.base.MyApplication;
 import com.noplugins.keepfit.android.bean.CgBindingBean;
 import com.noplugins.keepfit.android.bean.ChangguanBean;
 import com.noplugins.keepfit.android.bean.DictionaryeBean;
 import com.noplugins.keepfit.android.bean.TeacherBean;
-import com.noplugins.keepfit.android.callback.DialogCallBack;
+import com.noplugins.keepfit.android.callback.ImageCompressCallBack;
 import com.noplugins.keepfit.android.entity.AddClassEntity;
 import com.noplugins.keepfit.android.entity.ClassEntity;
 import com.noplugins.keepfit.android.entity.ClassTypeEntity;
 import com.noplugins.keepfit.android.entity.MaxPeopleEntity;
-import com.noplugins.keepfit.android.entity.TeacherEntity;
+import com.noplugins.keepfit.android.entity.QiNiuToken;
 import com.noplugins.keepfit.android.global.AppConstants;
 import com.noplugins.keepfit.android.util.GlideEngine;
 import com.noplugins.keepfit.android.util.SpUtils;
@@ -54,7 +51,7 @@ import com.noplugins.keepfit.android.util.net.progress.GsonSubscriberOnNextListe
 import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriber;
 import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriberNew;
 import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener;
-import com.noplugins.keepfit.android.util.ui.PopWindowHelper;
+import com.noplugins.keepfit.android.util.ui.ProgressUtil;
 import com.noplugins.keepfit.android.util.ui.cropimg.ClipImageActivity;
 import com.noplugins.keepfit.android.util.ui.cropimg.FileUtil;
 import com.noplugins.keepfit.android.util.ui.gallery_recycleview.GalleryLayoutManager;
@@ -64,13 +61,19 @@ import com.noplugins.keepfit.android.util.ui.jiugongge.CCRSortableNinePhotoLayou
 import com.noplugins.keepfit.android.util.ui.pop.CommonPopupWindow;
 import com.noplugins.keepfit.android.util.ui.pop.base.CenterPopupView;
 import com.noplugins.keepfit.android.util.ui.pop.inteface.ViewCallBack;
-import com.noplugins.keepfit.android.util.ui.speed_recyclerview.CardScaleHelper;
-import com.noplugins.keepfit.android.util.ui.speed_recyclerview.SpeedRecyclerView;
 import com.othershe.calendarview.utils.CalendarUtil;
+import com.qiniu.android.http.ResponseInfo;
+import com.qiniu.android.storage.UpCompletionHandler;
+import com.qiniu.android.storage.UploadManager;
+import com.qiniu.android.storage.UploadOptions;
+
+import org.json.JSONObject;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -85,8 +88,12 @@ import cn.qqtheme.framework.wheelview.contract.OnDateSelectedListener;
 import cn.qqtheme.framework.wheelview.contract.OnTimeSelectedListener;
 import cn.qqtheme.framework.wheelview.entity.DateEntity;
 import cn.qqtheme.framework.wheelview.entity.TimeEntity;
-import lib.demo.spinner.MaterialSpinner;
 import okhttp3.RequestBody;
+import top.zibin.luban.CompressionPredicate;
+import top.zibin.luban.Luban;
+import top.zibin.luban.OnCompressListener;
+
+import static com.noplugins.keepfit.android.fragment.BaseInformationFragment.getCompressJpgFileAbsolutePath;
 
 public class AddClassItemActivity extends BaseActivity implements CCRSortableNinePhotoLayout.Delegate {
     @BindView(R.id.back_btn)
@@ -159,6 +166,10 @@ public class AddClassItemActivity extends BaseActivity implements CCRSortableNin
     LinearLayout invite_teacher_btn;
     @BindView(R.id.speed_recyclerview)
     RecyclerView speed_recyclerview;
+    @BindView(R.id.select_room_name_btn)
+    RelativeLayout select_room_name_btn;
+    @BindView(R.id.select_room_name_tv)
+    TextView select_room_name_tv;
 
     private String select_target_type = "1";
     private String select_class_type = "1";
@@ -177,7 +188,7 @@ public class AddClassItemActivity extends BaseActivity implements CCRSortableNin
     List<DictionaryeBean> tatget_types = new ArrayList<>();
     String start = "";
     String end = "";
-    private String type = "";
+    private String room_type = "";
     public static String class_jianjie_tv = "";
     public static String shihe_renqun_tv = "";
     public static String zhuyi_shixiang_tv = "";
@@ -187,7 +198,23 @@ public class AddClassItemActivity extends BaseActivity implements CCRSortableNin
     public static List<TeacherBean> submit_tescher_list = new ArrayList<>();
     public static boolean is_refresh_teacher_list;
     RecyclerViewAdapter inviteTeacherAdapter;
+    List<ClassTypeEntity> room_lists = new ArrayList<>();
+    private String select_room_name = "";
+    private int select_room_name_id;
+    private ProgressUtil progress_upload;
+    /**
+     * 七牛云
+     **/
+    //指定upToken, 强烈建议从服务端提供get请求获取
+    private String uptoken = "xxxxxxxxx:xxxxxxx:xxxxxxxxxx";
+    private SimpleDateFormat sdf;
+    private String qiniu_key;
+    private UploadManager uploadManager;
+    private String icon_net_path = "";
 
+    /**
+     * 七牛云
+     **/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -205,6 +232,12 @@ public class AddClassItemActivity extends BaseActivity implements CCRSortableNin
         isShowTitle(false);
 
         cDate = CalendarUtil.getCurrent3Date();
+        /**七牛云**/
+        uploadManager = MyApplication.uploadManager;
+        sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+        qiniu_key = "icon_" + sdf.format(new Date());
+        getToken();
+        /**七牛云**/
 
         //设置营业时间
         getYinyeTime();
@@ -226,6 +259,13 @@ public class AddClassItemActivity extends BaseActivity implements CCRSortableNin
             @Override
             public void onClick(View view) {
                 select_room_type_pop();
+            }
+        });
+        //获取房间数量
+        select_room_name_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                select_room_list_pop();
             }
         });
         //获取课程难度
@@ -319,6 +359,27 @@ public class AddClassItemActivity extends BaseActivity implements CCRSortableNin
 
     }
 
+    private void getToken() {
+        subscription = Network.getInstance("登录", this)
+                .get_qiniu_token(new HashMap<>(), new ProgressSubscriberNew<>(QiNiuToken.class, new GsonSubscriberOnNextListener<QiNiuToken>() {
+                    @Override
+                    public void on_post_entity(QiNiuToken qiNiuToken, String s) {
+                        Log.e("获取到的token", "获取到的token" + qiNiuToken.getToken());
+                        uptoken = qiNiuToken.getToken();
+
+                    }
+                }, new SubscriberOnNextListener<Bean<Object>>() {
+                    @Override
+                    public void onNext(Bean<Object> result) {
+                    }
+
+                    @Override
+                    public void onError(String error) {
+                        Log.e("获取到的token失败", error);
+                    }
+                }, this, true));
+
+    }
 
 
     private void set_icon_image() {
@@ -395,57 +456,48 @@ public class AddClassItemActivity extends BaseActivity implements CCRSortableNin
             @Override
             public void onClick(View view) {
 
-                int startHour = Integer.parseInt(time1_edit.getText().toString().split(":")[0]);
-                int startMin = Integer.parseInt(time1_edit.getText().toString().split(":")[1]);
-
-                int endHour = Integer.parseInt(time2_edit.getText().toString().split(":")[0]);
-                int endMin = Integer.parseInt(time2_edit.getText().toString().split(":")[1]);
-                if (startHour > endHour) {
-                    Toast.makeText(AddClassItemActivity.this,
-                            "开始时间不能大于结束时间", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if (startHour == endHour && startMin > endMin) {
-                    Toast.makeText(AddClassItemActivity.this,
-                            "开始时间不能大于结束时间", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                int yinyeStartH = Integer.parseInt(start.split(":")[0]);
-                int yinyeStartM = Integer.parseInt(start.split(":")[1]);
-
-                int yinyeEndH = Integer.parseInt(end.split(":")[0]);
-                int yinyeEndM = Integer.parseInt(end.split(":")[1]);
-
-                if (startHour < yinyeStartH) {
-                    Toast.makeText(AddClassItemActivity.this,
-                            "该时间段场馆未营业", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if (startHour == yinyeStartH && startMin < yinyeStartM) {
-                    Toast.makeText(AddClassItemActivity.this,
-                            "该时间段场馆未营业", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                if (endHour > yinyeEndH) {
-                    Toast.makeText(AddClassItemActivity.this,
-                            "该时间段场馆未营业", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if (endHour == yinyeEndH && endMin > yinyeEndM) {
-                    Toast.makeText(AddClassItemActivity.this,
-                            "该时间段场馆未营业", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                if (edit_price_number.getText().toString().equals("")) {
-                    Toast.makeText(AddClassItemActivity.this,
-                            "价格不能为空", Toast.LENGTH_SHORT).show();
-                    return;
-                }
 
                 if (check_value()) {//如果所有参数不为空，请求网络接口
+                    int startHour = Integer.parseInt(time1_edit.getText().toString().split(":")[0]);
+                    int startMin = Integer.parseInt(time1_edit.getText().toString().split(":")[1]);
+                    int endHour = Integer.parseInt(time2_edit.getText().toString().split(":")[0]);
+                    int endMin = Integer.parseInt(time2_edit.getText().toString().split(":")[1]);
+                    if (startHour > endHour) {
+                        Toast.makeText(AddClassItemActivity.this,
+                                "开始时间不能大于结束时间", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    if (startHour == endHour && startMin > endMin) {
+                        Toast.makeText(AddClassItemActivity.this,
+                                "开始时间不能大于结束时间", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    int yinyeStartH = Integer.parseInt(start.split(":")[0]);
+                    int yinyeStartM = Integer.parseInt(start.split(":")[1]);
+                    int yinyeEndH = Integer.parseInt(end.split(":")[0]);
+                    int yinyeEndM = Integer.parseInt(end.split(":")[1]);
+                    if (startHour < yinyeStartH) {
+                        Toast.makeText(AddClassItemActivity.this,
+                                "该时间段场馆未营业", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    if (startHour == yinyeStartH && startMin < yinyeStartM) {
+                        Toast.makeText(AddClassItemActivity.this,
+                                "该时间段场馆未营业", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    if (endHour > yinyeEndH) {
+                        Toast.makeText(AddClassItemActivity.this,
+                                "该时间段场馆未营业", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    if (endHour == yinyeEndH && endMin > yinyeEndM) {
+                        Toast.makeText(AddClassItemActivity.this,
+                                "该时间段场馆未营业", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
                     add_class();
                 } else {
                     return;
@@ -454,77 +506,6 @@ public class AddClassItemActivity extends BaseActivity implements CCRSortableNin
 
             }
         });
-
-//        center.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//                InputMethodManager inputMethodManager =
-//                        (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-//                inputMethodManager.hideSoftInputFromWindow(edit_class_jieshao.getWindowToken(), 0);
-//                inputMethodManager.hideSoftInputFromWindow(edit_zhuyi_shixiang.getWindowToken(), 0);
-//                inputMethodManager.hideSoftInputFromWindow(edit_shihe_renqun.getWindowToken(), 0);
-//                edit_class_jieshao.clearFocus();
-//                edit_class_name.clearFocus();
-//                edit_price_number.clearFocus();
-//                edit_shihe_renqun.clearFocus();
-//                edit_tuanke_renshu_number.clearFocus();
-//                edit_zhuyi_shixiang.clearFocus();
-//                return false;
-//            }
-//        });
-//        select_date.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//
-//                InputMethodManager inputMethodManager =
-//                        (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-//                inputMethodManager.hideSoftInputFromWindow(edit_class_jieshao.getWindowToken(), 0);
-//                inputMethodManager.hideSoftInputFromWindow(edit_zhuyi_shixiang.getWindowToken(), 0);
-//                inputMethodManager.hideSoftInputFromWindow(edit_shihe_renqun.getWindowToken(), 0);
-//                edit_class_jieshao.clearFocus();
-//                edit_class_name.clearFocus();
-//                edit_price_number.clearFocus();
-//                edit_shihe_renqun.clearFocus();
-//                edit_tuanke_renshu_number.clearFocus();
-//                edit_zhuyi_shixiang.clearFocus();
-//
-//                return false;
-//            }
-//        });
-//        time1_edit.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//                InputMethodManager inputMethodManager =
-//                        (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-//                inputMethodManager.hideSoftInputFromWindow(edit_class_jieshao.getWindowToken(), 0);
-//                inputMethodManager.hideSoftInputFromWindow(edit_zhuyi_shixiang.getWindowToken(), 0);
-//                inputMethodManager.hideSoftInputFromWindow(edit_shihe_renqun.getWindowToken(), 0);
-//                edit_class_jieshao.clearFocus();
-//                edit_class_name.clearFocus();
-//                edit_price_number.clearFocus();
-//                edit_shihe_renqun.clearFocus();
-//                edit_tuanke_renshu_number.clearFocus();
-//                edit_zhuyi_shixiang.clearFocus();
-//                return false;
-//            }
-//        });
-//        time2_edit.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//                InputMethodManager inputMethodManager =
-//                        (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-//                inputMethodManager.hideSoftInputFromWindow(edit_class_jieshao.getWindowToken(), 0);
-//                inputMethodManager.hideSoftInputFromWindow(edit_zhuyi_shixiang.getWindowToken(), 0);
-//                inputMethodManager.hideSoftInputFromWindow(edit_shihe_renqun.getWindowToken(), 0);
-//                edit_class_jieshao.clearFocus();
-//                edit_class_name.clearFocus();
-//                edit_price_number.clearFocus();
-//                edit_shihe_renqun.clearFocus();
-//                edit_tuanke_renshu_number.clearFocus();
-//                edit_zhuyi_shixiang.clearFocus();
-//                return false;
-//            }
-//        });
     }
 
     private void get_class_room_type() {
@@ -541,7 +522,7 @@ public class AddClassItemActivity extends BaseActivity implements CCRSortableNin
                                 class_room_types.addAll(result.getData());
                                 //获取最大人数
                                 search_room_people(0);
-                                type = class_room_types.get(0).getKey() + "";
+                                room_type = class_room_types.get(0).getKey() + "";
 
 
                             }
@@ -625,11 +606,63 @@ public class AddClassItemActivity extends BaseActivity implements CCRSortableNin
         listView.setOnItemClickListener((adapterView, view1, i, l) -> {
             select_room_tv.setText(class_room_types.get(i).getValue());
             //查询每个房间最大能容纳的人数
-            type = class_room_types.get(i).getKey() + "";
+            room_type = class_room_types.get(i).getKey() + "";
             search_room_people(i);
+            //获取房间列表
+            get_room_list();
 
             popupWindow.dismiss();
         });
+    }
+
+
+    private void select_room_list_pop() {
+        CommonPopupWindow popupWindow = new CommonPopupWindow.Builder(this)
+                .setView(R.layout.select_type_layout)
+                .setBackGroundLevel(1f)//0.5f
+                .setAnimationStyle(R.style.top_to_bottom)
+                .setWidthAndHeight(select_room_name_btn.getWidth(),
+                        WindowManager.LayoutParams.WRAP_CONTENT)
+                .setOutSideTouchable(true).create();
+        popupWindow.showAsDropDown(select_room_name_btn);
+        /**设置逻辑*/
+        View view = popupWindow.getContentView();
+        List<String> strings = new ArrayList<>();
+        for (int i = 0; i < room_lists.size(); i++) {
+            strings.add(room_lists.get(i).getValue());
+        }
+        TypeAdapter typeAdapter = new TypeAdapter(strings, getApplicationContext());
+        ListView listView = view.findViewById(R.id.listview);
+        listView.setAdapter(typeAdapter);
+        listView.setOnItemClickListener((adapterView, view1, i, l) -> {
+            select_room_name_tv.setText(room_lists.get(i).getValue());
+            select_room_name = room_lists.get(i).getValue();
+            select_room_name_id = room_lists.get(i).getKey();
+            popupWindow.dismiss();
+        });
+    }
+
+
+    private void get_room_list() {
+        Map<String, Object> params = new HashMap<>();
+        params.put("areaNum", SpUtils.getString(getApplicationContext(), AppConstants.CHANGGUAN_NUM));//场馆编号
+        params.put("placeType", room_type);
+        subscription = Network.getInstance("获取房间列表", this)
+                .get_class_type(params,
+                        new ProgressSubscriber<>("获取房间列表", new SubscriberOnNextListener<Bean<List<ClassTypeEntity>>>() {
+                            @Override
+                            public void onNext(Bean<List<ClassTypeEntity>> result) {
+                                if (room_lists.size() > 0) {
+                                    room_lists.clear();
+                                }
+                                room_lists.addAll(result.getData());
+                            }
+
+                            @Override
+                            public void onError(String error) {
+
+                            }
+                        }, this, false));
     }
 
 
@@ -709,7 +742,11 @@ public class AddClassItemActivity extends BaseActivity implements CCRSortableNin
                         view.findViewById(R.id.sure_btn).setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                finish();
+                                if (is_no_invite_teacher) {
+
+                                } else {
+                                    finish();
+                                }
                                 popup.dismiss();
                             }
                         });
@@ -723,11 +760,20 @@ public class AddClassItemActivity extends BaseActivity implements CCRSortableNin
         Map<String, Object> params = new HashMap<>();
         params.put("gym_area_num", SpUtils.getString(getApplicationContext(), AppConstants.CHANGGUAN_NUM));//场馆编号
         params.put("course_name", edit_class_name.getText().toString());//团课名称
-        params.put("target", select_target_type);
-        params.put("difficulty", select_nandu_type);
-        params.put("type", type);
+        params.put("target", select_target_type);//训练目标
+        params.put("difficulty", select_nandu_type);//训练难度
+        params.put("type", room_type);//房间类型
+        params.put("gymPlaceNum", select_room_name_id);//选择的房间名称编号
+        params.put("placeName", select_room_name);//选择的房间名称
+        //params.put("logo", icon_net_path);
+        List<CgBindingBean.TeacherNumBean> teacherBeanList = new ArrayList<>();
+        for (TeacherBean teacherBean : submit_tescher_list) {
+            CgBindingBean.TeacherNumBean teacherNumBean = new CgBindingBean.TeacherNumBean();
+            teacherNumBean.setNum(teacherBean.getTeacherNum());
+            teacherBeanList.add(teacherNumBean);
+        }
+        params.put("teacherNum", teacherBeanList);//选择的教练列表
         params.put("class_type", select_class_type);//团课类型：1单车2瑜伽3普拉提4拳击5舞蹈6功能性7儿童
-        params.put("course_type", "1");//1团课，2私教，3健身
         params.put("max_num", edit_tuanke_renshu_number.getText().toString());//人数限制
         params.put("start_time",
                 year_tv.getText().toString() + "-" + month_tv.getText().toString() + "-" + date_tv.getText().toString() + " "
@@ -741,6 +787,7 @@ public class AddClassItemActivity extends BaseActivity implements CCRSortableNin
         params.put("tips", edit_zhuyi_shixiang.getText().toString());//注意事项
         params.put("price", edit_price_number.getText().toString());//注意事项
         params.put("suit_person", edit_shihe_renqun.getText().toString());//适合人群
+
         subscription = Network.getInstance("添加课程", this)
                 .add_class(params,
                         new ProgressSubscriber<>("添加课程", new SubscriberOnNextListener<Bean<AddClassEntity>>() {
@@ -778,13 +825,31 @@ public class AddClassItemActivity extends BaseActivity implements CCRSortableNin
         } else if (TextUtils.isEmpty(edit_zhuyi_shixiang.getText())) {
             Toast.makeText(this, R.string.alert_dialog_tishi20, Toast.LENGTH_SHORT).show();
             return false;
-        } else if (Integer.valueOf(edit_tuanke_renshu_number.getText().toString()) > enable_max_people) {
-            Log.e("最大人数", enable_max_people + "");
+        } else if (Integer.valueOf(edit_tuanke_renshu_number.getText().toString().replace("人", "")) > enable_max_people) {
             Toast.makeText(this, R.string.alert_dialog_tishi21, Toast.LENGTH_SHORT).show();
             return false;
+        } else if (icon_net_path.length() == 0) {//logo
+            Toast.makeText(this, R.string.alert_dialog_tishi36, Toast.LENGTH_SHORT).show();
+            return false;
+        } else if (TextUtils.isEmpty(select_room_name_tv.getText())) {
+            Toast.makeText(this, R.string.alert_dialog_tishi37, Toast.LENGTH_SHORT).show();
+            return false;
+        } else if (TextUtils.isEmpty(edit_price_number.getText())) {
+            Toast.makeText(this, R.string.alert_dialog_tishi38, Toast.LENGTH_SHORT).show();
+            return false;
+        } else if (TextUtils.isEmpty(time1_edit.getText())) {
+            Toast.makeText(this, R.string.alert_dialog_tishi39, Toast.LENGTH_SHORT).show();
+            return false;
+        } else if (TextUtils.isEmpty(time2_edit.getText())) {
+            Toast.makeText(this, R.string.alert_dialog_tishi40, Toast.LENGTH_SHORT).show();
+            return false;
+        } else if (submit_tescher_list.size() == 0) {//邀请老师列表
+            pop(true);
+            return true;
         } else {
             return true;
         }
+
 
     }
 
@@ -1057,11 +1122,93 @@ public class AddClassItemActivity extends BaseActivity implements CCRSortableNin
                 File icon_iamge_file = new File(cropImagePath);
                 Glide.with(getApplicationContext()).load(icon_iamge_file).into(logo_image);
                 delete_icon_btn.setVisibility(View.VISIBLE);
+                //上传七牛云
+                progress_upload = new ProgressUtil();
+                progress_upload.showProgressDialog(this, "上传中...");
+                //上传icon
+                upload_icon_image(cropImagePath, false);
+
             }
         } else if (RESULT_CANCELED == resultCode) {
             //Toast.makeText(this, "cancel", Toast.LENGTH_SHORT).show();
         }
     }
+
+
+    private void upload_icon_image(String image_path, boolean is_jiugognge) {
+        Luban.with(this)
+                .load(image_path)
+                .ignoreBy(100)
+                .setTargetDir(getCompressJpgFileAbsolutePath())
+                .filter(new CompressionPredicate() {
+                    @Override
+                    public boolean apply(String path) {
+                        return !(TextUtils.isEmpty(path) || path.toLowerCase().endsWith(".gif"));
+                    }
+                }).setCompressListener(new OnCompressListener() {
+            @Override
+            public void onStart() {
+                // TODO 压缩开始前调用，可以在方法内启动 loading UI
+            }
+
+            @Override
+            public void onSuccess(File file) {
+                // TODO 压缩成功后调用，返回压缩后的图片文件
+                if (is_jiugognge) {//九宫格上传
+                    //jiugonggeCallBack.onSucceed(file.getAbsolutePath());
+                } else {
+                    compressCallBack.onSucceed(file.getAbsolutePath());
+                }
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                compressCallBack.onFailure(e.getMessage());
+                // TODO 当压缩过程出现问题时调用
+            }
+        }).launch();
+    }
+
+    ImageCompressCallBack compressCallBack = new ImageCompressCallBack() {
+        @Override
+        public void onSucceed(String data) {
+//            Log.e("压缩过的",data);
+//            File file = new File(data);
+//            Log.e("压缩后的大小", FileSizeUtil.getFileOrFilesSize(file.getAbsolutePath(), 2) + "");
+            upload_icon_work(data);
+        }
+
+        @Override
+        public void onFailure(String msg) {
+            Log.e("压缩失败的", msg);
+        }
+    };
+
+    private void upload_icon_work(String img_path) {
+        Log.e("上传icon", img_path);
+        uploadManager.put(img_path, qiniu_key, uptoken,
+                new UpCompletionHandler() {
+                    @Override
+                    public void complete(String key, ResponseInfo info, JSONObject response) {
+                        //res包含hash、key等信息，具体字段取决于上传策略的设置
+                        if (info.isOK()) {
+                            icon_net_path = key;
+                            //测试资料上传的
+                            //getUrlTest(icon_net_path);
+                            //Log.e("qiniu", "Upload Success");
+                            Log.e("上传icon成功：", icon_net_path);
+                            progress_upload.dismissProgressDialog();
+                        } else {
+                            Log.e("qiniu", "Upload Fail");
+                            progress_upload.dismissProgressDialog();
+                            progress_upload = null;
+                            //如果失败，这里可以把info信息上报自己的服务器，便于后面分析上传错误原因
+                        }
+                        //Log.e("qiniu", key + ",\r\n " + info.path + ",\r\n " + response);
+                    }
+                }, new UploadOptions(null, "test-type", true, null, null));
+    }
+
 
     /**
      * 打开截图界面
