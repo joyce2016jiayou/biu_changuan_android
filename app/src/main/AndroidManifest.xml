@@ -69,7 +69,8 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.EditClassDetaiActivity"></activity>
+        <activity android:name=".activity.CooperateActivity" />
+        <activity android:name=".activity.EditClassDetaiActivity" />
         <activity android:name=".activity.use.RoomInfoActivity" />
         <activity android:name=".activity.use.RoomAddActivity" />
         <activity android:name=".activity.use.RoomManagerActivity" />
@@ -84,7 +85,6 @@
         <activity android:name=".activity.mine.TeacherManagerActivity" />
         <activity android:name=".activity.mine.CostAccountingActivity" />
         <activity android:name=".activity.SubmitInformationSelectActivity" />
-
         <activity android:name=".activity.mine.CgPriceActivity" />
         <activity android:name=".activity.user.Login2Activity" />
         <activity

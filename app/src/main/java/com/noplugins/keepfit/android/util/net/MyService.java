@@ -18,6 +18,7 @@ import com.noplugins.keepfit.android.bean.LoginBean;
 import com.noplugins.keepfit.android.bean.OrderResultBean;
 import com.noplugins.keepfit.android.bean.PrivateDetailBean;
 import com.noplugins.keepfit.android.bean.SelectChangGuanBean;
+import com.noplugins.keepfit.android.bean.SelectRoomBean;
 import com.noplugins.keepfit.android.bean.TeacherBean;
 import com.noplugins.keepfit.android.bean.TeacherDetailBean;
 import com.noplugins.keepfit.android.bean.RiChengBean;
@@ -454,6 +455,15 @@ public interface MyService {
     @POST("findAreaPlace")
     Observable<Bean<List<ClassTypeEntity>>> get_class_type(@Body RequestBody json);
 
+
+    /**
+     * 获取房间名字
+     *
+     * @return
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
+    @POST("getAreaPlace")
+    Observable<Bean<List<SelectRoomBean>>> get_class_name(@Body RequestBody json);
     /**
      * 获取支付信息 -支付宝
      *

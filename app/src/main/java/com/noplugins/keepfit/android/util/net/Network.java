@@ -26,6 +26,7 @@ import com.noplugins.keepfit.android.bean.LoginBean;
 import com.noplugins.keepfit.android.bean.OrderResultBean;
 import com.noplugins.keepfit.android.bean.PrivateDetailBean;
 import com.noplugins.keepfit.android.bean.SelectChangGuanBean;
+import com.noplugins.keepfit.android.bean.SelectRoomBean;
 import com.noplugins.keepfit.android.bean.TeacherBean;
 import com.noplugins.keepfit.android.bean.TeacherDetailBean;
 import com.noplugins.keepfit.android.bean.RiChengBean;
@@ -112,6 +113,8 @@ public class Network {
             return "http://testapi.noplugins.com/api/gym-service/";
         } else if (str.equals("api2")) {
             return "http://api2.noplugins.com/api/gym-service/";
+        } else if (str.equals("local")) {
+            return "http://192.168.1.160:8080/api/gym-service/";
         } else {
             return "http://kft.ahcomg.com/api/gym-service/";
         }
@@ -122,6 +125,8 @@ public class Network {
             return "http://testapi.noplugins.com/api/coach-service/coachuser/";
         } else if (str.equals("api2")) {
             return "http://api2.noplugins.com/api/coach-service/coachuser/";
+        } else if (str.equals("local")) {
+            return "http://192.168.1.160:8080/api/coach-service/coachuser/";
         } else {
             return "http://kft.ahcomg.com/api/coach-service/coachuser/";
         }
@@ -132,6 +137,8 @@ public class Network {
             return "http://testapi.noplugins.com/api/cust-service/custuser/";
         } else if (str.equals("api2")) {
             return "http://api2.noplugins.com/api/cust-service/custuser/";
+        } else if (str.equals("local")) {
+            return "http://192.168.1.160:8080/api/cust-service/custuser/";
         } else {
             return "http://kft.ahcomg.com/api/cust-service/custuser/";
         }
@@ -216,20 +223,20 @@ public class Network {
 
         retrofit = new Retrofit.Builder()
                 .client(client)
-                .baseUrl(get_changguan_url("test"))//设置请求网址根部
+                .baseUrl(get_changguan_url("local"))//设置请求网址根部
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
 
         coach_retrofit = new Retrofit.Builder()
                 .client(client)
-                .baseUrl(get_coach_url("test"))//设置请求网址根部
+                .baseUrl(get_coach_url("local"))//设置请求网址根部
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
         get_user_retrofit = new Retrofit.Builder()
                 .client(client)
-                .baseUrl(user_url("test"))//设置请求网址根部
+                .baseUrl(user_url("local"))//设置请求网址根部
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
@@ -866,6 +873,14 @@ public class Network {
 
     public Subscription get_class_type(Map<String, Object> params, Subscriber<Bean<List<ClassTypeEntity>>> subscriber) {
         return service.get_class_type(retuen_json_params(params))
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    public Subscription get_class_type1(Map<String, Object> params, Subscriber<Bean<List<SelectRoomBean>>> subscriber) {
+        return service.get_class_name(retuen_json_params(params))
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

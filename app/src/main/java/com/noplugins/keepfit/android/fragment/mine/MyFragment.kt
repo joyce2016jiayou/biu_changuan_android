@@ -157,8 +157,8 @@ class MyFragment : BaseFragment(), EasyPermissions.PermissionCallbacks {
                         activity!!.startActivityForResult(intent, 1)
                     }
                     "合作信息" -> {
-//                        val intent = Intent(activity, VenueDetailActivity::class.java)
-//                        activity!!.startActivityForResult(intent, 1)
+                        val intent = Intent(activity, CooperateActivity::class.java)
+                        activity!!.startActivityForResult(intent, 1)
                     }
                 }
             }
@@ -261,13 +261,13 @@ class MyFragment : BaseFragment(), EasyPermissions.PermissionCallbacks {
 
         when (SpUtils.getInt(activity, AppConstants.USER_TYPE)) {
             1 -> {
-                tv_type_name.text = "场馆主登陆:${SpUtils.getString(activity,AppConstants.NAME)}"
+                tv_type_name.text = "场馆主登陆:${SpUtils.getString(activity, AppConstants.NAME)}"
             }
             2 -> {
-                tv_type_name.text = "经理登陆:${SpUtils.getString(activity,AppConstants.NAME)}"
+                tv_type_name.text = "经理登陆:${SpUtils.getString(activity, AppConstants.NAME)}"
             }
             3 -> {
-                tv_type_name.text = "前台登陆:${SpUtils.getString(activity,AppConstants.NAME)}"
+                tv_type_name.text = "前台登陆:${SpUtils.getString(activity, AppConstants.NAME)}"
             }
         }
         Glide.with(activity)

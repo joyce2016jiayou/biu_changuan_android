@@ -14,7 +14,7 @@
     app:shadowStartAlpha="10">
 
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -24,6 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/m10"
             android:text="@string/tv176"
             android:textColor="@color/color_4A4A4A"
@@ -32,6 +33,7 @@
         <TextView
             android:id="@+id/pop_content"
             android:layout_width="match_parent"
+            android:layout_below="@+id/pop_title"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/m20"
             android:layout_marginRight="@dimen/m20"
@@ -45,7 +47,9 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/m30">
+            android:layout_marginBottom="@dimen/m10"
+            android:layout_alignParentBottom="true"
+            >
 
 
             <LinearLayout
@@ -83,7 +87,7 @@
             </LinearLayout>
         </RelativeLayout>
 
-    </LinearLayout>
+    </RelativeLayout>
 
 
 </www.linwg.org.lib.LCardView>

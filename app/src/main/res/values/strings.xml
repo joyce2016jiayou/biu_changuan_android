@@ -164,7 +164,7 @@
     <string name="tv104">权限管理</string>
     <string name="tv105">角色管理</string>
     <string name="tv106">教练绑定</string>
-    <string name="tv107">关于</string>
+    <string name="tv107">关于我们</string>
     <string name="tv108">产品反馈</string>
     <string name="tv109">选择问题类型(必填)</string>
     <string name="tv110">产品建议 (功能建议/新的想法)</string>
@@ -234,6 +234,12 @@
     <string name="tv177">确定退出创建团课吗？信息将不会保留</string>
     <string name="tv178">选择教练</string>
     <string name="tv179">您还未选择教练，课程信息将会保存在邀请状态中</string>
+    <string name="tv180">合作信息</string>
+    <string name="tv181">用户协议及隐私政策</string>
+    <string name="tv182">场馆合作协议</string>
+    <string name="tv183">版本升级</string>
+    <string name="tv184">当前是最新版本~</string>
+    <string name="tv185">图片上传失败~</string>
 
 
     <string name="tv_select">请选择</string>

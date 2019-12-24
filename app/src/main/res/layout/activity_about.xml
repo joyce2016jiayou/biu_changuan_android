@@ -1,21 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@color/color_F8F8F8"
-    android:layout_height="match_parent">
+    android:orientation="vertical">
+
     <RelativeLayout
+        android:id="@+id/rel_top"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="@dimen/m70"
         android:background="@drawable/daohanglan">
 
         <ImageView
             android:id="@+id/back_btn"
-            android:layout_width="28dp"
-            android:layout_height="18dp"
+            android:layout_width="@dimen/m22"
+            android:layout_height="@dimen/m19"
             android:layout_alignParentLeft="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginLeft="20dp"
-            android:layout_marginBottom="30dp"
+            android:layout_marginLeft="@dimen/m20"
+            android:layout_marginBottom="@dimen/m20"
             android:src="@drawable/icon_back" />
 
         <TextView
@@ -24,37 +28,100 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="19dp"
+            android:layout_marginBottom="@dimen/m19"
             android:text="@string/tv107"
             android:textColor="@color/top_heiziti"
-            android:textSize="25sp"
-            android:textStyle="bold" />
+            android:textSize="20sp"
+            android:textStyle="normal" />
     </RelativeLayout>
-    
-    <ImageView
-        android:layout_width="279dp"
-        android:layout_marginTop="20dp"
-        android:layout_height="130dp"
-        android:layout_gravity="center_horizontal"
-        android:src="@drawable/about_logo"
-        />
+
+    <RelativeLayout
+        android:id="@+id/rel_center"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/m167"
+        android:layout_below="@+id/rel_top"
+        android:layout_marginLeft="@dimen/m10"
+        android:layout_marginTop="@dimen/m20"
+        android:layout_marginRight="@dimen/m10">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/card" />
+
+        <ImageView
+            android:id="@+id/center_logo"
+            android:layout_width="@dimen/m80"
+            android:layout_height="@dimen/m79"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/m30"
+            android:src="@drawable/logo_guanyu" />
+
+        <TextView
+            android:id="@+id/tv_version"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/center_logo"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/m10"
+            android:text="版本号：v1.0"
+            android:textColor="@color/color_6D7278"
+            android:textSize="10sp" />
+
+    </RelativeLayout>
+
+    <www.linwg.org.lib.LCardView
+        android:id="@+id/clander_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rel_center"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/m20"
+        android:layout_marginTop="@dimen/m10"
+        android:layout_marginRight="@dimen/m20"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:cornerRadius="@dimen/m8"
+        app:shadowSize="@dimen/m2"
+        app:shadowStartAlpha="10">
+
+        <RelativeLayout
+            android:id="@+id/banben_shengji_btn"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/m51">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/m10"
+                android:text="@string/tv183"
+                android:textColor="#ff101010"
+                android:textSize="15sp" />
+
+            <ImageView
+                android:layout_width="@dimen/m20"
+                android:layout_height="@dimen/m20"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/m10"
+                android:src="@drawable/youjiantou" />
+        </RelativeLayout>
+    </www.linwg.org.lib.LCardView>
+
+
     <TextView
-        android:id="@+id/tv_version"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
-        android:text="版本号：v1.0"
-        android:textColor="@color/color_6D7278"
+        android:layout_marginBottom="@dimen/m30"
+        android:text="Copyright © 2019.Noplugins All rights reserved."
+        android:textColor="@color/color_929292"
         android:textSize="10sp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
-        android:layout_gravity="center_horizontal"
-        android:text="当前已经是最新版本啦~"
-        android:textColor="@color/color_6D7278"
-        android:textSize="13sp" />
-
-</LinearLayout>
+</RelativeLayout>

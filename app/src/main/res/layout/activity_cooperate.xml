@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.mine.CostAccountingActivity">
+
+    <FrameLayout
+        android:id="@+id/fl_head"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/m70">
+
+        <ImageView
+            android:id="@+id/back_btn"
+            android:layout_width="@dimen/m22"
+            android:layout_height="@dimen/m19"
+            android:layout_gravity="left|center_vertical"
+            android:layout_marginLeft="@dimen/m20"
+            android:layout_marginTop="@dimen/m20"
+            android:src="@drawable/icon_back" />
+
+        <TextView
+            android:id="@+id/title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/m20"
+            android:text="@string/tv180"
+            android:textColor="@color/contents_text"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </FrameLayout>
+
+    <www.linwg.org.lib.LCardView
+        android:id="@+id/clander_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/m20"
+        android:layout_marginTop="@dimen/m10"
+        android:layout_marginRight="@dimen/m20"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:cornerRadius="@dimen/m8"
+        app:shadowSize="@dimen/m2"
+        app:shadowStartAlpha="10">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/yinsizhengce_btn"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/m40">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/m10"
+                    android:text="@string/tv181"
+                    android:textColor="#ff101010"
+                    android:textSize="15sp" />
+
+                <ImageView
+                    android:layout_width="@dimen/m20"
+                    android:layout_height="@dimen/m20"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/m10"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/youjiantou"
+                    />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/changguan_hezuo_btn"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/m40">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/m10"
+                    android:text="@string/tv182"
+                    android:textColor="#ff101010"
+                    android:textSize="15sp" />
+
+                <ImageView
+                    android:layout_width="@dimen/m20"
+                    android:layout_height="@dimen/m20"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/m10"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/youjiantou"
+                    />
+            </RelativeLayout>
+        </LinearLayout>
+    </www.linwg.org.lib.LCardView>
+
+</LinearLayout>

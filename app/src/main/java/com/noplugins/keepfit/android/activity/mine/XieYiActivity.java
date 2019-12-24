@@ -22,10 +22,13 @@ import butterknife.ButterKnife;
 public class XieYiActivity extends BaseActivity {
     @BindView(R.id.content_layout)
     WebView webView;
+    @BindView(R.id.title_tv)
+    TextView title_tv;
 
+    int type = 0;
     @Override
     public void initBundle(Bundle parms) {
-
+        type = getIntent().getIntExtra("type",0);
     }
 
     @Override
@@ -49,7 +52,15 @@ public class XieYiActivity extends BaseActivity {
         WebSettings webSettings = webView.getSettings();
         webSettings.setUseWideViewPort(true);//设置此属性，可任意比例缩放
         webSettings.setLoadWithOverviewMode(true);
-        webView.loadUrl("http://www.noplugins.com/doc/changguan_xieyi.html");
+        if(type==1){//隐私政策
+            title_tv.setText(R.string.tv181);
+            webView.loadUrl("http://www.noplugins.com/doc/changguan_xieyi.html");
+
+        }else if(type==2){//合作协议
+            title_tv.setText(R.string.tv182);
+            webView.loadUrl("http://www.noplugins.com/doc/changguan_qianyue.html");
+
+        }
     }
 
 

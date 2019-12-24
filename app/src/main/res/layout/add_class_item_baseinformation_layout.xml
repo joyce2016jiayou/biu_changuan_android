@@ -373,6 +373,7 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/jisuan_time_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/m30"

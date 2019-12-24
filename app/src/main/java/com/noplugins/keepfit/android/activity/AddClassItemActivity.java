@@ -28,12 +28,14 @@ import com.lxj.xpopup.core.BasePopupView;
 import com.lxj.xpopup.enums.PopupAnimation;
 import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.activity.mine.TeacherSelectActivity;
+import com.noplugins.keepfit.android.activity.use.TeamInfoActivity;
 import com.noplugins.keepfit.android.adapter.TypeAdapter;
 import com.noplugins.keepfit.android.base.BaseActivity;
 import com.noplugins.keepfit.android.base.MyApplication;
 import com.noplugins.keepfit.android.bean.CgBindingBean;
 import com.noplugins.keepfit.android.bean.ChangguanBean;
 import com.noplugins.keepfit.android.bean.DictionaryeBean;
+import com.noplugins.keepfit.android.bean.SelectRoomBean;
 import com.noplugins.keepfit.android.bean.TeacherBean;
 import com.noplugins.keepfit.android.callback.ImageCompressCallBack;
 import com.noplugins.keepfit.android.entity.AddClassEntity;
@@ -70,6 +72,7 @@ import com.qiniu.android.storage.UploadOptions;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -170,6 +173,8 @@ public class AddClassItemActivity extends BaseActivity implements CCRSortableNin
     RelativeLayout select_room_name_btn;
     @BindView(R.id.select_room_name_tv)
     TextView select_room_name_tv;
+    @BindView(R.id.jisuan_time_tv)
+    TextView jisuan_time_tv;
 
     private String select_target_type = "1";
     private String select_class_type = "1";
@@ -198,9 +203,9 @@ public class AddClassItemActivity extends BaseActivity implements CCRSortableNin
     public static List<TeacherBean> submit_tescher_list = new ArrayList<>();
     public static boolean is_refresh_teacher_list;
     RecyclerViewAdapter inviteTeacherAdapter;
-    List<ClassTypeEntity> room_lists = new ArrayList<>();
+    List<SelectRoomBean> room_lists = new ArrayList<>();
     private String select_room_name = "";
-    private int select_room_name_id;
+    private String select_room_name_id;
     private ProgressUtil progress_upload;
     /**
      * 七牛云
@@ -455,49 +460,7 @@ public class AddClassItemActivity extends BaseActivity implements CCRSortableNin
         add_class_teacher_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
                 if (check_value()) {//如果所有参数不为空，请求网络接口
-                    int startHour = Integer.parseInt(time1_edit.getText().toString().split(":")[0]);
-                    int startMin = Integer.parseInt(time1_edit.getText().toString().split(":")[1]);
-                    int endHour = Integer.parseInt(time2_edit.getText().toString().split(":")[0]);
-                    int endMin = Integer.parseInt(time2_edit.getText().toString().split(":")[1]);
-                    if (startHour > endHour) {
-                        Toast.makeText(AddClassItemActivity.this,
-                                "开始时间不能大于结束时间", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                    if (startHour == endHour && startMin > endMin) {
-                        Toast.makeText(AddClassItemActivity.this,
-                                "开始时间不能大于结束时间", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                    int yinyeStartH = Integer.parseInt(start.split(":")[0]);
-                    int yinyeStartM = Integer.parseInt(start.split(":")[1]);
-                    int yinyeEndH = Integer.parseInt(end.split(":")[0]);
-                    int yinyeEndM = Integer.parseInt(end.split(":")[1]);
-                    if (startHour < yinyeStartH) {
-                        Toast.makeText(AddClassItemActivity.this,
-                                "该时间段场馆未营业", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                    if (startHour == yinyeStartH && startMin < yinyeStartM) {
-                        Toast.makeText(AddClassItemActivity.this,
-                                "该时间段场馆未营业", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-
-                    if (endHour > yinyeEndH) {
-                        Toast.makeText(AddClassItemActivity.this,
-                                "该时间段场馆未营业", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                    if (endHour == yinyeEndH && endMin > yinyeEndM) {
-                        Toast.makeText(AddClassItemActivity.this,
-                                "该时间段场馆未营业", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-
                     add_class();
                 } else {
                     return;
@@ -521,7 +484,6 @@ public class AddClassItemActivity extends BaseActivity implements CCRSortableNin
                                 }
                                 class_room_types.addAll(result.getData());
                                 //获取最大人数
-                                search_room_people(0);
                                 room_type = class_room_types.get(0).getKey() + "";
 
 
@@ -599,6 +561,7 @@ public class AddClassItemActivity extends BaseActivity implements CCRSortableNin
         List<String> strings = new ArrayList<>();
         for (int i = 0; i < class_room_types.size(); i++) {
             strings.add(class_room_types.get(i).getValue());
+            Log.e("坚实的开发接口数量的", class_room_types.get(i).getValue());
         }
         TypeAdapter typeAdapter = new TypeAdapter(strings, getApplicationContext());
         ListView listView = view.findViewById(R.id.listview);
@@ -607,7 +570,6 @@ public class AddClassItemActivity extends BaseActivity implements CCRSortableNin
             select_room_tv.setText(class_room_types.get(i).getValue());
             //查询每个房间最大能容纳的人数
             room_type = class_room_types.get(i).getKey() + "";
-            search_room_people(i);
             //获取房间列表
             get_room_list();
 
@@ -629,15 +591,16 @@ public class AddClassItemActivity extends BaseActivity implements CCRSortableNin
         View view = popupWindow.getContentView();
         List<String> strings = new ArrayList<>();
         for (int i = 0; i < room_lists.size(); i++) {
-            strings.add(room_lists.get(i).getValue());
+            strings.add(room_lists.get(i).getPlaceName());
         }
         TypeAdapter typeAdapter = new TypeAdapter(strings, getApplicationContext());
         ListView listView = view.findViewById(R.id.listview);
         listView.setAdapter(typeAdapter);
         listView.setOnItemClickListener((adapterView, view1, i, l) -> {
-            select_room_name_tv.setText(room_lists.get(i).getValue());
-            select_room_name = room_lists.get(i).getValue();
-            select_room_name_id = room_lists.get(i).getKey();
+            select_room_name_tv.setText(room_lists.get(i).getPlaceName());
+            select_room_name = room_lists.get(i).getPlaceName();
+            select_room_name_id = room_lists.get(i).getPlaceNum();
+            edit_tuanke_renshu_number.setText(room_lists.get(i).getMaxNum() + "人");
             popupWindow.dismiss();
         });
     }
@@ -648,10 +611,10 @@ public class AddClassItemActivity extends BaseActivity implements CCRSortableNin
         params.put("areaNum", SpUtils.getString(getApplicationContext(), AppConstants.CHANGGUAN_NUM));//场馆编号
         params.put("placeType", room_type);
         subscription = Network.getInstance("获取房间列表", this)
-                .get_class_type(params,
-                        new ProgressSubscriber<>("获取房间列表", new SubscriberOnNextListener<Bean<List<ClassTypeEntity>>>() {
+                .get_class_type1(params,
+                        new ProgressSubscriber<>("获取房间列表", new SubscriberOnNextListener<Bean<List<SelectRoomBean>>>() {
                             @Override
-                            public void onNext(Bean<List<ClassTypeEntity>> result) {
+                            public void onNext(Bean<List<SelectRoomBean>> result) {
                                 if (room_lists.size() > 0) {
                                     room_lists.clear();
                                 }
@@ -743,6 +706,8 @@ public class AddClassItemActivity extends BaseActivity implements CCRSortableNin
                             @Override
                             public void onClick(View v) {
                                 if (is_no_invite_teacher) {
+                                    //这边调用新增团课的接口
+                                    add_class();
 
                                 } else {
                                     finish();
@@ -755,8 +720,53 @@ public class AddClassItemActivity extends BaseActivity implements CCRSortableNin
                 })).show();
     }
 
+    private boolean calculate_time(TextView time1_edit, TextView time2_edit) {
+        int startHour = Integer.parseInt(time1_edit.getText().toString().split(":")[0]);
+        int startMin = Integer.parseInt(time1_edit.getText().toString().split(":")[1]);
+        int endHour = Integer.parseInt(time2_edit.getText().toString().split(":")[0]);
+        int endMin = Integer.parseInt(time2_edit.getText().toString().split(":")[1]);
+        if (startHour > endHour) {
+            Toast.makeText(AddClassItemActivity.this,
+                    "开始时间不能大于结束时间", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (startHour == endHour && startMin > endMin) {
+            Toast.makeText(AddClassItemActivity.this,
+                    "开始时间不能大于结束时间", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        int yinyeStartH = Integer.parseInt(start.split(":")[0]);
+        int yinyeStartM = Integer.parseInt(start.split(":")[1]);
+        int yinyeEndH = Integer.parseInt(end.split(":")[0]);
+        int yinyeEndM = Integer.parseInt(end.split(":")[1]);
+        if (startHour < yinyeStartH) {
+            Toast.makeText(AddClassItemActivity.this,
+                    "该时间段场馆未营业", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (startHour == yinyeStartH && startMin < yinyeStartM) {
+            Toast.makeText(AddClassItemActivity.this,
+                    "该时间段场馆未营业", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (endHour > yinyeEndH) {
+            Toast.makeText(AddClassItemActivity.this,
+                    "该时间段场馆未营业", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (endHour == yinyeEndH && endMin > yinyeEndM) {
+            Toast.makeText(AddClassItemActivity.this,
+                    "该时间段场馆未营业", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
+    }
 
     private void add_class() {
+        if (!calculate_time(time1_edit, time2_edit)) {//判断时间是否正确
+            return;
+        }
+
         Map<String, Object> params = new HashMap<>();
         params.put("gym_area_num", SpUtils.getString(getApplicationContext(), AppConstants.CHANGGUAN_NUM));//场馆编号
         params.put("course_name", edit_class_name.getText().toString());//团课名称
@@ -765,7 +775,7 @@ public class AddClassItemActivity extends BaseActivity implements CCRSortableNin
         params.put("type", room_type);//房间类型
         params.put("gymPlaceNum", select_room_name_id);//选择的房间名称编号
         params.put("placeName", select_room_name);//选择的房间名称
-        //params.put("logo", icon_net_path);
+        params.put("logo", icon_net_path);
         List<CgBindingBean.TeacherNumBean> teacherBeanList = new ArrayList<>();
         for (TeacherBean teacherBean : submit_tescher_list) {
             CgBindingBean.TeacherNumBean teacherNumBean = new CgBindingBean.TeacherNumBean();
@@ -774,7 +784,7 @@ public class AddClassItemActivity extends BaseActivity implements CCRSortableNin
         }
         params.put("teacherNum", teacherBeanList);//选择的教练列表
         params.put("class_type", select_class_type);//团课类型：1单车2瑜伽3普拉提4拳击5舞蹈6功能性7儿童
-        params.put("max_num", edit_tuanke_renshu_number.getText().toString());//人数限制
+        params.put("max_num", edit_tuanke_renshu_number.getText().toString().replace("人", ""));//人数限制
         params.put("start_time",
                 year_tv.getText().toString() + "-" + month_tv.getText().toString() + "-" + date_tv.getText().toString() + " "
                         + time1_edit.getText().toString());//开始时间
@@ -793,13 +803,14 @@ public class AddClassItemActivity extends BaseActivity implements CCRSortableNin
                         new ProgressSubscriber<>("添加课程", new SubscriberOnNextListener<Bean<AddClassEntity>>() {
                             @Override
                             public void onNext(Bean<AddClassEntity> result) {
-                                Intent intent = new Intent(AddClassItemActivity.this, YaoQingTeacherActivity.class);
-                                Bundle bundle = new Bundle();
-                                bundle.putString("create_time", result.getData().getStartTime());
-                                bundle.putString("gym_course_num", result.getData().getGym_course_num());
-                                intent.putExtras(bundle);
-                                startActivity(intent);
+//                                Intent intent = new Intent(AddClassItemActivity.this, TeamInfoActivity.class);
+//                                Bundle bundle = new Bundle();
+//                                bundle.putString("create_time", result.getData().getStartTime());
+//                                bundle.putString("gym_course_num", result.getData().getGym_course_num());
+//                                intent.putExtras(bundle);
+//                                startActivity(intent);
                                 finish();
+
                             }
 
                             @Override
@@ -825,9 +836,6 @@ public class AddClassItemActivity extends BaseActivity implements CCRSortableNin
         } else if (TextUtils.isEmpty(edit_zhuyi_shixiang.getText())) {
             Toast.makeText(this, R.string.alert_dialog_tishi20, Toast.LENGTH_SHORT).show();
             return false;
-        } else if (Integer.valueOf(edit_tuanke_renshu_number.getText().toString().replace("人", "")) > enable_max_people) {
-            Toast.makeText(this, R.string.alert_dialog_tishi21, Toast.LENGTH_SHORT).show();
-            return false;
         } else if (icon_net_path.length() == 0) {//logo
             Toast.makeText(this, R.string.alert_dialog_tishi36, Toast.LENGTH_SHORT).show();
             return false;
@@ -843,10 +851,11 @@ public class AddClassItemActivity extends BaseActivity implements CCRSortableNin
         } else if (TextUtils.isEmpty(time2_edit.getText())) {
             Toast.makeText(this, R.string.alert_dialog_tishi40, Toast.LENGTH_SHORT).show();
             return false;
-        } else if (submit_tescher_list.size() == 0) {//邀请老师列表
-            pop(true);
-            return true;
         } else {
+            if (submit_tescher_list.size() == 0) {//邀请老师列表
+                pop(true);
+                return false;
+            }
             return true;
         }
 
@@ -929,41 +938,46 @@ public class AddClassItemActivity extends BaseActivity implements CCRSortableNin
                 } else {
                     textView.setText(hour + ":" + minute);
                 }
+
+                if (!TextUtils.isEmpty(time1_edit.getText()) && !TextUtils.isEmpty(time2_edit.getText())) {
+                    //判断结束时候是否大于当前时间
+                    if (!calculate_time(time1_edit, time2_edit)) {//判断时间是否正确
+                        return;
+                    } else {
+                        String start_time = "2019/01/01 " + time1_edit.getText().toString();
+                        String end_time = "2019/01/01 " + time2_edit.getText().toString();
+                        //Log.e("接口少房间数量", start_time + "\n" + end_time);
+                        //Log.e("计算出来的时间", getTimeExpend(start_time, end_time));
+                        jisuan_time_tv.setText(getTimeExpend(start_time, end_time));
+                    }
+                }
             }
         });
     }
 
+    private String getTimeExpend(String startTime, String endTime) {
+        //传入字串类型 2016/06/28 08:30
+        long longStart = getTimeMillis(startTime); //获取开始时间毫秒数
+        long longEnd = getTimeMillis(endTime);  //获取结束时间毫秒数
+        long longExpend = longEnd - longStart;  //获取时间差
 
-    private void search_room_people(int position) {
-        Map<String, Object> params = new HashMap<>();
-        params.put("gymAreaNum", SpUtils.getString(getApplicationContext(), AppConstants.CHANGGUAN_NUM));//场馆编号
-        if (class_room_types.size() > 0) {
-            params.put("PlaceType", class_room_types.get(position).getKey());
+        long longHours = longExpend / (60 * 60 * 1000); //根据时间差来计算小时数
+        long longMinutes = (longExpend - longHours * (60 * 60 * 1000)) / (60 * 1000);   //根据时间差来计算分钟数
+
+        return longHours + ":" + longMinutes;
+    }
+
+    private long getTimeMillis(String strTime) {
+        long returnMillis = 0;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+        Date d = null;
+        try {
+            d = sdf.parse(strTime);
+            returnMillis = d.getTime();
+        } catch (ParseException e) {
+            Toast.makeText(AddClassItemActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
         }
-        Gson gson = new Gson();
-        String json_params = gson.toJson(params);
-        Log.e(TAG, "获取最大人数参数：" + json_params);
-        String json = new Gson().toJson(params);//要传递的json
-        RequestBody requestBody = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), json);
-        subscription = Network.getInstance("获取最大人数", this)
-                .get_max_num(requestBody, new ProgressSubscriberNew<>(MaxPeopleEntity.class, new GsonSubscriberOnNextListener<MaxPeopleEntity>() {
-                    @SuppressLint("SetTextI18n")
-                    @Override
-                    public void on_post_entity(MaxPeopleEntity entity, String s) {
-                        Log.e("获取最大人数成功", entity.getData() + "获取最大人数成功" + s);
-                        enable_max_people = entity.getData();
-                        edit_tuanke_renshu_number.setText("" + enable_max_people);
-                    }
-                }, new SubscriberOnNextListener<Bean<Object>>() {
-                    @Override
-                    public void onNext(Bean<Object> result) {
-                    }
-
-                    @Override
-                    public void onError(String error) {
-                        Log.e("获取最大人数失败", "获取最大人数失败:" + error);
-                    }
-                }, this, true));
+        return returnMillis;
     }
 
 
@@ -1202,6 +1216,7 @@ public class AddClassItemActivity extends BaseActivity implements CCRSortableNin
                             Log.e("qiniu", "Upload Fail");
                             progress_upload.dismissProgressDialog();
                             progress_upload = null;
+                            Toast.makeText(getApplicationContext(), R.string.tv185, Toast.LENGTH_SHORT).show();
                             //如果失败，这里可以把info信息上报自己的服务器，便于后面分析上传错误原因
                         }
                         //Log.e("qiniu", key + ",\r\n " + info.path + ",\r\n " + response);
