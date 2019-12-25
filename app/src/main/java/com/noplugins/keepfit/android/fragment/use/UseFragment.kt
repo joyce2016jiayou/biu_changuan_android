@@ -14,6 +14,7 @@ import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.noplugins.keepfit.android.R
+import com.noplugins.keepfit.android.activity.SelectChangGuanActivity
 import com.noplugins.keepfit.android.activity.mine.TeacherManagerActivity
 import com.noplugins.keepfit.android.activity.mine.WalletActivity
 import com.noplugins.keepfit.android.activity.use.RoomManagerActivity
@@ -60,6 +61,7 @@ class UseFragment: ViewPagerFragment() {
     var newView: View? = null
     var type  = 1
 
+    private var haveMoreArea: Boolean = false
     private var tvCGName: TextView?= null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         if (newView == null) {
@@ -90,6 +92,19 @@ class UseFragment: ViewPagerFragment() {
 
 
     private fun onClick(){
+        haveMoreArea = SpUtils.getBoolean(activity,AppConstants.HAVE_MORE_AREA)
+        if (SpUtils.getInt(activity!!, AppConstants.USER_TYPE) == 2 || SpUtils.getInt(activity!!, AppConstants.USER_TYPE) == 3) {
+            select_store_type.visibility = View.INVISIBLE
+        } else {
+            select_store_type.visibility = View.VISIBLE
+        }
+        select_store_type.setOnClickListener {
+            if (haveMoreArea) {//如果有更多场馆
+                val intent = Intent(activity, SelectChangGuanActivity::class.java)
+                startActivity(intent)
+            }
+        }
+
         ll_team_manager.setOnClickListener {
             if (BaseUtils.isFastClick()){
                 val intent = Intent(activity, TeamClassManagerActivity::class.java)

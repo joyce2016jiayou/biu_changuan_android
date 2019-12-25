@@ -261,8 +261,8 @@ class TeacherSelectActivity : BaseActivity(), AMapLocationListener {
     private fun initAdapter(){
         adapter = CgTeacherSelectAdapter(data)
         layoutManager = LinearLayoutManager(this)
-//        val view = LayoutInflater.from(context).inflate(R.layout.enpty_view, rv_list, false)
-//        adapter.emptyView = view
+        val view = LayoutInflater.from(this).inflate(R.layout.enpty_view, rv_list, false)
+        adapter.emptyView = view
         rv_list.layoutManager = layoutManager
         rv_list.adapter = adapter
 
@@ -468,7 +468,11 @@ class TeacherSelectActivity : BaseActivity(), AMapLocationListener {
         popWindow4 = SpinnerPopWindow(applicationContext,
                 listString,
                 PopUpAdapter.OnItemClickListener { _, _, position ->
-                    tv_class_select.text = listString[position]
+                    if (listString[position].length>4){
+                        tv_class_select.text = listString[position].substring(0,4)+".."
+                    } else {
+                        tv_class_select.text = listString[position]
+                    }
 
                     popWindow4!!.dismiss()
                     typeSelect= if (position == 0){

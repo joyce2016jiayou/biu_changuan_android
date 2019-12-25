@@ -69,6 +69,19 @@ class MyFragment : BaseFragment(), EasyPermissions.PermissionCallbacks {
         super.onActivityCreated(savedInstanceState)
 //        requestArea()
         setting()
+
+        if (SpUtils.getInt(activity!!, AppConstants.USER_TYPE) == 2 || SpUtils.getInt(activity!!, AppConstants.USER_TYPE) == 3) {
+            select_store_type.visibility = View.INVISIBLE
+        } else {
+            select_store_type.visibility = View.VISIBLE
+            store_type_tv.text = SpUtils.getString(activity!!, AppConstants.CG_NAME)
+        }
+        select_store_type.setOnClickListener {
+            if (SpUtils.getBoolean(activity,AppConstants.HAVE_MORE_AREA)) {//如果有更多场馆
+                val intent = Intent(activity, SelectChangGuanActivity::class.java)
+                startActivity(intent)
+            }
+        }
     }
 
     override fun onResume() {
@@ -261,13 +274,13 @@ class MyFragment : BaseFragment(), EasyPermissions.PermissionCallbacks {
 
         when (SpUtils.getInt(activity, AppConstants.USER_TYPE)) {
             1 -> {
-                tv_type_name.text = "场馆主登陆:${SpUtils.getString(activity, AppConstants.NAME)}"
+                tv_type_name.text = "场馆主登陆:${cg.area.legalPerson}"
             }
             2 -> {
-                tv_type_name.text = "经理登陆:${SpUtils.getString(activity, AppConstants.NAME)}"
+                tv_type_name.text = "经理登陆:${cg.area.legalPerson}"
             }
             3 -> {
-                tv_type_name.text = "前台登陆:${SpUtils.getString(activity, AppConstants.NAME)}"
+                tv_type_name.text = "前台登陆:${cg.area.legalPerson}"
             }
         }
         Glide.with(activity)

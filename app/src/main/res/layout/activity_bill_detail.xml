@@ -45,18 +45,18 @@
             <TextView
                     android:id="@+id/tv_select_time"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/m27"
+                    android:layout_height="match_parent"
                     tools:text="2019年10月"
                     android:gravity="center_vertical|left"
-                    android:layout_marginLeft="@dimen/m10"
+                    android:layout_marginLeft="@dimen/m5"
                     android:textColor="@color/color_4A4A4A"
                     android:textSize="15sp"/>
 
             <ImageView
-                    android:layout_width="@dimen/m14"
-                    android:layout_height="@dimen/m8"
+                    android:layout_width="@dimen/m20"
+                    android:layout_height="@dimen/m20"
                     android:layout_gravity="end|center_vertical"
-                    android:layout_marginRight="@dimen/m10"
+                    android:layout_marginRight="@dimen/m5"
                     android:src="@drawable/icon_xiala" />
         </FrameLayout>
 

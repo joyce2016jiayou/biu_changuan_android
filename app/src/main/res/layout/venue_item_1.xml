@@ -178,8 +178,7 @@
                 android:layout_height="@dimen/m32"
                 app:layout_constraintWidth_percent="0.25"
                 style="@style/tv_label"
-                android:gravity="center_vertical"
-                android:paddingLeft="@dimen/m10"
+                android:gravity="center"
                 android:text="@string/tv_contact_email"
                 android:inputType="textEmailAddress"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -197,6 +196,11 @@
                 app:layout_constraintLeft_toRightOf="@+id/label_contact_phone"
                 app:layout_constraintTop_toBottomOf="@+id/tv_contact_phone"
                 android:layout_marginTop="@dimen/m20"/>
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/m80"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_contact_email"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
        </ScrollView>
     </LinearLayout>

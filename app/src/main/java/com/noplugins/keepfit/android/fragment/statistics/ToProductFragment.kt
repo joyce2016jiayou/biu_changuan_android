@@ -40,6 +40,10 @@ import com.noplugins.keepfit.android.util.net.entity.Bean
 import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriber
 import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener
 import com.noplugins.keepfit.android.util.screen.KeyboardUtils
+import kotlinx.android.synthetic.main.fragment_statistics_product.picChart
+import kotlinx.android.synthetic.main.fragment_statistics_product.select_time
+import kotlinx.android.synthetic.main.fragment_statistics_product.tv_select_time
+import kotlinx.android.synthetic.main.fragment_statistics_user.*
 
 class ToProductFragment : BaseFragment() {
 
@@ -70,7 +74,7 @@ class ToProductFragment : BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        tv_select_time.text = selectDate
+        tv_select_time.text = "${year}年${month}月"
 
         select_time.setOnClickListener {
             select_time_pop()
@@ -108,37 +112,38 @@ class ToProductFragment : BaseFragment() {
         entries1.clear()
         values.clear()
         functionList.clear()
-        if (user.function != null && user.function.size > 0) {
-            functionList.addAll(user.function)
-            functionList.forEach {
-                string.add(it.value)
-            }
-            user.function.forEachIndexed { index, functionBean ->
-                values.add(BarEntry(index.toFloat(),
-                        floatArrayOf(functionBean.prices[0].price.toFloat(),
-                                functionBean.prices[1].price.toFloat(),
-                                functionBean.prices[2].price.toFloat())))
-            }
 
-        } else {
-
+        functionList.addAll(user.function)
+        functionList.forEach {
+            string.add(it.value)
+        }
+        user.function.forEachIndexed { index, functionBean ->
+            values.add(BarEntry(index.toFloat(),
+                    floatArrayOf(functionBean.prices[0].price.toFloat(),
+                            functionBean.prices[1].price.toFloat(),
+                            functionBean.prices[2].price.toFloat())))
         }
 
-        if (user.emptyProduct == 0) {
-            user.sales.product.forEach {
-                xiaoshouStrings.add(PieEntry(it.percent.toFloat(), it.type))
-            }
+        user.sales.product.forEach {
+            xiaoshouStrings.add(PieEntry(it.percent.toFloat(), it.type))
+        }
 
-            val dataSet = PieDataSet(xiaoshouStrings, "")
-            dataSet.colors = colors
-            val pieData = PieData(dataSet)
-            pieData.setDrawValues(true)
-            pieData.setValueFormatter(com.noplugins.keepfit.android.chart.PercentFormatter(picChart))
-            pieData.setValueTextSize(9f)
-            picChart.data = pieData
-            picChart.invalidate()
+        val dataSet = PieDataSet(xiaoshouStrings, "")
+        dataSet.colors = colors
+        val pieData = PieData(dataSet)
+        pieData.setDrawValues(true)
+        pieData.setValueFormatter(com.noplugins.keepfit.android.chart.PercentFormatter(picChart))
+        pieData.setValueTextSize(9f)
+        picChart.data = pieData
+        picChart.invalidate()
+
+        if (user.sales.emptyProduct == 1) {
+            picChart.visibility = View.GONE
+            iv_empty_pie.visibility = View.VISIBLE
         } else {
-            picChart.visibility = View.INVISIBLE
+            iv_empty_pie.visibility = View.GONE
+            picChart.visibility = View.VISIBLE
+
         }
 
         //折线图不可能为空

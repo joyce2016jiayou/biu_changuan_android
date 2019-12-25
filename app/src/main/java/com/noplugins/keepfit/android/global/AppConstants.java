@@ -13,6 +13,7 @@ public class AppConstants {
     public static final String LON = "currentLon";//精度
     public static final String COST = "cost";
     public static final String CG_NAME = "changguan_name";
+    public static final String HAVE_MORE_AREA = "haveMoreArea";
     public static String IS_SET_ALIAS = "is_set_alias";
     public static final String FRAGMENT_SIZE = "fragment_size";
     public static int ADD_CLASS_SELECT_IMAGES_SIZE = 0;

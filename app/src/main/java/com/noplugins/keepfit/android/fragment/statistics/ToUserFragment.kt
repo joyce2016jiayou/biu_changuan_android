@@ -77,7 +77,7 @@ class ToUserFragment : BaseFragment() {
         initPieChart(true)
         initMorePieChart()
 
-        tv_select_time.text = selectDate
+        tv_select_time.text = "${year}年${month}月"
         select_time.setOnClickListener {
             select_time_pop()
         }
@@ -127,68 +127,80 @@ class ToUserFragment : BaseFragment() {
         colors.add(parseColor("#588B4C"))
         colors.add(parseColor("#8ED06D"))
         colors.add(parseColor("#9B9791"))
-        if (bean.emptyTime == 0){
-            bean.time.forEach {
-                timeStrings.add(PieEntry(it.num.toFloat(), it.value))
-            }
-            val dataSet = PieDataSet(timeStrings, "")
-            dataSet.colors = colors
-            val pieData = PieData(dataSet)
-            pieData.setDrawValues(true)
-            pieData.setValueFormatter(com.noplugins.keepfit.android.chart.PercentFormatter(picChart))
-            pieData.setValueTextSize(9f)
-            picChart.data = pieData
-            picChart.invalidate()
-        } else {
+        bean.time.forEach {
+            timeStrings.add(PieEntry(it.num.toFloat(), it.value))
+        }
+        val dataSet = PieDataSet(timeStrings, "")
+        dataSet.colors = colors
+        val pieData = PieData(dataSet)
+        pieData.setDrawValues(true)
+        pieData.setValueFormatter(com.noplugins.keepfit.android.chart.PercentFormatter(picChart))
+        pieData.setValueTextSize(9f)
+        picChart.data = pieData
+        picChart.invalidate()
+        if (bean.emptyTime == 1){
             picChart.visibility = View.INVISIBLE
+            iv_empty_pie_1.visibility = View.VISIBLE
+        } else{
+            picChart.visibility = View.VISIBLE
+
+            iv_empty_pie_1.visibility = View.GONE
         }
 
-        if (bean.emptyAge == 0){
-            bean.age.forEach {
-                if (it.num!=0){
-                    ageStrings.add(PieEntry(it.num.toFloat(), it.value))
-                }
+
+        bean.age.forEach {
+            if (it.num!=0){
+                ageStrings.add(PieEntry(it.num.toFloat(), it.value))
             }
+        }
 
-            val dataSet1 = PieDataSet(ageStrings, "")
-            dataSet1.colors = colors
-            dataSet1.valueLineWidth = 1f
-            dataSet1.valueLinePart1OffsetPercentage = 100f
-            dataSet1.valueLinePart1Length = 0.5f
-            dataSet1.valueLinePart2Length = 0.6f
-            dataSet1.yValuePosition = PieDataSet.ValuePosition.OUTSIDE_SLICE
-            dataSet1.xValuePosition = PieDataSet.ValuePosition.OUTSIDE_SLICE
-            val pieData1 = PieData(dataSet1)
-            pieData1.setDrawValues(true)
-            pieData1.setValueFormatter(com.noplugins.keepfit.android.chart.PercentFormatter(picChart))
-            pieData1.setValueTextSize(9f)
-            picAgeChart.data = pieData1
-            picAgeChart.invalidate()
+        val dataSet1 = PieDataSet(ageStrings, "")
+        dataSet1.colors = colors
+        dataSet1.valueLineWidth = 1f
+        dataSet1.valueLinePart1OffsetPercentage = 100f
+        dataSet1.valueLinePart1Length = 0.5f
+        dataSet1.valueLinePart2Length = 0.6f
+        dataSet1.yValuePosition = PieDataSet.ValuePosition.OUTSIDE_SLICE
+        dataSet1.xValuePosition = PieDataSet.ValuePosition.OUTSIDE_SLICE
+        val pieData1 = PieData(dataSet1)
+        pieData1.setDrawValues(true)
+        pieData1.setValueFormatter(com.noplugins.keepfit.android.chart.PercentFormatter(picChart))
+        pieData1.setValueTextSize(9f)
+        picAgeChart.data = pieData1
+        picAgeChart.invalidate()
+        if (bean.emptyAge == 1){
 
-        } else {
             picAgeChart.visibility = View.INVISIBLE
+
+            iv_empty_pie_2.visibility = View.VISIBLE
+        } else{
+            picAgeChart.visibility = View.VISIBLE
+
+            iv_empty_pie_2.visibility = View.GONE
         }
 
-        if (bean.emptySex == 0){
-            bean.sex.forEach {
-                sexStrings.add(PieEntry(it.num.toFloat(), it.value))
-            }
-            val dataSet2 = PieDataSet(sexStrings, "")
-            dataSet2.colors = colors
-            val pieData2 = PieData(dataSet2)
-            pieData2.setDrawValues(true)
-            pieData2.setValueFormatter(com.noplugins.keepfit.android.chart.PercentFormatter(picSexChart))
-            pieData2.setValueTextSize(9f)
-            picSexChart.data = pieData2
-            picSexChart.invalidate()
-            val legend2 = picSexChart.legend
-            legend2.setCustom(getEntries(sexStrings, colors))
-        } else {
+        bean.sex.forEach {
+            sexStrings.add(PieEntry(it.num.toFloat(), it.value))
+        }
+        val dataSet2 = PieDataSet(sexStrings, "")
+        dataSet2.colors = colors
+        val pieData2 = PieData(dataSet2)
+        pieData2.setDrawValues(true)
+        pieData2.setValueFormatter(com.noplugins.keepfit.android.chart.PercentFormatter(picSexChart))
+        pieData2.setValueTextSize(9f)
+        picSexChart.data = pieData2
+        picSexChart.invalidate()
+        val legend2 = picSexChart.legend
+        legend2.setCustom(getEntries(sexStrings, colors))
+        if (bean.emptySex == 1){
             picSexChart.visibility = View.INVISIBLE
+
+            iv_empty_pie_3.visibility = View.VISIBLE
+        } else {
+            picSexChart.visibility = View.VISIBLE
+
+            iv_empty_pie_3.visibility = View.GONE
         }
-
-
-
 
 
     }

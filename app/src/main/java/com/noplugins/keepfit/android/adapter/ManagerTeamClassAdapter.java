@@ -45,6 +45,7 @@ public class ManagerTeamClassAdapter extends BaseQuickAdapter<ManagerBean.Course
             helper.setText(R.id.tv_team_tips, "循环"+item.getLoopCycle()+"周：每周"+item.getWeek());
             helper.getView(R.id.tv_team_date).setVisibility(View.GONE);
         }
+        helper.setText(R.id.tv_item, item.getStatusMsg());
         switch (item.getSearchType()) {
             case 1: //已上架
                 helper.setText(R.id.tv_cg_name, item.getTeacherName());
@@ -55,7 +56,6 @@ public class ManagerTeamClassAdapter extends BaseQuickAdapter<ManagerBean.Course
                 helper.getView(R.id.ll_shenqin).setVisibility(View.GONE);
                 break;
             case 2: //邀请中
-                helper.setText(R.id.tv_item, "邀请中");
                 helper.getView(R.id.ll_yaoqin_edit).setVisibility(View.VISIBLE);
                 helper.getView(R.id.tv_cg_name).setVisibility(View.GONE);
                 helper.getView(R.id.ll_shenqin).setVisibility(View.GONE);
@@ -66,7 +66,6 @@ public class ManagerTeamClassAdapter extends BaseQuickAdapter<ManagerBean.Course
                     helper.getView(R.id.tv_cg_name).setVisibility(View.VISIBLE);
                     helper.setText(R.id.tv_cg_name, item.getTeacherName());
                 }
-                helper.setText(R.id.tv_item, statusType(item.getStatus()));
                 helper.getView(R.id.tv_team_date).setVisibility(View.VISIBLE);
 
                 if (item.getIsEdit() == 0) {

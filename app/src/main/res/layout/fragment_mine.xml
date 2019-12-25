@@ -12,15 +12,50 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/contents_text"
-            android:text="@string/tv_mine"
-            android:layout_marginTop="@dimen/m50"
-            android:textStyle="bold"
-            android:layout_marginLeft="@dimen/m20"
-            android:textSize="26sp"/>
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/contents_text"
+                android:text="@string/tv_mine"
+                android:layout_marginTop="@dimen/m50"
+                android:textStyle="bold"
+                android:layout_marginLeft="@dimen/m20"
+                android:textSize="26sp"/>
+            <LinearLayout
+                android:id="@+id/select_store_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="@dimen/m50"
+                android:layout_marginRight="@dimen/m70">
+
+
+                <TextView
+                    android:id="@+id/store_type_tv"
+                    android:layout_width="@dimen/m150"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="right"
+                    android:textColor="@color/color_181818"
+                    android:textSize="15sp"
+                    tools:text="场馆地址" />
+
+                <ImageView
+                    android:layout_width="@dimen/m16"
+                    android:layout_height="@dimen/m16"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/m10"
+                    android:src="@drawable/icon_switch"
+                    android:layout_marginRight="@dimen/m10"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
 
         <RelativeLayout
             android:layout_width="match_parent"

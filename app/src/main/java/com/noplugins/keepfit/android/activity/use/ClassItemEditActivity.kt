@@ -337,7 +337,7 @@ class ClassItemEditActivity : BaseActivity(), CCRSortableNinePhotoLayout.Delegat
                                 class_room_types.addAll(result.data)
                                 //获取最大人数
                                 room_type = class_room_types[0].key.toString() + ""
-
+                                get_room_list()
 
                             }
 
@@ -1059,7 +1059,8 @@ class ClassItemEditActivity : BaseActivity(), CCRSortableNinePhotoLayout.Delegat
         time2_edit.text = DateHelper.getDateByLong(code.course.endTime)
 
         select_room_tv.text = roomType(code.course.type.toInt())
-        select_room_name_tv.text = ""
+        select_room_name_tv.text = if (code.course.placeName.isEmpty()) "" else code.course.placeName
+
         edit_tuanke_renshu_number.text ="${code.course.maxNum}人"
         select_xunhuan_type_tv.text = "单次"
 
@@ -1067,13 +1068,21 @@ class ClassItemEditActivity : BaseActivity(), CCRSortableNinePhotoLayout.Delegat
         edit_shihe_renqun.text = code.course.suitPerson
         edit_zhuyi_shixiang.text = code.course.tips
 
-
         Glide.with(this).load(code.course.imgUrl)
                 .transform( CenterCrop(this), GlideRoundTransform(this,10))
                 .placeholder(R.drawable.logo_gray)
                 .into(logo_image)
 
         delete_icon_btn.visibility = View.VISIBLE
+
+        //赋值操作
+        select_room_name = code.course.placeName
+        select_target_type = ""+code.course.target
+        select_nandu_type = ""+code.course.difficulty
+        room_type = ""+code.course.type
+        select_room_name_id = ""+code.course.gymPlaceNum
+        icon_net_path = ""+code.course.imgUrl
+        select_class_type = ""+code.course.classType
     }
     private fun requestData(){
         val params = HashMap<String, Any>()

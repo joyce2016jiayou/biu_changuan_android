@@ -397,6 +397,9 @@ public class RiChengFragment extends ViewPagerFragment {
                             public void onNext(Bean<RiChengBean> result) {
                                 store_type_tv.setText(result.getData().getAreaName());
                                 haveMoreArea = result.getData().isHaveMoreArea();
+
+                                SpUtils.putBoolean(getActivity(), AppConstants.HAVE_MORE_AREA, haveMoreArea);
+
                                 SpUtils.putString(getActivity(), AppConstants.CG_NAME, result.getData().getAreaName());
                                 Log.e("获取课程数据数量", result.getData().getResult().size() + "");
                                 if (class_list.size() > 0) {

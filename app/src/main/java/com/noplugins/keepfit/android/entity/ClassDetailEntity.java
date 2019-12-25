@@ -97,6 +97,15 @@ public class ClassDetailEntity {
         private String inviteString;
         private double finalGrade;
         private String teacherName;
+        private String placeName;
+
+        public String getPlaceName() {
+            return placeName;
+        }
+
+        public void setPlaceName(String placeName) {
+            this.placeName = placeName;
+        }
 
         public String getRefuse() {
             return refuse;

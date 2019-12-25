@@ -66,7 +66,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="@dimen/m20"
-                        android:src="@drawable/icon_drop" />
+                        android:src="@drawable/icon_xiala" />
 
                 </RelativeLayout>
 
@@ -183,7 +183,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="@dimen/m20"
-                        android:src="@drawable/icon_drop" />
+                        android:src="@drawable/icon_xiala" />
 
                 </RelativeLayout>
 
@@ -233,7 +233,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="@dimen/m20"
-                        android:src="@drawable/icon_drop" />
+                        android:src="@drawable/icon_xiala" />
 
                 </RelativeLayout>
             </LinearLayout>
@@ -425,7 +425,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="@dimen/m20"
-                        android:src="@drawable/icon_drop" />
+                        android:src="@drawable/icon_xiala" />
 
                 </RelativeLayout>
 
@@ -474,7 +474,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="@dimen/m20"
-                        android:src="@drawable/icon_drop" />
+                        android:src="@drawable/icon_xiala" />
 
                 </RelativeLayout>
 
@@ -552,7 +552,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="@dimen/m20"
-                        android:src="@drawable/icon_drop" />
+                        android:src="@drawable/icon_xiala" />
 
                 </RelativeLayout>
             </LinearLayout>

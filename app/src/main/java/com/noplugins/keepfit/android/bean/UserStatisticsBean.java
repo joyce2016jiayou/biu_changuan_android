@@ -104,6 +104,15 @@ public class UserStatisticsBean {
         private List<Y2yBean> y2y;
         private List<ProductBean> product;
         private List<M2mBean> m2m;
+        private int emptyProduct;
+
+        public int getEmptyProduct() {
+            return emptyProduct;
+        }
+
+        public void setEmptyProduct(int emptyProduct) {
+            this.emptyProduct = emptyProduct;
+        }
 
         public List<Y2yBean> getY2y() {
             return y2y;

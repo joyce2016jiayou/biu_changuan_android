@@ -111,7 +111,8 @@ class TeamInfoActivity : BaseActivity() {
                         tv_class_type.text.toString() == "申请成功" ||
                         tv_class_type.text.toString() == "申请中" ||
                         tv_class_type.text.toString() == "申请失败"||
-                        tv_class_type.text.toString() == "邀请成功") {
+                        tv_class_type.text.toString() == "邀请成功"||
+                        tv_class_type.text.toString() == "拒绝申请") {
                     val intent = Intent(this, TeacherDetailActivity::class.java)
                     val bundle = Bundle()
                     bundle.putString("cgNum", teacherNum)
@@ -211,7 +212,8 @@ class TeamInfoActivity : BaseActivity() {
                 statusMsg == "申请成功" ||
                 statusMsg == "申请中" ||
                 statusMsg == "申请失败" ||
-                statusMsg == "邀请成功") {
+                statusMsg == "邀请成功"||
+                statusMsg == "拒绝申请") {
             edit_team_teacher.text = managerTeamBean.teacherList[0].teacherName
             teacherNum = managerTeamBean.teacherList[0].teacherNum
         }

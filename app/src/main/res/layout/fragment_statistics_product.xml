@@ -17,18 +17,18 @@
         <TextView
             android:id="@+id/tv_select_time"
             android:layout_width="@dimen/m100"
-            android:layout_height="@dimen/m27"
+            android:layout_height="match_parent"
             android:text="2019年10月"
             android:gravity="center_vertical|left"
-            android:layout_marginLeft="@dimen/m10"
+            android:layout_marginLeft="@dimen/m5"
             android:textColor="@color/color_4A4A4A"
             android:textSize="15sp"/>
 
         <ImageView
-            android:layout_width="@dimen/m14"
-            android:layout_height="@dimen/m8"
+            android:layout_width="@dimen/m20"
+            android:layout_height="@dimen/m20"
             android:layout_gravity="end|center_vertical"
-            android:layout_marginRight="@dimen/m10"
+            android:layout_marginRight="@dimen/m5"
             android:src="@drawable/icon_xiala" />
     </FrameLayout>
     <ScrollView
@@ -52,7 +52,7 @@
                 android:text="产品消费占比"/>
             <www.linwg.org.lib.LCardView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/m210"
                 android:visibility="visible"
                 app:cornerRadius="@dimen/m10">
                 <com.github.mikephil.charting.charts.PieChart
@@ -60,6 +60,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/m210"
                     android:layout_gravity="center" />
+                <ImageView
+                    android:id="@+id/iv_empty_pie"
+                    android:visibility="gone"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/icon_sign"/>
             </www.linwg.org.lib.LCardView>
 
 

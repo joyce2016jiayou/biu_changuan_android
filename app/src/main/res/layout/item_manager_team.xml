@@ -88,6 +88,7 @@
                 android:layout_gravity="left"
                 android:textColor="@color/color_4A4A4A"
                 android:textSize="13sp"
+                android:layout_marginRight="@dimen/m50"
                 tool:text="共感单车·山地骑行" />
 
             <TextView
