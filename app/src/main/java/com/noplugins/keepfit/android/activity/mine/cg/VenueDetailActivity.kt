@@ -3,16 +3,16 @@ package com.noplugins.keepfit.android.activity.mine.cg
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewTreeObserver
-import android.widget.*
+import android.widget.CheckBox
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
@@ -43,22 +43,13 @@ import com.qiniu.android.storage.UploadManager
 import com.qiniu.android.storage.UploadOptions
 import com.ycuwq.datepicker.time.HourAndMinDialogFragment
 import io.reactivex.Observable
-import io.reactivex.ObservableEmitter
 import io.reactivex.ObservableOnSubscribe
 import io.reactivex.ObservableSource
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.functions.Consumer
 import io.reactivex.functions.Function
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_venue_detail.*
-import kotlinx.android.synthetic.main.title_activity.*
 import kotlinx.android.synthetic.main.title_activity_yellow.*
-import kotlinx.android.synthetic.main.title_activity_yellow.back_btn
-import kotlinx.android.synthetic.main.title_activity_yellow.title_tv
-import kotlinx.android.synthetic.main.venue_item_1.*
-import kotlinx.android.synthetic.main.venue_item_2.*
-import kotlinx.android.synthetic.main.venue_item_6.*
-import org.w3c.dom.Text
 import top.zibin.luban.Luban
 import top.zibin.luban.OnCompressListener
 import java.io.File
@@ -91,6 +82,10 @@ class VenueDetailActivity : BaseActivity(), CCRSortableNinePhotoLayout.Delegate 
 
     override fun initView() {
         setContentView(R.layout.activity_venue_detail)
+        //setTitleView(R.string.vunue_info, R.drawable.icon_back, R.string.tv123, true)
+        isShowTitle(true)
+        setTitleView(R.string.vunue_info)
+
         /**七牛云**/
         uploadManager = MyApplication.uploadManager
         sdf = SimpleDateFormat("yyyyMMddHHmmss")

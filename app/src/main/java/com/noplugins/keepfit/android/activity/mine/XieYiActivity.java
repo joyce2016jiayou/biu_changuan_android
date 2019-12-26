@@ -34,6 +34,7 @@ public class XieYiActivity extends BaseActivity {
     public void initView() {
         setContentLayout(R.layout.activity_xie_yi);
         ButterKnife.bind(this);
+        isShowTitle(true);
         if (type == 1) {
             setTitleView(R.string.tv186);
         } else if (type == 2) {

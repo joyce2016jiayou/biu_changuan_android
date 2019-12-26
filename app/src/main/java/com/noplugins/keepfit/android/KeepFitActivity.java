@@ -109,6 +109,7 @@ public class KeepFitActivity extends BaseActivity {
     public void initView() {
         setContentLayout(R.layout.activity_keepfit);
         ButterKnife.bind(this);
+        isShowTitle(false);
 
         if (SpUtils.getString(getApplicationContext(), AppConstants.USER_DENGJI).equals("2999")) {
             btn_shipu.setVisibility(View.GONE);
@@ -118,7 +119,6 @@ public class KeepFitActivity extends BaseActivity {
                 btn_shipu.setVisibility(View.VISIBLE);
             }
         }
-        isShowTitle(false);
         MyApplication.addDestoryActivity(this, "KeepFitActivity");
 
         //初始化页面

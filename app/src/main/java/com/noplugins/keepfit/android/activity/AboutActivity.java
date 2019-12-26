@@ -22,6 +22,7 @@ import com.allenliu.versionchecklib.v2.callback.CustomVersionDialogListener;
 import com.noplugins.keepfit.android.KeepFitActivity;
 import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.base.BaseActivity;
+import com.noplugins.keepfit.android.callback.OnclickCallBack;
 import com.noplugins.keepfit.android.entity.VersionEntity;
 import com.noplugins.keepfit.android.global.AppConstants;
 import com.noplugins.keepfit.android.util.SpUtils;
@@ -42,9 +43,6 @@ import butterknife.ButterKnife;
 import rx.Subscription;
 
 public class AboutActivity extends BaseActivity {
-
-    @BindView(R.id.back_btn)
-    ImageView back_btn;
     @BindView(R.id.tv_version)
     TextView tv_version;
     @BindView(R.id.banben_shengji_btn)
@@ -62,19 +60,20 @@ public class AboutActivity extends BaseActivity {
     public void initView() {
         setContentLayout(R.layout.activity_about);
         ButterKnife.bind(this);
-        isShowTitle(false);
+        isShowTitle(true);
+        setTitleView(R.string.tv107);
         tv_version.setText("版本号：" + getVerName(this));
-    }
-
-    @Override
-    public void doBusiness(Context mContext) {
-        back_btn.setOnClickListener(new View.OnClickListener() {
+        title_left_button_onclick_listen(new OnclickCallBack() {
             @Override
-            public void onClick(View view) {
+            public void onclick() {
                 setResult(SpUtils.getInt(getApplicationContext(), AppConstants.FRAGMENT_SIZE) - 1);
                 finish();
             }
         });
+    }
+
+    @Override
+    public void doBusiness(Context mContext) {
         banben_shengji_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

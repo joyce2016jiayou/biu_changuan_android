@@ -86,7 +86,7 @@ public class ToolbarControl extends Toolbar {
     }
 
     public void showRightTextView() {
-        if (toolbar_right_button_Tex != null) {
+        if (toolbar_right_button_Tex != null && toolbar_right_button_Image != null) {
             toolbar_right_button_Tex.setVisibility(VISIBLE);
             toolbar_right_button_Image.setVisibility(GONE);
 
@@ -94,14 +94,14 @@ public class ToolbarControl extends Toolbar {
     }
 
     public void hideRightTextView() {
-        if (toolbar_right_button_Tex != null) {
+        if (toolbar_right_button_Tex != null && toolbar_right_button_Image != null) {
             toolbar_right_button_Tex.setVisibility(GONE);
             toolbar_right_button_Image.setVisibility(GONE);
         }
     }
 
     public void showRightImageView() {
-        if (toolbar_right_button_Image != null) {
+        if (toolbar_right_button_Image != null && toolbar_right_button_Tex != null) {
             toolbar_right_button_Image.setVisibility(VISIBLE);
             toolbar_right_button_Tex.setVisibility(GONE);
 
@@ -109,7 +109,7 @@ public class ToolbarControl extends Toolbar {
     }
 
     public void hideRightImageView() {
-        if (toolbar_right_button_Image != null) {
+        if (toolbar_right_button_Image != null && toolbar_right_button_Tex != null) {
             toolbar_right_button_Image.setVisibility(GONE);
             toolbar_right_button_Tex.setVisibility(GONE);
         }

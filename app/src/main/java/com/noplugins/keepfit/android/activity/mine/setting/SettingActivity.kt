@@ -28,6 +28,10 @@ class SettingActivity : BaseActivity() {
     override fun initView() {
         setContentView(R.layout.activity_setting)
         title_tv.text = "设置"
+
+        isShowTitle(true)
+        setTitleView(R.string.vunue_info)
+
     }
 
     override fun onBackPressed() {

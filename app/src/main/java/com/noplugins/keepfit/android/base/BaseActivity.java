@@ -11,14 +11,17 @@ import android.net.ConnectivityManager;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import androidx.annotation.FractionRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -47,12 +50,11 @@ public abstract class BaseActivity extends AppCompatActivity implements EasyPerm
     protected final String TAG = this.getClass().getSimpleName();//是否输出日志信息
     protected Subscription subscription;//Rxjava
     ToolbarControl toolbar;//自定义title
-    RelativeLayout ly_content;//封装布局
+    FrameLayout ly_content;//封装布局
     private boolean isSetStatusBar = true;//是否沉浸状态栏
     private final List<BaseActivity> mActivities = new LinkedList<>();//记录所有活动的Activity
     private boolean isShowTitle;
     protected static final int RC_PERM = 123;
-
     private boolean isRegistered = false;
     private NetWorkChangReceiver netWorkChangReceiver;
 
@@ -95,7 +97,10 @@ public abstract class BaseActivity extends AppCompatActivity implements EasyPerm
         mContextView = LayoutInflater.from(this).inflate(R.layout.ll_basetitle, null);
         ly_content = mContextView.findViewById(R.id.layout_base);
 
+
         setContentView(mContextView);
+
+        toolbar = mContextView.findViewById(R.id.about_me_toolbar);
 
 
         //为了适配屏幕软键盘
@@ -103,9 +108,6 @@ public abstract class BaseActivity extends AppCompatActivity implements EasyPerm
             AndroidWorkaround.assistActivity(findViewById(android.R.id.content));
             //mContextView.setPadding(0,0,0, ScreenUtilsHelper.dip2px(this,50));
         }
-
-
-        toolbar = mContextView.findViewById(R.id.about_me_toolbar);
 
         //初始化控件
         initView();
@@ -116,7 +118,6 @@ public abstract class BaseActivity extends AppCompatActivity implements EasyPerm
         } else {
             toolbar.setVisibility(View.GONE);
         }
-
         //极光
         JPushInterface.init(getApplicationContext());
 
@@ -165,7 +166,7 @@ public abstract class BaseActivity extends AppCompatActivity implements EasyPerm
         ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT);
         mContextView.setLayoutParams(layoutParams);
-        mContextView.setBackgroundDrawable(null);
+        //mContextView.setBackgroundDrawable(null);
         if (null != ly_content) {
             ly_content.addView(mContextView);
         }
@@ -179,10 +180,9 @@ public abstract class BaseActivity extends AppCompatActivity implements EasyPerm
     }
 
     public void setTitleView(int title_content) {
-        this.isShowTitle = true;
+        //this.isShowTitle = true;
         title = title_content;
     }
-
 
 
     /**
@@ -197,6 +197,7 @@ public abstract class BaseActivity extends AppCompatActivity implements EasyPerm
         left_btn_id_resource = left_btn_id;
         right_btn_id_resource = right_btn_id;
         is_tv_resource_sure = is_tv_resource;
+
     }
 
     public void setTitleViewBg(int bg_corlor) {
@@ -223,10 +224,13 @@ public abstract class BaseActivity extends AppCompatActivity implements EasyPerm
 
     private void initToolBar() {
         if (isShowTitle) {
+            Log.e("222222", "显示title");
             toolbar.setVisibility(View.VISIBLE);
             setSupportActionBar(toolbar);
             Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
-            toolbar.setTitle(getResources().getString(title));
+            if (title != 0) {
+                toolbar.setTitle(getResources().getString(title));
+            }
             if (bg_corlor_resource != 0) {
                 toolbar.setBgColor(bg_corlor_resource);
             }
@@ -268,7 +272,7 @@ public abstract class BaseActivity extends AppCompatActivity implements EasyPerm
             });
 
         } else {
-            toolbar.setVisibility(View.GONE);
+            Log.e("222222", "隐藏title");
         }
 
     }

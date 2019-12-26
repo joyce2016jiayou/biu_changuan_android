@@ -4,11 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/m70"
     tools:context=".activity.mine.cg.VenueDetailActivity">
+
     <include
         android:id="@+id/include_title"
         layout="@layout/title_activity_yellow"
         app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"
         app:layout_constraintLeft_toLeftOf="parent" />
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

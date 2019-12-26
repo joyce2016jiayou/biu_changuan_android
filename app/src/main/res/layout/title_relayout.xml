@@ -6,76 +6,67 @@
     android:background="@color/transparent"
     android:orientation="vertical">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/toolbar_left_button1"
+        android:layout_width="@dimen/m22"
+        android:layout_height="@dimen/m22"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/m20"
+        android:src="@drawable/icon_back" />
 
+    <TextView
+        android:id="@+id/toolbar_title1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="标题"
+        android:textColor="@color/top_heiziti"
+        android:textSize="22sp"
+        android:textStyle="normal" />
 
+    <TextView
+        android:id="@+id/toolbar_right_button_Tex"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/m20"
+        android:text="右边文字"
+        android:textColor="@color/top_heiziti"
+        android:textSize="20sp"
+        android:textStyle="normal"
+        android:visibility="gone" />
 
-        <ImageView
-            android:id="@+id/toolbar_left_button1"
-            android:layout_width="@dimen/m22"
-            android:layout_height="@dimen/m22"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/m20"
-            android:src="@drawable/icon_back" />
+    <ImageView
+        android:id="@+id/toolbar_right_button_Image"
+        android:layout_width="@dimen/m22"
+        android:layout_height="@dimen/m22"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/m20"
+        android:src="@drawable/icon_back"
+        android:visibility="gone" />
 
-        <TextView
-            android:id="@+id/toolbar_title1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:text="标题"
-            android:textColor="@color/top_heiziti"
-            android:textSize="22sp"
-            android:textStyle="normal" />
+    <LinearLayout
+        android:id="@+id/linear_left"
+        android:layout_width="@dimen/m100"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:background="@color/transparent"
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/toolbar_right_button_Tex"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/m20"
-            android:text="右边文字"
-            android:textColor="@color/top_heiziti"
-            android:textSize="20sp"
-            android:textStyle="normal"
-            android:visibility="gone" />
+    </LinearLayout>
 
-        <ImageView
-            android:id="@+id/toolbar_right_button_Image"
-            android:layout_width="@dimen/m22"
-            android:layout_height="@dimen/m22"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/m20"
-            android:src="@drawable/icon_back"
-            android:visibility="gone" />
-        <LinearLayout
-            android:id="@+id/linear_left"
-            android:layout_width="@dimen/m100"
-            android:layout_height="match_parent"
-            android:layout_alignParentLeft="true"
-            android:background="@color/transparent"
-            android:orientation="vertical">
+    <LinearLayout
+        android:id="@+id/linear_right"
+        android:layout_width="@dimen/m100"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:background="@color/transparent"
+        android:orientation="vertical">
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/linear_right"
-            android:layout_width="@dimen/m100"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:background="@color/transparent"
-            android:orientation="vertical">
-
-        </LinearLayout>
-
-
-
-    </RelativeLayout>
+    </LinearLayout>
 
 </RelativeLayout>
