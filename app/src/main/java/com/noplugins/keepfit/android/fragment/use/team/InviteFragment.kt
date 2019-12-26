@@ -15,6 +15,7 @@ import com.noplugins.keepfit.android.adapter.ManagerTeamClassAdapter
 import com.noplugins.keepfit.android.base.BaseFragment
 import com.noplugins.keepfit.android.bean.use.ManagerBean
 import com.noplugins.keepfit.android.global.AppConstants
+import com.noplugins.keepfit.android.global.PublicPopControl
 import com.noplugins.keepfit.android.util.SpUtils
 import com.noplugins.keepfit.android.util.net.Network
 import com.noplugins.keepfit.android.util.net.entity.Bean
@@ -133,33 +134,18 @@ class InviteFragment : BaseFragment() {
     }
 
     private fun toJujue(view1: TextView, position: Int) {
-        val popupWindow = CommonPopupWindow.Builder(activity)
-            .setView(R.layout.dialog_to_room_delete)
-            .setBackGroundLevel(0.5f)//0.5f
-            .setAnimationStyle(R.style.main_menu_animstyle)
-            .setWidthAndHeight(
-                WindowManager.LayoutParams.MATCH_PARENT,
-                WindowManager.LayoutParams.MATCH_PARENT
-            )
-            .setOutSideTouchable(true).create()
-        popupWindow.showAsDropDown(view1)
-
-        /**设置逻辑 */
-        val view = popupWindow.contentView
-        val cancel = view.findViewById<TextView>(R.id.tv_cancel)
-        val sure = view.findViewById<TextView>(R.id.tv_add)
-        val tvInfo = view.findViewById<TextView>(R.id.tv_username)
-        val title = view.findViewById<TextView>(R.id.label_delete_room)
-        tvInfo.text = "确定取消邀请?"
-        title.text = "取消邀请"
-        cancel.setOnClickListener {
-            popupWindow.dismiss()
-        }
-        sure.setOnClickListener {
-            popupWindow.dismiss()
-            //去申请
-            agreeCourse(position)
-//
+        PublicPopControl.alert_dialog_center(activity) { view, popup ->
+            val content = view.findViewById<TextView>(R.id.pop_content)
+            val title = view.findViewById<TextView>(R.id.pop_title)
+            content.setText("确定取消邀请?")
+            title.setText("取消邀请")
+            view.findViewById<LinearLayout>(R.id.cancel_btn)
+                    .setOnClickListener {
+                        popup.dismiss()
+                    }
+            view.findViewById<LinearLayout>(R.id.sure_btn)
+                    .setOnClickListener {  //去申请
+                        agreeCourse(position)}
         }
     }
 
