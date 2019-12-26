@@ -203,7 +203,7 @@
 
                             <LinearLayout
                                 android:layout_width="@dimen/m15"
-                                android:layout_height="@dimen/m0.5"
+                                android:layout_height="@dimen/m0_5"
                                 android:background="@color/color_929292" />
 
                             <TextView
@@ -220,7 +220,7 @@
 
                             <LinearLayout
                                 android:layout_width="@dimen/m15"
-                                android:layout_height="@dimen/m0.5"
+                                android:layout_height="@dimen/m0_5"
                                 android:background="@color/color_929292" />
 
                             <TextView

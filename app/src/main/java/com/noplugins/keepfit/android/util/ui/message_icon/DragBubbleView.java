@@ -118,7 +118,7 @@ public class DragBubbleView extends View {
         mBubbleRadius = ta.getDimension(R.styleable.DragBubbleView_bubbleRadius, DensityUtils.dp2px(context, 12));
         mBubbleColor = ta.getColor(R.styleable.DragBubbleView_bubbleColor, Color.RED);
         mText = ta.getString(R.styleable.DragBubbleView_text);
-        mTextSize = ta.getDimension(R.styleable.DragBubbleView_textSize, DensityUtils.dp2px(context, 12));
+        mTextSize = ta.getDimension(R.styleable.DragBubbleView_text_Size, DensityUtils.dp2px(context, 12));
         mTextColor = ta.getColor(R.styleable.DragBubbleView_textColor, Color.WHITE);
         mState = STATE_DEFAULT;
         mCircleRadius = mBubbleRadius;

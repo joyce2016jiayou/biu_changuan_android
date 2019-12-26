@@ -272,7 +272,7 @@
 
                     <View
                         android:layout_width="@dimen/m10"
-                        android:layout_height="@dimen/m0.5"
+                        android:layout_height="@dimen/m0_5"
                         android:layout_marginLeft="@dimen/m1"
                         android:layout_marginRight="@dimen/m1"
                         android:background="@color/color_4A4A4A"
@@ -288,7 +288,7 @@
 
                     <View
                         android:layout_width="@dimen/m10"
-                        android:layout_height="@dimen/m0.5"
+                        android:layout_height="@dimen/m0_5"
                         android:layout_marginLeft="@dimen/m1"
                         android:layout_marginRight="@dimen/m1"
                         android:background="@color/color_4A4A4A"
@@ -343,7 +343,7 @@
 
                     <View
                         android:layout_width="@dimen/m40"
-                        android:layout_height="@dimen/m0.5"
+                        android:layout_height="@dimen/m0_5"
                         android:background="@color/color_4A4A4A" />
 
                     <TextView

@@ -38,12 +38,14 @@ import com.noplugins.keepfit.android.bean.DictionaryeBean;
 import com.noplugins.keepfit.android.bean.SelectRoomBean;
 import com.noplugins.keepfit.android.bean.TeacherBean;
 import com.noplugins.keepfit.android.callback.ImageCompressCallBack;
+import com.noplugins.keepfit.android.callback.PopViewCallBack;
 import com.noplugins.keepfit.android.entity.AddClassEntity;
 import com.noplugins.keepfit.android.entity.ClassEntity;
 import com.noplugins.keepfit.android.entity.ClassTypeEntity;
 import com.noplugins.keepfit.android.entity.MaxPeopleEntity;
 import com.noplugins.keepfit.android.entity.QiNiuToken;
 import com.noplugins.keepfit.android.global.AppConstants;
+import com.noplugins.keepfit.android.global.PublicPopControl;
 import com.noplugins.keepfit.android.util.GlideEngine;
 import com.noplugins.keepfit.android.util.SpUtils;
 import com.noplugins.keepfit.android.util.TimeCheckUtil;
@@ -684,40 +686,35 @@ public class AddClassItemActivity extends BaseActivity implements CCRSortableNin
     }
 
     private void pop(boolean is_no_invite_teacher) {
-        new XPopup.Builder(this)
-                .autoOpenSoftInput(true)
-                .popupAnimation(PopupAnimation.ScaleAlphaFromCenter)
-                .asCustom(new CenterPopupView(this, R.layout.back_invite_teacher_pop, new ViewCallBack() {
+        PublicPopControl.alert_dialog_center(this, new PopViewCallBack() {
+            @Override
+            public void return_view(View view, BasePopupView popup) {
+                TextView pop_title = view.findViewById(R.id.pop_title);
+                TextView pop_content = view.findViewById(R.id.pop_content);
+                if (is_no_invite_teacher) {//弹出"选择教练"提示
+                    pop_title.setText(R.string.tv178);
+                    pop_content.setText(R.string.tv179);
+                }
+                view.findViewById(R.id.cancel_btn).setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onReturnView(View view, BasePopupView popup) {
-                        TextView pop_title = view.findViewById(R.id.pop_title);
-                        TextView pop_content = view.findViewById(R.id.pop_content);
-                        if (is_no_invite_teacher) {//弹出"选择教练"提示
-                            pop_title.setText(R.string.tv178);
-                            pop_content.setText(R.string.tv179);
-                        }
-                        view.findViewById(R.id.cancel_btn).setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                popup.dismiss();
-                            }
-                        });
-                        view.findViewById(R.id.sure_btn).setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                if (is_no_invite_teacher) {
-                                    //这边调用新增团课的接口
-                                    add_class();
-
-                                } else {
-                                    finish();
-                                }
-                                popup.dismiss();
-                            }
-                        });
+                    public void onClick(View v) {
+                        popup.dismiss();
                     }
-
-                })).show();
+                });
+                view.findViewById(R.id.sure_btn).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (is_no_invite_teacher) {
+                            //这边调用新增团课的接口
+                            add_class();
+                        } else {
+                            finish();
+                        }
+                        popup.dismiss();
+                    }
+                });
+            }
+        });
     }
 
     private boolean calculate_time(TextView time1_edit, TextView time2_edit) {

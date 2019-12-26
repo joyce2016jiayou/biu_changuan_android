@@ -361,7 +361,7 @@ public final class CameraManager {
             return new PlanarYUVLuminanceSource(data, width, height, 0,
                     0, width, height, false);
         } else {
-            int actionbarHeight = context.getResources().getDimensionPixelSize(R.dimen.toolBarHeight);
+            int actionbarHeight = context.getResources().getDimensionPixelSize(R.dimen.m50);
             return new PlanarYUVLuminanceSource(data, width, height, rect.left,
                     rect.top + actionbarHeight, rect.width(), rect.height(), false);
         }

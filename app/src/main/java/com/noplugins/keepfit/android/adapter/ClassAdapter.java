@@ -17,9 +17,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.andview.refreshview.recyclerview.BaseRecyclerAdapter;
+import com.lxj.xpopup.core.BasePopupView;
 import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.bean.RiChengBean;
+import com.noplugins.keepfit.android.callback.PopViewCallBack;
 import com.noplugins.keepfit.android.fragment.RiChengFragment;
+import com.noplugins.keepfit.android.global.PublicPopControl;
 import com.noplugins.keepfit.android.util.ui.pop.CommonPopupWindow;
 
 import java.util.ArrayList;
@@ -153,10 +156,10 @@ public class ClassAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder> i
                 @Override
                 public void onClick(View view) {
                     if (resultBean.getCourseType() == 1 || resultBean.getCourseType() == 2) {
-                        call_pop(holder, resultBean.getTeacherPhone());
+                        call_pop(resultBean.getTeacherPhone());
                     } else {
 
-                        call_pop(holder, resultBean.getUserPhone());
+                        call_pop(resultBean.getUserPhone());
                     }
 
                 }
@@ -164,7 +167,7 @@ public class ClassAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder> i
             holder.phone_img.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    call_pop(holder, resultBean.getUserPhone());
+                    call_pop(resultBean.getUserPhone());
                 }
             });
         }
@@ -172,37 +175,29 @@ public class ClassAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder> i
 
     }
 
-    private void call_pop(WeiJieShuViewHolder holder, String phone_number) {
-        CommonPopupWindow popupWindow = new CommonPopupWindow.Builder(context.getActivity())
-                .setView(R.layout.call_pop)
-                .setBackGroundLevel(0.5f)//0.5f
-                .setAnimationStyle(R.style.main_menu_animstyle)
-                .setWidthAndHeight(WindowManager.LayoutParams.MATCH_PARENT,
-                        WindowManager.LayoutParams.MATCH_PARENT)
-                .setOutSideTouchable(true).create();
-        popupWindow.showAsDropDown(holder.phone_btn);
-
-        /**设置逻辑*/
-        View view = popupWindow.getContentView();
-        LinearLayout cancel_layout = view.findViewById(R.id.cancel_layout);
-        LinearLayout sure_layout = view.findViewById(R.id.sure_layout);
-        TextView content_tv = view.findViewById(R.id.content_tv);
-        content_tv.setText("确认拨打 " + phone_number + "?");
-        cancel_layout.setOnClickListener(new View.OnClickListener() {
+    private void call_pop(String phone_number) {
+        PublicPopControl.alert_call_phone_dialog_center(context.getContext(), new PopViewCallBack() {
             @Override
-            public void onClick(View view) {
-                popupWindow.dismiss();
+            public void return_view(View view, BasePopupView popup) {
+                LinearLayout cancel_layout = view.findViewById(R.id.cancel_layout);
+                LinearLayout sure_layout = view.findViewById(R.id.sure_layout);
+                TextView content_tv = view.findViewById(R.id.content_tv);
+                content_tv.setText("确认拨打 " + phone_number + "?");
+                cancel_layout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        popup.dismiss();
+                    }
+                });
+                sure_layout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        initSimple(phone_number);
+                        popup.dismiss();
+                    }
+                });
             }
         });
-        sure_layout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                initSimple(phone_number);
-                popupWindow.dismiss();
-            }
-        });
-
-
     }
 
     @AfterPermissionGranted(PERMISSION_STORAGE_CODE)

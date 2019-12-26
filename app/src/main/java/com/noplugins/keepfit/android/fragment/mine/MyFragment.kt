@@ -14,10 +14,12 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.noplugins.keepfit.android.R
-import com.noplugins.keepfit.android.activity.*
+import com.noplugins.keepfit.android.activity.CooperateActivity
+import com.noplugins.keepfit.android.activity.ProductAdviceActivity
+import com.noplugins.keepfit.android.activity.SelectChangGuanActivity
+import com.noplugins.keepfit.android.activity.ZhangHaoSafeActivity
 import com.noplugins.keepfit.android.activity.mine.CgPriceActivity
 import com.noplugins.keepfit.android.activity.mine.CostAccountingActivity
-import com.noplugins.keepfit.android.activity.mine.TeacherManagerActivity
 import com.noplugins.keepfit.android.activity.mine.WalletActivity
 import com.noplugins.keepfit.android.activity.mine.cg.VenueDetailActivity
 import com.noplugins.keepfit.android.activity.mine.roles.RolesManageActivity
@@ -27,7 +29,9 @@ import com.noplugins.keepfit.android.adapter.mine.cg.FunctionV11Adapter
 import com.noplugins.keepfit.android.base.BaseFragment
 import com.noplugins.keepfit.android.bean.ChangguanBean
 import com.noplugins.keepfit.android.bean.mine.MineFunctionBean
+import com.noplugins.keepfit.android.callback.PopViewCallBack
 import com.noplugins.keepfit.android.global.AppConstants
+import com.noplugins.keepfit.android.global.PublicPopControl
 import com.noplugins.keepfit.android.util.BaseUtils
 import com.noplugins.keepfit.android.util.SpUtils
 import com.noplugins.keepfit.android.util.TimeCheckUtil
@@ -37,10 +41,13 @@ import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriber
 import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener
 import com.noplugins.keepfit.android.util.ui.pop.CommonPopupWindow
 import kotlinx.android.synthetic.main.fragment_mine.*
-import pub.devrel.easypermissions.AfterPermissionGranted
 import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions
-import java.util.HashMap
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.List
+import kotlin.collections.MutableList
+import kotlin.collections.set
 
 class MyFragment : BaseFragment(), EasyPermissions.PermissionCallbacks {
     companion object {
@@ -77,7 +84,7 @@ class MyFragment : BaseFragment(), EasyPermissions.PermissionCallbacks {
             store_type_tv.text = SpUtils.getString(activity!!, AppConstants.CG_NAME)
         }
         select_store_type.setOnClickListener {
-            if (SpUtils.getBoolean(activity,AppConstants.HAVE_MORE_AREA)) {//如果有更多场馆
+            if (SpUtils.getBoolean(activity, AppConstants.HAVE_MORE_AREA)) {//如果有更多场馆
                 val intent = Intent(activity, SelectChangGuanActivity::class.java)
                 startActivity(intent)
             }
@@ -179,26 +186,17 @@ class MyFragment : BaseFragment(), EasyPermissions.PermissionCallbacks {
     }
 
     private fun call_pop(phone_number: String) {
-        val popupWindow = CommonPopupWindow.Builder(getActivity())
-                .setView(R.layout.call_pop)
-                .setBackGroundLevel(0.5f)//0.5f
-                .setAnimationStyle(R.style.main_menu_animstyle)
-                .setWidthAndHeight(WindowManager.LayoutParams.MATCH_PARENT,
-                        WindowManager.LayoutParams.MATCH_PARENT)
-                .setOutSideTouchable(true).create()
-        popupWindow.showAsDropDown(gv_function)
-
-        /**设置逻辑 */
-        val view = popupWindow.contentView
-        val cancel_layout = view.findViewById<LinearLayout>(R.id.cancel_layout)
-        val sure_layout = view.findViewById<LinearLayout>(R.id.sure_layout)
-        val content_tv = view.findViewById<TextView>(R.id.content_tv)
-        content_tv.text = "确认拨打 $phone_number?"
-        cancel_layout.setOnClickListener { popupWindow.dismiss() }
-        sure_layout.setOnClickListener {
-            initSimple("4006836895")
-            popupWindow.dismiss()
-        }
+        PublicPopControl.alert_call_phone_dialog_center(context, PopViewCallBack { view, popup ->
+            val cancel_layout = view.findViewById<LinearLayout>(R.id.cancel_layout)
+            val sure_layout = view.findViewById<LinearLayout>(R.id.sure_layout)
+            val content_tv = view.findViewById<TextView>(R.id.content_tv)
+            content_tv.text = "确认拨打 $phone_number?"
+            cancel_layout.setOnClickListener { popup.dismiss() }
+            sure_layout.setOnClickListener {
+                initSimple("4006836895")
+                popup.dismiss()
+            }
+        })
 
     }
 
