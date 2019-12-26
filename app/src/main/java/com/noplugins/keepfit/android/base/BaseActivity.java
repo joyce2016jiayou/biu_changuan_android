@@ -178,6 +178,13 @@ public abstract class BaseActivity extends AppCompatActivity implements EasyPerm
         left_btn_id_resource = left_btn_id;
     }
 
+    public void setTitleView(int title_content) {
+        this.isShowTitle = true;
+        title = title_content;
+    }
+
+
+
     /**
      * @param title_content  标题文字
      * @param left_btn_id    左边按钮图片资源

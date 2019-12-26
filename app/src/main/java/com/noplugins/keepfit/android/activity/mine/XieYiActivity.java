@@ -23,9 +23,6 @@ import butterknife.ButterKnife;
 public class XieYiActivity extends BaseActivity {
     @BindView(R.id.content_layout)
     WebView webView;
-    @BindView(R.id.title_tv)
-    TextView title_tv;
-
     int type = 0;
 
     @Override
@@ -37,21 +34,17 @@ public class XieYiActivity extends BaseActivity {
     public void initView() {
         setContentLayout(R.layout.activity_xie_yi);
         ButterKnife.bind(this);
-        setTitleView(R.string.tv186, R.drawable.icon_back);
+        if (type == 1) {
+            setTitleView(R.string.tv186);
+        } else if (type == 2) {
+            setTitleView(R.string.tv182);
+        }
         title_left_button_onclick_listen(new OnclickCallBack() {
             @Override
             public void onclick() {
                 finish();
             }
         });
-//        ImageView imageView = findViewById(R.id.back_btn);
-//        imageView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                finish();
-//            }
-//        });
-
     }
 
     @Override
@@ -61,14 +54,12 @@ public class XieYiActivity extends BaseActivity {
         webSettings.setUseWideViewPort(true);//设置此属性，可任意比例缩放
         webSettings.setLoadWithOverviewMode(true);
         if (type == 1) {//隐私政策
-            title_tv.setText(R.string.tv181);
             webView.loadUrl("http://www.noplugins.com/doc/changguan_xieyi.html");
-
         } else if (type == 2) {//合作协议
-            title_tv.setText(R.string.tv182);
             webView.loadUrl("http://www.noplugins.com/doc/changguan_qianyue.html");
-
         }
+
+
     }
 
 
