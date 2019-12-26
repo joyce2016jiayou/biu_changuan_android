@@ -429,6 +429,24 @@ public class ClassDetailEntity {
         private int inviteStatus;
         private String gymInviteNum;
         private double finalGrade;
+        private String inviteString;
+        private String refuse;
+
+        public String getInviteString() {
+            return inviteString;
+        }
+
+        public void setInviteString(String inviteString) {
+            this.inviteString = inviteString;
+        }
+
+        public String getRefuse() {
+            return refuse;
+        }
+
+        public void setRefuse(String refuse) {
+            this.refuse = refuse;
+        }
 
         public double getFinalGrade() {
             return finalGrade;

@@ -58,6 +58,15 @@ public class RecyclerView1Adapter extends RecyclerView.Adapter<RecyclerViewHolde
         pingfen_tv.setText(teacherBean.getFinalGrade() + "分");
         teacher_name_tv.setText(teacherBean.getTeacherName());
         //设置图片圆角角度
+        if (teacherBean.getInviteString()!=null){
+            invite_status_tv.setText(teacherBean.getInviteString());
+            if (teacherBean.getInviteString().equals("已拒绝")){
+                tv_tips.setVisibility(View.VISIBLE);
+                tv_tips.setText(teacherBean.getRefuse());
+            } else {
+                tv_tips.setVisibility(View.GONE);
+            }
+        }
 
 
         Glide.with(mContext).load(teacherBean.getLogoUrl())

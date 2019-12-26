@@ -194,8 +194,7 @@
                             android:gravity="center_vertical"
                             android:minWidth="@dimen/m100"
                             android:inputType="numberDecimal"
-                            android:paddingLeft="@dimen/m10"
-                            android:background="@drawable/shape_btn_bg_gray"/>
+                            android:background="@drawable/shape_edit_bg"/>
                     </LinearLayout>
                 </LinearLayout>
                 <TextView

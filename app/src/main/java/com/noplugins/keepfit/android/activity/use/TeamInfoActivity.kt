@@ -221,7 +221,7 @@ class TeamInfoActivity : BaseActivity() {
 
         if (type == 2) {
             fl_cancel_edit.visibility = View.VISIBLE
-            tv_team_cancel.text = "取消邀请"
+            tv_team_cancel.text = "取消课程"
         }
 
         if (type == 3 && isEdit == 1) {

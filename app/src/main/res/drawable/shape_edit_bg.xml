@@ -3,9 +3,12 @@
 <!-- This is the main color 主要用于给view设置上下边框  -->
 <item>
     <shape>
-        <corners android:radius="@dimen/m10" />
+        <corners android:radius="@dimen/m15" />
         <solid android:color="@color/edit_bg_color"/>
 
+        <padding
+            android:left="@dimen/m10"
+            android:right="@dimen/m10" />
     </shape>
 </item>
 <!-- 给View的上 左  右 下设置边框 ，其中只有底部边框是6dp,其他边框都为0-->
@@ -13,6 +16,7 @@
     <shape>
         <!--     View填充颜色 -->
         <!--<solid android:color="#FFFFFF" />-->
+
     </shape>
 </item>
 

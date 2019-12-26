@@ -59,7 +59,7 @@ public class ManagerTeamClassAdapter extends BaseQuickAdapter<ManagerBean.Course
                 helper.getView(R.id.ll_yaoqin_edit).setVisibility(View.VISIBLE);
                 helper.getView(R.id.tv_cg_name).setVisibility(View.GONE);
                 helper.getView(R.id.ll_shenqin).setVisibility(View.GONE);
-                helper.setText(R.id.tv_yaoqin_edit,"取消");
+                helper.setText(R.id.tv_yaoqin_edit,"取消课程");
                 break;
             case 3: //历史
                 if (item.getTeacherName() != null){
