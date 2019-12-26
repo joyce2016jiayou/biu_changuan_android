@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
@@ -23,6 +24,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.noplugins.keepfit.android.KeepFitActivity;
 import com.noplugins.keepfit.android.R;
+import com.noplugins.keepfit.android.callback.OnclickCallBack;
 import com.noplugins.keepfit.android.util.ActivityCollectorUtil;
 import com.noplugins.keepfit.android.util.ToolbarControl;
 import com.noplugins.keepfit.android.util.permission.EasyPermissions;
@@ -32,6 +34,7 @@ import com.orhanobut.logger.Logger;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
 import cn.jpush.android.api.JPushInterface;
 import rx.Subscription;
@@ -52,6 +55,7 @@ public abstract class BaseActivity extends AppCompatActivity implements EasyPerm
 
     private boolean isRegistered = false;
     private NetWorkChangReceiver netWorkChangReceiver;
+
     /**
      * 设置 app 不随着系统字体的调整而变化
      */
@@ -90,6 +94,7 @@ public abstract class BaseActivity extends AppCompatActivity implements EasyPerm
         //初始化布局
         mContextView = LayoutInflater.from(this).inflate(R.layout.ll_basetitle, null);
         ly_content = mContextView.findViewById(R.id.layout_base);
+
         setContentView(mContextView);
 
 
@@ -114,7 +119,6 @@ public abstract class BaseActivity extends AppCompatActivity implements EasyPerm
 
         //极光
         JPushInterface.init(getApplicationContext());
-
 
 
         doBusiness(getApplicationContext());
@@ -143,23 +147,12 @@ public abstract class BaseActivity extends AppCompatActivity implements EasyPerm
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             getWindow().setStatusBarColor(Color.parseColor("#00000000"));
         }
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-//            StatusBarUtil.setStatusBarColor(this, R.color.transparent);
-//        } else {
-//            StatusBarUtil.transparencyBar(this);
-//        }
-
         View decor = getWindow().getDecorView();
         int ui = decor.getSystemUiVisibility();
-        ui |=View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR; //设置状态栏中字体的颜色为黑色
+        ui |= View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR; //设置状态栏中字体的颜色为黑色
         decor.setSystemUiVisibility(ui);
     }
 
-
-    public void isShowTitle(boolean isShowTitle) {
-        this.isShowTitle = isShowTitle;
-    }
 
     /***
      * 设置内容区域
@@ -176,32 +169,99 @@ public abstract class BaseActivity extends AppCompatActivity implements EasyPerm
         if (null != ly_content) {
             ly_content.addView(mContextView);
         }
-
     }
 
-    public String title;
 
-    public void setTopTitleContent(String str) {
-        title = str;
+    public void setTitleView(int title_content, int left_btn_id) {
+        this.isShowTitle = true;
+        title = title_content;
+        left_btn_id_resource = left_btn_id;
     }
+
+    /**
+     * @param title_content  标题文字
+     * @param left_btn_id    左边按钮图片资源
+     * @param right_btn_id   右边按钮图片资源
+     * @param is_tv_resource 右边按钮资源是否是文字
+     */
+    public void setTitleView(int title_content, int left_btn_id, int right_btn_id, boolean is_tv_resource) {
+        this.isShowTitle = true;
+        title = title_content;
+        left_btn_id_resource = left_btn_id;
+        right_btn_id_resource = right_btn_id;
+        is_tv_resource_sure = is_tv_resource;
+    }
+
+    public void setTitleViewBg(int bg_corlor) {
+        this.isShowTitle = true;
+        bg_corlor_resource = bg_corlor;
+    }
+
+    public void isShowTitle(boolean isShowTitle) {
+        this.isShowTitle = isShowTitle;
+    }
+
+    public void title_left_button_onclick_listen(OnclickCallBack onclickCallBack) {
+        m_onclickCallBack = onclickCallBack;
+    }
+
+    public void title_right_button_onclick_listen(OnclickCallBack onclickCallBack) {
+        m_onclickCallBack = onclickCallBack;
+    }
+
+    public int title;
+    public int left_btn_id_resource, right_btn_id_resource, bg_corlor_resource;
+    public boolean is_tv_resource_sure;
+    public OnclickCallBack m_onclickCallBack;
 
     private void initToolBar() {
         if (isShowTitle) {
             toolbar.setVisibility(View.VISIBLE);
             setSupportActionBar(toolbar);
-            getSupportActionBar().setDisplayShowTitleEnabled(false);
-            toolbar.setTitle(title);
+            Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
+            toolbar.setTitle(getResources().getString(title));
+            if (bg_corlor_resource != 0) {
+                toolbar.setBgColor(bg_corlor_resource);
+            }
 
+            if (left_btn_id_resource != 0 && right_btn_id_resource != 0) {//左右两边都有按钮
+                toolbar.showLeft();
+                if (is_tv_resource_sure) {//右边按钮是文字资源
+                    toolbar.showRightTextView();
+                } else {//右边按钮是图片资源
+                    toolbar.showRightImageView();
+                }
+            } else if (left_btn_id_resource != 0) {//只有左边有按钮
+                toolbar.showLeft();
+                toolbar.hideRight();
+            } else if (right_btn_id_resource != 0) {//只有右边有按钮
+                toolbar.hideLeft();
+                if (is_tv_resource_sure) {//右边按钮是文字资源
+                    toolbar.showRightTextView();
+                } else {//右边按钮是图片资源
+                    toolbar.showRightImageView();
+                }
+            }
             toolbar.setBackButtonOnClickListerner(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    finish();
+                    if (null != m_onclickCallBack) {
+                        m_onclickCallBack.onclick();
+                    }
                 }
             });
 
+            toolbar.setRightButtonOnClickListerner(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (null != m_onclickCallBack) {
+                        m_onclickCallBack.onclick();
+                    }
+                }
+            });
 
         } else {
-            Logger.e("不显示title");
+            toolbar.setVisibility(View.GONE);
         }
 
     }

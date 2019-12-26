@@ -25,17 +25,20 @@ import butterknife.ButterKnife;
 public class ToolbarControl extends Toolbar {
 
     private String titleText;
-
     @BindView(R.id.toolbar_left_button1)
     public ImageView leftButton;
     @BindView(R.id.toolbar_title1)
     public TextView titleTextView;
     @BindView(R.id.linear_left)
     public LinearLayout linear_left;
-    @BindView(R.id.toolbar_right_button1)
-    public TextView toolbar_right_button1;
+    @BindView(R.id.toolbar_right_button_Tex)
+    public TextView toolbar_right_button_Tex;
     @BindView(R.id.rel_quanju)
     public RelativeLayout rel_quanju;
+    @BindView(R.id.toolbar_right_button_Image)
+    public ImageView toolbar_right_button_Image;
+    @BindView(R.id.linear_right)
+    public LinearLayout linear_right;
 
     public ToolbarControl(Context context) {
         super(context);
@@ -50,7 +53,6 @@ public class ToolbarControl extends Toolbar {
     private void init(Context context, AttributeSet attrs) {
         View view = LayoutInflater.from(context).inflate(R.layout.title_relayout, this, true);
         ButterKnife.bind(this, view);
-
         //很重要
         setContentInsetsRelative(0, 0);
 
@@ -58,8 +60,7 @@ public class ToolbarControl extends Toolbar {
         final TypedArray a = getContext().obtainStyledAttributes(
                 attrs, R.styleable.ToolbarControl, 0, 0);
         titleText = a.getString(R.styleable.ToolbarControl_titleText);
-//        Log.d(TAG, titleText);
-        if(null!=titleText){
+        if (null != titleText) {
             titleTextView.setText(titleText);
         }
 
@@ -72,49 +73,75 @@ public class ToolbarControl extends Toolbar {
         }
     }
 
-    public void setQuanJuColor(int color){
-        if(rel_quanju!=null){
+    public void setBgColor(int color) {
+        if (rel_quanju != null) {
             rel_quanju.setBackgroundColor(color);
         }
-
     }
 
-    public void setRightNumbers(String titleStr) {
-        if (toolbar_right_button1 != null) {
-            toolbar_right_button1.setText(titleStr);
-        }
-    }
-
-    public void setTitleByResourceId(int rid) {
+    public void setTitleTextByResourceId(int rid) {
         if (titleTextView != null) {
             titleTextView.setText(rid);
         }
     }
 
-    public void showRight(){
-        if(toolbar_right_button1!=null){
-            toolbar_right_button1.setVisibility(VISIBLE);
+    public void showRightTextView() {
+        if (toolbar_right_button_Tex != null) {
+            toolbar_right_button_Tex.setVisibility(VISIBLE);
+            toolbar_right_button_Image.setVisibility(GONE);
+
         }
     }
 
-    public void hideRight(){
-        if(toolbar_right_button1!=null){
-            toolbar_right_button1.setVisibility(INVISIBLE);
+    public void hideRightTextView() {
+        if (toolbar_right_button_Tex != null) {
+            toolbar_right_button_Tex.setVisibility(GONE);
+            toolbar_right_button_Image.setVisibility(GONE);
         }
     }
 
-    public void showLeft(){
-        if(leftButton !=null){
+    public void showRightImageView() {
+        if (toolbar_right_button_Image != null) {
+            toolbar_right_button_Image.setVisibility(VISIBLE);
+            toolbar_right_button_Tex.setVisibility(GONE);
+
+        }
+    }
+
+    public void hideRightImageView() {
+        if (toolbar_right_button_Image != null) {
+            toolbar_right_button_Image.setVisibility(GONE);
+            toolbar_right_button_Tex.setVisibility(GONE);
+        }
+    }
+
+    public void showLeft() {
+        if (leftButton != null) {
             leftButton.setVisibility(VISIBLE);
         }
     }
 
-    public void hideLeft(){
-        if(leftButton !=null){
-            leftButton.setVisibility(INVISIBLE);
+    public void hideLeft() {
+        if (leftButton != null) {
+            leftButton.setVisibility(GONE);
         }
     }
 
+
+    public void hideRight() {
+        if (leftButton != null) {
+            toolbar_right_button_Image.setVisibility(GONE);
+            toolbar_right_button_Tex.setVisibility(GONE);
+        }
+    }
+
+    public String getTitleText() {
+        return titleText;
+    }
+
+    public void setTitleText(String titleText) {
+        this.titleText = titleText;
+    }
 
 
     public void hide() {
@@ -127,12 +154,11 @@ public class ToolbarControl extends Toolbar {
         }
     }
 
-
-    public String getTitleText() {
-        return titleText;
+    public void setRightButtonOnClickListerner(OnClickListener listerner) {
+        if (linear_right != null && listerner != null) {
+            linear_right.setOnClickListener(listerner);
+        }
     }
 
-    public void setTitleText(String titleText) {
-        this.titleText = titleText;
-    }
+
 }

@@ -1,27 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:orientation="vertical"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:id="@+id/compensate_linear"
-        android:layout_width="match_parent"
-        android:layout_height="15dp"
-        android:background="@color/white"
-        android:orientation="vertical"
-        android:visibility="gone" />
 
     <com.noplugins.keepfit.android.util.ToolbarControl
         android:id="@+id/about_me_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/m20"
         android:layout_alignParentTop="true"
         android:visibility="gone" />
+
 
     <RelativeLayout
         android:id="@+id/layout_base"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/color_F8F8F8"
-        android:layout_alignParentTop="true" />
-</RelativeLayout>
+        />
+</LinearLayout>
