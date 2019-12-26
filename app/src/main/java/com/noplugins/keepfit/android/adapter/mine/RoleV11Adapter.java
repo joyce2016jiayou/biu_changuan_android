@@ -26,9 +26,9 @@ public class RoleV11Adapter extends BaseQuickAdapter<RoleBean.RoleEntity, BaseVi
 
     private String type2string(int type) {
         switch (type) {
-            case 1:
-                return "经理";
             case 2:
+                return "经理";
+            case 3:
                 return "前台";
             default:
                 return "";

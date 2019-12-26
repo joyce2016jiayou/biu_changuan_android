@@ -25,158 +25,186 @@
            android:layout_height="match_parent">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/m20">
+            android:layout_height="wrap_content">
             <TextView
                 android:id="@+id/label_cg_name"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintWidth_percent="0.25"
+                android:layout_marginStart="@dimen/m20"
+                android:layout_marginRight="@dimen/m20"
                 style="@style/tv_label"
                 android:gravity="center"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 android:text="@string/tv_venue_name"
                 android:layout_marginTop="@dimen/m20"/>
+
             <TextView
                 android:id="@+id/tv_cg_name"
+                style="@style/tv_subtitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                style="@style/tv_subtitle"
-                app:layout_constraintWidth_percent="0.75"
+                android:layout_marginStart="@dimen/m20"
+                android:layout_marginTop="@dimen/m20"
+                android:layout_marginEnd="@dimen/m20"
                 android:text="123"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintLeft_toRightOf="@+id/label_cg_name"
-                android:layout_marginTop="@dimen/m20"/>
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/label_cg_name"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/label_cg_type"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintWidth_percent="0.25"
+                android:layout_marginStart="@dimen/m20"
+                android:layout_marginRight="@dimen/m20"
                 style="@style/tv_label"
                 android:gravity="center"
                 android:text="@string/tv_venue_type"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_cg_name"
                 android:layout_marginTop="@dimen/m20"/>
+
             <TextView
                 android:id="@+id/tv_cg_type"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
                 style="@style/tv_subtitle"
-                app:layout_constraintWidth_percent="0.75"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/m20"
+                android:layout_marginTop="@dimen/m20"
                 android:text="123"
-                app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintLeft_toRightOf="@+id/label_cg_type"
-                app:layout_constraintTop_toBottomOf="@+id/tv_cg_name"
-                android:layout_marginTop="@dimen/m20"/>
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/label_cg_type"
+                app:layout_constraintTop_toBottomOf="@+id/tv_cg_name" />
 
             <TextView
                 android:id="@+id/label_cg_area"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintWidth_percent="0.25"
+                android:layout_marginStart="@dimen/m20"
+                android:layout_marginRight="@dimen/m20"
                 style="@style/tv_label"
                 android:gravity="center"
                 android:text="@string/tv_venue_area"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_cg_type"
                 android:layout_marginTop="@dimen/m20"/>
+
             <TextView
                 android:id="@+id/tv_cg_area"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
                 style="@style/tv_subtitle"
-                app:layout_constraintWidth_percent="0.75"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/m20"
+                android:layout_marginTop="@dimen/m20"
                 android:text="123"
-                app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintLeft_toRightOf="@+id/label_cg_area"
-                app:layout_constraintTop_toBottomOf="@+id/tv_cg_type"
-                android:layout_marginTop="@dimen/m20"/>
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/label_cg_area"
+                app:layout_constraintTop_toBottomOf="@+id/tv_cg_type" />
 
             <TextView
                 android:id="@+id/label_cg_address"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintWidth_percent="0.25"
+                android:layout_marginStart="@dimen/m20"
+                android:layout_marginRight="@dimen/m20"
                 style="@style/tv_label"
                 android:gravity="center"
                 android:text="@string/tv_venue_address"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_cg_area"
                 android:layout_marginTop="@dimen/m20"/>
+
             <TextView
                 android:id="@+id/tv_cg_address"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
                 style="@style/tv_subtitle"
-                app:layout_constraintWidth_percent="0.75"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/m20"
+                android:layout_marginTop="@dimen/m20"
                 android:text="123"
-                app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintLeft_toRightOf="@+id/label_cg_address"
-                app:layout_constraintTop_toBottomOf="@+id/tv_cg_area"
-                android:layout_marginTop="@dimen/m20"/>
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/label_cg_address"
+                app:layout_constraintTop_toBottomOf="@+id/tv_cg_area" />
             <!--营业时间-->
             <TextView
                 android:id="@+id/label_business_hours"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="@dimen/m32"
-                app:layout_constraintWidth_percent="0.25"
+                android:layout_marginStart="@dimen/m20"
+                android:layout_marginRight="@dimen/m20"
                 style="@style/tv_label"
                 android:gravity="center"
                 android:text="@string/tv_business_hours"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_cg_address"
                 android:layout_marginTop="@dimen/m20"/>
+
             <TextView
                 android:id="@+id/tv_business_hours"
+                style="@style/tv_subtitle"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/m32"
-                style="@style/tv_subtitle"
-                android:gravity="center"
-                app:layout_constraintWidth_percent="0.75"
+                android:layout_marginStart="@dimen/m20"
+                android:layout_marginTop="@dimen/m20"
+                android:layout_marginEnd="@dimen/m20"
                 android:background="@drawable/shape_btn_bg_gray"
-                app:layout_constraintRight_toRightOf="parent"
+                android:drawableRight="@drawable/icon_xiala"
+                android:gravity="center_vertical|left"
+                android:paddingLeft="@dimen/m20"
+                android:paddingRight="@dimen/m6"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintLeft_toRightOf="@+id/label_business_hours"
-                app:layout_constraintTop_toBottomOf="@+id/tv_cg_address"
-                android:layout_marginTop="@dimen/m20"/>
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/label_business_hours"
+                app:layout_constraintTop_toBottomOf="@+id/tv_cg_address" />
 
             <!--联系方式-->
             <TextView
                 android:id="@+id/label_contact_phone"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="@dimen/m32"
-                app:layout_constraintWidth_percent="0.25"
+                android:layout_marginStart="@dimen/m20"
+                android:layout_marginRight="@dimen/m20"
                 style="@style/tv_label"
                 android:gravity="center"
                 android:text="@string/tv_contact_phone"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_business_hours"
                 android:layout_marginTop="@dimen/m20"/>
+
             <EditText
                 android:id="@+id/tv_contact_phone"
+                style="@style/tv_subtitle"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/m32"
-                style="@style/tv_subtitle"
-                android:gravity="center_vertical"
-                android:paddingLeft="@dimen/m10"
-                android:maxLength="11"
-                android:inputType="phone"
-                app:layout_constraintWidth_percent="0.75"
+                android:layout_marginStart="@dimen/m20"
+                android:layout_marginTop="@dimen/m20"
+                android:layout_marginEnd="@dimen/m20"
                 android:background="@drawable/shape_btn_bg_gray"
-                app:layout_constraintRight_toRightOf="parent"
+                android:gravity="center_vertical"
+                android:inputType="phone"
+                android:maxLength="11"
+                android:paddingLeft="@dimen/m20"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintLeft_toRightOf="@+id/label_contact_phone"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/label_contact_phone"
                 app:layout_constraintTop_toBottomOf="@+id/tv_business_hours"
-                android:layout_marginTop="@dimen/m20"/>
+                 />
 
             <!--联系邮箱-->
             <TextView
                 android:id="@+id/label_contact_email"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="@dimen/m32"
-                app:layout_constraintWidth_percent="0.25"
+                android:layout_marginStart="@dimen/m20"
+                android:layout_marginRight="@dimen/m20"
                 style="@style/tv_label"
                 android:gravity="center"
                 android:text="@string/tv_contact_email"
@@ -184,18 +212,24 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_contact_phone"
                 android:layout_marginTop="@dimen/m20"/>
+
             <EditText
                 android:id="@+id/tv_contact_email"
+                style="@style/tv_subtitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:minHeight="@dimen/m32"
-                style="@style/tv_subtitle"
-                app:layout_constraintWidth_percent="0.75"
+                android:layout_marginStart="@dimen/m20"
+                android:layout_marginTop="@dimen/m20"
+                android:layout_marginEnd="@dimen/m20"
                 android:background="@drawable/shape_btn_bg_gray"
-                app:layout_constraintRight_toRightOf="parent"
+                android:minHeight="@dimen/m32"
+                android:paddingLeft="@dimen/m20"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintLeft_toRightOf="@+id/label_contact_phone"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/label_contact_email"
                 app:layout_constraintTop_toBottomOf="@+id/tv_contact_phone"
-                android:layout_marginTop="@dimen/m20"/>
+                 />
             <View
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/m80"

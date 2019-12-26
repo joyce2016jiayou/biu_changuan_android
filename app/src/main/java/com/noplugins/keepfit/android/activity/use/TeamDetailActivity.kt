@@ -43,7 +43,11 @@ class TeamDetailActivity : BaseActivity() {
     }
 
     private fun setting(code: ClassDetailEntity) {
-        title_tv.text = code.course.courseName
+        if (code.course.courseName.length > 10) {
+            title_tv.text = code.course.courseName.substring(0, 10) + "..."
+        } else {
+            title_tv.text = code.course.courseName
+        }
         val urlStr = ArrayList<String>()
         urlStr.add(code.course.imgUrl)
         //简单使用

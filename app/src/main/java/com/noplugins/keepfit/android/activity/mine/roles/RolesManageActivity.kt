@@ -18,6 +18,7 @@ import com.noplugins.keepfit.android.entity.RoleBean
 import com.noplugins.keepfit.android.global.AppConstants
 import com.noplugins.keepfit.android.util.BaseUtils
 import com.noplugins.keepfit.android.util.SpUtils
+import com.noplugins.keepfit.android.util.data.StringsHelper
 import com.noplugins.keepfit.android.util.net.Network
 import com.noplugins.keepfit.android.util.net.entity.Bean
 import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriber
@@ -111,7 +112,9 @@ class RolesManageActivity : BaseActivity() {
 
                             view.findViewById<TextView>(R.id.tv_add)
                                     .setOnClickListener {
-                                        addRoles(name.text.toString(),phone.text.toString(),role.text.toString(),popup)
+                                        if (BaseUtils.isFastClick()){
+                                            addRoles(name.text.toString(),phone.text.toString(),role.text.toString(),popup)
+                                        }
                                     }
 
                         })).show()
@@ -206,10 +209,11 @@ class RolesManageActivity : BaseActivity() {
             Toast.makeText(applicationContext, "姓名不能为空！", Toast.LENGTH_SHORT).show()
             return
         }
-        if (TextUtils.isEmpty(phone)) {
-            Toast.makeText(applicationContext, "手机号不能为空！", Toast.LENGTH_SHORT).show()
+        if (!StringsHelper.isMobileOne(phone)){
+            Toast.makeText(applicationContext, "手机号格式不正确！", Toast.LENGTH_SHORT).show()
             return
         }
+
         val role:Int = when(roles){
             "经理"-> {
                 2
@@ -226,6 +230,7 @@ class RolesManageActivity : BaseActivity() {
         val addData:MutableList<RoleBean.RoleEntity> = ArrayList()
         val roleBean = RoleBean.RoleEntity()
         roleBean.userName = name
+        roleBean.name = name
         roleBean.phone = phone
         roleBean.userType = role
         roleBean.type = 1

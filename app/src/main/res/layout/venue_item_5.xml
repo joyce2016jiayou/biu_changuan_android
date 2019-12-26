@@ -24,9 +24,10 @@
         android:layout_below="@+id/tv_save_5">
         <TextView
             android:id="@+id/label_logo"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintWidth_percent="0.2"
+            android:layout_marginLeft="@dimen/m20"
+            android:layout_marginRight="@dimen/m20"
             style="@style/tv_subtitle"
             android:gravity="center"
             app:layout_constraintTop_toTopOf="parent"
@@ -38,7 +39,7 @@
             android:layout_width="@dimen/m72"
             android:layout_height="@dimen/m72"
             app:layout_constraintLeft_toLeftOf="parent"
-            android:layout_marginLeft="@dimen/m10"
+            android:layout_marginLeft="@dimen/m30"
             app:layout_constraintTop_toBottomOf="@+id/label_logo"
             android:layout_marginTop="@dimen/m10">
             <ImageView
@@ -64,9 +65,9 @@
 
         <TextView
             android:id="@+id/label_teaching_pic"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintWidth_percent="0.23"
+            android:layout_marginLeft="@dimen/m20"
             style="@style/tv_subtitle"
             android:gravity="center"
             android:text="授课图"
@@ -104,7 +105,7 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/cl_content"
         android:minHeight="@dimen/m90"
-        android:layout_marginLeft="@dimen/m10"
+        android:layout_marginLeft="@dimen/m30"
         android:layout_marginRight="@dimen/m10"
         app:bga_snpl_deleteDrawable="@drawable/delete_image"
         app:bga_snpl_deleteDrawableOverlapQuarter="false"
@@ -112,7 +113,7 @@
         app:bga_snpl_itemCornerRadius="0dp"
         app:bga_snpl_itemSpanCount="3"
         app:bga_snpl_itemWhiteSpacing="5dp"
-        app:bga_snpl_itemWidth="@dimen/m90"
+        app:bga_snpl_itemWidth="@dimen/m70"
         app:bga_snpl_maxItemCount="9"
         app:bga_snpl_placeholderDrawable="@mipmap/bga_pp_ic_holder_dark"
         app:bga_snpl_plusDrawable="@drawable/add_image_moren"

@@ -61,6 +61,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/m20">
+            <ImageView
+                android:id="@+id/iv_user_type"
+                android:layout_width="@dimen/m16"
+                android:layout_height="@dimen/m16"
+                android:src="@mipmap/icon_admin"
+                android:layout_marginTop="@dimen/m15"
+                android:layout_marginLeft="@dimen/m23"/>
             <TextView
                 android:id="@+id/tv_type_name"
                 android:layout_width="wrap_content"
@@ -69,7 +76,8 @@
                 android:layout_marginTop="@dimen/m15"
                 android:textSize="12sp"
                 android:textColor="@color/color_4A4A4A"
-                android:layout_marginLeft="@dimen/m23"/>
+                android:layout_toRightOf="@+id/iv_user_type"
+                android:layout_marginLeft="@dimen/m5"/>
             <www.linwg.org.lib.LCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -94,7 +102,9 @@
 
                         <TextView
                             android:id="@+id/tv_user_Name"
-                            android:layout_width="@dimen/m130"
+                            android:minWidth="@dimen/m130"
+                            android:layout_width="wrap_content"
+                            android:maxWidth="@dimen/m180"
                             android:layout_height="wrap_content"
                             tools:text="PONY"
                             android:textSize="18sp"
@@ -107,10 +117,16 @@
 
                         <TextView
                             android:id="@+id/tv_score"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="@dimen/m55"
+                            android:layout_height="@dimen/m17"
                             android:layout_centerVertical="true"
                             android:layout_alignParentRight="true"
+                            android:background="@mipmap/cion_score"
+                            android:paddingRight="@dimen/m3"
+                            android:paddingTop="@dimen/m2"
+                            android:gravity="right"
+                            android:textSize="13sp"
+                            android:textColor="@color/color_75CEE1"
                             tools:text="9.0分"/>
                     </RelativeLayout>
 

@@ -10,6 +10,7 @@ import android.widget.Toast
 import com.noplugins.keepfit.android.R
 import com.noplugins.keepfit.android.activity.mine.UpdatePasswordActivity
 import com.noplugins.keepfit.android.base.BaseActivity
+import com.noplugins.keepfit.android.bean.LoginBean
 import com.noplugins.keepfit.android.global.AppConstants
 import com.noplugins.keepfit.android.util.BaseUtils
 import com.noplugins.keepfit.android.util.MD5
@@ -58,17 +59,10 @@ class SMSCodeActivity : BaseActivity() {
 
         tv_next.setOnClickListener {
             if (BaseUtils.isFastClick()){
-
-                if (setPwd !=-1){
-                    val intent = Intent(this, UpdatePasswordActivity::class.java)
-                    if (setPwd == 1){
-                        intent.putExtra("form","loginPwd")
-                    }
-                    startActivity(intent)
-                    finish()
-                    return@setOnClickListener
+                if (et_input.text.length != 6){
+                    Toast.makeText(applicationContext,"请输入6位数的验证码",Toast.LENGTH_SHORT)
+                            .show()
                 }
-
                 if(bool.isNotEmpty()){
                     //验证新手机号
 
@@ -77,13 +71,47 @@ class SMSCodeActivity : BaseActivity() {
                     return@setOnClickListener
                 }
 
-                val intent = Intent(this, InputNewPhoneActivity::class.java)
-                startActivity(intent)
-                finish()
+                vercode()
+
             }
         }
     }
 
+    /**
+     * 验证 验证码
+     */
+    private fun vercode(){
+        val params = HashMap<String, Any>()
+        params["messageId"] = messageId
+        params["code"] = et_input.text.toString()
+        params["phone"] = phone
+        subscription = Network.getInstance("验证验证码和登录", this)
+                .verifyCodeLogin(params,ProgressSubscriber("验证验证码",
+                        object : SubscriberOnNextListener<Bean<LoginBean>>{
+                            override fun onNext(t: Bean<LoginBean>?) {
+                                if (setPwd !=-1){
+                                    val intent = Intent(this@SMSCodeActivity, UpdatePasswordActivity::class.java)
+                                    if (setPwd == 1){
+                                        intent.putExtra("form","loginPwd")
+                                    }
+                                    startActivity(intent)
+                                    finish()
+                                    return
+                                }
+
+
+                                val intent = Intent(this@SMSCodeActivity, InputNewPhoneActivity::class.java)
+                                startActivity(intent)
+                                finish()
+                            }
+
+                            override fun onError(error: String?) {
+                                Toast.makeText(applicationContext,error,Toast.LENGTH_SHORT)
+                                        .show()
+                            }
+
+                        },this,true))
+    }
 
     /**
      * 获取验证码

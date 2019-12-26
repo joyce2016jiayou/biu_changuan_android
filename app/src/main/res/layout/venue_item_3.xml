@@ -6,98 +6,116 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="@dimen/m20">
+        android:layout_height="wrap_content">
         <TextView
             android:id="@+id/label_legal_name"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintWidth_percent="0.25"
+            android:layout_marginLeft="@dimen/m20"
+
+            android:layout_marginRight="@dimen/m20"
             style="@style/tv_label"
             android:gravity="center"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             android:text="@string/tv_legal_name"
             android:layout_marginTop="@dimen/m20"/>
+
         <TextView
             android:id="@+id/tv_legal_name"
+            style="@style/tv_subtitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            style="@style/tv_subtitle"
-            app:layout_constraintWidth_percent="0.75"
+            android:layout_marginStart="@dimen/m20"
+            android:layout_marginTop="@dimen/m20"
+            android:layout_marginEnd="@dimen/m20"
             android:text="123"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintLeft_toRightOf="@+id/label_legal_name"
-            android:layout_marginTop="@dimen/m20"/>
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/label_legal_name"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/label_id_card"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintWidth_percent="0.25"
+            android:layout_marginLeft="@dimen/m20"
+            android:layout_marginRight="@dimen/m20"
             style="@style/tv_label"
             android:gravity="center"
             android:text="@string/tv_id_card"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_legal_name"
             android:layout_marginTop="@dimen/m20"/>
+
         <TextView
             android:id="@+id/tv_id_card"
+            style="@style/tv_subtitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            style="@style/tv_subtitle"
-            app:layout_constraintWidth_percent="0.75"
+            android:layout_marginStart="@dimen/m20"
+            android:layout_marginTop="@dimen/m20"
+            android:layout_marginEnd="@dimen/m20"
             android:text="123"
-            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintLeft_toRightOf="@+id/label_id_card"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/label_id_card"
             app:layout_constraintTop_toBottomOf="@+id/tv_legal_name"
-            android:layout_marginTop="@dimen/m20"/>
+             />
 
         <TextView
             android:id="@+id/label_company_name"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintWidth_percent="0.25"
+            android:layout_marginLeft="@dimen/m20"
+            android:layout_marginRight="@dimen/m20"
             style="@style/tv_label"
             android:gravity="center"
             android:text="@string/tv_company_name"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_id_card"
             android:layout_marginTop="@dimen/m20"/>
+
         <TextView
             android:id="@+id/tv_company_name"
+            style="@style/tv_subtitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            style="@style/tv_subtitle"
-            app:layout_constraintWidth_percent="0.75"
+            android:layout_marginStart="@dimen/m20"
+            android:layout_marginTop="@dimen/m20"
+            android:layout_marginEnd="@dimen/m20"
             android:text="123"
-            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintLeft_toRightOf="@+id/label_company_name"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/label_company_name"
             app:layout_constraintTop_toBottomOf="@+id/tv_id_card"
-            android:layout_marginTop="@dimen/m20"/>
+             />
 
         <TextView
             android:id="@+id/label_business_license"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintWidth_percent="0.52"
+            android:layout_marginLeft="@dimen/m20"
             style="@style/tv_label"
-            android:gravity="center"
             android:text="@string/tv_business_license"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_company_name"
             android:layout_marginTop="@dimen/m20"/>
+
         <TextView
             android:id="@+id/tv_business_license"
+            style="@style/tv_subtitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            style="@style/tv_subtitle"
-            app:layout_constraintWidth_percent="0.75"
+            android:layout_marginStart="@dimen/m80"
+            android:layout_marginTop="@dimen/m10"
             android:text="123"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/label_business_license"
-            android:layout_marginTop="@dimen/m10"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/label_business_license" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </RelativeLayout>

@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.google.android.material.textfield.TextInputEditText
 import com.huantansheng.easyphotos.EasyPhotos
 import com.noplugins.keepfit.android.R
@@ -28,6 +29,7 @@ import com.noplugins.keepfit.android.entity.QiNiuToken
 import com.noplugins.keepfit.android.global.AppConstants
 import com.noplugins.keepfit.android.util.BaseUtils
 import com.noplugins.keepfit.android.util.GlideEngine
+import com.noplugins.keepfit.android.util.GlideRoundTransform
 import com.noplugins.keepfit.android.util.SpUtils
 import com.noplugins.keepfit.android.util.net.Network
 import com.noplugins.keepfit.android.util.net.entity.Bean
@@ -325,7 +327,7 @@ class VenueDetailActivity : BaseActivity(), CCRSortableNinePhotoLayout.Delegate 
     private fun changeLayout2() {
         nowSelect = 2
 
-        var selectStr = infoBean!!.facility
+        val selectStr = ArrayList<String>()
         if (layout2Adapter == null) {
             layout2Adapter = VenueLayout2Adapter(docList)
         }
@@ -343,9 +345,10 @@ class VenueDetailActivity : BaseActivity(), CCRSortableNinePhotoLayout.Delegate 
             when (view.id) {
                 R.id.cb_facilities -> {
                     if ((view as CheckBox).isChecked) {
+                        selectStr.add("${position+1}")
                         Log.d("tag", "添加了该box")
-
                     } else {
+                        selectStr.remove("${position+1}")
                         Log.d("tag", "移除了该box")
                     }
                 }
@@ -360,6 +363,7 @@ class VenueDetailActivity : BaseActivity(), CCRSortableNinePhotoLayout.Delegate 
                     if (itemView != null) {
                         val chabox = itemView.findViewById<CheckBox>(R.id.cb_facilities)
                         chabox.isChecked = true
+                        selectStr.add(it)
                     }
                 }
 
@@ -370,6 +374,12 @@ class VenueDetailActivity : BaseActivity(), CCRSortableNinePhotoLayout.Delegate 
         })
 
         save2.setOnClickListener {
+            var str = ""
+            selectStr.forEach {
+                str += "$it,"
+            }
+            infoBean!!.facility = str.substring(0,str.length-1)
+            updateInfo()
         }
 
     }
@@ -453,6 +463,7 @@ class VenueDetailActivity : BaseActivity(), CCRSortableNinePhotoLayout.Delegate 
         //赋值操作
         Glide.with(this)
                 .load(cgBean!!.area.logo)
+                .transform( CenterCrop(this), GlideRoundTransform(this,10))
                 .into(ivLogo)
 
         for (i in 0 until cgBean!!.pic.size) {
