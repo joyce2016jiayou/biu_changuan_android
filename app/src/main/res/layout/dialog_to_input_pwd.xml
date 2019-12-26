@@ -25,7 +25,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/m15"
                 android:layout_gravity="center_horizontal"
-                android:text="请输入提现密码"
+                android:text="请输入转出密码"
                 />
         <TextView
                 android:id="@+id/tv_money"

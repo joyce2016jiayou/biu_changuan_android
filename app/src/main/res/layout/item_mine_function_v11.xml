@@ -4,7 +4,7 @@
               android:layout_width="match_parent"
               android:gravity="center"
               android:id="@+id/ll_click"
-              android:layout_height="@dimen/m80">
+              android:layout_height="wrap_content">
 
     <ImageView
             android:id="@+id/iv_img"

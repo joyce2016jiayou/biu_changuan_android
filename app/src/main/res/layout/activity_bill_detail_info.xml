@@ -45,7 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_marginTop="@dimen/m10"
             android:layout_height="wrap_content"
-            tools:text="提现-招商银行（1212）"/>
+            tools:text="转出-招商银行（1212）"/>
     <TextView
             android:id="@+id/tv_money"
             android:layout_width="wrap_content"
@@ -85,7 +85,7 @@
                         android:layout_height="@dimen/m31"
                         android:layout_marginLeft="@dimen/m30"
 
-                        tools:text="提现"
+                        tools:text="转出"
                         android:gravity="center_vertical"
                         android:textColor="@color/color_4A4A4A"
                         android:textSize="15sp"/>
@@ -178,7 +178,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/m31"
                         android:layout_marginLeft="@dimen/m30"
-                    tools:text="提现成功"
+                    tools:text="转出成功"
                         android:gravity="center_vertical"
                         android:textColor="@color/color_4A4A4A"
                         android:textSize="15sp"/>

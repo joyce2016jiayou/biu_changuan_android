@@ -17,7 +17,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/m20"
                 android:layout_marginTop="@dimen/m30"
-                android:text="提现账户"
+                android:text="转出账户"
                 android:textColor="#ff181818"
                 android:textSize="16sp" />
 

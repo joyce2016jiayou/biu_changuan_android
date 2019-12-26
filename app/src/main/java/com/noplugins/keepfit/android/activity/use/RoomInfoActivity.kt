@@ -102,7 +102,9 @@ class RoomInfoActivity : BaseActivity() {
                         popup.dismiss()
                     }
             view.findViewById<LinearLayout>(R.id.sure_btn)
-                    .setOnClickListener {deleteRoom(position)}
+                    .setOnClickListener {
+                        popup.dismiss()
+                        deleteRoom(position)}
         }
     }
 

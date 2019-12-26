@@ -135,7 +135,9 @@ class RolesManageActivity : BaseActivity() {
                         popup.dismiss()
                     }
             view.findViewById<LinearLayout>(R.id.sure_btn)
-                    .setOnClickListener {  deleteRoles(popup,position)}
+                    .setOnClickListener {
+                        popup.dismiss()
+                        deleteRoles(popup,position)}
         }
     }
     /**

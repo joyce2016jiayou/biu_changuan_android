@@ -24,12 +24,12 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/m15"
                 android:layout_gravity="center_horizontal"
-                android:text="提现密码"
+                android:text="转出密码"
                 />
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="您还为设置提现密码，快去设置吧～"
+                android:text="您还为设置转出密码，快去设置吧～"
                 android:textSize="15sp"
                 android:layout_marginTop="@dimen/m20"
                 android:textColor="@color/color_4A4A4A"

@@ -87,13 +87,13 @@ class UpdatePasswordActivity : BaseActivity() {
         val params = HashMap<String, Any>()
         params["userNum"] = SpUtils.getString(applicationContext, AppConstants.USER_NAME)
         params["paypassword"] = edit_new_password1.text.toString()
-        subscription = Network.getInstance("设置提现密码", this)
+        subscription = Network.getInstance("设置转出密码", this)
                 .settingPayPassword(params,
-                        ProgressSubscriber("设置提现密码", object : SubscriberOnNextListener<Bean<Any>> {
+                        ProgressSubscriber("设置转出密码", object : SubscriberOnNextListener<Bean<Any>> {
                             override fun onNext(result: Bean<Any>) {
 //                        toLogin()
                                 SpUtils.putInt(applicationContext, AppConstants.IS_TX, 1)
-                                EventBus.getDefault().post("提现了金额")
+                                EventBus.getDefault().post("转出了金额")
                                 finish()
                             }
 

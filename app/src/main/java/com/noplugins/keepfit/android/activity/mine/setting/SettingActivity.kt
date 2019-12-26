@@ -85,7 +85,9 @@ class SettingActivity : BaseActivity() {
                         popup.dismiss()
                     }
             view.findViewById<LinearLayout>(R.id.sure_btn)
-                    .setOnClickListener { toLogin()}
+                    .setOnClickListener {
+                        popup.dismiss()
+                        toLogin()}
         }
     }
 

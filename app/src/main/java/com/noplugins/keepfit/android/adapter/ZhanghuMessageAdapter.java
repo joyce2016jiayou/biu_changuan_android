@@ -79,22 +79,22 @@ public class ZhanghuMessageAdapter extends BaseRecyclerAdapter<RecyclerView.View
 
             if (messageBean.getType() == 1) {//微信
                 Glide.with(context).load(R.drawable.wx_icon).into(holder.left_icon);
-                holder.title_tv.setText("微信提现");
+                holder.title_tv.setText("微信转出");
                 holder.shouzhi_money_tv.setTextColor(context.getResources().getColor(R.color.result_points));
 
             } else if (messageBean.getType() == 2) {//支付宝
                 Glide.with(context).load(R.drawable.ali_icon).into(holder.left_icon);
-                holder.title_tv.setText("支付宝提现");
+                holder.title_tv.setText("支付宝转出");
                 holder.shouzhi_money_tv.setTextColor(context.getResources().getColor(R.color.result_points));
 
             } else if (messageBean.getType() == 3) {
                 Glide.with(context).load(R.drawable.band_icon).into(holder.left_icon);
-                holder.title_tv.setText("银行卡提现");
+                holder.title_tv.setText("银行卡转出");
                 holder.shouzhi_money_tv.setTextColor(context.getResources().getColor(R.color.result_points));
 
             }
 
-            holder.shouzhi_money_tv.setText("+" + messageBean.getFinalWithdrawMoney());//提现金额
+            holder.shouzhi_money_tv.setText("+" + messageBean.getFinalWithdrawMoney());//转出金额
             long time = messageBean.getWithdrawTime();
             Date date = DateHelper.transForDate(time);
             holder.tv_date_time.setText((date.getYear() + 1900) + "." + (date.getMonth() + 1) + "." + date.getDate() + " " + date.getHours() + ":" + date.getMinutes());

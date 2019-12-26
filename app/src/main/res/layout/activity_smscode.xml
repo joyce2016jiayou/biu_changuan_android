@@ -51,15 +51,21 @@
         android:textColor="@color/color_181818"
         android:textSize="13sp"/>
 
-    <TextView
-        android:id="@+id/tv_next"
-        android:layout_width="@dimen/m209"
-        android:layout_height="@dimen/m50"
-        android:gravity="center"
-        android:background="@drawable/shape_btn_bg_40"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/tv_next"
-        android:layout_marginTop="@dimen/m80"
-        android:textColor="@color/color_22243D"
-        android:textSize="20sp"/>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/tv_next"
+            android:layout_width="@dimen/m209"
+            android:layout_height="@dimen/m50"
+            android:gravity="center"
+            android:background="@drawable/shape_btn_bg_40"
+            android:layout_gravity="center_horizontal|bottom"
+            android:text="@string/tv_next"
+            android:layout_marginBottom="@dimen/m118"
+            android:textColor="@color/color_22243D"
+            android:textSize="20sp"/>
+    </FrameLayout>
+
+
 </LinearLayout>

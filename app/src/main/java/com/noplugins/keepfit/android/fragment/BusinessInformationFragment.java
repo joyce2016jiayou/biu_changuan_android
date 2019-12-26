@@ -340,7 +340,7 @@ public class BusinessInformationFragment extends ViewPagerFragment {
                         new ProgressSubscriber<>("获取公司信息", new SubscriberOnNextListener<Bean<CompnyBean>>() {
                             @Override
                             public void onNext(Bean<CompnyBean> result) {
-                                //切换到提现布局
+                                //切换到转出布局
                                 yingye_ziliao_layout.setVisibility(View.GONE);
                                 tixian_compny_layout.setVisibility(View.VISIBLE);
                                 compny_check_btn.setChecked(true);

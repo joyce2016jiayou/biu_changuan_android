@@ -145,6 +145,7 @@ class InviteFragment : BaseFragment() {
                     }
             view.findViewById<LinearLayout>(R.id.sure_btn)
                     .setOnClickListener {  //去申请
+                        popup.dismiss()
                         agreeCourse(position)}
         }
     }

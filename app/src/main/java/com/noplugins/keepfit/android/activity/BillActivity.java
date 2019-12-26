@@ -197,7 +197,7 @@ public class BillActivity extends BaseActivity {
                     @Override
                     public void on_post_entity(BillEntity s, String message_id) {
 
-                        tv_income.setText("提现：¥"+s.getIncome());
+                        tv_income.setText("转出：¥"+s.getIncome());
                         tv_withdraw.setText("收入：¥"+s.getWithdraw());
                         set_list_resource(s.getBillItemBeans());
                     }

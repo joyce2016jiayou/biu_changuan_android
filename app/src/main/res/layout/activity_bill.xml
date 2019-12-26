@@ -120,7 +120,7 @@
                     android:id="@+id/tv_withdraw_service"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="提现"/>
+                    android:text="转出"/>
 
             </LinearLayout>
         </LinearLayout>
@@ -137,7 +137,7 @@
             android:layout_below="@+id/tv_select_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="提现：¥22222.22"
+            android:text="转出：¥22222.22"
             android:layout_marginTop="@dimen/m10"
             android:textColor="@color/top_heiziti"
             android:layout_alignParentRight="true" />

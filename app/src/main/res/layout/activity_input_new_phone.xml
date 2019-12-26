@@ -29,8 +29,14 @@
         android:layout_marginTop="@dimen/m30"
         android:inputType="phone"
         android:digits="1234567890"
+        android:background="@null"
         android:textColor="@color/color_000000"
         android:textSize="18sp"/>
+    <View
+        android:layout_width="@dimen/m177"
+        android:layout_height="@dimen/m1"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/color_F9CE0F"/>
 
     <TextView
         android:id="@+id/tv_send_code"

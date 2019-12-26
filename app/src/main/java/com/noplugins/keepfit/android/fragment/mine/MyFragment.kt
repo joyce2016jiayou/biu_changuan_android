@@ -99,6 +99,7 @@ class MyFragment : BaseFragment(), EasyPermissions.PermissionCallbacks {
     private fun setting() {
         val fuctionBean: MutableList<MineFunctionBean> = ArrayList()
         val fuctionV11Bean: MutableList<MineFunctionBean> = ArrayList()
+
         if (SpUtils.getInt(activity, AppConstants.USER_TYPE) != 3) {
             val min1 = MineFunctionBean("场馆信息", R.drawable.tab_data)
             val min2 = MineFunctionBean("成本核算", R.drawable.tab_account)
@@ -113,6 +114,8 @@ class MyFragment : BaseFragment(), EasyPermissions.PermissionCallbacks {
                 val min5 = MineFunctionBean("权限管理", R.drawable.icon_quanxian)
                 fuctionBean.add(min5)
             }
+        } else {
+            gv_function_v11.visibility = View.GONE
         }
 
         val min6 = MineFunctionBean("设置", R.drawable.icon_about)
@@ -126,7 +129,7 @@ class MyFragment : BaseFragment(), EasyPermissions.PermissionCallbacks {
         gv_function.setOnItemClickListener { parent, view, position, id ->
             if (BaseUtils.isFastClick()) {
                 when (fuctionBean[position].name) {
-                    "钱包" -> {
+                    "账户" -> {
                         val intent = Intent(activity, WalletActivity::class.java)
                         activity!!.startActivityForResult(intent, 1)
                     }

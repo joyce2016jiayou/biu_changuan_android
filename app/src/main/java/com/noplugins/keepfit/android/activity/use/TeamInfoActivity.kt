@@ -496,6 +496,7 @@ class TeamInfoActivity : BaseActivity() {
                     }
             view.findViewById<LinearLayout>(R.id.sure_btn)
                     .setOnClickListener {  //去申请
+                        popup.dismiss()
                         cancelCourse()}
         }
 

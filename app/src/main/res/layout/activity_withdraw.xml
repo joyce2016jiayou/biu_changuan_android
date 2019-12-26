@@ -25,7 +25,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="提现"
+                android:text="转出"
                 android:textColor="@color/contents_text"
                 android:textSize="20sp"
                 android:layout_marginTop="@dimen/m20"
@@ -131,7 +131,7 @@
                     android:id="@+id/tv_money_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="提现金额"
+                    android:text="转出金额"
                     android:textColor="@color/top_heiziti"
                     android:layout_margin="@dimen/m20"
                     android:textSize="15sp"/>
@@ -184,7 +184,7 @@
                     android:layout_toLeftOf="@+id/tv_all"
                     android:layout_alignParentLeft="true"
                     android:gravity="left"
-                    android:text="当前可提现余额 0.00"/>
+                    android:text="当前可转出余额 0.00"/>
 
             <TextView
                     android:id="@+id/tv_all"
@@ -196,7 +196,7 @@
                     android:textSize="10sp"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="@dimen/m60"
-                    android:text="全部提现"/>
+                    android:text="全部转出"/>
 
             <TextView
                     android:id="@+id/tv_tips"
@@ -210,7 +210,7 @@
                     android:visibility="gone"
                     android:layout_alignParentLeft="true"
                     android:gravity="left"
-                    android:text="金额已超过可提现余额"/>
+                    android:text="金额已超过可转出余额"/>
         </RelativeLayout>
     </www.linwg.org.lib.LCardView>
 
@@ -223,7 +223,7 @@
                 android:id="@+id/tv_prompt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="提现金额不得低于 ¥100"
+                android:text="转出金额不得低于 ¥100"
                 android:textSize="10sp"
                 android:textColor="@color/color_red"
                 android:layout_marginTop="@dimen/m8"
@@ -240,7 +240,7 @@
             android:layout_height="@dimen/m50"
             android:layout_marginTop="@dimen/m60"
             android:layout_gravity="center_horizontal"
-            android:text="确认提现"
+            android:text="确认转出"
             android:textSize="20sp"
             android:gravity="center"
             android:layout_centerHorizontal="true"

@@ -64,7 +64,7 @@ public class BillDetailAdapter extends BaseQuickAdapter<BalanceListBean.ListBean
     private String typeToString(int type) {
         switch (type) {
             case 1:
-                return "银行卡提现";
+                return "银行卡转出";
             case 3:
                 return "私教服务";
             case 4:

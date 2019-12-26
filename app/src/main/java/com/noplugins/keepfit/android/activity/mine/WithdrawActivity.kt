@@ -48,8 +48,8 @@ class WithdrawActivity : BaseActivity() {
     override fun initView() {
         setContentView(R.layout.activity_withdraw)
         tv_name.text = "持卡人  "+SpUtils.getString(this, AppConstants.NAME)
-        //超过1000元可以提现
-        val ss = SpannableString("超过1000元可以提现")//定义hint的值
+        //超过1000元可以转出
+        val ss = SpannableString("超过1000元可以转出")//定义hint的值
         val ass = AbsoluteSizeSpan(15, true)//设置字体大小 true表示单位是sp
         ss.setSpan(ass, 0, ss.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         et_withdraw_money.hint = SpannedString(ss)
@@ -62,7 +62,7 @@ class WithdrawActivity : BaseActivity() {
         super.onResume()
     }
     override fun doBusiness(mContext: Context?) {
-        tv_now_money.text = "当前可提现余额$finalCanWithdraw"
+        tv_now_money.text = "当前可转出余额$finalCanWithdraw"
         back_btn.setOnClickListener {
             finish()
         }
@@ -83,12 +83,12 @@ class WithdrawActivity : BaseActivity() {
 
         tv_withdraw_ok.setOnClickListener {
             if (et_withdraw_money.text.toString().isEmpty()){
-                Toast.makeText(applicationContext,"提现金额不能小于1000",Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext,"转出金额不能小于1000",Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            //提现操作
+            //转出操作
             if (et_withdraw_money.text.toString().toDouble() < 1000){
-               Toast.makeText(applicationContext,"提现金额不能小于1000",Toast.LENGTH_SHORT).show()
+               Toast.makeText(applicationContext,"转出金额不能小于1000",Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             toInputPwd(tv_withdraw_ok)
@@ -220,10 +220,10 @@ class WithdrawActivity : BaseActivity() {
         params["money"] = et_withdraw_money.text.toString().trim()
         params["paypassword"] = pwd
         params["userNum"] = SpUtils.getString(this, AppConstants.USER_NAME)
-        val subscription = Network.getInstance("提现", this)
+        val subscription = Network.getInstance("转出", this)
                 .areaWithdraw(
                         params,
-                        ProgressSubscriber("提现", object : SubscriberOnNextListener<Bean<Any>> {
+                        ProgressSubscriber("转出", object : SubscriberOnNextListener<Bean<Any>> {
                             override fun onNext(result: Bean<Any>) {
                                 toComplete()
                             }
