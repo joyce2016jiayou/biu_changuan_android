@@ -117,9 +117,7 @@ class ClassItemEditActivity : BaseActivity(), CCRSortableNinePhotoLayout.Delegat
     internal var start = ""
     internal var end = ""
     private var room_type = ""
-    var class_jianjie_tv = ""
-    var shihe_renqun_tv = ""
-    var zhuyi_shixiang_tv = ""
+    
     private var icon_image_path = ""
     private var max_num = 0
     private val strings = ArrayList<String>()
@@ -143,6 +141,9 @@ class ClassItemEditActivity : BaseActivity(), CCRSortableNinePhotoLayout.Delegat
     companion object {
         var submit_tescher_list_edit: MutableList<TeacherBean> = ArrayList()
         var is_refresh_teacher_list_edit: Boolean = false
+        var class_jianjie_tv_edit:String = ""
+        var shihe_renqun_tv_edit:String = ""
+        var zhuyi_shixiang_tv_edit:String = ""
     }
 
     var courseNum = ""
@@ -194,6 +195,7 @@ class ClassItemEditActivity : BaseActivity(), CCRSortableNinePhotoLayout.Delegat
         input_class_detail_btn.setOnClickListener {
             val intent = Intent(this@ClassItemEditActivity, EditClassDetaiActivity::class.java)
             intent.putExtra("type", "class_content")
+            intent.putExtra("infoType", "edit")
             startActivity(intent)
         }
 
@@ -201,12 +203,14 @@ class ClassItemEditActivity : BaseActivity(), CCRSortableNinePhotoLayout.Delegat
         input_shihe_renqun_btn.setOnClickListener {
             val intent = Intent(this@ClassItemEditActivity, EditClassDetaiActivity::class.java)
             intent.putExtra("type", "shihe_renqun")
+            intent.putExtra("infoType", "edit")
             startActivity(intent)
         }
         //注意事项
         input_zhuyishixiang_btn.setOnClickListener {
             val intent = Intent(this@ClassItemEditActivity, EditClassDetaiActivity::class.java)
             intent.putExtra("type", "zhuyi_shixiang")
+            intent.putExtra("infoType", "edit")
             startActivity(intent)
         }
 
@@ -282,22 +286,22 @@ class ClassItemEditActivity : BaseActivity(), CCRSortableNinePhotoLayout.Delegat
 
     override fun onResume() {
         super.onResume()
-        if (class_jianjie_tv.length == 0) {
+        if (class_jianjie_tv_edit.length == 0) {
             edit_class_jieshao.hint = resources.getText(R.string.edit_hint23)
         } else {
-            edit_class_jieshao.text = class_jianjie_tv
+            edit_class_jieshao.text = class_jianjie_tv_edit
         }
 
-        if (shihe_renqun_tv.length == 0) {
+        if (shihe_renqun_tv_edit.length == 0) {
             edit_shihe_renqun.hint = resources.getText(R.string.edit_hint24)
         } else {
-            edit_shihe_renqun.text = shihe_renqun_tv
+            edit_shihe_renqun.text = shihe_renqun_tv_edit
         }
 
-        if (zhuyi_shixiang_tv.length == 0) {
+        if (zhuyi_shixiang_tv_edit.length == 0) {
             edit_zhuyi_shixiang.hint = resources.getText(R.string.edit_hint25)
         } else {
-            edit_zhuyi_shixiang.text = zhuyi_shixiang_tv
+            edit_zhuyi_shixiang.text = zhuyi_shixiang_tv_edit
         }
         //判断是否刷新教练邀请列表
         if (is_refresh_teacher_list_edit) {

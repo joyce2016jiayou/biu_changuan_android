@@ -52,6 +52,7 @@ public class RecyclerView1Adapter extends RecyclerView.Adapter<RecyclerViewHolde
         TextView teacher_name_tv = holder.itemView.findViewById(R.id.teacher_name_tv);
         TextView invite_status_tv = holder.itemView.findViewById(R.id.invite_status_tv);
         ImageView teacher_img = holder.itemView.findViewById(R.id.teacher_img);
+        TextView tv_tips = holder.itemView.findViewById(R.id.tv_tips);
 
         ClassDetailEntity.TeacherListBean teacherBean = submit_tescher_list.get(position);
         pingfen_tv.setText(teacherBean.getFinalGrade() + "分");

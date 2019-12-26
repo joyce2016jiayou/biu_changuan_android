@@ -2,10 +2,10 @@
 <!--popupWindow bg-->
 
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:top="1dp">
+    <item android:top="-1dp">
         <shape android:shape="rectangle">
             <solid android:color="#F4F4F4"/>
-            <corners android:radius="20dp"/>
+            <corners android:radius="5dp"/>
         </shape>
     </item>
 </layer-list>

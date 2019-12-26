@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.noplugins.keepfit.android.R;
+import com.noplugins.keepfit.android.activity.use.ClassItemEditActivity;
 import com.noplugins.keepfit.android.base.BaseActivity;
 import com.noplugins.keepfit.android.util.screen.KeyboardUtils;
 
@@ -30,6 +31,7 @@ public class EditClassDetaiActivity extends BaseActivity {
     TextView title_tv;
 
     String type = "";
+    String infoType = "";
     int input_max_umber = 0;
 
     @Override
@@ -40,6 +42,10 @@ public class EditClassDetaiActivity extends BaseActivity {
     @Override
     public void initBundle(Bundle parms) {
         type = getIntent().getStringExtra("type");
+        if (getIntent().getStringExtra("infoType")!=null){
+            infoType = getIntent().getStringExtra("infoType");
+        }
+
     }
 
     @Override
@@ -76,16 +82,32 @@ public class EditClassDetaiActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 if (!TextUtils.isEmpty(edit_tv.getText())) {
-                    if (type.equals("class_content")) {//课程内容
-                        AddClassItemActivity.class_jianjie_tv = edit_tv.getText().toString();
+                    if (infoType.equals("edit")){
+                        //
+                        if (type.equals("class_content")) {//课程内容
+                            ClassItemEditActivity.Companion.setClass_jianjie_tv_edit(edit_tv.getText().toString());
 
-                    } else if (type.equals("shihe_renqun")) {//适合人群
-                        AddClassItemActivity.shihe_renqun_tv = edit_tv.getText().toString();
+                        } else if (type.equals("shihe_renqun")) {//适合人群
 
-                    } else if (type.equals("zhuyi_shixiang")) {//注意事项
-                        AddClassItemActivity.zhuyi_shixiang_tv = edit_tv.getText().toString();
+                            ClassItemEditActivity.Companion.setShihe_renqun_tv_edit(edit_tv.getText().toString());
 
+                        } else if (type.equals("zhuyi_shixiang")) {//注意事项
+                            ClassItemEditActivity.Companion.setZhuyi_shixiang_tv_edit(edit_tv.getText().toString());
+
+                        }
+                    } else  {
+                        if (type.equals("class_content")) {//课程内容
+                            AddClassItemActivity.class_jianjie_tv = edit_tv.getText().toString();
+
+                        } else if (type.equals("shihe_renqun")) {//适合人群
+                            AddClassItemActivity.shihe_renqun_tv = edit_tv.getText().toString();
+
+                        } else if (type.equals("zhuyi_shixiang")) {//注意事项
+                            AddClassItemActivity.zhuyi_shixiang_tv = edit_tv.getText().toString();
+
+                        }
                     }
+
                 }
                 //影藏键盘
                 KeyboardUtils.hideSoftKeyboard(EditClassDetaiActivity.this);

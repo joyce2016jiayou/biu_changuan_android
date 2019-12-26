@@ -1,70 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="@dimen/m130"
-    android:layout_height="@dimen/m184"
+    android:layout_height="wrap_content"
     android:background="@color/transparent">
 
 
-    <ImageView
-        android:id="@+id/teacher_img"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:src="@color/color_bk_black" />
-
-    <LinearLayout
-        android:layout_width="@dimen/m42"
-        android:layout_height="@dimen/m21"
-        android:background="@drawable/icon_score"
-        android:gravity="center"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/pingfen_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="9.7分"
-            android:textColor="@color/white"
-            android:textSize="12sp" />
-
-    </LinearLayout>
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/m48"
-        android:layout_alignParentBottom="true"
-        android:scaleType="centerCrop"
-        android:src="@drawable/icon_mask" />
-
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="@dimen/m10">
+        android:id="@+id/rv_img"
+        android:layout_width="@dimen/m130"
+        android:layout_height="@dimen/m184">
+        <ImageView
+            android:id="@+id/teacher_img"
+            android:layout_width="@dimen/m130"
+            android:layout_height="@dimen/m184"
+            android:scaleType="centerCrop"
+            android:src="@color/color_bk_black" />
 
-        <TextView
-            android:id="@+id/teacher_name_tv"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="@dimen/m42"
+            android:layout_height="@dimen/m21"
+            android:background="@drawable/icon_score"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/pingfen_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="9.7分"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/m48"
+            android:layout_alignParentBottom="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/icon_mask" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/m10"
-            android:text="朱莉"
-            android:layout_toLeftOf="@+id/invite_status_tv"
-            android:textColor="@color/white"
-            android:textSize="13sp" />
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/m10">
 
-        <TextView
-            android:id="@+id/invite_status_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/m10"
-            android:text="邀请中"
-            android:textColor="@color/color_F9CE0F"
-            android:textSize="13sp" />
+            <TextView
+                android:id="@+id/teacher_name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/m10"
+                android:text="朱莉"
+                android:layout_toLeftOf="@+id/invite_status_tv"
+                android:textColor="@color/white"
+                android:textSize="13sp" />
 
+            <TextView
+                android:id="@+id/invite_status_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/m10"
+                android:text="邀请中"
+                android:textColor="@color/color_F9CE0F"
+                android:textSize="13sp" />
+
+        </RelativeLayout>
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_tips"
+        android:layout_below="@+id/rv_img"
+        android:layout_width="@dimen/m130"
+        android:layout_height="wrap_content"
+        android:textColor="@color/color_181818"
+        android:layout_marginLeft="@dimen/m10"
+        android:layout_marginRight="@dimen/m10"
+        android:layout_marginTop="@dimen/m5"
+        android:visibility="gone"
+        android:textSize="10sp"/>
 
 </RelativeLayout>

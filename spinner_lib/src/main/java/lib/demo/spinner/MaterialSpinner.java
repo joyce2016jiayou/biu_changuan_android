@@ -151,8 +151,8 @@ public class MaterialSpinner extends AppCompatTextView {
          *
          */
         if (!hideArrow) {
-            arrowDrawable = ContextCompat.getDrawable(context, R.drawable.ms_arrow).mutate();
-            arrowDrawable.setColorFilter(arrowColor, PorterDuff.Mode.SRC_IN);
+            arrowDrawable = ContextCompat.getDrawable(context, R.drawable.down_arrow);
+//            arrowDrawable.setColorFilter(arrowColor, PorterDuff.Mode.SRC_IN);
             if (rtl) {
                 setCompoundDrawablesWithIntrinsicBounds(arrowDrawable, null, null, null);
             } else {

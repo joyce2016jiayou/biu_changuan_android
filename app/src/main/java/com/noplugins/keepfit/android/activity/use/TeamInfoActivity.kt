@@ -116,6 +116,7 @@ class TeamInfoActivity : BaseActivity() {
                     val intent = Intent(this, TeacherDetailActivity::class.java)
                     val bundle = Bundle()
                     bundle.putString("cgNum", teacherNum)
+                    bundle.putInt("type", 100)
                     intent.putExtras(bundle)
                     startActivity(intent)
                 }
@@ -203,7 +204,7 @@ class TeamInfoActivity : BaseActivity() {
         if (statusMsg == "邀请中" ||
                 statusMsg == "已取消" ||
                 statusMsg == "邀请失败") {
-            edit_team_teacher.text = "邀请中..."
+            edit_team_teacher.text = statusMsg
             edit_team_teacher.setTextColor(Color.RED)
             edit_team_teacher.setCompoundDrawables(null, null, null, null)
         }

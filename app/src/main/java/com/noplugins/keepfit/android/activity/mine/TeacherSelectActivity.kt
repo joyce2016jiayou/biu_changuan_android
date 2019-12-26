@@ -106,9 +106,10 @@ class TeacherSelectActivity : BaseActivity(), AMapLocationListener {
     override fun initView() {
         setContentView(R.layout.activity_teacher_select)
         init()
+
+        initAdapter()
         requestPermission()
         requestTeamType()
-        initAdapter()
 //        agreeCourse()
     }
 
@@ -261,10 +262,10 @@ class TeacherSelectActivity : BaseActivity(), AMapLocationListener {
     private fun initAdapter(){
         adapter = CgTeacherSelectAdapter(data)
         layoutManager = LinearLayoutManager(this)
-        val view = LayoutInflater.from(this).inflate(R.layout.enpty_view, rv_list, false)
-        adapter.emptyView = view
         rv_list.layoutManager = layoutManager
         rv_list.adapter = adapter
+        val view = LayoutInflater.from(this).inflate(R.layout.enpty_view, rv_list, false)
+        adapter!!.emptyView = view
 
         adapter.setOnItemChildClickListener { adapter, view, position ->
             when (view.id) {
