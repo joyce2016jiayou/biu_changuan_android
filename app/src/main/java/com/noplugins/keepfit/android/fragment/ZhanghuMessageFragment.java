@@ -76,7 +76,7 @@ public class ZhanghuMessageFragment extends Fragment {
         if (view == null) {
             view = inflater.inflate(R.layout.fragment_zhanghu, container, false);
             ButterKnife.bind(this, view);//绑定黄牛刀
-//            initView();
+            initView();
         }
         return view;
 

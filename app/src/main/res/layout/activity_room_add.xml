@@ -12,6 +12,8 @@
     <www.linwg.org.lib.LCardView
         android:layout_width="match_parent"
         android:layout_height="@dimen/m51"
+        android:layout_marginRight="@dimen/m16"
+        android:layout_marginLeft="@dimen/m16"
         app:cornerRadius="@dimen/m8">
 
         <RelativeLayout
@@ -51,6 +53,8 @@
     <www.linwg.org.lib.LCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/m16"
+        android:layout_marginRight="@dimen/m16"
         app:cornerRadius="@dimen/m8">
 
         <RelativeLayout

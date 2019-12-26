@@ -19,6 +19,7 @@
         app:sl_dy="2dp"
         app:sl_shadowColor="#143A4E73"
         app:sl_shadowRadius="8dp"
+        spinner:sl_cornerRadius="@dimen/m15"
         android:layout_marginLeft="@dimen/m10"
         android:layout_marginRight="@dimen/m10"
         app:layout_constraintTop_toBottomOf="@+id/in_title"

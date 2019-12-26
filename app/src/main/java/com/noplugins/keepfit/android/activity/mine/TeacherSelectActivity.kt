@@ -96,6 +96,7 @@ class TeacherSelectActivity : BaseActivity(), AMapLocationListener {
     private var bind_teacher_list: MutableList<TeacherBean> = ArrayList()
     var courseNum = ""
     var enter_type = ""
+    val selectItem:MutableList<Int> = ArrayList()
     override fun initBundle(parms: Bundle?) {
         if (parms != null) {
             courseNum = parms.getString("courseNum", "")
@@ -283,12 +284,14 @@ class TeacherSelectActivity : BaseActivity(), AMapLocationListener {
                     //选中或者取消选中
                     if ((view as CheckBox).isChecked){
                         Log.d("item","点击了")
+                        selectItem.add(position)
                         val bindingCgBean = CgBindingBean.TeacherNumBean()
                         bindingCgBean.num = data[position].teacherNum
                         submitList.add(bindingCgBean)
                         bind_teacher_list.add(data[position])
                     } else {
                         Log.d("item","取消了")
+                        selectItem.remove(position)
                         for (i in 0 until submitList.size){
                             if (submitList[i].num == data[position].teacherNum){
                                 submitList.removeAt(i)
@@ -373,11 +376,21 @@ class TeacherSelectActivity : BaseActivity(), AMapLocationListener {
                     if (childAt != null) {
                         val chabox = childAt.findViewById<CheckBox>(R.id.ck_select)
                         chabox.isChecked = true
+                        Log.d("item","从详情页面选择了")
+                        selectItem.forEach {
+                            if (it == item){
+                                return
+                            }
+                        }
+
+                        selectItem.add(item)
+                        val bindingCgBean = CgBindingBean.TeacherNumBean()
+                        bindingCgBean.num = data[item].teacherNum
+                        submitList.add(bindingCgBean)
+                        bind_teacher_list.add(data[item])
                     }
 
-                    val bindingCgBean = CgBindingBean.TeacherNumBean()
-                    bindingCgBean.num = data[item].teacherNum
-                    submitList.add(bindingCgBean)
+
                 }
 
             }
@@ -511,7 +524,6 @@ class TeacherSelectActivity : BaseActivity(), AMapLocationListener {
                                 //申请成功
                                 initArea(list)
                             }
-
                             override fun onError(error: String) {
                                 Toast.makeText(applicationContext,error,Toast.LENGTH_SHORT).show()
                             }

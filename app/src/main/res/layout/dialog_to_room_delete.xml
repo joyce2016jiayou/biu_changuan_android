@@ -17,6 +17,7 @@
         app:sl_borderColor="#CCEDEFF3"
         app:sl_borderWidth="1dp"
         app:sl_dy="2dp"
+        spinner:sl_cornerRadius="@dimen/m15"
         app:sl_shadowColor="#143A4E73"
         app:sl_shadowRadius="8dp"
         android:layout_marginLeft="@dimen/m10"

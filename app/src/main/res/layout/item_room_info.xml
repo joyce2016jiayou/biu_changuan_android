@@ -2,16 +2,16 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:layout_width="@dimen/m148"
+    android:layout_width="wrap_content"
     android:background="@mipmap/room_card"
     android:id="@+id/fl_room"
     android:layout_height="@dimen/m122"
-    android:layout_marginLeft="@dimen/m20"
-    android:layout_marginRight="@dimen/m20"
+    android:layout_marginLeft="@dimen/m5"
     android:layout_marginBottom="@dimen/m10">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:orientation="vertical">
         <TextView
             android:id="@+id/tv_room_name"

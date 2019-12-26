@@ -77,7 +77,7 @@ public class AreaSubmitAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHold
     private RecyclerView.ViewHolder getViewHolderByViewType(int viewType, ViewGroup parent) {
         View item_view = null;
         if (viewType == EMPTY_VIEW) {
-            item_view = LayoutInflater.from(context).inflate(R.layout.daywhatch_empty_view, parent, false);
+            item_view = LayoutInflater.from(context).inflate(R.layout.enpty_view, parent, false);
             holder = new EmptyViewHolder(item_view, false);
         } else if (viewType == TYPE_YOUTANG) {
             item_view = LayoutInflater.from(context).inflate(R.layout.area_submit_item, parent, false);

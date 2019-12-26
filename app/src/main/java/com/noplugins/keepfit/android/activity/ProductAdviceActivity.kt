@@ -106,6 +106,7 @@ class ProductAdviceActivity : BaseActivity() {
                 .feedback(params, ProgressSubscriber("产品反馈", object : SubscriberOnNextListener<Bean<Any>> {
                     override fun onNext(objectBean: Bean<Any>) {
                         Toast.makeText(applicationContext, "提交成功", Toast.LENGTH_SHORT).show()
+
                         setResult(SpUtils.getInt(applicationContext, AppConstants.FRAGMENT_SIZE) - 1)
                         finish()
                     }
