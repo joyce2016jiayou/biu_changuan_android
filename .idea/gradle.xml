@@ -16,8 +16,10 @@
             <option value="$PROJECT_DIR$/XrefreshLibrary" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/calendarview" />
+            <option value="$PROJECT_DIR$/codelibrary" />
             <option value="$PROJECT_DIR$/datepicker" />
             <option value="$PROJECT_DIR$/easyPhotos" />
+            <option value="$PROJECT_DIR$/libbannerandroidx" />
             <option value="$PROJECT_DIR$/okhttputils" />
             <option value="$PROJECT_DIR$/pickerview1" />
             <option value="$PROJECT_DIR$/spinner_lib" />
@@ -28,7 +30,6 @@
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
-        <option name="testRunner" value="PLATFORM" />
       </GradleProjectSettings>
     </option>
   </component>

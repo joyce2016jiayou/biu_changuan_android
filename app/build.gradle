@@ -267,4 +267,7 @@ dependencies {
 
     //banner
     implementation project(':libbannerandroidx')
+
+    //今日头条适配方案
+    implementation 'me.jessyan:autosize:1.1.2'
 }
