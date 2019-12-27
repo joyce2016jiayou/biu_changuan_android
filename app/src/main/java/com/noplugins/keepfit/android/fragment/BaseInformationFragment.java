@@ -823,7 +823,9 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
     public InformationEntity getDates() {
         InformationEntity informationEntity = new InformationEntity();
         informationEntity.setArea_name(changguan_name.getText().toString());//场馆名称
-        informationEntity.setType(Integer.valueOf(changguan_type));//场馆类型
+        if (null != changguan_type && changguan_type.length() > 0) {
+            informationEntity.setType(Integer.valueOf(changguan_type));//场馆类型
+        }
         informationEntity.setArea(Integer.valueOf(edittext_area.getText().toString()));//场馆面积
         informationEntity.setPhone(tell_edit.getText().toString());//电话号码
         informationEntity.setEmail(edit_email.getText().toString());//邮箱
