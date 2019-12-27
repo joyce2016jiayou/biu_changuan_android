@@ -25,7 +25,8 @@ class BillDetailInfoActivity : BaseActivity() {
     }
 
     override fun initView() {
-        setContentView(R.layout.activity_bill_detail_info)
+        setContentLayout(R.layout.activity_bill_detail_info)
+        isShowTitle(true)
     }
 
     override fun doBusiness(mContext: Context?) {
@@ -37,7 +38,7 @@ class BillDetailInfoActivity : BaseActivity() {
 
     private fun setting(bean:BalanceListBean.ListBean){
         if(bean.type == 1){
-            title_tv.text ="转出详情"
+            setTitleView(R.string.tv_zhuanchu)
             lv_1.visibility = View.VISIBLE
             lv_2.visibility = View.GONE
             tv_zcje.text ="¥${bean.finalMoney}"
@@ -50,7 +51,7 @@ class BillDetailInfoActivity : BaseActivity() {
             tv_zclb.text = typeToString(bean.type)
             tv_money.text = "-${bean.finalMoney}"
         } else {
-            title_tv.text = "收入详情"
+            setTitleView(R.string.tv_shouru)
             lv_1.visibility = View.GONE
             lv_2.visibility = View.VISIBLE
             tv_srje.text = "¥${bean.finalMoney}"

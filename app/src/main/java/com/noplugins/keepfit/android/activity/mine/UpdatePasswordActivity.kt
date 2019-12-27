@@ -38,7 +38,11 @@ class UpdatePasswordActivity : BaseActivity() {
 
     override fun initView() {
         setContentLayout(R.layout.activity_update_tixian)
+        isShowTitle(true)
+        setTitleView(R.string.tv_setting_tx_pwd)
         if (intent.getStringExtra("form") == "loginPwd"){
+
+            setTitleView(R.string.tv_setting_pwd)
             tv_tips.text = "请输入不少于6位的密码"
             edit_new_password1.filters = arrayOf<InputFilter>(InputFilter.LengthFilter(18)) //最大输入长度
             edit_password2.filters = arrayOf<InputFilter>(InputFilter.LengthFilter(18)) //最大输入长度
@@ -49,7 +53,7 @@ class UpdatePasswordActivity : BaseActivity() {
 
 
     override fun doBusiness(mContext: Context) {
-        back_btn.setOnClickListener(View.OnClickListener { finish() })
+       title_left_button_onclick_listen { finish() }
         login_btn.setOnClickListener(View.OnClickListener { updatePassword() })
     }
 

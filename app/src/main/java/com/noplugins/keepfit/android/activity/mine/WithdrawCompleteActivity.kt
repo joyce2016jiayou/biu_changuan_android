@@ -13,11 +13,13 @@ class WithdrawCompleteActivity : BaseActivity() {
     }
 
     override fun initView() {
-        setContentView(R.layout.activity_withdraw_complete)
+        setContentLayout(R.layout.activity_withdraw_complete)
+        isShowTitle(true)
+        setTitleView(R.string.tv_tixian,0,0,true,R.string.tv123)
     }
 
     override fun doBusiness(mContext: Context?) {
-        tv_complete.setOnClickListener {
+        title_right_button_onclick_listen {
             killMe()
         }
     }

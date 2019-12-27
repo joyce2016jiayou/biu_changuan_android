@@ -57,7 +57,7 @@ class CgPriceActivity : BaseActivity() {
     override fun initView() {
         setContentView(R.layout.activity_cg_price)
         isShowTitle(true)
-        setTitleView(R.string.tv187)
+        setTitleView(R.string.tv188)
         val data: MutableList<PriceBean> = ArrayList()
         val price1 = PriceBean("6:00-9:00", "¥19.9")
         val price2 = PriceBean("9:00-12:00", "¥39.9")
@@ -99,7 +99,7 @@ class CgPriceActivity : BaseActivity() {
     @SuppressLint("SetTextI18n")
     override fun doBusiness(mContext: Context?) {
 
-        back_btn.setOnClickListener {
+        title_left_button_onclick_listen {
             back()
         }
         iv_tips.setOnClickListener {

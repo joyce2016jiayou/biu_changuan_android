@@ -12,30 +12,6 @@
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:orientation="vertical">
-       <FrameLayout
-               android:layout_width="match_parent"
-               android:layout_height="@dimen/m90">
-
-           <ImageView
-                   android:id="@+id/back_btn"
-                   android:layout_width="@dimen/m22"
-                   android:layout_height="@dimen/m19"
-                   android:layout_gravity="left|center_vertical"
-                   android:layout_marginLeft="@dimen/m20"
-                   android:src="@drawable/icon_back"
-                   android:layout_marginTop="@dimen/m20"/>
-
-           <TextView
-                   android:id="@+id/title_tv"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:layout_gravity="center"
-                   android:text="设置转出密码"
-                   android:textColor="@color/contents_text"
-                   android:textSize="@dimen/sp20"
-                   android:layout_marginTop="@dimen/m20"
-                   android:textStyle="bold"/>
-       </FrameLayout>
 
        <EditText
            android:id="@+id/edit_new_password1"

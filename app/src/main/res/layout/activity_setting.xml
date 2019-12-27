@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <include layout="@layout/title_activity"
-        android:visibility="visible"/>
+    <!--<include layout="@layout/title_activity"-->
+        <!--android:visibility="visible"/>-->
 
     <www.linwg.org.lib.LCardView
         android:layout_width="match_parent"

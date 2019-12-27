@@ -46,7 +46,9 @@ class WithdrawActivity : BaseActivity() {
     }
 
     override fun initView() {
-        setContentView(R.layout.activity_withdraw)
+        setContentLayout(R.layout.activity_withdraw)
+        isShowTitle(true)
+        setTitleView(R.string.tv_tixian)
         tv_name.text = "持卡人  "+SpUtils.getString(this, AppConstants.NAME)
         //超过1000元可以转出
         val ss = SpannableString("超过1000元可以转出")//定义hint的值
@@ -63,7 +65,7 @@ class WithdrawActivity : BaseActivity() {
     }
     override fun doBusiness(mContext: Context?) {
         tv_now_money.text = "当前可转出余额$finalCanWithdraw"
-        back_btn.setOnClickListener {
+        title_left_button_onclick_listen {
             finish()
         }
         rl_money_details.setOnClickListener {

@@ -37,7 +37,9 @@ class WalletActivity : BaseActivity() {
 
 
     override fun initView() {
-        setContentView(R.layout.activity_wallet)
+        setContentLayout(R.layout.activity_wallet)
+        isShowTitle(true)
+        setTitleView(R.string.tv_qianbao)
         EventBus.getDefault().register(this)
         if (SpUtils.getInt(applicationContext,AppConstants.USER_TYPE) == 1){
             ll_tixian.visibility = View.VISIBLE
@@ -53,7 +55,7 @@ class WalletActivity : BaseActivity() {
             intent.putExtra("walletNum",walletNum)
             startActivity(intent)
         }
-        back_btn.setOnClickListener {
+       title_left_button_onclick_listen {
             setResult(SpUtils.getInt(applicationContext,AppConstants.FRAGMENT_SIZE)-1)
             finish()
         }

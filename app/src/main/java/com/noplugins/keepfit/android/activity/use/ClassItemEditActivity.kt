@@ -85,9 +85,6 @@ import kotlinx.android.synthetic.main.activity_class_item_edit.*
 import kotlinx.android.synthetic.main.add_class_item_baseinformation_layout.*
 import kotlinx.android.synthetic.main.add_class_item_baseinformation_layout2.*
 import kotlinx.android.synthetic.main.add_class_item_baseinformation_layout3.*
-import kotlinx.android.synthetic.main.title_activity.*
-import kotlinx.android.synthetic.main.title_activity.back_btn
-import kotlinx.android.synthetic.main.title_activity.title_tv
 import okhttp3.RequestBody
 import org.json.JSONObject
 import top.zibin.luban.CompressionPredicate
@@ -157,7 +154,8 @@ class ClassItemEditActivity : BaseActivity(), CCRSortableNinePhotoLayout.Delegat
 
     override fun initView() {
         setContentLayout(R.layout.activity_class_item_edit)
-        title_tv.text = "编辑"
+        isShowTitle(true)
+        setTitleView(R.string.tv_edit)
 
         cDate = CalendarUtil.getCurrent3Date()
         /**七牛云 */
@@ -315,7 +313,7 @@ class ClassItemEditActivity : BaseActivity(), CCRSortableNinePhotoLayout.Delegat
     }
 
     override fun doBusiness(mContext: Context) {
-        back_btn.setOnClickListener {
+       title_left_button_onclick_listen{
             //弹出是否退出创建的提示
             pop(false)
         }

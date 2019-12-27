@@ -196,12 +196,13 @@ public abstract class BaseActivity extends AppCompatActivity implements EasyPerm
      * @param right_btn_id   右边按钮图片资源
      * @param is_tv_resource 右边按钮资源是否是文字
      */
-    public void setTitleView(int title_content, int left_btn_id, int right_btn_id, boolean is_tv_resource) {
+    public void setTitleView(int title_content, int left_btn_id, int right_btn_id, boolean is_tv_resource, int right_text_id) {
         this.isShowTitle = true;
         title_resource = title_content;
         left_btn_id_resource = left_btn_id;
         right_btn_id_resource = right_btn_id;
         is_tv_resource_sure = is_tv_resource;
+        right_btn_id_text_resource = right_text_id;
 
     }
 
@@ -219,14 +220,15 @@ public abstract class BaseActivity extends AppCompatActivity implements EasyPerm
     }
 
     public void title_right_button_onclick_listen(OnclickCallBack onclickCallBack) {
-        m_onclickCallBack = onclickCallBack;
+        m_rightCallBack = onclickCallBack;
     }
 
 
     public int title_resource;
-    public int left_btn_id_resource, right_btn_id_resource, bg_corlor_resource;
+    public int left_btn_id_resource, right_btn_id_resource, bg_corlor_resource, right_btn_id_text_resource;
     public boolean is_tv_resource_sure;
     public OnclickCallBack m_onclickCallBack;
+    public OnclickCallBack m_rightCallBack;
 
     private void initToolBar() {
         if (isShowTitle) {
@@ -243,19 +245,30 @@ public abstract class BaseActivity extends AppCompatActivity implements EasyPerm
 
             if (left_btn_id_resource != 0 && right_btn_id_resource != 0) {//左右两边都有按钮
                 toolbar.showLeft();
+                toolbar.leftButton.setImageResource(left_btn_id_resource);
                 if (is_tv_resource_sure) {//右边按钮是文字资源
                     toolbar.showRightTextView();
+                    if (right_btn_id_text_resource != 0) {
+                        toolbar.toolbar_right_button_Tex.setText(right_btn_id_text_resource);
+                    }
                 } else {//右边按钮是图片资源
                     toolbar.showRightImageView();
+                    toolbar.toolbar_right_button_Image.setImageResource(right_btn_id_resource);
+
                 }
             } else if (left_btn_id_resource != 0) {//只有左边有按钮
                 toolbar.showLeft();
+                toolbar.leftButton.setImageResource(left_btn_id_resource);
                 toolbar.hideRight();
             } else if (right_btn_id_resource != 0) {//只有右边有按钮
                 toolbar.hideLeft();
                 if (is_tv_resource_sure) {//右边按钮是文字资源
+                    if (right_btn_id_text_resource != 0) {
+                        toolbar.toolbar_right_button_Tex.setText(right_btn_id_text_resource);
+                    }
                     toolbar.showRightTextView();
                 } else {//右边按钮是图片资源
+                    toolbar.toolbar_right_button_Image.setImageResource(right_btn_id_resource);
                     toolbar.showRightImageView();
                 }
             }
@@ -270,8 +283,8 @@ public abstract class BaseActivity extends AppCompatActivity implements EasyPerm
             toolbar.setRightButtonOnClickListerner(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (null != m_onclickCallBack) {
-                        m_onclickCallBack.onclick();
+                    if (null != m_rightCallBack) {
+                        m_rightCallBack.onclick();
                     }
                 }
             });

@@ -18,13 +18,14 @@ class AccountSecurityActivity : BaseActivity() {
     }
 
     override fun initView() {
-        setContentView(R.layout.activity_account_security)
-        title_tv.text = "安全管理"
+        setContentLayout(R.layout.activity_account_security)
+        isShowTitle(true)
+        setTitleView(R.string.tv_anquan)
         tv_now_phone.text = SpUtils.getString(applicationContext, AppConstants.PHONE)
     }
 
     override fun doBusiness(mContext: Context?) {
-        back_btn.setOnClickListener {
+        title_left_button_onclick_listen {
             finish()
         }
         rl_update_phone.setOnClickListener{

@@ -47,15 +47,16 @@ class BillDetailActivity : BaseActivity() {
     }
 
     override fun initView() {
-        setContentView(R.layout.activity_bill_detail)
-
+        setContentLayout(R.layout.activity_bill_detail)
+        isShowTitle(true)
+        setTitleView(R.string.tv_mingxi)
         tv_select_time.text = "${year}年${month}月"
         initAdapter()
 
     }
 
     override fun doBusiness(mContext: Context?) {
-        back_btn.setOnClickListener {
+        title_left_button_onclick_listen {
             finish()
         }
         tv_select_time.setOnClickListener {

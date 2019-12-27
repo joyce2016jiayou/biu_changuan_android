@@ -30,7 +30,9 @@ class VerificationPhoneActivity : BaseActivity() {
     }
 
     override fun initView() {
-        setContentView(R.layout.activity_verification_phone)
+        setContentLayout(R.layout.activity_verification_phone)
+        isShowTitle(true)
+        setTitleView(R.string.tv_verification)
 //        tv_phone.text = intent.getStringExtra("newPhone")
 //        if (intent.getStringExtra("newPhone") == ""){
 //
@@ -64,7 +66,7 @@ class VerificationPhoneActivity : BaseActivity() {
 
 
         }
-        back_btn.setOnClickListener {
+        title_left_button_onclick_listen {
             finish()
         }
     }

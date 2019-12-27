@@ -37,7 +37,7 @@ class CostAccountingActivity : BaseActivity() {
     override fun initView() {
         setContentView(R.layout.activity_cost_accounting)
         isShowTitle(true)
-        setTitleView(R.string.tv188)
+        setTitleView(R.string.tv187)
         val filters = arrayOf(CashierInputFilter())
         et_fangzu.filters = filters
         et_nengyuan.filters = filters
@@ -56,7 +56,7 @@ class CostAccountingActivity : BaseActivity() {
             }, 2000)
 
         }
-        back_btn.setOnClickListener {
+        title_left_button_onclick_listen {
             if (form == "pay" && cost != 0.0) {
                 val mIntent = Intent()//没有任何参数（意图），只是用来传递数据
                 mIntent.putExtra("cost", "" + cost)
@@ -65,8 +65,6 @@ class CostAccountingActivity : BaseActivity() {
             } else {
                 setResult(SpUtils.getInt(applicationContext, AppConstants.FRAGMENT_SIZE) - 1)
             }
-
-
             finish()
         }
 

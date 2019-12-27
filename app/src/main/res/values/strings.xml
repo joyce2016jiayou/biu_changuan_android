@@ -441,4 +441,15 @@
     <string name="team_goal">训练目标</string>
     <string name="team_difficulty">训练难度</string>
     <string name="team_teacher">团课教练</string>
+    <string name="tv_input_new_phone">输入新手机号</string>
+    <string name="tv_sms_code">短信验证码</string>
+    <string name="tv_update_phone">修改手机号</string>
+    <string name="tv_mingxi">明细</string>
+    <string name="tv_zhuanchu">转出详情</string>
+    <string name="tv_shouru">收入详情</string>
+    <string name="tv_teacher_detail">教练详情</string>
+    <string name="tv_teacher_manager">教练管理</string>
+    <string name="tv_setting_tx_pwd">设置转出密码</string>
+    <string name="tv_verification">验证手机号</string>
+    <string name="tv_edit">编辑</string>
 </resources>

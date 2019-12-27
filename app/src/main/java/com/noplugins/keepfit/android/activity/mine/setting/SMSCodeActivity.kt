@@ -20,7 +20,6 @@ import com.noplugins.keepfit.android.util.net.entity.Bean
 import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriber
 import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener
 import kotlinx.android.synthetic.main.activity_smscode.*
-import kotlinx.android.synthetic.main.title_activity.*
 import java.util.HashMap
 
 class SMSCodeActivity : BaseActivity() {
@@ -37,9 +36,10 @@ class SMSCodeActivity : BaseActivity() {
 
     @SuppressLint("SetTextI18n")
     override fun initView() {
-        setContentView(R.layout.activity_smscode)
+        setContentLayout(R.layout.activity_smscode)
+        isShowTitle(true)
+        setTitleView(R.string.tv_sms_code)
         tv_phone.text = "短信已发送至${SpUtils.getString(applicationContext,AppConstants.PHONE)}"
-        title_tv.text = "短信验证码"
         phone = SpUtils.getString(applicationContext,AppConstants.PHONE)
         tv_send_code.isEnabled = false//设置不可点击，等待60秒过后可以点击
 
@@ -53,7 +53,7 @@ class SMSCodeActivity : BaseActivity() {
     }
 
     override fun doBusiness(mContext: Context?) {
-        back_btn.setOnClickListener {
+        title_left_button_onclick_listen {
             finish()
         }
 

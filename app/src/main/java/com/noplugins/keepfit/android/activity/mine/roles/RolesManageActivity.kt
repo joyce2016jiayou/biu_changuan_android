@@ -29,7 +29,6 @@ import com.noplugins.keepfit.android.util.ui.pop.base.CenterPopupView
 import com.noplugins.keepfit.android.util.ui.pop.inteface.ViewCallBack
 import com.noplugins.keepfit.android.util.ui.toast.SuperCustomToast
 import kotlinx.android.synthetic.main.activity_roles_manage.*
-import kotlinx.android.synthetic.main.title_activity.*
 import lib.demo.spinner.MaterialSpinner
 import java.util.HashMap
 
@@ -45,26 +44,30 @@ class RolesManageActivity : BaseActivity() {
     }
 
     override fun initView() {
-        setContentView(R.layout.activity_roles_manage)
-        title_tv.text = getString(R.string.authority_management)
-        add_btn.visibility = View.VISIBLE
+        setContentLayout(R.layout.activity_roles_manage)
+        isShowTitle(true)
+        setTitleView(R.string.authority_management,R.drawable.icon_back,R.drawable.icon_add,false,0)
+//        title_tv.text = getString(R.string.authority_management)
+//        add_btn.visibility = View.VISIBLE
         initAdapter()
         getBindingUserList()
     }
 
 
     override fun doBusiness(mContext: Context?) {
-        back_btn.setOnClickListener {
+
+        title_left_button_onclick_listen {
             setResult(SpUtils.getInt(applicationContext,AppConstants.FRAGMENT_SIZE)-1)
             finish()
         }
 
-        add_btn.setOnClickListener {
+        title_right_button_onclick_listen {
             if (BaseUtils.isFastClick()){
                 //添加
                 addPop()
             }
         }
+
 
     }
 

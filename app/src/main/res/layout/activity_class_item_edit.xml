@@ -8,8 +8,6 @@
     android:background="@color/color_F8F8F8"
     android:orientation="vertical"
     tools:context=".activity.AddClassItemActivity">
-
-    <include layout="@layout/title_activity"/>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">

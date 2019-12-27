@@ -30,8 +30,7 @@ class SettingActivity : BaseActivity() {
     }
 
     override fun initView() {
-        setContentView(R.layout.activity_setting)
-        title_tv.text = "设置"
+        setContentLayout(R.layout.activity_setting)
         isShowTitle(true)
         setTitleView(R.string.setting)
 
@@ -48,7 +47,10 @@ class SettingActivity : BaseActivity() {
 
     override fun doBusiness(mContext: Context?) {
 //        val layoutInflater = LayoutInflater.from(this)
-        back_btn.setOnClickListener {
+//        back_btn.setOnClickListener {
+//            back()
+//        }
+        title_left_button_onclick_listen{
             back()
         }
 

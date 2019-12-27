@@ -69,18 +69,20 @@ class TeacherManagerActivity : BaseActivity(){
     }
 
     override fun initView() {
-        setContentView(R.layout.activity_teacher_manager)
+        setContentLayout(R.layout.activity_teacher_manager)
+        isShowTitle(true)
+        setTitleView(R.string.tv_teacher_manager,R.drawable.icon_back,R.drawable.icon_add,false,0)
         initFragment()
         requestPermission()
     }
 
     override fun doBusiness(mContext: Context?) {
         rbOnClick()
-        tv_complete.setOnClickListener {
+        title_right_button_onclick_listen {
             val intent = Intent(this, TeacherSelectActivity::class.java)
             startActivity(intent)
         }
-        back_btn.setOnClickListener {
+        title_left_button_onclick_listen{
             setResult(SpUtils.getInt(applicationContext,AppConstants.FRAGMENT_SIZE)-1)
             finish()
         }

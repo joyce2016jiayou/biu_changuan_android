@@ -6,8 +6,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/title_activity"/>
-
     <TextView
         android:id="@+id/tv_now_phone"
         android:layout_width="match_parent"

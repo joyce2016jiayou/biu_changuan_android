@@ -7,41 +7,6 @@
     android:orientation="vertical"
     android:id="@+id/ll_content">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/m90">
-
-        <ImageView
-            android:id="@+id/back_btn"
-            android:layout_width="@dimen/m22"
-            android:layout_height="@dimen/m19"
-            android:layout_gravity="left|center_vertical"
-            android:layout_marginLeft="@dimen/m20"
-            android:src="@drawable/icon_back"
-            android:layout_marginTop="@dimen/m20"/>
-
-        <TextView
-            android:id="@+id/title_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="教练管理"
-            android:textColor="@color/contents_text"
-            android:textSize="@dimen/sp20"
-            android:layout_marginTop="@dimen/m20"
-            android:textStyle="bold"/>
-        <TextView
-            android:id="@+id/tv_complete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right|center_vertical"
-            android:text="添加"
-            android:textColor="@color/contents_text"
-            android:textSize="@dimen/sp15"
-            android:layout_marginRight="@dimen/m20"
-            android:layout_marginTop="@dimen/m20"/>
-
-    </FrameLayout>
 
     <RadioGroup
         android:layout_width="match_parent"

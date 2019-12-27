@@ -17,13 +17,14 @@ class UpdatePhoneActivity : BaseActivity() {
     }
 
     override fun initView() {
-        setContentView(R.layout.activity_update_phone)
-        title_tv.text = "修改手机号"
+        setContentLayout(R.layout.activity_update_phone)
+        isShowTitle(true)
+        setTitleView(R.string.tv_update_phone)
         tv_phone.text = SpUtils.getString(applicationContext,AppConstants.PHONE)
     }
 
     override fun doBusiness(mContext: Context?) {
-        back_btn.setOnClickListener {
+        title_left_button_onclick_listen {
             finish()
         }
 

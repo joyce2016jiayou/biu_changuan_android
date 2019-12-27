@@ -12,7 +12,6 @@ import com.noplugins.keepfit.android.global.AppConstants
 import com.noplugins.keepfit.android.util.BaseUtils
 import com.noplugins.keepfit.android.util.SpUtils
 import kotlinx.android.synthetic.main.activity_input_new_phone.*
-import kotlinx.android.synthetic.main.title_activity.*
 
 class InputNewPhoneActivity : BaseActivity() {
     companion object {
@@ -23,17 +22,18 @@ class InputNewPhoneActivity : BaseActivity() {
     }
 
     override fun initView() {
-        setContentView(R.layout.activity_input_new_phone)
+        setContentLayout(R.layout.activity_input_new_phone)
+        isShowTitle(true)
+        setTitleView(R.string.tv_input_new_phone)
         inputNewPhoneActivity = this
-        title_tv.text = "输入新手机号"
         val phone = SpUtils.getString(applicationContext,AppConstants.PHONE)
         tv_now_phone.text = "您目前的手机号为：$phone，您想要变更为？"
     }
 
     override fun doBusiness(mContext: Context?) {
-        back_btn.setOnClickListener {
-            finish()
-        }
+       title_left_button_onclick_listen {
+           finish()
+       }
         et_new_phone
 
         tv_send_code.setOnClickListener {

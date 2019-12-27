@@ -9,38 +9,6 @@
     android:focusable="true"
     android:focusableInTouchMode="true"
     android:id="@+id/ll_content">
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/m70">
-
-        <ImageView
-            android:id="@+id/back_btn"
-            android:layout_width="@dimen/m22"
-            android:layout_height="@dimen/m19"
-            android:layout_gravity="left|center_vertical"
-            android:layout_marginLeft="@dimen/m20"
-            android:src="@drawable/icon_back"
-            android:layout_marginTop="@dimen/m20"/>
-
-        <TextView
-            android:id="@+id/title_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="教练选择"
-            android:textColor="@color/contents_text"
-            android:textSize="@dimen/sp20"
-            android:layout_marginTop="@dimen/m20"
-            android:textStyle="bold"/>
-        <ImageView
-            android:id="@+id/queren_btn"
-            android:layout_width="@dimen/m22"
-            android:layout_height="@dimen/m22"
-            android:layout_gravity="right|center_vertical"
-            android:layout_marginRight="@dimen/m20"
-            android:src="@drawable/queren_img"
-            android:layout_marginTop="@dimen/m20"/>
-    </FrameLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_toRightOf="@+id/back_btn"

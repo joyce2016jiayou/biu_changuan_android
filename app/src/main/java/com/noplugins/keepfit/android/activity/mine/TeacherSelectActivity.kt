@@ -105,7 +105,10 @@ class TeacherSelectActivity : BaseActivity(), AMapLocationListener {
     }
 
     override fun initView() {
-        setContentView(R.layout.activity_teacher_select)
+        setContentLayout(R.layout.activity_teacher_select)
+        isShowTitle(true)
+        setTitleView(R.string.tv_teacher_manager,R.drawable.icon_back,R.drawable.queren_img,false,0)
+
         init()
 
         initAdapter()
@@ -115,14 +118,14 @@ class TeacherSelectActivity : BaseActivity(), AMapLocationListener {
     }
 
     override fun doBusiness(mContext: Context?) {
-        back_btn.setOnClickListener {
+        title_left_button_onclick_listen {
             finish()
         }
-        queren_btn.setOnClickListener {
+        title_right_button_onclick_listen{
             if (submitList.size <1){
                 Toast.makeText(applicationContext,"选择教练不可为空哦",Toast.LENGTH_SHORT)
                         .show()
-                return@setOnClickListener
+                return@title_right_button_onclick_listen
             }
             if (enter_type.equals("add_page")) {
                 AddClassItemActivity.submit_tescher_list.addAll(bind_teacher_list)

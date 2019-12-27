@@ -81,17 +81,17 @@ class VenueDetailActivity : BaseActivity(), CCRSortableNinePhotoLayout.Delegate 
     }
 
     override fun initView() {
-        setContentView(R.layout.activity_venue_detail)
-        //setTitleView(R.string.vunue_info, R.drawable.icon_back, R.string.tv123, true)
+        setContentLayout(R.layout.activity_venue_detail)
         isShowTitle(true)
         setTitleView(R.string.vunue_info)
+
 
         /**七牛云**/
         uploadManager = MyApplication.uploadManager
         sdf = SimpleDateFormat("yyyyMMddHHmmss")
         qiniu_key = "icon_" + sdf!!.format(Date())
         docList = ArrayList()
-        title_tv.text = getString(R.string.vunue_info)
+//        title_tv.text = getString(R.string.vunue_info)
         getToken()
         requestDoc()
         requestData()
@@ -188,7 +188,10 @@ class VenueDetailActivity : BaseActivity(), CCRSortableNinePhotoLayout.Delegate 
 
     override fun doBusiness(mContext: Context?) {
 //        val layoutInflater = LayoutInflater.from(this)
-        back_btn.setOnClickListener {
+//        back_btn.setOnClickListener {
+//            back()
+//        }
+        title_left_button_onclick_listen {
             back()
         }
         rb_base_info.setOnClickListener {

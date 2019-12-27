@@ -27,14 +27,15 @@ class RoomAddActivity : BaseActivity() {
     }
 
     override fun initView() {
-        setContentView(R.layout.activity_room_add)
-        title_tv.text = getString(R.string.room_add)
+        setContentLayout(R.layout.activity_room_add)
+        isShowTitle(true)
+        setTitleView(R.string.room_add)
         requestRoomType()
     }
 
     override fun doBusiness(mContext: Context?) {
 
-        back_btn.setOnClickListener {
+        title_left_button_onclick_listen {
             finish()
         }
         tv_complete.setOnClickListener {

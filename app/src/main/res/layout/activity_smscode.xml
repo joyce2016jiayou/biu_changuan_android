@@ -7,7 +7,6 @@
     android:orientation="vertical"
     tools:context=".activity.mine.setting.UpdatePhoneActivity">
 
-    <include layout="@layout/title_activity"/>
 
     <TextView
         android:id="@+id/tv_phone"

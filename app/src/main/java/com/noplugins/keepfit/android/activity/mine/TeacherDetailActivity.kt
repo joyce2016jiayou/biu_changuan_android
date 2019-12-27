@@ -52,7 +52,9 @@ class TeacherDetailActivity : BaseActivity() {
     }
 
     override fun initView() {
-        setContentView(R.layout.activity_private_detail)
+        setContentLayout(R.layout.activity_private_detail)
+        isShowTitle(true)
+        setTitleView(R.string.tv_teacher_detail)
         if (type == 1) {
             tv_yaoqing.text = "解 绑"
             iv_teacher_call.visibility = View.VISIBLE
@@ -75,7 +77,7 @@ class TeacherDetailActivity : BaseActivity() {
                 unBinding()
             }
         }
-        back_btn.setOnClickListener {
+        title_left_button_onclick_listen {
             finish()
         }
 
