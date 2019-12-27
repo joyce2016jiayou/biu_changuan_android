@@ -36,6 +36,7 @@ import com.noplugins.keepfit.android.global.AppConstants;
 import com.noplugins.keepfit.android.jpush.TagAliasOperatorHelper;
 import com.noplugins.keepfit.android.util.SpUtils;
 import com.noplugins.keepfit.android.util.VersionUtils;
+import com.noplugins.keepfit.android.util.data.SharedPreferencesHelper;
 import com.noplugins.keepfit.android.util.eventbus.MessageEvent;
 import com.noplugins.keepfit.android.util.net.Network;
 import com.noplugins.keepfit.android.util.net.entity.Bean;
@@ -309,17 +310,13 @@ public class KeepFitActivity extends BaseActivity {
 
     private void loginSuccess() {
         //如果没有缓存的别名，重新获取
-        if ("".equals(SpUtils.getString(getApplicationContext(), AppConstants.IS_SET_ALIAS))) {
+        if ("".equals(SpUtils.getString(getApplicationContext(), AppConstants.IS_SET_ALIAS,""))) {
             //设置别名
             TagAliasOperatorHelper.TagAliasBean tagAliasBean = new TagAliasOperatorHelper.TagAliasBean();
             TagAliasOperatorHelper.sequence++;
             //设置用户编号为别名
-            if (null == SpUtils.getString(getApplicationContext(), AppConstants.CHANGGUAN_NUM)) {
-                tagAliasBean.alias = "null_user_id";
-            } else {
-                String user_id = SpUtils.getString(getApplicationContext(), AppConstants.CHANGGUAN_NUM);
-                tagAliasBean.alias = user_id;
-            }
+            tagAliasBean.alias = SpUtils.getString(getApplicationContext(), AppConstants.USER_NAME);
+            Log.e("打印alias", tagAliasBean.alias);
             tagAliasBean.isAliasAction = true;
             tagAliasBean.action = TagAliasOperatorHelper.ACTION_SET;
             TagAliasOperatorHelper.getInstance().handleAction(
@@ -338,8 +335,6 @@ public class KeepFitActivity extends BaseActivity {
         super.onDestroy();
         //更新弹出框销毁
         AllenVersionChecker.getInstance().cancelAllMission();
-
-
     }
 
     @Override
