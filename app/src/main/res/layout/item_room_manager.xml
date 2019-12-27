@@ -15,7 +15,7 @@
         android:layout_gravity="bottom|right"
         android:layout_margin="@dimen/m10"
         android:textColor="@color/color_22243D"
-        android:textSize="18sp"
+        android:textSize="@dimen/sp18"
         android:textStyle="bold"
         android:background="@drawable/shape_btn_bg_ffcc7d"/>
 </FrameLayout>

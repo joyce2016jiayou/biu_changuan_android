@@ -27,7 +27,7 @@
             android:layout_gravity="center"
             android:text="成本核算"
             android:textColor="@color/contents_text"
-            android:textSize="20sp"
+            android:textSize="@dimen/sp20"
             android:layout_marginTop="@dimen/m20"
             android:textStyle="bold"/>
     </FrameLayout>
@@ -45,7 +45,7 @@
             android:layout_marginLeft="@dimen/m20"
             android:layout_marginRight="@dimen/m20"
             android:layout_marginBottom="@dimen/m15"
-            android:textSize="13sp"/>
+            android:textSize="@dimen/sp13"/>
 
         <www.linwg.org.lib.LCardView
             android:layout_width="match_parent"
@@ -67,7 +67,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="房租支出"
-                        android:textSize="15sp"
+                        android:textSize="@dimen/sp15"
                         android:textColor="@color/contents_text"/>
                     <EditText
                         android:id="@+id/et_fangzu"
@@ -82,7 +82,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/m15"
-                        android:textSize="15sp"
+                        android:textSize="@dimen/sp15"
                         android:textColor="@color/contents_text"
                         android:text="元/ 月"/>
                 </LinearLayout>
@@ -98,7 +98,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="能源（水电煤）"
-                        android:textSize="15sp"
+                        android:textSize="@dimen/sp15"
                         android:textColor="@color/contents_text"/>
                     <EditText
                         android:id="@+id/et_nengyuan"
@@ -113,7 +113,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/m15"
-                        android:textSize="15sp"
+                        android:textSize="@dimen/sp15"
                         android:textColor="@color/contents_text"
                         android:text="元/ 月"/>
                 </LinearLayout>
@@ -129,7 +129,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="人员支出"
-                        android:textSize="15sp"
+                        android:textSize="@dimen/sp15"
                         android:textColor="@color/contents_text"/>
                     <EditText
                         android:id="@+id/et_renyuan"
@@ -144,7 +144,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/m15"
-                        android:textSize="15sp"
+                        android:textSize="@dimen/sp15"
                         android:textColor="@color/contents_text"
                         android:text="元/ 月"/>
                 </LinearLayout>
@@ -160,7 +160,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="运营支出"
-                        android:textSize="15sp"
+                        android:textSize="@dimen/sp15"
                         android:textColor="@color/contents_text"/>
                     <EditText
                         android:id="@+id/et_yunying"
@@ -175,7 +175,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/m15"
-                        android:textSize="15sp"
+                        android:textSize="@dimen/sp15"
                         android:textColor="@color/contents_text"
                         android:text="元/ 月"/>
                 </LinearLayout>
@@ -191,7 +191,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="会员到店人次"
-                        android:textSize="15sp"
+                        android:textSize="@dimen/sp15"
                         android:textColor="@color/contents_text"/>
                     <EditText
                         android:id="@+id/et_renci"
@@ -206,7 +206,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/m15"
-                        android:textSize="15sp"
+                        android:textSize="@dimen/sp15"
                         android:textColor="@color/contents_text"
                         android:text="人次/ 月"/>
                 </LinearLayout>
@@ -221,7 +221,7 @@
             android:layout_marginTop="@dimen/m40"
             android:textColor="@color/contents_text"
             android:layout_marginBottom="@dimen/m20"
-            android:textSize="20sp"
+            android:textSize="@dimen/sp20"
             android:layout_gravity="center_horizontal"
             app:quickClickLimit="2000"/>
         <FrameLayout
@@ -236,7 +236,7 @@
                 android:visibility="gone"
                 android:background="@color/color_fbf0bd"
                 android:textColor="@color/color_705C00"
-                android:textSize="15sp"
+                android:textSize="@dimen/sp15"
                 android:layout_gravity="bottom"
                 android:text="当前经营成本： 15/人/次"/>
         </FrameLayout>

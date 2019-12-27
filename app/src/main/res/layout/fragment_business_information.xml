@@ -21,7 +21,7 @@
             android:layout_marginTop="@dimen/m15"
             android:text="工商信息"
             android:textColor="#ff181818"
-            android:textSize="16sp" />
+            android:textSize="@dimen/sp16" />
 
 
         <LinearLayout
@@ -47,7 +47,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/tv133"
                     android:textColor="@color/top_heiziti"
-                    android:textSize="16sp" />
+                    android:textSize="@dimen/sp16" />
 
                 <EditText
                     android:id="@+id/qiye_mingcheng_name"
@@ -61,7 +61,7 @@
                     android:singleLine="true"
                     android:textColor="@color/top_heiziti"
                     android:textColorHint="@color/color_9B9B9B"
-                    android:textSize="13sp" />
+                    android:textSize="@dimen/sp13" />
             </LinearLayout>
 
             <LinearLayout
@@ -83,14 +83,14 @@
                         android:layout_height="wrap_content"
                         android:text="营业执照/统一"
                         android:textColor="@color/top_heiziti"
-                        android:textSize="16sp" />
+                        android:textSize="@dimen/sp16" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="社会信用代码"
                         android:textColor="@color/top_heiziti"
-                        android:textSize="16sp" />
+                        android:textSize="@dimen/sp16" />
                 </LinearLayout>
 
 
@@ -106,7 +106,7 @@
                     android:singleLine="true"
                     android:textColor="@color/top_heiziti"
                     android:textColorHint="@color/color_9B9B9B"
-                    android:textSize="13sp" />
+                    android:textSize="@dimen/sp13" />
             </LinearLayout>
 
 
@@ -124,7 +124,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/tv35"
                     android:textColor="@color/top_heiziti"
-                    android:textSize="16sp" />
+                    android:textSize="@dimen/sp16" />
 
                 <EditText
                     android:id="@+id/faren_name"
@@ -137,7 +137,7 @@
                     android:singleLine="true"
                     android:textColor="@color/top_heiziti"
                     android:textColorHint="@color/color_9B9B9B"
-                    android:textSize="13sp" />
+                    android:textSize="@dimen/sp13" />
             </LinearLayout>
 
             <LinearLayout
@@ -154,7 +154,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/tv36"
                     android:textColor="@color/top_heiziti"
-                    android:textSize="16sp" />
+                    android:textSize="@dimen/sp16" />
 
                 <EditText
                     android:id="@+id/icon_id_card"
@@ -168,7 +168,7 @@
                     android:singleLine="true"
                     android:textColor="@color/top_heiziti"
                     android:textColorHint="@color/color_9B9B9B"
-                    android:textSize="13sp" />
+                    android:textSize="@dimen/sp13" />
             </LinearLayout>
 
             <LinearLayout
@@ -185,7 +185,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/tv135"
                     android:textColor="@color/top_heiziti"
-                    android:textSize="16sp" />
+                    android:textSize="@dimen/sp16" />
 
                 <EditText
                     android:id="@+id/qiye_zhanghao"
@@ -200,7 +200,7 @@
                     android:singleLine="true"
                     android:textColor="@color/top_heiziti"
                     android:textColorHint="@color/color_9B9B9B"
-                    android:textSize="13sp" />
+                    android:textSize="@dimen/sp13" />
             </LinearLayout>
 
             <LinearLayout
@@ -218,7 +218,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/tv149"
                     android:textColor="@color/top_heiziti"
-                    android:textSize="16sp" />
+                    android:textSize="@dimen/sp16" />
 
                 <EditText
                     android:id="@+id/kaihuhang_edit"
@@ -233,7 +233,7 @@
                     android:singleLine="true"
                     android:textColor="@color/top_heiziti"
                     android:textColorHint="@color/color_9B9B9B"
-                    android:textSize="13sp" />
+                    android:textSize="@dimen/sp13" />
             </LinearLayout>
 
             <LinearLayout
@@ -251,7 +251,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/tv134"
                     android:textColor="@color/top_heiziti"
-                    android:textSize="16sp" />
+                    android:textSize="@dimen/sp16" />
 
                 <EditText
                     android:id="@+id/yanzheng_jine"
@@ -264,7 +264,7 @@
                     android:singleLine="true"
                     android:textColor="@color/top_heiziti"
                     android:textColorHint="@color/color_9B9B9B"
-                    android:textSize="13sp" />
+                    android:textSize="@dimen/sp13" />
 
                 <LinearLayout
                     android:layout_width="@dimen/m95"
@@ -278,7 +278,7 @@
                         android:layout_height="wrap_content"
                         android:text="发送验证金额"
                         android:textColor="#ff181818"
-                        android:textSize="13sp" />
+                        android:textSize="@dimen/sp13" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -303,7 +303,7 @@
                 android:layout_marginLeft="@dimen/m10"
                 android:text="@string/edit_hint20"
                 android:textColor="@color/color_9B9B9B"
-                android:textSize="13sp" />
+                android:textSize="@dimen/sp13" />
         </LinearLayout>
 
         <LinearLayout
@@ -321,7 +321,7 @@
                 android:gravity="center"
                 android:text="@string/tv136"
                 android:textColor="@color/top_heiziti"
-                android:textSize="20sp" />
+                android:textSize="@dimen/sp20" />
 
         </LinearLayout>
     </LinearLayout>
@@ -348,7 +348,7 @@
                 android:layout_marginTop="@dimen/m30"
                 android:text="转出账户"
                 android:textColor="#ff181818"
-                android:textSize="16sp" />
+                android:textSize="@dimen/sp16" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -393,7 +393,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="公 司"
                                 android:textColor="#ff181818"
-                                android:textSize="15sp" />
+                                android:textSize="@dimen/sp15" />
                         </LinearLayout>
 
                     </LinearLayout>
@@ -429,7 +429,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="个 人"
                                 android:textColor="#ff181818"
-                                android:textSize="15sp" />
+                                android:textSize="@dimen/sp15" />
                         </LinearLayout>
 
                     </LinearLayout>
@@ -464,7 +464,7 @@
                     android:layout_marginLeft="@dimen/m10"
                     android:text="@string/edit_hint20"
                     android:textColor="@color/color_9B9B9B"
-                    android:textSize="13sp" />
+                    android:textSize="@dimen/sp13" />
             </LinearLayout>
 
         </LinearLayout>
@@ -484,7 +484,7 @@
                 android:gravity="center"
                 android:text="@string/tv143"
                 android:textColor="@color/top_heiziti"
-                android:textSize="20sp" />
+                android:textSize="@dimen/sp20" />
 
         </LinearLayout>
 

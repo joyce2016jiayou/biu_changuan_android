@@ -28,20 +28,20 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv1"
             android:layout_marginLeft="40dp"
-            android:layout_marginTop="21dp"
+            android:layout_marginTop="@dimen/m21"
             android:text="@string/tv128"
             android:textColor="@color/white"
-            android:textSize="20sp" />
+            android:textSize="@dimen/sp20" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv2"
             android:layout_marginLeft="40dp"
-            android:layout_marginTop="21dp"
+            android:layout_marginTop="@dimen/m21"
             android:text="@string/tv129"
             android:textColor="@color/white"
-            android:textSize="15sp" />
+            android:textSize="@dimen/sp15" />
 
         <LinearLayout
             android:id="@+id/submit_layout_center"
@@ -64,7 +64,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/tv130"
                     android:textColor="@color/white"
-                    android:textSize="20sp"
+                    android:textSize="@dimen/sp20"
                     android:textStyle="normal" />
             </LinearLayout>
 
@@ -81,7 +81,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/tv131"
                     android:textColor="@color/white"
-                    android:textSize="20sp"
+                    android:textSize="@dimen/sp20"
                     android:textStyle="normal" />
             </LinearLayout>
         </LinearLayout>

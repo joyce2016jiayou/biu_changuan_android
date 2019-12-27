@@ -38,7 +38,7 @@
                         android:layout_alignParentTop="true"
                         android:text="三端融合"
                         android:textColor="#ff181818"
-                        android:textSize="13sp"
+                        android:textSize="@dimen/sp13"
                         android:textStyle="bold" />
 
                     <TextView
@@ -47,7 +47,7 @@
                         android:layout_alignParentBottom="true"
                         android:text="场馆+教练+用户，随时随地管理场馆，只需一个APP。"
                         android:textColor="#ff181818"
-                        android:textSize="11sp" />
+                        android:textSize="@dimen/sp11" />
                 </RelativeLayout>
             </LinearLayout>
 
@@ -75,7 +75,7 @@
                         android:layout_alignParentTop="true"
                         android:text="场馆管理"
                         android:textColor="#ff181818"
-                        android:textSize="13sp"
+                        android:textSize="@dimen/sp13"
                         android:textStyle="bold" />
 
                     <TextView
@@ -84,7 +84,7 @@
                         android:layout_alignParentBottom="true"
                         android:text="客流变化，课程安排，均在APP实现。"
                         android:textColor="#ff181818"
-                        android:textSize="11sp" />
+                        android:textSize="@dimen/sp11" />
                 </RelativeLayout>
             </LinearLayout>
 
@@ -120,7 +120,7 @@
                         android:layout_alignParentTop="true"
                         android:text="三端融合"
                         android:textColor="#ff181818"
-                        android:textSize="13sp"
+                        android:textSize="@dimen/sp13"
                         android:textStyle="bold" />
 
                     <TextView
@@ -129,7 +129,7 @@
                         android:layout_alignParentBottom="true"
                         android:text="场馆+教练+用户，随时随地管理场馆，只需一个APP。"
                         android:textColor="#ff181818"
-                        android:textSize="11sp" />
+                        android:textSize="@dimen/sp11" />
                 </RelativeLayout>
             </LinearLayout>
 
@@ -157,7 +157,7 @@
                         android:layout_alignParentTop="true"
                         android:text="场馆管理"
                         android:textColor="#ff181818"
-                        android:textSize="13sp"
+                        android:textSize="@dimen/sp13"
                         android:textStyle="bold" />
 
                     <TextView
@@ -166,7 +166,7 @@
                         android:layout_alignParentBottom="true"
                         android:text="客流变化，课程安排，均在APP实现。"
                         android:textColor="#ff181818"
-                        android:textSize="11sp" />
+                        android:textSize="@dimen/sp11" />
                 </RelativeLayout>
             </LinearLayout>
 
@@ -194,7 +194,7 @@
                         android:layout_alignParentTop="true"
                         android:text="数据统计"
                         android:textColor="#ff181818"
-                        android:textSize="13sp"
+                        android:textSize="@dimen/sp13"
                         android:textStyle="bold" />
 
                     <TextView
@@ -203,7 +203,7 @@
                         android:layout_alignParentBottom="true"
                         android:text="可视化数据统计，当日、月、年盈利情况，一目了然。"
                         android:textColor="#ff181818"
-                        android:textSize="11sp" />
+                        android:textSize="@dimen/sp11" />
                 </RelativeLayout>
             </LinearLayout>
         </LinearLayout>
@@ -238,7 +238,7 @@
                         android:layout_alignParentTop="true"
                         android:text="三端融合"
                         android:textColor="#ff181818"
-                        android:textSize="13sp"
+                        android:textSize="@dimen/sp13"
                         android:textStyle="bold" />
 
                     <TextView
@@ -247,7 +247,7 @@
                         android:layout_alignParentBottom="true"
                         android:text="场馆+教练+用户，随时随地管理场馆，只需一个APP。"
                         android:textColor="#ff181818"
-                        android:textSize="11sp" />
+                        android:textSize="@dimen/sp11" />
                 </RelativeLayout>
             </LinearLayout>
 
@@ -275,7 +275,7 @@
                         android:layout_alignParentTop="true"
                         android:text="场馆管理"
                         android:textColor="#ff181818"
-                        android:textSize="13sp"
+                        android:textSize="@dimen/sp13"
                         android:textStyle="bold" />
 
                     <TextView
@@ -284,7 +284,7 @@
                         android:layout_alignParentBottom="true"
                         android:text="客流变化，课程安排，均在APP实现。"
                         android:textColor="#ff181818"
-                        android:textSize="11sp" />
+                        android:textSize="@dimen/sp11" />
                 </RelativeLayout>
             </LinearLayout>
 
@@ -312,7 +312,7 @@
                         android:layout_alignParentTop="true"
                         android:text="数据统计"
                         android:textColor="#ff181818"
-                        android:textSize="13sp"
+                        android:textSize="@dimen/sp13"
                         android:textStyle="bold" />
 
                     <TextView
@@ -321,7 +321,7 @@
                         android:layout_alignParentBottom="true"
                         android:text="可视化数据统计，当日、月、年盈利情况，一目了然。"
                         android:textColor="#ff181818"
-                        android:textSize="11sp" />
+                        android:textSize="@dimen/sp11" />
                 </RelativeLayout>
             </LinearLayout>
 
@@ -349,7 +349,7 @@
                         android:layout_alignParentTop="true"
                         android:text="行业报表"
                         android:textColor="#ff181818"
-                        android:textSize="13sp"
+                        android:textSize="@dimen/sp13"
                         android:textStyle="bold" />
 
                     <TextView
@@ -358,7 +358,7 @@
                         android:layout_alignParentBottom="true"
                         android:text="可年终总结专属于你的年度报表。"
                         android:textColor="#ff181818"
-                        android:textSize="11sp" />
+                        android:textSize="@dimen/sp11" />
                 </RelativeLayout>
             </LinearLayout>
 

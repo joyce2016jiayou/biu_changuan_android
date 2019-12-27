@@ -52,8 +52,8 @@
             <ImageView
                 android:id="@+id/delete_icon_btn"
                 android:layout_gravity="right|top"
-                android:layout_width="16dp"
-                android:layout_height="16dp"
+                android:layout_width="@dimen/m16"
+                android:layout_height="@dimen/m16"
                 android:layout_marginTop="3dp"
                 android:layout_marginRight="3dp"
                 android:clickable="true"

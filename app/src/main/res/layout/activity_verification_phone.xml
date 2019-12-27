@@ -29,7 +29,7 @@
                     android:layout_gravity="center"
                     android:text="验证手机号"
                     android:textColor="@color/contents_text"
-                    android:textSize="20sp"
+                    android:textSize="@dimen/sp20"
                     android:layout_marginTop="@dimen/m20"
                     android:textStyle="bold"/>
         </FrameLayout>
@@ -60,10 +60,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="5dp"
-                        android:layout_marginRight="25dp"
+                        android:layout_marginRight="@dimen/m25"
                         android:gravity="center_vertical"
                         android:textColor="@color/contents_text"
-                        android:textSize="18sp" />
+                        android:textSize="@dimen/sp18" />
             </LinearLayout>
         </www.linwg.org.lib.LCardView>
         <www.linwg.org.lib.LCardView
@@ -83,8 +83,8 @@
                     android:orientation="horizontal">
 
                 <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="23dp"
+                        android:layout_width="@dimen/m20"
+                        android:layout_height="@dimen/m23"
                         android:layout_gravity="center_vertical"
                         android:src="@drawable/icon_user_off" />
 
@@ -98,9 +98,9 @@
                         android:hint="@string/edit_hint5"
                         android:inputType="number"
                         android:maxLength="6"
-                        android:layout_marginRight="25dp"
+                        android:layout_marginRight="@dimen/m25"
                         android:singleLine="true"
-                        android:textSize="18dp" />
+                        android:textSize="@dimen/m18" />
 
                 <TextView
                         android:id="@+id/tv_send"
@@ -108,9 +108,9 @@
                         android:layout_height="wrap_content"
                         android:text="@string/tv6"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginRight="24dp"
+                        android:layout_marginRight="@dimen/m24"
                         android:textColor="@color/color_F9CE0F"
-                        android:textSize="15sp"
+                        android:textSize="@dimen/sp15"
                         />
             </LinearLayout>
         </www.linwg.org.lib.LCardView>
@@ -133,7 +133,7 @@
                 android:gravity="center"
                 android:text="完成"
                 android:textColor="@color/contents_text"
-                android:textSize="20sp" />
+                android:textSize="@dimen/sp20" />
 
     </LinearLayout>
 </FrameLayout>

@@ -39,7 +39,7 @@
             android:layout_marginTop="@dimen/m10"
             android:text="版本号：v1.0"
             android:textColor="@color/color_6D7278"
-            android:textSize="10sp" />
+            android:textSize="@dimen/sp10" />
 
     </RelativeLayout>
 
@@ -71,7 +71,7 @@
                 android:layout_marginLeft="@dimen/m10"
                 android:text="@string/tv183"
                 android:textColor="#ff101010"
-                android:textSize="15sp" />
+                android:textSize="@dimen/sp15" />
 
             <ImageView
                 android:layout_width="@dimen/m20"
@@ -93,6 +93,6 @@
         android:layout_marginBottom="@dimen/m30"
         android:text="Copyright © 2019.Noplugins All rights reserved."
         android:textColor="@color/color_929292"
-        android:textSize="10sp" />
+        android:textSize="@dimen/sp10" />
 
 </RelativeLayout>

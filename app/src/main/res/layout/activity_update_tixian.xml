@@ -32,7 +32,7 @@
                    android:layout_gravity="center"
                    android:text="设置转出密码"
                    android:textColor="@color/contents_text"
-                   android:textSize="20sp"
+                   android:textSize="@dimen/sp20"
                    android:layout_marginTop="@dimen/m20"
                    android:textStyle="bold"/>
        </FrameLayout>
@@ -51,7 +51,7 @@
            android:textColor="@color/color_ACACAC"
            android:textColorHint="@color/color_ACACAC"
            android:layout_gravity="center_horizontal"
-           android:textSize="15sp" />
+           android:textSize="@dimen/sp15" />
        <View
            android:layout_width="@dimen/m177"
            android:layout_height="@dimen/m1"
@@ -72,7 +72,7 @@
            android:layout_marginTop="@dimen/m40"
            android:textColor="@color/color_ACACAC"
            android:textColorHint="@color/color_ACACAC"
-           android:textSize="15sp" />
+           android:textSize="@dimen/sp15" />
        <View
            android:layout_width="@dimen/m177"
            android:layout_height="@dimen/m1"
@@ -88,7 +88,7 @@
                android:layout_marginTop="@dimen/m6"
            android:visibility="gone"
                android:textColor="@color/color_929292"
-               android:textSize="12sp"/>
+               android:textSize="@dimen/sp12"/>
    </LinearLayout>
 
     <FrameLayout
@@ -107,7 +107,7 @@
                 android:text="完  成"
                 android:background="@drawable/shape_btn_bg_40"
                 android:textColor="@color/white"
-                android:textSize="20sp" />
+                android:textSize="@dimen/sp20" />
 
     </FrameLayout>
 </RelativeLayout>

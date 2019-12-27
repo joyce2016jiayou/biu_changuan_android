@@ -25,7 +25,7 @@
                 android:layout_marginLeft="@dimen/m20"
                 android:text="@string/edit_hint28"
                 android:textColor="@color/color_4A4A4A"
-                android:textSize="16sp" />
+                android:textSize="@dimen/sp16" />
 
             <TextView
                 android:id="@+id/tv_now_phone"
@@ -35,7 +35,7 @@
                 android:layout_marginRight="@dimen/m10"
                 android:layout_toLeftOf="@+id/iv_right"
                 android:textColor="@color/contents_text"
-                android:textSize="16sp"
+                android:textSize="@dimen/sp16"
                 tools:text="18380583083" />
 
             <ImageView
@@ -66,7 +66,7 @@
                 android:layout_marginLeft="@dimen/m20"
                 android:text="@string/tv_setting_pwd"
                 android:textColor="@color/color_4A4A4A"
-                android:textSize="16sp" />
+                android:textSize="@dimen/sp16" />
 
             <ImageView
                 android:layout_width="@dimen/m16"
@@ -95,7 +95,7 @@
                 android:layout_marginLeft="@dimen/m20"
                 android:text="@string/tv_update_tixian"
                 android:textColor="@color/color_4A4A4A"
-                android:textSize="16sp" />
+                android:textSize="@dimen/sp16" />
 
             <ImageView
                 android:layout_width="@dimen/m16"

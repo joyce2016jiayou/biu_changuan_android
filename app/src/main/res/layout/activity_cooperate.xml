@@ -29,7 +29,7 @@
             android:layout_marginTop="@dimen/m20"
             android:text="@string/tv180"
             android:textColor="@color/contents_text"
-            android:textSize="20sp"
+            android:textSize="@dimen/sp20"
             android:textStyle="bold" />
     </FrameLayout>
 
@@ -65,7 +65,7 @@
                     android:layout_marginLeft="@dimen/m10"
                     android:text="@string/tv181"
                     android:textColor="#ff101010"
-                    android:textSize="15sp" />
+                    android:textSize="@dimen/sp15" />
 
                 <ImageView
                     android:layout_width="@dimen/m20"
@@ -89,7 +89,7 @@
                     android:layout_marginLeft="@dimen/m10"
                     android:text="@string/tv182"
                     android:textColor="#ff101010"
-                    android:textSize="15sp" />
+                    android:textSize="@dimen/sp15" />
 
                 <ImageView
                     android:layout_width="@dimen/m20"

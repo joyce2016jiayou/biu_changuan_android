@@ -25,7 +25,7 @@
             android:layout_gravity="center"
             android:text="订单确认"
             android:textColor="@color/contents_text"
-            android:textSize="20sp"
+            android:textSize="@dimen/sp20"
             android:layout_marginTop="@dimen/m20"
             android:textStyle="bold"/>
     </FrameLayout>
@@ -51,7 +51,7 @@
             android:layout_toLeftOf="@+id/tv_vip_price"
             android:layout_marginLeft="@dimen/m10"
             android:layout_marginTop="@dimen/m9"
-            android:textSize="15sp"
+            android:textSize="@dimen/sp15"
             android:textColor="@color/contents_text"/>
 
         <TextView
@@ -63,7 +63,7 @@
             android:layout_below="@+id/tv_cg_name"
             android:layout_toRightOf="@+id/iv_logo"
             android:layout_marginLeft="@dimen/m10"
-            android:textSize="13sp"
+            android:textSize="@dimen/sp13"
             android:textColor="@color/color_4A4A4A"/>
 
         <TextView
@@ -74,7 +74,7 @@
             android:layout_marginTop="@dimen/m9"
             android:layout_alignParentRight="true"
             android:layout_marginRight="@dimen/m30"
-            android:textSize="15sp"
+            android:textSize="@dimen/sp15"
             android:textColor="@color/color_4A4A4A"/>
     </RelativeLayout>
 
@@ -104,7 +104,7 @@
                 android:layout_marginLeft="@dimen/m22"
                 android:layout_toRightOf="@+id/iv_quanyi"
                 android:textColor="@color/contents_text"
-                android:textSize="18sp" />
+                android:textSize="@dimen/sp18" />
 
 
             <CheckBox
@@ -137,7 +137,7 @@
                 android:layout_marginLeft="@dimen/m22"
                 android:layout_toRightOf="@+id/iv_weixin"
                 android:textColor="@color/contents_text"
-                android:textSize="18sp" />
+                android:textSize="@dimen/sp18" />
 
             <CheckBox
                 android:id="@+id/cb_fault_feedback"
@@ -170,7 +170,7 @@
                 android:layout_marginLeft="@dimen/m22"
                 android:layout_toRightOf="@+id/iv_zhifubao"
                 android:textColor="@color/contents_text"
-                android:textSize="18sp" />
+                android:textSize="@dimen/sp18" />
 
             <CheckBox
                 android:id="@+id/cb_other"
@@ -193,7 +193,7 @@
         android:background="@drawable/shape_btn_bg_40"
         android:layout_gravity="bottom|center_horizontal"
         android:text="支 付"
-        android:textSize="20sp"
+        android:textSize="@dimen/sp20"
         android:layout_marginTop="@dimen/m50"
         android:textColor="@color/contents_text"
         android:gravity="center"/>

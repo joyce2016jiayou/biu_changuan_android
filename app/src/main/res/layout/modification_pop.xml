@@ -28,7 +28,7 @@
                     style="@style/Dialog_content_1"
                     android:text="@string/alert_dialog_tishi2"
                     android:textColor="@color/color_292c31"
-                    android:textSize="16dp"
+                    android:textSize="@dimen/m16"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -43,19 +43,19 @@
                 style="@style/Dialog_sure_style"
                 android:text="放弃"
                 android:textColor="@color/color_777777"
-                android:textSize="16dp" />
+                android:textSize="@dimen/m16" />
 
             <LinearLayout
                 style="@style/view_fengexiang_2"
-                android:layout_marginBottom="15dp"
-                android:layout_marginTop="15dp" />
+                android:layout_marginBottom="@dimen/m15"
+                android:layout_marginTop="@dimen/m15" />
 
             <TextView
                 android:id="@+id/folder_ok"
                 style="@style/Dialog_sure_style"
                 android:text="保存"
                 android:textColor="@color/color_292c31"
-                android:textSize="16dp" />
+                android:textSize="@dimen/m16" />
         </LinearLayout>
     </LinearLayout>
 

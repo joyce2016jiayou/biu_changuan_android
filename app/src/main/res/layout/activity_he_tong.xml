@@ -15,10 +15,10 @@
         <ImageView
             android:id="@+id/back_btn"
             android:layout_width="28dp"
-            android:layout_height="18dp"
+            android:layout_height="@dimen/m18"
             android:layout_alignParentLeft="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="@dimen/m20"
             android:layout_marginBottom="30dp"
             android:src="@drawable/icon_back"
             android:visibility="invisible" />
@@ -28,10 +28,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="19dp"
+            android:layout_marginBottom="@dimen/m19"
             android:text="@string/tv144"
             android:textColor="@color/top_heiziti"
-            android:textSize="25sp"
+            android:textSize="@dimen/sp25"
             android:textStyle="bold" />
     </RelativeLayout>
 
@@ -69,7 +69,7 @@
             android:layout_marginLeft="4dp"
             android:text="我已阅读并同意《哔呦会员服务协议》"
             android:textColor="@color/color_B7B7B7"
-            android:textSize="12sp" />
+            android:textSize="@dimen/sp12" />
     </LinearLayout>
 
     <LinearLayout
@@ -88,7 +88,7 @@
             android:gravity="center"
             android:text="@string/tv145"
             android:textColor="@color/top_heiziti"
-            android:textSize="20sp" />
+            android:textSize="@dimen/sp20" />
 
     </LinearLayout>
 

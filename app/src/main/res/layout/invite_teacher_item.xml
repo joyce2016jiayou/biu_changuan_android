@@ -29,7 +29,7 @@
                 android:layout_height="wrap_content"
                 android:text="9.7分"
                 android:textColor="@color/white"
-                android:textSize="12sp" />
+                android:textSize="@dimen/sp12" />
 
         </LinearLayout>
 
@@ -56,7 +56,7 @@
                 android:text="朱莉"
                 android:layout_toLeftOf="@+id/invite_status_tv"
                 android:textColor="@color/white"
-                android:textSize="13sp" />
+                android:textSize="@dimen/sp13" />
 
             <TextView
                 android:id="@+id/invite_status_tv"
@@ -67,7 +67,7 @@
                 android:layout_marginRight="@dimen/m10"
                 android:text="邀请中"
                 android:textColor="@color/color_F9CE0F"
-                android:textSize="13sp" />
+                android:textSize="@dimen/sp13" />
 
         </RelativeLayout>
     </RelativeLayout>
@@ -82,6 +82,6 @@
         android:layout_marginRight="@dimen/m10"
         android:layout_marginTop="@dimen/m5"
         android:visibility="gone"
-        android:textSize="10sp"/>
+        android:textSize="@dimen/sp10"/>
 
 </RelativeLayout>

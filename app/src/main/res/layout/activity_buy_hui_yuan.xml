@@ -25,9 +25,9 @@
             <ImageView
                 android:id="@+id/back_btn"
                 android:layout_width="28dp"
-                android:layout_height="18dp"
+                android:layout_height="@dimen/m18"
                 android:layout_alignParentLeft="true"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="@dimen/m20"
                 android:layout_marginTop="@dimen/m50"
                 android:src="@drawable/icon_back"
                 android:visibility="invisible" />
@@ -40,7 +40,7 @@
                 android:layout_marginTop="@dimen/m49"
                 android:text="@string/tv146"
                 android:textColor="@color/top_heiziti"
-                android:textSize="20sp"
+                android:textSize="@dimen/sp20"
                 android:textStyle="bold" />
 
             <de.hdodenhof.circleimageview.CircleImageView
@@ -63,7 +63,7 @@
                 android:layout_marginTop="@dimen/m6"
                 android:text="哔哔哔旗舰店"
                 android:textColor="#ff502b0e"
-                android:textSize="18sp"
+                android:textSize="@dimen/sp18"
                 android:textStyle="bold" />
 
             <RelativeLayout
@@ -87,7 +87,7 @@
                     android:layout_centerVertical="true"
                     android:text="会员套餐"
                     android:textColor="#ff181818"
-                    android:textSize="15sp" />
+                    android:textSize="@dimen/sp15" />
             </RelativeLayout>
 
             <include
@@ -118,7 +118,7 @@
                     android:layout_centerVertical="true"
                     android:text="会员权益"
                     android:textColor="#ff181818"
-                    android:textSize="15sp" />
+                    android:textSize="@dimen/sp15" />
             </RelativeLayout>
 
             <include
@@ -145,6 +145,6 @@
             android:layout_height="wrap_content"
             android:text="立即开通"
             android:textColor="#ff502b0e"
-            android:textSize="20sp" />
+            android:textSize="@dimen/sp20" />
     </LinearLayout>
 </RelativeLayout>

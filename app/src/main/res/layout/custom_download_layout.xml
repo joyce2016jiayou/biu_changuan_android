@@ -39,7 +39,7 @@
                 android:text="@string/tv160"
                 android:layout_marginBottom="@dimen/m20"
                 android:textColor="@color/top_heiziti"
-                android:textSize="13sp" />
+                android:textSize="@dimen/sp13" />
         </RelativeLayout>
 
         <ImageView
@@ -63,7 +63,7 @@
     <!--android:id="@+id/pb"-->
     <!--style="?android:attr/progressBarStyleHorizontal"-->
     <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="15dp"-->
+    <!--android:layout_height="@dimen/m15"-->
     <!--android:max="100"-->
     <!--android:progress="0"-->
     <!--android:progressDrawable="@drawable/progressbar_horizontal" />-->
@@ -79,7 +79,7 @@
     <!--android:layout_height="wrap_content"-->
     <!--android:text="@string/versionchecklib_downloading"-->
     <!--android:textColor="@color/versionchecklib_theme_color"-->
-    <!--android:textSize="15sp" />-->
+    <!--android:textSize="@dimen/sp15" />-->
 
     <!--<TextView-->
     <!--android:id="@+id/tv_progress"-->
@@ -88,7 +88,7 @@
     <!--android:layout_alignParentRight="true"-->
     <!--android:text="@string/versionchecklib_progress"-->
     <!--android:textColor="@color/versionchecklib_theme_color"-->
-    <!--android:textSize="15sp" />-->
+    <!--android:textSize="@dimen/sp15" />-->
     <!--</RelativeLayout>-->
 
 

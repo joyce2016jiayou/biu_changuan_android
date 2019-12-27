@@ -16,7 +16,7 @@
         android:layout_marginTop="@dimen/m39"
         android:text="用户协议及隐私政策"
         android:textColor="@color/top_heiziti"
-        android:textSize="15sp"
+        android:textSize="@dimen/sp15"
         android:visibility="gone" />
 
 
@@ -42,7 +42,7 @@
             android:layout_alignParentLeft="true"
             android:text="不同意"
             android:textColor="@color/btn_text_gray"
-            android:textSize="20sp" />
+            android:textSize="@dimen/sp20" />
 
         <TextView
             android:id="@+id/agree_btn"
@@ -51,7 +51,7 @@
             android:layout_alignParentRight="true"
             android:text="同意"
             android:textColor="@color/top_heiziti"
-            android:textSize="20sp" />
+            android:textSize="@dimen/sp20" />
     </RelativeLayout>
 
 </RelativeLayout>

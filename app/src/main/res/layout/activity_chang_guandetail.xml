@@ -28,10 +28,10 @@
                 <ImageView
                     android:id="@+id/back_btn"
                     android:layout_width="28dp"
-                    android:layout_height="18dp"
+                    android:layout_height="@dimen/m18"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentBottom="true"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="@dimen/m20"
                     android:layout_marginBottom="30dp"
                     android:src="@drawable/icon_back" />
 
@@ -41,10 +41,10 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginBottom="19dp"
+                    android:layout_marginBottom="@dimen/m19"
                     android:text="场馆信息"
                     android:textColor="@color/top_heiziti"
-                    android:textSize="25sp"
+                    android:textSize="@dimen/sp25"
                     android:textStyle="bold" />
 
                 <TextView
@@ -53,27 +53,27 @@
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentRight="true"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginBottom="19dp"
-                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="@dimen/m19"
+                    android:layout_marginRight="@dimen/m20"
                     android:text="@string/tv123"
                     android:id="@+id/tv_complete"
                     android:textColor="@color/top_heiziti"
-                    android:textSize="17sp" />
+                    android:textSize="@dimen/sp17" />
             </RelativeLayout>
 
             <!--第一块-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="280dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/m10"
                 android:background="@drawable/kapian_bg"
                 android:orientation="vertical">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/top_heiziti"
-                    android:textSize="25sp"
-                    android:layout_marginTop="20dp"
+                    android:textSize="@dimen/sp25"
+                    android:layout_marginTop="@dimen/m20"
                     android:layout_marginLeft="28dp"
                     android:textStyle="bold"
                     android:text="@string/tv121"
@@ -91,7 +91,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/tv119"
                         android:textColor="@color/top_heiziti"
-                        android:textSize="16sp" />
+                        android:textSize="@dimen/sp16" />
 
                     <EditText
                         android:id="@+id/changguan_name"
@@ -105,15 +105,15 @@
                         android:enabled="false"
                         android:textColor="@color/top_heiziti"
                         android:textColorHint="@color/color_9B9B9B"
-                        android:textSize="13sp" />
+                        android:textSize="@dimen/sp13" />
                 </LinearLayout>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="28dp"
-                    android:layout_marginTop="22dp"
-                    android:layout_marginRight="24dp">
+                    android:layout_marginTop="@dimen/m22"
+                    android:layout_marginRight="@dimen/m24">
 
                     <LinearLayout
                         android:id="@+id/ll_cg_type"
@@ -129,7 +129,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/tv120"
                             android:textColor="@color/top_heiziti"
-                            android:textSize="16sp" />
+                            android:textSize="@dimen/sp16" />
 
                         <lib.demo.spinner.MaterialSpinner
                             android:id="@+id/spinner_type"
@@ -142,7 +142,7 @@
                             android:layout_marginLeft="4dp"
                             android:background="@drawable/et_login_bg"
                             android:gravity="center"
-                            android:textSize="13sp" />
+                            android:textSize="@dimen/sp13" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -158,7 +158,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/tv21"
                             android:textColor="@color/top_heiziti"
-                            android:textSize="16sp" />
+                            android:textSize="@dimen/sp16" />
 
                         <EditText
                             android:id="@+id/edittext_area"
@@ -173,11 +173,11 @@
                             android:textColor="@color/top_heiziti"
                             android:textColorHint="@color/color_9B9B9B"
                             android:enabled="false"
-                            android:textSize="13sp" />
+                            android:textSize="@dimen/sp13" />
 
                         <ImageView
                             android:layout_width="9dp"
-                            android:layout_height="12dp"
+                            android:layout_height="@dimen/m12"
                             android:src="@drawable/pingfang" />
                     </LinearLayout>
                 </RelativeLayout>
@@ -186,8 +186,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="28dp"
-                    android:layout_marginTop="23dp"
-                    android:layout_marginRight="20dp">
+                    android:layout_marginTop="@dimen/m23"
+                    android:layout_marginRight="@dimen/m20">
 
                     <LinearLayout
                         android:id="@+id/ll_phone"
@@ -203,7 +203,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/tv22"
                             android:textColor="@color/top_heiziti"
-                            android:textSize="16sp" />
+                            android:textSize="@dimen/sp16" />
 
                         <EditText
                             android:id="@+id/tell_edit"
@@ -217,7 +217,7 @@
                             android:singleLine="true"
                             android:textColor="@color/top_heiziti"
                             android:textColorHint="@color/color_9B9B9B"
-                            android:textSize="13sp" />
+                            android:textSize="@dimen/sp13" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -234,7 +234,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/tv23"
                             android:textColor="@color/top_heiziti"
-                            android:textSize="16sp" />
+                            android:textSize="@dimen/sp16" />
 
                         <EditText
                             android:id="@+id/edit_email"
@@ -247,7 +247,7 @@
                             android:singleLine="true"
                             android:textColor="@color/top_heiziti"
                             android:textColorHint="@color/color_9B9B9B"
-                            android:textSize="13sp" />
+                            android:textSize="@dimen/sp13" />
                     </LinearLayout>
                 </RelativeLayout>
 
@@ -255,7 +255,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="28dp"
-                    android:layout_marginTop="22dp"
+                    android:layout_marginTop="@dimen/m22"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
@@ -264,7 +264,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/tv24"
                         android:textColor="@color/top_heiziti"
-                        android:textSize="16sp" />
+                        android:textSize="@dimen/sp16" />
 
                     <TextView
                         android:id="@+id/time1_edit"
@@ -277,12 +277,12 @@
                         android:text="@string/edit_hint12"
                         android:textColor="@color/top_heiziti"
                         android:textColorHint="@color/color_9B9B9B"
-                        android:textSize="13sp" />
+                        android:textSize="@dimen/sp13" />
 
                     <LinearLayout
                         android:layout_width="42dp"
                         android:layout_height="8dp"
-                        android:layout_marginLeft="11dp"
+                        android:layout_marginLeft="@dimen/m11"
                         android:background="@drawable/hengang"
                         android:orientation="horizontal" />
 
@@ -290,14 +290,14 @@
                         android:id="@+id/time2_edit"
                         android:layout_width="63dp"
                         android:layout_height="36dp"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="@dimen/m10"
                         android:background="@null"
                         android:gravity="center"
                         android:hint="@string/edit_hint13"
                         android:text="@string/edit_hint13"
                         android:textColor="@color/top_heiziti"
                         android:textColorHint="@color/color_9B9B9B"
-                        android:textSize="13sp" />
+                        android:textSize="@dimen/sp13" />
                 </LinearLayout>
             </LinearLayout>
             <!--第二块-->
@@ -310,7 +310,7 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="@dimen/m20"
                     android:layout_marginLeft="28dp"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
@@ -320,7 +320,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/tv27"
                         android:textColor="@color/top_heiziti"
-                        android:textSize="16sp" />
+                        android:textSize="@dimen/sp16" />
 
                     <EditText
                         android:id="@+id/edit_address"
@@ -333,7 +333,7 @@
                         android:textColor="@color/top_heiziti"
                         android:textColorHint="@color/color_9B9B9B"
                         android:enabled="false"
-                        android:textSize="13sp" />
+                        android:textSize="@dimen/sp13" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -349,7 +349,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/tv28"
                         android:textColor="@color/top_heiziti"
-                        android:textSize="16sp" />
+                        android:textSize="@dimen/sp16" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rc_view"
@@ -374,7 +374,7 @@
                         android:layout_marginTop="3dp"
                         android:text="@string/tv29"
                         android:textColor="@color/top_heiziti"
-                        android:textSize="16sp" />
+                        android:textSize="@dimen/sp16" />
 
                     <RelativeLayout
                         android:layout_width="54dp"
@@ -393,8 +393,8 @@
 
                         <ImageView
                             android:id="@+id/delete_icon_btn"
-                            android:layout_width="16dp"
-                            android:layout_height="16dp"
+                            android:layout_width="@dimen/m16"
+                            android:layout_height="@dimen/m16"
                             android:layout_alignParentTop="true"
                             android:layout_alignParentRight="true"
                             android:layout_marginTop="3dp"
@@ -410,7 +410,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="28dp"
-                    android:layout_marginTop="11dp"
+                    android:layout_marginTop="@dimen/m11"
                     android:orientation="horizontal">
 
                     <LinearLayout
@@ -429,7 +429,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/tv30"
                                 android:textColor="@color/top_heiziti"
-                                android:textSize="15sp" />
+                                android:textSize="@dimen/sp15" />
 
                             <TextView
                                 android:id="@+id/select_numbers_tv"
@@ -448,15 +448,15 @@
                             android:text="@string/tv32"
                             android:visibility="gone"
                             android:textColor="@color/color_9B9B9B"
-                            android:textSize="11sp" />
+                            android:textSize="@dimen/sp11" />
                     </LinearLayout>
 
                     <com.noplugins.keepfit.android.util.ui.jiugongge.CCRSortableNinePhotoLayout
                         android:id="@+id/snpl_moment_add_photos"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="@dimen/m10"
+                        android:layout_marginRight="@dimen/m10"
                         app:bga_snpl_deleteDrawable="@drawable/delete_image"
                         app:bga_snpl_deleteDrawableOverlapQuarter="false"
                         app:bga_snpl_editable="true"
@@ -484,8 +484,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/top_heiziti"
-                    android:textSize="25sp"
-                    android:layout_marginTop="19dp"
+                    android:textSize="@dimen/sp25"
+                    android:layout_marginTop="@dimen/m19"
                     android:layout_marginLeft="28dp"
                     android:textStyle="bold"
                     android:text="@string/tv122"
@@ -495,7 +495,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="11dp"
+                    android:layout_marginTop="@dimen/m11"
                     android:orientation="horizontal">
 
                     <CheckBox
@@ -512,7 +512,7 @@
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="23dp"
+                        android:layout_marginLeft="@dimen/m23"
                         android:background="@drawable/selector_btn_wuyang"
                         android:button="@null"
                         android:checked="false" />
@@ -522,7 +522,7 @@
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="23dp"
+                        android:layout_marginLeft="@dimen/m23"
                         android:background="@drawable/selector_btn_tuancao"
                         android:button="@null"
                         android:checked="false" />
@@ -532,7 +532,7 @@
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="23dp"
+                        android:layout_marginLeft="@dimen/m23"
                         android:background="@drawable/selector_btn_danche"
                         android:button="@null"
                         android:checked="false" />
@@ -542,7 +542,7 @@
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="23dp"
+                        android:layout_marginLeft="@dimen/m23"
                         android:background="@drawable/selector_btn_youyong"
                         android:button="@null"
                         android:checked="false" />
@@ -569,7 +569,7 @@
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="23dp"
+                        android:layout_marginLeft="@dimen/m23"
                         android:background="@drawable/selector_btn_genyi"
                         android:button="@null"
                         android:checked="false" />
@@ -579,7 +579,7 @@
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="23dp"
+                        android:layout_marginLeft="@dimen/m23"
                         android:background="@drawable/selector_btn_linyu"
                         android:button="@null"
                         android:checked="false" />
@@ -589,7 +589,7 @@
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="23dp"
+                        android:layout_marginLeft="@dimen/m23"
                         android:background="@drawable/selector_btn_cesuo"
                         android:button="@null"
                         android:checked="false" />
@@ -607,16 +607,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/top_heiziti"
-                    android:textSize="25sp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginLeft="25dp"
+                    android:textSize="@dimen/sp25"
+                    android:layout_marginTop="@dimen/m20"
+                    android:layout_marginLeft="@dimen/m25"
                     android:textStyle="bold"
                     android:text="@string/tv121"
                     />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="25dp"
+                    android:layout_marginLeft="@dimen/m25"
                     android:layout_marginRight="@dimen/m25"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
@@ -626,7 +626,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/tv35"
                         android:textColor="@color/top_heiziti"
-                        android:textSize="16sp" />
+                        android:textSize="@dimen/sp16" />
 
                     <EditText
                         android:id="@+id/faren_name"
@@ -640,14 +640,14 @@
                         android:singleLine="true"
                         android:textColor="@color/top_heiziti"
                         android:textColorHint="@color/color_9B9B9B"
-                        android:textSize="13sp" />
+                        android:textSize="@dimen/sp13" />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="25dp"
+                    android:layout_marginLeft="@dimen/m25"
                     android:layout_marginRight="@dimen/m25"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="@dimen/m20"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
@@ -656,7 +656,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/tv36"
                         android:textColor="@color/top_heiziti"
-                        android:textSize="16sp" />
+                        android:textSize="@dimen/sp16" />
 
                     <EditText
                         android:id="@+id/icon_id_card"
@@ -670,14 +670,14 @@
                         android:singleLine="true"
                         android:textColor="@color/top_heiziti"
                         android:textColorHint="@color/color_9B9B9B"
-                        android:textSize="13sp" />
+                        android:textSize="@dimen/sp13" />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="25dp"
+                    android:layout_marginLeft="@dimen/m25"
                     android:layout_marginRight="@dimen/m25"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="@dimen/m20"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
@@ -686,7 +686,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/tv37"
                         android:textColor="@color/top_heiziti"
-                        android:textSize="16sp" />
+                        android:textSize="@dimen/sp16" />
 
                     <EditText
                         android:id="@+id/qiye_name"
@@ -700,14 +700,14 @@
                         android:gravity="center_vertical|right"
                         android:textColor="@color/top_heiziti"
                         android:textColorHint="@color/color_9B9B9B"
-                        android:textSize="13sp" />
+                        android:textSize="@dimen/sp13" />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="25dp"
+                    android:layout_marginLeft="@dimen/m25"
                     android:layout_marginRight="@dimen/m25"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="@dimen/m20"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
@@ -716,7 +716,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/tv38"
                         android:textColor="@color/top_heiziti"
-                        android:textSize="16sp" />
+                        android:textSize="@dimen/sp16" />
 
                     <EditText
                         android:id="@+id/qiye_zhucehao"
@@ -730,7 +730,7 @@
                         android:enabled="false"
                         android:gravity="center_vertical|right"
                         android:textColorHint="@color/color_9B9B9B"
-                        android:textSize="13sp" />
+                        android:textSize="@dimen/sp13" />
                 </LinearLayout>
 
             </LinearLayout>

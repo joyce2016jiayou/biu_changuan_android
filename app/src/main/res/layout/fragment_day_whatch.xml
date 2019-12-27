@@ -12,7 +12,7 @@
         android:id="@+id/rel_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="@dimen/m20"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -37,7 +37,7 @@
                 android:gravity="center"
                 android:text="@string/tv46"
                 android:textColor="@color/top_heiziti"
-                android:textSize="20sp" />
+                android:textSize="@dimen/sp20" />
         </LinearLayout>
 
         <LinearLayout
@@ -53,7 +53,7 @@
                 android:gravity="center"
                 android:text="@string/tv47"
                 android:textColor="@color/top_heiziti"
-                android:textSize="20sp" />
+                android:textSize="@dimen/sp20" />
 
         </LinearLayout>
 
@@ -71,7 +71,7 @@
                 android:gravity="center"
                 android:text="@string/tv48"
                 android:textColor="@color/top_heiziti"
-                android:textSize="20sp" />
+                android:textSize="@dimen/sp20" />
         </LinearLayout>
     </LinearLayout>
 
@@ -81,7 +81,7 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/rel_top"
 
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="@dimen/m20"
         android:background="@color/color_F8F8F8">
 
         <androidx.recyclerview.widget.RecyclerView

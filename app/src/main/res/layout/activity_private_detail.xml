@@ -26,7 +26,7 @@
             android:layout_gravity="center"
             android:text="教练详情"
             android:textColor="@color/contents_text"
-            android:textSize="20sp"
+            android:textSize="@dimen/sp20"
             android:layout_marginTop="@dimen/m20"
             android:textStyle="bold"/>
     </FrameLayout>
@@ -67,7 +67,7 @@
                             android:id="@+id/tv_teacher_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="15sp"
+                            android:textSize="@dimen/sp15"
                             android:textColor="@color/contents_text"
                             android:text="私教姓名"/>
 
@@ -82,7 +82,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="right|center_vertical"
                             tools:text="7.8fen"
-                            android:textSize="13sp"
+                            android:textSize="@dimen/sp13"
                             android:layout_marginRight="@dimen/m19"
                             android:layout_marginLeft="@dimen/m15"
                             android:textColor="@color/color_F9CE0F"/>
@@ -99,7 +99,7 @@
                         android:drawableLeft="@mipmap/icon_sign"
                         tools:text="我是气场一米八的大长腿，是一位重度咖啡爱好者，喜欢尝试新事物。"
                         android:textColor="@color/color_4A4A4A"
-                        android:textSize="12sp"/>
+                        android:textSize="@dimen/sp12"/>
                 </LinearLayout>
 
                 <FrameLayout
@@ -114,7 +114,7 @@
                         android:layout_gravity="left|center_vertical"
                         android:gravity="center_vertical"
                         android:text="累计服务时长：154小时"
-                        android:textSize="12sp"
+                        android:textSize="@dimen/sp12"
                         android:drawableLeft="@mipmap/icon_servicetime"
                         android:layout_marginLeft="@dimen/m16"
                         android:textColor="@color/color_4A4A4A"/>
@@ -152,7 +152,7 @@
                             android:layout_height="wrap_content"
                             android:text="已获标签"
                             android:layout_marginLeft="@dimen/m10"
-                            android:textSize="12sp"
+                            android:textSize="@dimen/sp12"
                             android:layout_marginTop="@dimen/m2"
                             android:textColor="@color/color_929292"/>
 
@@ -175,7 +175,7 @@
                             android:layout_height="wrap_content"
                             android:text="教练技能"
                             android:layout_marginLeft="@dimen/m10"
-                            android:textSize="12sp"
+                            android:textSize="@dimen/sp12"
                             android:layout_marginTop="@dimen/m2"
                             android:textColor="@color/color_929292"/>
 
@@ -196,7 +196,7 @@
                 android:background="@drawable/shape_btn_bg_40"
                 android:layout_gravity="bottom|center_horizontal"
                 android:text="邀请"
-                android:textSize="20sp"
+                android:textSize="@dimen/sp20"
                 android:layout_marginTop="@dimen/m30"
                 android:textColor="@color/contents_text"
                 android:layout_marginBottom="@dimen/m20"

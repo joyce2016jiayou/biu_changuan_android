@@ -59,7 +59,7 @@
                         android:layout_height="250dip"
                         android:background="#ffffff"
                         android:layout_centerHorizontal="true"
-                        android:padding="10dp"
+                        android:padding="@dimen/m10"
                         android:visibility="gone"/>
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
@@ -94,7 +94,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/m120"
                         android:layout_centerVertical="true"
-                        android:paddingRight="10dp"
+                        android:paddingRight="@dimen/m10"
                         android:background="#ffffff"
                         android:orientation="horizontal"
                         android:visibility="gone">
@@ -154,7 +154,7 @@
                         android:layout_height="250dip"
                         android:background="#ffffff"
                         android:layout_centerHorizontal="true"
-                        android:padding="10dp"
+                        android:padding="@dimen/m10"
                         android:visibility="gone"/>
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>

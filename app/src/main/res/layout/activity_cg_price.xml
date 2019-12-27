@@ -25,7 +25,7 @@
             android:layout_gravity="center"
             android:text="场馆价格"
             android:textColor="@color/contents_text"
-            android:textSize="20sp"
+            android:textSize="@dimen/sp20"
             android:layout_marginTop="@dimen/m20"
             android:textStyle="bold"/>
     </FrameLayout>
@@ -62,7 +62,7 @@
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:textColor="@color/color_925711"
-                        android:textSize="13sp"
+                        android:textSize="@dimen/sp13"
                         android:layout_marginLeft="@dimen/m7"
                         android:text="时段范围及定价示例"/>
 
@@ -88,7 +88,7 @@
                 android:id="@+id/fl_hesuan"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/m67"
-                android:layout_marginTop="-10dp"
+                android:layout_marginTop="@dimen/m_d_10"
                 android:background="@drawable/bg_h110">
 
                 <LinearLayout
@@ -110,7 +110,7 @@
                         android:layout_marginTop="@dimen/m7"
                         android:text="最新成本核算"
                         android:textColor="@color/color_22243D"
-                        android:textSize="13sp" />
+                        android:textSize="@dimen/sp13" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -126,7 +126,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/color_22243D"
-                        android:textSize="15sp" />
+                        android:textSize="@dimen/sp15" />
 
                     <ImageView
                         android:layout_width="@dimen/m16"
@@ -167,7 +167,7 @@
                             android:text="门市价格"
                             android:drawableLeft="@mipmap/icon_question_mark"
                             android:textColor="@color/color_22243D"
-                            android:textSize="13sp" />
+                            android:textSize="@dimen/sp13" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -185,7 +185,7 @@
                             android:text="￥"
                             android:textStyle="bold"
                             android:textColor="@color/color_22243D"
-                            android:textSize="13sp" />
+                            android:textSize="@dimen/sp13" />
                         <EditText
                             android:id="@+id/et_price"
                             android:layout_width="match_parent"
@@ -203,7 +203,7 @@
                     android:layout_height="@dimen/m31"
                     android:layout_marginLeft="@dimen/m24"
                     android:textColor="@color/color_705C00"
-                    android:textSize="13sp"
+                    android:textSize="@dimen/sp13"
                     android:text="场馆门市价格： 0"
                     android:gravity="center"
                     android:layout_marginBottom="@dimen/m14"
@@ -247,7 +247,7 @@
                                 android:layout_marginTop="@dimen/m7"
                                 android:text="分时段价格"
                                 android:textColor="@color/color_22243D"
-                                android:textSize="13sp" />
+                                android:textSize="@dimen/sp13" />
                         </LinearLayout>
                         
                         <TextView
@@ -283,7 +283,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="以上信息后续可在【我的】中修改"
-                android:textSize="10sp"
+                android:textSize="@dimen/sp10"
                 android:layout_marginTop="@dimen/m8"
                 android:textColor="@color/color_929292"/>
             <TextView
@@ -293,7 +293,7 @@
                 android:background="@drawable/shape_btn_bg_40"
                 android:layout_gravity="bottom|center_horizontal"
                 android:text="保存设置"
-                android:textSize="20sp"
+                android:textSize="@dimen/sp20"
                 android:layout_marginTop="@dimen/m30"
                 android:textColor="@color/contents_text"
                 android:layout_marginBottom="@dimen/m20"

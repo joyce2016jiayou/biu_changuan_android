@@ -27,7 +27,7 @@
             android:layout_marginTop="@dimen/m10"
             android:text="添加场馆房间"
             android:textColor="@color/color_4A4A4A"
-            android:textSize="18sp" />
+            android:textSize="@dimen/sp18" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -57,7 +57,7 @@
                     android:singleLine="true"
                     android:textColor="@color/top_heiziti"
                     android:textColorHint="@color/color_9B9B9B"
-                    android:textSize="15sp" />
+                    android:textSize="@dimen/sp15" />
 
                 <ImageView
                     android:layout_width="@dimen/m20"
@@ -84,7 +84,7 @@
                 android:singleLine="true"
                 android:textColor="@color/top_heiziti"
                 android:textColorHint="@color/color_929292"
-                android:textSize="15sp" />
+                android:textSize="@dimen/sp15" />
 
             <EditText
                 android:id="@+id/room_people_number"
@@ -101,7 +101,7 @@
                 android:singleLine="true"
                 android:textColor="@color/top_heiziti"
                 android:textColorHint="@color/color_929292"
-                android:textSize="15sp" />
+                android:textSize="@dimen/sp15" />
         </LinearLayout>
 
         <RelativeLayout
@@ -126,7 +126,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/cancel"
                     android:textColor="@color/white"
-                    android:textSize="18sp"
+                    android:textSize="@dimen/sp18"
                     android:textStyle="normal" />
             </LinearLayout>
 
@@ -144,7 +144,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/tv_ok"
                     android:textColor="@color/contents_text"
-                    android:textSize="18sp"
+                    android:textSize="@dimen/sp18"
                     android:textStyle="normal" />
             </LinearLayout>
         </RelativeLayout>

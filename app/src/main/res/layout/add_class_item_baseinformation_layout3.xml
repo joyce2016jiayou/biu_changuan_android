@@ -34,7 +34,7 @@
                     android:layout_gravity="center_vertical"
                     android:text="@string/tv172"
                     android:textColor="@color/top_heiziti"
-                    android:textSize="15sp" />
+                    android:textSize="@dimen/sp15" />
 
                 <RelativeLayout
                     android:layout_width="@dimen/m90"
@@ -89,7 +89,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/tv173"
                             android:textColor="@color/top_heiziti"
-                            android:textSize="15sp" />
+                            android:textSize="@dimen/sp15" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -97,7 +97,7 @@
                             android:layout_marginLeft="5dp"
                             android:text="("
                             android:textColor="@color/color_9B9B9B"
-                            android:textSize="13sp" />
+                            android:textSize="@dimen/sp13" />
 
                         <TextView
                             android:id="@+id/select_numbers_tv"
@@ -105,14 +105,14 @@
                             android:layout_height="wrap_content"
                             android:text="@string/tv31"
                             android:textColor="@color/color_9B9B9B"
-                            android:textSize="13sp" />
+                            android:textSize="@dimen/sp13" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text=")"
                             android:textColor="@color/color_9B9B9B"
-                            android:textSize="13sp" />
+                            android:textSize="@dimen/sp13" />
 
                     </LinearLayout>
 
@@ -154,7 +154,7 @@
                     android:layout_centerVertical="true"
                     android:text="@string/tv174"
                     android:textColor="@color/color_181818"
-                    android:textSize="15sp" />
+                    android:textSize="@dimen/sp15" />
 
                 <TextView
                     android:id="@+id/invite_teacher_number_tv"
@@ -165,7 +165,7 @@
                     android:layout_toEndOf="@+id/tv"
                     android:text="(0/20)"
                     android:textColor="@color/color_181818"
-                    android:textSize="15sp" />
+                    android:textSize="@dimen/sp15" />
 
                 <LinearLayout
                     android:id="@+id/invite_teacher_btn"
@@ -183,7 +183,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/tv175"
                         android:textColor="#ff22243d"
-                        android:textSize="13sp" />
+                        android:textSize="@dimen/sp13" />
 
                 </LinearLayout>
             </RelativeLayout>

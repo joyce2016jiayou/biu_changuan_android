@@ -7,8 +7,8 @@
     android:orientation="vertical"
     android:background="@drawable/loading_bg"
     android:paddingBottom="5dp"
-    android:paddingLeft="15dp"
-    android:paddingRight="15dp"
+    android:paddingLeft="@dimen/m15"
+    android:paddingRight="@dimen/m15"
     android:paddingTop="5dp" >
     <!--去掉了背景为黑色-->
     <!--android:background="@drawable/progress_hud_bg"-->

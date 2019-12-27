@@ -35,7 +35,7 @@
                 android:gravity="center"
                 android:text="@string/jujue"
                 android:textColor="@color/color_181818"
-                android:textSize="15sp" />
+                android:textSize="@dimen/sp15" />
         </FrameLayout>
 
         <FrameLayout
@@ -52,7 +52,7 @@
                 android:gravity="center"
                 android:text="@string/jieshou"
                 android:textColor="@color/color_181818"
-                android:textSize="15sp" />
+                android:textSize="@dimen/sp15" />
         </FrameLayout>
 
     </LinearLayout>
@@ -73,7 +73,7 @@
             android:gravity="center"
             android:text="@string/cancel"
             android:textColor="@color/color_181818"
-            android:textSize="15sp" />
+            android:textSize="@dimen/sp15" />
     </FrameLayout>
 
     <LinearLayout
@@ -94,7 +94,7 @@
             android:background="@drawable/shape_btn_bg_22243d_40"
             android:gravity="center"
             android:textColor="@color/color_F9CE0F"
-            android:textSize="13sp" />
+            android:textSize="@dimen/sp13" />
         <!--场馆信息-->
         <RelativeLayout
             android:id="@+id/jump_team_detail"
@@ -113,7 +113,7 @@
                 android:layout_marginRight="@dimen/m10"
                 android:layout_toLeftOf="@+id/label_detail"
                 android:textColor="@color/color_181818"
-                android:textSize="15sp"
+                android:textSize="@dimen/sp15"
                 android:textStyle="bold"
                 tools:text="太阳的后裔场馆" />
 
@@ -125,7 +125,7 @@
                 android:layout_gravity="right"
                 android:text="查看课程详情 >"
                 android:textColor="@color/color_181818"
-                android:textSize="15sp" />
+                android:textSize="@dimen/sp15" />
         </RelativeLayout>
 
     </LinearLayout>
@@ -167,7 +167,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/team_teacher"
                             android:textColor="@color/color_181818"
-                            android:textSize="15sp" />
+                            android:textSize="@dimen/sp15" />
 
                         <TextView
                             android:id="@+id/edit_team_teacher"
@@ -177,7 +177,7 @@
                             android:drawableRight="@drawable/ic_chevron_right_black_32dp"
                             android:gravity="center_vertical"
                             android:textColor="@color/color_4A4A4A"
-                            android:textSize="15sp"
+                            android:textSize="@dimen/sp15"
                             tools:text="云鹏" />
                     </LinearLayout>
 
@@ -194,7 +194,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/team_room"
                             android:textColor="@color/color_181818"
-                            android:textSize="15sp" />
+                            android:textSize="@dimen/sp15" />
 
                         <TextView
                             android:id="@+id/edit_class_room"
@@ -203,7 +203,7 @@
                             android:layout_marginLeft="@dimen/m30"
                             android:gravity="center_vertical"
                             android:textColor="@color/color_4A4A4A"
-                            android:textSize="15sp"
+                            android:textSize="@dimen/sp15"
                             tools:text="动感单车房|15人" />
                     </LinearLayout>
 
@@ -220,7 +220,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/team_name"
                             android:textColor="@color/color_181818"
-                            android:textSize="15sp" />
+                            android:textSize="@dimen/sp15" />
 
                         <TextView
                             android:id="@+id/edit_class_name"
@@ -230,7 +230,7 @@
                             android:gravity="center_vertical"
                             android:minHeight="@dimen/m31"
                             android:textColor="@color/color_4A4A4A"
-                            android:textSize="15sp"
+                            android:textSize="@dimen/sp15"
                             tools:text="动感单车" />
                     </LinearLayout>
 
@@ -247,7 +247,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/team_type"
                             android:textColor="@color/color_181818"
-                            android:textSize="15sp" />
+                            android:textSize="@dimen/sp15" />
 
                         <TextView
                             android:id="@+id/tv_select_type"
@@ -257,7 +257,7 @@
 
                             android:gravity="center_vertical"
                             android:textColor="@color/color_4A4A4A"
-                            android:textSize="15sp"
+                            android:textSize="@dimen/sp15"
                             tools:text="动感单车" />
                     </LinearLayout>
 
@@ -274,7 +274,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/team_goal"
                             android:textColor="@color/color_181818"
-                            android:textSize="15sp" />
+                            android:textSize="@dimen/sp15" />
 
                         <TextView
                             android:id="@+id/tv_xunlian_goal"
@@ -284,7 +284,7 @@
 
                             android:gravity="center_vertical"
                             android:textColor="@color/color_4A4A4A"
-                            android:textSize="15sp"
+                            android:textSize="@dimen/sp15"
                             tools:text="训练目标" />
                     </LinearLayout>
 
@@ -301,7 +301,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/team_difficulty"
                             android:textColor="@color/color_181818"
-                            android:textSize="15sp" />
+                            android:textSize="@dimen/sp15" />
 
                         <TextView
                             android:id="@+id/tv_xunlian_difficulty"
@@ -311,7 +311,7 @@
 
                             android:gravity="center_vertical"
                             android:textColor="@color/color_4A4A4A"
-                            android:textSize="15sp"
+                            android:textSize="@dimen/sp15"
                             tools:text="训练难度" />
                     </LinearLayout>
 
@@ -328,7 +328,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/class_time"
                             android:textColor="@color/color_181818"
-                            android:textSize="15sp" />
+                            android:textSize="@dimen/sp15" />
 
                         <TextView
                             android:id="@+id/tv_team_length"
@@ -337,7 +337,7 @@
                             android:layout_marginLeft="@dimen/m30"
                             android:gravity="center_vertical"
                             android:textColor="@color/color_4A4A4A"
-                            android:textSize="15sp"
+                            android:textSize="@dimen/sp15"
                             tools:text="45min" />
                     </LinearLayout>
 
@@ -354,7 +354,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/class_price"
                             android:textColor="@color/color_181818"
-                            android:textSize="15sp" />
+                            android:textSize="@dimen/sp15" />
 
                         <TextView
                             android:id="@+id/edit_price"
@@ -364,7 +364,7 @@
 
                             android:gravity="center_vertical"
                             android:textColor="@color/color_4A4A4A"
-                            android:textSize="15sp"
+                            android:textSize="@dimen/sp15"
                             tools:text="¥300" />
                     </LinearLayout>
 
@@ -381,7 +381,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/team_cycle"
                             android:textColor="@color/color_181818"
-                            android:textSize="15sp" />
+                            android:textSize="@dimen/sp15" />
 
                         <TextView
                             android:id="@+id/edit_cycle"
@@ -390,7 +390,7 @@
                             android:layout_marginLeft="@dimen/m30"
                             android:gravity="center_vertical"
                             android:textColor="@color/color_4A4A4A"
-                            android:textSize="15sp"
+                            android:textSize="@dimen/sp15"
                             tools:text="四周" />
                     </LinearLayout>
 
@@ -407,7 +407,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/team_date"
                             android:textColor="@color/color_181818"
-                            android:textSize="15sp" />
+                            android:textSize="@dimen/sp15" />
 
                         <TextView
                             android:id="@+id/edit_date"
@@ -416,7 +416,7 @@
                             android:layout_marginLeft="@dimen/m30"
                             android:gravity="center_vertical"
                             android:textColor="@color/color_4A4A4A"
-                            android:textSize="15sp"
+                            android:textSize="@dimen/sp15"
                             tools:text="2019-07-11  11:30-12:30" />
                     </LinearLayout>
 
@@ -441,7 +441,7 @@
                     android:layout_centerVertical="true"
                     android:text="@string/tv174"
                     android:textColor="@color/color_181818"
-                    android:textSize="15sp" />
+                    android:textSize="@dimen/sp15" />
 
                 <TextView
                     android:id="@+id/invite_teacher_number_tv"
@@ -452,7 +452,7 @@
                     android:layout_toEndOf="@+id/tv"
                     android:text="(0/20)"
                     android:textColor="@color/color_181818"
-                    android:textSize="15sp" />
+                    android:textSize="@dimen/sp15" />
 
                 <TextView
                     android:id="@+id/invite_teacher_btn"
@@ -465,7 +465,7 @@
                     android:gravity="center"
                     android:text="@string/tv175"
                     android:textColor="#ff22243d"
-                    android:textSize="13sp" />
+                    android:textSize="@dimen/sp13" />
             </RelativeLayout>
 
             <RelativeLayout

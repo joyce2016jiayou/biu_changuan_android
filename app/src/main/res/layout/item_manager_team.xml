@@ -21,7 +21,7 @@
             android:layout_marginLeft="@dimen/m10"
             android:layout_marginTop="@dimen/m10"
             android:textColor="@color/color_4A4A4A"
-            android:textSize="13sp"
+            android:textSize="@dimen/sp13"
             tool:text="2019-09-11" />
 
         <TextView
@@ -32,7 +32,7 @@
             android:layout_marginTop="@dimen/m10"
             android:layout_toRightOf="@+id/tv_time_day"
             android:textColor="@color/color_4A4A4A"
-            android:textSize="13sp"
+            android:textSize="@dimen/sp13"
             tool:text="周三" />
 
         <TextView
@@ -44,7 +44,7 @@
             android:layout_toLeftOf="@+id/tv_item"
             android:layout_toRightOf="@+id/tv_time_week"
             android:textColor="@color/color_4A4A4A"
-            android:textSize="13sp"
+            android:textSize="@dimen/sp13"
             tool:text="11:30-12:10" />
 
         <TextView
@@ -58,7 +58,7 @@
             android:gravity="center"
             android:text="已上架"
             android:textColor="@color/color_F9CE0F"
-            android:textSize="13sp" />
+            android:textSize="@dimen/sp13" />
 
         <TextView
             android:id="@+id/tv_cg_name"
@@ -68,7 +68,7 @@
             android:layout_marginLeft="@dimen/m10"
             android:layout_marginTop="@dimen/m20"
             android:textColor="@color/color_4A4A4A"
-            android:textSize="13sp"
+            android:textSize="@dimen/sp13"
             android:textStyle="bold"
             android:visibility="gone"
             tool:text="X-part SportTeam" />
@@ -87,7 +87,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:textColor="@color/color_4A4A4A"
-                android:textSize="13sp"
+                android:textSize="@dimen/sp13"
                 android:layout_marginRight="@dimen/m50"
                 tool:text="共感单车·山地骑行" />
 
@@ -98,7 +98,7 @@
                 android:layout_gravity="right"
                 android:layout_marginRight="@dimen/m20"
                 android:textColor="@color/color_4A4A4A"
-                android:textSize="15sp"
+                android:textSize="@dimen/sp15"
                 android:textStyle="bold"
                 android:visibility="visible"
                 tool:text="¥213" />
@@ -110,7 +110,7 @@
                 android:layout_gravity="right"
                 android:layout_marginRight="@dimen/m20"
                 android:textColor="@color/color_4A4A4A"
-                android:textSize="13sp"
+                android:textSize="@dimen/sp13"
                 android:visibility="gone"
                 tool:text="45min" />
         </FrameLayout>
@@ -132,7 +132,7 @@
                 android:background="@drawable/shape_btn_bg_gray_40"
                 android:gravity="center"
                 android:textColor="@color/white"
-                android:textSize="13sp"
+                android:textSize="@dimen/sp13"
                 tool:text="第2周" />
 
             <TextView
@@ -142,7 +142,7 @@
                 android:layout_marginLeft="@dimen/m15"
                 android:gravity="center"
                 android:textColor="@color/color_4A4A4A"
-                android:textSize="13sp"
+                android:textSize="@dimen/sp13"
                 tool:text="循环四周：每周一" />
 
             <TextView
@@ -152,7 +152,7 @@
                 android:layout_marginRight="@dimen/m20"
                 android:gravity="center_vertical|right"
                 android:textColor="@color/color_4A4A4A"
-                android:textSize="13sp"
+                android:textSize="@dimen/sp13"
                 tool:text="45min" />
 
         </LinearLayout>
@@ -177,7 +177,7 @@
                 android:layout_marginLeft="@dimen/m10"
                 android:gravity="center"
                 android:textColor="@color/color_4A4A4A"
-                android:textSize="13sp"
+                android:textSize="@dimen/sp13"
                 tool:text="动感单车房" />
 
             <TextView
@@ -187,7 +187,7 @@
                 android:layout_marginLeft="@dimen/m10"
                 android:gravity="center"
                 android:textColor="@color/color_4A4A4A"
-                android:textSize="13sp"
+                android:textSize="@dimen/sp13"
                 tool:text="15人" />
 
             <FrameLayout
@@ -206,7 +206,7 @@
                     android:gravity="center"
                     android:text="重新申请"
                     android:textColor="@color/color_181818"
-                    android:textSize="13sp"
+                    android:textSize="@dimen/sp13"
                     android:visibility="gone" />
             </FrameLayout>
 
@@ -232,7 +232,7 @@
                 android:gravity="center"
                 android:text="@string/cancel"
                 android:textColor="@color/color_22243D"
-                android:textSize="13sp" />
+                android:textSize="@dimen/sp13" />
         </FrameLayout>
 
         <LinearLayout
@@ -259,7 +259,7 @@
                     android:gravity="center"
                     android:text="拒绝"
                     android:textColor="@color/color_22243D"
-                    android:textSize="13sp" />
+                    android:textSize="@dimen/sp13" />
             </FrameLayout>
 
             <FrameLayout
@@ -276,7 +276,7 @@
                     android:gravity="center"
                     android:text="接受"
                     android:textColor="@color/color_22243D"
-                    android:textSize="13sp" />
+                    android:textSize="@dimen/sp13" />
             </FrameLayout>
         </LinearLayout>
     </RelativeLayout>

@@ -16,7 +16,7 @@
         android:layout_marginTop="@dimen/m50"
         android:layout_marginLeft="@dimen/m50"
         android:textColor="@color/color_6D7278"
-        android:textSize="13sp"
+        android:textSize="@dimen/sp13"
         android:layout_marginRight="@dimen/m50"/>
 
     <EditText
@@ -31,7 +31,7 @@
         android:digits="1234567890"
         android:background="@null"
         android:textColor="@color/color_000000"
-        android:textSize="18sp"/>
+        android:textSize="@dimen/sp18"/>
     <View
         android:layout_width="@dimen/m177"
         android:layout_height="@dimen/m1"
@@ -48,5 +48,5 @@
         android:text="@string/tv_send_yzm"
         android:layout_marginTop="@dimen/m30"
         android:textColor="@color/color_22243D"
-        android:textSize="20sp"/>
+        android:textSize="@dimen/sp20"/>
 </LinearLayout>

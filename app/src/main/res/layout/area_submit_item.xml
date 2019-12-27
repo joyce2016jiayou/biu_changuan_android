@@ -5,8 +5,8 @@
     android:background="@color/white"
     android:gravity="center_vertical"
     android:orientation="vertical"
-    android:paddingTop="10dp"
-    android:paddingBottom="10dp">
+    android:paddingTop="@dimen/m10"
+    android:paddingBottom="@dimen/m10">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,7 +19,7 @@
             android:layout_width="43dp"
             android:layout_height="43dp"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="@dimen/m20"
             android:src="@drawable/touxiang"
             app:civ_border_color="@android:color/transparent"
             app:civ_border_width="0dp" />
@@ -51,11 +51,11 @@
                         android:layout_height="wrap_content"
                         android:text="操房申请"
                         android:textColor="@color/top_heiziti"
-                        android:textSize="15sp" />
+                        android:textSize="@dimen/sp15" />
                     <LinearLayout
                         android:id="@+id/agree_icon"
                         android:layout_width="54dp"
-                        android:layout_height="25dp"
+                        android:layout_height="@dimen/m25"
                         android:layout_marginLeft="5dp"
                         android:visibility="gone"
                         android:background="@drawable/agree_bg"
@@ -66,14 +66,14 @@
                             android:layout_height="wrap_content"
                             android:text="@string/tv92"
                             android:textColor="@color/white"
-                            android:textSize="12sp"
+                            android:textSize="@dimen/sp12"
                             android:textStyle="normal" />
                     </LinearLayout>
                     <LinearLayout
                         android:id="@+id/jujue_icon"
                         android:layout_width="54dp"
                         android:layout_marginLeft="5dp"
-                        android:layout_height="25dp"
+                        android:layout_height="@dimen/m25"
                         android:visibility="gone"
                         android:background="@drawable/jujue_bg"
                         android:gravity="center">
@@ -83,7 +83,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/tv93"
                             android:textColor="@color/top_heiziti"
-                            android:textSize="12sp"
+                            android:textSize="@dimen/sp12"
                             android:textStyle="normal" />
                 </LinearLayout>
                 </LinearLayout>
@@ -97,7 +97,7 @@
                     android:maxLines="3"
                     android:text="发现新版本发现新版本发现新版本发现新版本发现新版本发现新版本发现新版本发现新版本发现新版本发现新版本"
                     android:textColor="@color/color_bbbbbb"
-                    android:textSize="12sp" />
+                    android:textSize="@dimen/sp12" />
             </LinearLayout>
 
             <TextView
@@ -105,10 +105,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="15sp"
+                android:layout_marginRight="@dimen/sp15"
                 android:text="2019.07.05 18:30"
                 android:textColor="@color/color_bbbbbb"
-                android:textSize="12sp" />
+                android:textSize="@dimen/sp12" />
 
         </RelativeLayout>
 
@@ -119,7 +119,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="86dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/m10"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -134,7 +134,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/tv90"
                 android:textColor="@color/top_heiziti"
-                android:textSize="16sp"
+                android:textSize="@dimen/sp16"
                 android:textStyle="normal" />
         </LinearLayout>
 
@@ -151,7 +151,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/tv91"
                 android:textColor="@color/white"
-                android:textSize="16sp"
+                android:textSize="@dimen/sp16"
                 android:textStyle="normal" />
         </LinearLayout>
     </LinearLayout>
@@ -162,12 +162,12 @@
         android:orientation="vertical"
         android:layout_marginLeft="66dp"
         android:visibility="gone"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="@dimen/m10"
         android:layout_height="wrap_content">
         <TextView
             android:textColor="@color/top_heiziti"
             android:text="@string/tv95"
-            android:textSize="13sp"
+            android:textSize="@dimen/sp13"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <EditText
@@ -179,7 +179,7 @@
             android:textColorHint="@color/color_bbbbbb"
             android:textColor="@color/top_heiziti"
             android:hint="@string/edit_hint26"
-            android:textSize="12sp"
+            android:textSize="@dimen/sp12"
             android:maxLength="140"
             android:layout_width="294dp"
             android:background="@drawable/layout_bg2"
@@ -199,7 +199,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/tv39"
                 android:textColor="@color/white"
-                android:textSize="16sp"
+                android:textSize="@dimen/sp16"
                 android:textStyle="normal" />
         </LinearLayout>
     </LinearLayout>

@@ -44,7 +44,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/tv151"
                         android:textColor="@color/top_heiziti"
-                        android:textSize="15sp" />
+                        android:textSize="@dimen/sp15" />
 
                     <EditText
                         android:id="@+id/changguan_name"
@@ -58,7 +58,7 @@
                         android:singleLine="true"
                         android:textColor="@color/top_heiziti"
                         android:textColorHint="@color/color_929292"
-                        android:textSize="15sp" />
+                        android:textSize="@dimen/sp15" />
                 </LinearLayout>
 
 
@@ -76,7 +76,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/tv20"
                         android:textColor="@color/top_heiziti"
-                        android:textSize="15sp" />
+                        android:textSize="@dimen/sp15" />
 
 
                     <RelativeLayout
@@ -99,7 +99,7 @@
                             android:singleLine="true"
                             android:textColor="@color/top_heiziti"
                             android:textColorHint="@color/color_9B9B9B"
-                            android:textSize="15sp" />
+                            android:textSize="@dimen/sp15" />
 
                         <ImageView
                             android:layout_width="@dimen/m20"
@@ -126,7 +126,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/tv21"
                         android:textColor="@color/top_heiziti"
-                        android:textSize="15sp" />
+                        android:textSize="@dimen/sp15" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -149,7 +149,7 @@
                             android:singleLine="true"
                             android:textColor="@color/top_heiziti"
                             android:textColorHint="@color/color_9B9B9B"
-                            android:textSize="15sp" />
+                            android:textSize="@dimen/sp15" />
 
                         <ImageView
                             android:layout_width="@dimen/m15"
@@ -174,7 +174,7 @@
                         android:layout_marginTop="@dimen/m5"
                         android:text="@string/tv27"
                         android:textColor="@color/top_heiziti"
-                        android:textSize="15sp" />
+                        android:textSize="@dimen/sp15" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -199,7 +199,7 @@
                                 android:singleLine="true"
                                 android:textColor="@color/top_heiziti"
                                 android:textColorHint="@color/color_9B9B9B"
-                                android:textSize="15sp" />
+                                android:textSize="@dimen/sp15" />
 
                             <LinearLayout
                                 android:layout_width="@dimen/m15"
@@ -216,7 +216,7 @@
                                 android:singleLine="true"
                                 android:textColor="@color/top_heiziti"
                                 android:textColorHint="@color/color_9B9B9B"
-                                android:textSize="15sp" />
+                                android:textSize="@dimen/sp15" />
 
                             <LinearLayout
                                 android:layout_width="@dimen/m15"
@@ -233,7 +233,7 @@
                                 android:singleLine="true"
                                 android:textColor="@color/top_heiziti"
                                 android:textColorHint="@color/color_9B9B9B"
-                                android:textSize="15sp" />
+                                android:textSize="@dimen/sp15" />
                         </LinearLayout>
 
                         <EditText
@@ -248,7 +248,7 @@
                             android:singleLine="true"
                             android:textColor="@color/top_heiziti"
                             android:textColorHint="@color/color_9B9B9B"
-                            android:textSize="15sp" />
+                            android:textSize="@dimen/sp15" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -266,7 +266,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/tv24"
                         android:textColor="@color/top_heiziti"
-                        android:textSize="15sp" />
+                        android:textSize="@dimen/sp15" />
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -294,7 +294,7 @@
                                 android:hint="时间"
                                 android:textColor="@color/top_heiziti"
                                 android:textColorHint="@color/color_929292"
-                                android:textSize="15sp" />
+                                android:textSize="@dimen/sp15" />
 
                             <LinearLayout
                                 android:layout_width="@dimen/m40"
@@ -311,7 +311,7 @@
                                 android:hint="时间"
                                 android:textColor="@color/top_heiziti"
                                 android:textColorHint="@color/color_929292"
-                                android:textSize="15sp" />
+                                android:textSize="@dimen/sp15" />
                         </LinearLayout>
 
                         <ImageView
@@ -338,7 +338,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/tv22"
                         android:textColor="@color/top_heiziti"
-                        android:textSize="15sp" />
+                        android:textSize="@dimen/sp15" />
 
                     <EditText
                         android:id="@+id/tell_edit"
@@ -355,7 +355,7 @@
                         android:singleLine="true"
                         android:textColor="@color/top_heiziti"
                         android:textColorHint="@color/color_929292"
-                        android:textSize="15sp" />
+                        android:textSize="@dimen/sp15" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -376,7 +376,7 @@
                             android:layout_alignParentLeft="true"
                             android:text="邮"
                             android:textColor="@color/top_heiziti"
-                            android:textSize="15sp" />
+                            android:textSize="@dimen/sp15" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -384,7 +384,7 @@
                             android:layout_alignParentRight="true"
                             android:text="箱"
                             android:textColor="@color/top_heiziti"
-                            android:textSize="15sp" />
+                            android:textSize="@dimen/sp15" />
                     </RelativeLayout>
 
 
@@ -400,7 +400,7 @@
                         android:singleLine="true"
                         android:textColor="@color/top_heiziti"
                         android:textColorHint="@color/color_9B9B9B"
-                        android:textSize="15sp" />
+                        android:textSize="@dimen/sp15" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -417,7 +417,7 @@
                         android:layout_alignParentLeft="true"
                         android:text="@string/tv161"
                         android:textColor="@color/top_heiziti"
-                        android:textSize="15sp" />
+                        android:textSize="@dimen/sp15" />
 
 
                     <LinearLayout
@@ -434,7 +434,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/tv_add"
                             android:textColor="@color/color_181818"
-                            android:textSize="13sp" />
+                            android:textSize="@dimen/sp13" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -468,7 +468,7 @@
                 android:layout_marginTop="@dimen/m20"
                 android:text="@string/tv33"
                 android:textColor="@color/top_heiziti"
-                android:textSize="15sp" />
+                android:textSize="@dimen/sp15" />
 
             <com.noplugins.keepfit.android.util.ui.MyGridView
                 android:id="@+id/tag_grid_view"
@@ -495,7 +495,7 @@
                     android:layout_gravity="center_vertical"
                     android:text="@string/tv29"
                     android:textColor="@color/top_heiziti"
-                    android:textSize="15sp" />
+                    android:textSize="@dimen/sp15" />
 
                 <RelativeLayout
                     android:layout_width="@dimen/m90"
@@ -548,7 +548,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/tv30"
                             android:textColor="@color/top_heiziti"
-                            android:textSize="15sp" />
+                            android:textSize="@dimen/sp15" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -556,7 +556,7 @@
                             android:layout_marginLeft="5dp"
                             android:text="("
                             android:textColor="@color/color_9B9B9B"
-                            android:textSize="13sp" />
+                            android:textSize="@dimen/sp13" />
 
                         <TextView
                             android:id="@+id/select_numbers_tv"
@@ -564,14 +564,14 @@
                             android:layout_height="wrap_content"
                             android:text="@string/tv31"
                             android:textColor="@color/color_9B9B9B"
-                            android:textSize="13sp" />
+                            android:textSize="@dimen/sp13" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text=")"
                             android:textColor="@color/color_9B9B9B"
-                            android:textSize="13sp" />
+                            android:textSize="@dimen/sp13" />
 
                     </LinearLayout>
 
@@ -582,7 +582,7 @@
                         android:gravity="bottom"
                         android:text="@string/tv32"
                         android:textColor="@color/color_9B9B9B"
-                        android:textSize="10sp" />
+                        android:textSize="@dimen/sp10" />
                 </LinearLayout>
 
                 <com.noplugins.keepfit.android.util.ui.jiugongge.CCRSortableNinePhotoLayout
@@ -624,7 +624,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/tv34"
                 android:textColor="@color/color_4A4A4A"
-                android:textSize="20sp" />
+                android:textSize="@dimen/sp20" />
         </LinearLayout>
 
 

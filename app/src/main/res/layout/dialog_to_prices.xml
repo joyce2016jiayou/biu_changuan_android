@@ -41,7 +41,7 @@
                 android:text="添加分时段价格"
                 android:gravity="center"
                 android:textColor="@color/color_4A4A4A"
-                android:textSize="18sp"
+                android:textSize="@dimen/sp18"
                 android:layout_marginTop="@dimen/m10"
                 android:layout_marginBottom="@dimen/m15"/>
             <LinearLayout
@@ -75,7 +75,7 @@
                         android:minWidth="@dimen/m100"
                         android:paddingLeft="@dimen/m10"
                         android:textColor="@color/color_22243D"
-                        android:textSize="13sp"
+                        android:textSize="@dimen/sp13"
                         android:drawableRight="@drawable/icon_xiala"
                         android:paddingRight="@dimen/m10"
                         android:background="@drawable/shape_btn_bg_gray"/>
@@ -121,7 +121,7 @@
                     android:layout_marginTop="@dimen/m20"
                     android:gravity="center"
                     android:text="@string/cancel"
-                    android:textSize="13sp"
+                    android:textSize="@dimen/sp13"
                     android:textColor="@color/contents_text"
                     android:background="@drawable/shape_btn_bg_gray"
                     android:layout_marginRight="@dimen/m15"
@@ -135,7 +135,7 @@
                     android:layout_marginTop="@dimen/m20"
                     android:gravity="center"
                     android:text="@string/tv_add"
-                    android:textSize="13sp"
+                    android:textSize="@dimen/sp13"
                     android:textColor="@color/contents_text"
                     android:background="@drawable/shape_btn_bg_yellow"
                     android:layout_marginRight="@dimen/m15"

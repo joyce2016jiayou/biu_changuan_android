@@ -17,10 +17,10 @@
         <ImageView
             android:id="@+id/back_btn"
             android:layout_width="28dp"
-            android:layout_height="18dp"
+            android:layout_height="@dimen/m18"
             android:layout_alignParentLeft="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="@dimen/m20"
             android:layout_marginBottom="30dp"
             android:src="@drawable/icon_back" />
 
@@ -30,10 +30,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="19dp"
+            android:layout_marginBottom="@dimen/m19"
             android:text="@string/tv77"
             android:textColor="@color/top_heiziti"
-            android:textSize="25sp"
+            android:textSize="@dimen/sp25"
             android:textStyle="bold" />
     </RelativeLayout>
 
@@ -42,11 +42,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginTop="@dimen/m10"
+        android:layout_marginRight="@dimen/m10"
         android:text="(0/5)"
         android:textColor="@color/color_6D7278"
-        android:textSize="13sp" />
+        android:textSize="@dimen/sp13" />
     <com.andview.refreshview.XRefreshView
         android:id="@+id/xrefreshview"
         android:layout_width="match_parent"

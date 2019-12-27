@@ -20,12 +20,12 @@
             android:layout_gravity="top"
             android:text="@string/tv49"
             android:textColor="@color/top_heiziti"
-            android:textSize="16sp"
+            android:textSize="@dimen/sp16"
             />
         <com.bt.mylibrary.TimeLineMarkerView
             android:id="@+id/lin_view"
             android:layout_marginLeft="5dp"
-            android:layout_width="15dp"
+            android:layout_width="@dimen/m15"
             android:layout_gravity="top"
             android:layout_height="match_parent"
             app:beginLine="@color/result_points"
@@ -66,7 +66,7 @@
                     android:gravity="center_horizontal"
                     android:text="尊巴"
                     android:textColor="@color/top_heiziti"
-                    android:textSize="16sp"
+                    android:textSize="@dimen/sp16"
                     android:textStyle="bold" />
 
                 <TextView
@@ -77,7 +77,7 @@
                     android:gravity="center_horizontal"
                     android:text="(9/15)"
                     android:textColor="@color/color_898989"
-                    android:textSize="16sp" />
+                    android:textSize="@dimen/sp16" />
 
                 <TextView
                     android:id="@+id/youyang_user_tv"
@@ -87,7 +87,7 @@
                     android:gravity="center_horizontal"
                     android:text="老高"
                     android:textColor="@color/color_898989"
-                    android:textSize="16sp" />
+                    android:textSize="@dimen/sp16" />
 
                 <TextView
                     android:id="@+id/money_tv"
@@ -97,7 +97,7 @@
                     android:gravity="center_horizontal"
                     android:text="￥40/人"
                     android:textColor="@color/color_898989"
-                    android:textSize="16sp" />
+                    android:textSize="@dimen/sp16" />
             </LinearLayout>
 
         </LinearLayout>
@@ -133,7 +133,7 @@
                     android:gravity="center_horizontal"
                     android:text="尊巴"
                     android:textColor="@color/top_heiziti"
-                    android:textSize="16sp"
+                    android:textSize="@dimen/sp16"
                     android:textStyle="bold" />
 
                 <TextView
@@ -144,7 +144,7 @@
                     android:gravity="center_horizontal"
                     android:text="(9/15)"
                     android:textColor="@color/color_898989"
-                    android:textSize="16sp" />
+                    android:textSize="@dimen/sp16" />
 
                 <TextView
                     android:id="@+id/yujia_user_tv"
@@ -154,7 +154,7 @@
                     android:gravity="center_horizontal"
                     android:text="老高"
                     android:textColor="@color/color_898989"
-                    android:textSize="16sp" />
+                    android:textSize="@dimen/sp16" />
 
                 <TextView
                     android:id="@+id/yujia_money_tv"
@@ -164,7 +164,7 @@
                     android:gravity="center_horizontal"
                     android:text="￥40/人"
                     android:textColor="@color/color_898989"
-                    android:textSize="16sp" />
+                    android:textSize="@dimen/sp16" />
             </LinearLayout>
 
         </LinearLayout>
@@ -201,7 +201,7 @@
                     android:gravity="center_horizontal"
                     android:text="尊巴"
                     android:textColor="@color/top_heiziti"
-                    android:textSize="16sp"
+                    android:textSize="@dimen/sp16"
                     android:textStyle="bold" />
 
                 <TextView
@@ -212,7 +212,7 @@
                     android:gravity="center_horizontal"
                     android:text="(9/15)"
                     android:textColor="@color/color_898989"
-                    android:textSize="16sp" />
+                    android:textSize="@dimen/sp16" />
 
                 <TextView
                     android:id="@+id/dance_user_tv"
@@ -222,7 +222,7 @@
                     android:gravity="center_horizontal"
                     android:text="老高"
                     android:textColor="@color/color_898989"
-                    android:textSize="16sp" />
+                    android:textSize="@dimen/sp16" />
 
                 <TextView
                     android:id="@+id/dance_money_tv"
@@ -232,7 +232,7 @@
                     android:gravity="center_horizontal"
                     android:text="￥40/人"
                     android:textColor="@color/color_898989"
-                    android:textSize="16sp" />
+                    android:textSize="@dimen/sp16" />
             </LinearLayout>
 
         </LinearLayout>

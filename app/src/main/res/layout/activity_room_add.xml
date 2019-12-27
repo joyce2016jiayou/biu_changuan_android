@@ -29,7 +29,7 @@
                 android:layout_marginLeft="@dimen/m20"
                 android:text="@string/tv_room_type"
                 android:textColor="@color/color_4A4A4A"
-                android:textSize="16sp" />
+                android:textSize="@dimen/sp16" />
 
             <lib.demo.spinner.MaterialSpinner
                 android:id="@+id/ms_room_type"
@@ -37,7 +37,7 @@
                 android:layout_height="@dimen/m31"
                 android:layout_centerVertical="true"
                 android:gravity="center"
-                android:textSize="13sp"
+                android:textSize="@dimen/sp13"
                 android:text="@string/tv_select"
                 android:layout_toRightOf="@+id/label_room_type"
                 spinner:ms_background_color="@color/edit_bg_color"
@@ -71,7 +71,7 @@
                 android:gravity="center_vertical"
                 android:text="@string/tv_room_name"
                 android:textColor="@color/color_4A4A4A"
-                android:textSize="16sp" />
+                android:textSize="@dimen/sp16" />
 
             <EditText
                 android:id="@+id/et_room_name"
@@ -94,7 +94,7 @@
                 android:gravity="center_vertical"
                 android:text="@string/tv_Capacity"
                 android:textColor="@color/color_4A4A4A"
-                android:textSize="16sp" />
+                android:textSize="@dimen/sp16" />
 
             <EditText
                 android:id="@+id/et_people_number"
@@ -124,5 +124,5 @@
         android:text="@string/tv_ok"
         android:layout_marginTop="@dimen/m60"
         android:textColor="@color/color_22243D"
-        android:textSize="20sp"/>
+        android:textSize="@dimen/sp20"/>
 </LinearLayout>

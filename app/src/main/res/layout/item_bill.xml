@@ -13,7 +13,7 @@
         android:id="@+id/touxiang_image"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="@dimen/m20"
         android:layout_gravity="center_vertical"
         android:src="@drawable/touxiang"
         app:civ_border_color="@android:color/transparent"
@@ -41,7 +41,7 @@
                     android:layout_height="wrap_content"
                     android:text="消息类型"
                     android:textColor="@color/top_heiziti"
-                    android:textSize="15sp" />
+                    android:textSize="@dimen/sp15" />
                 <TextView
                     android:id="@+id/content_tv"
                     android:layout_width="wrap_content"
@@ -49,14 +49,14 @@
                     android:layout_marginTop="9dp"
                     tools:text="发现新版本.发现新版本发现新版本发."
                     android:textColor="@color/color_bbbbbb"
-                    android:textSize="12sp" />
+                    android:textSize="@dimen/sp12" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="15dp"
+                android:layout_marginRight="@dimen/m15"
                 android:orientation="vertical"
                 android:layout_height="wrap_content">
                 <TextView
@@ -65,17 +65,17 @@
                     android:layout_height="wrap_content"
                     android:text="2019.07.05 18:30"
                     android:textColor="@color/color_bbbbbb"
-                    android:textSize="12sp" />
+                    android:textSize="@dimen/sp12" />
 
                 <TextView
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="@dimen/m10"
                     android:layout_gravity="right|bottom"
                     android:gravity="center"
                     android:id="@+id/tv_count"
                     android:layout_width="wrap_content"
                     android:text="-3000000"
                     android:textColor="@color/bottom_color"
-                    android:textSize="11sp"
+                    android:textSize="@dimen/sp11"
                     android:layout_height="wrap_content"
                     />
             </LinearLayout>

@@ -14,11 +14,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/rel1"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginLeft="@dimen/m20"
+        android:layout_marginTop="@dimen/m15"
         android:text="@string/tv109"
         android:textColor="@color/top_heiziti"
-        android:textSize="15sp"
+        android:textSize="@dimen/sp15"
         android:textStyle="bold" />
 
     <LinearLayout
@@ -32,7 +32,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="@dimen/m20"
             android:layout_marginTop="29dp">
 
             <TextView
@@ -41,15 +41,15 @@
                 android:layout_centerVertical="true"
                 android:text="@string/tv110"
                 android:textColor="@color/top_heiziti"
-                android:textSize="15sp" />
+                android:textSize="@dimen/sp15" />
 
 
             <CheckBox
                 android:id="@+id/cb_product_suggest"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="@dimen/m25"
+                android:layout_height="@dimen/m25"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="20dp"
+                android:layout_marginRight="@dimen/m20"
                 android:layout_alignParentRight="true"
                 android:background="@drawable/btn_checkbox"
                 android:button="@null"
@@ -59,8 +59,8 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp">
+            android:layout_marginLeft="@dimen/m20"
+            android:layout_marginTop="@dimen/m20">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -68,15 +68,15 @@
                 android:layout_centerVertical="true"
                 android:text="@string/tv111"
                 android:textColor="@color/top_heiziti"
-                android:textSize="15sp" />
+                android:textSize="@dimen/sp15" />
 
             <CheckBox
                 android:id="@+id/cb_fault_feedback"
-                android:layout_width="25dp"
+                android:layout_width="@dimen/m25"
                 android:layout_alignParentRight="true"
-                android:layout_height="25dp"
+                android:layout_height="@dimen/m25"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="20dp"
+                android:layout_marginRight="@dimen/m20"
                 android:background="@drawable/btn_checkbox"
                 android:button="@null"
                 android:checked="false" />
@@ -85,8 +85,8 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp">
+            android:layout_marginLeft="@dimen/m20"
+            android:layout_marginTop="@dimen/m20">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -94,15 +94,15 @@
                 android:layout_centerVertical="true"
                 android:text="@string/tv112"
                 android:textColor="@color/top_heiziti"
-                android:textSize="15sp" />
+                android:textSize="@dimen/sp15" />
 
             <CheckBox
                 android:id="@+id/cb_other"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="@dimen/m25"
+                android:layout_height="@dimen/m25"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="20dp"
+                android:layout_marginRight="@dimen/m20"
                 android:background="@drawable/btn_checkbox"
                 android:button="@null"
                 android:checked="false" />
@@ -111,28 +111,28 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="@dimen/m20"
             android:layout_marginTop="5dp"
             android:text="@string/tv113"
             android:textColor="@color/color_777777"
-            android:textSize="13sp" />
+            android:textSize="@dimen/sp13" />
 
         <EditText
             android:id="@+id/edit_content"
             android:layout_width="match_parent"
             android:layout_height="106dp"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="@dimen/m20"
             android:layout_marginTop="5dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginRight="@dimen/m20"
             android:background="@drawable/layout_bg2"
             android:gravity="left|top"
             android:hint="@string/edit_hint30"
             android:maxLength="140"
-            android:paddingLeft="10dp"
+            android:paddingLeft="@dimen/m10"
             android:paddingTop="5dp"
             android:textColor="@color/top_heiziti"
             android:textColorHint="@color/color_bbbbbb"
-            android:textSize="13sp" />
+            android:textSize="@dimen/sp13" />
 
     </LinearLayout>
 
@@ -142,11 +142,11 @@
         android:layout_width="@dimen/m209"
         android:layout_height="@dimen/m50"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="@dimen/m20"
         android:layout_marginTop="@dimen/m30"
         android:background="@drawable/shape_btn_bg_yellow_40"
         android:text="@string/tv39"
         android:textColor="@color/color_181818"
-        android:textSize="20sp"
+        android:textSize="@dimen/sp20"
         android:gravity="center"/>
 </LinearLayout>

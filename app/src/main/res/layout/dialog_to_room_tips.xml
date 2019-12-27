@@ -41,7 +41,7 @@
                 android:text="@string/tv_delete_room"
                 android:gravity="center"
                 android:textColor="@color/color_4A4A4A"
-                android:textSize="18sp"
+                android:textSize="@dimen/sp18"
                 android:layout_marginTop="@dimen/m10"
                 android:layout_marginBottom="@dimen/m15"/>
             <TextView
@@ -50,7 +50,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/tv_room_delete_tips"
                 android:gravity="center_vertical"
-                android:textSize="15sp"
+                android:textSize="@dimen/sp15"
                 android:textColor="@color/color_4A4A4A"
                 android:layout_below="@+id/label_delete_room"
                 android:layout_marginLeft="@dimen/m50"
@@ -66,7 +66,7 @@
                 android:layout_below="@+id/tv_username"
                 android:gravity="center"
                 android:text="@string/tv_know"
-                android:textSize="13sp"
+                android:textSize="@dimen/sp13"
                 android:textColor="@color/contents_text"
                 android:background="@drawable/shape_btn_bg_yellow"
                 android:layout_marginRight="@dimen/m15"

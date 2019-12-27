@@ -21,7 +21,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/color_4A4A4A"
-                android:textSize="18sp"
+                android:textSize="@dimen/sp18"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/m15"
                 android:layout_gravity="center_horizontal"
@@ -32,7 +32,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="¥3000"
-                android:textSize="20sp"
+                android:textSize="@dimen/sp20"
                 android:layout_marginTop="@dimen/m20"
                 android:textStyle="bold"
                 android:layout_gravity="center_horizontal"
@@ -43,16 +43,16 @@
                 android:id="@+id/et_password"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/m42"
-                android:layout_margin="10dp"
-                android:layout_marginTop="20dp"
+                android:layout_margin="@dimen/m10"
+                android:layout_marginTop="@dimen/m20"
                 android:layout_marginLeft="@dimen/m20"
                 android:layout_marginRight="@dimen/m20"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
                 android:inputType="number"
                 android:maxLength="6"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
+                android:paddingLeft="@dimen/m10"
+                android:paddingRight="@dimen/m10"
                 app:blockLineWidth="1dp"
                 app:blockNormalColor="@android:color/black"
                 app:blockShape="stroke"
@@ -73,7 +73,7 @@
                 android:text="忘记密码"
                 android:textColor="@color/color_F9CE0F"
                 android:layout_marginRight="@dimen/m20"
-                android:textSize="10sp"/>
+                android:textSize="@dimen/sp10"/>
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_marginTop="@dimen/m25"
@@ -98,7 +98,7 @@
                         android:layout_height="wrap_content"
                         android:textStyle="normal"
                         android:text="@string/cancel"
-                        android:textSize="18sp"
+                        android:textSize="@dimen/sp18"
                         android:textColor="@color/top_heiziti"
                         />
             </LinearLayout>
@@ -117,7 +117,7 @@
                         android:layout_height="wrap_content"
                         android:textStyle="normal"
                         android:text="确认"
-                        android:textSize="18sp"
+                        android:textSize="@dimen/sp18"
                         android:textColor="@color/contents_text"
                         />
             </LinearLayout>
