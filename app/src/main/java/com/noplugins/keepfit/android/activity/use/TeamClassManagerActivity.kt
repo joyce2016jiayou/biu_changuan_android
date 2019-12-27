@@ -28,8 +28,6 @@ import com.noplugins.keepfit.android.fragment.use.team.InviteFragment
 import com.noplugins.keepfit.android.fragment.use.team.ShelvesFragment
 import com.noplugins.keepfit.android.global.AppConstants
 import com.noplugins.keepfit.android.util.SpUtils
-import kotlinx.android.synthetic.main.activity_teacher_manager.back_btn
-import kotlinx.android.synthetic.main.activity_teacher_manager.title_tv
 import kotlinx.android.synthetic.main.activity_teacher_manager.view_pager
 import kotlinx.android.synthetic.main.activity_team_class_manager.*
 import kotlinx.android.synthetic.main.discovers_fragment.*
