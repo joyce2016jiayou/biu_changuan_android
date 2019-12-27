@@ -102,6 +102,7 @@ public class KeepFitActivity extends BaseActivity {
 
     @Override
     public void initBundle(Bundle bundle) {
+
     }
 
 

@@ -5,7 +5,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
@@ -19,7 +18,6 @@ import com.noplugins.keepfit.android.bean.DictionaryeBean
 import com.noplugins.keepfit.android.bean.use.RoomBean
 import com.noplugins.keepfit.android.bean.use.RoomDelBean
 import com.noplugins.keepfit.android.global.AppConstants
-import com.noplugins.keepfit.android.global.PublicPopControl
 import com.noplugins.keepfit.android.util.BaseUtils
 import com.noplugins.keepfit.android.util.SpUtils
 import com.noplugins.keepfit.android.util.net.Network
@@ -92,18 +90,22 @@ class RoomInfoActivity : BaseActivity() {
 
 
     private fun deletePop(position:Int) {
-        PublicPopControl.alert_dialog_center(this) { view, popup ->
-            val content = view.findViewById<TextView>(R.id.pop_content)
-            val title = view.findViewById<TextView>(R.id.pop_title)
-            content.setText(R.string.tv_delete_info)
-            title.setText(R.string.tv_delete_room)
-            view.findViewById<LinearLayout>(R.id.cancel_btn)
-                    .setOnClickListener {
-                        popup.dismiss()
-                    }
-            view.findViewById<LinearLayout>(R.id.sure_btn)
-                    .setOnClickListener {deleteRoom(position)}
-        }
+        XPopup.Builder(this)
+                .autoOpenSoftInput(false)
+                .autoFocusEditText(false)
+                .popupAnimation(PopupAnimation.ScaleAlphaFromCenter)
+                .asCustom(CenterPopupView(this,R.layout.dialog_to_room_delete,
+                        ViewCallBack { view, popup ->
+
+                            view.findViewById<TextView>(R.id.tv_cancel)
+                                    .setOnClickListener {
+                                        popup.dismiss()
+                                    }
+
+                            view.findViewById<TextView>(R.id.tv_add)
+                                    .setOnClickListener {deleteRoom(position)}
+
+                        })).show()
     }
 
     /**

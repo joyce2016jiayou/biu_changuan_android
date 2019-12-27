@@ -10,6 +10,7 @@ import android.widget.RelativeLayout;
 import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.activity.mine.XieYiActivity;
 import com.noplugins.keepfit.android.base.BaseActivity;
+import com.noplugins.keepfit.android.callback.OnclickCallBack;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -19,8 +20,7 @@ public class CooperateActivity extends BaseActivity {
     RelativeLayout yinsizhengce_btn;
     @BindView(R.id.changguan_hezuo_btn)
     RelativeLayout changguan_hezuo_btn;
-    @BindView(R.id.back_btn)
-    ImageView back_btn;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,23 +36,38 @@ public class CooperateActivity extends BaseActivity {
     public void initView() {
         setContentLayout(R.layout.activity_cooperate);
         ButterKnife.bind(this);
-        isShowTitle(false);
+        isShowTitle(true);
+        setTitleView(R.string.tv180);
+        title_left_button_onclick_listen(new OnclickCallBack() {
+            @Override
+            public void onclick() {
+                back();
 
+            }
+        });
+
+    }
+
+    private void back() {
+        setResult(3);
+        finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        back();
     }
 
     @Override
     public void doBusiness(Context mContext) {
-        back_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+
+
         yinsizhengce_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(CooperateActivity.this, XieYiActivity.class);
-                intent.putExtra("type",1);
+                intent.putExtra("type", 1);
                 startActivity(intent);
             }
         });
@@ -61,7 +76,7 @@ public class CooperateActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(CooperateActivity.this, XieYiActivity.class);
-                intent.putExtra("type",2);
+                intent.putExtra("type", 2);
                 startActivity(intent);
             }
         });

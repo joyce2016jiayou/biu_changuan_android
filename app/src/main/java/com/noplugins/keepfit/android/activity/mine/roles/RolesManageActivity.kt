@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
 import android.widget.EditText
-import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,7 +16,6 @@ import com.noplugins.keepfit.android.adapter.mine.RoleV11Adapter
 import com.noplugins.keepfit.android.base.BaseActivity
 import com.noplugins.keepfit.android.entity.RoleBean
 import com.noplugins.keepfit.android.global.AppConstants
-import com.noplugins.keepfit.android.global.PublicPopControl
 import com.noplugins.keepfit.android.util.BaseUtils
 import com.noplugins.keepfit.android.util.SpUtils
 import com.noplugins.keepfit.android.util.data.StringsHelper
@@ -124,19 +122,24 @@ class RolesManageActivity : BaseActivity() {
 
 
     private fun deletePop(position: Int){
+        XPopup.Builder(this)
+                .autoOpenSoftInput(false)
+                .autoFocusEditText(false)
+                .popupAnimation(PopupAnimation.ScaleAlphaFromCenter)
+                .asCustom(CenterPopupView(this,R.layout.dialog_to_roles_delete,
+                        ViewCallBack { view, popup ->
 
-        PublicPopControl.alert_dialog_center(this) { view, popup ->
-            val content = view.findViewById<TextView>(R.id.pop_content)
-            val title = view.findViewById<TextView>(R.id.pop_title)
-            content.setText(R.string.label_role_del)
-            title.setText("确认删除")
-            view.findViewById<LinearLayout>(R.id.cancel_btn)
-                    .setOnClickListener {
-                        popup.dismiss()
-                    }
-            view.findViewById<LinearLayout>(R.id.sure_btn)
-                    .setOnClickListener {  deleteRoles(popup,position)}
-        }
+                            view.findViewById<TextView>(R.id.tv_cancel)
+                                    .setOnClickListener {
+                                        popup.dismiss()
+                                    }
+
+                            view.findViewById<TextView>(R.id.tv_add)
+                                    .setOnClickListener {
+                                        deleteRoles(popup,position)
+                                    }
+
+                        })).show()
     }
     /**
      * 获取当前已绑定的用户

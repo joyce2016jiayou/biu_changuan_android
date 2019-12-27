@@ -7,32 +7,6 @@
     android:orientation="vertical"
     tools:context=".activity.mine.CostAccountingActivity">
 
-    <FrameLayout
-        android:id="@+id/fl_head"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/m70">
-
-        <ImageView
-            android:id="@+id/back_btn"
-            android:layout_width="@dimen/m22"
-            android:layout_height="@dimen/m19"
-            android:layout_gravity="left|center_vertical"
-            android:layout_marginLeft="@dimen/m20"
-            android:layout_marginTop="@dimen/m20"
-            android:src="@drawable/icon_back" />
-
-        <TextView
-            android:id="@+id/title_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/m20"
-            android:text="@string/tv180"
-            android:textColor="@color/contents_text"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-    </FrameLayout>
-
     <www.linwg.org.lib.LCardView
         android:id="@+id/clander_layout"
         android:layout_width="match_parent"

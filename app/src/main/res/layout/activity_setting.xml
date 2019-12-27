@@ -1,40 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <include layout="@layout/title_activity"
-        android:visibility="visible"/>
+
+    <include
+        layout="@layout/title_activity"
+        android:visibility="visible" />
 
     <www.linwg.org.lib.LCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cornerRadius="@dimen/m8">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <RelativeLayout
                 android:id="@+id/rl_account"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/m51">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/m20"
                     android:text="@string/tv_anquan"
                     android:textColor="@color/color_4A4A4A"
-                    android:textSize="16sp"
-                    android:layout_marginLeft="@dimen/m20"
-                    android:layout_centerVertical="true"/>
+                    android:textSize="16sp" />
+
                 <ImageView
                     android:layout_width="@dimen/m16"
                     android:layout_height="@dimen/m16"
-                    android:src="@drawable/icon_right"
                     android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
                     android:layout_marginRight="@dimen/m20"
-                    android:layout_centerVertical="true"/>
+                    android:src="@drawable/icon_right" />
             </RelativeLayout>
         </LinearLayout>
     </www.linwg.org.lib.LCardView>
@@ -43,50 +48,56 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cornerRadius="@dimen/m8">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <RelativeLayout
                 android:id="@+id/rl_about"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/m50">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/m20"
                     android:text="@string/tv_about"
                     android:textColor="@color/color_4A4A4A"
-                    android:textSize="16sp"
-                    android:layout_marginLeft="@dimen/m20"
-                    android:layout_centerVertical="true"/>
+                    android:textSize="16sp" />
+
                 <ImageView
                     android:layout_width="@dimen/m16"
                     android:layout_height="@dimen/m16"
-                    android:src="@drawable/icon_right"
                     android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
                     android:layout_marginRight="@dimen/m20"
-                    android:layout_centerVertical="true"/>
+                    android:src="@drawable/icon_right" />
             </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/rl_wenti"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/m50">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/m20"
                     android:text="@string/tv_wenti"
                     android:textColor="@color/color_4A4A4A"
-                    android:textSize="16sp"
-                    android:layout_marginLeft="@dimen/m20"
-                    android:layout_centerVertical="true"/>
+                    android:textSize="16sp" />
+
                 <ImageView
                     android:layout_width="@dimen/m16"
                     android:layout_height="@dimen/m16"
-                    android:src="@drawable/icon_right"
                     android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
                     android:layout_marginRight="@dimen/m20"
-                    android:layout_centerVertical="true"/>
+                    android:src="@drawable/icon_right" />
             </RelativeLayout>
 
         </LinearLayout>
@@ -96,25 +107,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cornerRadius="@dimen/m8">
+
         <RelativeLayout
             android:id="@+id/rl_quit"
             android:layout_width="match_parent"
             android:layout_height="@dimen/m51">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/m20"
                 android:text="@string/tv_quit"
                 android:textColor="@color/color_4A4A4A"
-                android:textSize="16sp"
-                android:layout_marginLeft="@dimen/m20"
-                android:layout_centerVertical="true"/>
+                android:textSize="16sp" />
+
             <ImageView
                 android:layout_width="@dimen/m16"
                 android:layout_height="@dimen/m16"
-                android:src="@drawable/icon_right"
                 android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/m20"
-                android:layout_centerVertical="true"/>
+                android:src="@drawable/icon_right" />
         </RelativeLayout>
     </www.linwg.org.lib.LCardView>
 

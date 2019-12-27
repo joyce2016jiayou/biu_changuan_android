@@ -30,12 +30,14 @@ class CostAccountingActivity : BaseActivity() {
     override fun initBundle(parms: Bundle?) {
         if (parms != null) {
             form = parms.getString("form", "main")
-            Log.d("tag__AAA",form)
+            Log.d("tag__AAA", form)
         }
     }
 
     override fun initView() {
         setContentView(R.layout.activity_cost_accounting)
+        isShowTitle(true)
+        setTitleView(R.string.tv188)
         val filters = arrayOf(CashierInputFilter())
         et_fangzu.filters = filters
         et_nengyuan.filters = filters
@@ -57,11 +59,11 @@ class CostAccountingActivity : BaseActivity() {
         back_btn.setOnClickListener {
             if (form == "pay" && cost != 0.0) {
                 val mIntent = Intent()//没有任何参数（意图），只是用来传递数据
-                mIntent.putExtra("cost", ""+cost)
+                mIntent.putExtra("cost", "" + cost)
                 setResult(RESULT_OK, mIntent)
-                Log.d("tag__BBB",form)
+                Log.d("tag__BBB", form)
             } else {
-                setResult(SpUtils.getInt(applicationContext,AppConstants.FRAGMENT_SIZE)-1)
+                setResult(SpUtils.getInt(applicationContext, AppConstants.FRAGMENT_SIZE) - 1)
             }
 
 
@@ -71,9 +73,9 @@ class CostAccountingActivity : BaseActivity() {
     }
 
     private fun count() {
-        if (et_fangzu.text.toString() == ""||et_nengyuan.text.toString()==""||
-                et_renyuan.text.toString()==""||et_yunying.text.toString()==""||
-                et_renci.text.toString()=="") {
+        if (et_fangzu.text.toString() == "" || et_nengyuan.text.toString() == "" ||
+                et_renyuan.text.toString() == "" || et_yunying.text.toString() == "" ||
+                et_renci.text.toString() == "") {
             tv_result.text = "计算错误，请输入正确的内容"
             return
         }
@@ -97,7 +99,7 @@ class CostAccountingActivity : BaseActivity() {
                         params,
                         ProgressSubscriber("成本核算", object : SubscriberOnNextListener<Bean<Any>> {
                             override fun onNext(result: Bean<Any>) {
-                                SpUtils.putString(applicationContext,AppConstants.COST,"$cost")
+                                SpUtils.putString(applicationContext, AppConstants.COST, "$cost")
                                 Toast.makeText(applicationContext, "上传成功", Toast.LENGTH_SHORT).show()
                             }
 
@@ -109,13 +111,13 @@ class CostAccountingActivity : BaseActivity() {
     }
 
     override fun onBackPressed() {
-        Log.d("pay","pay:"+form)
-        if (form == "pay" && cost!=0.0) {
+        Log.d("pay", "pay:" + form)
+        if (form == "pay" && cost != 0.0) {
             val mIntent = Intent()//没有任何参数（意图），只是用来传递数据
-            mIntent.putExtra("cost", ""+cost)
+            mIntent.putExtra("cost", "" + cost)
             setResult(RESULT_OK, mIntent)
         } else {
-            setResult(SpUtils.getInt(applicationContext,AppConstants.FRAGMENT_SIZE)-1)
+            setResult(SpUtils.getInt(applicationContext, AppConstants.FRAGMENT_SIZE) - 1)
         }
 
 
