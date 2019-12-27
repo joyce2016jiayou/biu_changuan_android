@@ -26,6 +26,7 @@ import com.noplugins.keepfit.android.bean.use.ManagerTeamBean
 import com.noplugins.keepfit.android.bean.use.RoomBean
 import com.noplugins.keepfit.android.entity.ClassDetailEntity
 import com.noplugins.keepfit.android.global.AppConstants
+import com.noplugins.keepfit.android.global.PublicPopControl
 import com.noplugins.keepfit.android.util.BaseUtils
 import com.noplugins.keepfit.android.util.GlideRoundTransform
 import com.noplugins.keepfit.android.util.SpUtils
@@ -110,8 +111,8 @@ class TeamInfoActivity : BaseActivity() {
                 if (tv_class_type.text.toString() == "已上架" ||
                         tv_class_type.text.toString() == "申请成功" ||
                         tv_class_type.text.toString() == "申请中" ||
-                        tv_class_type.text.toString() == "申请失败"||
-                        tv_class_type.text.toString() == "邀请成功"||
+                        tv_class_type.text.toString() == "申请失败" ||
+                        tv_class_type.text.toString() == "邀请成功" ||
                         tv_class_type.text.toString() == "拒绝申请") {
                     val intent = Intent(this, TeacherDetailActivity::class.java)
                     val bundle = Bundle()
@@ -213,7 +214,7 @@ class TeamInfoActivity : BaseActivity() {
                 statusMsg == "申请成功" ||
                 statusMsg == "申请中" ||
                 statusMsg == "申请失败" ||
-                statusMsg == "邀请成功"||
+                statusMsg == "邀请成功" ||
                 statusMsg == "拒绝申请") {
             edit_team_teacher.text = managerTeamBean.teacherList[0].teacherName
             teacherNum = managerTeamBean.teacherList[0].teacherNum
@@ -483,86 +484,59 @@ class TeamInfoActivity : BaseActivity() {
      * 取消
      */
     private fun toCancel(view1: TextView) {
-        val popupWindow = CommonPopupWindow.Builder(this)
-                .setView(R.layout.dialog_to_room_delete)
-                .setBackGroundLevel(0.5f)//0.5f
-                .setAnimationStyle(R.style.main_menu_animstyle)
-                .setWidthAndHeight(
-                        WindowManager.LayoutParams.MATCH_PARENT,
-                        WindowManager.LayoutParams.MATCH_PARENT
-                )
-                .setOutSideTouchable(true).create()
-        popupWindow.showAsDropDown(view1)
-
-<<<<<<< HEAD
-        /**设置逻辑 */
-        val view = popupWindow.contentView
-        val cancel = view.findViewById<TextView>(R.id.tv_cancel)
-        val sure = view.findViewById<TextView>(R.id.tv_add)
-        val tvInfo = view.findViewById<TextView>(R.id.tv_username)
-        val title = view.findViewById<TextView>(R.id.label_delete_room)
-        tvInfo.text = "确定取消邀请?"
-        title.text = "取消邀请"
-        cancel.setOnClickListener {
-            popupWindow.dismiss()
-        }
-        sure.setOnClickListener {
-            popupWindow.dismiss()
-            //去申请
-            cancelCourse()
-//
-=======
         PublicPopControl.alert_dialog_center(this) { view, popup ->
-            val content = view.findViewById<TextView>(R.id.pop_content)
-            val title = view.findViewById<TextView>(R.id.pop_title)
-            content.setText("确定取消邀请?")
-            title.setText("取消邀请")
-            view.findViewById<LinearLayout>(R.id.cancel_btn)
-                    .setOnClickListener {
-                        popup.dismiss()
-                    }
-            view.findViewById<LinearLayout>(R.id.sure_btn)
-                    .setOnClickListener {  //去申请
-                        popup.dismiss()
-                        cancelCourse()}
->>>>>>> origin/develop
-        }
-    }
-
-
-    private fun cancelCourse() {
-        val params = HashMap<String, Any>()
-        params["courseNum"] = courseNum
-        val subscription = Network.getInstance("团课取消邀请", this)
-                .cancelCourseByArea(
-                        params,
-                        ProgressSubscriber("团课取消邀请", object : SubscriberOnNextListener<Bean<Any>> {
-                            override fun onNext(result: Bean<Any>) {
-                                //上架成功！
-                                if (result.code == 0) {
-                                    EventBus.getDefault().post(AppConstants.TEAM_YQ_REFUSE)
-                                    finish()
-                                }
-
-                                SuperCustomToast.getInstance(this@TeamInfoActivity)
-                                        .show(result.message)
-                            }
-
-                            override fun onError(error: String) {
-                                SuperCustomToast.getInstance(this@TeamInfoActivity)
-                                        .show(error)
-                            }
-                        }, this, false)
-                )
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data1: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data1)
-        if (requestCode == 1) {
-            if (resultCode == RESULT_OK) {
-                requestData(courseNum)
+            val cancel = view.findViewById<TextView>(R.id.tv_cancel)
+            val sure = view.findViewById<TextView>(R.id.tv_add)
+            val tvInfo = view.findViewById<TextView>(R.id.tv_username)
+            val title = view.findViewById<TextView>(R.id.label_delete_room)
+            tvInfo.text = "确定取消邀请?"
+            title.text = "取消邀请"
+            cancel.setOnClickListener {
+                popup.dismiss()
+            }
+            sure.setOnClickListener {
+                popup.dismiss()
+                //去申请
+                cancelCourse()
             }
         }
+
+}
+
+
+private fun cancelCourse() {
+    val params = HashMap<String, Any>()
+    params["courseNum"] = courseNum
+    val subscription = Network.getInstance("团课取消邀请", this)
+            .cancelCourseByArea(
+                    params,
+                    ProgressSubscriber("团课取消邀请", object : SubscriberOnNextListener<Bean<Any>> {
+                        override fun onNext(result: Bean<Any>) {
+                            //上架成功！
+                            if (result.code == 0) {
+                                EventBus.getDefault().post(AppConstants.TEAM_YQ_REFUSE)
+                                finish()
+                            }
+
+                            SuperCustomToast.getInstance(this@TeamInfoActivity)
+                                    .show(result.message)
+                        }
+
+                        override fun onError(error: String) {
+                            SuperCustomToast.getInstance(this@TeamInfoActivity)
+                                    .show(error)
+                        }
+                    }, this, false)
+            )
+}
+
+override fun onActivityResult(requestCode: Int, resultCode: Int, data1: Intent?) {
+    super.onActivityResult(requestCode, resultCode, data1)
+    if (requestCode == 1) {
+        if (resultCode == RESULT_OK) {
+            requestData(courseNum)
+        }
     }
+}
 
 }

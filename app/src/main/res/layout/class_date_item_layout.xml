@@ -90,37 +90,60 @@
                 android:layout_below="@+id/rel1"
                 android:layout_marginTop="@dimen/m10">
 
-                <TextView
-                    android:id="@+id/tv_left"
+                <LinearLayout
+                    android:id="@+id/lin_left_viwe"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/m15"
-                    android:text="@string/tv165"
-                    android:textColor="#ff4a4a4a"
-                    android:textSize="@dimen/sp13" />
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_left"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/m15"
+                        android:text="@string/tv165"
+                        android:textColor="#ff4a4a4a"
+                        android:textSize="@dimen/sp13" />
+
+                    <TextView
+                        android:id="@+id/coach_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/m20"
+                        android:layout_toEndOf="@+id/tv_left"
+                        android:ellipsize="end"
+                        android:singleLine="true"
+                        android:text=""
+                        android:textColor="#ff4a4a4a"
+                        android:textSize="@dimen/sp13" />
+
+                    <ImageView
+                        android:id="@+id/phone_btn"
+                        android:layout_width="@dimen/m25"
+                        android:layout_height="@dimen/m25"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/m10"
+                        android:layout_toEndOf="@+id/coach_name"
+                        android:src="@drawable/call" />
+                </LinearLayout>
 
                 <TextView
-                    android:id="@+id/coach_name"
+                    android:id="@+id/lin_right_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/m10"
-                    android:layout_toEndOf="@+id/tv_left"
                     android:ellipsize="end"
                     android:singleLine="true"
-                    android:text="张晗"
+                    android:text="场馆锻炼"
                     android:textColor="#ff4a4a4a"
                     android:textSize="@dimen/sp13" />
 
-                <ImageView
-                    android:id="@+id/phone_btn"
-                    android:layout_width="@dimen/m25"
-                    android:layout_height="@dimen/m25"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/m10"
-                    android:layout_toEndOf="@+id/coach_name"
-                    android:src="@drawable/call" />
+
 
                 <TextView
                     android:id="@+id/status1_tv"
@@ -138,16 +161,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/rel2"
-                android:layout_marginBottom="@dimen/m10"
-                android:layout_marginTop="@dimen/m10">
+                android:layout_marginTop="@dimen/m10"
+                android:layout_marginBottom="@dimen/m10">
 
                 <LinearLayout
                     android:id="@+id/type_icon_bg"
                     android:layout_width="@dimen/m23"
                     android:layout_height="@dimen/m23"
                     android:layout_alignParentLeft="true"
-                    android:layout_marginLeft="@dimen/m15"
                     android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/m15"
                     android:background="@drawable/zi_bg"
                     android:gravity="center">
 
@@ -173,12 +196,12 @@
                     android:textSize="@dimen/sp13" />
 
                 <ImageView
-                    android:layout_toEndOf="@+id/phone_or_name_tv"
                     android:id="@+id/phone_img"
                     android:layout_width="@dimen/m25"
-                    android:layout_centerVertical="true"
                     android:layout_height="@dimen/m25"
+                    android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/m20"
+                    android:layout_toEndOf="@+id/phone_or_name_tv"
                     android:src="@drawable/call"
                     android:visibility="gone" />
 
@@ -186,11 +209,11 @@
                     android:id="@+id/status_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/m26"
                     android:text="已签"
                     android:textColor="#ff929292"
-                    android:layout_marginRight="@dimen/m26"
                     android:textSize="@dimen/sp13" />
             </RelativeLayout>
         </RelativeLayout>

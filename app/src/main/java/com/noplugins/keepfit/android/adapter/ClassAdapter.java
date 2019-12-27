@@ -127,7 +127,8 @@ public class ClassAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder> i
                 holder.phone_img.setVisibility(View.GONE);
                 holder.status_tv.setVisibility(View.GONE);
                 holder.status1_tv.setText(resultBean.getTeacherCheckIn());
-
+                holder.lin_left_viwe.setVisibility(View.VISIBLE);
+                holder.lin_right_view.setVisibility(View.GONE);
             } else if (resultBean.getCourseType() == 2) {//私教
                 holder.type_icon_bg.setBackgroundResource(R.drawable.trainer);
                 holder.coach_name.setText(resultBean.getTeacherName());
@@ -137,15 +138,18 @@ public class ClassAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder> i
                 holder.status_tv.setVisibility(View.VISIBLE);
                 holder.status_tv.setText(resultBean.getUserCheckIn());
                 holder.status1_tv.setText(resultBean.getTeacherCheckIn());
-
+                holder.lin_left_viwe.setVisibility(View.VISIBLE);
+                holder.lin_right_view.setVisibility(View.GONE);
             } else {//健身
                 holder.type_icon_bg.setBackgroundResource(R.drawable.venue);
                 holder.coach_name.setText(resultBean.getUserName());
                 holder.phone_or_name_tv.setVisibility(View.INVISIBLE);
-                //holder.phone_or_name_tv.setText(resultBean.getUserName());
                 holder.phone_img.setVisibility(View.GONE);
                 holder.status1_tv.setText(resultBean.getUserCheckIn());
                 holder.status_tv.setVisibility(View.GONE);
+                holder.lin_left_viwe.setVisibility(View.GONE);
+                holder.lin_right_view.setVisibility(View.VISIBLE);
+
             }
 
 
@@ -298,9 +302,9 @@ public class ClassAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder> i
     public class WeiJieShuViewHolder extends RecyclerView.ViewHolder {
         public View view;
         public TextView coach_name, status_tv, type_icon_tv, phone_or_name_tv,
-                time_tv, class_type, money_tv, status1_tv, status_tv_right_top;
+                time_tv, class_type, money_tv, status1_tv, status_tv_right_top, lin_right_view;
         public ImageView phone_btn, phone_img;
-        public LinearLayout type_icon_bg, status_layout;
+        public LinearLayout type_icon_bg, status_layout, lin_left_viwe;
 
         public WeiJieShuViewHolder(View itemView, boolean isItem) {
             super(itemView);
@@ -319,6 +323,8 @@ public class ClassAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder> i
                 phone_img = view.findViewById(R.id.phone_img);
                 status_layout = view.findViewById(R.id.status_layout);
                 status_tv_right_top = view.findViewById(R.id.status_tv_right_top);
+                lin_left_viwe = view.findViewById(R.id.lin_left_viwe);
+                lin_right_view = view.findViewById(R.id.lin_right_view);
             }
         }
     }
