@@ -44,7 +44,7 @@
                     android:singleLine="true"
                     android:text="教练-张晗"
                     android:textColor="#ff4a4a4a"
-                    android:textSize="13sp" />
+                    android:textSize="@dimen/sp13" />
 
                 <ImageView
                     android:id="@+id/phone_btn"
@@ -56,11 +56,11 @@
                 <TextView
                     android:id="@+id/status1_tv"
                     android:layout_width="wrap_content"
-                    android:layout_height="22dp"
+                    android:layout_height="@dimen/m22"
                     android:layout_marginLeft="@dimen/m44"
                     android:text="已签"
                     android:textColor="#ff929292"
-                    android:textSize="13sp" />
+                    android:textSize="@dimen/sp13" />
             </LinearLayout>
 
             <LinearLayout
@@ -86,7 +86,7 @@
                         android:layout_height="wrap_content"
                         android:text="团"
                         android:textColor="@color/white"
-                        android:textSize="13sp"
+                        android:textSize="@dimen/sp13"
                         android:visibility="gone" />
                 </LinearLayout>
 
@@ -97,7 +97,7 @@
                     android:layout_marginLeft="@dimen/m15"
                     android:text="11/20人"
                     android:textColor="@color/color_4A4A4A"
-                    android:textSize="13sp" />
+                    android:textSize="@dimen/sp13" />
 
                 <ImageView
                     android:id="@+id/phone_img"
@@ -110,11 +110,11 @@
                 <TextView
                     android:id="@+id/status_tv"
                     android:layout_width="wrap_content"
-                    android:layout_height="22dp"
+                    android:layout_height="@dimen/m22"
                     android:layout_marginLeft="@dimen/m84"
                     android:text="已签"
                     android:textColor="#ff929292"
-                    android:textSize="13sp" />
+                    android:textSize="@dimen/sp13" />
             </LinearLayout>
 
             <LinearLayout
@@ -131,7 +131,7 @@
                     android:layout_height="wrap_content"
                     android:text="12:30-13:30"
                     android:textColor="@color/color_4A4A4A"
-                    android:textSize="13sp" />
+                    android:textSize="@dimen/sp13" />
 
                 <TextView
                     android:id="@+id/class_type"
@@ -140,7 +140,7 @@
                     android:layout_marginLeft="@dimen/m30"
                     android:text="减脂塑形"
                     android:textColor="@color/color_4A4A4A"
-                    android:textSize="13sp" />
+                    android:textSize="@dimen/sp13" />
 
                 <TextView
                     android:id="@+id/money_tv"
@@ -149,7 +149,7 @@
                     android:layout_marginLeft="@dimen/m44"
                     android:text="¥ 39"
                     android:textColor="@color/color_4A4A4A"
-                    android:textSize="13sp" />
+                    android:textSize="@dimen/sp13" />
             </LinearLayout>
 
 

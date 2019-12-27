@@ -26,7 +26,7 @@
             android:gravity="center"
             android:text="已上架"
             android:textColor="@color/contents_text"
-            android:textSize="13sp" />
+            android:textSize="@dimen/sp13" />
 
         <RelativeLayout
             android:id="@+id/rl_detail"
@@ -53,7 +53,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/contents_text"
-                    android:textSize="13sp"
+                    android:textSize="@dimen/sp13"
                     tools:text="原动力-萧山店·综合会所" />
                 <!--todo-->
             </FrameLayout>
@@ -67,7 +67,7 @@
                 android:layout_marginTop="@dimen/m13"
                 android:layout_toRightOf="@+id/iv_cg_logo"
                 android:textColor="@color/contents_text"
-                android:textSize="13sp"
+                android:textSize="@dimen/sp13"
                 tools:text="面积：1000m²" />
 
             <LinearLayout
@@ -106,7 +106,7 @@
                 android:gravity="center"
                 android:text="拒绝"
                 android:textColor="@color/contents_text"
-                android:textSize="13sp" />
+                android:textSize="@dimen/sp13" />
 
             <TextView
                 android:id="@+id/tv_jieshou"
@@ -117,7 +117,7 @@
                 android:gravity="center"
                 android:text="接受"
                 android:textColor="@color/contents_text"
-                android:textSize="13sp" />
+                android:textSize="@dimen/sp13" />
         </LinearLayout>
     </LinearLayout>
 

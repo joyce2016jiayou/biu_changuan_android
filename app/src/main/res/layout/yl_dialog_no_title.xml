@@ -40,12 +40,12 @@
                 android:gravity="center"
                 android:text="放弃"
                 android:textColor="@color/color_777777"
-                android:textSize="18dp" />
+                android:textSize="@dimen/m18" />
 
             <LinearLayout
                 style="@style/view_fengexiang_2"
-                android:layout_marginBottom="15dp"
-                android:layout_marginTop="15dp" />
+                android:layout_marginBottom="@dimen/m15"
+                android:layout_marginTop="@dimen/m15" />
 
             <TextView
                 android:id="@+id/folder_ok"
@@ -55,7 +55,7 @@
                 android:gravity="center"
                 android:text="保存"
                 android:textColor="@color/color_292c31"
-                android:textSize="18dp" />
+                android:textSize="@dimen/m18" />
         </LinearLayout>
     </LinearLayout>
 

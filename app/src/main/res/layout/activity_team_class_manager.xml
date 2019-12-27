@@ -13,7 +13,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_height="40dp"
         app:tabIndicatorHeight="4dp"
-        app:tabIndicatorWidth="13dp"
+        app:tabIndicatorWidth="@dimen/m13"
         app:tabTextColor="#4a4a4a"
         app:tab_Mode="mode_scrollable"
         app:tabSelectTextColor="@color/color_181818"

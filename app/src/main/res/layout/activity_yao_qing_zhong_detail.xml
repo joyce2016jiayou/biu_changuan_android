@@ -21,10 +21,10 @@
             <ImageView
                 android:id="@+id/back_btn"
                 android:layout_width="28dp"
-                android:layout_height="18dp"
+                android:layout_height="@dimen/m18"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentBottom="true"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="@dimen/m20"
                 android:layout_marginBottom="30dp"
                 android:src="@drawable/icon_back" />
 
@@ -34,10 +34,10 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-                android:layout_marginBottom="19dp"
+                android:layout_marginBottom="@dimen/m19"
                 android:text="@string/tv64"
                 android:textColor="@color/top_heiziti"
-                android:textSize="25sp"
+                android:textSize="@dimen/sp25"
                 android:textStyle="bold" />
         </RelativeLayout>
 
@@ -45,7 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="@dimen/m15"
             android:orientation="vertical">
 
             <TextView
@@ -53,17 +53,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right|top"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="15dp"
+                android:layout_marginTop="@dimen/m20"
+                android:layout_marginRight="@dimen/m15"
                 android:text="邀请已接受"
                 android:textColor="@color/color_4A4A4A"
-                android:textSize="13sp" />
+                android:textSize="@dimen/sp13" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/m10"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -75,7 +75,7 @@
                     android:layout_centerVertical="true"
                     tools:text="普拉提"
                     android:textColor="@color/top_heiziti"
-                    android:textSize="16sp"
+                    android:textSize="@dimen/sp16"
                     android:textStyle="bold" />
 
 
@@ -85,7 +85,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/m10"
                 android:orientation="horizontal">
 
                 <TextView
@@ -95,7 +95,7 @@
                     android:layout_centerVertical="true"
                     android:text="课程名称："
                     android:textColor="@color/top_heiziti"
-                    android:textSize="15sp" />
+                    android:textSize="@dimen/sp15" />
 
                 <TextView
                     android:id="@+id/class_name1"
@@ -105,7 +105,7 @@
                     android:layout_centerVertical="true"
                     tools:text="普拉提"
                     android:textColor="@color/color_4A4A4A"
-                    android:textSize="14sp" />
+                    android:textSize="@dimen/sp14" />
 
 
             </LinearLayout>
@@ -114,7 +114,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/m10"
                 android:orientation="horizontal">
 
                 <TextView
@@ -124,7 +124,7 @@
                     android:layout_centerVertical="true"
                     android:text="团课老师："
                     android:textColor="@color/top_heiziti"
-                    android:textSize="15sp" />
+                    android:textSize="@dimen/sp15" />
 
                 <TextView
                     android:id="@+id/teacher_name_tv"
@@ -134,7 +134,7 @@
                     android:layout_centerVertical="true"
                     tools:text="普拉提"
                     android:textColor="@color/color_4A4A4A"
-                    android:textSize="14sp" />
+                    android:textSize="@dimen/sp14" />
 
 
             </LinearLayout>
@@ -142,7 +142,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/m10"
                 android:orientation="horizontal">
 
                 <TextView
@@ -152,7 +152,7 @@
                     android:layout_centerVertical="true"
                     android:text="训练目标："
                     android:textColor="@color/top_heiziti"
-                    android:textSize="15sp" />
+                    android:textSize="@dimen/sp15" />
 
                 <TextView
                     android:id="@+id/xunlian_mubiao"
@@ -162,13 +162,13 @@
                     android:layout_centerVertical="true"
                     tools:text="普拉提"
                     android:textColor="@color/color_4A4A4A"
-                    android:textSize="14sp" />
+                    android:textSize="@dimen/sp14" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/m10"
                 android:orientation="horizontal">
 
                 <TextView
@@ -178,7 +178,7 @@
                     android:layout_centerVertical="true"
                     android:text="课程房间："
                     android:textColor="@color/top_heiziti"
-                    android:textSize="15sp" />
+                    android:textSize="@dimen/sp15" />
 
                 <TextView
                     android:id="@+id/class_room"
@@ -188,7 +188,7 @@
                     android:layout_centerVertical="true"
                     tools:text="普拉提"
                     android:textColor="@color/color_4A4A4A"
-                    android:textSize="14sp" />
+                    android:textSize="@dimen/sp14" />
 
 
             </LinearLayout>
@@ -197,7 +197,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/m10"
                 android:orientation="horizontal">
 
                 <TextView
@@ -207,7 +207,7 @@
                     android:layout_centerVertical="true"
                     android:text="课程价格："
                     android:textColor="@color/top_heiziti"
-                    android:textSize="15sp" />
+                    android:textSize="@dimen/sp15" />
 
                 <TextView
                     android:id="@+id/price"
@@ -217,7 +217,7 @@
                     android:layout_centerVertical="true"
                     tools:text="普拉提"
                     android:textColor="@color/color_4A4A4A"
-                    android:textSize="14sp" />
+                    android:textSize="@dimen/sp14" />
 
 
             </LinearLayout>
@@ -226,7 +226,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/m10"
                 android:orientation="horizontal">
 
                 <TextView
@@ -236,7 +236,7 @@
                     android:layout_centerVertical="true"
                     android:text="人数限制："
                     android:textColor="@color/top_heiziti"
-                    android:textSize="15sp" />
+                    android:textSize="@dimen/sp15" />
 
                 <TextView
                     android:id="@+id/people_xianzhi"
@@ -246,7 +246,7 @@
                     android:layout_centerVertical="true"
                     tools:text="普拉提"
                     android:textColor="@color/color_4A4A4A"
-                    android:textSize="14sp" />
+                    android:textSize="@dimen/sp14" />
 
 
             </LinearLayout>
@@ -255,7 +255,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/m10"
                 android:orientation="horizontal">
 
                 <TextView
@@ -265,7 +265,7 @@
                     android:layout_centerVertical="true"
                     android:text="课程循环："
                     android:textColor="@color/top_heiziti"
-                    android:textSize="15sp" />
+                    android:textSize="@dimen/sp15" />
 
                 <TextView
                     android:id="@+id/class_xunhuan"
@@ -275,7 +275,7 @@
                     android:layout_centerVertical="true"
                     tools:text="普拉提"
                     android:textColor="@color/color_4A4A4A"
-                    android:textSize="14sp" />
+                    android:textSize="@dimen/sp14" />
 
 
             </LinearLayout>
@@ -284,7 +284,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/m10"
                 android:orientation="horizontal">
 
                 <TextView
@@ -294,7 +294,7 @@
                     android:layout_centerVertical="true"
                     android:text="课程时间："
                     android:textColor="@color/top_heiziti"
-                    android:textSize="15sp" />
+                    android:textSize="@dimen/sp15" />
 
                 <TextView
                     android:id="@+id/create_time"
@@ -304,7 +304,7 @@
                     android:layout_centerVertical="true"
                     android:text="2019.7.11"
                     android:textColor="@color/color_4A4A4A"
-                    android:textSize="14sp" />
+                    android:textSize="@dimen/sp14" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -314,7 +314,7 @@
                     android:text="-----"
                     android:visibility="gone"
                     android:textColor="@color/color_4A4A4A"
-                    android:textSize="14sp" />
+                    android:textSize="@dimen/sp14" />
 
                 <TextView
                     android:id="@+id/end_time"
@@ -325,7 +325,7 @@
                     android:text="2019.7.11"
                     android:visibility="gone"
                     android:textColor="@color/color_4A4A4A"
-                    android:textSize="14sp" />
+                    android:textSize="@dimen/sp14" />
 
 
             </LinearLayout>
@@ -334,7 +334,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/m10"
                 android:orientation="vertical">
 
                 <TextView
@@ -344,7 +344,7 @@
                     android:layout_centerVertical="true"
                     android:text="课程介绍："
                     android:textColor="@color/top_heiziti"
-                    android:textSize="15sp" />
+                    android:textSize="@dimen/sp15" />
 
                 <TextView
                     android:id="@+id/jieshao_tv"
@@ -354,14 +354,14 @@
                     android:layout_centerVertical="true"
                     android:text="课程介绍课程介绍课程介绍课程介绍课程介绍课程介绍课程介绍课程介绍课程介绍课程介绍课程介绍课程介绍课程介绍课程介绍课程介绍课程介绍课程介绍课程介绍"
                     android:textColor="@color/color_4A4A4A"
-                    android:textSize="14sp" />
+                    android:textSize="@dimen/sp14" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/m10"
                 android:orientation="vertical">
 
                 <TextView
@@ -371,7 +371,7 @@
                     android:layout_centerVertical="true"
                     android:text="适合人群："
                     android:textColor="@color/top_heiziti"
-                    android:textSize="15sp" />
+                    android:textSize="@dimen/sp15" />
 
                 <TextView
                     android:id="@+id/shihe_people"
@@ -381,14 +381,14 @@
                     android:layout_centerVertical="true"
                     android:text="适合人群适合人群适合人群适合人群适合人群适合人群适合人群适合人群适合人群适合人群适合人群适合人群适合人群适合人群适合人群适合人群适合人群适合人群"
                     android:textColor="@color/color_4A4A4A"
-                    android:textSize="14sp" />
+                    android:textSize="@dimen/sp14" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/m10"
                 android:orientation="vertical">
 
                 <TextView
@@ -398,7 +398,7 @@
                     android:layout_centerVertical="true"
                     android:text="注意事项："
                     android:textColor="@color/top_heiziti"
-                    android:textSize="15sp" />
+                    android:textSize="@dimen/sp15" />
 
                 <TextView
                     android:id="@+id/tips_tv"
@@ -408,7 +408,7 @@
                     android:layout_centerVertical="true"
                     android:text="注意事项注意事项注意事项注意事项注意事项注意事项注意事项注意事项注意事项注意事项注意事项注意事项注意事项注意事项注意事项注意事项注意事项注意事项注意事项注意事项注意事项注意事项注意事项注意事项注意事项注意事项"
                     android:textColor="@color/color_4A4A4A"
-                    android:textSize="14sp" />
+                    android:textSize="@dimen/sp14" />
             </LinearLayout>
         </LinearLayout>
 
@@ -418,10 +418,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="left"
             android:layout_marginTop="8dp"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="@dimen/m20"
             android:text="已邀请(1/5)"
             android:textColor="@color/color_6D7278"
-            android:textSize="13sp" />
+            android:textSize="@dimen/sp13" />
 
         <!--邀请列表-->
         <androidx.recyclerview.widget.RecyclerView
@@ -448,7 +448,7 @@
                 android:gravity="center"
                 android:text="@string/tv77"
                 android:textColor="@color/white"
-                android:textSize="25sp" />
+                android:textSize="@dimen/sp25" />
 
         </LinearLayout>
     </LinearLayout>

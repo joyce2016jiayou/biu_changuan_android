@@ -946,7 +946,7 @@ public class Network {
     }
 
     /**
-     * 钱包
+     * 账户
      */
     public Subscription myBalance(Map<String, Object> params, Subscriber<Bean<WalletBean>> subscriber) {
         return service.myBalance(retuen_json_params(params))
@@ -1012,7 +1012,7 @@ public class Network {
     }
 
     /**
-     * 设置提现密码
+     * 设置转出密码
      */
     public Subscription settingPayPassword(Map<String, Object> params, Subscriber<Bean<Object>> subscriber) {
         return service.settingPayPassword(retuen_json_params(params))
@@ -1023,7 +1023,7 @@ public class Network {
     }
 
     /**
-     * 提现
+     * 转出
      *
      * @param params
      * @param subscriber
@@ -1203,7 +1203,7 @@ public class Network {
     }
 
     /**
-     * 提现
+     * 转出
      */
     public Subscription areaWithdraw(Map<String, Object> params, Subscriber<Bean<Object>> subscriber) {
         return service.areaWithdraw(retuen_json_object(params))
@@ -1214,7 +1214,7 @@ public class Network {
     }
 
     /**
-     * 提现
+     * 转出
      */
     public Subscription bankCard(Map<String, Object> params, Subscriber<Bean<BankCradBean>> subscriber) {
         return service.bankCard(retuen_json_object(params))

@@ -55,7 +55,7 @@
                 android:gravity="center"
                 android:text="@string/alert_dialog_cached_cancel"
                 android:textColor="@color/white"
-                android:textSize="20sp" />
+                android:textSize="@dimen/sp20" />
 
             <TextView
                 android:id="@+id/sure_btn"
@@ -66,7 +66,7 @@
                 android:gravity="center"
                 android:text="@string/tv4"
                 android:textColor="@color/white"
-                android:textSize="20sp" />
+                android:textSize="@dimen/sp20" />
         </RelativeLayout>
     </RelativeLayout>
 

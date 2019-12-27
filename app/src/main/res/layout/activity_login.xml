@@ -29,7 +29,7 @@
             android:layout_marginRight="31dp"
             android:text="@string/register"
             android:textColor="@color/color_9B9B9B"
-            android:textSize="18dp" />
+            android:textSize="@dimen/m18" />
 
         <LinearLayout
             android:id="@+id/center"
@@ -45,13 +45,13 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="17dp"
+                android:layout_marginLeft="@dimen/m17"
                 android:layout_marginTop="48dp"
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="21dp"
-                    android:layout_height="21dp"
+                    android:layout_width="@dimen/m21"
+                    android:layout_height="@dimen/m21"
                     android:layout_gravity="center_vertical"
                     android:src="@drawable/icon_number" />
 
@@ -62,25 +62,25 @@
                     android:layout_marginLeft="5dp"
                     android:background="@null"
                     android:hint="@string/edit_hint1"
-                    android:layout_marginRight="25dp"
+                    android:layout_marginRight="@dimen/m25"
                     android:inputType="textNoSuggestions|text|textCapCharacters"
                     android:maxLength="11"
                     android:singleLine="true"
                     android:textColor="@color/color_ACACAC"
                     android:textColorHint="@color/color_ACACAC"
-                    android:textSize="18dp" />
+                    android:textSize="@dimen/m18" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="17dp"
+                android:layout_marginLeft="@dimen/m17"
                 android:layout_marginTop="41dp"
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="23dp"
+                    android:layout_width="@dimen/m20"
+                    android:layout_height="@dimen/m23"
                     android:layout_gravity="center_vertical"
                     android:src="@drawable/icon_password" />
 
@@ -93,17 +93,17 @@
                     android:hint="@string/edit_hint2"
                     android:inputType="textPassword"
                     android:password="true"
-                    android:layout_marginRight="25dp"
+                    android:layout_marginRight="@dimen/m25"
                     android:singleLine="true"
                     android:textColor="@color/color_ACACAC"
                     android:textColorHint="@color/color_ACACAC"
-                    android:textSize="18dp" />
+                    android:textSize="@dimen/m18" />
             </LinearLayout>
 
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="27dp"
+                android:layout_marginLeft="@dimen/m27"
                 android:layout_marginTop="49dp">
 
                 <LinearLayout
@@ -119,8 +119,8 @@
 
                     <CheckBox
                         android:id="@+id/xieyi_check_btn"
-                        android:layout_width="10dp"
-                        android:layout_height="10dp"
+                        android:layout_width="@dimen/m10"
+                        android:layout_height="@dimen/m10"
                         android:layout_gravity="center_vertical"
                         android:background="@drawable/selector_btn_checkbox"
                         android:button="@null"
@@ -169,7 +169,7 @@
                 android:gravity="center"
                 android:text="@string/tv1"
                 android:textColor="@color/white"
-                android:textSize="18dp" />
+                android:textSize="@dimen/m18" />
 
         </LinearLayout>
 

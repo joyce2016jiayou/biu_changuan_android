@@ -37,7 +37,7 @@ class BillDetailInfoActivity : BaseActivity() {
 
     private fun setting(bean:BalanceListBean.ListBean){
         if(bean.type == 1){
-            title_tv.text ="提现详情"
+            title_tv.text ="转出详情"
             lv_1.visibility = View.VISIBLE
             lv_2.visibility = View.GONE
             tv_zcje.text ="¥${bean.finalMoney}"
@@ -45,7 +45,7 @@ class BillDetailInfoActivity : BaseActivity() {
             if (null != bean.cardName){
                 tv_txyh.text= bean.cardName
             }
-            tv_operate.text = "提现-${bean.cardName}"
+            tv_operate.text = "转出-${bean.cardName}"
             tv_dqzt.text= statusToString(bean.status)
             tv_zclb.text = typeToString(bean.type)
             tv_money.text = "-${bean.finalMoney}"
@@ -77,10 +77,10 @@ class BillDetailInfoActivity : BaseActivity() {
         val params = HashMap<String, Any>()
 //        params["teacherNum"] = SpUtils.getString(activity, AppConstants.USER_NAME)
         params["walletDetailNum"] = walletDetailNum
-        val subscription = Network.getInstance("我的钱包", this)
+        val subscription = Network.getInstance("我的账户", this)
             .myBalanceListDetail(
                 params,
-                ProgressSubscriber("我的钱包", object : SubscriberOnNextListener<Bean<BalanceListBean.ListBean>> {
+                ProgressSubscriber("我的账户", object : SubscriberOnNextListener<Bean<BalanceListBean.ListBean>> {
                     override fun onNext(result: Bean<BalanceListBean.ListBean>) {
                         setting(result.data)
 
@@ -107,7 +107,7 @@ class BillDetailInfoActivity : BaseActivity() {
     private fun typeToString(type: Int): String {
 
         return when (type) {
-            1 -> "银行卡提现"
+            1 -> "银行卡转出"
             2 -> "健身服务"
             3 -> "私教服务"
             4 -> "团课服务"

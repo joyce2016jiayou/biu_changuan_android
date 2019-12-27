@@ -123,7 +123,7 @@
                     android:layout_height="wrap_content"
                     android:text="99+"
                     android:textColor="@color/white"
-                    android:textSize="11sp" />
+                    android:textSize="@dimen/sp11" />
 
             </LinearLayout>
         </RelativeLayout>

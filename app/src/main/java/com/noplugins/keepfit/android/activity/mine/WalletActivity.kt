@@ -63,7 +63,7 @@ class WalletActivity : BaseActivity() {
 
             if (SpUtils.getInt(applicationContext,AppConstants.IS_TX) == 1){
                 if (finalCanWithdraw < 1000){
-                    Toast.makeText(applicationContext,"可提现金额必须大于1000",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(applicationContext,"可转出金额必须大于1000",Toast.LENGTH_SHORT).show()
                     return@setOnClickListener
                 }
                 val intent = Intent(this, WithdrawActivity::class.java)
@@ -73,7 +73,7 @@ class WalletActivity : BaseActivity() {
                 startActivity(intent)
                 return@setOnClickListener
             }
-            //跳转到提现
+            //跳转到转出
             toQueren(btn_tixian)
 
         }
@@ -81,7 +81,7 @@ class WalletActivity : BaseActivity() {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public fun upadate(messageEvent:String ) {
-        if ("提现了金额" == messageEvent){
+        if ("转出了金额" == messageEvent){
             requestData()
         }
     }
@@ -139,10 +139,10 @@ class WalletActivity : BaseActivity() {
 //        params["userNum"] = SpUtils.getString(this, AppConstants.USER_NAME)
         params["gymAreaNum"] = SpUtils.getString(this,AppConstants.CHANGGUAN_NUM)
         params["gymUserNum"] = SpUtils.getString(this,AppConstants.USER_NAME)
-        val subscription = Network.getInstance("我的钱包", this)
+        val subscription = Network.getInstance("我的账户", this)
             .myBalance(
                 params,
-                ProgressSubscriber("我的钱包", object : SubscriberOnNextListener<Bean<WalletBean>> {
+                ProgressSubscriber("我的账户", object : SubscriberOnNextListener<Bean<WalletBean>> {
                     override fun onNext(result: Bean<WalletBean>) {
                         setting(result.data)
                     }

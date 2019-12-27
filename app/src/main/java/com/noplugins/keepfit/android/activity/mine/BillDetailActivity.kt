@@ -153,13 +153,13 @@ class BillDetailActivity : BaseActivity() {
         params["walletNum"] = walletNum
         params["date"] = selectDate
         params["page"] = page
-        subscription = Network.getInstance("我的钱包", this)
+        subscription = Network.getInstance("我的账户", this)
             .myBalanceList(
                 params,
-                ProgressSubscriber("我的钱包", object : SubscriberOnNextListener<Bean<BalanceListBean>> {
+                ProgressSubscriber("我的账户", object : SubscriberOnNextListener<Bean<BalanceListBean>> {
                     override fun onNext(result: Bean<BalanceListBean>) {
                         tv_income.text = "收入：${result.data.monthIncome}"
-                        tv_withdraw.text = "提现：${result.data.monthWithDraw}"
+                        tv_withdraw.text = "转出：${result.data.monthWithDraw}"
                         maxPage = result.data.maxPage
                         if (page == 1){
                             data.clear()

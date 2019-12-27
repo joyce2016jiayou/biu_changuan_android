@@ -30,7 +30,7 @@
                 android:layout_gravity="center_horizontal"
                 android:text="@string/update_title"
                 android:textColor="@android:color/black"
-                android:textSize="13sp" />
+                android:textSize="@dimen/sp13" />
 
             <TextView
                 android:id="@+id/tv_msg"
@@ -40,7 +40,7 @@
                 android:layout_gravity="center_horizontal"
                 android:text="@string/updatecontent"
                 android:textColor="#666"
-                android:textSize="12sp" />
+                android:textSize="@dimen/sp12" />
 
             <Button
                 android:layout_marginTop="@dimen/m10"

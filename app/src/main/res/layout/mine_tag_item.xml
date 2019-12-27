@@ -18,6 +18,6 @@
             android:layout_height="wrap_content"
             android:text="有接口"
             android:textColor="@color/color_4A4A4A"
-            android:textSize="12sp" />
+            android:textSize="@dimen/sp12" />
     </LinearLayout>
 </LinearLayout>

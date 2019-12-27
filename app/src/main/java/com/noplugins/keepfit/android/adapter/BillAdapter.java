@@ -69,7 +69,7 @@ public class BillAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder> {
             //设置内容
             holder.content_tv.setText(billItemBean.getRemark());
 
-            //提现账单
+            //转出账单
             if (billItemBean.getType() == 4){
                 holder.tv_count.setTextColor(Color.RED);
             } else {

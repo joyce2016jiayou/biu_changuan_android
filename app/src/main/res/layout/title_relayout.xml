@@ -23,7 +23,7 @@
         android:layout_centerVertical="true"
         android:text="标题"
         android:textColor="@color/top_heiziti"
-        android:textSize="22sp"
+        android:textSize="@dimen/sp22"
         android:textStyle="normal" />
 
     <TextView
@@ -35,7 +35,7 @@
         android:layout_marginRight="@dimen/m20"
         android:text="右边文字"
         android:textColor="@color/top_heiziti"
-        android:textSize="20sp"
+        android:textSize="@dimen/sp20"
         android:textStyle="normal"
         android:visibility="gone" />
 

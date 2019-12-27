@@ -15,8 +15,8 @@
 
     <ImageView
         android:id="@+id/iv_item_nine_photo_flag"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
+        android:layout_width="@dimen/m25"
+        android:layout_height="@dimen/m25"
         android:layout_alignParentRight="true"
         android:clickable="true"
         android:padding="@dimen/bga_pp_size_delete_padding"

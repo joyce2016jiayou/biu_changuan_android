@@ -16,10 +16,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="19dp"
+            android:layout_marginBottom="@dimen/m19"
             android:text="@string/tv85"
             android:textColor="@color/top_heiziti"
-            android:textSize="25sp"
+            android:textSize="@dimen/sp25"
             android:textStyle="bold" />
     </RelativeLayout>
 
@@ -44,7 +44,7 @@
                 android:layout_centerVertical="true"
                 android:text="@string/tv86"
                 android:textColor="@color/top_heiziti"
-                android:textSize="18sp" />
+                android:textSize="@dimen/sp18" />
 
             <LinearLayout
                 android:id="@+id/lin1"
@@ -80,7 +80,7 @@
                 android:layout_centerVertical="true"
                 android:text="@string/tv87"
                 android:textColor="@color/top_heiziti"
-                android:textSize="18sp" />
+                android:textSize="@dimen/sp18" />
 
             <LinearLayout
                 android:id="@+id/lin2"
@@ -117,7 +117,7 @@
                 android:layout_centerVertical="true"
                 android:text="@string/tv88"
                 android:textColor="@color/top_heiziti"
-                android:textSize="18sp" />
+                android:textSize="@dimen/sp18" />
 
             <LinearLayout
                 android:id="@+id/lin3"
@@ -153,7 +153,7 @@
                 android:layout_alignParentTop="true"
                 android:text="@string/tv89"
                 android:textColor="@color/top_heiziti"
-                android:textSize="18sp" />
+                android:textSize="@dimen/sp18" />
 
             <LinearLayout
                 android:id="@+id/lin4"

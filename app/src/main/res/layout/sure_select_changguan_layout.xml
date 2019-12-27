@@ -26,7 +26,7 @@
             android:layout_marginTop="@dimen/m10"
             android:text="@string/tv154"
             android:textColor="@color/color_4A4A4A"
-            android:textSize="18sp" />
+            android:textSize="@dimen/sp18" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -35,7 +35,7 @@
             android:layout_marginTop="@dimen/m10"
             android:text="@string/tv155"
             android:textColor="@color/color_4A4A4A"
-            android:textSize="15sp" />
+            android:textSize="@dimen/sp15" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -57,7 +57,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/alert_dialog_cached_cancel"
                     android:textColor="@color/white"
-                    android:textSize="18sp" />
+                    android:textSize="@dimen/sp18" />
             </LinearLayout>
 
             <LinearLayout
@@ -74,7 +74,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/tv4"
                     android:textColor="@color/color_181818"
-                    android:textSize="18sp" />
+                    android:textSize="@dimen/sp18" />
             </LinearLayout>
         </RelativeLayout>
 

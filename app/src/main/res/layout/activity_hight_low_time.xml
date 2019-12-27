@@ -15,10 +15,10 @@
         <ImageView
             android:id="@+id/back_btn"
             android:layout_width="28dp"
-            android:layout_height="18dp"
+            android:layout_height="@dimen/m18"
             android:layout_alignParentLeft="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="@dimen/m20"
             android:layout_marginBottom="30dp"
             android:src="@drawable/icon_back" />
 
@@ -28,10 +28,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="19dp"
+            android:layout_marginBottom="@dimen/m19"
             android:text="@string/tv124"
             android:textColor="@color/top_heiziti"
-            android:textSize="25sp"
+            android:textSize="@dimen/sp25"
             android:textStyle="bold" />
 
         <TextView
@@ -41,17 +41,17 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="19dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginBottom="@dimen/m19"
+            android:layout_marginRight="@dimen/m20"
             android:text="@string/tv123"
             android:textColor="@color/top_heiziti"
-            android:textSize="17sp" />
+            android:textSize="@dimen/sp17" />
     </RelativeLayout>
     
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="horizontal"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="@dimen/m20"
         android:background="@color/white"
         android:layout_height="183dp"
         android:visibility="gone">
@@ -65,7 +65,7 @@
             android:orientation="vertical"
             android:layout_height="match_parent">
             <RelativeLayout
-                android:layout_marginLeft="25dp"
+                android:layout_marginLeft="@dimen/m25"
                 android:layout_width="match_parent"
                 android:layout_marginTop="30dp"
                 android:layout_height="wrap_content">
@@ -76,7 +76,7 @@
                     android:textStyle="bold"
                     android:layout_centerVertical="true"
                     android:layout_alignParentLeft="true"
-                    android:textSize="20sp"
+                    android:textSize="@dimen/sp20"
                     android:textColor="@color/top_heiziti"
                     />
 
@@ -84,9 +84,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="价格： ￥28/小时"
-                    android:layout_marginRight="25dp"
+                    android:layout_marginRight="@dimen/m25"
                     android:layout_centerVertical="true"
-                    android:textSize="15sp"
+                    android:textSize="@dimen/sp15"
                     android:layout_alignParentRight="true"
                     android:textColor="@color/top_heiziti"
                     />
@@ -116,12 +116,12 @@
                         android:text="@string/edit_hint12"
                         android:textColor="@color/top_heiziti"
                         android:textColorHint="@color/color_9B9B9B"
-                        android:textSize="13sp" />
+                        android:textSize="@dimen/sp13" />
 
                     <LinearLayout
                         android:layout_width="42dp"
                         android:layout_height="8dp"
-                        android:layout_marginLeft="11dp"
+                        android:layout_marginLeft="@dimen/m11"
                         android:layout_gravity="center_vertical"
                         android:background="@drawable/hengang"
                         android:orientation="horizontal" />
@@ -130,14 +130,14 @@
                         android:id="@+id/time2_edit"
                         android:layout_width="63dp"
                         android:layout_height="36dp"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="@dimen/m10"
                         android:background="@drawable/time_item"
                         android:gravity="center"
                         android:hint="@string/edit_hint13"
                         android:text="@string/edit_hint13"
                         android:textColor="@color/top_heiziti"
                         android:textColorHint="@color/color_9B9B9B"
-                        android:textSize="13sp" />
+                        android:textSize="@dimen/sp13" />
                 </LinearLayout>
 
 
@@ -155,7 +155,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="28dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/m10"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
                 <LinearLayout
@@ -173,12 +173,12 @@
                         android:text="@string/edit_hint12"
                         android:textColor="@color/top_heiziti"
                         android:textColorHint="@color/color_9B9B9B"
-                        android:textSize="13sp" />
+                        android:textSize="@dimen/sp13" />
 
                     <LinearLayout
                         android:layout_width="42dp"
                         android:layout_height="8dp"
-                        android:layout_marginLeft="11dp"
+                        android:layout_marginLeft="@dimen/m11"
                         android:layout_gravity="center_vertical"
                         android:background="@drawable/hengang"
                         android:orientation="horizontal" />
@@ -186,14 +186,14 @@
                     <TextView
                         android:layout_width="63dp"
                         android:layout_height="36dp"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="@dimen/m10"
                         android:background="@drawable/time_item"
                         android:gravity="center"
                         android:hint="@string/edit_hint13"
                         android:text="@string/edit_hint13"
                         android:textColor="@color/top_heiziti"
                         android:textColorHint="@color/color_9B9B9B"
-                        android:textSize="13sp" />
+                        android:textSize="@dimen/sp13" />
                 </LinearLayout>
 
 
@@ -215,7 +215,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="horizontal"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="@dimen/m20"
         android:background="@color/white"
         android:layout_height="wrap_content">
         <LinearLayout
@@ -228,7 +228,7 @@
             android:orientation="vertical"
             android:layout_height="match_parent">
             <RelativeLayout
-                android:layout_marginLeft="25dp"
+                android:layout_marginLeft="@dimen/m25"
                 android:layout_width="match_parent"
                 android:layout_marginTop="30dp"
                 android:layout_height="wrap_content">
@@ -239,7 +239,7 @@
                     android:textStyle="bold"
                     android:layout_centerVertical="true"
                     android:layout_alignParentLeft="true"
-                    android:textSize="20sp"
+                    android:textSize="@dimen/sp20"
                     android:textColor="@color/top_heiziti"
                     />
 
@@ -247,9 +247,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="价格： ￥28/小时"
-                    android:layout_marginRight="25dp"
+                    android:layout_marginRight="@dimen/m25"
                     android:layout_centerVertical="true"
-                    android:textSize="15sp"
+                    android:textSize="@dimen/sp15"
                     android:layout_alignParentRight="true"
                     android:textColor="@color/top_heiziti"
                     />

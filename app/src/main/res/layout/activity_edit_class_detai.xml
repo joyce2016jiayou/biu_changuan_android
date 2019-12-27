@@ -31,7 +31,7 @@
             android:layout_marginBottom="@dimen/m8"
             android:text="@string/tv74"
             android:textColor="@color/top_heiziti"
-            android:textSize="20sp"
+            android:textSize="@dimen/sp20"
             android:textStyle="bold" />
 
         <TextView
@@ -45,7 +45,7 @@
             android:layout_marginBottom="@dimen/m10"
             android:text="@string/tv123"
             android:textColor="@color/top_heiziti"
-            android:textSize="15sp" />
+            android:textSize="@dimen/sp15" />
 
         <LinearLayout
             android:id="@+id/done_btn"
@@ -104,7 +104,7 @@
                 android:gravity="left|top"
                 android:padding="@dimen/m10"
                 android:textColor="@color/color_4A4A4A"
-                android:textSize="13sp" />
+                android:textSize="@dimen/sp13" />
 
             <TextView
                 android:id="@+id/number_tv"
@@ -117,7 +117,7 @@
                 android:layout_marginBottom="@dimen/m10"
                 android:text="0/300"
                 android:textColor="@color/color_929292"
-                android:textSize="12sp" />
+                android:textSize="@dimen/sp12" />
         </LinearLayout>
     </www.linwg.org.lib.LCardView>
 </LinearLayout>

@@ -48,7 +48,7 @@
                     android:layout_gravity="center_vertical"
                     android:gravity="right"
                     android:textColor="@color/color_181818"
-                    android:textSize="15sp"
+                    android:textSize="@dimen/sp15"
                     tools:text="场馆地址" />
 
                 <ImageView
@@ -328,7 +328,7 @@
                         android:background="@drawable/radio_use_btn"
                         android:button="@null"
                         android:gravity="center"
-                        android:textSize="13sp"
+                        android:textSize="@dimen/sp13"
                         android:checked="true"
                         android:textColor="@drawable/radio_use_btn_text"
                         android:text="@string/tv_today"/>
@@ -340,7 +340,7 @@
                         android:background="@drawable/radio_use_btn"
                         android:button="@null"
                         android:gravity="center"
-                        android:textSize="13sp"
+                        android:textSize="@dimen/sp13"
                         android:textColor="@drawable/radio_use_btn_text"
                         android:text="@string/tv_yesterday"/>
                     <RadioButton
@@ -352,7 +352,7 @@
                         android:background="@drawable/radio_use_btn"
                         android:button="@null"
                         android:gravity="center"
-                        android:textSize="13sp"
+                        android:textSize="@dimen/sp13"
                         android:textColor="@drawable/radio_use_btn_text"/>
                     <RadioButton
                         android:id="@+id/rb_1month"
@@ -363,7 +363,7 @@
                         android:background="@drawable/radio_use_btn"
                         android:button="@null"
                         android:gravity="center"
-                        android:textSize="13sp"
+                        android:textSize="@dimen/sp13"
                         android:textColor="@drawable/radio_use_btn_text"/>
                 </RadioGroup>
                 <LinearLayout
@@ -440,7 +440,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textColor="@color/color_22243D"
-                android:textSize="15sp"
+                android:textSize="@dimen/sp15"
                 android:layout_margin="@dimen/m10"
                 android:text="@string/label_product_cons"/>
             <com.github.mikephil.charting.charts.PieChart

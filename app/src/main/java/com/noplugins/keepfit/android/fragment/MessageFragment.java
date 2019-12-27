@@ -145,7 +145,7 @@ public class MessageFragment extends BaseFragment {
             String is_read = intent.getStringExtra("is_read");
             String type_number = intent.getStringExtra("type_number");
             if (type_number.equals("1")) {
-                if (is_read.equals("true")) {//已读,第一个提现不显示
+                if (is_read.equals("true")) {//已读,第一个转出不显示
                     circle1.setVisibility(View.GONE);
                 } else {//未读
                     circle1.setVisibility(View.GONE);

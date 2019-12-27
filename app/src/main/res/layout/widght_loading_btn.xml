@@ -14,7 +14,7 @@
             android:layout_height="match_parent"
             android:text="提交"
             android:textColor="@color/contents_text"
-            android:textSize="18sp"
+            android:textSize="@dimen/sp18"
             android:layout_gravity="center"
             android:gravity="center"
             android:visibility="visible"
@@ -35,7 +35,7 @@
         android:id="@+id/loading_btn_notice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="12sp"
+        android:textSize="@dimen/sp12"
         android:visibility="visible"
         android:textColor="#ff6767"/>
 </LinearLayout>

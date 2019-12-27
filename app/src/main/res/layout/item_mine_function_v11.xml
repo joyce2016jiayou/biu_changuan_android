@@ -4,7 +4,7 @@
               android:layout_width="match_parent"
               android:gravity="center"
               android:id="@+id/ll_click"
-              android:layout_height="@dimen/m80">
+              android:layout_height="wrap_content">
 
     <ImageView
             android:id="@+id/iv_img"
@@ -16,7 +16,7 @@
             android:layout_marginTop="@dimen/m5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="13sp"
+            android:textSize="@dimen/sp13"
             android:textColor="@color/color_4A4A4A"
             />
 

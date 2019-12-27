@@ -90,6 +90,7 @@ class RoomInfoActivity : BaseActivity() {
 
 
     private fun deletePop(position:Int) {
+<<<<<<< HEAD
         XPopup.Builder(this)
                 .autoOpenSoftInput(false)
                 .autoFocusEditText(false)
@@ -106,6 +107,22 @@ class RoomInfoActivity : BaseActivity() {
                                     .setOnClickListener {deleteRoom(position)}
 
                         })).show()
+=======
+        PublicPopControl.alert_dialog_center(this) { view, popup ->
+            val content = view.findViewById<TextView>(R.id.pop_content)
+            val title = view.findViewById<TextView>(R.id.pop_title)
+            content.setText(R.string.tv_delete_info)
+            title.setText(R.string.tv_delete_room)
+            view.findViewById<LinearLayout>(R.id.cancel_btn)
+                    .setOnClickListener {
+                        popup.dismiss()
+                    }
+            view.findViewById<LinearLayout>(R.id.sure_btn)
+                    .setOnClickListener {
+                        popup.dismiss()
+                        deleteRoom(position)}
+        }
+>>>>>>> origin/develop
     }
 
     /**

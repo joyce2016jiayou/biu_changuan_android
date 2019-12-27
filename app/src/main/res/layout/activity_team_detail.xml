@@ -10,13 +10,13 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/m10"
         android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingTop="10dp"
+            android:paddingTop="@dimen/m10"
             android:paddingBottom="8dp"
             android:orientation="vertical">
             <com.ms.banner.Banner
@@ -53,7 +53,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/color_6D7278"
-                        android:textSize="13sp"
+                        android:textSize="@dimen/sp13"
                         tools:text="动感单车，英文名字（SPINNING），是由美国私人教练兼极限运动员JOHNNYG于二十世纪八十年代首创，是一种结合了音乐、视觉效果等独特的充满活力的室内自行车训练课程。
 动感单车在克服了室外行驶的一切缺点后，由于技术上的改进，使得这项运动在简单易学之余，成为一项能够使全身得到锻炼的有氧运动。"
                         android:gravity="left"
@@ -75,7 +75,7 @@
                         android:layout_height="wrap_content"
                         tools:text="喜欢运动的年轻人"
                         android:textColor="@color/color_6D7278"
-                        android:textSize="13sp"
+                        android:textSize="@dimen/sp13"
                         android:gravity="left"
                         android:layout_marginTop="@dimen/m8"
                         android:layout_marginLeft="@dimen/m20"
@@ -95,7 +95,7 @@
                         android:layout_height="wrap_content"
                         tools:text="训练前，摄入充足的热量和水分很重要哦～"
                         android:textColor="@color/color_6D7278"
-                        android:textSize="13sp"
+                        android:textSize="@dimen/sp13"
                         android:gravity="center_vertical|left"
                         android:layout_marginTop="@dimen/m8"
                         android:layout_marginLeft="@dimen/m20"

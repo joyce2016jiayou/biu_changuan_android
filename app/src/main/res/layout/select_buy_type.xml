@@ -40,7 +40,7 @@
                         android:layout_marginTop="@dimen/m10"
                         android:text="入驻平台"
                         android:textColor="#ff875935"
-                        android:textSize="11sp" />
+                        android:textSize="@dimen/sp11" />
 
                 </LinearLayout>
 
@@ -86,7 +86,7 @@
                         android:layout_marginTop="@dimen/m10"
                         android:text="入驻平台+数据统计"
                         android:textColor="#ff875935"
-                        android:textSize="11sp" />
+                        android:textSize="@dimen/sp11" />
 
                 </LinearLayout>
 
@@ -106,7 +106,7 @@
                 android:layout_height="wrap_content"
                 android:text="超值推荐"
                 android:textColor="#ff22243d"
-                android:textSize="13sp" />
+                android:textSize="@dimen/sp13" />
         </LinearLayout>
 
     </RelativeLayout>
@@ -150,7 +150,7 @@
                         android:gravity="center"
                         android:text="入驻平台+数据统计+年度行业报表"
                         android:textColor="#ff875935"
-                        android:textSize="11sp" />
+                        android:textSize="@dimen/sp11" />
 
                 </LinearLayout>
 

@@ -12,7 +12,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/m20"
         android:textColor="@color/top_heiziti"
-        android:textSize="20sp"
+        android:textSize="@dimen/sp20"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -22,8 +22,8 @@
     <ImageView
         android:id="@+id/back_btn"
         android:layout_width="28dp"
-        android:layout_height="18dp"
-        android:layout_marginLeft="20dp"
+        android:layout_height="@dimen/m18"
+        android:layout_marginLeft="@dimen/m20"
         android:layout_marginTop="@dimen/m20"
         android:src="@drawable/icon_return"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -33,7 +33,12 @@
     <ImageView
         android:id="@+id/add_btn"
         android:layout_width="28dp"
+<<<<<<< HEAD
         android:layout_height="18dp"
+=======
+        android:layout_height="@dimen/m18"
+        android:layout_marginRight="@dimen/m20"
+>>>>>>> origin/develop
         android:layout_marginTop="@dimen/m20"
         android:layout_marginRight="20dp"
         android:src="@drawable/icon_add"

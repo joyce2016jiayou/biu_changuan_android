@@ -29,7 +29,7 @@
             android:layout_marginRight="31dp"
             android:text="@string/tv1"
             android:textColor="@color/color_9B9B9B"
-            android:textSize="15sp" />
+            android:textSize="@dimen/sp15" />
 
         <LinearLayout
             android:id="@+id/center"
@@ -44,13 +44,13 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="17dp"
+                android:layout_marginLeft="@dimen/m17"
                 android:layout_marginTop="48dp"
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="21dp"
-                    android:layout_height="21dp"
+                    android:layout_width="@dimen/m21"
+                    android:layout_height="@dimen/m21"
                     android:layout_gravity="center_vertical"
                     android:src="@drawable/icon_number" />
 
@@ -66,29 +66,29 @@
                     android:singleLine="true"
                     android:textColor="@color/color_ACACAC"
                     android:textColorHint="@color/color_ACACAC"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/sp20" />
                 <TextView
                     android:id="@+id/yanzhengma_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/tv6"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginRight="16dp"
+                    android:layout_marginRight="@dimen/m16"
                     android:textColor="@color/color_FFBA02"
-                    android:textSize="15sp"
+                    android:textSize="@dimen/sp15"
                     />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="17dp"
+                android:layout_marginLeft="@dimen/m17"
                 android:layout_marginTop="32dp"
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="23dp"
+                    android:layout_width="@dimen/m20"
+                    android:layout_height="@dimen/m23"
                     android:layout_gravity="center_vertical"
                     android:src="@drawable/icon_yanzhengma" />
 
@@ -104,13 +104,13 @@
                     android:singleLine="true"
                     android:textColor="@color/color_ACACAC"
                     android:textColorHint="@color/color_ACACAC"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/sp20" />
                 
                 <ImageView
                     android:id="@+id/clear_password_btn"
                     android:layout_marginLeft="5dp"
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
+                    android:layout_width="@dimen/m16"
+                    android:layout_height="@dimen/m16"
                     android:visibility="invisible"
                     android:layout_gravity="center_vertical"
                     android:layout_marginRight="34dp"
@@ -120,13 +120,13 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="17dp"
+                android:layout_marginLeft="@dimen/m17"
                 android:layout_marginTop="32dp"
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="23dp"
+                    android:layout_width="@dimen/m20"
+                    android:layout_height="@dimen/m23"
                     android:layout_gravity="center_vertical"
                     android:src="@drawable/icon_password" />
 
@@ -142,19 +142,19 @@
                     android:singleLine="true"
                     android:textColor="@color/color_ACACAC"
                     android:textColorHint="@color/color_ACACAC"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/sp20" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="17dp"
+                android:layout_marginLeft="@dimen/m17"
                 android:layout_marginTop="32dp"
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="23dp"
+                    android:layout_width="@dimen/m20"
+                    android:layout_height="@dimen/m23"
                     android:layout_gravity="center_vertical"
                     android:src="@drawable/icon_password" />
 
@@ -170,7 +170,7 @@
                     android:singleLine="true"
                     android:textColor="@color/color_ACACAC"
                     android:textColorHint="@color/color_ACACAC"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/sp20" />
             </LinearLayout>
 
 
@@ -193,7 +193,7 @@
                 android:gravity="center"
                 android:text="@string/tv4"
                 android:textColor="@color/white"
-                android:textSize="20sp" />
+                android:textSize="@dimen/sp20" />
 
         </LinearLayout>
 
@@ -202,7 +202,7 @@
             android:layout_width="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="11dp"
+            android:layout_marginBottom="@dimen/m11"
             android:layout_height="wrap_content">
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -210,8 +210,8 @@
                 android:orientation="horizontal">
                 <CheckBox
                     android:id="@+id/xieyi_check_btn"
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
+                    android:layout_width="@dimen/m10"
+                    android:layout_height="@dimen/m10"
                     android:layout_gravity="center_vertical"
                     android:background="@drawable/selector_btn_checkbox"
                     android:button="@null"
@@ -223,7 +223,7 @@
                     android:text="@string/tv2"
                     android:layout_marginLeft="2dp"
                     android:textColor="@color/color_D8D8D8"
-                    android:textSize="12sp" />
+                    android:textSize="@dimen/sp12" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -231,15 +231,15 @@
                     android:layout_gravity="center_vertical"
                     android:text="@string/tv3"
                     android:textColor="@color/color_898989"
-                    android:textSize="12sp" />
+                    android:textSize="@dimen/sp12" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/check_layout"
                 android:background="@color/transparent"
-                android:layout_width="20dp"
+                android:layout_width="@dimen/m20"
                 android:orientation="vertical"
-                android:layout_height="12dp">
+                android:layout_height="@dimen/m12">
 
             </LinearLayout>
         </RelativeLayout>

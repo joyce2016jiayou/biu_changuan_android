@@ -12,5 +12,5 @@
         android:gravity="center"
         android:text="@string/tv1"
         android:textColor="@color/color_6D7278"
-        android:textSize="15sp" />
+        android:textSize="@dimen/sp15" />
 </LinearLayout>

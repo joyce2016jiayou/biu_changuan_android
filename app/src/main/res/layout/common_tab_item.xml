@@ -9,7 +9,7 @@
 
     <TextView
         android:id="@+id/tab_item_text"
-        android:textSize="15sp"
+        android:textSize="@dimen/sp15"
         android:textColor="@color/color_4A4A4A"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

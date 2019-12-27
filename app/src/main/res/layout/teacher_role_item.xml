@@ -28,7 +28,7 @@
             android:singleLine="true"
             android:textColor="@color/top_heiziti"
             android:textColorHint="@color/color_9B9B9B"
-            android:textSize="13sp" />
+            android:textSize="@dimen/sp13" />
 
         <EditText
             android:id="@+id/edit_phone"
@@ -42,7 +42,7 @@
             android:singleLine="true"
             android:textColor="@color/top_heiziti"
             android:textColorHint="@color/color_9B9B9B"
-            android:textSize="13sp" />
+            android:textSize="@dimen/sp13" />
 
 
 
@@ -53,7 +53,7 @@
         android:id="@+id/Add_btn"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginRight="@dimen/m20"
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
         android:src="@drawable/role_jian_btn" />

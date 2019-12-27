@@ -14,11 +14,11 @@
         <ImageView
             android:id="@+id/back_btn_img"
             android:layout_width="28dp"
-            android:layout_height="18dp"
+            android:layout_height="@dimen/m18"
             android:layout_alignParentLeft="true"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="30dp"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="@dimen/m20"
             android:src="@drawable/icon_back" />
         <TextView
             android:id="@+id/top_title_tv"
@@ -28,8 +28,8 @@
             android:textStyle="bold"
             android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="19dp"
-            android:textSize="25sp"
+            android:layout_marginBottom="@dimen/m19"
+            android:textSize="@dimen/sp25"
             android:textColor="@color/top_heiziti"
             />
     </RelativeLayout>

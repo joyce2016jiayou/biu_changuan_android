@@ -16,7 +16,7 @@
         android:layout_marginTop="@dimen/m50"
         android:layout_marginLeft="@dimen/m50"
         android:textColor="@color/color_6D7278"
-        android:textSize="13sp"
+        android:textSize="@dimen/sp13"
         android:layout_marginRight="@dimen/m50"/>
 
     <TextView
@@ -27,7 +27,7 @@
         tools:text="17717418869"
         android:layout_marginTop="@dimen/m30"
         android:textColor="@color/color_000000"
-        android:textSize="18sp"/>
+        android:textSize="@dimen/sp18"/>
 
     <TextView
         android:id="@+id/tv_send_code"
@@ -39,5 +39,5 @@
         android:text="@string/tv_send_yzm"
         android:layout_marginTop="@dimen/m30"
         android:textColor="@color/color_22243D"
-        android:textSize="20sp"/>
+        android:textSize="@dimen/sp20"/>
 </LinearLayout>

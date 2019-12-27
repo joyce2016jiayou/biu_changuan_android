@@ -39,7 +39,7 @@
                 android:layout_centerInParent="true"
                 android:text="@string/scan_code"
                 android:textColor="#ffffff"
-                android:textSize="20sp" />
+                android:textSize="@dimen/sp20" />
 
 
         </RelativeLayout>
@@ -121,11 +121,11 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="@dimen/m15"
         android:layout_marginBottom="200dp"
         android:text="我的二维码"
         android:textColor="#FFBA02"
-        android:textSize="20sp"
+        android:textSize="@dimen/sp20"
         android:textStyle="bold"
         android:visibility="gone" />
 

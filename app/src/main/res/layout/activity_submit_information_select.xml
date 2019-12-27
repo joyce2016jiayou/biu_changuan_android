@@ -14,7 +14,7 @@
         android:layout_marginTop="@dimen/m89"
         android:text="@string/tv132"
         android:textColor="#ff1d1d1d"
-        android:textSize="25sp"
+        android:textSize="@dimen/sp25"
         android:textStyle="bold" />
 
     <ImageView
@@ -35,7 +35,7 @@
         android:layout_marginTop="@dimen/m10"
         android:text="您暂无权限"
         android:textColor="#ffb7b7b7"
-        android:textSize="15sp" />
+        android:textSize="@dimen/sp15" />
 
     <TextView
         android:id="@+id/tv3"
@@ -46,7 +46,7 @@
         android:layout_marginTop="@dimen/m6"
         android:text="请提交企业资料后进行申请"
         android:textColor="#ffb7b7b7"
-        android:textSize="15sp" />
+        android:textSize="@dimen/sp15" />
 
     <LinearLayout
         android:id="@+id/submit_btn"
@@ -63,6 +63,6 @@
             android:layout_height="wrap_content"
             android:text="提交审核资料"
             android:textColor="#ff181818"
-            android:textSize="20sp" />
+            android:textSize="@dimen/sp20" />
     </LinearLayout>
 </RelativeLayout>

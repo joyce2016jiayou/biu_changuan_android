@@ -193,7 +193,7 @@
     <string name="tv133">企业名称</string>
     <string name="tv134">验证金额</string>
     <string name="tv135">企业银行账号</string>
-    <string name="tv136">设置提现账户</string>
+    <string name="tv136">设置转出账户</string>
     <string name="tv137">企业名称</string>
     <string name="tv138">用户名</string>
     <string name="tv139">身份证号</string>
@@ -246,10 +246,10 @@
 
 
     <string name="tv_select">请选择</string>
-    <string name="tv_qianbao">钱包</string>
+    <string name="tv_qianbao">账户</string>
     <string name="tv_money_details">收支明细</string>
-    <string name="tv_tixian">提现</string>
-    <string name="tv_tixian_money">提现金额</string>
+    <string name="tv_tixian">转出</string>
+    <string name="tv_tixian_money">转出金额</string>
 
     <string name="alert_dialog_tishi1">温馨提示</string>
     <string name="alert_dialog_tishi2">解绑银行卡</string>
@@ -309,9 +309,9 @@
     <string name="close_flash">关闭闪光灯</string>
     <string name="gallery">相册</string>
     <string name="scan_failed_tip">Scan image failed, please retry.</string>
-    <string name="tv_tixian_ok">确认提现</string>
-    <string name="tv_all_tixian">全部提现</string>
-    <string name="tv_now_tixian">立即提现</string>
+    <string name="tv_tixian_ok">确认转出</string>
+    <string name="tv_all_tixian">全部转出</string>
+    <string name="tv_now_tixian">立即转出</string>
     <string name="tv_bill">账单</string>
 
 
@@ -322,14 +322,14 @@
     <string name="tv_zclb">支出类别</string>
     <string name="tv_zcje">支出金额</string>
     <string name="tv_sqsj">申请时间</string>
-    <string name="tv_txyh">提现银行</string>
+    <string name="tv_txyh">转出银行</string>
     <string name="tv_dqzt">当前状态</string>
     <string name="tv_srlb">收入类别</string>
     <string name="tv_srje">收入金额</string>
     <string name="tv_kcmc">课程名称</string>
     <string name="tv_cgmc">场馆名称</string>
     <string name="tv_sksj">收款时间</string>
-    <string name="tixian_3day">提现申请已提交，我们会在三个工作日内进行处理，请等待～</string>
+    <string name="tixian_3day">转出申请已提交，我们会在三个工作日内进行处理，请等待～</string>
     <string name="add_card">添加银行卡</string>
     <string name="tv_input_card">请输入银行卡号</string>
     <string name="tv_card_man">持卡人</string>
@@ -343,9 +343,9 @@
     <string name="instructor_tips">可单选/全选/全不选 来决定是否接受相应课程类型的约课 如未选择某类型，则不会收到该课程类型的约课</string>
     <string name="man_skill">个人签名</string>
 
-    <string name="tv_txzh">提现账户</string>
-    <string name="tv_txje">提现金额</string>
-    <string name="tv_txsj">提现时间</string>
+    <string name="tv_txzh">转出账户</string>
+    <string name="tv_txje">转出金额</string>
+    <string name="tv_txsj">转出时间</string>
 
     <string name="tv_rzzh">入账账户</string>
     <string name="tv_rzsj">入账时间</string>
@@ -392,7 +392,7 @@
     <string name="tv_wenti">问题反馈</string>
     <string name="tv_quit">登出账户</string>
     <string name="tv_setting_pwd">设置登陆密码</string>
-    <string name="tv_update_tixian">修改提现密码</string>
+    <string name="tv_update_tixian">修改转出密码</string>
     <string name="tv_update_phone_tips">为了保证您的账号安全，请验证身份。验证成功后进行下一步操作。</string>
     <string name="tv_send_yzm">发送验证码</string>
     <string name="tv_next">下一步</string>

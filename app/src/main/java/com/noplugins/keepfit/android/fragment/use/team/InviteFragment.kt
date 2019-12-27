@@ -15,6 +15,7 @@ import com.noplugins.keepfit.android.adapter.ManagerTeamClassAdapter
 import com.noplugins.keepfit.android.base.BaseFragment
 import com.noplugins.keepfit.android.bean.use.ManagerBean
 import com.noplugins.keepfit.android.global.AppConstants
+import com.noplugins.keepfit.android.global.PublicPopControl
 import com.noplugins.keepfit.android.util.SpUtils
 import com.noplugins.keepfit.android.util.net.Network
 import com.noplugins.keepfit.android.util.net.entity.Bean
@@ -133,33 +134,19 @@ class InviteFragment : BaseFragment() {
     }
 
     private fun toJujue(view1: TextView, position: Int) {
-        val popupWindow = CommonPopupWindow.Builder(activity)
-            .setView(R.layout.dialog_to_room_delete)
-            .setBackGroundLevel(0.5f)//0.5f
-            .setAnimationStyle(R.style.main_menu_animstyle)
-            .setWidthAndHeight(
-                WindowManager.LayoutParams.MATCH_PARENT,
-                WindowManager.LayoutParams.MATCH_PARENT
-            )
-            .setOutSideTouchable(true).create()
-        popupWindow.showAsDropDown(view1)
-
-        /**设置逻辑 */
-        val view = popupWindow.contentView
-        val cancel = view.findViewById<TextView>(R.id.tv_cancel)
-        val sure = view.findViewById<TextView>(R.id.tv_add)
-        val tvInfo = view.findViewById<TextView>(R.id.tv_username)
-        val title = view.findViewById<TextView>(R.id.label_delete_room)
-        tvInfo.text = "确定取消邀请?"
-        title.text = "取消邀请"
-        cancel.setOnClickListener {
-            popupWindow.dismiss()
-        }
-        sure.setOnClickListener {
-            popupWindow.dismiss()
-            //去申请
-            agreeCourse(position)
-//
+        PublicPopControl.alert_dialog_center(activity) { view, popup ->
+            val content = view.findViewById<TextView>(R.id.pop_content)
+            val title = view.findViewById<TextView>(R.id.pop_title)
+            content.setText("确定取消邀请?")
+            title.setText("取消邀请")
+            view.findViewById<LinearLayout>(R.id.cancel_btn)
+                    .setOnClickListener {
+                        popup.dismiss()
+                    }
+            view.findViewById<LinearLayout>(R.id.sure_btn)
+                    .setOnClickListener {  //去申请
+                        popup.dismiss()
+                        agreeCourse(position)}
         }
     }
 
@@ -168,28 +155,28 @@ class InviteFragment : BaseFragment() {
         val params = HashMap<String, Any>()
         params["courseNum"] = datas[position].courseNum
         val subscription = Network.getInstance("团课取消邀请", activity)
-            .cancelCourseByArea(
-                params,
-                ProgressSubscriber("团课取消邀请", object : SubscriberOnNextListener<Bean<Any>> {
-                    override fun onNext(result: Bean<Any>) {
-                        //上架成功！
-                       if (result.code == 0){
-                           datas.removeAt(position)//删除数据源,移除集合中当前下标的数据
-                           adapterManager.notifyItemRemoved(position)//刷新被删除的地方
-                           adapterManager.notifyItemRangeChanged(position, adapterManager.itemCount) //刷新被删除数据，以及其后面的数据
-                           EventBus.getDefault().post(AppConstants.TEAM_YQ_REFUSE)
-                       }
+                .cancelCourseByArea(
+                        params,
+                        ProgressSubscriber("团课取消邀请", object : SubscriberOnNextListener<Bean<Any>> {
+                            override fun onNext(result: Bean<Any>) {
+                                //上架成功！
+                                if (result.code == 0){
+                                    datas.removeAt(position)//删除数据源,移除集合中当前下标的数据
+                                    adapterManager.notifyItemRemoved(position)//刷新被删除的地方
+                                    adapterManager.notifyItemRangeChanged(position, adapterManager.itemCount) //刷新被删除数据，以及其后面的数据
+                                    EventBus.getDefault().post(AppConstants.TEAM_YQ_REFUSE)
+                                }
 
-                        SuperCustomToast.getInstance(activity)
-                            .show(result.message)
-                    }
+                                SuperCustomToast.getInstance(activity)
+                                        .show(result.message)
+                            }
 
-                    override fun onError(error: String) {
-                        SuperCustomToast.getInstance(activity)
-                            .show(error)
-                    }
-                }, activity, false)
-            )
+                            override fun onError(error: String) {
+                                SuperCustomToast.getInstance(activity)
+                                        .show(error)
+                            }
+                        }, activity, false)
+                )
     }
     override fun onDestroyView() {
         super.onDestroyView()

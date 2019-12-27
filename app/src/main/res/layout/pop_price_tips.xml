@@ -15,12 +15,12 @@
             android:text="您已成为哔呦终身会员啦～"
             android:layout_marginTop="@dimen/m35"
             android:layout_marginLeft="@dimen/m45"
-            android:textSize="13sp"/>
+            android:textSize="@dimen/sp13"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/m45"
-            android:textSize="13sp"
+            android:textSize="@dimen/sp13"
             android:textColor="@color/color_705C00"
             android:layout_marginRight="@dimen/m25"
             android:layout_marginTop="@dimen/m10"

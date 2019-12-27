@@ -17,7 +17,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/top_heiziti"
-                android:textSize="18sp"
+                android:textSize="@dimen/sp18"
                 android:layout_marginTop="@dimen/m24"
                 android:layout_gravity="center_horizontal"
                 android:text="确认拨打（021）67254325？"
@@ -45,7 +45,7 @@
                         android:layout_height="wrap_content"
                         android:textStyle="normal"
                         android:text="@string/cancel"
-                        android:textSize="15sp"
+                        android:textSize="@dimen/sp15"
                         android:textColor="@color/color_4A4A4A"
                         />
             </LinearLayout>
@@ -64,7 +64,7 @@
                         android:layout_height="wrap_content"
                         android:textStyle="normal"
                         android:text="@string/tv148"
-                        android:textSize="15sp"
+                        android:textSize="@dimen/sp15"
                         android:textColor="@color/contents_text"
                         />
             </LinearLayout>

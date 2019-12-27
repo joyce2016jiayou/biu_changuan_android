@@ -9,9 +9,9 @@
     <ImageView
         android:id="@+id/back_btn"
         android:layout_width="28dp"
-        android:layout_height="18dp"
+        android:layout_height="@dimen/m18"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="@dimen/m20"
         android:layout_marginTop="57dp"
         android:src="@drawable/icon_back" />
 
@@ -20,7 +20,7 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="@dimen/m15"
         android:layout_marginLeft="40dp"
         android:text="@string/tv7"
         android:textStyle="bold"
@@ -29,7 +29,7 @@
 
     <RelativeLayout
         android:id="@+id/guanzhu_btn"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="@dimen/m25"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/title"
         android:layout_width="375dp"
@@ -52,15 +52,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
-                    android:textSize="20sp"
+                    android:textSize="@dimen/sp20"
                     android:layout_gravity="center_vertical"
                     android:text="@string/tv8"
                     />
                 <ImageView
-                    android:layout_width="16dp"
-                    android:layout_marginLeft="20dp"
+                    android:layout_width="@dimen/m16"
+                    android:layout_marginLeft="@dimen/m20"
                     android:layout_gravity="center_vertical"
-                    android:layout_height="16dp"
+                    android:layout_height="@dimen/m16"
                     android:src="@drawable/you_jiantou"
                     />
             </LinearLayout>
@@ -91,15 +91,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/top_heiziti"
-                    android:textSize="20sp"
+                    android:textSize="@dimen/sp20"
                     android:layout_gravity="center_vertical"
                     android:text="@string/tv9"
                     />
                 <ImageView
-                    android:layout_width="16dp"
-                    android:layout_marginLeft="20dp"
+                    android:layout_width="@dimen/m16"
+                    android:layout_marginLeft="@dimen/m20"
                     android:layout_gravity="center_vertical"
-                    android:layout_height="16dp"
+                    android:layout_height="@dimen/m16"
                     android:src="@drawable/black_right_jiantou"
                     />
             </LinearLayout>

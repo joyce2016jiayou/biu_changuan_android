@@ -494,6 +494,7 @@ class TeamInfoActivity : BaseActivity() {
                 .setOutSideTouchable(true).create()
         popupWindow.showAsDropDown(view1)
 
+<<<<<<< HEAD
         /**设置逻辑 */
         val view = popupWindow.contentView
         val cancel = view.findViewById<TextView>(R.id.tv_cancel)
@@ -510,6 +511,21 @@ class TeamInfoActivity : BaseActivity() {
             //去申请
             cancelCourse()
 //
+=======
+        PublicPopControl.alert_dialog_center(this) { view, popup ->
+            val content = view.findViewById<TextView>(R.id.pop_content)
+            val title = view.findViewById<TextView>(R.id.pop_title)
+            content.setText("确定取消邀请?")
+            title.setText("取消邀请")
+            view.findViewById<LinearLayout>(R.id.cancel_btn)
+                    .setOnClickListener {
+                        popup.dismiss()
+                    }
+            view.findViewById<LinearLayout>(R.id.sure_btn)
+                    .setOnClickListener {  //去申请
+                        popup.dismiss()
+                        cancelCourse()}
+>>>>>>> origin/develop
         }
     }
 

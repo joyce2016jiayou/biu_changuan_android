@@ -16,10 +16,10 @@
         <ImageView
             android:id="@+id/back_btn"
             android:layout_width="28dp"
-            android:layout_height="18dp"
+            android:layout_height="@dimen/m18"
             android:layout_alignParentLeft="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="@dimen/m20"
             android:layout_marginBottom="30dp"
             android:src="@drawable/icon_back" />
 
@@ -28,10 +28,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="19dp"
+            android:layout_marginBottom="@dimen/m19"
             android:text="@string/tv50"
             android:textColor="@color/top_heiziti"
-            android:textSize="25sp"
+            android:textSize="@dimen/sp25"
             android:textStyle="bold" />
     </RelativeLayout>
 
@@ -42,7 +42,7 @@
         android:layout_marginTop="@dimen/m166"
         android:textColor="@color/color_000000"
         android:layout_gravity="center_horizontal"
-        android:textSize="20sp"
+        android:textSize="@dimen/sp20"
         android:textStyle="bold" />
 
     <TextView
@@ -50,11 +50,11 @@
         android:layout_height="wrap_content"
         android:text="@string/tv52"
         android:layout_marginLeft="42dp"
-        android:layout_marginRight="26dp"
+        android:layout_marginRight="@dimen/m25"
         android:layout_marginTop="@dimen/m13"
         android:textColor="@color/color_000000"
         android:layout_gravity="center_horizontal"
-        android:textSize="20sp"/>
+        android:textSize="@dimen/sp20"/>
 
     <LinearLayout
         android:id="@+id/again_submit_btn"
@@ -72,7 +72,7 @@
             android:text="@string/tv53"
             android:textColor="@color/white"
             android:textStyle="bold"
-            android:textSize="25sp" />
+            android:textSize="@dimen/sp25" />
 
     </LinearLayout>
 

@@ -26,9 +26,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/m20"
-            android:text="钱包"
+            android:text="账户"
             android:textColor="@color/contents_text"
-            android:textSize="20sp"
+            android:textSize="@dimen/sp20"
             android:textStyle="bold" />
     </FrameLayout>
 
@@ -48,7 +48,7 @@
             android:gravity="center"
             android:text="明 细"
             android:textColor="@color/color_4A4A4A"
-            android:textSize="13sp"
+            android:textSize="@dimen/sp13"
             android:visibility="gone" />
 
         <TextView
@@ -59,7 +59,7 @@
             android:layout_marginTop="@dimen/m30"
             android:text="余额"
             android:textColor="@color/color_101010"
-            android:textSize="18sp" />
+            android:textSize="@dimen/sp18" />
 
         <TextView
             android:id="@+id/tv_balance"
@@ -70,7 +70,7 @@
             android:layout_margin="@dimen/m6"
             android:text="¥ 0.00"
             android:textColor="@color/color_101010"
-            android:textSize="20sp"
+            android:textSize="@dimen/sp20"
             android:textStyle="bold" />
 
         <LinearLayout
@@ -93,7 +93,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/contents_text"
-                    android:textSize="15sp"
+                    android:textSize="@dimen/sp15"
                     tools:text="¥ 2000.00" />
 
                 <TextView
@@ -102,7 +102,7 @@
                     android:layout_marginTop="@dimen/m5"
                     android:text="@string/tv_sum_sr"
                     android:textColor="@color/color_4A4A4A"
-                    android:textSize="12sp" />
+                    android:textSize="@dimen/sp12" />
             </LinearLayout>
 
             <LinearLayout
@@ -117,7 +117,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/contents_text"
-                    android:textSize="15sp"
+                    android:textSize="@dimen/sp15"
                     tools:text="¥ 222.02" />
 
                 <TextView
@@ -126,7 +126,7 @@
                     android:layout_marginTop="@dimen/m5"
                     android:text="@string/tv_day_sr"
                     android:textColor="@color/color_4A4A4A"
-                    android:textSize="12sp" />
+                    android:textSize="@dimen/sp12" />
             </LinearLayout>
 
             <LinearLayout
@@ -141,7 +141,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/contents_text"
-                    android:textSize="15sp"
+                    android:textSize="@dimen/sp15"
                     tools:text="¥ 333.03" />
 
                 <TextView
@@ -150,7 +150,7 @@
                     android:layout_marginTop="@dimen/m5"
                     android:text="@string/tv_month_sr"
                     android:textColor="@color/color_4A4A4A"
-                    android:textSize="12sp" />
+                    android:textSize="@dimen/sp12" />
             </LinearLayout>
         </LinearLayout>
     </RelativeLayout>
@@ -174,9 +174,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="累计提现"
+                android:text="累计转出"
                 android:textColor="@color/color_101010"
-                android:textSize="13sp" />
+                android:textSize="@dimen/sp13" />
 
             <TextView
                 android:id="@+id/tv_sum_withdraw"
@@ -185,7 +185,7 @@
                 android:layout_gravity="right"
                 android:text="¥0.00"
                 android:textColor="@color/color_4A4A4A"
-                android:textSize="13sp" />
+                android:textSize="@dimen/sp13" />
         </FrameLayout>
 
         <FrameLayout
@@ -199,9 +199,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="当前可提现"
+                android:text="当前可转出"
                 android:textColor="@color/color_101010"
-                android:textSize="13sp" />
+                android:textSize="@dimen/sp13" />
 
             <TextView
                 android:id="@+id/tv_now_withdraw"
@@ -210,7 +210,7 @@
                 android:layout_gravity="right"
                 android:text="¥0.00"
                 android:textColor="@color/color_4A4A4A"
-                android:textSize="13sp" />
+                android:textSize="@dimen/sp13" />
         </FrameLayout>
 
         <TextView
@@ -222,8 +222,8 @@
             android:layout_marginBottom="@dimen/m15"
             android:background="@drawable/shape_btn_bg_40"
             android:gravity="center"
-            android:text="立即提现"
+            android:text="立即转出"
             android:textColor="@color/contents_text"
-            android:textSize="20sp" />
+            android:textSize="@dimen/sp20" />
     </LinearLayout>
 </LinearLayout>

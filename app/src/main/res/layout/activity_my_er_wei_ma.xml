@@ -14,11 +14,11 @@
         <ImageView
             android:id="@+id/back_btn"
             android:layout_width="28dp"
-            android:layout_height="18dp"
+            android:layout_height="@dimen/m18"
             android:layout_alignParentLeft="true"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="30dp"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="@dimen/m20"
             android:src="@drawable/icon_back" />
         <TextView
             android:id="@+id/title_tv"
@@ -28,8 +28,8 @@
             android:textStyle="bold"
             android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="19dp"
-            android:textSize="25sp"
+            android:layout_marginBottom="@dimen/m19"
+            android:textSize="@dimen/sp25"
             android:textColor="@color/top_heiziti"
             />
 
@@ -51,14 +51,14 @@
         <com.lwj.widget.viewpagerindicator.ViewPagerIndicator
             android:id="@+id/indicator_spring"
             android:layout_width="match_parent"
-            android:layout_height="15dp"
+            android:layout_height="@dimen/m15"
             android:background="@color/transparent"
             app:vpi_default_color="@color/color_ACACAC"
-            app:vpi_distance="15dp"
+            app:vpi_distance="@dimen/m15"
             app:vpi_distanceType="BY_DISTANCE"
             app:vpi_indicatorType="SPRING"
             app:vpi_radius="5dp"
-            android:layout_marginBottom="19dp"
+            android:layout_marginBottom="@dimen/m19"
             app:vpi_selected_color="@color/color_FFBA02"
             />
     </LinearLayout>
@@ -67,8 +67,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="horizontal"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
+        android:paddingLeft="@dimen/m10"
+        android:paddingRight="@dimen/m10"
         android:background="@color/color_F8F8F8"
         android:layout_height="wrap_content">
 

@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:text="@string/tv137"
             android:textColor="@color/top_heiziti"
-            android:textSize="16sp" />
+            android:textSize="@dimen/sp16" />
 
         <EditText
             android:id="@+id/tixian_compny_name"
@@ -35,7 +35,7 @@
             android:text="哔哔哔旗舰店"
             android:textColor="@color/top_heiziti"
             android:textColorHint="@color/color_9B9B9B"
-            android:textSize="13sp" />
+            android:textSize="@dimen/sp13" />
     </LinearLayout>
 
     <LinearLayout
@@ -52,7 +52,7 @@
             android:layout_height="wrap_content"
             android:text="@string/tv135"
             android:textColor="@color/top_heiziti"
-            android:textSize="16sp" />
+            android:textSize="@dimen/sp16" />
 
         <EditText
             android:id="@+id/tixian_qiye_zhanghao"
@@ -67,7 +67,7 @@
             android:text="123123123456456"
             android:textColor="@color/top_heiziti"
             android:textColorHint="@color/color_9B9B9B"
-            android:textSize="13sp" />
+            android:textSize="@dimen/sp13" />
     </LinearLayout>
 
     <LinearLayout
@@ -85,7 +85,7 @@
             android:layout_height="wrap_content"
             android:text="@string/tv149"
             android:textColor="@color/top_heiziti"
-            android:textSize="16sp" />
+            android:textSize="@dimen/sp16" />
 
         <EditText
             android:id="@+id/compny_kaihuhang"
@@ -100,7 +100,7 @@
             android:text="123123123456456"
             android:textColor="@color/top_heiziti"
             android:textColorHint="@color/color_9B9B9B"
-            android:textSize="13sp" />
+            android:textSize="@dimen/sp13" />
     </LinearLayout>
 
 </LinearLayout>

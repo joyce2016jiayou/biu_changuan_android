@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="9dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="@dimen/m10"
             android:background="@drawable/jpush_richpush_btn_selector" />
 
         <ImageView
@@ -39,7 +39,7 @@
             android:layout_toRightOf="@id/imgView"
             android:clickable="false"
             android:text=" "
-            android:textSize="20sp"
+            android:textSize="@dimen/sp20"
             android:textColor="#ffffff" />
     </RelativeLayout>
 

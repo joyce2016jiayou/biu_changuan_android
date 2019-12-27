@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:background="@color/white"
     android:layout_marginLeft="28dp"
-    android:layout_marginTop="10dp"
+    android:layout_marginTop="@dimen/m10"
     android:gravity="center_vertical"
     android:orientation="horizontal">
 
@@ -25,13 +25,13 @@
             android:text="@string/tv_select"
             android:textColor="@color/top_heiziti"
             android:textColorHint="@color/color_9B9B9B"
-            android:textSize="13sp" />
+            android:textSize="@dimen/sp13" />
 
         <LinearLayout
             android:layout_width="42dp"
             android:layout_height="8dp"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="11dp"
+            android:layout_marginLeft="@dimen/m11"
             android:background="@drawable/hengang"
             android:orientation="horizontal" />
 
@@ -39,14 +39,14 @@
             android:id="@+id/tvEndTime"
             android:layout_width="63dp"
             android:layout_height="36dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="@dimen/m10"
             android:background="@drawable/time_item"
             android:gravity="center"
             android:hint="@string/edit_hint13"
             android:text="@string/tv_select"
             android:textColor="@color/top_heiziti"
             android:textColorHint="@color/color_9B9B9B"
-            android:textSize="13sp" />
+            android:textSize="@dimen/sp13" />
     </LinearLayout>
 
 

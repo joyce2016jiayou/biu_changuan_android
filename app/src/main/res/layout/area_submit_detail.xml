@@ -9,34 +9,34 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="455dp"
-        android:layout_marginTop="-10dp"
+        android:layout_marginTop="@dimen/m_d_10"
         android:background="@drawable/jujue_bg1"
         android:orientation="vertical">
 
         <ImageView
             android:id="@+id/close_btn"
-            android:layout_width="22dp"
-            android:layout_height="22dp"
+            android:layout_width="@dimen/m22"
+            android:layout_height="@dimen/m22"
             android:layout_alignParentRight="true"
-            android:layout_marginTop="15dp"
-            android:layout_marginRight="15dp"
+            android:layout_marginTop="@dimen/m15"
+            android:layout_marginRight="@dimen/m15"
             android:src="@drawable/close_btn_ico" />
 
         <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="@dimen/m20"
             android:layout_marginTop="29dp"
             android:text="@string/tv96"
             android:textColor="@color/top_heiziti"
-            android:textSize="25sp" />
+            android:textSize="@dimen/sp25" />
 
         <LinearLayout
             android:layout_below="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="@dimen/m20"
             android:orientation="vertical">
 
             <LinearLayout
@@ -51,7 +51,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/tv54"
                     android:textColor="@color/color_6D7278"
-                    android:textSize="15sp" />
+                    android:textSize="@dimen/sp15" />
 
                 <TextView
                     android:id="@+id/edit_class_name"
@@ -64,12 +64,12 @@
                     android:text="瑜伽"
                     android:singleLine="true"
                     android:textColor="@color/top_heiziti"
-                    android:textSize="15sp" />
+                    android:textSize="@dimen/sp15" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/m10"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -78,7 +78,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/tv55"
                     android:textColor="@color/color_6D7278"
-                    android:textSize="15sp" />
+                    android:textSize="@dimen/sp15" />
 
                 <TextView
                     android:layout_width="265dp"
@@ -90,12 +90,12 @@
                     android:text="tony老师"
                     android:singleLine="true"
                     android:textColor="@color/top_heiziti"
-                    android:textSize="15sp" />
+                    android:textSize="@dimen/sp15" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/m10"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -104,7 +104,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/tv56"
                     android:textColor="@color/color_6D7278"
-                    android:textSize="15sp" />
+                    android:textSize="@dimen/sp15" />
 
                 <TextView
                     android:layout_width="265dp"
@@ -116,13 +116,13 @@
                     android:text="有氧草房"
                     android:singleLine="true"
                     android:textColor="@color/top_heiziti"
-                    android:textSize="15sp" />
+                    android:textSize="@dimen/sp15" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/m10"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -131,7 +131,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/tv57"
                     android:textColor="@color/color_6D7278"
-                    android:textSize="15sp" />
+                    android:textSize="@dimen/sp15" />
 
                 <TextView
                     android:layout_width="265dp"
@@ -143,12 +143,12 @@
                     android:text="40/人"
                     android:singleLine="true"
                     android:textColor="@color/top_heiziti"
-                    android:textSize="15sp" />
+                    android:textSize="@dimen/sp15" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/m10"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -157,7 +157,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/tv58"
                     android:textColor="@color/color_6D7278"
-                    android:textSize="15sp" />
+                    android:textSize="@dimen/sp15" />
 
                 <TextView
                     android:layout_width="265dp"
@@ -169,12 +169,12 @@
                     android:text="40人"
                     android:singleLine="true"
                     android:textColor="@color/top_heiziti"
-                    android:textSize="15sp" />
+                    android:textSize="@dimen/sp15" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/m10"
                 android:gravity="center_vertical"
                 android:orientation="vertical">
 
@@ -183,23 +183,23 @@
                     android:layout_height="wrap_content"
                     android:text="@string/tv60"
                     android:textColor="@color/color_6D7278"
-                    android:textSize="15sp" />
+                    android:textSize="@dimen/sp15" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="33dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="@dimen/m10"
                     android:gravity="center_vertical"
                     android:paddingLeft="5dp"
                     android:text="课程介绍课程介绍课程介绍课程介绍课程介绍课程介绍"
                     android:singleLine="true"
                     android:textColor="@color/top_heiziti"
-                    android:textSize="15sp" />
+                    android:textSize="@dimen/sp15" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="@dimen/m15"
                 android:gravity="center_vertical"
                 android:orientation="vertical">
 
@@ -208,18 +208,18 @@
                     android:layout_height="wrap_content"
                     android:text="@string/tv61"
                     android:textColor="@color/color_6D7278"
-                    android:textSize="15sp" />
+                    android:textSize="@dimen/sp15" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="33dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="@dimen/m10"
                     android:gravity="center_vertical"
                     android:paddingLeft="5dp"
                     android:text="注意事项注意事项注意事项注意事项注意事项注意事项"
                     android:singleLine="true"
                     android:textColor="@color/top_heiziti"
-                    android:textSize="15sp" />
+                    android:textSize="@dimen/sp15" />
             </LinearLayout>
         </LinearLayout>
 
@@ -230,8 +230,8 @@
         android:layout_width="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginTop="@dimen/m10"
+        android:layout_marginBottom="@dimen/m10"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -246,7 +246,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/tv90"
                 android:textColor="@color/top_heiziti"
-                android:textSize="16sp"
+                android:textSize="@dimen/sp16"
                 android:textStyle="normal" />
         </LinearLayout>
 
@@ -263,7 +263,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/tv91"
                 android:textColor="@color/white"
-                android:textSize="16sp"
+                android:textSize="@dimen/sp16"
                 android:textStyle="normal" />
         </LinearLayout>
     </LinearLayout>

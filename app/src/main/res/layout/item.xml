@@ -15,7 +15,7 @@
             android:layout_width="93dp"
             android:layout_height="33dp"
             android:background="@drawable/et_login_bg"
-            android:textSize="13sp"
+            android:textSize="@dimen/sp13"
             android:gravity="center"
             spinner:ms_background_color="@android:color/white"
             spinner:ms_popupwindow_height="wrap_content"
@@ -25,7 +25,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginLeft="22dp"
+            android:layout_marginLeft="@dimen/m22"
             android:gravity="center_vertical"
             android:layout_height="wrap_content">
 
@@ -38,7 +38,7 @@
                 android:inputType="number"
                 android:maxLength="10"
                 android:singleLine="true"
-                android:textSize="13sp"
+                android:textSize="@dimen/sp13"
                 android:textColor="@color/top_heiziti"
                 android:textColorHint="@color/color_9B9B9B" />
             <TextView
@@ -52,9 +52,9 @@
 
         <ImageView
             android:id="@+id/Add_btn"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:layout_marginLeft="11dp"
+            android:layout_width="@dimen/m15"
+            android:layout_height="@dimen/m15"
+            android:layout_marginLeft="@dimen/m11"
             android:src="@drawable/jiahao"
             />
 

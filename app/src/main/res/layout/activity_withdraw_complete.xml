@@ -26,9 +26,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="提现"
+                android:text="转出"
                 android:textColor="@color/contents_text"
-                android:textSize="20sp"
+                android:textSize="@dimen/sp20"
                 android:layout_marginTop="@dimen/m20"
                 android:textStyle="bold"/>
         <TextView
@@ -38,7 +38,7 @@
                 android:layout_gravity="right|center_vertical"
                 android:text="完成"
                 android:textColor="@color/contents_text"
-                android:textSize="15sp"
+                android:textSize="@dimen/sp15"
                 android:layout_marginRight="@dimen/m20"
                 android:layout_marginTop="@dimen/m20"/>
 
@@ -70,7 +70,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:textSize="15sp"
+                    android:textSize="@dimen/sp15"
                     android:textColor="@color/color_6D7278"
                     android:layout_marginTop="@dimen/m10"
                     android:text="@string/tixian_3day"

@@ -21,17 +21,17 @@
         android:layout_marginTop="9dp"
         android:layout_gravity="center_horizontal"
         android:textColor="@color/top_heiziti"
-        android:textSize="20sp"
+        android:textSize="@dimen/sp20"
         />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/tv41"
-        android:layout_marginTop="13dp"
+        android:layout_marginTop="@dimen/m13"
         android:layout_gravity="center_horizontal"
         android:textColor="@color/color_4A4A4A"
-        android:textSize="15sp"
+        android:textSize="@dimen/sp15"
         />
 
 

@@ -11,7 +11,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp">
+        android:layout_marginTop="@dimen/m15">
 
         <LinearLayout
             android:id="@+id/last_btn"
@@ -25,7 +25,7 @@
 
             <ImageView
                 android:layout_width="9dp"
-                android:layout_height="14dp"
+                android:layout_height="@dimen/m14"
                 android:background="@mipmap/last" />
         </LinearLayout>
 
@@ -38,7 +38,7 @@
             android:layout_centerVertical="true"
             android:text="当前日期"
             android:textColor="@android:color/black"
-            android:textSize="22sp" />
+            android:textSize="@dimen/sp22" />
 
         <LinearLayout
             android:id="@+id/next_btn"
@@ -53,7 +53,7 @@
 
             <ImageView
                 android:layout_width="9dp"
-                android:layout_height="14dp"
+                android:layout_height="@dimen/m14"
                 android:layout_centerVertical="true"
                 android:background="@mipmap/next" />
         </LinearLayout>
@@ -65,7 +65,7 @@
     <com.othershe.calendarview.weiget.WeekView2
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="14dp"
+        android:layout_marginTop="@dimen/m14"
         android:background="@drawable/rili_top" />
 
     <com.othershe.calendarview.weiget.CalenDarView2

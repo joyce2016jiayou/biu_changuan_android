@@ -17,7 +17,7 @@
         android:layout_marginTop="@dimen/m50"
         android:layout_marginLeft="@dimen/m50"
         android:textColor="@color/color_6D7278"
-        android:textSize="13sp"
+        android:textSize="@dimen/sp13"
         android:layout_marginRight="@dimen/m50"/>
 
 
@@ -31,13 +31,13 @@
         android:inputType="number"
         app:blockShape="underline"
         app:maxCodeLength="6"
-        app:blockSpace="10dp"
+        app:blockSpace="@dimen/m10"
         app:blockNormalColor="@color/color_4A4A4A"
         app:isEnteredState="true"
         app:codeTextColor="@color/color_181818"
         app:blockFocusColor="@color/color_F6C82A"
         app:codeInputType="text"
-        app:codeTextSize="24sp"
+        app:codeTextSize="@dimen/sp24"
         android:layout_marginStart="60dp"
         android:layout_marginEnd="60dp"/>
 
@@ -49,17 +49,23 @@
         tools:text="发送验证码"
         android:layout_marginTop="@dimen/m20"
         android:textColor="@color/color_181818"
-        android:textSize="13sp"/>
+        android:textSize="@dimen/sp13"/>
 
-    <TextView
-        android:id="@+id/tv_next"
-        android:layout_width="@dimen/m209"
-        android:layout_height="@dimen/m50"
-        android:gravity="center"
-        android:background="@drawable/shape_btn_bg_40"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/tv_next"
-        android:layout_marginTop="@dimen/m80"
-        android:textColor="@color/color_22243D"
-        android:textSize="20sp"/>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/tv_next"
+            android:layout_width="@dimen/m209"
+            android:layout_height="@dimen/m50"
+            android:gravity="center"
+            android:background="@drawable/shape_btn_bg_40"
+            android:layout_gravity="center_horizontal|bottom"
+            android:text="@string/tv_next"
+            android:layout_marginBottom="@dimen/m118"
+            android:textColor="@color/color_22243D"
+            android:textSize="@dimen/sp20"/>
+    </FrameLayout>
+
+
 </LinearLayout>

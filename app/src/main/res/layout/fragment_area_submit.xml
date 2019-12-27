@@ -8,7 +8,7 @@
 
     <com.andview.refreshview.XRefreshView
         android:id="@+id/xrefreshview"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/m10"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/color_F8F8F8">

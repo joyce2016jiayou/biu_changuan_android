@@ -20,10 +20,10 @@
             <ImageView
                     android:id="@+id/back_btn"
                     android:layout_width="28dp"
-                    android:layout_height="18dp"
+                    android:layout_height="@dimen/m18"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentBottom="true"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="@dimen/m20"
                     android:layout_marginBottom="30dp"
                     android:src="@drawable/icon_back" />
 
@@ -33,10 +33,10 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginBottom="19dp"
+                    android:layout_marginBottom="@dimen/m19"
                     android:text="修改密码"
                     android:textColor="@color/top_heiziti"
-                    android:textSize="20sp"
+                    android:textSize="@dimen/sp20"
                     android:textStyle="bold" />
         </RelativeLayout>
         <www.linwg.org.lib.LCardView
@@ -56,8 +56,8 @@
                     android:orientation="horizontal">
 
                 <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="23dp"
+                        android:layout_width="@dimen/m20"
+                        android:layout_height="@dimen/m23"
                         android:layout_gravity="center_vertical"
                         android:src="@drawable/icon_user_off" />
 
@@ -66,7 +66,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="5dp"
-                        android:layout_marginRight="25dp"
+                        android:layout_marginRight="@dimen/m25"
                         android:background="@null"
                         android:hint="@string/edit_hint1"
                         android:inputType="phone"
@@ -75,7 +75,7 @@
                         android:singleLine="true"
                         android:textColor="@color/color_ACACAC"
                         android:textColorHint="@color/color_ACACAC"
-                        android:textSize="15sp" />
+                        android:textSize="@dimen/sp15" />
             </LinearLayout>
         </www.linwg.org.lib.LCardView>
         <www.linwg.org.lib.LCardView
@@ -95,8 +95,8 @@
                     android:orientation="horizontal">
 
                 <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="23dp"
+                        android:layout_width="@dimen/m20"
+                        android:layout_height="@dimen/m23"
                         android:layout_gravity="center_vertical"
                         android:src="@drawable/icon_user_off" />
 
@@ -110,9 +110,9 @@
                         android:hint="@string/edit_hint5"
                         android:inputType="number"
                         android:maxLength="6"
-                        android:layout_marginRight="25dp"
+                        android:layout_marginRight="@dimen/m25"
                         android:singleLine="true"
-                        android:textSize="15sp" />
+                        android:textSize="@dimen/sp15" />
 
                 <TextView
                         android:id="@+id/tv_send"
@@ -120,9 +120,9 @@
                         android:layout_height="wrap_content"
                         android:text="@string/tv6"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginRight="24dp"
+                        android:layout_marginRight="@dimen/m24"
                         android:textColor="@color/color_F9CE0F"
-                        android:textSize="15sp"
+                        android:textSize="@dimen/sp15"
                         />
             </LinearLayout>
         </www.linwg.org.lib.LCardView>
@@ -143,8 +143,8 @@
                     android:orientation="horizontal">
 
                 <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="23dp"
+                        android:layout_width="@dimen/m20"
+                        android:layout_height="@dimen/m23"
                         android:layout_gravity="center_vertical"
                         android:src="@drawable/icon_user_off" />
 
@@ -153,7 +153,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="5dp"
-                        android:layout_marginRight="25dp"
+                        android:layout_marginRight="@dimen/m25"
                         android:background="@null"
                         android:hint="@string/edit_hint6"
                         android:inputType="textPassword"
@@ -162,7 +162,7 @@
                         android:singleLine="true"
                         android:textColor="@color/color_ACACAC"
                         android:textColorHint="@color/color_ACACAC"
-                        android:textSize="15sp" />
+                        android:textSize="@dimen/sp15" />
             </LinearLayout>
         </www.linwg.org.lib.LCardView>
         <www.linwg.org.lib.LCardView
@@ -182,8 +182,8 @@
                     android:orientation="horizontal">
 
                 <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="23dp"
+                        android:layout_width="@dimen/m20"
+                        android:layout_height="@dimen/m23"
                         android:layout_gravity="center_vertical"
                         android:src="@drawable/icon_user_off" />
 
@@ -192,7 +192,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="5dp"
-                        android:layout_marginRight="25dp"
+                        android:layout_marginRight="@dimen/m25"
                         android:background="@null"
                         android:maxLength="16"
                         android:hint="@string/edit_hint7"
@@ -201,7 +201,7 @@
                         android:singleLine="true"
                         android:textColor="@color/color_ACACAC"
                         android:textColorHint="@color/color_ACACAC"
-                        android:textSize="15sp" />
+                        android:textSize="@dimen/sp15" />
             </LinearLayout>
         </www.linwg.org.lib.LCardView>
 
@@ -218,5 +218,5 @@
             android:gravity="center"
             android:text="@string/tv39"
             android:textColor="@color/contents_text"
-            android:textSize="20sp" />
+            android:textSize="@dimen/sp20" />
 </RelativeLayout>

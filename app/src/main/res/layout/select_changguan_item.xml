@@ -38,7 +38,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/m20"
                     android:textColor="@color/top_heiziti"
-                    android:textSize="15sp"
+                    android:textSize="@dimen/sp15"
                     android:text="注册即代表您同意哔哟注册即代表您同意哔哟" />
 
                 <LinearLayout
@@ -60,7 +60,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/m8"
                         android:textColor="@color/color_4A4A4A"
-                        android:textSize="12sp"
+                        android:textSize="@dimen/sp12"
                         android:text="07:00-21:00" />
                 </LinearLayout>
 
@@ -83,7 +83,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/m8"
                         android:textColor="@color/color_4A4A4A"
-                        android:textSize="12sp"
+                        android:textSize="@dimen/sp12"
                         android:text="闵行区甬虹路78弄1号晋城中心" />
                 </LinearLayout>
 

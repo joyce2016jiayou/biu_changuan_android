@@ -492,7 +492,7 @@ public interface MyService {
     Observable<Bean<PrivateDetailBean>> teacherDetails(@Body RequestBody json);
 
     /**
-     * 钱包
+     * 账户
      *
      * @return
      */
@@ -546,7 +546,7 @@ public interface MyService {
     Observable<Bean<Object>> forgetPassword(@Body RequestBody json);
 
     /**
-     * 设置提现密码
+     * 设置转出密码
      *
      * @return
      */
@@ -555,7 +555,7 @@ public interface MyService {
     Observable<Bean<Object>> settingPayPassword(@Body RequestBody json);
 
     /**
-     * 提现
+     * 转出
      *
      * @return
      */
@@ -692,7 +692,7 @@ public interface MyService {
     Observable<Bean<Object>> areaInviteTeacher(@Body RequestBody json);
 
     /**
-     * 提现
+     * 转出
      *
      * @return
      */

@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.LinearLayout
 import android.widget.TextView
 import com.lxj.xpopup.XPopup
 import com.lxj.xpopup.enums.PopupAnimation
@@ -14,6 +15,7 @@ import com.noplugins.keepfit.android.activity.user.Login2Activity
 import com.noplugins.keepfit.android.base.BaseActivity
 import com.noplugins.keepfit.android.base.BaseActivity2
 import com.noplugins.keepfit.android.global.AppConstants
+import com.noplugins.keepfit.android.global.PublicPopControl
 import com.noplugins.keepfit.android.util.ActivityCollectorUtil
 import com.noplugins.keepfit.android.util.BaseUtils
 import com.noplugins.keepfit.android.util.SpUtils
@@ -96,6 +98,20 @@ class SettingActivity : BaseActivity() {
                                     }
 
                         })).show()
+        PublicPopControl.alert_dialog_center(this) { view, popup ->
+            val content = view.findViewById<TextView>(R.id.pop_content)
+            val title = view.findViewById<TextView>(R.id.pop_title)
+            content.setText("确定登出哔呦账户吗？")
+            title.setText("登出账户")
+            view.findViewById<LinearLayout>(R.id.cancel_btn)
+                    .setOnClickListener {
+                        popup.dismiss()
+                    }
+            view.findViewById<LinearLayout>(R.id.sure_btn)
+                    .setOnClickListener {
+                        popup.dismiss()
+                        toLogin()}
+        }
     }
 
 

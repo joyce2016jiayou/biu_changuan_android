@@ -25,7 +25,7 @@
                 android:layout_marginLeft="@dimen/m20"
                 android:text="单车房-双子座"
                 android:textColor="@color/color_584903"
-                android:textSize="15sp" />
+                android:textSize="@dimen/sp15" />
 
             <TextView
                 android:id="@+id/people_number_tv"
@@ -36,7 +36,7 @@
                 android:layout_marginRight="@dimen/m22"
                 android:text="50人"
                 android:textColor="@color/color_584903"
-                android:textSize="15sp" />
+                android:textSize="@dimen/sp15" />
         </RelativeLayout>
 
         <ImageView
