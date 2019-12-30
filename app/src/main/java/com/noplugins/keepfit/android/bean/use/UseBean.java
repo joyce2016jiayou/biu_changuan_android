@@ -20,6 +20,15 @@ public class UseBean {
     private TotalBean total;
     private RollBean roll;
     private List<ProductBean> product;
+    private int isProduct;
+
+    public int getIsProduct() {
+        return isProduct;
+    }
+
+    public void setIsProduct(int isProduct) {
+        this.isProduct = isProduct;
+    }
 
     public AreaBean getArea() {
         return area;

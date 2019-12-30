@@ -189,11 +189,12 @@ class UseFragment: ViewPagerFragment() {
 
         xiaoshouStrings.clear()
 
-        if (bean.product!=null){
+        if (bean.isProduct == 0){
+            picChart.visibility = View.VISIBLE
+            iv_empty_pie.visibility = View.GONE
             bean.product.forEach {
                 xiaoshouStrings.add(PieEntry(it.percent.toFloat(), it.type))
             }
-
             val dataSet = PieDataSet(xiaoshouStrings, "")
             dataSet.colors = colors
             val pieData = PieData(dataSet)
@@ -204,6 +205,7 @@ class UseFragment: ViewPagerFragment() {
             picChart.invalidate()
         } else{
             picChart.visibility = View.INVISIBLE
+            iv_empty_pie.visibility = View.VISIBLE
         }
 
     }
@@ -243,7 +245,7 @@ class UseFragment: ViewPagerFragment() {
         description.text = ""
         picChart.description = description
         picChart.holeRadius = 0f
-        picChart.x = -120f
+        picChart.x = -100f
         picChart.transparentCircleRadius = 0f
         picChart.extraTopOffset = 20f
         picChart.extraBottomOffset = 20f

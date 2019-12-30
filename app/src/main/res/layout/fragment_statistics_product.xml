@@ -52,21 +52,21 @@
                 android:text="产品消费占比"/>
             <www.linwg.org.lib.LCardView
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/m210"
+                android:layout_height="wrap_content"
                 android:visibility="visible"
                 app:cornerRadius="@dimen/m10">
                 <com.github.mikephil.charting.charts.PieChart
                     android:id="@+id/picChart"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/m210"
+                    android:layout_height="@dimen/m291"
                     android:layout_gravity="center" />
                 <ImageView
                     android:id="@+id/iv_empty_pie"
                     android:visibility="gone"
                     android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/icon_sign"/>
+                    android:layout_width="@dimen/m77"
+                    android:layout_height="@dimen/m100"
+                    android:src="@mipmap/default_page"/>
             </www.linwg.org.lib.LCardView>
 
 
@@ -83,7 +83,7 @@
                 <com.github.mikephil.charting.charts.LineChart
                     android:id="@+id/lineChart"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/m216"
+                    android:layout_height="@dimen/m276"
                     android:layout_marginBottom="@dimen/m20"/>
             </www.linwg.org.lib.LCardView>
             <TextView
@@ -100,7 +100,7 @@
                 <com.github.mikephil.charting.charts.BarChart
                     android:id="@+id/barChart"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/m300"/>
+                    android:layout_height="@dimen/m262"/>
             </www.linwg.org.lib.LCardView>
 
         </LinearLayout>

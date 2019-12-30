@@ -31,6 +31,7 @@ import com.noplugins.keepfit.android.util.BaseUtils
 import com.noplugins.keepfit.android.util.GlideEngine
 import com.noplugins.keepfit.android.util.GlideRoundTransform
 import com.noplugins.keepfit.android.util.SpUtils
+import com.noplugins.keepfit.android.util.data.StringsHelper
 import com.noplugins.keepfit.android.util.net.Network
 import com.noplugins.keepfit.android.util.net.entity.Bean
 import com.noplugins.keepfit.android.util.net.progress.GsonSubscriberOnNextListener
@@ -256,7 +257,6 @@ class VenueDetailActivity : BaseActivity(), CCRSortableNinePhotoLayout.Delegate 
         cgAddress.text = infoBean!!.address
 
 
-
         cgHours.text = "${BaseUtils.strSubEnd3(infoBean!!.business_start)}-${BaseUtils.strSubEnd3(infoBean!!.business_end)}"
 
         cgPhone.text = infoBean!!.phone
@@ -311,6 +311,16 @@ class VenueDetailActivity : BaseActivity(), CCRSortableNinePhotoLayout.Delegate 
 
 
         save1.setOnClickListener {
+            if (cgPhone.text.toString().isEmpty() || cgPhone.text.toString().length >12){
+                Toast.makeText(this@VenueDetailActivity, "请输入正确的电话号码",
+                        Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            if (!StringsHelper.isEmail(cgEmail.text.toString())){
+                Toast.makeText(this@VenueDetailActivity, "请输入正确的邮箱",
+                        Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
             infoBean!!.business_start = tvSelectTime.text.split("-")[0]
             infoBean!!.business_end = tvSelectTime.text.split("-")[1]
             infoBean!!.phone = cgPhone.text.toString()
@@ -372,6 +382,11 @@ class VenueDetailActivity : BaseActivity(), CCRSortableNinePhotoLayout.Delegate 
         })
 
         save2.setOnClickListener {
+            if (selectStr.size == 0){
+                Toast.makeText(this@VenueDetailActivity, "场馆设施不可为空",
+                        Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
             var str = ""
             selectStr.forEach {
                 str += "$it,"
@@ -593,7 +608,7 @@ class VenueDetailActivity : BaseActivity(), CCRSortableNinePhotoLayout.Delegate 
                                         Toast.LENGTH_SHORT).show()
 //                                setResult(SpUtils.getInt(applicationContext, AppConstants.FRAGMENT_SIZE) - 1)
 //                                finish()
-                                if (nowSelect == 5){
+                                if (nowSelect == 5 || nowSelect == 1){
                                     requestData()
                                 }
                             }

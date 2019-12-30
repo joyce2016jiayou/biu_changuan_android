@@ -73,6 +73,13 @@ class ToUserFragment : BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        colors.add(parseColor("#707BCC"))
+        colors.add(parseColor("#5CCEFF"))
+        colors.add(parseColor("#8ED06D"))
+        colors.add(parseColor("#FFB963"))
+        colors.add(parseColor("#ED7B60"))
+        colors.add(parseColor("#9B9791"))
+        colors.add(parseColor("#828AD3"))
         initAllPieChart(false)
         initPieChart(true)
         initMorePieChart()
@@ -119,14 +126,7 @@ class ToUserFragment : BaseFragment() {
         ageStrings.clear()
         sexStrings.clear()
 
-        colors.add(parseColor("#707BCC"))
-        colors.add(parseColor("#5CCEFF"))
-        colors.add(parseColor("#828AD3"))
-        colors.add(parseColor("#FFB963"))
-        colors.add(parseColor("#EE7C61"))
-        colors.add(parseColor("#588B4C"))
-        colors.add(parseColor("#8ED06D"))
-        colors.add(parseColor("#9B9791"))
+
         bean.time.forEach {
             timeStrings.add(PieEntry(it.num.toFloat(), it.value))
         }
@@ -219,7 +219,7 @@ class ToUserFragment : BaseFragment() {
         val legend = picChart.legend
         legend.yOffset = 50f
 //        legend.xOffset = -420f
-        legend.verticalAlignment = Legend.LegendVerticalAlignment.TOP
+        legend.verticalAlignment = Legend.LegendVerticalAlignment.CENTER
         legend.horizontalAlignment = Legend.LegendHorizontalAlignment.RIGHT
         legend.orientation = Legend.LegendOrientation.VERTICAL
 //        legend.direction = Legend.LegendDirection.RIGHT_TO_LEFT
@@ -233,7 +233,7 @@ class ToUserFragment : BaseFragment() {
         description.text = ""
         picChart.description = description
         picChart.holeRadius = 0f
-        picChart.x = -120f
+        picChart.x = -50f
         picChart.transparentCircleRadius = 0f
         picChart.extraTopOffset = 20f
         picChart.extraBottomOffset = 20f
@@ -248,7 +248,7 @@ class ToUserFragment : BaseFragment() {
         if (isLine) {
             dataSet.valueLineWidth = 1f
             dataSet.valueLinePart1OffsetPercentage = 100f
-            dataSet.valueLinePart1Length = 0.5f
+            dataSet.valueLinePart1Length = 0.3f
             dataSet.valueLinePart2Length = 0.6f
         }
         dataSet.yValuePosition = PieDataSet.ValuePosition.OUTSIDE_SLICE
@@ -272,10 +272,10 @@ class ToUserFragment : BaseFragment() {
         val description = Description()
         description.text = ""
         picAgeChart.description = description
-        picAgeChart.holeRadius = 80f
+        picAgeChart.holeRadius = 70f
         picAgeChart.transparentCircleRadius = 0f
         picAgeChart.extraTopOffset = 20f
-        picAgeChart.extraBottomOffset = 20f
+        picAgeChart.extraBottomOffset = 30f
 
 
     }

@@ -58,15 +58,15 @@
                 <com.github.mikephil.charting.charts.PieChart
                     android:id="@+id/picChart"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/m210"
+                    android:layout_height="@dimen/m291"
                     android:layout_gravity="center" />
                 <ImageView
                     android:id="@+id/iv_empty_pie_1"
                     android:visibility="gone"
                     android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/icon_sign"/>
+                    android:layout_width="@dimen/m77"
+                    android:layout_height="@dimen/m100"
+                    android:src="@mipmap/default_page"/>
             </www.linwg.org.lib.LCardView>
 
 
@@ -83,15 +83,15 @@
                 <com.github.mikephil.charting.charts.PieChart
                     android:id="@+id/picAgeChart"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/m210"
+                    android:layout_height="@dimen/m266"
                     android:layout_gravity="center" />
                 <ImageView
                     android:id="@+id/iv_empty_pie_2"
                     android:visibility="gone"
                     android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/icon_sign"/>
+                    android:layout_width="@dimen/m77"
+                    android:layout_height="@dimen/m100"
+                    android:src="@mipmap/default_page"/>
             </www.linwg.org.lib.LCardView>
             <TextView
                 android:layout_width="match_parent"
@@ -107,15 +107,15 @@
                 <com.github.mikephil.charting.charts.PieChart
                     android:id="@+id/picSexChart"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/m210"
+                    android:layout_height="@dimen/m226"
                     android:layout_gravity="center" />
                 <ImageView
                     android:id="@+id/iv_empty_pie_3"
                     android:visibility="gone"
                     android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/icon_sign"/>
+                    android:layout_width="@dimen/m77"
+                    android:layout_height="@dimen/m100"
+                    android:src="@mipmap/default_page"/>
             </www.linwg.org.lib.LCardView>
 
         </LinearLayout>

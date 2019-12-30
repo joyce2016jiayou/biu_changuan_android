@@ -443,11 +443,23 @@
                 android:textSize="@dimen/sp15"
                 android:layout_margin="@dimen/m10"
                 android:text="@string/label_product_cons"/>
-            <com.github.mikephil.charting.charts.PieChart
-                android:id="@+id/picChart"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/m190"
-                android:layout_gravity="center" />
+                android:layout_height="@dimen/m230">
+                <com.github.mikephil.charting.charts.PieChart
+                    android:id="@+id/picChart"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/m230"
+                    android:layout_gravity="center" />
+                <ImageView
+                    android:id="@+id/iv_empty_pie"
+                    android:visibility="gone"
+                    android:layout_gravity="center"
+                    android:layout_width="@dimen/m77"
+                    android:layout_height="@dimen/m100"
+                    android:src="@mipmap/default_page"/>
+            </FrameLayout>
+
         </LinearLayout>
 
 

@@ -234,7 +234,7 @@ class ToProductFragment : BaseFragment() {
         description.text = ""
         picChart.description = description
         picChart.holeRadius = 0f
-        picChart.x = -120f
+        picChart.x = -90f
         picChart.transparentCircleRadius = 0f
         picChart.extraTopOffset = 20f
         picChart.extraBottomOffset = 20f
