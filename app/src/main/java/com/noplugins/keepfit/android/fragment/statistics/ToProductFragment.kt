@@ -52,7 +52,6 @@ class ToProductFragment : BaseFragment() {
     val month = if (canler.get(Calendar.MONTH) + 1 > 9) "${canler.get(Calendar.MONTH) + 1}"
     else "0${canler.get(Calendar.MONTH) + 1}"
     var selectDate = "$year-$month"
-
     companion object {
         fun newInstance(title: String): ToProductFragment {
             val fragment = ToProductFragment()
@@ -62,7 +61,6 @@ class ToProductFragment : BaseFragment() {
             return fragment
         }
     }
-
     var newView: View? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -138,7 +136,7 @@ class ToProductFragment : BaseFragment() {
         picChart.invalidate()
 
         if (user.sales.emptyProduct == 1) {
-            picChart.visibility = View.GONE
+            picChart.visibility = View.INVISIBLE
             iv_empty_pie.visibility = View.VISIBLE
         } else {
             iv_empty_pie.visibility = View.GONE
