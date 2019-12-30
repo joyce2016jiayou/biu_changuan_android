@@ -142,7 +142,7 @@ class CgPriceActivity : BaseActivity() {
         }
 
         tv_shangjia.setOnClickListener {
-            if (et_price.text.toString().isEmpty()){
+            if (et_price.text.toString().isEmpty() || et_price.text.toString().toDouble() == 0.0){
                 Toast.makeText(applicationContext, "价格不能为空", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }

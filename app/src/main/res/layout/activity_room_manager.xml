@@ -6,8 +6,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".activity.use.RoomManagerActivity">
-    <include layout="@layout/title_activity"/>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_room_manager"
         android:layout_width="match_parent"

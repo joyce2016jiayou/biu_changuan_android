@@ -30,8 +30,9 @@ class RoomManagerActivity : BaseActivity() {
     }
 
     override fun initView() {
-        setContentView(R.layout.activity_room_manager)
-        title_tv.text = getString(R.string.room_manager)
+        setContentLayout(R.layout.activity_room_manager)
+        isShowTitle(true)
+        setTitleView(R.string.room_manager,R.drawable.icon_back,R.drawable.icon_add,false,0)
         add_btn.visibility = View.VISIBLE
 
         adapter = RoomManagerAdapter(data)
@@ -51,12 +52,12 @@ class RoomManagerActivity : BaseActivity() {
 
     override fun doBusiness(mContext: Context?) {
 
-        back_btn.setOnClickListener {
+        title_left_button_onclick_listen {
             setResult(SpUtils.getInt(applicationContext, AppConstants.FRAGMENT_SIZE)-1)
             finish()
         }
 
-        add_btn.setOnClickListener {
+        title_right_button_onclick_listen {
             if (BaseUtils.isFastClick()){
                 val intent = Intent(this,RoomAddActivity::class.java)
                 startActivity(intent)
