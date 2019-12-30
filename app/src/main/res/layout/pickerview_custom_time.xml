@@ -79,7 +79,7 @@
 
             <TextView
                 android:id="@+id/quxiao_btn"
-                android:layout_width="0dp"
+                android:layout_width="@dimen/m0"
                 android:layout_height="@dimen/m44"
                 android:layout_alignParentLeft="true"
                 android:layout_weight="1"
@@ -92,7 +92,7 @@
 
             <TextView
                 android:id="@+id/sure_btn"
-                android:layout_width="0dp"
+                android:layout_width="@dimen/m0"
                 android:layout_height="@dimen/m44"
                 android:layout_alignParentRight="true"
                 android:layout_weight="1"

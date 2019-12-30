@@ -78,7 +78,7 @@
 
                 <LinearLayout
                     android:id="@+id/last_btn"
-                    android:layout_width="50dp"
+                    android:layout_width="@dimen/m50"
                     android:layout_height="match_parent"
                     android:layout_marginRight="35dp"
                     android:layout_alignParentLeft="true"
@@ -115,14 +115,14 @@
                         android:layout_width="@dimen/m15"
                         android:layout_height="@dimen/m15"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginLeft="@dimen/m5"
                         android:src="@drawable/xiala" />
                 </LinearLayout>
 
 
                 <LinearLayout
                     android:id="@+id/next_btn"
-                    android:layout_width="50dp"
+                    android:layout_width="@dimen/m50"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="35dp"
                     android:layout_alignParentRight="true"

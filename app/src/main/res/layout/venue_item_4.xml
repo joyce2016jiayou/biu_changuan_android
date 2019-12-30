@@ -22,7 +22,7 @@
             android:layout_marginTop="@dimen/m20"/>
         <TextView
             android:id="@+id/tv_company_bank_number"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/m0"
             android:layout_height="wrap_content"
             style="@style/tv_subtitle"
             app:layout_constraintWidth_percent="0.85"
@@ -47,7 +47,7 @@
             android:layout_marginTop="@dimen/m20"/>
         <TextView
             android:id="@+id/tv_company_bank"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/m0"
             android:layout_height="wrap_content"
             style="@style/tv_subtitle"
             app:layout_constraintWidth_percent="0.85"

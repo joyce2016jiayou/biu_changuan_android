@@ -5,17 +5,17 @@
     android:layout_height="match_parent">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="@dimen/m100"
         android:background="@drawable/daohanglan">
 
         <ImageView
             android:id="@+id/back_btn"
-            android:layout_width="28dp"
+            android:layout_width="@dimen/m28"
             android:layout_height="@dimen/m18"
             android:layout_alignParentLeft="true"
             android:layout_alignParentBottom="true"
             android:layout_marginLeft="@dimen/m20"
-            android:layout_marginBottom="30dp"
+            android:layout_marginBottom="@dimen/m30"
             android:src="@drawable/icon_back" />
 
         <TextView
@@ -34,11 +34,11 @@
         android:id="@+id/jeuse_layout"
         android:layout_width="match_parent"
         android:background="@drawable/user_item_bg"
-        android:layout_height="68dp">
+        android:layout_height="@dimen/m68">
         <ImageView
             android:id="@+id/image2"
-            android:layout_width="33dp"
-            android:layout_height="33dp"
+            android:layout_width="@dimen/m33"
+            android:layout_height="@dimen/m33"
             android:layout_marginLeft="@dimen/m15"
             android:layout_centerVertical="true"
             android:src="@drawable/juese"
@@ -47,7 +47,7 @@
             android:layout_toRightOf="@+id/image2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="@dimen/m5"
             android:textSize="@dimen/sp16"
             android:layout_centerVertical="true"
             android:textColor="@color/top_heiziti"
@@ -66,11 +66,11 @@
         android:id="@+id/jiaolian_layout"
         android:layout_width="match_parent"
         android:background="@drawable/user_item_bg"
-        android:layout_height="68dp">
+        android:layout_height="@dimen/m68">
         <ImageView
             android:id="@+id/image1"
-            android:layout_width="33dp"
-            android:layout_height="33dp"
+            android:layout_width="@dimen/m33"
+            android:layout_height="@dimen/m33"
             android:layout_marginLeft="@dimen/m15"
             android:layout_centerVertical="true"
             android:src="@drawable/jiaolian"
@@ -79,7 +79,7 @@
             android:layout_toRightOf="@+id/image1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="@dimen/m5"
             android:textSize="@dimen/sp16"
             android:layout_centerVertical="true"
             android:textColor="@color/top_heiziti"

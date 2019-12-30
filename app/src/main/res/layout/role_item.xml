@@ -8,7 +8,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="@dimen/m60"
         android:background="@drawable/user_item_bg"
         android:gravity="center_vertical"
         android:orientation="horizontal">
@@ -18,7 +18,7 @@
             android:id="@+id/edit_name"
             android:layout_width="80dp"
             android:layout_marginLeft="@dimen/m12"
-            android:layout_height="36dp"
+            android:layout_height="@dimen/m36"
             android:background="@drawable/riqi_bg"
             android:hint="@string/edit_hint27"
             android:maxLength="10"
@@ -31,8 +31,8 @@
         <EditText
             android:id="@+id/edit_phone"
             android:layout_width="119dp"
-            android:layout_marginLeft="6dp"
-            android:layout_height="36dp"
+            android:layout_marginLeft="@dimen/m6"
+            android:layout_height="@dimen/m36"
             android:background="@drawable/kapian_shurukuang"
             android:hint="@string/edit_hint28"
             android:maxLength="11"
@@ -43,10 +43,10 @@
             android:textSize="@dimen/sp13" />
         <LinearLayout
             android:layout_width="@dimen/m80"
-            android:layout_height="33dp"
-            android:layout_marginLeft="4dp"
+            android:layout_height="@dimen/m33"
+            android:layout_marginLeft="@dimen/m4"
             android:background="@drawable/kapian_shurukuang"
-            android:padding="2dp">
+            android:padding="@dimen/m2">
 
             <lib.demo.spinner.MaterialSpinner
                 android:id="@+id/post_type_spinner"
@@ -57,14 +57,14 @@
                 android:text="@string/tv_select"
                 spinner:ms_background_color="@android:color/white"
                 spinner:ms_popupwindow_height="wrap_content"
-                spinner:ms_popupwindow_maxheight="200dp"
+                spinner:ms_popupwindow_maxheight="@dimen/m200"
                 spinner:ms_text_color="@color/color_9B9B9B" />
         </LinearLayout>
 
         <ImageView
             android:id="@+id/Add_btn"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="@dimen/m30"
+            android:layout_height="@dimen/m30"
             android:layout_marginLeft="@dimen/m15"
             android:src="@drawable/role_jian_btn" />
 

@@ -15,7 +15,7 @@
             <LinearLayout
                 style="@style/tanchukuang_style_2"
                 android:layout_width="match_parent"
-                android:layout_height="70dp">
+                android:layout_height="@dimen/m70">
 
                 <TextView
                     android:id="@+id/title"

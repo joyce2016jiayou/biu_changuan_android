@@ -49,7 +49,7 @@
             android:layout_toRightOf="@+id/shijiao_qiehuan_btn"
             android:layout_marginBottom="@dimen/m18"
             android:layout_alignParentBottom="true"
-            android:layout_marginLeft="40dp"
+            android:layout_marginLeft="@dimen/m40"
             android:layout_height="wrap_content">
             <TextView
                 android:id="@+id/date_tv"
@@ -63,11 +63,11 @@
                 />
             <ImageView
                 android:id="@+id/xiala_icon"
-                android:layout_marginLeft="3dp"
+                android:layout_marginLeft="@dimen/m3"
                 android:layout_width="@dimen/m14"
                 android:layout_gravity="bottom"
-                android:layout_height="8dp"
-                android:layout_marginBottom="8dp"
+                android:layout_height="@dimen/m8"
+                android:layout_marginBottom="@dimen/m8"
                 android:src="@drawable/xiala_btn"
                 />
         </LinearLayout>
@@ -82,7 +82,7 @@
 
     <com.noplugins.keepfit.android.util.ui.NoScrollViewPager
         android:id="@+id/viewpager_content"
-        android:layout_marginTop="-8dp"
+        android:layout_marginTop="@dimen/m_d_8"
         android:background="@color/color_F8F8F8"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

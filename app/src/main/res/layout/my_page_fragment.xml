@@ -8,7 +8,7 @@
     android:orientation="vertical">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="@dimen/m100"
         android:background="@drawable/daohanglan">
 
         <TextView
@@ -70,7 +70,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="6dp"
+                            android:layout_marginLeft="@dimen/m6"
                             android:text="综合场馆"
                             android:textColor="@color/color_7E7E7E"
                             android:textSize="@dimen/sp15"
@@ -81,7 +81,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="32dp"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginTop="@dimen/m5"
                         android:orientation="horizontal">
 
                         <TextView
@@ -94,7 +94,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="6dp"
+                            android:layout_marginLeft="@dimen/m6"
                             android:text="9:00-20:00"
                             android:textColor="@color/color_7E7E7E"
                             android:textSize="@dimen/sp15"
@@ -104,7 +104,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="32dp"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginTop="@dimen/m5"
                         android:orientation="horizontal">
 
                         <TextView
@@ -136,8 +136,8 @@
                 android:layout_height="68dp">
                 <ImageView
                     android:id="@+id/image1"
-                    android:layout_width="33dp"
-                    android:layout_height="33dp"
+                    android:layout_width="@dimen/m33"
+                    android:layout_height="@dimen/m33"
                     android:layout_marginLeft="@dimen/m15"
                     android:layout_centerVertical="true"
                     android:src="@drawable/item_icon1"
@@ -146,7 +146,7 @@
                     android:layout_toRightOf="@+id/image1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginLeft="@dimen/m5"
                     android:textSize="@dimen/sp16"
                     android:layout_centerVertical="true"
                     android:textColor="@color/top_heiziti"
@@ -169,8 +169,8 @@
 
                 <ImageView
                     android:id="@+id/image2"
-                    android:layout_width="33dp"
-                    android:layout_height="33dp"
+                    android:layout_width="@dimen/m33"
+                    android:layout_height="@dimen/m33"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/m15"
                     android:src="@drawable/item_icon2" />
@@ -178,7 +178,7 @@
                     android:layout_toRightOf="@+id/image2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginLeft="@dimen/m5"
                     android:textSize="@dimen/sp16"
                     android:layout_centerVertical="true"
                     android:textColor="@color/top_heiziti"
@@ -201,8 +201,8 @@
 
                 <ImageView
                     android:id="@+id/image3"
-                    android:layout_width="33dp"
-                    android:layout_height="33dp"
+                    android:layout_width="@dimen/m33"
+                    android:layout_height="@dimen/m33"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/m15"
                     android:src="@drawable/item_icon3" />
@@ -210,7 +210,7 @@
                     android:layout_toRightOf="@+id/image3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginLeft="@dimen/m5"
                     android:textSize="@dimen/sp16"
                     android:layout_centerVertical="true"
                     android:textColor="@color/top_heiziti"
@@ -233,8 +233,8 @@
 
                 <ImageView
                     android:id="@+id/image4"
-                    android:layout_width="33dp"
-                    android:layout_height="33dp"
+                    android:layout_width="@dimen/m33"
+                    android:layout_height="@dimen/m33"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/m15"
                     android:src="@drawable/item_icon4" />
@@ -242,7 +242,7 @@
                     android:layout_toRightOf="@+id/image4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginLeft="@dimen/m5"
                     android:textSize="@dimen/sp16"
                     android:layout_centerVertical="true"
                     android:textColor="@color/top_heiziti"
@@ -265,8 +265,8 @@
 
                 <ImageView
                     android:id="@+id/image5"
-                    android:layout_width="33dp"
-                    android:layout_height="33dp"
+                    android:layout_width="@dimen/m33"
+                    android:layout_height="@dimen/m33"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/m15"
                     android:src="@drawable/item_icon5" />
@@ -274,7 +274,7 @@
                     android:layout_toRightOf="@+id/image5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginLeft="@dimen/m5"
                     android:textSize="@dimen/sp16"
                     android:layout_centerVertical="true"
                     android:textColor="@color/top_heiziti"
@@ -297,8 +297,8 @@
 
                 <ImageView
                     android:id="@+id/image6"
-                    android:layout_width="33dp"
-                    android:layout_height="33dp"
+                    android:layout_width="@dimen/m33"
+                    android:layout_height="@dimen/m33"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/m15"
                     android:src="@drawable/item_icon6" />
@@ -306,7 +306,7 @@
                     android:layout_toRightOf="@+id/image6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginLeft="@dimen/m5"
                     android:textSize="@dimen/sp16"
                     android:layout_centerVertical="true"
                     android:textColor="@color/top_heiziti"

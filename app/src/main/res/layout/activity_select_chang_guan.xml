@@ -9,7 +9,7 @@
 
     <ImageView
         android:id="@+id/back_btn"
-        android:layout_width="28dp"
+        android:layout_width="@dimen/m28"
         android:layout_height="@dimen/m18"
         android:layout_marginLeft="@dimen/m25"
         android:layout_marginTop="@dimen/m50"

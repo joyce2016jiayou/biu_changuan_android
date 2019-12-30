@@ -21,7 +21,7 @@
                 android:id="@+id/center"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="70dp"
+                android:layout_marginBottom="@dimen/m70"
                 android:background="@color/white"
                 android:orientation="vertical">
 
@@ -38,8 +38,8 @@
 
             <LinearLayout
                 android:id="@+id/add_class_teacher_btn"
-                android:layout_width="225dp"
-                android:layout_height="70dp"
+                android:layout_width="@dimen/m225"
+                android:layout_height="@dimen/m70"
                 android:layout_gravity="center_horizontal"
                 android:background="@drawable/login_btn"
                 android:gravity="center">

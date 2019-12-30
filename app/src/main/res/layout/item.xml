@@ -13,13 +13,13 @@
         <lib.demo.spinner.MaterialSpinner
             android:id="@+id/spinner_changsuo_type"
             android:layout_width="93dp"
-            android:layout_height="33dp"
+            android:layout_height="@dimen/m33"
             android:background="@drawable/et_login_bg"
             android:textSize="@dimen/sp13"
             android:gravity="center"
             spinner:ms_background_color="@android:color/white"
             spinner:ms_popupwindow_height="wrap_content"
-            spinner:ms_popupwindow_maxheight="200dp"
+            spinner:ms_popupwindow_maxheight="@dimen/m200"
             spinner:ms_text_color="@color/color_9B9B9B"/>
 
         <LinearLayout
@@ -32,7 +32,7 @@
             <EditText
                 android:id="@+id/xianzhi_number"
                 android:layout_width="85dp"
-                android:layout_height="36dp"
+                android:layout_height="@dimen/m36"
                 android:background="@null"
                 android:hint="@string/edit_hint14"
                 android:inputType="number"

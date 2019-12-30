@@ -9,5 +9,5 @@
         android:id="@+id/fengxiang_btn"
         android:layout_width="match_parent"
         android:text="分享"
-        android:layout_height="50dp" />
+        android:layout_height="@dimen/m50" />
 </RelativeLayout>

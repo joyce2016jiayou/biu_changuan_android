@@ -7,7 +7,7 @@
     android:background="@color/white">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="@dimen/m100"
         android:layout_marginRight="@dimen/m20"
         android:layout_marginLeft="@dimen/m20">
         <TextView

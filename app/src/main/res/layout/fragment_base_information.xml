@@ -137,7 +137,7 @@
 
                         <EditText
                             android:id="@+id/edittext_area"
-                            android:layout_width="0dp"
+                            android:layout_width="@dimen/m0"
                             android:layout_height="match_parent"
                             android:layout_gravity="center_vertical"
                             android:layout_weight="1"
@@ -287,8 +287,8 @@
                             <TextView
                                 android:id="@+id/time1_edit"
                                 android:layout_width="63dp"
-                                android:layout_height="36dp"
-                                android:layout_marginLeft="3dp"
+                                android:layout_height="@dimen/m36"
+                                android:layout_marginLeft="@dimen/m3"
                                 android:background="@null"
                                 android:gravity="right|center_vertical"
                                 android:hint="时间"
@@ -305,7 +305,7 @@
                             <TextView
                                 android:id="@+id/time2_edit"
                                 android:layout_width="63dp"
-                                android:layout_height="36dp"
+                                android:layout_height="@dimen/m36"
                                 android:background="@null"
                                 android:gravity="left|center_vertical"
                                 android:hint="时间"
@@ -553,7 +553,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dp"
+                            android:layout_marginLeft="@dimen/m5"
                             android:text="("
                             android:textColor="@color/color_9B9B9B"
                             android:textSize="@dimen/sp13" />
@@ -594,7 +594,7 @@
                     app:bga_snpl_deleteDrawable="@drawable/delete_image"
                     app:bga_snpl_deleteDrawableOverlapQuarter="false"
                     app:bga_snpl_editable="true"
-                    app:bga_snpl_itemCornerRadius="0dp"
+                    app:bga_snpl_itemCornerRadius="@dimen/m0"
                     app:bga_snpl_itemSpanCount="3"
                     app:bga_snpl_itemWhiteSpacing="@dimen/m5"
                     app:bga_snpl_itemWidth="@dimen/m90"

@@ -7,8 +7,8 @@
 
     <ImageView
         android:id="@+id/left_icon"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="@dimen/m30"
+        android:layout_height="@dimen/m30"
         android:layout_marginLeft="@dimen/m20"
         android:src="@drawable/tanhao_icon"
         android:layout_gravity="center_vertical"
@@ -21,7 +21,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="6dp"
+            android:layout_marginLeft="@dimen/m6"
             android:layout_height="wrap_content">
 
             <LinearLayout
@@ -41,7 +41,7 @@
                     android:id="@+id/content_tv_msg"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="9dp"
+                    android:layout_marginTop="@dimen/m9"
                     android:text="发现新版本......"
                     android:textColor="@color/color_bbbbbb"
                     android:textSize="@dimen/sp12" />
@@ -86,9 +86,9 @@
         <LinearLayout
             android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
-            android:layout_marginLeft="6dp"
+            android:layout_marginLeft="@dimen/m6"
             android:background="@color/color_F8F8F8"
-            android:layout_height="1dp"/>
+            android:layout_height="@dimen/m1"/>
     </RelativeLayout>
 
 

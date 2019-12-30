@@ -21,12 +21,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:leftTopCornerRadius="@dimen/m10"
-            app:rightBottomCornerRadius="@dimen/dp_10"
+            app:rightBottomCornerRadius="@dimen/m10"
             app:leftBottomCornerRadius="@dimen/m10"
             app:rightTopCornerRadius="@dimen/m10"
             android:id="@+id/rl_money_details"
-            app:leftShadowWidth="0dp"
-            app:rightShadowWidth="0dp">
+            app:leftShadowWidth="@dimen/m0"
+            app:rightShadowWidth="@dimen/m0">
 
         <LinearLayout
                 android:orientation="horizontal"
@@ -50,7 +50,7 @@
 
             <LinearLayout
                     android:layout_weight="1"
-                    android:layout_width="0dp"
+                    android:layout_width="@dimen/m0"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical|left"
                     android:orientation="vertical"
@@ -93,11 +93,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:leftTopCornerRadius="@dimen/m10"
-            app:rightBottomCornerRadius="@dimen/dp_10"
+            app:rightBottomCornerRadius="@dimen/m10"
             app:leftBottomCornerRadius="@dimen/m10"
             app:rightTopCornerRadius="@dimen/m10"
-            app:leftShadowWidth="0dp"
-            app:rightShadowWidth="0dp">
+            app:leftShadowWidth="@dimen/m0"
+            app:rightShadowWidth="@dimen/m0">
 
         <RelativeLayout
                 android:layout_width="match_parent"

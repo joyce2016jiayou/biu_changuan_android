@@ -10,7 +10,7 @@
         android:layout_height="match_parent">
         <RadioGroup
             android:id="@+id/rec_left"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/m0"
             android:layout_height="match_parent"
             android:background="@color/color_cg_bg"
             app:layout_constraintWidth_percent="0.2"
@@ -82,7 +82,7 @@
 
         <LinearLayout
             android:id="@+id/rec_right"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/m0"
             android:layout_height="match_parent"
             android:background="@color/white"
             android:orientation="vertical"

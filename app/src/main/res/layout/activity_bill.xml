@@ -6,7 +6,7 @@
     android:orientation="vertical">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="@dimen/m100"
         android:background="@drawable/daohanglan">
 
         <ImageView
@@ -16,7 +16,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentBottom="true"
             android:layout_marginLeft="@dimen/m20"
-            android:layout_marginBottom="30dp"
+            android:layout_marginBottom="@dimen/m30"
             android:src="@drawable/icon_back" />
 
         <TextView

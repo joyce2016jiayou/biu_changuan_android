@@ -7,13 +7,13 @@
     android:layout_height="wrap_content">
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="271dp"
+        android:layout_width="@dimen/m271"
         android:background="@drawable/toast_bg"
         android:gravity="center"
-        android:layout_height="166dp">
+        android:layout_height="@dimen/m166">
         <ImageView
-            android:layout_width="85dp"
-            android:layout_height="85dp"
+            android:layout_width="@dimen/m85"
+            android:layout_height="@dimen/m85"
             android:src="@drawable/duigou"
             />
         <TextView

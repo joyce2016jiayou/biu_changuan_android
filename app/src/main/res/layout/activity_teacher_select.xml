@@ -82,7 +82,7 @@
         android:layout_marginLeft="@dimen/m5">
         <FrameLayout
             android:id="@+id/ll_location"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/m0"
             android:layout_weight="1.5"
             android:layout_height="@dimen/m22"
             android:visibility="visible"
@@ -108,7 +108,7 @@
 
         <FrameLayout
             android:id="@+id/class_eat"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/m0"
             android:layout_weight="1.6"
             android:layout_height="@dimen/m22"
             android:layout_marginLeft="@dimen/m5"
@@ -135,7 +135,7 @@
 
         <FrameLayout
             android:id="@+id/teacher_year"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/m0"
             android:layout_weight="1.5"
             android:layout_height="@dimen/m22"
             android:layout_marginLeft="@dimen/m5"
@@ -161,7 +161,7 @@
 
         <FrameLayout
             android:id="@+id/teacher_sex"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/m0"
             android:layout_weight="1.2"
             android:layout_height="@dimen/m22"
             android:layout_marginLeft="@dimen/m5"

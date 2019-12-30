@@ -4,7 +4,7 @@
           android:layout_width="wrap_content"
           android:layout_height="@dimen/m20"
           android:gravity="center_vertical"
-          android:padding="5dp"
+          android:padding="@dimen/m5"
           android:background="@drawable/shape_btn_bg_histroy"
           android:textColor="@color/color_6D7278"
           android:textSize="@dimen/sp13"/>

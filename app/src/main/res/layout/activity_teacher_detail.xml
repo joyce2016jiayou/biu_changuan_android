@@ -16,7 +16,7 @@
         <RelativeLayout
             android:id="@+id/title"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="@dimen/m100"
             android:background="@drawable/daohanglan">
 
             <ImageView
@@ -26,7 +26,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentBottom="true"
                 android:layout_marginLeft="@dimen/m20"
-                android:layout_marginBottom="30dp"
+                android:layout_marginBottom="@dimen/m30"
                 android:src="@drawable/icon_back" />
 
             <TextView
@@ -58,13 +58,13 @@
                 android:layout_marginTop="@dimen/m20"
                 android:src="@drawable/touxiang"
                 app:civ_border_color="@android:color/transparent"
-                app:civ_border_width="0dp" />
+                app:civ_border_width="@dimen/m0" />
 
             <TextView
                 android:id="@+id/teacher_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="@dimen/m5"
                 android:text="Jane erry"
                 android:textColor="@color/white"
                 android:textSize="@dimen/sp20"
@@ -131,7 +131,7 @@
                 app:itemColor="@color/colorAccent"
                 app:itemSize="@dimen/sp12"
                 app:textPaddingH="@dimen/m15"
-                app:textPaddingV="8dp"
+                app:textPaddingV="@dimen/m8"
                 app:verticalSpacing="@dimen/m15" />
         </LinearLayout>
 
@@ -156,7 +156,7 @@
 
                 <!--<LinearLayout-->
                     <!--android:layout_width="90dp"-->
-                    <!--android:layout_height="30dp"-->
+                    <!--android:layout_height="@dimen/m30"-->
                     <!--android:layout_marginLeft="@dimen/m20"-->
                     <!--android:layout_marginTop="@dimen/m14"-->
                     <!--android:background="@drawable/biaoqian_bg"-->
@@ -181,7 +181,7 @@
                 app:itemColor="@color/colorAccent"
                 app:itemSize="@dimen/sp12"
                 app:textPaddingH="@dimen/m15"
-                app:textPaddingV="8dp"
+                app:textPaddingV="@dimen/m8"
                 app:verticalSpacing="@dimen/m15" />
 
 
@@ -194,7 +194,7 @@
     <LinearLayout
         android:id="@+id/yaoqing_btn"
         android:layout_width="225dp"
-        android:layout_height="70dp"
+        android:layout_height="@dimen/m70"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="@dimen/m11"

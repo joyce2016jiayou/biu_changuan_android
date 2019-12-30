@@ -53,14 +53,14 @@
                 android:maxLength="6"
                 android:paddingLeft="@dimen/m10"
                 android:paddingRight="@dimen/m10"
-                app:blockLineWidth="1dp"
+                app:blockLineWidth="@dimen/m1"
                 app:blockNormalColor="@android:color/black"
                 app:blockShape="stroke"
-                app:blockSpace="0dp"
+                app:blockSpace="@dimen/m0"
                 app:codeInputType="password"
                 app:codeTextColor="@android:color/black"
                 app:codeTextSize="30sp"
-                app:cursorWidth="4dp"
+                app:cursorWidth="@dimen/m4"
                 app:maxCodeLength="6"
                 app:showCursor="true"
                 tools:text="111" />
@@ -84,14 +84,14 @@
             <LinearLayout
                     android:id="@+id/cancel_layout"
                     android:layout_weight="1"
-                    android:layout_width="0dp"
+                    android:layout_width="@dimen/m0"
                     android:orientation="vertical"
                     android:layout_marginRight="@dimen/m15"
                     android:gravity="center"
                     android:background="@drawable/shape_btn_bg_gray"
                     android:layout_height="@dimen/m39"
-                    android:layout_marginLeft="0dp"
-                    android:layout_marginStart="0dp">
+                    android:layout_marginLeft="@dimen/m0"
+                    android:layout_marginStart="@dimen/m0">
 
                 <TextView
                         android:layout_width="wrap_content"
@@ -105,7 +105,7 @@
             <LinearLayout
                     android:id="@+id/sure_layout"
                     android:layout_weight="1"
-                    android:layout_width="0dp"
+                    android:layout_width="@dimen/m0"
                     android:orientation="vertical"
                     android:gravity="center"
                     android:layout_marginLeft="@dimen/m15"

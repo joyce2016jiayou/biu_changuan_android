@@ -7,7 +7,7 @@
     android:layout_marginBottom="@dimen/m10"
     android:orientation="horizontal">
     <RelativeLayout
-        android:layout_width="0dp"
+        android:layout_width="@dimen/m0"
         android:layout_height="@dimen/m55"
         android:layout_weight="9"
         android:background="@drawable/shape_btn_bg_22243d_40"

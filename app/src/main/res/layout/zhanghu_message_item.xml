@@ -3,12 +3,12 @@
     android:orientation="horizontal" android:layout_width="match_parent"
     android:background="@color/white"
     android:gravity="center_vertical"
-    android:layout_height="75dp">
+    android:layout_height="@dimen/m75">
 
     <ImageView
         android:id="@+id/left_icon"
-        android:layout_width="39dp"
-        android:layout_height="39dp"
+        android:layout_width="@dimen/m39"
+        android:layout_height="@dimen/m39"
         android:layout_marginLeft="@dimen/m20"
         android:src="@drawable/wx_icon"
         android:layout_gravity="center_vertical"
@@ -21,7 +21,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="6dp"
+            android:layout_marginLeft="@dimen/m6"
             android:layout_alignParentLeft="true"
             android:orientation="vertical"
             android:layout_height="wrap_content">
@@ -62,7 +62,7 @@
                 android:layout_height="wrap_content"
                 android:text="-20000.00"
                 android:layout_gravity="right"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="@dimen/m4"
                 android:textStyle="bold"
                 android:textColor="@color/bottom_color"
                 android:textSize="@dimen/sp20" />

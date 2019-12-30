@@ -8,7 +8,7 @@
     <RelativeLayout
         android:id="@+id/title"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="@dimen/m100"
         android:background="@drawable/daohanglan">
         <TextView
             android:id="@+id/title_tv"
@@ -30,7 +30,7 @@
         android:layout_height="32dp">
         <RelativeLayout
             android:id="@+id/zhanghu_message_layout"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/m0"
             android:layout_weight="1"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -51,22 +51,22 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_alignParentBottom="true"
-                android:layout_height="3dp"
+                android:layout_height="@dimen/m3"
                 android:visibility="invisible"
                 android:background="@color/color_FFBA02" />
             <ImageView
                 android:id="@+id/circle1"
-                android:layout_width="7dp"
+                android:layout_width="@dimen/m7"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
-                android:layout_height="7dp"
+                android:layout_height="@dimen/m7"
                 android:visibility="gone"
-                android:layout_marginRight="8dp"
+                android:layout_marginRight="@dimen/m8"
                 android:src="@drawable/circle_bg"/>
         </RelativeLayout>
         <RelativeLayout
             android:id="@+id/system_message_layout"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/m0"
             android:layout_weight="1"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -87,22 +87,22 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:visibility="invisible"
-                android:layout_height="3dp"
+                android:layout_height="@dimen/m3"
                 android:layout_alignParentBottom="true"
                 android:background="@color/color_FFBA02" />
             <ImageView
                 android:id="@+id/circle2"
-                android:layout_width="7dp"
+                android:layout_width="@dimen/m7"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="8dp"
+                android:layout_marginRight="@dimen/m8"
                 android:visibility="gone"
                 android:layout_alignParentTop="true"
-                android:layout_height="7dp"
+                android:layout_height="@dimen/m7"
                 android:src="@drawable/circle_bg"/>
         </RelativeLayout>
         <RelativeLayout
             android:id="@+id/user_message_layout"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/m0"
             android:layout_weight="1"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -123,23 +123,23 @@
                 android:id="@+id/lin3"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="3dp"
+                android:layout_height="@dimen/m3"
                 android:layout_alignParentBottom="true"
                 android:visibility="invisible"
                 android:background="@color/color_FFBA02" />
             <ImageView
                 android:id="@+id/circle3"
-                android:layout_width="7dp"
+                android:layout_width="@dimen/m7"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginRight="8dp"
-                android:layout_height="7dp"
+                android:layout_marginRight="@dimen/m8"
+                android:layout_height="@dimen/m7"
                 android:visibility="gone"
                 android:src="@drawable/circle_bg"/>
         </RelativeLayout>
         <RelativeLayout
             android:id="@+id/area_message_layout"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/m0"
             android:layout_weight="1"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -160,17 +160,17 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_alignParentBottom="true"
-                android:layout_height="3dp"
+                android:layout_height="@dimen/m3"
                 android:visibility="invisible"
                 android:background="@color/color_FFBA02" />
             <ImageView
                 android:id="@+id/circle4"
-                android:layout_width="7dp"
+                android:layout_width="@dimen/m7"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
-                android:layout_height="7dp"
+                android:layout_height="@dimen/m7"
                 android:visibility="gone"
-                android:layout_marginRight="8dp"
+                android:layout_marginRight="@dimen/m8"
                 android:src="@drawable/circle_bg"/>
         </RelativeLayout>
     </LinearLayout>
