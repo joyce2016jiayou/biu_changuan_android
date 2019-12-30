@@ -35,7 +35,7 @@ class CostAccountingActivity : BaseActivity() {
     }
 
     override fun initView() {
-        setContentView(R.layout.activity_cost_accounting)
+        setContentLayout(R.layout.activity_cost_accounting)
         isShowTitle(true)
         setTitleView(R.string.tv187)
         val filters = arrayOf(CashierInputFilter())

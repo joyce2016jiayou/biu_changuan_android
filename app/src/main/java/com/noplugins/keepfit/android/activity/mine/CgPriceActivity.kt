@@ -55,7 +55,7 @@ class CgPriceActivity : BaseActivity() {
     }
 
     override fun initView() {
-        setContentView(R.layout.activity_cg_price)
+        setContentLayout(R.layout.activity_cg_price)
         isShowTitle(true)
         setTitleView(R.string.tv188)
         val data: MutableList<PriceBean> = ArrayList()

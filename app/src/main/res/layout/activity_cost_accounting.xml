@@ -6,35 +6,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".activity.mine.CostAccountingActivity">
-    <FrameLayout
-        android:id="@+id/fl_head"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/m70">
 
-        <ImageView
-            android:id="@+id/back_btn"
-            android:layout_width="@dimen/m22"
-            android:layout_height="@dimen/m19"
-            android:layout_gravity="left|center_vertical"
-            android:layout_marginLeft="@dimen/m20"
-            android:src="@drawable/icon_back"
-            android:layout_marginTop="@dimen/m20"/>
-
-        <TextView
-            android:id="@+id/title_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="成本核算"
-            android:textColor="@color/contents_text"
-            android:textSize="@dimen/sp20"
-            android:layout_marginTop="@dimen/m20"
-            android:textStyle="bold"/>
-    </FrameLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/fl_head"
         android:orientation="vertical">
         <TextView
             android:layout_marginTop="@dimen/m15"

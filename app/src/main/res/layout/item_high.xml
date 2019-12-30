@@ -5,9 +5,10 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/m10">
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/m60"
-        android:minWidth="@dimen/m200"
+        android:layout_width="@dimen/m254"
+        android:layout_height="@dimen/m71"
+        android:layout_marginLeft="@dimen/m24"
+        android:layout_marginRight="@dimen/m21"
         android:background="@drawable/shape_btn_bg_fbf0bd"
         android:gravity="center_vertical"
         android:orientation="vertical">
@@ -15,7 +16,7 @@
             android:id="@+id/tv_time_part"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/m50"
+            android:layout_marginLeft="@dimen/m52"
             android:textColor="@color/color_705C00"
             android:textSize="@dimen/sp13"
             android:text="时段：  "/>
@@ -24,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/m15"
-            android:layout_marginLeft="@dimen/m50"
+            android:layout_marginLeft="@dimen/m52"
             android:textColor="@color/color_705C00"
             android:textSize="@dimen/sp13"
             android:text="价格：  "/>
