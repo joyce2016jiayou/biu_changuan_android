@@ -19,7 +19,7 @@
         android:id="@+id/tab_item_indicator"
         android:layout_width="@dimen/m13"
         android:layout_height="@dimen/m4"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="@dimen/m5"
         android:background="@drawable/selecter_tab_indicator"
         android:visibility="invisible" />
 </LinearLayout>

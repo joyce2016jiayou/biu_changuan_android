@@ -15,7 +15,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="@dimen/m100"
             android:background="@drawable/daohanglan">
 
             <ImageView
@@ -25,7 +25,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentBottom="true"
                 android:layout_marginLeft="@dimen/m20"
-                android:layout_marginBottom="30dp"
+                android:layout_marginBottom="@dimen/m30"
                 android:src="@drawable/icon_back" />
 
             <TextView
@@ -62,7 +62,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
+                android:layout_marginLeft="@dimen/m30"
                 android:layout_marginTop="@dimen/m10"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
@@ -84,7 +84,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
+                android:layout_marginLeft="@dimen/m30"
                 android:layout_marginTop="@dimen/m10"
                 android:orientation="horizontal">
 
@@ -113,7 +113,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
+                android:layout_marginLeft="@dimen/m30"
                 android:layout_marginTop="@dimen/m10"
                 android:orientation="horizontal">
 
@@ -141,7 +141,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
+                android:layout_marginLeft="@dimen/m30"
                 android:layout_marginTop="@dimen/m10"
                 android:orientation="horizontal">
 
@@ -167,7 +167,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
+                android:layout_marginLeft="@dimen/m30"
                 android:layout_marginTop="@dimen/m10"
                 android:orientation="horizontal">
 
@@ -196,7 +196,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
+                android:layout_marginLeft="@dimen/m30"
                 android:layout_marginTop="@dimen/m10"
                 android:orientation="horizontal">
 
@@ -225,7 +225,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
+                android:layout_marginLeft="@dimen/m30"
                 android:layout_marginTop="@dimen/m10"
                 android:orientation="horizontal">
 
@@ -254,7 +254,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
+                android:layout_marginLeft="@dimen/m30"
                 android:layout_marginTop="@dimen/m10"
                 android:orientation="horizontal">
 
@@ -283,7 +283,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
+                android:layout_marginLeft="@dimen/m30"
                 android:layout_marginTop="@dimen/m10"
                 android:orientation="horizontal">
 
@@ -333,7 +333,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
+                android:layout_marginLeft="@dimen/m30"
                 android:layout_marginTop="@dimen/m10"
                 android:orientation="vertical">
 
@@ -360,7 +360,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
+                android:layout_marginLeft="@dimen/m30"
                 android:layout_marginTop="@dimen/m10"
                 android:orientation="vertical">
 
@@ -387,7 +387,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
+                android:layout_marginLeft="@dimen/m30"
                 android:layout_marginTop="@dimen/m10"
                 android:orientation="vertical">
 
@@ -417,7 +417,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/m8"
             android:layout_marginLeft="@dimen/m20"
             android:text="已邀请(1/5)"
             android:textColor="@color/color_6D7278"
@@ -428,16 +428,16 @@
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:background="@color/color_F8F8F8"
-            android:layout_height="0dp"
+            android:layout_height="@dimen/m0"
             android:layout_weight="1"
             android:scrollbars="vertical" />
 
         <LinearLayout
             android:id="@+id/add_class_btn"
             android:layout_width="225dp"
-            android:layout_height="70dp"
+            android:layout_height="@dimen/m70"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="3dp"
+            android:layout_marginTop="@dimen/m3"
             android:visibility="gone"
             android:background="@drawable/login_btn"
             android:gravity="center">

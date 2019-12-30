@@ -17,8 +17,8 @@
 
     <LinearLayout
         android:id="@+id/back_layout"
-        android:layout_width="70dp"
-        android:layout_height="50dp"
+        android:layout_width="@dimen/m70"
+        android:layout_height="@dimen/m50"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="@dimen/m15"

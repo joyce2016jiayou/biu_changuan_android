@@ -8,7 +8,7 @@
         android:id="@+id/enhance_tab_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:tabIndicatorHeight="0dp"
+        app:tabIndicatorHeight="@dimen/m0"
         >
     </com.google.android.material.tabs.TabLayout>
 </FrameLayout>

@@ -11,13 +11,13 @@
     <de.hdodenhof.circleimageview.CircleImageView
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/touxiang_image"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="@dimen/m50"
+        android:layout_height="@dimen/m50"
         android:layout_marginLeft="@dimen/m20"
         android:layout_gravity="center_vertical"
         android:src="@drawable/touxiang"
         app:civ_border_color="@android:color/transparent"
-        app:civ_border_width="0dp" />
+        app:civ_border_width="@dimen/m0" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -26,7 +26,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="6dp"
+            android:layout_marginLeft="@dimen/m6"
             android:layout_height="wrap_content">
 
             <LinearLayout
@@ -46,7 +46,7 @@
                     android:id="@+id/content_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="9dp"
+                    android:layout_marginTop="@dimen/m9"
                     tools:text="发现新版本.发现新版本发现新版本发."
                     android:textColor="@color/color_bbbbbb"
                     android:textSize="@dimen/sp12" />
@@ -84,9 +84,9 @@
         <LinearLayout
             android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
-            android:layout_marginLeft="6dp"
+            android:layout_marginLeft="@dimen/m6"
             android:background="@color/color_F8F8F8"
-            android:layout_height="1dp"/>
+            android:layout_height="@dimen/m1"/>
     </RelativeLayout>
 
 

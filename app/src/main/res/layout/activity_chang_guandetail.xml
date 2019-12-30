@@ -21,7 +21,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="@dimen/m100"
                 android:visibility="gone"
                 android:background="@drawable/daohanglan">
 
@@ -32,7 +32,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentBottom="true"
                     android:layout_marginLeft="@dimen/m20"
-                    android:layout_marginBottom="30dp"
+                    android:layout_marginBottom="@dimen/m30"
                     android:src="@drawable/icon_back" />
 
                 <TextView
@@ -97,8 +97,8 @@
                         android:id="@+id/changguan_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:minHeight="36dp"
-                        android:layout_marginLeft="4dp"
+                        android:minHeight="@dimen/m36"
+                        android:layout_marginLeft="@dimen/m4"
                         android:background="@null"
                         android:hint="@string/edit_hint8"
                         android:singleLine="true"
@@ -135,11 +135,11 @@
                             android:id="@+id/spinner_type"
                             spinner:ms_background_color="@android:color/white"
                             spinner:ms_popupwindow_height="wrap_content"
-                            spinner:ms_popupwindow_maxheight="200dp"
+                            spinner:ms_popupwindow_maxheight="@dimen/m200"
                             spinner:ms_text_color="@color/color_9B9B9B"
                             android:layout_width="93dp"
-                            android:layout_height="36dp"
-                            android:layout_marginLeft="4dp"
+                            android:layout_height="@dimen/m36"
+                            android:layout_marginLeft="@dimen/m4"
                             android:background="@drawable/et_login_bg"
                             android:gravity="center"
                             android:textSize="@dimen/sp13" />
@@ -163,8 +163,8 @@
                         <EditText
                             android:id="@+id/edittext_area"
                             android:layout_width="wrap_content"
-                            android:layout_height="36dp"
-                            android:layout_marginLeft="4dp"
+                            android:layout_height="@dimen/m36"
+                            android:layout_marginLeft="@dimen/m4"
                             android:background="@null"
                             android:hint="@string/edit_hint9"
                             android:inputType="number"
@@ -176,7 +176,7 @@
                             android:textSize="@dimen/sp13" />
 
                         <ImageView
-                            android:layout_width="9dp"
+                            android:layout_width="@dimen/m9"
                             android:layout_height="@dimen/m12"
                             android:src="@drawable/pingfang" />
                     </LinearLayout>
@@ -208,7 +208,7 @@
                         <EditText
                             android:id="@+id/tell_edit"
                             android:layout_width="93dp"
-                            android:layout_height="36dp"
+                            android:layout_height="@dimen/m36"
                             android:background="@null"
                             android:gravity="center"
                             android:hint="@string/edit_hint10"
@@ -239,9 +239,9 @@
                         <EditText
                             android:id="@+id/edit_email"
                             android:layout_width="match_parent"
-                            android:layout_height="36dp"
-                            android:layout_marginStart="4dp"
-                            android:layout_marginLeft="4dp"
+                            android:layout_height="@dimen/m36"
+                            android:layout_marginStart="@dimen/m4"
+                            android:layout_marginLeft="@dimen/m4"
                             android:background="@null"
                             android:hint="@string/edit_hint11"
                             android:singleLine="true"
@@ -269,8 +269,8 @@
                     <TextView
                         android:id="@+id/time1_edit"
                         android:layout_width="63dp"
-                        android:layout_height="36dp"
-                        android:layout_marginLeft="3dp"
+                        android:layout_height="@dimen/m36"
+                        android:layout_marginLeft="@dimen/m3"
                         android:background="@null"
                         android:gravity="center"
                         android:hint="@string/edit_hint12"
@@ -281,7 +281,7 @@
 
                     <LinearLayout
                         android:layout_width="42dp"
-                        android:layout_height="8dp"
+                        android:layout_height="@dimen/m8"
                         android:layout_marginLeft="@dimen/m11"
                         android:background="@drawable/hengang"
                         android:orientation="horizontal" />
@@ -289,7 +289,7 @@
                     <TextView
                         android:id="@+id/time2_edit"
                         android:layout_width="63dp"
-                        android:layout_height="36dp"
+                        android:layout_height="@dimen/m36"
                         android:layout_marginLeft="@dimen/m10"
                         android:background="@null"
                         android:gravity="center"
@@ -325,8 +325,8 @@
                     <EditText
                         android:id="@+id/edit_address"
                         android:layout_width="264dp"
-                        android:layout_height="36dp"
-                        android:layout_marginLeft="4dp"
+                        android:layout_height="@dimen/m36"
+                        android:layout_marginLeft="@dimen/m4"
                         android:background="@null"
                         android:hint="@string/edit_hint15"
                         android:singleLine="true"
@@ -340,7 +340,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="28dp"
-                    android:layout_marginTop="6dp"
+                    android:layout_marginTop="@dimen/m6"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
@@ -363,7 +363,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="28dp"
-                    android:layout_marginTop="3dp"
+                    android:layout_marginTop="@dimen/m3"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
@@ -371,16 +371,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginTop="3dp"
+                        android:layout_marginTop="@dimen/m3"
                         android:text="@string/tv29"
                         android:textColor="@color/top_heiziti"
                         android:textSize="@dimen/sp16" />
 
                     <RelativeLayout
-                        android:layout_width="54dp"
-                        android:layout_height="54dp"
+                        android:layout_width="@dimen/m209"
+                        android:layout_height="@dimen/m54"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="50dp">
+                        android:layout_marginLeft="@dimen/m50">
 
                         <ImageView
                             android:id="@+id/logo_image"
@@ -397,8 +397,8 @@
                             android:layout_height="@dimen/m16"
                             android:layout_alignParentTop="true"
                             android:layout_alignParentRight="true"
-                            android:layout_marginTop="3dp"
-                            android:layout_marginRight="3dp"
+                            android:layout_marginTop="@dimen/m3"
+                            android:layout_marginRight="@dimen/m3"
                             android:clickable="true"
                             android:src="@drawable/delete_image"
                             android:visibility="invisible" />
@@ -435,7 +435,7 @@
                                 android:id="@+id/select_numbers_tv"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="5dp"
+                                android:layout_marginLeft="@dimen/m5"
                                 android:text="@string/tv31"
                                 android:textColor="@color/color_9B9B9B"
                                 android:textSize="8sp" />
@@ -444,7 +444,7 @@
                         <TextView
                             android:layout_width="77dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="3dp"
+                            android:layout_marginTop="@dimen/m3"
                             android:text="@string/tv32"
                             android:visibility="gone"
                             android:textColor="@color/color_9B9B9B"
@@ -460,10 +460,10 @@
                         app:bga_snpl_deleteDrawable="@drawable/delete_image"
                         app:bga_snpl_deleteDrawableOverlapQuarter="false"
                         app:bga_snpl_editable="true"
-                        app:bga_snpl_itemCornerRadius="0dp"
+                        app:bga_snpl_itemCornerRadius="@dimen/m0"
                         app:bga_snpl_itemSpanCount="4"
-                        app:bga_snpl_itemWhiteSpacing="5dp"
-                        app:bga_snpl_itemWidth="0dp"
+                        app:bga_snpl_itemWhiteSpacing="@dimen/m5"
+                        app:bga_snpl_itemWidth="@dimen/m0"
                         app:bga_snpl_maxItemCount="9"
                         app:bga_snpl_placeholderDrawable="@mipmap/bga_pp_ic_holder_dark"
                         app:bga_snpl_plusDrawable="@drawable/add_image_moren"
@@ -500,8 +500,8 @@
 
                     <CheckBox
                         android:id="@+id/checkbox_youyang"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_width="@dimen/m30"
+                        android:layout_height="@dimen/m30"
                         android:layout_gravity="center_vertical"
                         android:background="@drawable/selector_btn_youyang"
                         android:button="@null"
@@ -509,8 +509,8 @@
 
                     <CheckBox
                         android:id="@+id/checkbox_wuyang"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_width="@dimen/m30"
+                        android:layout_height="@dimen/m30"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/m23"
                         android:background="@drawable/selector_btn_wuyang"
@@ -519,8 +519,8 @@
 
                     <CheckBox
                         android:id="@+id/checkbox_tuancao"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_width="@dimen/m30"
+                        android:layout_height="@dimen/m30"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/m23"
                         android:background="@drawable/selector_btn_tuancao"
@@ -529,8 +529,8 @@
 
                     <CheckBox
                         android:id="@+id/checkbox_danche"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_width="@dimen/m30"
+                        android:layout_height="@dimen/m30"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/m23"
                         android:background="@drawable/selector_btn_danche"
@@ -539,8 +539,8 @@
 
                     <CheckBox
                         android:id="@+id/checkbox_youyong"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_width="@dimen/m30"
+                        android:layout_height="@dimen/m30"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/m23"
                         android:background="@drawable/selector_btn_youyong"
@@ -552,13 +552,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="@dimen/m5"
                     android:orientation="horizontal">
 
                     <CheckBox
                         android:id="@+id/checkbox_wifi"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_width="@dimen/m30"
+                        android:layout_height="@dimen/m30"
                         android:layout_gravity="center_vertical"
                         android:background="@drawable/selector_btn_wifi"
                         android:button="@null"
@@ -566,8 +566,8 @@
 
                     <CheckBox
                         android:id="@+id/checkbox_genyi"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_width="@dimen/m30"
+                        android:layout_height="@dimen/m30"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/m23"
                         android:background="@drawable/selector_btn_genyi"
@@ -576,8 +576,8 @@
 
                     <CheckBox
                         android:id="@+id/checkbox_linyu"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_width="@dimen/m30"
+                        android:layout_height="@dimen/m30"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/m23"
                         android:background="@drawable/selector_btn_linyu"
@@ -586,8 +586,8 @@
 
                     <CheckBox
                         android:id="@+id/checkbox_cesuo"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_width="@dimen/m30"
+                        android:layout_height="@dimen/m30"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/m23"
                         android:background="@drawable/selector_btn_cesuo"
@@ -631,8 +631,8 @@
                     <EditText
                         android:id="@+id/faren_name"
                         android:layout_width="match_parent"
-                        android:layout_height="36dp"
-                        android:layout_marginLeft="4dp"
+                        android:layout_height="@dimen/m36"
+                        android:layout_marginLeft="@dimen/m4"
                         android:background="@null"
                         android:hint="@string/edit_hint16"
                         android:gravity="center_vertical|right"
@@ -661,8 +661,8 @@
                     <EditText
                         android:id="@+id/icon_id_card"
                         android:layout_width="match_parent"
-                        android:layout_height="36dp"
-                        android:layout_marginLeft="4dp"
+                        android:layout_height="@dimen/m36"
+                        android:layout_marginLeft="@dimen/m4"
                         android:background="@null"
                         android:hint="@string/edit_hint17"
                         android:enabled="false"
@@ -691,8 +691,8 @@
                     <EditText
                         android:id="@+id/qiye_name"
                         android:layout_width="match_parent"
-                        android:layout_height="36dp"
-                        android:layout_marginLeft="4dp"
+                        android:layout_height="@dimen/m36"
+                        android:layout_marginLeft="@dimen/m4"
                         android:singleLine="true"
                         android:background="@null"
                         android:hint="@string/edit_hint18"
@@ -721,8 +721,8 @@
                     <EditText
                         android:id="@+id/qiye_zhucehao"
                         android:layout_width="match_parent"
-                        android:layout_height="36dp"
-                        android:layout_marginLeft="4dp"
+                        android:layout_height="@dimen/m36"
+                        android:layout_marginLeft="@dimen/m4"
                         android:background="@null"
                         android:singleLine="true"
                         android:hint="@string/edit_hint18"

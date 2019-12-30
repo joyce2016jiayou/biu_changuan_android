@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingTop="@dimen/m10"
-            android:paddingBottom="8dp"
+            android:paddingBottom="@dimen/m8"
             android:orientation="vertical">
             <com.ms.banner.Banner
                 android:id="@+id/banner"

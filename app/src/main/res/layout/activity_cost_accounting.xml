@@ -71,7 +71,7 @@
                         android:textColor="@color/contents_text"/>
                     <EditText
                         android:id="@+id/et_fangzu"
-                        android:layout_width="0dp"
+                        android:layout_width="@dimen/m0"
                         android:layout_weight="1"
                         android:background="@drawable/shape_edit_bg"
                         android:layout_height="@dimen/m31"
@@ -102,7 +102,7 @@
                         android:textColor="@color/contents_text"/>
                     <EditText
                         android:id="@+id/et_nengyuan"
-                        android:layout_width="0dp"
+                        android:layout_width="@dimen/m0"
                         android:layout_weight="1"
                         android:background="@drawable/shape_edit_bg"
                         android:layout_height="@dimen/m31"
@@ -133,7 +133,7 @@
                         android:textColor="@color/contents_text"/>
                     <EditText
                         android:id="@+id/et_renyuan"
-                        android:layout_width="0dp"
+                        android:layout_width="@dimen/m0"
                         android:layout_weight="1"
                         android:background="@drawable/shape_edit_bg"
                         android:layout_height="@dimen/m31"
@@ -164,7 +164,7 @@
                         android:textColor="@color/contents_text"/>
                     <EditText
                         android:id="@+id/et_yunying"
-                        android:layout_width="0dp"
+                        android:layout_width="@dimen/m0"
                         android:layout_weight="1"
                         android:background="@drawable/shape_edit_bg"
                         android:layout_height="@dimen/m31"
@@ -195,7 +195,7 @@
                         android:textColor="@color/contents_text"/>
                     <EditText
                         android:id="@+id/et_renci"
-                        android:layout_width="0dp"
+                        android:layout_width="@dimen/m0"
                         android:layout_weight="1"
                         android:background="@drawable/shape_edit_bg"
                         android:layout_height="@dimen/m31"

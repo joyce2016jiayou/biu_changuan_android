@@ -28,7 +28,7 @@
             android:paddingEnd="@dimen/m10"
             android:paddingBottom="@dimen/m5"
             android:layout_marginLeft="@dimen/m10"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/m8"
             app:counterEnabled="true"
             android:background="@drawable/shape_btn_bg_gray_0"
             app:counterMaxLength="150">

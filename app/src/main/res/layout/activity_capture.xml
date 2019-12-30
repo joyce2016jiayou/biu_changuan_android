@@ -28,9 +28,9 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/backIv"
-                android:layout_width="42dp"
+                android:layout_width="@dimen/m42"
                 android:layout_height="match_parent"
-                android:padding="6dp"
+                android:padding="@dimen/m6"
                 app:srcCompat="@drawable/ic_back" />
 
             <TextView
@@ -49,20 +49,20 @@
         <com.noplugins.keepfit.android.util.ui.erweima.ViewfinderView
             android:id="@+id/viewfinder_view"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="@dimen/m0"
             android:layout_weight="1" />
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/bottomLayout"
             android:layout_width="match_parent"
-            android:layout_height="96dp"
+            android:layout_height="@dimen/m96"
             android:layout_gravity="bottom"
             android:background="#99000000"
             android:orientation="horizontal">
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:id="@+id/flashLightLayout"
-                android:layout_width="0dp"
+                android:layout_width="@dimen/m0"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
@@ -70,15 +70,15 @@
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/flashLightIv"
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
+                    android:layout_width="@dimen/m36"
+                    android:layout_height="@dimen/m36"
                     app:srcCompat="@drawable/ic_close" />
 
                 <TextView
                     android:id="@+id/flashLightTv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="@dimen/m5"
                     android:gravity="center"
                     android:text="@string/open_flash"
                     android:textColor="#ffffff" />
@@ -87,7 +87,7 @@
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:id="@+id/albumLayout"
-                android:layout_width="0dp"
+                android:layout_width="@dimen/m0"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
@@ -95,15 +95,15 @@
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/albumIv"
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
+                    android:layout_width="@dimen/m36"
+                    android:layout_height="@dimen/m36"
                     android:tint="#ffffffff"
                     app:srcCompat="@drawable/ic_photo" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="@dimen/m5"
                     android:gravity="center"
                     android:text="@string/gallery"
 
@@ -122,7 +122,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/m15"
-        android:layout_marginBottom="200dp"
+        android:layout_marginBottom="@dimen/m200"
         android:text="我的二维码"
         android:textColor="#FFBA02"
         android:textSize="@dimen/sp20"

@@ -94,7 +94,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dp"
+                            android:layout_marginLeft="@dimen/m5"
                             android:text="("
                             android:textColor="@color/color_9B9B9B"
                             android:textSize="@dimen/sp13" />
@@ -127,7 +127,7 @@
                     app:bga_snpl_deleteDrawable="@drawable/delete_image"
                     app:bga_snpl_deleteDrawableOverlapQuarter="false"
                     app:bga_snpl_editable="true"
-                    app:bga_snpl_itemCornerRadius="0dp"
+                    app:bga_snpl_itemCornerRadius="@dimen/m0"
                     app:bga_snpl_itemSpanCount="3"
                     app:bga_snpl_itemWhiteSpacing="@dimen/m5"
                     app:bga_snpl_itemWidth="@dimen/m90"

@@ -60,7 +60,7 @@
         android:layout_height="@dimen/m45">
         <RelativeLayout
             android:id="@+id/rl_user"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/m0"
             android:layout_weight="1"
             android:layout_height="match_parent"
             android:orientation="vertical"
@@ -90,7 +90,7 @@
 
         <RelativeLayout
             android:id="@+id/rl_product"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/m0"
             android:layout_weight="1"
             android:layout_marginLeft="@dimen/m30"
             android:layout_height="match_parent"
@@ -121,7 +121,7 @@
     <FrameLayout
         android:id="@+id/main_container_content"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="@dimen/m0"
         android:layout_weight="1"
         android:background="@color/transparent"/>
 

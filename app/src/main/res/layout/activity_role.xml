@@ -9,7 +9,7 @@
     tools:context=".activity.RoleActivity">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="@dimen/m100"
         android:background="@drawable/daohanglan">
 
         <ImageView
@@ -19,7 +19,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentBottom="true"
             android:layout_marginLeft="@dimen/m20"
-            android:layout_marginBottom="30dp"
+            android:layout_marginBottom="@dimen/m30"
             android:src="@drawable/icon_back" />
 
         <TextView
@@ -50,7 +50,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="@dimen/m60"
         android:background="@drawable/user_item_bg"
         android:gravity="center_vertical"
         android:orientation="horizontal">
@@ -60,7 +60,7 @@
             android:id="@+id/tv_user_name"
             android:layout_width="80dp"
             android:layout_marginLeft="@dimen/m12"
-            android:layout_height="36dp"
+            android:layout_height="@dimen/m36"
             android:background="@drawable/riqi_bg"
             android:hint="@string/edit_hint27"
             android:maxLength="10"
@@ -73,8 +73,8 @@
         <TextView
             android:id="@+id/tv_user_phone"
             android:layout_width="119dp"
-            android:layout_marginLeft="6dp"
-            android:layout_height="36dp"
+            android:layout_marginLeft="@dimen/m6"
+            android:layout_height="@dimen/m36"
             android:background="@drawable/kapian_shurukuang"
             android:hint="@string/edit_hint28"
             android:maxLength="11"
@@ -87,7 +87,7 @@
             android:id="@+id/tv_zhiwei_name"
             android:layout_width="80dp"
             android:layout_marginLeft="@dimen/m12"
-            android:layout_height="36dp"
+            android:layout_height="@dimen/m36"
             android:background="@drawable/riqi_bg"
             android:hint="@string/edit_hint27"
             android:maxLength="10"
@@ -99,8 +99,8 @@
 
         <ImageView
             android:id="@+id/iv_add"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="@dimen/m30"
+            android:layout_height="@dimen/m30"
             android:layout_marginLeft="@dimen/m15"
             android:src="@drawable/role_add_icon" />
 

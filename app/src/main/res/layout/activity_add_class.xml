@@ -11,7 +11,7 @@
     <RelativeLayout
         android:id="@+id/rel_top"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="@dimen/m100"
         android:background="@drawable/daohanglan">
 
         <ImageView
@@ -21,7 +21,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentBottom="true"
             android:layout_marginLeft="@dimen/m20"
-            android:layout_marginBottom="30dp"
+            android:layout_marginBottom="@dimen/m30"
             android:src="@drawable/icon_back" />
 
         <TextView
@@ -40,7 +40,7 @@
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/xrefreshview"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="@dimen/m0"
         android:layout_weight="1">
 
         <androidx.recyclerview.widget.RecyclerView

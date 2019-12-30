@@ -22,14 +22,14 @@
             android:layout_marginLeft="@dimen/m20"
             android:src="@drawable/touxiang"
             app:civ_border_color="@android:color/transparent"
-            app:civ_border_width="0dp" />
+            app:civ_border_width="@dimen/m0" />
 
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="6dp">
+            android:layout_marginLeft="@dimen/m6">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -54,9 +54,9 @@
                         android:textSize="@dimen/sp15" />
                     <LinearLayout
                         android:id="@+id/agree_icon"
-                        android:layout_width="54dp"
+                        android:layout_width="@dimen/m209"
                         android:layout_height="@dimen/m25"
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginLeft="@dimen/m5"
                         android:visibility="gone"
                         android:background="@drawable/agree_bg"
                         android:gravity="center">
@@ -71,8 +71,8 @@
                     </LinearLayout>
                     <LinearLayout
                         android:id="@+id/jujue_icon"
-                        android:layout_width="54dp"
-                        android:layout_marginLeft="5dp"
+                        android:layout_width="@dimen/m209"
+                        android:layout_marginLeft="@dimen/m5"
                         android:layout_height="@dimen/m25"
                         android:visibility="gone"
                         android:background="@drawable/jujue_bg"
@@ -92,8 +92,8 @@
                     android:id="@+id/content_tv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginRight="50dp"
+                    android:layout_marginTop="@dimen/m8"
+                    android:layout_marginRight="@dimen/m50"
                     android:maxLines="3"
                     android:text="发现新版本发现新版本发现新版本发现新版本发现新版本发现新版本发现新版本发现新版本发现新版本发现新版本"
                     android:textColor="@color/color_bbbbbb"
@@ -172,10 +172,10 @@
             android:layout_height="wrap_content" />
         <EditText
             android:id="@+id/edit_reason_tv"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="@dimen/m5"
             android:gravity="left|top"
-            android:paddingTop="5dp"
-            android:paddingLeft="5dp"
+            android:paddingTop="@dimen/m5"
+            android:paddingLeft="@dimen/m5"
             android:textColorHint="@color/color_bbbbbb"
             android:textColor="@color/top_heiziti"
             android:hint="@string/edit_hint26"
@@ -189,7 +189,7 @@
             android:id="@+id/submit_btn"
             android:layout_width="80dp"
             android:layout_height="34dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="@dimen/m5"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/agree_bg"
             android:gravity="center">

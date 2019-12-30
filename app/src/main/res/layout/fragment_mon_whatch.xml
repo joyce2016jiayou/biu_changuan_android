@@ -24,7 +24,7 @@
             android:gravity="center">
 
             <ImageView
-                android:layout_width="9dp"
+                android:layout_width="@dimen/m9"
                 android:layout_height="@dimen/m14"
                 android:background="@mipmap/last" />
         </LinearLayout>
@@ -52,7 +52,7 @@
             android:onClick="nextMonth">
 
             <ImageView
-                android:layout_width="9dp"
+                android:layout_width="@dimen/m9"
                 android:layout_height="@dimen/m14"
                 android:layout_centerVertical="true"
                 android:background="@mipmap/next" />
@@ -64,7 +64,7 @@
 
     <com.othershe.calendarview.weiget.WeekView2
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="@dimen/m50"
         android:layout_marginTop="@dimen/m14"
         android:background="@drawable/rili_top" />
 
@@ -72,7 +72,7 @@
         android:id="@+id/calendar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="-5dp"
+        android:layout_marginTop="@dimen/m_d_5"
         calendarview:choose_type="single"
         calendarview:day_bg="@drawable/yellow_circle"
         calendarview:show_holiday="false"

@@ -4,10 +4,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="4dp"
-    android:paddingTop="2dp"
-    android:paddingLeft="8dp"
-    android:paddingRight="8dp"
+    android:paddingBottom="@dimen/m4"
+    android:paddingTop="@dimen/m2"
+    android:paddingLeft="@dimen/m8"
+    android:paddingRight="@dimen/m8"
     >
 
     <ImageView
@@ -32,15 +32,15 @@
                 android:id="@+id/push_notification_small_icon"
                 android:layout_width="@dimen/m18"
                 android:layout_height="@dimen/m18"
-                android:layout_marginLeft="6dp"
+                android:layout_marginLeft="@dimen/m6"
                 android:scaleType="centerInside"/>
             <TextView
                 android:id="@+id/push_notification_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
+                android:layout_marginLeft="@dimen/m4"
                 android:maxLines="1"
-                android:maxWidth="200dp"
+                android:maxWidth="@dimen/m200"
                 android:maxLength="24"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/sp12"/>
@@ -48,7 +48,7 @@
                 android:id="@+id/push_notification_dot"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
+                android:layout_marginLeft="@dimen/m4"
                 android:text="· "
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/sp20"/>
@@ -69,7 +69,7 @@
             android:layout_height="48dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="8dp"
+            android:layout_marginRight="@dimen/m8"
             android:scaleType="centerInside"/>
 
         <TextView
@@ -79,10 +79,10 @@
             android:textColor="@android:color/black"
             android:layout_below="@id/push_notification_layout_lefttop"
             android:layout_toLeftOf="@+id/push_notification_big_icon"
-            android:layout_marginLeft="6dp"
-            android:layout_marginRight="4dp"
+            android:layout_marginLeft="@dimen/m6"
+            android:layout_marginRight="@dimen/m4"
             android:visibility="gone"
-            android:layout_marginTop="1dp"
+            android:layout_marginTop="@dimen/m1"
             android:textSize="@dimen/sp13"
             android:maxLines="1"
             />
@@ -94,9 +94,9 @@
             android:textColor="@android:color/black"
             android:layout_below="@id/push_notification_sub_title"
             android:layout_toLeftOf="@+id/push_notification_big_icon"
-            android:layout_marginLeft="6dp"
-            android:layout_marginRight="4dp"
-            android:layout_marginTop="1dp"
+            android:layout_marginLeft="@dimen/m6"
+            android:layout_marginRight="@dimen/m4"
+            android:layout_marginTop="@dimen/m1"
             android:textSize="@dimen/sp13"
             android:maxLines="2"
             android:ellipsize="end"
@@ -109,9 +109,9 @@
             android:textColor="@android:color/black"
             android:layout_below="@id/push_notification_sub_title"
             android:layout_toLeftOf="@+id/push_notification_big_icon"
-            android:layout_marginLeft="6dp"
-            android:layout_marginRight="4dp"
-            android:layout_marginTop="1dp"
+            android:layout_marginLeft="@dimen/m6"
+            android:layout_marginRight="@dimen/m4"
+            android:layout_marginTop="@dimen/m1"
             android:textSize="@dimen/sp13"
             android:maxLines="1"
             android:ellipsize="end"
@@ -124,13 +124,13 @@
         android:layout_height="wrap_content">
         <ImageView
             android:id="@+id/push_notification_style_1_big_icon"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="@dimen/m50"
+            android:layout_height="@dimen/m50"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:scaleType="centerInside"/>
         <LinearLayout
-            android:layout_marginLeft="6dp"
+            android:layout_marginLeft="@dimen/m6"
             android:layout_toRightOf="@+id/push_notification_style_1_big_icon"
             android:orientation="vertical"
             android:layout_centerVertical="true"
@@ -152,7 +152,7 @@
                     android:textSize="@dimen/sp12"
                     android:textStyle="bold"
                     android:maxLines="1"
-                    android:layout_marginRight="8dp"
+                    android:layout_marginRight="@dimen/m8"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </RelativeLayout>
@@ -161,8 +161,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/black"
-                android:layout_marginRight="4dp"
-                android:layout_marginTop="1dp"
+                android:layout_marginRight="@dimen/m4"
+                android:layout_marginTop="@dimen/m1"
                 android:textSize="@dimen/sp13"
                 android:maxLines="2"
                 android:ellipsize="end" />

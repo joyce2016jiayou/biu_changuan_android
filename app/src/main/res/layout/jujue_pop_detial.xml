@@ -43,9 +43,9 @@
 
             <LinearLayout
                 android:id="@+id/agree_icon"
-                android:layout_width="54dp"
+                android:layout_width="@dimen/m209"
                 android:layout_height="@dimen/m25"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="@dimen/m5"
                 android:visibility="visible"
                 android:background="@drawable/agree_bg"
                 android:gravity="center">
@@ -72,7 +72,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="9dp"
+                android:layout_marginTop="@dimen/m9"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -85,12 +85,12 @@
 
                 <TextView
                     android:id="@+id/class_name"
-                    android:layout_width="265dp"
-                    android:layout_height="33dp"
-                    android:layout_marginLeft="4dp"
+                    android:layout_width="@dimen/m265"
+                    android:layout_height="@dimen/m33"
+                    android:layout_marginLeft="@dimen/m4"
                     android:background="@drawable/kapian_shurukuang"
                     android:gravity="center_vertical"
-                    android:paddingLeft="5dp"
+                    android:paddingLeft="@dimen/m5"
                     android:text="瑜伽"
                     android:singleLine="true"
                     android:textColor="@color/top_heiziti"
@@ -112,12 +112,12 @@
 
                 <TextView
                     android:id="@+id/teacher_name"
-                    android:layout_width="265dp"
-                    android:layout_height="33dp"
-                    android:layout_marginLeft="4dp"
+                    android:layout_width="@dimen/m265"
+                    android:layout_height="@dimen/m33"
+                    android:layout_marginLeft="@dimen/m4"
                     android:background="@drawable/kapian_shurukuang"
                     android:gravity="center_vertical"
-                    android:paddingLeft="5dp"
+                    android:paddingLeft="@dimen/m5"
                     android:text="tony老师"
                     android:singleLine="true"
                     android:textColor="@color/top_heiziti"
@@ -139,12 +139,12 @@
 
                 <TextView
                     android:id="@+id/class_room"
-                    android:layout_width="265dp"
-                    android:layout_height="33dp"
-                    android:layout_marginLeft="4dp"
+                    android:layout_width="@dimen/m265"
+                    android:layout_height="@dimen/m33"
+                    android:layout_marginLeft="@dimen/m4"
                     android:background="@drawable/kapian_shurukuang"
                     android:gravity="center_vertical"
-                    android:paddingLeft="5dp"
+                    android:paddingLeft="@dimen/m5"
                     android:text="有氧草房"
                     android:singleLine="true"
                     android:textColor="@color/top_heiziti"
@@ -167,12 +167,12 @@
 
                 <TextView
                     android:id="@+id/price_tv"
-                    android:layout_width="265dp"
-                    android:layout_height="33dp"
-                    android:layout_marginLeft="4dp"
+                    android:layout_width="@dimen/m265"
+                    android:layout_height="@dimen/m33"
+                    android:layout_marginLeft="@dimen/m4"
                     android:background="@drawable/kapian_shurukuang"
                     android:gravity="center_vertical"
-                    android:paddingLeft="5dp"
+                    android:paddingLeft="@dimen/m5"
                     android:text="40/人"
                     android:singleLine="true"
                     android:textColor="@color/top_heiziti"
@@ -194,12 +194,12 @@
 
                 <TextView
                     android:id="@+id/people_number_xianzhi"
-                    android:layout_width="265dp"
-                    android:layout_height="33dp"
-                    android:layout_marginLeft="4dp"
+                    android:layout_width="@dimen/m265"
+                    android:layout_height="@dimen/m33"
+                    android:layout_marginLeft="@dimen/m4"
                     android:background="@drawable/kapian_shurukuang"
                     android:gravity="center_vertical"
-                    android:paddingLeft="5dp"
+                    android:paddingLeft="@dimen/m5"
                     android:text="40人"
                     android:singleLine="true"
                     android:textColor="@color/top_heiziti"
@@ -222,10 +222,10 @@
                 <TextView
                     android:id="@+id/class_jieshao_content"
                     android:layout_width="wrap_content"
-                    android:layout_height="33dp"
+                    android:layout_height="@dimen/m33"
                     android:layout_marginLeft="@dimen/m10"
                     android:gravity="center_vertical"
-                    android:paddingLeft="5dp"
+                    android:paddingLeft="@dimen/m5"
                     android:text="课程介绍课程介绍课程介绍课程介绍课程介绍课程介绍"
                     android:singleLine="true"
                     android:textColor="@color/top_heiziti"
@@ -248,10 +248,10 @@
                 <TextView
                     android:id="@+id/zhuyi_shixiang_tv"
                     android:layout_width="wrap_content"
-                    android:layout_height="33dp"
+                    android:layout_height="@dimen/m33"
                     android:layout_marginLeft="@dimen/m10"
                     android:gravity="center_vertical"
-                    android:paddingLeft="5dp"
+                    android:paddingLeft="@dimen/m5"
                     android:text="注意事项注意事项注意事项注意事项注意事项注意事项"
                     android:singleLine="true"
                     android:textColor="@color/top_heiziti"
@@ -278,10 +278,10 @@
             android:layout_height="wrap_content" />
         <EditText
             android:id="@+id/edit_reason_tv"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="@dimen/m5"
             android:gravity="left|top"
-            android:paddingTop="5dp"
-            android:paddingLeft="5dp"
+            android:paddingTop="@dimen/m5"
+            android:paddingLeft="@dimen/m5"
             android:textColorHint="@color/color_bbbbbb"
             android:textColor="@color/top_heiziti"
             android:hint="@string/edit_hint26"
@@ -295,7 +295,7 @@
             android:id="@+id/submit_btn"
             android:layout_width="80dp"
             android:layout_height="34dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="@dimen/m5"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/agree_bg"
             android:gravity="center">

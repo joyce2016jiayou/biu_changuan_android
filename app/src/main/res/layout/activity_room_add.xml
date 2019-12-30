@@ -41,7 +41,7 @@
                 spinner:ms_background_color="@color/edit_bg_color"
                 spinner:ms_background_drawable="@drawable/ms_selector_style_v11"
                 spinner:ms_popupwindow_height="wrap_content"
-                spinner:ms_popupwindow_maxheight="200dp"
+                spinner:ms_popupwindow_maxheight="@dimen/m200"
                 spinner:ms_text_color="@color/color_181818"
                 android:layout_marginRight="@dimen/m20"
                 android:layout_marginLeft="@dimen/m5"/>

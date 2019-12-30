@@ -24,7 +24,7 @@
         <TextView
             android:id="@+id/tv_legal_name"
             style="@style/tv_subtitle"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/m0"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/m20"
             android:layout_marginTop="@dimen/m20"
@@ -52,7 +52,7 @@
         <TextView
             android:id="@+id/tv_id_card"
             style="@style/tv_subtitle"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/m0"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/m20"
             android:layout_marginTop="@dimen/m20"
@@ -81,7 +81,7 @@
         <TextView
             android:id="@+id/tv_company_name"
             style="@style/tv_subtitle"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/m0"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/m20"
             android:layout_marginTop="@dimen/m20"
@@ -108,7 +108,7 @@
         <TextView
             android:id="@+id/tv_business_license"
             style="@style/tv_subtitle"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/m0"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/m80"
             android:layout_marginTop="@dimen/m10"

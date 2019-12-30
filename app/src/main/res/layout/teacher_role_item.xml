@@ -8,7 +8,7 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="60dp"
+        android:layout_height="@dimen/m60"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:background="@drawable/user_item_bg"
@@ -20,7 +20,7 @@
             android:id="@+id/edit_name"
             android:layout_width="85dp"
             android:layout_marginLeft="48dp"
-            android:layout_height="36dp"
+            android:layout_height="@dimen/m36"
             android:background="@drawable/riqi_bg"
             android:hint="@string/edit_hint27"
             android:maxLength="10"
@@ -34,7 +34,7 @@
             android:id="@+id/edit_phone"
             android:layout_width="119dp"
             android:layout_marginLeft="32dp"
-            android:layout_height="36dp"
+            android:layout_height="@dimen/m36"
             android:background="@drawable/kapian_shurukuang"
             android:hint="@string/edit_hint28"
             android:maxLength="11"
@@ -51,8 +51,8 @@
     </LinearLayout>
     <ImageView
         android:id="@+id/Add_btn"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="@dimen/m30"
+        android:layout_height="@dimen/m30"
         android:layout_marginRight="@dimen/m20"
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"

@@ -33,7 +33,7 @@
                         android:src="@drawable/icon_eg"
                         android:layout_marginLeft="@dimen/m21"/>
                     <TextView
-                        android:layout_width="0dp"
+                        android:layout_width="@dimen/m0"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:textColor="@color/color_925711"

@@ -8,7 +8,7 @@
     <RelativeLayout
         android:id="@+id/umeng_socialize_titlebar"
         android:layout_width="match_parent"
-        android:layout_height="54dp"
+        android:layout_height="@dimen/m54"
         android:background="#0086DC">
 
         <TextView
@@ -22,7 +22,7 @@
 
         <RelativeLayout
             android:id="@+id/umeng_back"
-            android:layout_width="60dp"
+            android:layout_width="@dimen/m60"
             android:layout_height="match_parent"
 
             android:onClick="onCancel"
@@ -46,7 +46,7 @@
             android:layout_centerInParent="true"
             android:layout_marginRight="@dimen/m10"
             android:background="@drawable/umeng_socialize_btn_bg"
-            android:padding="4dp"
+            android:padding="@dimen/m4"
             android:text="分享"
             android:textColor="#ffffff" />
     </RelativeLayout>
@@ -54,7 +54,7 @@
     <RelativeLayout
         android:id="@+id/umeng_socialize_follow"
         android:layout_width="fill_parent"
-        android:layout_height="40dp"
+        android:layout_height="@dimen/m40"
         android:layout_alignParentBottom="true"
         android:background="#AAAAAA"
         android:visibility="visible">
@@ -106,8 +106,8 @@
         android:background="#F2F5F6" >
 
         <LinearLayout
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="@dimen/m80"
+            android:layout_height="@dimen/m80"
             android:layout_centerInParent="true"
             android:orientation="horizontal">
 

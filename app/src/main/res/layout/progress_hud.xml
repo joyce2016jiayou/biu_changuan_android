@@ -6,10 +6,10 @@
     android:gravity="center_horizontal"
     android:orientation="vertical"
     android:background="@drawable/loading_bg"
-    android:paddingBottom="5dp"
+    android:paddingBottom="@dimen/m5"
     android:paddingLeft="@dimen/m15"
     android:paddingRight="@dimen/m15"
-    android:paddingTop="5dp" >
+    android:paddingTop="@dimen/m5" >
     <!--去掉了背景为黑色-->
     <!--android:background="@drawable/progress_hud_bg"-->
 

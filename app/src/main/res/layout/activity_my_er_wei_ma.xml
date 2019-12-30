@@ -10,14 +10,14 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:background="@drawable/daohanglan"
-        android:layout_height="100dp">
+        android:layout_height="@dimen/m100">
         <ImageView
             android:id="@+id/back_btn"
             android:layout_width="28dp"
             android:layout_height="@dimen/m18"
             android:layout_alignParentLeft="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="30dp"
+            android:layout_marginBottom="@dimen/m30"
             android:layout_marginLeft="@dimen/m20"
             android:src="@drawable/icon_back" />
         <TextView
@@ -41,13 +41,13 @@
         android:layout_weight="1"
         android:background="@color/color_F8F8F8"
         android:orientation="vertical"
-        android:layout_marginTop="-8dp"
-        android:layout_height="0dp">
+        android:layout_marginTop="@dimen/m_d_8"
+        android:layout_height="@dimen/m0">
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/weweima_viewpage"
             android:layout_width="match_parent"
             android:layout_weight="1"
-            android:layout_height="0dp" />
+            android:layout_height="@dimen/m0" />
         <com.lwj.widget.viewpagerindicator.ViewPagerIndicator
             android:id="@+id/indicator_spring"
             android:layout_width="match_parent"
@@ -57,7 +57,7 @@
             app:vpi_distance="@dimen/m15"
             app:vpi_distanceType="BY_DISTANCE"
             app:vpi_indicatorType="SPRING"
-            app:vpi_radius="5dp"
+            app:vpi_radius="@dimen/m5"
             android:layout_marginBottom="@dimen/m19"
             app:vpi_selected_color="@color/color_FFBA02"
             />
@@ -73,53 +73,53 @@
         android:layout_height="wrap_content">
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="@dimen/m0"
             android:layout_weight="1"
             android:gravity="center"
             android:background="@drawable/fenxiang_bg"
             android:layout_height="97dp">
             <ImageView
-                android:layout_width="36dp"
-                android:layout_height="36dp"
+                android:layout_width="@dimen/m36"
+                android:layout_height="@dimen/m36"
                 android:src="@drawable/umeng_socialize_wxcircle"
                 />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="@dimen/m0"
             android:layout_weight="1"
             android:gravity="center"
             android:background="@drawable/fenxiang_bg"
             android:layout_height="97dp">
             <ImageView
-                android:layout_width="36dp"
-                android:layout_height="36dp"
+                android:layout_width="@dimen/m36"
+                android:layout_height="@dimen/m36"
                 android:src="@drawable/umeng_socialize_wxcircle"
                 />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="@dimen/m0"
             android:layout_weight="1"
             android:gravity="center"
             android:background="@drawable/fenxiang_bg"
             android:layout_height="97dp">
             <ImageView
-                android:layout_width="36dp"
-                android:layout_height="36dp"
+                android:layout_width="@dimen/m36"
+                android:layout_height="@dimen/m36"
                 android:src="@drawable/umeng_socialize_wxcircle"
                 />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="@dimen/m0"
             android:layout_weight="1"
             android:gravity="center"
             android:background="@drawable/fenxiang_bg"
             android:layout_height="97dp">
             <ImageView
-                android:layout_width="36dp"
-                android:layout_height="36dp"
+                android:layout_width="@dimen/m36"
+                android:layout_height="@dimen/m36"
                 android:src="@drawable/umeng_socialize_wxcircle"
                 />
         </LinearLayout>

@@ -34,34 +34,34 @@
     </RelativeLayout>
 
     <!--圆形裁剪框示例
-        app:clipBorderWidth="5dp"     ： 裁剪框边框宽度
+        app:clipBorderWidth="@dimen/m5"     ： 裁剪框边框宽度
         app:clipType="circle"         ： 裁剪框类型为圆形
-        app:mHorizontalPadding="30dp" ：裁剪框距离左右边距为30dp
+        app:mHorizontalPadding="@dimen/m30" ：裁剪框距离左右边距为30dp
      -->
     <com.noplugins.keepfit.android.util.ui.cropimg.ClipViewLayout
         android:id="@+id/clipViewLayout1"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="@dimen/m0"
         android:layout_weight="1"
-        app:clipBorderWidth="2dp"
+        app:clipBorderWidth="@dimen/m2"
         app:clipType="circle"
-        app:mHorizontalPadding="30dp" />
+        app:mHorizontalPadding="@dimen/m30" />
 
     <!--矩形裁剪框示例 -->
     <com.noplugins.keepfit.android.util.ui.cropimg.ClipViewLayout
         android:id="@+id/clipViewLayout2"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="@dimen/m0"
         android:layout_weight="1"
         android:visibility="gone"
-        app:clipBorderWidth="2dp"
+        app:clipBorderWidth="@dimen/m2"
         app:clipType="rectangle"
-        app:mHorizontalPadding="30dp" />
+        app:mHorizontalPadding="@dimen/m30" />
 
     <RelativeLayout
         android:id="@+id/bottom"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="@dimen/m60"
         android:background="#1C1C1C">
 
         <TextView
@@ -74,8 +74,8 @@
             android:gravity="center_vertical|start"
             android:paddingStart="@dimen/m15"
             android:paddingLeft="@dimen/m15"
-            android:paddingEnd="0dp"
-            android:paddingRight="0dp"
+            android:paddingEnd="@dimen/m0"
+            android:paddingRight="@dimen/m0"
             android:text="取消"
             android:textColor="#ffffff"
             android:textSize="@dimen/sp16" />
@@ -88,8 +88,8 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:gravity="center_vertical|end"
-            android:paddingStart="0dp"
-            android:paddingLeft="0dp"
+            android:paddingStart="@dimen/m0"
+            android:paddingLeft="@dimen/m0"
             android:paddingEnd="@dimen/m15"
             android:paddingRight="@dimen/m15"
             android:text="选取"

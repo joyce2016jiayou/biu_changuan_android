@@ -10,7 +10,7 @@
         android:orientation="horizontal">
 
         <RelativeLayout
-            android:layout_width="0dp"
+            android:layout_width="@dimen/m0"
             android:layout_height="@dimen/m31"
             android:layout_marginRight="@dimen/m20"
             android:layout_weight="1"
