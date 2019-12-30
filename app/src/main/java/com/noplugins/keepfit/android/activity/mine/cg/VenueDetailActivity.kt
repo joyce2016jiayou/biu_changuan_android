@@ -3,6 +3,7 @@ package com.noplugins.keepfit.android.activity.mine.cg
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.util.Log
@@ -39,6 +40,8 @@ import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriber
 import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriberNew
 import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener
 import com.noplugins.keepfit.android.util.ui.ProgressUtil
+import com.noplugins.keepfit.android.util.ui.cropimg.ClipImageActivity
+import com.noplugins.keepfit.android.util.ui.cropimg.FileUtil
 import com.noplugins.keepfit.android.util.ui.jiugongge.CCRSortableNinePhotoLayout
 import com.qiniu.android.storage.UploadManager
 import com.qiniu.android.storage.UploadOptions
@@ -579,14 +582,23 @@ class VenueDetailActivity : BaseActivity(), CCRSortableNinePhotoLayout.Delegate 
                     AppConstants.SELECT_IMAGES_SIZE = strings.size
                     tvPhotoNum!!.text = "(${AppConstants.SELECT_IMAGES_SIZE}/9)"
 
-                } else {
+                } else if (requestCode == 102) {
                     val resultPaths = data!!.getStringArrayListExtra(EasyPhotos.RESULT_PATHS)
                     if (resultPaths.size > 0) {
-                        ivLogoPath = resultPaths[0]
-                        val ivLogoFile = File(ivLogoPath)
-                        Glide.with(applicationContext).load(ivLogoFile).into(ivLogo)
+                        val ivLogoFile = File(resultPaths[0])
+//                        Glide.with(applicationContext).load(ivLogoFile).into(ivLogo)
 //                        delete_icon_btn.setVisibility(View.VISIBLE)
+                        gotoClipActivity(Uri.fromFile(ivLogoFile))
                     }
+                } else if (requestCode == 103) {
+                    if (data == null){
+                        return
+                    }
+                    val uri = data.data
+                    ivLogoPath = FileUtil.getRealFilePathFromUri(this, uri)
+                    //Bitmap bitMap = BitmapFactory.decodeFile(cropImagePath);
+                    val icon_iamge_file = File(ivLogoPath)
+                    Glide.with(this).load(icon_iamge_file).into(ivLogo)
                 }
             }
         }
@@ -820,6 +832,20 @@ class VenueDetailActivity : BaseActivity(), CCRSortableNinePhotoLayout.Delegate 
                     }
                 }, this, true))
 
+    }
+
+    /**
+     * 打开截图界面
+     */
+    fun gotoClipActivity(uri: Uri?) {
+        if (uri == null) {
+            return
+        }
+        val intent = Intent()
+        intent.setClass(this, ClipImageActivity::class.java)
+        intent.putExtra("type", 2)//1:圆形 2:方形
+        intent.data = uri
+        startActivityForResult(intent, 103)
     }
 
 }
