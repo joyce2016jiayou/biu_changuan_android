@@ -30,7 +30,7 @@ import pub.devrel.easypermissions.AfterPermissionGranted
 import pub.devrel.easypermissions.EasyPermissions
 import java.util.ArrayList
 
-class TeacherManagerActivity : BaseActivity(){
+class TeacherManagerActivity : BaseActivity() {
 
 //    override fun onLocationChanged(amapLocation: AMapLocation?) {
 //        if (amapLocation != null) {
@@ -71,7 +71,7 @@ class TeacherManagerActivity : BaseActivity(){
     override fun initView() {
         setContentLayout(R.layout.activity_teacher_manager)
         isShowTitle(true)
-        setTitleView(R.string.tv_teacher_manager,R.drawable.icon_back,R.drawable.icon_add,false,0)
+        setTitleView(R.string.tv_teacher_manager, R.drawable.icon_back, R.drawable.icon_add, false, 0)
         initFragment()
         requestPermission()
     }
@@ -82,8 +82,8 @@ class TeacherManagerActivity : BaseActivity(){
             val intent = Intent(this, TeacherSelectActivity::class.java)
             startActivity(intent)
         }
-        title_left_button_onclick_listen{
-            setResult(SpUtils.getInt(applicationContext,AppConstants.FRAGMENT_SIZE)-1)
+        title_left_button_onclick_listen {
+            setResult(SpUtils.getInt(applicationContext, AppConstants.FRAGMENT_SIZE) - 1)
             finish()
         }
     }
@@ -196,7 +196,7 @@ class TeacherManagerActivity : BaseActivity(){
     }
 
     override fun onBackPressed() {
-        setResult(SpUtils.getInt(applicationContext,AppConstants.FRAGMENT_SIZE)-1)
+        setResult(SpUtils.getInt(applicationContext, AppConstants.FRAGMENT_SIZE) - 1)
         finish()
     }
 
