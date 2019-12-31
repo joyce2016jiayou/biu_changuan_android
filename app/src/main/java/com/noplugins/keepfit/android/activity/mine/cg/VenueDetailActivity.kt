@@ -508,6 +508,10 @@ class VenueDetailActivity : BaseActivity(), CCRSortableNinePhotoLayout.Delegate 
 
         save5.setOnClickListener {
             if (BaseUtils.isFastClick()){
+                if (strings.size < 1){
+                    Toast.makeText(this,"授课图不可为空",Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
                 withLs()
             }
         }

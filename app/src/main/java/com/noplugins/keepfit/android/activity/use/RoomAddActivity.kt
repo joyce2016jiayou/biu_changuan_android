@@ -2,8 +2,14 @@ package com.noplugins.keepfit.android.activity.use
 
 import android.content.Context
 import android.os.Bundle
+import android.view.View
+import android.view.WindowManager
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.ListView
 import android.widget.Toast
 import com.noplugins.keepfit.android.R
+import com.noplugins.keepfit.android.adapter.TypeAdapter
 import com.noplugins.keepfit.android.base.BaseActivity
 import com.noplugins.keepfit.android.bean.DictionaryeBean
 import com.noplugins.keepfit.android.global.AppConstants
@@ -13,6 +19,8 @@ import com.noplugins.keepfit.android.util.net.Network
 import com.noplugins.keepfit.android.util.net.entity.Bean
 import com.noplugins.keepfit.android.util.net.progress.ProgressSubscriber
 import com.noplugins.keepfit.android.util.net.progress.SubscriberOnNextListener
+import com.noplugins.keepfit.android.util.ui.FlowLayout
+import com.noplugins.keepfit.android.util.ui.pop.CommonPopupWindow
 import kotlinx.android.synthetic.main.activity_room_add.*
 import kotlinx.android.synthetic.main.title_activity.*
 import java.util.HashMap
@@ -43,6 +51,10 @@ class RoomAddActivity : BaseActivity() {
                 addRoom()
             }
         }
+
+        ms_room_type.setOnClickListener {
+            initMs()
+        }
     }
 
     override fun onBackPressed() {
@@ -51,13 +63,28 @@ class RoomAddActivity : BaseActivity() {
 
 
     private fun initMs() {
-        ms_room_type.setItems(data)
-//        ms_room_type.selectedIndex = 0
-        ms_room_type.setOnItemSelectedListener { _, position, _, _ ->
-            ms_room_type.text = list[position].name
-            selectType = list[position].value.toInt()
+        val popupWindow = CommonPopupWindow.Builder(this)
+                .setView(R.layout.select_type_layout)
+                .setBackGroundLevel(1f)//0.5f
+                .setAnimationStyle(R.style.top_to_bottom)
+                .setWidthAndHeight(ms_room_type.width,
+                        WindowManager.LayoutParams.WRAP_CONTENT)
+                .setOutSideTouchable(true).create()
+        popupWindow.showAsDropDown(ms_room_type)
+        /**设置逻辑 */
+        val view = popupWindow.contentView
+        val strings = java.util.ArrayList<String>()
+        for (i in list.indices) {
+            strings.add(list[i].name)
         }
-        ms_room_type.setOnNothingSelectedListener { spinner -> spinner.selectedIndex }
+        val typeAdapter = TypeAdapter(strings, applicationContext)
+        val listView = view.findViewById<ListView>(R.id.listview)
+        listView.adapter = typeAdapter
+        listView.setOnItemClickListener { adapterView, view1, i, l ->
+            ms_room_type.text = strings[i]
+            selectType = list[i].value.toInt()
+            popupWindow.dismiss()
+        }
     }
 
     /**
@@ -74,10 +101,6 @@ class RoomAddActivity : BaseActivity() {
 
                                 if (bean.data != null) {
                                     list = bean.data
-                                    bean.data.forEach {
-                                        data.add(it.name)
-                                    }
-                                    initMs()
                                 }
                             }
 
@@ -94,9 +117,11 @@ class RoomAddActivity : BaseActivity() {
 
     private fun addRoom(){
         if (et_room_name.text.toString().isEmpty()){
+            Toast.makeText(applicationContext, "房间名称不可为空", Toast.LENGTH_SHORT).show()
             return
         }
-        if (et_people_number.text.toString().isEmpty()){
+        if (et_people_number.text.toString().isEmpty()||et_people_number.text.toString().toInt() == 0){
+            Toast.makeText(applicationContext, "可容纳人数不可为空", Toast.LENGTH_SHORT).show()
             return
         }
         val params = HashMap<String, Any>()
@@ -109,6 +134,7 @@ class RoomAddActivity : BaseActivity() {
                 .addAreaPlace(params, ProgressSubscriber("新增房间",
                         object : SubscriberOnNextListener<Bean<Any>> {
                             override fun onNext(bean: Bean<Any>) {
+                                Toast.makeText(applicationContext, "新增房间成功", Toast.LENGTH_SHORT).show()
                                 finish()
                             }
 

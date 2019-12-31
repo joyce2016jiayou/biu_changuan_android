@@ -126,6 +126,8 @@ class RoomInfoActivity : BaseActivity() {
                                     data.removeAt(position)
                                     adapter!!.notifyItemRemoved(position)//刷新被删除的地方
                                     adapter!!.notifyItemRangeChanged(position, adapter!!.itemCount)
+
+                                    Toast.makeText(applicationContext, "删除房间成功", Toast.LENGTH_SHORT).show()
                                 }
                             }
 

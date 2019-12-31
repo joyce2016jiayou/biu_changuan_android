@@ -29,22 +29,47 @@
                 android:textColor="@color/color_4A4A4A"
                 android:textSize="@dimen/sp16" />
 
-            <lib.demo.spinner.MaterialSpinner
+            <!--<lib.demo.spinner.MaterialSpinner-->
+                <!--android:id="@+id/ms_room_type"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="@dimen/m31"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:gravity="center"-->
+                <!--android:textSize="@dimen/sp13"-->
+                <!--android:text="@string/tv_select"-->
+                <!--android:layout_toRightOf="@+id/label_room_type"-->
+                <!--spinner:ms_background_color="@color/edit_bg_color"-->
+                <!--spinner:ms_background_drawable="@drawable/ms_selector_style_v11"-->
+                <!--spinner:ms_popupwindow_height="wrap_content"-->
+                <!--spinner:ms_popupwindow_maxheight="@dimen/m200"-->
+                <!--spinner:ms_text_color="@color/color_181818"-->
+                <!--android:layout_marginRight="@dimen/m20"-->
+                <!--android:layout_marginLeft="@dimen/m5"/>-->
+
+            <TextView
                 android:id="@+id/ms_room_type"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/m31"
+                android:background="@drawable/edit_bg1"
                 android:layout_centerVertical="true"
-                android:gravity="center"
-                android:textSize="@dimen/sp13"
-                android:text="@string/tv_select"
+                android:gravity="center_vertical"
+                android:hint="@string/tv167"
+                android:paddingLeft="@dimen/m20"
+                android:singleLine="true"
+                android:textColor="@color/top_heiziti"
                 android:layout_toRightOf="@+id/label_room_type"
-                spinner:ms_background_color="@color/edit_bg_color"
-                spinner:ms_background_drawable="@drawable/ms_selector_style_v11"
-                spinner:ms_popupwindow_height="wrap_content"
-                spinner:ms_popupwindow_maxheight="@dimen/m200"
-                spinner:ms_text_color="@color/color_181818"
+                android:textColorHint="@color/color_9B9B9B"
+                android:textSize="@dimen/sp15"
                 android:layout_marginRight="@dimen/m20"
                 android:layout_marginLeft="@dimen/m5"/>
+
+            <ImageView
+                android:layout_width="@dimen/m20"
+                android:layout_height="@dimen/m20"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/m30"
+                android:src="@drawable/icon_xiala" />
         </RelativeLayout>
     </www.linwg.org.lib.LCardView>
 
@@ -78,6 +103,7 @@
                 android:layout_marginLeft="@dimen/m5"
                 android:layout_marginTop="@dimen/m20"
                 android:layout_marginRight="@dimen/m20"
+                android:maxLength="10"
                 android:layout_toRightOf="@+id/label_room_name"
                 android:background="@drawable/shape_edit_bg"
                 android:gravity="center_vertical" />
@@ -102,8 +128,9 @@
                 android:layout_marginLeft="@dimen/m5"
                 android:layout_marginTop="@dimen/m20"
                 android:layout_marginRight="@dimen/m20"
-                android:inputType="number"
+                android:inputType="number|phone"
                 android:maxLength="4"
+                android:digits="1234567890"
                 android:layout_marginBottom="@dimen/m20"
                 android:layout_toRightOf="@+id/label_people_number"
                 android:background="@drawable/shape_edit_bg"

@@ -33,7 +33,6 @@ class RoomManagerActivity : BaseActivity() {
         setContentLayout(R.layout.activity_room_manager)
         isShowTitle(true)
         setTitleView(R.string.room_manager,R.drawable.icon_back,R.drawable.icon_add,false,0)
-        add_btn.visibility = View.VISIBLE
 
         adapter = RoomManagerAdapter(data)
         rv_room_manager.layoutManager = LinearLayoutManager(this)
