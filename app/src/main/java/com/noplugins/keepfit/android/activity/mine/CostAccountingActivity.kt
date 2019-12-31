@@ -83,7 +83,8 @@ class CostAccountingActivity : BaseActivity() {
         val yunying = et_yunying.text.toString().toBigDecimal()
         val sum = et_renci.text.toString().toBigDecimal()
         cost = (fangzu.add(nengyuan).add(renyuan).add(yunying)).divide(sum, 2, RoundingMode.HALF_UP).toDouble()
-        tv_result.text = "当前经营成本： $cost/人/次"
+
+        tv_result.text = "当前经营成本： ${String.format("%.2f", cost)}/人/次"
 
         request()
     }
@@ -91,13 +92,13 @@ class CostAccountingActivity : BaseActivity() {
     private fun request() {
         val params = HashMap<String, Any>()
         params["area_num"] = SpUtils.getString(applicationContext, AppConstants.CHANGGUAN_NUM)
-        params["cost"] = cost
+        params["cost"] = String.format("%.2f", cost)
         subscription = Network.getInstance("成本核算", this)
                 .updateCost(
                         params,
                         ProgressSubscriber("成本核算", object : SubscriberOnNextListener<Bean<Any>> {
                             override fun onNext(result: Bean<Any>) {
-                                SpUtils.putString(applicationContext, AppConstants.COST, "$cost")
+                                SpUtils.putString(applicationContext, AppConstants.COST, "${String.format("%.2f", cost)}")
                                 Toast.makeText(applicationContext, "上传成功", Toast.LENGTH_SHORT).show()
                             }
 

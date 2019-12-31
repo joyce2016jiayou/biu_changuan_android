@@ -195,7 +195,7 @@ class CgPriceActivity : BaseActivity() {
                                             return@setOnClickListener
                                         }
 
-                                        if (price.text.isEmpty()){
+                                        if (price.text.toString().isEmpty()||price.text.toString().toInt() == 0){
                                             Toast.makeText(applicationContext, "请输入价格", Toast.LENGTH_SHORT).show()
                                             return@setOnClickListener
                                         }

@@ -71,4 +71,7 @@
     <color name="color_0D70FC">#0D70FC</color>
     <color name="color_502B0E">#502B0E</color>
     <color name="color_393b52">#393b52</color>
+
+    <color name="disabled_color">#44000000</color>
+    <color name="error_color">#E7492E</color>
 </resources>
