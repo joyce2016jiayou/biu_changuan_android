@@ -29,6 +29,8 @@ public class EditClassDetaiActivity extends BaseActivity {
     TextView number_tv;
     @BindView(R.id.title_tv)
     TextView title_tv;
+    @BindView(R.id.title_tv_top)
+    TextView title_tv_top;
 
     String type = "";
     String infoType = "";
@@ -71,19 +73,23 @@ public class EditClassDetaiActivity extends BaseActivity {
     public void doBusiness(Context mContext) {
         if (type.equals("class_content")) {//课程内容
             title_tv.setText(getResources().getText(R.string.tv74));
+            title_tv_top.setText(getResources().getText(R.string.edit_hint23));
             input_max_umber = 300;
             if (!TextUtils.isEmpty(class_content)) {
                 edit_tv.setText(class_content);
+
             }
 
         } else if (type.equals("shihe_renqun")) {//适合人群
             title_tv.setText(getResources().getText(R.string.tv75));
+            title_tv_top.setText(getResources().getText(R.string.edit_hint24));
             input_max_umber = 150;
             if (!TextUtils.isEmpty(class_shihe_renqun)) {
                 edit_tv.setText(class_shihe_renqun);
             }
 
         } else if (type.equals("zhuyi_shixiang")) {//注意事项
+            title_tv_top.setText(getResources().getText(R.string.edit_hint25));
             title_tv.setText(getResources().getText(R.string.tv76));
             input_max_umber = 300;
             if (!TextUtils.isEmpty(class_zhuyi_shixiang)) {
