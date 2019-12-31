@@ -221,7 +221,7 @@ public interface MyService {
     Observable<Bean<Object>> get_class_resource(@FieldMap Map<String, String> map);
 
     /**
-     * 获取审核状态
+     * 添加团课
      *
      * @return
      */

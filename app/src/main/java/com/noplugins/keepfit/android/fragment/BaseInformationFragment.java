@@ -867,6 +867,9 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
         } else if (TextUtils.isEmpty(edittext_area.getText())) {
             Toast.makeText(getActivity(), R.string.alert_dialog_tishi4, Toast.LENGTH_SHORT).show();
             return false;
+        } else if (TextUtils.isEmpty(select_type_tv.getText())) {
+            Toast.makeText(getActivity(), R.string.alert_dialog_tishi41, Toast.LENGTH_SHORT).show();
+            return false;
         } else if (TextUtils.isEmpty(tell_edit.getText())) {
             Toast.makeText(getActivity(), R.string.alert_dialog_tishi5, Toast.LENGTH_SHORT).show();
             return false;
@@ -997,7 +1000,7 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
                 type_buffer.append(information_tags.get(i).getValue()).append(",");
             }
         }
-        Log.e("选择的标签编号", type_buffer.substring(0, type_buffer.length() - 1) + "");
+        //Log.e("选择的标签编号", type_buffer.substring(0, type_buffer.length() - 1) + "");
         return type_buffer.substring(0, type_buffer.length() - 1);
     }
 

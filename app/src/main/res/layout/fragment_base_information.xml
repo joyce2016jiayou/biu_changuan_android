@@ -94,7 +94,7 @@
                             android:layout_height="@dimen/m31"
                             android:background="@drawable/edit_bg1"
                             android:gravity="center_vertical"
-                            android:hint="综合会所"
+                            android:hint="请选择"
                             android:paddingLeft="@dimen/m20"
                             android:singleLine="true"
                             android:textColor="@color/top_heiziti"

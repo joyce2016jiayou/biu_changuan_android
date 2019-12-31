@@ -177,6 +177,8 @@ public class AddClassItemActivity extends BaseActivity implements CCRSortableNin
     TextView select_room_name_tv;
     @BindView(R.id.jisuan_time_tv)
     TextView jisuan_time_tv;
+    @BindView(R.id.invite_teacher_number_tv)
+    TextView invite_teacher_number_tv;
 
     private String select_target_type = "1";
     private String select_class_type = "1";
@@ -304,9 +306,15 @@ public class AddClassItemActivity extends BaseActivity implements CCRSortableNin
         input_class_detail_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Intent intent = new Intent(AddClassItemActivity.this, EditClassDetaiActivity.class);
                 intent.putExtra("type", "class_content");
+                if(!TextUtils.isEmpty(edit_class_jieshao.getText())){
+                    intent.putExtra("class_content", edit_class_jieshao.getText().toString());
+                }
                 startActivity(intent);
+
+
             }
         });
 
@@ -316,6 +324,9 @@ public class AddClassItemActivity extends BaseActivity implements CCRSortableNin
             public void onClick(View view) {
                 Intent intent = new Intent(AddClassItemActivity.this, EditClassDetaiActivity.class);
                 intent.putExtra("type", "shihe_renqun");
+                if(!TextUtils.isEmpty(edit_shihe_renqun.getText())){
+                    intent.putExtra("class_shihe_renqun", edit_shihe_renqun.getText().toString());
+                }
                 startActivity(intent);
             }
         });
@@ -325,6 +336,9 @@ public class AddClassItemActivity extends BaseActivity implements CCRSortableNin
             public void onClick(View view) {
                 Intent intent = new Intent(AddClassItemActivity.this, EditClassDetaiActivity.class);
                 intent.putExtra("type", "zhuyi_shixiang");
+                if(!TextUtils.isEmpty(edit_zhuyi_shixiang.getText())){
+                    intent.putExtra("class_zhuyi_shixiang", edit_zhuyi_shixiang.getText().toString());
+                }
                 startActivity(intent);
             }
         });
@@ -443,6 +457,7 @@ public class AddClassItemActivity extends BaseActivity implements CCRSortableNin
         if (is_refresh_teacher_list) {
             if (submit_tescher_list.size() > 0) {
                 inviteTeacherAdapter.notifyDataSetChanged();
+                invite_teacher_number_tv.setText("("+submit_tescher_list.size()+"/20)");
             }
             is_refresh_teacher_list = false;
         }
@@ -545,6 +560,7 @@ public class AddClassItemActivity extends BaseActivity implements CCRSortableNin
         listView.setOnItemClickListener((adapterView, view1, i, l) -> {
             select_class_difficulty_tv.setText(strings.get(i));
             select_nandu_type = class_difficultys.get(i).getValue();
+            Log.e("寒暑假啦", select_nandu_type);
             popupWindow.dismiss();
         });
     }
