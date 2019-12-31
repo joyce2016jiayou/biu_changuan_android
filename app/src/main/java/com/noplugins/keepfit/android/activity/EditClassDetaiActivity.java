@@ -77,7 +77,9 @@ public class EditClassDetaiActivity extends BaseActivity {
             input_max_umber = 300;
             if (!TextUtils.isEmpty(class_content)) {
                 edit_tv.setText(class_content);
-
+                number_tv.setText(class_content.length() + "/" + input_max_umber);
+            } else {
+                number_tv.setText("0/" + input_max_umber);
             }
 
         } else if (type.equals("shihe_renqun")) {//适合人群
@@ -86,6 +88,9 @@ public class EditClassDetaiActivity extends BaseActivity {
             input_max_umber = 150;
             if (!TextUtils.isEmpty(class_shihe_renqun)) {
                 edit_tv.setText(class_shihe_renqun);
+                number_tv.setText(class_shihe_renqun.length() + "/" + input_max_umber);
+            } else {
+                number_tv.setText("0/" + input_max_umber);
             }
 
         } else if (type.equals("zhuyi_shixiang")) {//注意事项
@@ -94,10 +99,12 @@ public class EditClassDetaiActivity extends BaseActivity {
             input_max_umber = 300;
             if (!TextUtils.isEmpty(class_zhuyi_shixiang)) {
                 edit_tv.setText(class_zhuyi_shixiang);
+                number_tv.setText(class_zhuyi_shixiang.length() + "/" + input_max_umber);
+            } else {
+                number_tv.setText("0/" + input_max_umber);
             }
         }
         edit_tv.setMaxEms(input_max_umber);
-
 
         back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
