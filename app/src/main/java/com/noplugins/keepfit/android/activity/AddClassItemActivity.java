@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -95,12 +96,10 @@ import cn.qqtheme.framework.wheelview.contract.OnDateSelectedListener;
 import cn.qqtheme.framework.wheelview.contract.OnTimeSelectedListener;
 import cn.qqtheme.framework.wheelview.entity.DateEntity;
 import cn.qqtheme.framework.wheelview.entity.TimeEntity;
-import okhttp3.RequestBody;
 import top.zibin.luban.CompressionPredicate;
 import top.zibin.luban.Luban;
 import top.zibin.luban.OnCompressListener;
 
-import static com.noplugins.keepfit.android.fragment.BaseInformationFragment.getCompressJpgFileAbsolutePath;
 
 public class AddClassItemActivity extends BaseActivity implements CCRSortableNinePhotoLayout.Delegate {
     @BindView(R.id.back_btn)
@@ -1224,6 +1223,22 @@ public class AddClassItemActivity extends BaseActivity implements CCRSortableNin
                 // TODO 当压缩过程出现问题时调用
             }
         }).launch();
+    }
+    /**
+     * 获取保存压缩图片文件的位置
+     *
+     * @return
+     */
+    private final static String PHOTO_COMPRESS_JPG_BASEPATH = "/" + "TakePhoto" + "/CompressImgs/";
+
+    public static String getCompressJpgFileAbsolutePath() {
+        String fileBasePath = Environment.getExternalStorageDirectory().getAbsolutePath() + PHOTO_COMPRESS_JPG_BASEPATH;
+        File file = new File(fileBasePath);
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+
+        return fileBasePath;
     }
 
     ImageCompressCallBack compressCallBack = new ImageCompressCallBack() {
