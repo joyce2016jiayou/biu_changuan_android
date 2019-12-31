@@ -5,7 +5,6 @@
     android:layout_height="wrap_content"
     android:gravity="center"
     android:orientation="vertical">
-
     <www.linwg.org.lib.LCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,15 +14,14 @@
         app:shadowSize="@dimen/m2"
         app:shadowStartAlpha="10">
 
-        <ListView
-            android:layout_marginTop="@dimen/m24"
-            android:layout_marginBottom="@dimen/m24"
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/listview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/m10"
             android:divider="@null"
             android:dividerHeight="@dimen/m10"
-            android:listSelector="@android:color/transparent" />
+            android:listSelector="@android:color/transparent"
+            android:scrollbars="none"/>
     </www.linwg.org.lib.LCardView>
-
 </LinearLayout>

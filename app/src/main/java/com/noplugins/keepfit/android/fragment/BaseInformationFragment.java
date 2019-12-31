@@ -47,6 +47,7 @@ import com.noplugins.keepfit.android.activity.InformationCheckActivity;
 import com.noplugins.keepfit.android.adapter.BaseInformationTagAdapter;
 import com.noplugins.keepfit.android.adapter.ExRecyclerAdapter;
 import com.noplugins.keepfit.android.adapter.SelectRoomAdapter;
+import com.noplugins.keepfit.android.adapter.SelectTypeAdapter;
 import com.noplugins.keepfit.android.adapter.TypeAdapter;
 import com.noplugins.keepfit.android.base.MyApplication;
 import com.noplugins.keepfit.android.bean.CityCode;
@@ -550,13 +551,18 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
         for (int i = 0; i < room_types.size(); i++) {
             strings.add(room_types.get(i).getName());
         }
-        TypeAdapter typeAdapter = new TypeAdapter(strings, getActivity());
-        ListView listView = view.findViewById(R.id.listview);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        SelectTypeAdapter typeAdapter = new SelectTypeAdapter(strings, getActivity());
+        RecyclerView listView = view.findViewById(R.id.listview);
+        listView.setLayoutManager(linearLayoutManager);
         listView.setAdapter(typeAdapter);
-        listView.setOnItemClickListener((adapterView, view1, i, l) -> {
-            select_room_type_tv.setText(strings.get(i));
-            select_room_type_code = room_types.get(i).getValue();
-            popupWindow.dismiss();
+        typeAdapter.setOnItemClickListener(new SelectTypeAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                select_room_type_tv.setText(strings.get(position));
+                select_room_type_code = room_types.get(position).getValue();
+                popupWindow.dismiss();
+            }
         });
     }
 
@@ -982,14 +988,19 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
         for (int i = 0; i < changguan_types.size(); i++) {
             strings.add(changguan_types.get(i).getName());
         }
-        TypeAdapter typeAdapter = new TypeAdapter(strings, getActivity());
-        ListView listView = view.findViewById(R.id.listview);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        SelectTypeAdapter typeAdapter = new SelectTypeAdapter(strings, getActivity());
+        RecyclerView listView = view.findViewById(R.id.listview);
+        listView.setLayoutManager(linearLayoutManager);
         listView.setAdapter(typeAdapter);
-        listView.setOnItemClickListener((adapterView, view1, i, l) -> {
-            select_type_tv.setText(strings.get(i));
-            changguan_type = changguan_types.get(i).getValue();
-            Log.e("选择的场馆类型ID", changguan_type + "");
-            popupWindow.dismiss();
+        typeAdapter.setOnItemClickListener(new SelectTypeAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                select_type_tv.setText(strings.get(position));
+                changguan_type = changguan_types.get(position).getValue();
+                //Log.e("选择的场馆类型ID", changguan_type + "");
+                popupWindow.dismiss();
+            }
         });
     }
 

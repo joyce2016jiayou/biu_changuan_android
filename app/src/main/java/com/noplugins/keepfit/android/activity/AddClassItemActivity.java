@@ -17,6 +17,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -29,6 +30,7 @@ import com.lxj.xpopup.enums.PopupAnimation;
 import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.activity.mine.TeacherSelectActivity;
 import com.noplugins.keepfit.android.activity.use.TeamInfoActivity;
+import com.noplugins.keepfit.android.adapter.SelectTypeAdapter;
 import com.noplugins.keepfit.android.adapter.TypeAdapter;
 import com.noplugins.keepfit.android.base.BaseActivity;
 import com.noplugins.keepfit.android.base.MyApplication;
@@ -309,7 +311,7 @@ public class AddClassItemActivity extends BaseActivity implements CCRSortableNin
 
                 Intent intent = new Intent(AddClassItemActivity.this, EditClassDetaiActivity.class);
                 intent.putExtra("type", "class_content");
-                if(!TextUtils.isEmpty(edit_class_jieshao.getText())){
+                if (!TextUtils.isEmpty(edit_class_jieshao.getText())) {
                     intent.putExtra("class_content", edit_class_jieshao.getText().toString());
                 }
                 startActivity(intent);
@@ -324,7 +326,7 @@ public class AddClassItemActivity extends BaseActivity implements CCRSortableNin
             public void onClick(View view) {
                 Intent intent = new Intent(AddClassItemActivity.this, EditClassDetaiActivity.class);
                 intent.putExtra("type", "shihe_renqun");
-                if(!TextUtils.isEmpty(edit_shihe_renqun.getText())){
+                if (!TextUtils.isEmpty(edit_shihe_renqun.getText())) {
                     intent.putExtra("class_shihe_renqun", edit_shihe_renqun.getText().toString());
                 }
                 startActivity(intent);
@@ -336,7 +338,7 @@ public class AddClassItemActivity extends BaseActivity implements CCRSortableNin
             public void onClick(View view) {
                 Intent intent = new Intent(AddClassItemActivity.this, EditClassDetaiActivity.class);
                 intent.putExtra("type", "zhuyi_shixiang");
-                if(!TextUtils.isEmpty(edit_zhuyi_shixiang.getText())){
+                if (!TextUtils.isEmpty(edit_zhuyi_shixiang.getText())) {
                     intent.putExtra("class_zhuyi_shixiang", edit_zhuyi_shixiang.getText().toString());
                 }
                 startActivity(intent);
@@ -457,7 +459,7 @@ public class AddClassItemActivity extends BaseActivity implements CCRSortableNin
         if (is_refresh_teacher_list) {
             if (submit_tescher_list.size() > 0) {
                 inviteTeacherAdapter.notifyDataSetChanged();
-                invite_teacher_number_tv.setText("("+submit_tescher_list.size()+"/20)");
+                invite_teacher_number_tv.setText("(" + submit_tescher_list.size() + "/20)");
             }
             is_refresh_teacher_list = false;
         }
@@ -529,13 +531,18 @@ public class AddClassItemActivity extends BaseActivity implements CCRSortableNin
         for (int i = 0; i < tuanke_types.size(); i++) {
             strings.add(tuanke_types.get(i).getName());
         }
-        TypeAdapter typeAdapter = new TypeAdapter(strings, getApplicationContext());
-        ListView listView = view.findViewById(R.id.listview);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
+        SelectTypeAdapter typeAdapter = new SelectTypeAdapter(strings, getApplicationContext());
+        RecyclerView listView = view.findViewById(R.id.listview);
+        listView.setLayoutManager(linearLayoutManager);
         listView.setAdapter(typeAdapter);
-        listView.setOnItemClickListener((adapterView, view1, i, l) -> {
-            select_tuanke_type_tv.setText(strings.get(i));
-            select_class_type = tuanke_types.get(i).getValue();
-            popupWindow.dismiss();
+        typeAdapter.setOnItemClickListener(new SelectTypeAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                select_tuanke_type_tv.setText(strings.get(position));
+                select_class_type = tuanke_types.get(position).getValue();
+                popupWindow.dismiss();
+            }
         });
     }
 
@@ -554,14 +561,18 @@ public class AddClassItemActivity extends BaseActivity implements CCRSortableNin
         for (int i = 0; i < class_difficultys.size(); i++) {
             strings.add(class_difficultys.get(i).getName());
         }
-        TypeAdapter typeAdapter = new TypeAdapter(strings, getApplicationContext());
-        ListView listView = view.findViewById(R.id.listview);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
+        SelectTypeAdapter typeAdapter = new SelectTypeAdapter(strings, getApplicationContext());
+        RecyclerView listView = view.findViewById(R.id.listview);
+        listView.setLayoutManager(linearLayoutManager);
         listView.setAdapter(typeAdapter);
-        listView.setOnItemClickListener((adapterView, view1, i, l) -> {
-            select_class_difficulty_tv.setText(strings.get(i));
-            select_nandu_type = class_difficultys.get(i).getValue();
-            Log.e("寒暑假啦", select_nandu_type);
-            popupWindow.dismiss();
+        typeAdapter.setOnItemClickListener(new SelectTypeAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                select_class_difficulty_tv.setText(strings.get(position));
+                select_nandu_type = class_difficultys.get(position).getValue();
+                popupWindow.dismiss();
+            }
         });
     }
 
@@ -579,19 +590,23 @@ public class AddClassItemActivity extends BaseActivity implements CCRSortableNin
         List<String> strings = new ArrayList<>();
         for (int i = 0; i < class_room_types.size(); i++) {
             strings.add(class_room_types.get(i).getValue());
-            Log.e("坚实的开发接口数量的", class_room_types.get(i).getValue());
         }
-        TypeAdapter typeAdapter = new TypeAdapter(strings, getApplicationContext());
-        ListView listView = view.findViewById(R.id.listview);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
+        SelectTypeAdapter typeAdapter = new SelectTypeAdapter(strings, getApplicationContext());
+        RecyclerView listView = view.findViewById(R.id.listview);
+        listView.setLayoutManager(linearLayoutManager);
         listView.setAdapter(typeAdapter);
-        listView.setOnItemClickListener((adapterView, view1, i, l) -> {
-            select_room_tv.setText(class_room_types.get(i).getValue());
-            //查询每个房间最大能容纳的人数
-            room_type = class_room_types.get(i).getKey() + "";
-            //获取房间列表
-            get_room_list();
+        typeAdapter.setOnItemClickListener(new SelectTypeAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                select_room_tv.setText(class_room_types.get(position).getValue());
+                //查询每个房间最大能容纳的人数
+                room_type = class_room_types.get(position).getKey() + "";
+                //获取房间列表
+                get_room_list();
 
-            popupWindow.dismiss();
+                popupWindow.dismiss();
+            }
         });
     }
 
@@ -611,15 +626,20 @@ public class AddClassItemActivity extends BaseActivity implements CCRSortableNin
         for (int i = 0; i < room_lists.size(); i++) {
             strings.add(room_lists.get(i).getPlaceName());
         }
-        TypeAdapter typeAdapter = new TypeAdapter(strings, getApplicationContext());
-        ListView listView = view.findViewById(R.id.listview);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
+        SelectTypeAdapter typeAdapter = new SelectTypeAdapter(strings, getApplicationContext());
+        RecyclerView listView = view.findViewById(R.id.listview);
+        listView.setLayoutManager(linearLayoutManager);
         listView.setAdapter(typeAdapter);
-        listView.setOnItemClickListener((adapterView, view1, i, l) -> {
-            select_room_name_tv.setText(room_lists.get(i).getPlaceName());
-            select_room_name = room_lists.get(i).getPlaceName();
-            select_room_name_id = room_lists.get(i).getPlaceNum();
-            edit_tuanke_renshu_number.setText(room_lists.get(i).getMaxNum() + "人");
-            popupWindow.dismiss();
+        typeAdapter.setOnItemClickListener(new SelectTypeAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                select_room_name_tv.setText(room_lists.get(position).getPlaceName());
+                select_room_name = room_lists.get(position).getPlaceName();
+                select_room_name_id = room_lists.get(position).getPlaceNum();
+                edit_tuanke_renshu_number.setText(room_lists.get(position).getMaxNum() + "人");
+                popupWindow.dismiss();
+            }
         });
     }
 
@@ -662,13 +682,18 @@ public class AddClassItemActivity extends BaseActivity implements CCRSortableNin
         for (int i = 0; i < tatget_types.size(); i++) {
             strings.add(tatget_types.get(i).getName());
         }
-        TypeAdapter typeAdapter = new TypeAdapter(strings, getApplicationContext());
-        ListView listView = view.findViewById(R.id.listview);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
+        SelectTypeAdapter typeAdapter = new SelectTypeAdapter(strings, getApplicationContext());
+        RecyclerView listView = view.findViewById(R.id.listview);
+        listView.setLayoutManager(linearLayoutManager);
         listView.setAdapter(typeAdapter);
-        listView.setOnItemClickListener((adapterView, view1, i, l) -> {
-            select_class_target_tv.setText(strings.get(i));
-            select_target_type = tatget_types.get(i).getValue();
-            popupWindow.dismiss();
+        typeAdapter.setOnItemClickListener(new SelectTypeAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                select_class_target_tv.setText(strings.get(position));
+                select_target_type = tatget_types.get(position).getValue();
+                popupWindow.dismiss();
+            }
         });
     }
 
@@ -685,13 +710,18 @@ public class AddClassItemActivity extends BaseActivity implements CCRSortableNin
         View view = popupWindow.getContentView();
         List<String> strings = new ArrayList<>();
         strings.add("单次");
-        TypeAdapter typeAdapter = new TypeAdapter(strings, getApplicationContext());
-        ListView listView = view.findViewById(R.id.listview);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
+        SelectTypeAdapter typeAdapter = new SelectTypeAdapter(strings, getApplicationContext());
+        RecyclerView listView = view.findViewById(R.id.listview);
+        listView.setLayoutManager(linearLayoutManager);
         listView.setAdapter(typeAdapter);
-        listView.setOnItemClickListener((adapterView, view1, i, l) -> {
-            select_xunhuan_type_tv.setText(strings.get(i));
-            select_xunhuan_type = strings.get(i);
-            popupWindow.dismiss();
+        typeAdapter.setOnItemClickListener(new SelectTypeAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                select_xunhuan_type_tv.setText(strings.get(position));
+                select_xunhuan_type = strings.get(position);
+                popupWindow.dismiss();
+            }
         });
     }
 

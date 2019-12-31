@@ -28,6 +28,7 @@ import com.noplugins.keepfit.android.R;
 import com.noplugins.keepfit.android.activity.AddClassActivity;
 import com.noplugins.keepfit.android.activity.SelectChangGuanActivity;
 import com.noplugins.keepfit.android.adapter.ClassAdapter;
+import com.noplugins.keepfit.android.adapter.SelectTypeAdapter;
 import com.noplugins.keepfit.android.adapter.TypeAdapter;
 import com.noplugins.keepfit.android.bean.CalenderEntity;
 import com.noplugins.keepfit.android.bean.DateViewEntity;
@@ -100,13 +101,13 @@ public class RiChengFragment extends ViewPagerFragment {
     LinearLayout title_layout;
     @BindView(R.id.xiala_img)
     ImageView xiala_img;
-//    @BindView(R.id.date_tv)
+    //    @BindView(R.id.date_tv)
 //    TextView date_tv;
 //    @BindView(R.id.week_tv)
 //    TextView week_tv;
     @BindView(R.id.saoma_btn)
     ImageView saoma_btn;
-//    @BindView(R.id.more_btn)
+    //    @BindView(R.id.more_btn)
 //    LinearLayout more_btn;
     @BindView(R.id.status_tv)
     TextView status_tv;
@@ -490,17 +491,19 @@ public class RiChengFragment extends ViewPagerFragment {
         for (int i = 0; i < select_status.size(); i++) {
             strings.add(select_status.get(i).getName());
         }
-        TypeAdapter typeAdapter = new TypeAdapter(strings, getActivity());
-        ListView listView = view.findViewById(R.id.listview);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        SelectTypeAdapter typeAdapter = new SelectTypeAdapter(strings, getActivity());
+        RecyclerView listView = view.findViewById(R.id.listview);
+        listView.setLayoutManager(linearLayoutManager);
         listView.setAdapter(typeAdapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        typeAdapter.setOnItemClickListener(new SelectTypeAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                status_tv.setText(strings.get(i));
-                if (i == 0) {
+            public void onItemClick(View view, int position) {
+                status_tv.setText(strings.get(position));
+                if (position == 0) {
                     select_courcestatus_str = "";
                 } else {
-                    select_courcestatus_str = select_status.get(i - 1).getValue();
+                    select_courcestatus_str = select_status.get(position - 1).getValue();
                     Log.e("选择的状态", select_courcestatus_str);
                 }
                 popupWindow.dismiss();
@@ -526,17 +529,19 @@ public class RiChengFragment extends ViewPagerFragment {
         for (int i = 0; i < select_types.size(); i++) {
             strings.add(select_types.get(i).getName());
         }
-        TypeAdapter typeAdapter = new TypeAdapter(strings, getActivity());
-        ListView listView = view.findViewById(R.id.listview);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        SelectTypeAdapter typeAdapter = new SelectTypeAdapter(strings, getActivity());
+        RecyclerView listView = view.findViewById(R.id.listview);
+        listView.setLayoutManager(linearLayoutManager);
         listView.setAdapter(typeAdapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        typeAdapter.setOnItemClickListener(new SelectTypeAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                types_tv.setText(strings.get(i));
-                if (i == 0) {
+            public void onItemClick(View view, int position) {
+                types_tv.setText(strings.get(position));
+                if (position == 0) {
                     select_coursetype_str = "";
                 } else {
-                    select_coursetype_str = select_types.get(i - 1).getValue();
+                    select_coursetype_str = select_types.get(position - 1).getValue();
                 }
                 popupWindow.dismiss();
                 init_class_date_resource();//重新请求课程
@@ -558,19 +563,18 @@ public class RiChengFragment extends ViewPagerFragment {
         View view = popupWindow.getContentView();
         List<String> strings = new ArrayList<>();
         strings.add(SpUtils.getString(getActivity(), AppConstants.CG_NAME));
-//        strings.add("龙湖天街");
-        TypeAdapter typeAdapter = new TypeAdapter(strings, getActivity());
-        ListView listView = view.findViewById(R.id.listview);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        SelectTypeAdapter typeAdapter = new SelectTypeAdapter(strings, getActivity());
+        RecyclerView listView = view.findViewById(R.id.listview);
+        listView.setLayoutManager(linearLayoutManager);
         listView.setAdapter(typeAdapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        typeAdapter.setOnItemClickListener(new SelectTypeAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                store_type_tv.setText(strings.get(i));
+            public void onItemClick(View view, int position) {
+                store_type_tv.setText(strings.get(position));
                 popupWindow.dismiss();
             }
         });
-
-
     }
 
     @Override
