@@ -515,7 +515,7 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
                                 } else {
                                     itemBean.setMax_num(Integer.valueOf(room_people_number.getText().toString()));
                                     itemBean.setPlace_type(select_room_type_code);//设置房间类型
-                                    itemBean.setPlace_num(room_name.getText().toString());
+                                    itemBean.setPlace_name(room_name.getText().toString());
                                     select_rooms.add(itemBean);
                                     selectRoomAdapter.notifyDataSetChanged();
                                     popup.dismiss();
@@ -862,6 +862,7 @@ public class BaseInformationFragment extends ViewPagerFragment implements CCRSor
         informationEntity.setCityCode(select_shi_code);
         informationEntity.setDistrictCode(select_qu_code);
 
+        //设置选择的房间名称
         return informationEntity;
     }
 

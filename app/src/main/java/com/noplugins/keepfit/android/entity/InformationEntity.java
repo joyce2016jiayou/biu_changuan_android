@@ -300,6 +300,15 @@ public class InformationEntity {
 
         private String place_num;
 
+        public String getPlace_name() {
+            return place_name;
+        }
+
+        public void setPlace_name(String place_name) {
+            this.place_name = place_name;
+        }
+
+        private String place_name;
         public String getPlace_num() {
             return place_num;
         }

@@ -63,7 +63,7 @@ public class SelectRoomAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHold
         if (view_holder instanceof YouYangViewHolder) {
             YouYangViewHolder holder = (YouYangViewHolder) view_holder;
             InformationEntity.GymPlacesBean gymPlacesBean = list.get(position);
-            holder.room_name_tv.setText(gymPlacesBean.getPlace_num() + "");
+            holder.room_name_tv.setText(gymPlacesBean.getPlace_name() + "");
             holder.people_number_tv.setText(gymPlacesBean.getMax_num() + "");
             holder.remove_img.setOnClickListener(new View.OnClickListener() {
                 @Override

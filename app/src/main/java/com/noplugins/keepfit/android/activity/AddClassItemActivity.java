@@ -1224,6 +1224,7 @@ public class AddClassItemActivity extends BaseActivity implements CCRSortableNin
             }
         }).launch();
     }
+
     /**
      * 获取保存压缩图片文件的位置
      *
